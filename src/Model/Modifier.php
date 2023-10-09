@@ -14,4 +14,9 @@ enum Modifier: int
     case Reversed    = 0b000001000000;
     case Hidden      = 0b000010000000;
     case CrossedOut  = 0b000100000000;
+
+    public function add(self $modifier): int
+    {
+        return $this->value | $modifier->value;
+    }
 }

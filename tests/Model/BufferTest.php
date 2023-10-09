@@ -31,8 +31,6 @@ class BufferTest extends TestCase
             '1234',
             '12345678'
         ]);
-
-        dump($buffer);
     }
 
     /**

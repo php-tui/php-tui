@@ -5,11 +5,11 @@ namespace DTL\PhpTui\Model;
 final class Cell
 {
     public function __construct(
-        public readonly string $char,
-        public readonly Color $fg,
-        public readonly Color $bg,
-        public readonly Color $underline,
-        public readonly Modifier $modifier
+        public string $char,
+        public Color $fg,
+        public Color $bg,
+        public Color $underline,
+        public Modifier $modifier
     ) {
     }
 
@@ -21,5 +21,25 @@ final class Cell
     public static function fromChar(string $char): self
     {
         return new self($char, AnsiColor::Reset, AnsiColor::Reset, AnsiColor::Reset, Modifier::None);
+    }
+
+    public function setChar(string $char): void
+    {
+        $this->char = $char;
+    }
+
+    public function setStyle(Style $style): void
+    {
+        if ($style->fg) {
+            $this->fg = $style->fg;
+        }
+        if ($style->bg) {
+            $this->bg = $style->bg;
+        }
+        if ($style->underline) {
+            $this->underline = $style->underline;
+        }
+        $this->modifier->add($style->addModifier);
+        $this->modifier->sub($style->subModifier);
     }
 }

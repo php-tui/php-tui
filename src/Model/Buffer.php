@@ -3,7 +3,6 @@
 namespace DTL\PhpTui\Model;
 
 use Countable;
-use RuntimeException;
 
 final class Buffer implements Countable
 {
@@ -88,9 +87,22 @@ final class Buffer implements Countable
         return count($this->content);
     }
 
-    private function putString(Position $position, string $line, Style $style): void
+    private function putString(Position $position, string $line, Style $style, int $width = PHP_INT_MAX): void
     {
         $index = $position->toIndex($this->area);
-        throw new RuntimeException('asd');
+        $xOffset = $position->x;
+        // TODO: graphemes
+
+        $chars = mb_str_split($line, 1);
+        $maxOffset = min($this->area->right(), $width + $position->x);
+        foreach ($chars as $char) {
+            $this->content[$index]->setChar($char);
+            $this->content[$index]->setStyle($char);
+        }
+
+
+
+
+
     }
 }
