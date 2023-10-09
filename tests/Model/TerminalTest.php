@@ -16,6 +16,14 @@ class TerminalTest extends TestCase
         self::assertInstanceOf(Terminal::class, $terminal);
     }
 
+    public function testDraw(): void
+    {
+        $backend = DummyBackend::fromDimensions(10, 4);
+        $terminal = Terminal::fullscreen($backend);
+        $terminal->draw(function (Buffer $buffer) {
+        });
+    }
+
     public function testFlushes(): void
     {
         $backend = DummyBackend::fromDimensions(10, 4);
