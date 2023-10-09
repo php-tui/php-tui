@@ -32,9 +32,9 @@ class BufferTest extends TestCase
             '12345678'
         ]);
         self::assertEquals(<<<'EOT'
-        1234    
-        12345678
-        EOT, $buffer->toString());
+            1234    
+            12345678
+            EOT, $buffer->toString());
 
     }
 
@@ -46,7 +46,9 @@ class BufferTest extends TestCase
     {
         $assertion($b1->diff($b2));
     }
-
+    /**
+     * @return Generator<string,array{Buffer,Buffer,Closure(BufferUpdates): void}>
+     */
     public static function provideDiff(): Generator
     {
         yield 'no difference' => [
@@ -56,10 +58,39 @@ class BufferTest extends TestCase
             Buffer::fromLines([
                 '01234',
             ]),
-            static function (BufferUpdates $updates) {
+            static function (BufferUpdates $updates): void {
+                self::assertCount(0, $updates);
             }
         ];
 
+        yield 'last char diff' => [
+            Buffer::fromLines([
+                '01235',
+            ]),
+            Buffer::fromLines([
+                '01234',
+            ]),
+            static function (BufferUpdates $updates): void {
+                self::assertCount(1, $updates);
+                self::assertEquals(4, $updates->at(0)->position->x);
+                self::assertEquals(0, $updates->at(0)->position->y);
+                self::assertEquals('4', $updates->at(0)->char);
+            }
+        ];
+        yield 'last char diff and second line' => [
+            Buffer::fromLines([
+                '01235',
+                '00000',
+            ]),
+            Buffer::fromLines([
+                '01234',
+                '01210',
+            ]),
+            static function (BufferUpdates $updates): void {
+                self::assertCount(4, $updates);
+            }
+        ];
     }
 
 }
+

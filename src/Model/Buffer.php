@@ -57,10 +57,7 @@ final class Buffer implements Countable
         return $this->content;
     }
 
-    /**
-     * @return BufferUpdate[]
-     */
-    public function diff(Buffer $buffer): array
+    public function diff(Buffer $buffer): BufferUpdates
     {
         $previous = $this->content();
         $next     = $buffer->content();
@@ -74,7 +71,7 @@ final class Buffer implements Countable
             }
         }
 
-        return $updates;
+        return new BufferUpdates($updates);
 
     }
 
