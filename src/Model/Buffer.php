@@ -65,21 +65,13 @@ final class Buffer implements Countable
         $previous = $this->content();
         $next     = $buffer->content();
         $updates = [];
-        $toSkip = 0;
-        $invalidated = 0;
 
         for ($i = 0; $i < count($next); $i++) {
             $previousCell = $previous[$i];
             $currentCell = $next[$i];
-            if (($previousCell->char !== $currentCell->char || $invalidated > 0) && $toSkip === 0) {
+            if ($previousCell->char !== $currentCell->char) {
                 $updates[] = new BufferUpdate(Position::fromIndex($i, $this->area), $currentCell->char);
             }
-
-            $toSkip = strlen($currentCell->char) - 1;
-            $toSkip = $toSkip < 0 ? 0 : $toSkip;
-            $affectedWidth = max(strlen($currentCell->char), strlen($previousCell->char));
-            $invalidated = max($affectedWidth, $invalidated) - 1;
-            $invalidated < 0 ? 0 : $invalidated;
         }
 
         return $updates;

@@ -3,6 +3,7 @@
 namespace DTL\PhpTui\Model;
 
 use DTL\PhpTui\Model\Viewport\Fullscreen;
+use RuntimeException;
 
 class Terminal
 {
@@ -18,8 +19,7 @@ class Terminal
         private Area $viewportArea,
         private Area $lastKnownSize,
         private Position $lastKnownCursorPosition,
-    )
-    {
+    ) {
     }
 
     public static function fullscreen(Backend $backend): self
