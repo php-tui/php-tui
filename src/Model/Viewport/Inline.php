@@ -1,9 +1,8 @@
 <?php
 
-namespace DTL\PhpTui\Model;
+namespace DTL\PhpTui\Model\Viewport;
 
-class ViewportInline implements Viewport
-
+class Inline implements Viewport
 {
     public function __construct(public readonly int $height)
     {

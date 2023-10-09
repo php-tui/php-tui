@@ -2,6 +2,8 @@
 
 namespace DTL\PhpTui\Model;
 
+use DTL\PhpTui\Model\Viewport\Fullscreen;
+
 class Terminal
 {
     /**
@@ -28,7 +30,7 @@ class Terminal
             [Buffer::empty($size), Buffer::empty($size)],
             0,
             false,
-            new ViewportFullscreen(),
+            new Fullscreen(),
             $size,
             $size,
             new Position(0, 0),

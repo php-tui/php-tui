@@ -2,7 +2,9 @@
 
 namespace DTL\PhpTui\Model;
 
-final class Area
+use Stringable;
+
+final class Area implements Stringable
 {
     public function __construct(
         public Position $position,
@@ -19,6 +21,31 @@ final class Area
     public function area(): int
     {
         return $this->width * $this->height;
+    }
+
+    public function left(): int
+    {
+        return $this->position->x;
+    }
+
+    public function right(): int
+    {
+        return $this->position->x + $this->width;
+    }
+
+    public function top(): int
+    {
+        return $this->position->y;
+    }
+
+    public function bottom(): int
+    {
+        return $this->position->y + $this->height;
+    }
+
+    public function __toString(): string
+    {
+        return sprintf('@%s of %sx%s', $this->position->__toString(), $this->width, $this->height);
     }
 
 }

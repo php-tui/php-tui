@@ -1,8 +1,8 @@
 <?php
 
-namespace DTL\PhpTui\Model;
+namespace DTL\PhpTui\Model\Viewport;
 
-class ViewportFixed implements Viewport
+class Fixed implements Viewport
 {
     public function __construct(public readonly Area $area)
     {
