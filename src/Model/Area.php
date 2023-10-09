@@ -12,4 +12,9 @@ final class Area
     ) {
     }
 
+    public function area(): int
+    {
+        return $this->width * $this->height;
+    }
+
 }

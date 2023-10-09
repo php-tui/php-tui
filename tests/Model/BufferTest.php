@@ -12,6 +12,6 @@ class BufferTest extends TestCase
     public function testFilled(): void
     {
         $buffer = Buffer::filled(new Area(0, 0, 100, 100), Cell::fromChar('X'));
-        self::assertCount(10000, $buffer->count());
+        self::assertCount(10000, $buffer);
     }
 }

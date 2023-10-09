@@ -17,6 +17,7 @@ final class Buffer implements Countable
 
     public static function filled(Area $area, Cell $cell): self
     {
+        return new self($area, array_fill(0, $area->area(), $cell));
     }
 
     public function count(): int
