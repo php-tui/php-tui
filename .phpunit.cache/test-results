@@ -1,1 +1,1 @@
-{"version":1,"defects":{"DTL\\PhpTui\\Tests\\Model\\BufferTest::testFilled":8},"times":{"DTL\\PhpTui\\Tests\\Model\\BufferTest::testFilled":0.002}}
+{"version":1,"defects":{"DTL\\PhpTui\\Tests\\Model\\BufferTest::testFilled":7,"DTL\\PhpTui\\Tests\\Model\\TerminalTest::testCreatesFullscreenTerminal":5},"times":{"DTL\\PhpTui\\Tests\\Model\\BufferTest::testFilled":0.001,"DTL\\PhpTui\\Tests\\Model\\BufferTest::testEmpty":0,"DTL\\PhpTui\\Tests\\Model\\TerminalTest::testCreatesFullscreenTerminal":0}}

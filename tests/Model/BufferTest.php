@@ -9,9 +9,16 @@ use PHPUnit\Framework\TestCase;
 
 class BufferTest extends TestCase
 {
+    public function testEmpty(): void
+    {
+        $buffer = Buffer::empty(new Area(0, 0, 100, 100));
+        self::assertCount(10000, $buffer);
+    }
+
     public function testFilled(): void
     {
-        $buffer = Buffer::filled(new Area(0, 0, 100, 100), Cell::fromChar('X'));
-        self::assertCount(10000, $buffer);
+        $buffer = Buffer::filled(new Area(0, 0, 10, 10), Cell::fromChar('X'));
+        self::assertCount(100, $buffer);
+        self::assertEquals(array_fill(0, 100, Cell::fromChar('X')), $buffer->content());
     }
 }
