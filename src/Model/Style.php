@@ -2,7 +2,7 @@
 
 namespace DTL\PhpTui\Model;
 
-use DTL\PhpTui\Model\Modifier;
+use DTL\PhpTui\Model\Modifiers;
 
 final class Style
 {
@@ -10,8 +10,8 @@ final class Style
         public readonly ?Color $fg,
         public readonly ?Color $bg,
         public readonly ?Color $underline,
-        public readonly Modifier $addModifier,
-        public readonly Modifier $subModifier
+        public readonly Modifiers $addModifier,
+        public readonly Modifiers $subModifier
     ) {
     }
 
@@ -21,8 +21,8 @@ final class Style
             null,
             null,
             null,
-            Modifier::None,
-            Modifier::None,
+            Modifiers::None,
+            Modifiers::None,
         );
     }
 }

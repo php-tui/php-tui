@@ -9,18 +9,18 @@ final class Cell
         public Color $fg,
         public Color $bg,
         public Color $underline,
-        public Modifier $modifier
+        public Modifiers $modifier
     ) {
     }
 
     public static function empty(): self
     {
-        return new self(' ', AnsiColor::Reset, AnsiColor::Reset, AnsiColor::Reset, Modifier::None);
+        return new self(' ', AnsiColor::Reset, AnsiColor::Reset, AnsiColor::Reset, Modifiers::None);
     }
 
     public static function fromChar(string $char): self
     {
-        return new self($char, AnsiColor::Reset, AnsiColor::Reset, AnsiColor::Reset, Modifier::None);
+        return new self($char, AnsiColor::Reset, AnsiColor::Reset, AnsiColor::Reset, Modifiers::None);
     }
 
     public function setChar(string $char): void
