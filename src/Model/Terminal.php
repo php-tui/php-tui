@@ -34,4 +34,12 @@ class Terminal
             new Position(0, 0),
         );
     }
+
+    public function flush(): void
+    {
+        $previous = $this->buffers[1 - $this->current];
+        $current = $this->buffers[$this->current];
+        $updates = $previous->diff($current);
+        throw new RuntimeException('TODO');
+    }
 }
