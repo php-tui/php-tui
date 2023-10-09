@@ -4,15 +4,8 @@ use PhpCsFixer\Config;
 use PhpCsFixer\Finder;
 
 $finder = Finder::create()
-    ->in('lib')
+    ->in('src')
     ->in('tests')
-    ->exclude([
-        'Workspace',
-        'Assets/Cache',
-        'Assets/Projects',
-        'Assets/Workspace',
-        'InternalStubs',
-    ])
 ;
 
 return (new Config())
