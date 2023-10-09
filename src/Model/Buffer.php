@@ -9,7 +9,7 @@ final class Buffer implements Countable
     /**
      * @param Cell[] $content
      */
-    public function __construct(
+    private function __construct(
         private readonly Area $area,
         private readonly array $content
     ) {
@@ -17,12 +17,16 @@ final class Buffer implements Countable
 
     public static function empty(Area $area): self
     {
-        return new self($area, array_fill(0, $area->area(), Cell::empty()));
+        return self::filled($area, Cell::empty());
     }
 
     public static function filled(Area $area, Cell $cell): self
     {
-        return new self($area, array_fill(0, $area->area(), $cell));
+        $content = [];
+        for ($i = 0; $i < $area->area(); $i++) {
+            $content[] = clone $cell;
+        }
+        return new self($area, $content);
     }
 
     /**
@@ -87,22 +91,26 @@ final class Buffer implements Countable
         return count($this->content);
     }
 
+    public function toString(): string
+    {
+        $string = '';
+        foreach ($this->content as $i => $cell) {
+            if ($i > 0 && $i % $this->area->width === 0) {
+                $string .= "\n";
+            }
+            $string .= $cell->char;
+        }
+        return $string;
+    }
+
     private function putString(Position $position, string $line, Style $style, int $width = PHP_INT_MAX): void
     {
         $index = $position->toIndex($this->area);
-        $xOffset = $position->x;
-        // TODO: graphemes
-
         $chars = mb_str_split($line, 1);
-        $maxOffset = min($this->area->right(), $width + $position->x);
         foreach ($chars as $char) {
             $this->content[$index]->setChar($char);
-            $this->content[$index]->setStyle($char);
+            $this->content[$index]->setStyle($style);
+            $index++;
         }
-
-
-
-
-
     }
 }

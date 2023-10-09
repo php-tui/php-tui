@@ -2,17 +2,14 @@
 
 namespace DTL\PhpTui\Model;
 
-use DTL\PhpTui\Model\Modifiers;
-
 final class Style
 {
-    private function __construct(
-        public readonly ?Color $fg,
-        public readonly ?Color $bg,
-        public readonly ?Color $underline,
-        public readonly Modifiers $addModifier,
-        public readonly Modifiers $subModifier
-    ) {
+    /**
+     * @param Modifier[] $addModifiers
+     * @param Modifier[] $subModifiers
+     */
+    private function __construct(public readonly ?Color $fg, public readonly ?Color $bg, public readonly ?Color $underline, public readonly array $addModifiers, public readonly array $subModifiers)
+    {
     }
 
     public static function default(): self
@@ -21,8 +18,8 @@ final class Style
             null,
             null,
             null,
-            Modifiers::None,
-            Modifiers::None,
+            [],
+            [],
         );
     }
 }

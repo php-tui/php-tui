@@ -31,6 +31,11 @@ class BufferTest extends TestCase
             '1234',
             '12345678'
         ]);
+        self::assertEquals(<<<'EOT'
+        1234    
+        12345678
+        EOT, $buffer->toString());
+
     }
 
     /**
@@ -42,7 +47,7 @@ class BufferTest extends TestCase
         $assertion($b1->diff($b2));
     }
 
-    public function provideDiff(): Generator
+    public static function provideDiff(): Generator
     {
         yield 'no difference' => [
             Buffer::fromLines([

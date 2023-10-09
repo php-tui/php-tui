@@ -15,12 +15,12 @@ final class Cell
 
     public static function empty(): self
     {
-        return new self(' ', AnsiColor::Reset, AnsiColor::Reset, AnsiColor::Reset, Modifiers::None);
+        return new self(' ', AnsiColor::Reset, AnsiColor::Reset, AnsiColor::Reset, Modifiers::none());
     }
 
     public static function fromChar(string $char): self
     {
-        return new self($char, AnsiColor::Reset, AnsiColor::Reset, AnsiColor::Reset, Modifiers::None);
+        return new self($char, AnsiColor::Reset, AnsiColor::Reset, AnsiColor::Reset, Modifiers::none());
     }
 
     public function setChar(string $char): void
@@ -39,7 +39,11 @@ final class Cell
         if ($style->underline) {
             $this->underline = $style->underline;
         }
-        $this->modifier->add($style->addModifier);
-        $this->modifier->sub($style->subModifier);
+        foreach ($style->addModifiers as $modifier) {
+            $this->modifier->add($modifier);
+        }
+        foreach ($style->subModifiers as $modifier) {
+            $this->modifier->sub($modifier);
+        }
     }
 }
