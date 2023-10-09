@@ -2,10 +2,15 @@
 
 namespace DTL\PhpTui\Model;
 
+use ArrayIterator;
 use Countable;
+use IteratorAggregate;
 use RuntimeException;
-
-final class BufferUpdates implements Countable
+use Traversable;
+/**
+ * @implements IteratorAggregate<BufferUpdate>
+ */
+final class BufferUpdates implements Countable, IteratorAggregate
 {
     /**
      * @param BufferUpdate[] $updates
@@ -27,5 +32,20 @@ final class BufferUpdates implements Countable
             ));
         }
         return $this->updates[$index];
+    }
+
+    public function last(): BufferUpdate
+    {
+        if (count($this->updates) === 0) {
+            throw new RuntimeException(
+                'Cannot get last update because there are no updates'
+            );
+        }
+        return $this->updates[count($this->updates) - 1];
+    }
+
+    public function getIterator(): Traversable
+    {
+        return new ArrayIterator($this->updates);
     }
 }

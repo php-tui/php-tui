@@ -3,7 +3,6 @@
 namespace DTL\PhpTui\Model;
 
 use DTL\PhpTui\Model\Viewport\Fullscreen;
-use RuntimeException;
 
 class Terminal
 {
@@ -42,6 +41,15 @@ class Terminal
         $previous = $this->buffers[1 - $this->current];
         $current = $this->buffers[$this->current];
         $updates = $previous->diff($current);
-        throw new RuntimeException('TODO');
+        if (count($updates) > 0) {
+            $this->lastKnownCursorPosition = $updates->last()->position;
+        }
+
+        $this->backend->draw($updates);
+    }
+
+    public function buffer(): Buffer
+    {
+        return $this->buffers[$this->current];
     }
 }

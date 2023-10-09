@@ -92,8 +92,9 @@ final class Buffer implements Countable
         return $string;
     }
 
-    private function putString(Position $position, string $line, Style $style, int $width = PHP_INT_MAX): void
+    public function putString(Position $position, string $line, ?Style $style = null, int $width = PHP_INT_MAX): void
     {
+        $style = $style ?: Style::default();
         $index = $position->toIndex($this->area);
         $chars = mb_str_split($line, 1);
         foreach ($chars as $char) {
