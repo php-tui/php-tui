@@ -1,0 +1,25 @@
+{
+    "name": "dantleech/php-tui",
+    "description": "PHP TUI",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "DTL\\PhpTui\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "DTL\\PhpTui\\Tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Daniel Leech"
+        }
+    ],
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.34",
+        "phpstan/phpstan": "^1.10"
+    }
+}
