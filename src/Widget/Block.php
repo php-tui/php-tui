@@ -4,16 +4,20 @@ namespace DTL\PhpTui\Widget;
 
 use DTL\PhpTui\Model\Area;
 use DTL\PhpTui\Model\Widget\Borders;
+use DTL\PhpTui\Model\Widget\Title;
 
 final class Block
 {
+
     /**
      * @param int-mask-of<Borders::*> $borders
      */
     public function __construct(
-        private int $borders
+        private int $borders,
+        private ?Title $title = null,
     ) {
     }
+
     public static function default(): self
     {
         return new self(Borders::NONE);
@@ -39,6 +43,7 @@ final class Block
         if ($this->borders & Borders::BOTTOM) {
             $height = max(0, $height - 1);
         }
+
         return Area::fromPrimitives($x, $y, $width, $height);
     }
 
@@ -48,6 +53,12 @@ final class Block
     public function borders(int $flag): self
     {
         $this->borders = $flag;
+        return $this;
+    }
+
+    public function title(Title $title): self
+    {
+        $this->title = $title;
         return $this;
     }
 }
