@@ -218,25 +218,28 @@ class BlockTest extends TestCase
 
     }
 
+    /**
+     * @return Generator<string,array{string,Area,HorizontalAlignment,string}>
+     */
     public static function provideTitleAlignment(): Generator
     {
-        yield [
-            'test',
-            Area::fromDimensions(8, 1),
-            HorizontalAlignment::Left,
-            'test     ',
-        ];
-        yield [
+        yield 'right' => [
             'test',
             Area::fromDimensions(8, 1),
             HorizontalAlignment::Right,
-            '     test',
+            '    test',
         ];
-        yield [
+        yield 'left' => [
+            'test',
+            Area::fromDimensions(8, 1),
+            HorizontalAlignment::Left,
+            'test    ',
+        ];
+        yield 'center' => [
             'test',
             Area::fromDimensions(8, 1),
             HorizontalAlignment::Center,
-            '   test  ',
+            '  test  ',
         ];
     }
 }

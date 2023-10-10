@@ -7,7 +7,6 @@ use DTL\PhpTui\Model\Buffer;
 use DTL\PhpTui\Model\Position;
 use DTL\PhpTui\Model\Widget\Borders;
 use DTL\PhpTui\Model\Widget\HorizontalAlignment;
-use DTL\PhpTui\Model\Widget\Line;
 use DTL\PhpTui\Model\Widget\Title;
 use DTL\PhpTui\Model\Widget\VerticalAlignment;
 
@@ -91,6 +90,8 @@ final class Block
     private function renderTitlePosition(VerticalAlignment $alignment, Area $area, Buffer $buffer): void
     {
         $this->renderRightTitles($alignment, $area, $buffer);
+        $this->renderCenterTitles($alignment, $area, $buffer);
+        $this->renderLeftTitles($alignment, $area, $buffer);
     }
 
     private function renderRightTitles(VerticalAlignment $alignment, Area $area, Buffer $buffer): void
@@ -111,6 +112,70 @@ final class Block
             $buffer->putLine(
                 Position::at(
                     max(0, $area->width - $titleX) + $area->left(),
+                    match ($alignment) {
+                        VerticalAlignment::Bottom => $area->bottom() - 1,
+                        VerticalAlignment::Top => $area->top(),
+                    }
+                ),
+                $title->title,
+                $titleAreaWidth,
+            );
+        }
+    }
+
+    private function renderLeftTitles(VerticalAlignment $alignment, Area $area, Buffer $buffer): void
+    {
+        [$leftBorderDx, $_, $titleAreaWidth] = $this->calculateTitleAreaOffsets($area);
+        $offset = $leftBorderDx;
+        foreach (array_filter(
+            $this->titles,
+            function (Title $title) use ($alignment) {
+                return 
+                    $title->horizontalAlignment === HorizontalAlignment::Left 
+                    && $title->verticalAlignment === $alignment;
+            }
+        ) as $title) {
+            $titleX = $offset;
+            $offset += $title->title->width() + 1;
+
+            $buffer->putLine(
+                Position::at(
+                    $titleX + $area->left(),
+                    match ($alignment) {
+                        VerticalAlignment::Bottom => $area->bottom() - 1,
+                        VerticalAlignment::Top => $area->top(),
+                    }
+                ),
+                $title->title,
+                $titleAreaWidth,
+            );
+        }
+    }
+
+    private function renderCenterTitles(VerticalAlignment $alignment, Area $area, Buffer $buffer): void
+    {
+        [$_, $_, $titleAreaWidth] = $this->calculateTitleAreaOffsets($area);
+        $titles = array_filter(
+            $this->titles,
+            function (Title $title) use ($alignment) {
+                return 
+                    $title->horizontalAlignment === HorizontalAlignment::Center 
+                    && $title->verticalAlignment === $alignment;
+            }
+        );
+        $sumWidth = array_reduce(
+            $titles,
+            fn (int $acc, Title $title) => $acc + $title->title->width(),
+            0
+        );
+        $offset = intval(max(0, $area->width - $sumWidth) / 2);
+        foreach ($titles as $title) {
+            $titleX = $offset;
+            $offset += $title->title->width() + 1;
+
+            $buffer->putLine(
+                Position::at(
+                    $titleX + $area->left(),
                     match ($alignment) {
                         VerticalAlignment::Bottom => $area->bottom() - 1,
                         VerticalAlignment::Top => $area->top(),
