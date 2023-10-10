@@ -13,7 +13,7 @@ final class Area implements Stringable
     ) {
     }
 
-    public static function fromPrimatives(int $x, int $y, int $width, int $height): self
+    public static function fromPrimitives(int $x, int $y, int $width, int $height): self
     {
         return new self(new Position($x, $y), $width, $height);
     }
@@ -50,7 +50,7 @@ final class Area implements Stringable
 
     public static function fromDimensions(int $width, int $height): self
     {
-        return self::fromPrimatives(0, 0, $width, $height);
+        return self::fromPrimitives(0, 0, $width, $height);
     }
 
 }

@@ -12,7 +12,7 @@ class PositionTest extends TestCase
     {
         self::assertEquals(
             55,
-            (new Position(5, 5))->toIndex(Area::fromPrimatives(0, 0, 10, 10))
+            (new Position(5, 5))->toIndex(Area::fromPrimitives(0, 0, 10, 10))
         );
     }
 
@@ -21,13 +21,13 @@ class PositionTest extends TestCase
         $this->expectExceptionMessage('Position (15,5) outside of area @(0,0) of 10x10 when trying to get index');
         self::assertEquals(
             55,
-            (new Position(15, 5))->toIndex(Area::fromPrimatives(0, 0, 10, 10))
+            (new Position(15, 5))->toIndex(Area::fromPrimitives(0, 0, 10, 10))
         );
     }
 
     public function testCreatesPositionFromIndex(): void
     {
-        $position = Position::fromIndex(55, Area::fromPrimatives(0, 0, 10, 10));
+        $position = Position::fromIndex(55, Area::fromPrimitives(0, 0, 10, 10));
         self::assertEquals(5, $position->x);
         self::assertEquals(5, $position->y);
     }
@@ -35,6 +35,6 @@ class PositionTest extends TestCase
     public function testThrowsExceptionIfIndexOutOfRange(): void
     {
         $this->expectExceptionMessage('outside of area');
-        Position::fromIndex(100, Area::fromPrimatives(0, 0, 10, 10));
+        Position::fromIndex(100, Area::fromPrimitives(0, 0, 10, 10));
     }
 }

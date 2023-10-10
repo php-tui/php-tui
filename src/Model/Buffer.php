@@ -43,7 +43,7 @@ final class Buffer implements Countable
             0
         );
 
-        $buffer = self::empty(Area::fromPrimatives(0, 0, $width, $height));
+        $buffer = self::empty(Area::fromPrimitives(0, 0, $width, $height));
         foreach ($lines as $y => $line) {
             $buffer->putString(new Position(0, $y), $line, Style::default());
         }
