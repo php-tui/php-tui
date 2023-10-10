@@ -253,8 +253,8 @@ final class Block
      */
     private function calculateTitleAreaOffsets(Area $area): array
     {
-        $leftBorderDx = $this->borders & Borders::LEFT;
-        $rightBorderDx = $this->borders & Borders::RIGHT;
+        $leftBorderDx = (bool)$this->borders & Borders::LEFT;
+        $rightBorderDx = (bool)$this->borders & Borders::RIGHT;
 
         return [
             $leftBorderDx,

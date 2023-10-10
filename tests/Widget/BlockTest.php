@@ -256,6 +256,7 @@ class BlockTest extends TestCase
             '└───┘',
         ], $buffer->toLines());
     }
+
     public function testRendersBordersRounded(): void
     {
         $buffer = Buffer::empty(Area::fromDimensions(5, 5));
@@ -266,6 +267,23 @@ class BlockTest extends TestCase
             '|   |',
             '|   |',
             '╰───╯',
+        ], $buffer->toLines());
+    }
+
+    public function testRendersWithTitle(): void
+    {
+        $buffer = Buffer::empty(Area::fromDimensions(8, 5));
+        Block::default()
+            ->borderType(BorderType::Rounded)
+            ->borders(Borders::ALL)
+            ->title(Title::fromString('G\'day')->horizontalAlignmnet(HorizontalAlignment::Left))
+            ->render($buffer->area(), $buffer);
+        self::assertEquals([
+            "G'day──╮",
+            '|      |',
+            '|      |',
+            '|      |',
+            '╰──────╯',
         ], $buffer->toLines());
     }
 }
