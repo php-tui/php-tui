@@ -3,6 +3,7 @@
 namespace DTL\PhpTui\Model;
 
 use Closure;
+use DTL\PhpTui\Model\Exception\TodoException;
 use DTL\PhpTui\Model\Viewport\Fullscreen;
 use DTL\PhpTui\Model\Viewport\Inline;
 
@@ -64,6 +65,7 @@ class Terminal
         $closure($this->buffer());
         // TODO: cursor position
 
+        throw new TodoException('here');
     }
 
     private function autoresize(): void
