@@ -7,3 +7,4 @@ TODO
 ----
 
 - [ ] Grapheme support
+- [ ] Cursor positioning after after draw (removed "frame" concept)

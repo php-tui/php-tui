@@ -61,6 +61,9 @@ class Terminal
     public function draw(Closure $closure): void
     {
         $this->autoresize();
+        $closure($this->buffer());
+        // TODO: cursor position
+
     }
 
     private function autoresize(): void
