@@ -85,9 +85,6 @@ final class Block
         $this->renderTitles($area, $buffer);
     }
 
-    /**
-     * @param Rounded $borderType
-     */
     public function borderType(BorderType $borderType): self
     {
         $this->borderType = $borderType;

@@ -54,7 +54,7 @@ class BufferTest extends TestCase
 
     /**
      * @dataProvider provideDiff
-     * @param Closure(): void $assertion
+     * @param Closure(BufferUpdates): void $assertion
      */
     public function testDiff(Buffer $b1, Buffer $b2, Closure $assertion): void
     {
