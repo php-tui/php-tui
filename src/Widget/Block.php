@@ -4,8 +4,12 @@ namespace DTL\PhpTui\Widget;
 
 use DTL\PhpTui\Model\Area;
 use DTL\PhpTui\Model\Buffer;
+use DTL\PhpTui\Model\Position;
 use DTL\PhpTui\Model\Widget\Borders;
+use DTL\PhpTui\Model\Widget\HorizontalAlignment;
+use DTL\PhpTui\Model\Widget\Line;
 use DTL\PhpTui\Model\Widget\Title;
+use DTL\PhpTui\Model\Widget\VerticalAlignment;
 
 final class Block
 {
@@ -67,5 +71,69 @@ final class Block
 
     public function render(Area $area, Buffer $buffer): void
     {
+        if ($area->area() === 0) {
+            return;
+        }
+        $this->renderBorders($area, $buffer);
+        $this->renderTitles($area, $buffer);
+    }
+
+    private function renderBorders(Area $area, Buffer $buffer): void
+    {
+    }
+
+    private function renderTitles(Area $area, Buffer $buffer): void
+    {
+        $this->renderTitlePosition(VerticalAlignment::Top, $area, $buffer);
+        $this->renderTitlePosition(VerticalAlignment::Bottom, $area, $buffer);
+    }
+
+    private function renderTitlePosition(VerticalAlignment $alignment, Area $area, Buffer $buffer): void
+    {
+        $this->renderRightTitles($alignment, $area, $buffer);
+    }
+
+    private function renderRightTitles(VerticalAlignment $alignment, Area $area, Buffer $buffer): void
+    {
+        [$_, $rightBorderDx, $titleAreaWidth] = $this->calculateTitleAreaOffsets($area);
+        $offset = $rightBorderDx;
+        foreach (array_filter(
+            $this->titles,
+            function (Title $title) use ($alignment) {
+                return 
+                    $title->horizontalAlignment === HorizontalAlignment::Right 
+                    && $title->verticalAlignment === $alignment;
+            }
+        ) as $title) {
+            $offset += $title->title->width() + 1;
+            $titleX = $offset - 1;
+
+            $buffer->putLine(
+                Position::at(
+                    max(0, $area->width - $titleX) + $area->left(),
+                    match ($alignment) {
+                        VerticalAlignment::Bottom => $area->bottom() - 1,
+                        VerticalAlignment::Top => $area->top(),
+                    }
+                ),
+                $title->title,
+                $titleAreaWidth,
+            );
+        }
+    }
+
+    /**
+     * @return array{int,int,int}
+     */
+    private function calculateTitleAreaOffsets(Area $area): array
+    {
+        $leftBorderDx = $this->borders & Borders::LEFT;
+        $rightBorderDx = $this->borders & Borders::RIGHT;
+
+        return [
+            $leftBorderDx,
+            $rightBorderDx,
+            $area->width - max(0, $leftBorderDx, $rightBorderDx),
+        ];
     }
 }

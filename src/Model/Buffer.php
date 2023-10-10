@@ -3,6 +3,7 @@
 namespace DTL\PhpTui\Model;
 
 use Countable;
+use DTL\PhpTui\Model\Widget\Line;
 use OutOfBoundsException;
 use RuntimeException;
 
@@ -94,21 +95,27 @@ final class Buffer implements Countable
         return $string;
     }
 
-    public function putString(Position $position, string $line, ?Style $style = null, int $width = PHP_INT_MAX): void
+    public function putString(Position $position, string $line, ?Style $style = null, int $width = PHP_INT_MAX): Position
     {
         $style = $style ?: Style::default();
         try {
             $index = $position->toIndex($this->area);
         } catch (OutOfBoundsException $e) {
-            return;
+            return $position;
         }
         $chars = mb_str_split($line, 1);
-        $chars = array_slice($chars, 0, count($this->content) - 1);
+        $chars = array_slice(
+            $chars,
+            0,
+            min($width, count($this->content) - 1)
+        );
         foreach ($chars as $char) {
             $this->content[$index]->setChar($char);
             $this->content[$index]->setStyle($style);
             $index++;
         }
+
+        return $position->withX($position->x + count($chars));
     }
 
     public function resize(Area $area): void
@@ -145,5 +152,27 @@ final class Buffer implements Countable
         foreach ($this->content as $cell) {
             $cell->reset();
         }
+    }
+
+    public function putLine(Position $position, Line $line, int $width): Position
+    {
+        $remainingWidth = $width;
+        $x = $position->x;
+        foreach ($line as $span) {
+            if ($remainingWidth === 0) {
+                return $position;
+            }
+            $newPosition = $this->putString(
+                $position,
+                $span->content,
+                $span->style,
+                $remainingWidth,
+            );
+            $w = max(0, $position->x - $newPosition->x);
+            $position = $position->withX($newPosition->x);
+            $remainingWidth -= max(0, $remainingWidth - $x);
+        }
+
+        return $position;
     }
 }

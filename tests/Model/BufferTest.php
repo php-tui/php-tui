@@ -7,6 +7,8 @@ use DTL\PhpTui\Model\Area;
 use DTL\PhpTui\Model\Buffer;
 use DTL\PhpTui\Model\BufferUpdates;
 use DTL\PhpTui\Model\Cell;
+use DTL\PhpTui\Model\Position;
+use DTL\PhpTui\Model\Widget\Line;
 use Generator;
 use PHPUnit\Framework\TestCase;
 
@@ -36,6 +38,18 @@ class BufferTest extends TestCase
             12345678
             EOT, $buffer->toString());
 
+    }
+
+    public function testPutLine(): void
+    {
+        $buffer = Buffer::empty(Area::fromDimensions(4, 4));
+        $buffer->putLine(Position::at(1, 1), Line::fromString('1234'), 2);
+        self::assertEquals([
+            '    ',
+            ' 12 ',
+            '    ',
+            '    ',
+        ], $buffer->toLines());
     }
 
     /**

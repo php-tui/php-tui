@@ -57,4 +57,14 @@ final class Position implements Stringable
         }
         return ($this->y - $area->position->y) * $area->width + ($this->x - $area->position->x);
     }
+
+    public static function at(int $x, int $y): self
+    {
+        return new self($x, $y);
+    }
+
+    public function withX(int $x): self
+    {
+        return new self($x, $this->y);
+    }
 }

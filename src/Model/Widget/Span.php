@@ -14,4 +14,9 @@ final class Span
     {
         return new self($string, Style::default());
     }
+
+    public function width(): int
+    {
+        return mb_strlen($this->content);
+    }
 }
