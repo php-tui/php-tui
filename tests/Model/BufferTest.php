@@ -92,5 +92,34 @@ class BufferTest extends TestCase
         ];
     }
 
+    public function testResize(): void
+    {
+        // truncate
+        $buffer = Buffer::fromLines([
+            '12345678',
+            '12345678',
+            '12345678',
+        ]);
+
+        $buffer->resize(Area::fromDimensions(2, 2));
+        self::assertEquals([
+            '12',
+            '34',
+        ], $buffer->toLines());
+
+        // expand
+        $buffer = Buffer::fromLines([
+            '12',
+            '34',
+        ]);
+
+        $buffer->resize(Area::fromDimensions(4, 4));
+        self::assertEquals([
+            '1234',
+            '    ',
+            '    ',
+            '    ',
+        ], $buffer->toLines());
+    }
 }
 

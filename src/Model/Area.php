@@ -48,4 +48,9 @@ final class Area implements Stringable
         return sprintf('@%s of %sx%s', $this->position->__toString(), $this->width, $this->height);
     }
 
+    public static function fromDimensions(int $width, int $height): self
+    {
+        return self::fromPrimatives(0, 0, $width, $height);
+    }
+
 }

@@ -58,7 +58,7 @@ class Terminal
     /**
      * @param Closure(Buffer): void $closure
      */
-    public function draw(Closure $closure)
+    public function draw(Closure $closure): void
     {
         $this->autoresize();
     }
@@ -75,5 +75,21 @@ class Terminal
         }
 
         $this->resize($size);
+    }
+
+    private function resize(Area $size): void
+    {
+        $offsetInPreviousViewport = max(0, $this->lastKnownCursorPosition->y - $this->viewportArea->top());
+        $nextArea = $this->viewport->computeArea($this->backend, $size, $offsetInPreviousViewport);
+
+        $this->setViewportArea($nextArea);
+
+    }
+
+    private function setViewportArea(Area $area): void
+    {
+        $this->buffers[$this->current]->resize($area);
+        $this->buffers[1 - $this->current]->resize($area);
+        $this->viewportArea = $area;
     }
 }

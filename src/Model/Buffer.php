@@ -3,6 +3,7 @@
 namespace DTL\PhpTui\Model;
 
 use Countable;
+use RuntimeException;
 
 final class Buffer implements Countable
 {
@@ -10,8 +11,8 @@ final class Buffer implements Countable
      * @param Cell[] $content
      */
     private function __construct(
-        private readonly Area $area,
-        private readonly array $content
+        private Area $area,
+        private array $content
     ) {
     }
 
@@ -102,5 +103,31 @@ final class Buffer implements Countable
             $this->content[$index]->setStyle($style);
             $index++;
         }
+    }
+
+    public function resize(Area $area): void
+    {
+        (function () use ($area) {
+            if (count($this->content) > $area->area()) {
+                $this->content = array_slice($this->content, 0, $area->area());
+                return;
+            }
+            for ($i = count($this->content); $i < $area->area(); $i++) {
+                $this->content[] = Cell::empty();
+            }
+        })();
+        $this->area = $area;
+    }
+    /**
+     * @return string[]
+     */
+    public function toLines(): array
+    {
+        $text = $this->toString();
+        $lines = explode("\n", $text);
+        if (false === $lines) {
+            throw new RuntimeException('should not happen');
+        }
+        return $lines;
     }
 }
