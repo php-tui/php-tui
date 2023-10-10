@@ -3,6 +3,7 @@
 namespace DTL\PhpTui\Tests\Widget;
 
 use Closure;
+use DTL\PhpTui\Model\Widget\Borders;
 use DTL\PhpTui\Widget\Block;
 use DTL\PhpTui\Model\Area;
 use Generator;
@@ -47,6 +48,15 @@ class BlockTest extends TestCase
                 self::assertEquals(
                     Area::fromPrimitives(0, 0, 0, 1),
                     $block->inner(Area::fromPrimitives(0, 0, 0, 1))
+                );
+            }
+        ];
+        yield 'left, width=1' => [
+            Block::default()->borders(Borders::LEFT),
+            function (Block $block): void {
+                self::assertEquals(
+                    Area::fromPrimitives(1, 0, 0, 1),
+                    $block->inner(Area::fromPrimitives(0, 0, 1, 1))
                 );
             }
         ];
