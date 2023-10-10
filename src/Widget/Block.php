@@ -33,6 +33,12 @@ final class Block
             $y = min($y + 1, $area->bottom());
             $height = max(0, $height-1);
         }
+        if ($this->borders & Borders::RIGHT) {
+            $width = max(0, $width - 1);
+        }
+        if ($this->borders & Borders::BOTTOM) {
+            $height = max(0, $height - 1);
+        }
         return Area::fromPrimitives($x, $y, $width, $height);
     }
 

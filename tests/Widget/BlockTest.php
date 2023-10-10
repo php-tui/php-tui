@@ -123,5 +123,32 @@ class BlockTest extends TestCase
                 );
             }
         ];
+        yield 'bottom, height=0' => [
+            Block::default()->borders(Borders::BOTTOM),
+            function (Block $block): void {
+                self::assertEquals(
+                    Area::fromPrimitives(0, 0, 1, 0),
+                    $block->inner(Area::fromPrimitives(0, 0, 1, 0))
+                );
+            }
+        ];
+        yield 'bottom, height=1' => [
+            Block::default()->borders(Borders::BOTTOM),
+            function (Block $block): void {
+                self::assertEquals(
+                    Area::fromPrimitives(0, 0, 1, 0),
+                    $block->inner(Area::fromPrimitives(0, 0, 1, 1))
+                );
+            }
+        ];
+        yield 'bottom, height=2' => [
+            Block::default()->borders(Borders::BOTTOM),
+            function (Block $block): void {
+                self::assertEquals(
+                    Area::fromPrimitives(0, 0, 1, 1),
+                    $block->inner(Area::fromPrimitives(0, 0, 1, 2))
+                );
+            }
+        ];
     }
 }
