@@ -4,6 +4,7 @@ namespace DTL\PhpTui\Tests\Widget;
 
 use Closure;
 use DTL\PhpTui\Model\Buffer;
+use DTL\PhpTui\Model\Widget\BorderType;
 use DTL\PhpTui\Model\Widget\Borders;
 use DTL\PhpTui\Model\Widget\HorizontalAlignment;
 use DTL\PhpTui\Model\Widget\Title;
@@ -253,6 +254,18 @@ class BlockTest extends TestCase
             '|   |',
             '|   |',
             '└───┘',
+        ], $buffer->toLines());
+    }
+    public function testRendersBordersRounded(): void
+    {
+        $buffer = Buffer::empty(Area::fromDimensions(5, 5));
+        Block::default()->borderType(BorderType::Rounded)->borders(Borders::ALL)->render($buffer->area(), $buffer);
+        self::assertEquals([
+            '╭───╮',
+            '|   |',
+            '|   |',
+            '|   |',
+            '╰───╯',
         ], $buffer->toLines());
     }
 }

@@ -262,4 +262,13 @@ final class Block
             $area->width - max(0, $leftBorderDx, $rightBorderDx),
         ];
     }
+
+    /**
+     * @param Rounded $borderType
+     */
+    public function borderType(BorderType $borderType): self
+    {
+        $this->borderType = $borderType;
+        return $this;
+    }
 }
