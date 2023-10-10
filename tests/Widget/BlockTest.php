@@ -242,4 +242,18 @@ class BlockTest extends TestCase
             '  test  ',
         ];
     }
+
+    public function testRendersBorders(): void
+    {
+        $buffer = Buffer::empty(Area::fromDimensions(5, 5));
+        Block::default()->borders(Borders::ALL)->render($buffer->area(), $buffer);
+        self::assertEquals([
+            '+---+',
+            '|   |',
+            '|   |',
+            '|   |',
+            '|   |',
+            '+---+',
+        ], $buffer->toLines());
+    }
 }
