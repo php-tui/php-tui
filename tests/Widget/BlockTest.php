@@ -96,5 +96,32 @@ class BlockTest extends TestCase
                 );
             }
         ];
+        yield 'right, width=0' => [
+            Block::default()->borders(Borders::RIGHT),
+            function (Block $block): void {
+                self::assertEquals(
+                    Area::fromPrimitives(0, 0, 0, 1),
+                    $block->inner(Area::fromPrimitives(0, 0, 0, 1))
+                );
+            }
+        ];
+        yield 'right, width=1' => [
+            Block::default()->borders(Borders::RIGHT),
+            function (Block $block): void {
+                self::assertEquals(
+                    Area::fromPrimitives(0, 0, 0, 1),
+                    $block->inner(Area::fromPrimitives(0, 0, 1, 1))
+                );
+            }
+        ];
+        yield 'right, width=2' => [
+            Block::default()->borders(Borders::RIGHT),
+            function (Block $block): void {
+                self::assertEquals(
+                    Area::fromPrimitives(0, 0, 1, 1),
+                    $block->inner(Area::fromPrimitives(0, 0, 2, 1))
+                );
+            }
+        ];
     }
 }
