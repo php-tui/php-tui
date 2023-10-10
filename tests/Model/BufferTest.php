@@ -106,6 +106,7 @@ class BufferTest extends TestCase
             '12',
             '34',
         ], $buffer->toLines());
+        self::assertEquals('@(0,0) of 2x2', $buffer->area()->__toString());
 
         // expand
         $buffer = Buffer::fromLines([
@@ -120,6 +121,7 @@ class BufferTest extends TestCase
             '    ',
             '    ',
         ], $buffer->toLines());
+        self::assertEquals('@(0,0) of 4x4', $buffer->area()->__toString());
     }
 }
 

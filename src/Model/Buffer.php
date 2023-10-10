@@ -130,4 +130,9 @@ final class Buffer implements Countable
         }
         return $lines;
     }
+
+    public function area(): Area
+    {
+        return $this->area;
+    }
 }
