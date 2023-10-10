@@ -91,7 +91,7 @@ class BufferTest extends TestCase
                 self::assertEquals('4', $updates->at(0)->char);
             }
         ];
-        yield 'last char diff and second line' => [
+        yield 'lst char diff and second line' => [
             Buffer::fromLines([
                 '01235',
                 '00000',

@@ -106,7 +106,7 @@ final class Buffer implements Countable
         $chars = array_slice(
             $chars,
             0,
-            min($width, count($this->content) - 1)
+            min($width, count($this->content))
         );
         foreach ($chars as $char) {
             $this->content[$index]->setChar($char);
