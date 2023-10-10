@@ -67,6 +67,7 @@ class Terminal
         // TODO: cursor position
 
         $this->flush();
+        $this->swapBuffers();
     }
 
     private function autoresize(): void
@@ -97,5 +98,12 @@ class Terminal
         $this->buffers[$this->current]->resize($area);
         $this->buffers[1 - $this->current]->resize($area);
         $this->viewportArea = $area;
+    }
+
+    private function swapBuffers(): void
+    {
+        $this->buffers[1 - $this->current]->reset();
+        $this->current = 1 - $this->current;
+        $this->backend->flush();
     }
 }

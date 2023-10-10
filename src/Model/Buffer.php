@@ -139,4 +139,11 @@ final class Buffer implements Countable
     {
         return $this->area;
     }
+
+    public function reset(): void
+    {
+        foreach ($this->content as $cell) {
+            $cell->reset();
+        }
+    }
 }

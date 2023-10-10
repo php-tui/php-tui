@@ -13,9 +13,16 @@ class DummyBackend implements Backend
      */
     private array $grid = [];
 
+    private ?string $flushed = null;
+
     public function __construct(private int $width, private int $height)
     {
         $this->fillGrid($width, $height);
+    }
+
+    public function flushed(): ?string
+    {
+        return $this->flushed;
     }
 
     public function size(): Area
@@ -48,6 +55,11 @@ class DummyBackend implements Backend
         $this->fillGrid($width, $height);
         $this->width = $width;
         $this->height = $height;
+    }
+
+    public function flush(): void
+    {
+        $this->flushed = $this->toString();
     }
 
     /**

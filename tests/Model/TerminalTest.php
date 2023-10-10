@@ -2,7 +2,6 @@
 
 namespace DTL\PhpTui\Tests\Model;
 
-use DTL\PhpTui\Model\Area;
 use DTL\PhpTui\Model\Backend\DummyBackend;
 use DTL\PhpTui\Model\Buffer;
 use DTL\PhpTui\Model\Position;
@@ -24,7 +23,7 @@ class TerminalTest extends TestCase
         $backend->setDimensions(2, 2);
 
         // intentionally go out of bounds
-        $terminal->draw(function (Buffer $buffer) {
+        $terminal->draw(function (Buffer $buffer): void {
             for ($y = 0; $y < 4; $y++) {
                 for ($x = 0; $x < 4; $x++) {
                     $buffer->putString(new Position($x, $y), 'h');
@@ -32,19 +31,32 @@ class TerminalTest extends TestCase
             }
         });
         self::assertEquals(<<<'EOT'
-        hh  
-        hh  
-            
-            
-        EOT, $backend->toString());
+            hh  
+            hh  
+                
+                
+            EOT, $backend->toString());
     }
 
     public function testDraw(): void
     {
-        $backend = DummyBackend::fromDimensions(10, 4);
+        $backend = DummyBackend::fromDimensions(4, 4);
         $terminal = Terminal::fullscreen($backend);
-        $terminal->draw(function (Buffer $buffer) {
+        $terminal->draw(function (Buffer $buffer): void {
+            $x = 0;
+            for ($y = 0; $y <= 4; $y++) {
+                $buffer->putString(new Position($x++, $y), 'x');
+            }
         });
+        self::assertEquals(
+            <<<'EOT'
+                x   
+                 x  
+                  x 
+                   x
+                EOT,
+            $backend->flushed()
+        );
     }
 
     public function testFlushes(): void

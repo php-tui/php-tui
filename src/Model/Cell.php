@@ -46,4 +46,10 @@ final class Cell
             $this->modifier->sub($modifier);
         }
     }
+
+    public function reset(): void
+    {
+        $this->setChar(' ');
+        $this->setStyle(Style::default());
+    }
 }
