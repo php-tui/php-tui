@@ -52,5 +52,4 @@ final class Area implements Stringable
     {
         return self::fromPrimitives(0, 0, $width, $height);
     }
-
 }

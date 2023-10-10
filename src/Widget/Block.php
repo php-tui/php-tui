@@ -3,6 +3,7 @@
 namespace DTL\PhpTui\Widget;
 
 use DTL\PhpTui\Model\Area;
+use DTL\PhpTui\Model\Buffer;
 use DTL\PhpTui\Model\Widget\Borders;
 use DTL\PhpTui\Model\Widget\Title;
 
@@ -11,17 +12,18 @@ final class Block
 
     /**
      * @param int-mask-of<Borders::*> $borders
+     * @param Title[] $titles
      */
     public function __construct(
         private int $borders,
-        private ?Title $title = null,
+        private array $titles,
     )
     {
     }
 
     public static function default(): self
     {
-        return new self(Borders::NONE);
+        return new self(Borders::NONE, []);
     }
 
     public function inner(Area $area): Area
@@ -34,7 +36,7 @@ final class Block
             $x = min($x + 1, $area->right());
             $width = max(0, $width - 1);
         }
-        if ($this->borders & Borders::TOP || null !== $this->title) {
+        if ($this->borders & Borders::TOP || [] !== $this->titles) {
             $y = min($y + 1, $area->bottom());
             $height = max(0, $height-1);
         }
@@ -59,7 +61,11 @@ final class Block
 
     public function title(Title $title): self
     {
-        $this->title = $title;
+        $this->titles[] = $title;
         return $this;
+    }
+
+    public function render(Area $area, Buffer $buffer): void
+    {
     }
 }

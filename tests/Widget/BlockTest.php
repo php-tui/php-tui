@@ -3,7 +3,9 @@
 namespace DTL\PhpTui\Tests\Widget;
 
 use Closure;
+use DTL\PhpTui\Model\Buffer;
 use DTL\PhpTui\Model\Widget\Borders;
+use DTL\PhpTui\Model\Widget\HorizontalAlignment;
 use DTL\PhpTui\Model\Widget\Title;
 use DTL\PhpTui\Widget\Block;
 use DTL\PhpTui\Model\Area;
@@ -195,6 +197,46 @@ class BlockTest extends TestCase
                     $block->inner(Area::fromPrimitives(0, 0, 0, 1))
                 );
             }
+        ];
+    }
+
+    /**
+     * @dataProvider provideTitleAlignment
+     */
+    public function testTitleAlignment(
+        string $text,
+        Area $area,
+        HorizontalAlignment $alignment,
+        string $expected
+    ): void
+    {
+        $buffer = Buffer::empty($area);
+        Block::default()
+            ->title(Title::fromString($text)->horizontalAlignmnet($alignment))
+            ->render($buffer->area(), $buffer);
+        self::assertEquals($expected, $buffer->toString());
+
+    }
+
+    public static function provideTitleAlignment(): Generator
+    {
+        yield [
+            'test',
+            Area::fromDimensions(8, 1),
+            HorizontalAlignment::Left,
+            'test     ',
+        ];
+        yield [
+            'test',
+            Area::fromDimensions(8, 1),
+            HorizontalAlignment::Right,
+            '     test',
+        ];
+        yield [
+            'test',
+            Area::fromDimensions(8, 1),
+            HorizontalAlignment::Center,
+            '   test  ',
         ];
     }
 }
