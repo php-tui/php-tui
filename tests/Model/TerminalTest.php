@@ -22,14 +22,20 @@ class TerminalTest extends TestCase
         $backend = DummyBackend::fromDimensions(4, 4);
         $terminal = Terminal::fullscreen($backend);
         $backend->setDimensions(2, 2);
+
+        // intentionally go out of bounds
         $terminal->draw(function (Buffer $buffer) {
-            for ($y = 0; $y < 5; $y++) {
-                for ($x = 0; $x < 5; $x++) {
-                    $buffer->putString(new Position($x, $y), 'hello');
+            for ($y = 0; $y < 4; $y++) {
+                for ($x = 0; $x < 4; $x++) {
+                    $buffer->putString(new Position($x, $y), 'h');
                 }
             }
         });
         self::assertEquals(<<<'EOT'
+        hh  
+        hh  
+            
+            
         EOT, $backend->toString());
     }
 

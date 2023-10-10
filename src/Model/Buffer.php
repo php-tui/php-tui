@@ -3,6 +3,7 @@
 namespace DTL\PhpTui\Model;
 
 use Countable;
+use OutOfBoundsException;
 use RuntimeException;
 
 final class Buffer implements Countable
@@ -96,8 +97,13 @@ final class Buffer implements Countable
     public function putString(Position $position, string $line, ?Style $style = null, int $width = PHP_INT_MAX): void
     {
         $style = $style ?: Style::default();
-        $index = $position->toIndex($this->area);
+        try {
+            $index = $position->toIndex($this->area);
+        } catch (OutOfBoundsException $e) {
+            return;
+        }
         $chars = mb_str_split($line, 1);
+        $chars = array_slice($chars, 0, count($this->content) - 1);
         foreach ($chars as $char) {
             $this->content[$index]->setChar($char);
             $this->content[$index]->setStyle($style);
@@ -125,9 +131,7 @@ final class Buffer implements Countable
     {
         $text = $this->toString();
         $lines = explode("\n", $text);
-        if (false === $lines) {
-            throw new RuntimeException('should not happen');
-        }
+
         return $lines;
     }
 

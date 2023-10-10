@@ -63,9 +63,10 @@ class Terminal
     {
         $this->autoresize();
         $closure($this->buffer());
+
         // TODO: cursor position
 
-        throw new TodoException('here');
+        $this->flush();
     }
 
     private function autoresize(): void
