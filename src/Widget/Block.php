@@ -24,8 +24,7 @@ final class Block
         private array $titles,
         private BorderType $borderType,
         private Style $borderStyle,
-    )
-    {
+    ) {
     }
 
     public static function default(): self
@@ -84,6 +83,15 @@ final class Block
         }
         $this->renderBorders($area, $buffer);
         $this->renderTitles($area, $buffer);
+    }
+
+    /**
+     * @param Rounded $borderType
+     */
+    public function borderType(BorderType $borderType): self
+    {
+        $this->borderType = $borderType;
+        return $this;
     }
 
     private function renderBorders(Area $area, Buffer $buffer): void
@@ -162,8 +170,8 @@ final class Block
         foreach (array_filter(
             $this->titles,
             function (Title $title) use ($alignment) {
-                return 
-                    $title->horizontalAlignment === HorizontalAlignment::Right 
+                return
+                    $title->horizontalAlignment === HorizontalAlignment::Right
                     && $title->verticalAlignment === $alignment;
             }
         ) as $title) {
@@ -191,8 +199,8 @@ final class Block
         foreach (array_filter(
             $this->titles,
             function (Title $title) use ($alignment) {
-                return 
-                    $title->horizontalAlignment === HorizontalAlignment::Left 
+                return
+                    $title->horizontalAlignment === HorizontalAlignment::Left
                     && $title->verticalAlignment === $alignment;
             }
         ) as $title) {
@@ -219,8 +227,8 @@ final class Block
         $titles = array_filter(
             $this->titles,
             function (Title $title) use ($alignment) {
-                return 
-                    $title->horizontalAlignment === HorizontalAlignment::Center 
+                return
+                    $title->horizontalAlignment === HorizontalAlignment::Center
                     && $title->verticalAlignment === $alignment;
             }
         );
@@ -261,14 +269,5 @@ final class Block
             $rightBorderDx,
             $area->width - max(0, $leftBorderDx, $rightBorderDx),
         ];
-    }
-
-    /**
-     * @param Rounded $borderType
-     */
-    public function borderType(BorderType $borderType): self
-    {
-        $this->borderType = $borderType;
-        return $this;
     }
 }

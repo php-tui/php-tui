@@ -209,8 +209,7 @@ class BlockTest extends TestCase
         Area $area,
         HorizontalAlignment $alignment,
         string $expected
-    ): void
-    {
+    ): void {
         $buffer = Buffer::empty($area);
         Block::default()
             ->title(Title::fromString($text)->horizontalAlignmnet($alignment))

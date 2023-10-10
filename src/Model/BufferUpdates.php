@@ -7,6 +7,7 @@ use Countable;
 use IteratorAggregate;
 use RuntimeException;
 use Traversable;
+
 /**
  * @implements IteratorAggregate<BufferUpdate>
  */
@@ -15,7 +16,8 @@ final class BufferUpdates implements Countable, IteratorAggregate
     /**
      * @param BufferUpdate[] $updates
      */
-    public function __construct(private array $updates) {
+    public function __construct(private array $updates)
+    {
     }
 
     public function count(): int
@@ -28,7 +30,8 @@ final class BufferUpdates implements Countable, IteratorAggregate
         if (!isset($this->updates[$index])) {
             throw new RuntimeException(sprintf(
                 'No buffer update at index %d (%d indexes)',
-                $index, count($this->updates)
+                $index,
+                count($this->updates)
             ));
         }
         return $this->updates[$index];

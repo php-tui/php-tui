@@ -138,4 +138,3 @@ class BufferTest extends TestCase
         self::assertEquals('@(0,0) of 4x4', $buffer->area()->__toString());
     }
 }
-

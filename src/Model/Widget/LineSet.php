@@ -16,7 +16,8 @@ class LineSet
         public readonly string $horizontalDown,
         public readonly string $horizontalUp,
         public readonly string $cross
-    ) {}
+    ) {
+    }
 
     public static function plain(): self
     {

@@ -5,6 +5,7 @@ namespace DTL\PhpTui\Model\Widget;
 use ArrayIterator;
 use IteratorAggregate;
 use Traversable;
+
 /**
  * @implements IteratorAggregate<Span>
  */
@@ -16,8 +17,7 @@ final class Line implements IteratorAggregate
     public function __construct(
         public readonly array $spans,
         public readonly HorizontalAlignment $alignment
-    )
-    {
+    ) {
     }
 
     public function width(): int

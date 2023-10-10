@@ -13,6 +13,11 @@ final class Area implements Stringable
     ) {
     }
 
+    public function __toString(): string
+    {
+        return sprintf('@%s of %sx%s', $this->position->__toString(), $this->width, $this->height);
+    }
+
     public static function fromPrimitives(int $x, int $y, int $width, int $height): self
     {
         return new self(new Position($x, $y), $width, $height);
@@ -41,11 +46,6 @@ final class Area implements Stringable
     public function bottom(): int
     {
         return $this->position->y + $this->height;
-    }
-
-    public function __toString(): string
-    {
-        return sprintf('@%s of %sx%s', $this->position->__toString(), $this->width, $this->height);
     }
 
     public static function fromDimensions(int $width, int $height): self

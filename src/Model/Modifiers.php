@@ -30,17 +30,13 @@ final class Modifiers
         return $this->modifiers;
     }
 
-    /**
-     * @param int $value
-     */
+
     public static function fromInt(int $value): self
     {
         return new self($value);
     }
 
-    /**
-     * @param Modifier $modifier
-     */
+
     public static function fromModifier(Modifier $modifier): self
     {
         return self::fromInt($modifier->value);

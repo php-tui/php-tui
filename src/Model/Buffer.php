@@ -5,7 +5,6 @@ namespace DTL\PhpTui\Model;
 use Countable;
 use DTL\PhpTui\Model\Widget\Line;
 use OutOfBoundsException;
-use RuntimeException;
 
 final class Buffer implements Countable
 {
@@ -120,7 +119,7 @@ final class Buffer implements Countable
 
     public function resize(Area $area): void
     {
-        (function () use ($area) {
+        (function () use ($area): void {
             if (count($this->content) > $area->area()) {
                 $this->content = array_slice($this->content, 0, $area->area());
                 return;
