@@ -2,7 +2,9 @@
 
 namespace DTL\PhpTui\Model;
 
+use Closure;
 use DTL\PhpTui\Model\Viewport\Fullscreen;
+use DTL\PhpTui\Model\Viewport\Inline;
 
 class Terminal
 {
@@ -51,5 +53,27 @@ class Terminal
     public function buffer(): Buffer
     {
         return $this->buffers[$this->current];
+    }
+
+    /**
+     * @param Closure(Buffer): void $closure
+     */
+    public function draw(Closure $closure)
+    {
+        $this->autoresize();
+    }
+
+    private function autoresize(): void
+    {
+        if (!$this->viewport instanceof Fullscreen && !$this->viewport instanceof Inline) {
+            return;
+        }
+
+        $size = $this->backend->size();
+        if ($size === $this->lastKnownSize) {
+            return;
+        }
+
+        $this->resize($size);
     }
 }

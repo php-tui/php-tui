@@ -5,6 +5,10 @@ namespace DTL\PhpTui\Model;
 use OutOfBoundsException;
 use Stringable;
 
+/**
+ * Zero-based co-ordinates for cells.
+ * Top-left cell will be 0,0
+ */
 final class Position implements Stringable
 {
     public function __construct(public int $x, public int $y)

@@ -11,17 +11,11 @@ class DummyBackend implements Backend
     /**
      * @var array<int,array<int,string>>
      */
-    private array $grid;
+    private array $grid = [];
 
     public function __construct(private int $width, private int $height)
     {
-        $grid = [];
-        for ($y = 0; $y < $height; $y++) {
-            for ($x = 0; $x < $width; $x++) {
-                $grid[$y][$x] = ' ';
-            }
-        }
-        $this->grid = $grid;
+        $this->fillGrid($width, $height);
     }
 
     public function size(): Area
@@ -47,5 +41,27 @@ class DummyBackend implements Backend
     {
 
         return new self($width, $height);
+    }
+
+    public function setDimensions(int $width, int $height): void
+    {
+        $this->fillGrid($width, $height);
+        $this->width = $width;
+        $this->height = $height;
+    }
+
+    /**
+     * @return array<int,array<int,string>>
+     */
+    private function fillGrid(int $width, int $height): array
+    {
+        for ($y = 0; $y < $height; $y++) {
+            for ($x = 0; $x < $width; $x++) {
+                if (!isset($this->grid[$y][$x])) {
+                    $this->grid[$y][$x] = ' ';
+                }
+            }
+        }
+        return $this->grid;
     }
 }
