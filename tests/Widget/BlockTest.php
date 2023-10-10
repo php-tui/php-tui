@@ -191,8 +191,8 @@ class BlockTest extends TestCase
             Block::default()->title(Title::fromString('Hello World')),
             function (Block $block): void {
                 self::assertEquals(
-                    Area::fromPrimitives(1, 1, 1, 1),
-                    $block->inner(Area::fromPrimitives(0, 0, 3, 3))
+                    Area::fromPrimitives(0, 1, 0, 0),
+                    $block->inner(Area::fromPrimitives(0, 0, 0, 1))
                 );
             }
         ];

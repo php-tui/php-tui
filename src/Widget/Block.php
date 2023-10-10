@@ -15,7 +15,8 @@ final class Block
     public function __construct(
         private int $borders,
         private ?Title $title = null,
-    ) {
+    )
+    {
     }
 
     public static function default(): self
@@ -33,7 +34,7 @@ final class Block
             $x = min($x + 1, $area->right());
             $width = max(0, $width - 1);
         }
-        if ($this->borders & Borders::TOP) {
+        if ($this->borders & Borders::TOP || null !== $this->title) {
             $y = min($y + 1, $area->bottom());
             $height = max(0, $height-1);
         }
