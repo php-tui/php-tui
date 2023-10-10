@@ -175,4 +175,11 @@ final class Buffer implements Countable
 
         return $position;
     }
+
+    public function get(Position $position): Cell
+    {
+        $index = $position->toIndex($this->area);
+        return $this->content[$index];
+
+    }
 }

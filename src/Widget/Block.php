@@ -5,6 +5,8 @@ namespace DTL\PhpTui\Widget;
 use DTL\PhpTui\Model\Area;
 use DTL\PhpTui\Model\Buffer;
 use DTL\PhpTui\Model\Position;
+use DTL\PhpTui\Model\Style;
+use DTL\PhpTui\Model\Widget\BorderType;
 use DTL\PhpTui\Model\Widget\Borders;
 use DTL\PhpTui\Model\Widget\HorizontalAlignment;
 use DTL\PhpTui\Model\Widget\Title;
@@ -20,13 +22,20 @@ final class Block
     public function __construct(
         private int $borders,
         private array $titles,
+        private BorderType $borderType,
+        private Style $borderStyle,
     )
     {
     }
 
     public static function default(): self
     {
-        return new self(Borders::NONE, []);
+        return new self(
+            Borders::NONE,
+            [],
+            BorderType::Plain,
+            Style::default()
+        );
     }
 
     public function inner(Area $area): Area
@@ -79,6 +88,58 @@ final class Block
 
     private function renderBorders(Area $area, Buffer $buffer): void
     {
+        $lineSet = $this->borderType->lineSet();
+        if ($this->borders & Borders::LEFT) {
+            foreach (range($area->top(), $area->bottom() - 1) as $y) {
+                $buffer->get(Position::at($area->left(), $y))
+                    ->setStyle($this->borderStyle)
+                    ->setChar($lineSet->vertical);
+            }
+        }
+        if ($this->borders & Borders::TOP) {
+            foreach (range($area->left(), $area->right() - 1) as $x) {
+                $buffer->get(Position::at($x, $area->top()))
+                    ->setStyle($this->borderStyle)
+                    ->setChar($lineSet->horizontal);
+            }
+        }
+        if ($this->borders & Borders::RIGHT) {
+            $x = $area->right() - 1;
+            foreach (range($area->top(), $area->bottom() - 1) as $y) {
+                $buffer->get(Position::at($x, $y))
+                    ->setStyle($this->borderStyle)
+                    ->setChar($lineSet->vertical);
+            }
+        }
+        if ($this->borders & Borders::BOTTOM) {
+            $y = $area->bottom() - 1;
+            foreach (range($area->left(), $area->right() - 1) as $x) {
+                $buffer->get(Position::at($x, $y))
+                    ->setStyle($this->borderStyle)
+                    ->setChar($lineSet->horizontal);
+            }
+        }
+        if ($this->borders & (Borders::RIGHT | Borders::BOTTOM)) {
+            $buffer->get(Position::at($area->right() - 1, $area->bottom() - 1))
+                ->setChar($lineSet->bottomRight)
+                ->setStyle($this->borderStyle);
+        }
+        if ($this->borders & (Borders::RIGHT | Borders::TOP)) {
+            $buffer->get(Position::at($area->right() - 1, $area->top()))
+                ->setChar($lineSet->topRight)
+                ->setStyle($this->borderStyle);
+        }
+        if ($this->borders & (Borders::LEFT | Borders::TOP)) {
+            $buffer->get(Position::at($area->left(), $area->top()))
+                ->setChar($lineSet->topLeft)
+                ->setStyle($this->borderStyle);
+        }
+        if ($this->borders & (Borders::LEFT | Borders::BOTTOM)) {
+            $buffer->get(Position::at($area->left(), $area->bottom() - 1))
+                ->setChar($lineSet->bottomLeft)
+                ->setStyle($this->borderStyle);
+        }
+
     }
 
     private function renderTitles(Area $area, Buffer $buffer): void

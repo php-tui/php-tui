@@ -248,12 +248,11 @@ class BlockTest extends TestCase
         $buffer = Buffer::empty(Area::fromDimensions(5, 5));
         Block::default()->borders(Borders::ALL)->render($buffer->area(), $buffer);
         self::assertEquals([
-            '+---+',
+            '┌───┐',
             '|   |',
             '|   |',
             '|   |',
-            '|   |',
-            '+---+',
+            '└───┘',
         ], $buffer->toLines());
     }
 }

@@ -23,12 +23,13 @@ final class Cell
         return new self($char, AnsiColor::Reset, AnsiColor::Reset, AnsiColor::Reset, Modifiers::none());
     }
 
-    public function setChar(string $char): void
+    public function setChar(string $char): self
     {
         $this->char = $char;
+        return $this;
     }
 
-    public function setStyle(Style $style): void
+    public function setStyle(Style $style): self
     {
         if ($style->fg) {
             $this->fg = $style->fg;
@@ -45,6 +46,7 @@ final class Cell
         foreach ($style->subModifiers as $modifier) {
             $this->modifier->sub($modifier);
         }
+        return $this;
     }
 
     public function reset(): void
