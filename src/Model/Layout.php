@@ -47,6 +47,6 @@ final class Layout
 
     public function split(Area $target): Areas
     {
-        return $this->solver->solve($target, $this->constraints);
+        return $this->solver->solve($this, $target, $this->constraints);
     }
 }

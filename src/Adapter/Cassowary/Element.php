@@ -2,6 +2,7 @@
 
 namespace DTL\PhpTui\Adapter\Cassowary;
 
+use DTL\Cassowary\Expression;
 use DTL\Cassowary\Variable;
 
 final class Element
@@ -18,5 +19,25 @@ final class Element
             new Variable(0.0),
             new Variable(0.0),
         );
+    }
+
+    public function left(): Variable
+    {
+        return $this->x;
+    }
+
+    public function top(): Variable
+    {
+        return $this->y;
+    }
+
+    public function right(): Expression
+    {
+        return $this->x->add($this->width);
+    }
+
+    public function bottom(): Expression
+    {
+        return $this->y->add($this->height);
     }
 }

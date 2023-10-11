@@ -6,7 +6,7 @@ use DTL\PhpTui\Model\Constraint;
 
 class PercentageConstraint extends Constraint
 {
-    public function __construct(int $percentage)
+    public function __construct(public int $percentage)
     {
     }
 

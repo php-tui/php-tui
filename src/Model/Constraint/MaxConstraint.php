@@ -6,7 +6,7 @@ use DTL\PhpTui\Model\Constraint;
 
 final class MaxConstraint extends Constraint
 {
-    public function __construct(int $max)
+    public function __construct(public int $max)
     {
     }
 

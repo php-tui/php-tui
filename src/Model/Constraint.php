@@ -2,6 +2,7 @@
 
 namespace DTL\PhpTui\Model;
 
+use DTL\PhpTui\Model\Constraint\LengthConstraint;
 use DTL\PhpTui\Model\Constraint\MaxConstraint;
 
 use DTL\PhpTui\Model\Constraint\MinConstraint;
@@ -13,6 +14,11 @@ use DTL\PhpTui\Model\Constraint\PercentageConstraint;
  */
 abstract class Constraint
 {
+    public static function length(int $length): LengthConstraint
+    {
+        return new LengthConstraint($length);
+    }
+
     public static function percentage(int $percentage): PercentageConstraint
     {
         return new PercentageConstraint($percentage);

@@ -4,10 +4,9 @@ namespace DTL\PhpTui\Model\Constraint;
 
 use DTL\PhpTui\Model\Constraint;
 
-final class MinConstraint extends Constraint
+class LengthConstraint extends Constraint
 {
-    public function __construct(public int $min)
+    public function __construct(public int $length)
     {
     }
-
 }
