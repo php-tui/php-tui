@@ -253,6 +253,12 @@ class Solver
 
     }
 
+    /**
+     * Optimize the system for the given objective function.
+     *
+     * This method performs iterations of Phase 2 of the simplex method
+     * until the objective function reaches a minimum.
+     */
     private function optimise(Row $objective): void
     {
         while (true) {
@@ -299,7 +305,7 @@ class Solver
      *
      * @return array{Symbol, Row}
      */
-    private function getLeavingRow(Symbol $entering): ?array
+    private function getLeavingRow(Symbol $entering): array
     {
         $ratio = INF;
         $found = null;
@@ -319,7 +325,10 @@ class Solver
         }
 
         if (null === $found) {
-            return null;
+            throw new AddConstraintaintError(sprintf(
+                'Could not find leaving row for entering symbol: %s',
+                $entering->__toString()
+            ));
         }
 
         $foundRow = $this->rows->offsetGet($found);
