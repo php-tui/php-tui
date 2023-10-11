@@ -25,4 +25,24 @@ final class Layout
             true
         );
     }
+
+    public function direction(Direction $direction): self
+    {
+        $this->direction = $direction;
+        return $this;
+    }
+
+    /**
+     * @param Constraint[] $constrniats
+     */
+    public function constraints(array $constraints): self
+    {
+        $this->constraints = $constraints;
+        return $this;
+    }
+
+    public function split(Area $target): Areas
+    {
+        return new Areas([$target]);
+    }
 }

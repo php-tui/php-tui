@@ -3,6 +3,8 @@
 namespace DTL\PhpTui\Tests\Model;
 
 use DTL\PhpTui\Model\Area;
+use DTL\PhpTui\Model\Constraint;
+use DTL\PhpTui\Model\Direction;
 use DTL\PhpTui\Model\Layout;
 use PHPUnit\Framework\TestCase;
 
