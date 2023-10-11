@@ -2,16 +2,19 @@
 
 namespace DTL\PhpTui\Model;
 
+use DTL\PhpTui\Adapter\Cassowary\CassowaryConstraintSolver;
+
 final class Layout
 {
     /**
      * @param Constraint[] $constraints
      */
-    public function __construct(
+    private function __construct(
+        private ConstraintSolver $solver,
         public Direction $direction,
         public Margin $margin,
         public array $constraints,
-        public bool $expandToFill
+        public bool $expandToFill,
     )
     {
     }
@@ -19,6 +22,7 @@ final class Layout
     public static function default(): self
     {
         return new self(
+            new CassowaryConstraintSolver(),
             Direction::Vertical,
             new Margin(0, 0),
             [],
@@ -33,7 +37,7 @@ final class Layout
     }
 
     /**
-     * @param Constraint[] $constrniats
+     * @param Constraint[] $constraints
      */
     public function constraints(array $constraints): self
     {
@@ -43,6 +47,6 @@ final class Layout
 
     public function split(Area $target): Areas
     {
-        return new Areas([$target]);
+        return $this->solver->solve($target, $this->constraints);
     }
 }
