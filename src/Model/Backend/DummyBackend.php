@@ -6,7 +6,7 @@ use DTL\PhpTui\Model\Area;
 use DTL\PhpTui\Model\Backend;
 use DTL\PhpTui\Model\BufferUpdates;
 
-class DummyBackend implements Backend
+final class DummyBackend implements Backend
 {
     /**
      * @var array<int,array<int,string>>

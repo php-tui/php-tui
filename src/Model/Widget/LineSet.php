@@ -2,7 +2,7 @@
 
 namespace DTL\PhpTui\Model\Widget;
 
-class LineSet
+final class LineSet
 {
     public function __construct(
         public readonly string $vertical,

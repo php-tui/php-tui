@@ -2,7 +2,7 @@
 
 namespace DTL\PhpTui\Model;
 
-class TerminalOptions
+final class TerminalOptions
 {
     public function __construct(public readonly Viewport $viewport)
     {

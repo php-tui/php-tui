@@ -6,7 +6,7 @@ use DTL\PhpTui\Model\Area;
 use DTL\PhpTui\Model\Backend;
 use DTL\PhpTui\Model\Viewport;
 
-class Fullscreen implements Viewport
+final class Fullscreen implements Viewport
 {
     public function computeArea(Backend $backend, Area $size, int $offsetInPreviousViewport): Area
     {

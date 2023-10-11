@@ -7,7 +7,7 @@ use DTL\PhpTui\Model\Backend;
 use DTL\PhpTui\Model\Exception\TodoException;
 use DTL\PhpTui\Model\Viewport;
 
-class Inline implements Viewport
+final class Inline implements Viewport
 {
     public function __construct(public readonly int $height)
     {

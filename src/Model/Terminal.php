@@ -6,7 +6,7 @@ use Closure;
 use DTL\PhpTui\Model\Viewport\Fullscreen;
 use DTL\PhpTui\Model\Viewport\Inline;
 
-class Terminal
+final class Terminal
 {
     /**
      * @param array{Buffer,Buffer} $buffers

@@ -6,7 +6,7 @@ use DTL\PhpTui\Model\Area;
 use DTL\PhpTui\Model\Backend;
 use DTL\PhpTui\Model\Viewport;
 
-class Fixed implements Viewport
+final class Fixed implements Viewport
 {
     public function __construct(public readonly Area $area)
     {
