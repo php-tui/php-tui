@@ -11,7 +11,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "DTL\\PhpTui\\Tests\\": "tests/"
+            "DTL\\PhpTui\\Tests\\": "tests/",
+            "DTL\\Cassowary\\Tests\\": "lib/cassowary/tests/"
         }
     },
     "authors": [

@@ -5,6 +5,7 @@ namespace DTL\PhpTui\Adapter\Cassowary;
 use DTL\Cassowary\Constraint;
 use DTL\Cassowary\Expression;
 use DTL\Cassowary\RelationalOperator;
+use DTL\Cassowary\Solver;
 use DTL\Cassowary\Strength;
 use DTL\Cassowary\Term;
 use DTL\PhpTui\Model\Area;
@@ -23,6 +24,7 @@ final class CassowaryConstraintSolver implements ConstraintSolver
 {
     public function solve(Layout $layout, Area $area, array $constraints): Areas
     {
+        $solver = new Solver();
         $vars = new SplObjectStorage();
         $elements = array_map(fn () => Element::empty(), $constraints, $constraints);
         $areas = array_map(fn () => Area::empty(), $constraints);
@@ -240,6 +242,8 @@ final class CassowaryConstraintSolver implements ConstraintSolver
             })(),
         };
 
-        return new Areas($areas);
+        $solver->addConstraints($css);
+
+        return $css;
     }
 }
