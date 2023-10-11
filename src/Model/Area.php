@@ -57,4 +57,18 @@ final class Area implements Stringable
     {
         return new self(Position::at(0, 0), 0, 0);
     }
+
+    public function inner(Margin $margin): self
+    {
+        if ($this->width < 2 * $margin->horizontal || $this->height < 2 * $margin->vertical) {
+            return self::empty();
+        }
+
+        return self::fromPrimitives(
+            $this->position->x + $margin->horizontal,
+            $this->position->y + $margin->vertical,
+            $this->width - 2 * $margin->horizontal,
+            $this->height - 2 * $margin->vertical,
+        );
+    }
 }
