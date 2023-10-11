@@ -8,4 +8,9 @@ class Symbol
     {
     }
 
+    public static function invalid(): self
+    {
+        return new self(0, SymbolType::Invalid);
+    }
+
 }
