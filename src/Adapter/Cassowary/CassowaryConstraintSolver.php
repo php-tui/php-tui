@@ -175,7 +175,69 @@ final class CassowaryConstraintSolver implements ConstraintSolver
                     };
                 }
             })(),
-            Direction::Vertical => null,
+            Direction::Vertical => (function () use ($elements, $css, $layout, $destArea) {
+                $lastElement = null;
+                foreach ($elements as $element) {
+                    if (null === $lastElement) {
+                        $lastElement = $element;
+                        continue;
+                    }
+                    $css[] = new Constraint(
+                        RelationalOperator::Equal,
+                        $lastElement->y->add(
+                            $lastElement->width
+                        )->add(
+                            $element->y
+                        ),
+                        Strength::REQUIRED
+                    );
+                    $lastElement = $element;
+                }
+
+                foreach ($layout->constraints as $i => $constraint) {
+                    $css[] = new Constraint(
+                        RelationalOperator::Equal,
+                        new Expression(
+                            [new Term($elements[$i]->x)],
+                            (float)$destArea->position->x,
+                        ),
+                        Strength::REQUIRED
+                    );
+                    $css[] = new Constraint(
+                        RelationalOperator::Equal,
+                        new Expression(
+                            [new Term($elements[$i]->width)],
+                            (float)$destArea->width,
+                        ),
+                        Strength::REQUIRED
+                    );
+                    $css[] = match (true) {
+                        $constraint instanceof MinConstraint => new Constraint(
+                            RelationalOperator::GreaterThanOrEqualTo,
+                            $elements[$i]->height->toExpression()->assign($constraint->min),
+                            Strength::MEDIUM,
+                        ),
+                        $constraint instanceof MaxConstraint => new Constraint(
+                            RelationalOperator::LessThanOrEqualTo,
+                            $elements[$i]->height->toExpression()->assign($constraint->max),
+                            Strength::MEDIUM,
+                        ),
+                        $constraint instanceof PercentageConstraint => new Constraint(
+                            RelationalOperator::Equal,
+                            $elements[$i]->height->toExpression()->assign($constraint->percentage * $destArea->height / 100.0),
+                            Strength::MEDIUM,
+                        ),
+                        $constraint instanceof LengthConstraint => new Constraint(
+                            RelationalOperator::Equal,
+                            $elements[$i]->height->toExpression()->assign($constraint->length),
+                            Strength::MEDIUM,
+                        ),
+                        default => throw new RuntimeException(sprintf(
+                            'Do not know how to handle constraint: %s', $constraint::class
+                        ))
+                    };
+                }
+            })(),
         };
 
         return new Areas($areas);
