@@ -24,7 +24,7 @@ class LayoutTest extends TestCase
         self::assertCount(3, $chunks);
         self::assertEquals(
             $target->height,
-            array_sum(array_map(fn (Area $area) => $area->height, $chunks))
+            array_sum(array_map(fn (Area $area) => $area->height, $chunks->toArray()))
         );
     }
 }

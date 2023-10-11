@@ -21,5 +21,12 @@ final class Areas implements IteratorAggregate
     {
         return new ArrayIterator($this->areas);
     }
+    /**
+     * @return Area[]
+     */
+    public function toArray(): array
+    {
+        return $this->areas;
+    }
 
 }

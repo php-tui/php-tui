@@ -6,7 +6,7 @@
     "autoload": {
         "psr-4": {
             "DTL\\PhpTui\\": "src/",
-            "DTL\\Cassowary\\": "lib/"
+            "DTL\\Cassowary\\": "lib/cassowary/src"
         }
     },
     "autoload-dev": {
