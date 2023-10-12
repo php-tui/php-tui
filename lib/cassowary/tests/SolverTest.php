@@ -38,6 +38,11 @@ class SolverTest extends TestCase
         $solver = Solver::new();
         $solver->addConstraints([
             new Constraint(
+                RelationalOperator::GreaterThanOrEqualTo,
+                $variable->toExpression()->constant(1),
+                Strength::STRONG,
+            ),
+            new Constraint(
                 RelationalOperator::LessThanOrEqualTo,
                 $variable->toExpression()->constant(8),
                 Strength::STRONG,
