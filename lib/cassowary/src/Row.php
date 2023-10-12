@@ -115,4 +115,14 @@ class Row
             $this->cells->offsetSet($symbol, $c *= $coefficient);
         }
     }
+
+    public function substitute(Symbol $symbol, Row $row): bool
+    {
+        if (false === $this->cells->offsetExists($symbol)) {
+            return false;
+        }
+        $coefficient = $this->cells->offsetGet($symbol);
+        $this->cells->offsetUnset($symbol);
+        return $this->insertRow($row, $coefficient);
+    }
 }

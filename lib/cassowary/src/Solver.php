@@ -14,6 +14,7 @@ class Solver
      * @param SplObjectStorage<Variable,array{float, Symbol, int}> $varData
      * @param SplObjectStorage<Symbol,Row> $rows
      * @param SplObjectStorage<Variable> $changed
+     * @param array<Row> $infeasibleRows
      */
     final private function __construct(
         private SplObjectStorage $constraints,
@@ -25,6 +26,7 @@ class Solver
         private ?Row $artificial,
         private int $idTick,
         private bool $shouldClearChanges = false,
+        private array $infeasibleRows = []
     ) {
     }
 
@@ -150,7 +152,23 @@ class Solver
             switch ($constraint->relationalOperator) {
                 case RelationalOperator::GreaterThanOrEqualTo:
                 case RelationalOperator::LessThanOrEqualTo:
-                    throw new TodoException('greater than / less than');
+                    $coefficient = $constraint->relationalOperator === RelationalOperator::GreaterThanOrEqualTo ? 1.0 : -1.0;
+                    $slack = $this->spawnSymbol(SymbolType::Slack);
+                    $row->insertSymbol($slack, $coefficient);
+                    if ($constraint->strength < Strength::REQUIRED) {
+                        $error = $this->spawnSymbol(SymbolType::Error);
+                        $row->insertSymbol($error, -$coefficient);
+                        $this->objective->insertSymbol($error, $constraint->strength);
+                        return new Tag(
+                            $slack,
+                            $error 
+                        );
+                    }
+
+                    return new Tag(
+                        $slack,
+                        Symbol::invalid()
+                    );
                 case RelationalOperator::Equal:
                     if ($constraint->strength < Strength::REQUIRED) {
                         $errplus = $this->spawnSymbol(SymbolType::Error);
@@ -348,9 +366,28 @@ class Solver
         return [$found, $foundRow];
     }
 
-    private function substitute(Symbol $entering, Row $row): void
+    /**
+     * Substitute the parametric symbol with the given row.
+     *
+     * This method will substitute all instances of the parametric symbol
+     * in the tableau and the objective function with the given row.
+     */
+    private function substitute(Symbol $symbol, Row $row): void
     {
-        throw new TodoException('Substitute');
+        foreach ($this->rows as $otherSymbol) {
+            $otherRow = $this->rows->offsetGet($otherSymbol);
+            $constantChanged = $otherRow->substitute($symbol, $row);
+            if ($otherSymbol->symbolType === SymbolType::External && $constantChanged) {
+                $this->varChanged($this->varForSymbol[$otherSymbol]);
+            }
+            if ($otherSymbol->symbolType === SymbolType::External && $otherRow->constant < 0.0) {
+                $this->infeasibleRows[] = $otherRow;
+            }
+        }
+        $this->objective->substitute($symbol, $row);
+        if ($this->artificial !== null) {
+            $this->artificial->substitute($symbol, $row);
+        }
     }
 
     private function varChanged(Variable $variable): void
