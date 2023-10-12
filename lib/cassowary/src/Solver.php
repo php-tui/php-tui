@@ -14,7 +14,8 @@ class Solver
      * @param SplObjectStorage<Variable,array{float, Symbol, int}> $varData
      * @param SplObjectStorage<Symbol,Row> $rows
      * @param SplObjectStorage<Variable> $changed
-     * @param array<Row> $infeasibleRows
+     * @param list<Row> $infeasibleRows
+     * @param list<array{Variable,float}> $infeasibleRows
      */
     final private function __construct(
         private SplObjectStorage $constraints,
@@ -26,7 +27,8 @@ class Solver
         private ?Row $artificial,
         private int $idTick,
         private bool $shouldClearChanges = false,
-        private array $infeasibleRows = []
+        private array $infeasibleRows = [],
+        private array $publicChanges = []
     ) {
     }
 
@@ -393,9 +395,39 @@ class Solver
     private function varChanged(Variable $variable): void
     {
         if ($this->shouldClearChanges) {
-            $this->changed = new SplObjectStorage();
-            $this->shouldClearChanges = false;
+            $this->clearChanges();
         }
         $this->changed->offsetSet($variable);
+    }
+
+    /**
+     * @return list<array{Variable,float}>
+     */
+    public function fetchChanges(): array
+    {
+        if ($this->shouldClearChanges) {
+            $this->clearChanges();
+        } else {
+            $this->shouldClearChanges = true;
+        }
+        $this->publicChanges = [];
+        foreach ($this->changed as $variable) {
+            if ($this->varData->offsetExists($variable)) {
+                $varData = $this->varData->offsetGet($variable);
+                $newValue = $this->rows->offsetExists($varData[1]) ? $this->rows->offsetGet($varData[1])->constant : 0.0;
+                $oldValue = $varData[0];
+                if ($oldValue !== $newValue) {
+                    $this->publicChanges[] = [$variable, $newValue];
+                    $varData[0] = $newValue;
+                }
+            }
+        }
+        return $this->publicChanges;
+    }
+
+    private function clearChanges(): void
+    {
+        $this->changed = new SplObjectStorage();
+        $this->shouldClearChanges = false;
     }
 }
