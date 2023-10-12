@@ -138,7 +138,9 @@ class QuadrilateralTest extends TestCase
             ]);
         }
 
-        $solver->fetchChanges();
+        $changes = $solver->fetchChanges();
+
+        dd($midPoints);
         throw new TodoException('TODO: Assert changes');
     }
 }
