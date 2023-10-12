@@ -7,7 +7,7 @@ use Stringable;
 
 class Variable implements Stringable
 {
-    public function __construct(public float $float)
+    public function __construct(public float $float, public ?string $label = null)
     {
     }
 
@@ -41,5 +41,4 @@ class Variable implements Stringable
     {
         return sprintf('%f', $this->float);
     }
-
 }

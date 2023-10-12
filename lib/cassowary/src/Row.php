@@ -29,12 +29,12 @@ class Row implements Countable
     {
         $diff = $other->constant * $coefficient;
         $this->constant += $diff;
-        foreach ($this->cells as $symbol) {
-            $symbolCoefficient = $this->cells->offsetGet($symbol);
-            $this->insertSymbol($symbol, $symbolCoefficient * $coefficient);
+        foreach ($other->cells as $symbol) {
+            $otherCoefficient = $other->cells->offsetGet($symbol);
+            $this->insertSymbol($symbol, $otherCoefficient * $coefficient);
         }
 
-        return $diff !== 0;
+        return $diff !== 0.0;
     }
 
     public function insertSymbol(Symbol $symbol, float $coefficient): void
@@ -100,9 +100,9 @@ class Row implements Countable
     {
         $coefficient = -1.0 / (function () use ($symbol) {
             if ($this->cells->offsetExists($symbol)) {
-                $value = $this->cells->offsetGet($symbol);
+                $coeefficient = $this->cells->offsetGet($symbol);
                 $this->cells->offsetUnset($symbol);
-                return $value;
+                return $coeefficient;
             }
 
             throw new RuntimeException(

@@ -21,6 +21,7 @@ class QuadrilateralTest extends TestCase
             Point::new(),
             Point::new(),
         ];
+        $points[0]->x->label = '0.x';
         $pointStarts = [
             [10.0, 10.0],
             [10.0, 200.0],
