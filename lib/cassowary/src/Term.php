@@ -15,4 +15,9 @@ class Term implements Stringable
         return sprintf('(%s * %f)', $this->variable->__toString(), $this->coefficient);
     }
 
+    public function div(float $divisor): self
+    {
+        return new self($this->variable, $this->coefficient / $divisor);
+    }
+
 }

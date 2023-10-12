@@ -2,6 +2,7 @@
 
 namespace DTL\Cassowary;
 
+use RuntimeException;
 use Stringable;
 
 class Variable implements Stringable
@@ -10,13 +11,25 @@ class Variable implements Stringable
     {
     }
 
-    public function add(Variable $variable): Expression
+    public function add(mixed $value): Expression
     {
-        return new Expression([
-            new Term($this, 1.0),
-            new Term($variable, 1.0),
-        ], 0.0);
+        if ($value instanceof Variable) {
+            return new Expression([
+                new Term($this, 1.0),
+                new Term($value, 1.0),
+            ], 0.0);
+        }
 
+        if (is_float($value)) {
+            return new Expression([
+                new Term($this, 1.0),
+            ], $value);
+        }
+
+        throw new RuntimeException(sprintf(
+            'Do not know how to add %s to a Variable',
+            is_object($value) ? $value::class : gettype($value)
+        ));
     }
 
     public function toExpression(): Expression

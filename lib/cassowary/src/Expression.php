@@ -18,11 +18,21 @@ final class Expression implements Stringable
         return new self([$term], 0.0);
     }
 
-    public function add(Variable $variable): Expression
+    /**
+     * TODO: Refactor to remove union type?
+     */
+    public function add(Expression|Variable $expr): Expression
     {
-        $terms = $this->terms;
-        $terms[] = new Term($variable);
-        return new Expression($terms, 0.0);
+        if ($expr instanceof Variable) {
+            $terms = $this->terms;
+            $terms[] = new Term($expr);
+            return new Expression($terms, 0.0);
+        }
+
+        return new Expression(
+            array_merge($this->terms, $expr->terms),
+            $this->constant += $expr->constant
+        );
 
     }
 
@@ -37,6 +47,14 @@ final class Expression implements Stringable
         return sprintf(
             '%s constant: %f',
             implode(', ', array_map(fn (Term $t) => $t->__toString(), $this->terms)),
+            $this->constant
+        );
+    }
+
+    public function div(float $divisor): self
+    {
+        return new self(
+            array_map(fn (Term $term) => $term->div($divisor), $this->terms),
             $this->constant
         );
     }
