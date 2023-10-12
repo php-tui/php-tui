@@ -36,9 +36,10 @@ final class Expression implements Stringable
 
     }
 
-    public function assign(float $constant): self
+    public function constant(float $constant): self
     {
-        return $this->subtract($constant);
+        $this->constant = $constant;
+        return $this;
     }
 
     public function __toString(): string
@@ -56,11 +57,5 @@ final class Expression implements Stringable
             array_map(fn (Term $term) => $term->div($divisor), $this->terms),
             $this->constant
         );
-    }
-
-    private function subtract(float $constant): self
-    {
-        $this->constant -= $constant;
-        return $this;
     }
 }

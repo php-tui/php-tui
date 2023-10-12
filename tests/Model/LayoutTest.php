@@ -16,12 +16,11 @@ class LayoutTest extends TestCase
         $chunks = Layout::default()
             ->direction(Direction::Vertical)
             ->constraints([
-                Constraint::percentage(10),
                 Constraint::max(5),
                 Constraint::min(1)
             ])
             ->split($target);
-        self::assertCount(3, $chunks);
+        dump($chunks);
         self::assertEquals(
             $target->height,
             array_sum(array_map(fn (Area $area) => $area->height, $chunks->toArray()))

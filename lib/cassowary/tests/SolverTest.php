@@ -29,4 +29,30 @@ class SolverTest extends TestCase
             $constraint
         ]);
     }
+
+    public function testAddConstraint(): void
+    {
+        $variable = new Variable(10.0);
+        $variable2 = new Variable(1);
+        $variable3 = new Variable(1);
+        $solver = Solver::new();
+        $solver->addConstraints([
+            new Constraint(
+                RelationalOperator::LessThanOrEqualTo,
+                $variable->toExpression()->constant(8),
+                Strength::STRONG,
+            ),
+            new Constraint(
+                RelationalOperator::GreaterThanOrEqualTo,
+                $variable2->toExpression()->add($variable),
+                Strength::STRONG,
+            ),
+            new Constraint(
+                RelationalOperator::Equal,
+                $variable3->toExpression()->constant(1),
+                Strength::REQUIRED,
+            ),
+        ]);
+        dump($solver->fetchChanges());
+    }
 }

@@ -42,12 +42,12 @@ class QuadrilateralTest extends TestCase
             $solver->addConstraints([
                 new Constraint(
                     RelationalOperator::Equal,
-                    $points[$i]->x->toExpression()->assign($pointStarts[$i][0]),
+                    $points[$i]->x->toExpression()->constant($pointStarts[$i][0]),
                     Strength::WEAK * $weight
                 ),
                 new Constraint(
                     RelationalOperator::Equal,
-                    $points[$i]->y->toExpression()->assign($pointStarts[$i][1]),
+                    $points[$i]->y->toExpression()->constant($pointStarts[$i][1]),
                     Strength::WEAK * $weight
                 )
             ]);
@@ -117,22 +117,22 @@ class QuadrilateralTest extends TestCase
             $solver->addConstraints([
                 new Constraint(
                     RelationalOperator::GreaterThanOrEqualTo,
-                    $point->x->toExpression()->assign(0.0),
+                    $point->x->toExpression()->constant(0.0),
                     Strength::REQUIRED,
                 ),
                 new Constraint(
                     RelationalOperator::GreaterThanOrEqualTo,
-                    $point->y->toExpression()->assign(0.0),
+                    $point->y->toExpression()->constant(0.0),
                     Strength::REQUIRED,
                 ),
                 new Constraint(
                     RelationalOperator::LessThanOrEqualTo,
-                    $point->x->toExpression()->assign(500.0),
+                    $point->x->toExpression()->constant(500.0),
                     Strength::REQUIRED,
                 ),
                 new Constraint(
                     RelationalOperator::LessThanOrEqualTo,
-                    $point->y->toExpression()->assign(500.0),
+                    $point->y->toExpression()->constant(500.0),
                     Strength::REQUIRED,
                 ),
             ]);

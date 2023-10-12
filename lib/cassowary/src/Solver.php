@@ -73,7 +73,7 @@ class Solver
                 $varData = $this->varData->offsetGet($variable);
 
                 // TODO: added abs() here!!
-                $newValue = abs($this->rows->offsetExists($varData[1]) ? $this->rows->offsetGet($varData[1])->constant : 0.0);
+                $newValue = $this->rows->offsetExists($varData[1]) ? $this->rows->offsetGet($varData[1])->constant : 0.0;
 
                 $oldValue = $varData[0];
                 if ($oldValue !== $newValue) {

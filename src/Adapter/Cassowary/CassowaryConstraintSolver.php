@@ -8,6 +8,7 @@ use DTL\Cassowary\RelationalOperator;
 use DTL\Cassowary\Solver;
 use DTL\Cassowary\Strength;
 use DTL\Cassowary\Term;
+use DTL\Cassowary\Variable;
 use DTL\PhpTui\Model\Area;
 use DTL\PhpTui\Model\Areas;
 use DTL\PhpTui\Model\ConstraintSolver;
@@ -24,7 +25,8 @@ final class CassowaryConstraintSolver implements ConstraintSolver
 {
     public function solve(Layout $layout, Area $area, array $constraints): Areas
     {
-        $solver = new Solver();
+        $solver = Solver::new();
+        /** @var SplObjectStorage<Variable,array{int,int}> */
         $vars = new SplObjectStorage();
         $elements = array_map(fn () => Element::empty(), $constraints, $constraints);
         $areas = array_map(fn () => Area::empty(), $constraints);
@@ -36,47 +38,36 @@ final class CassowaryConstraintSolver implements ConstraintSolver
             $vars[$element->height] = [$i, 3];
         }
         $css = [];
+
         foreach ($elements as $element) {
             $css[] = new Constraint(
                 RelationalOperator::GreaterThanOrEqualTo,
-                new Expression(
-                    [new Term($element->width)],
-                    0,
-                ),
+                $element->width->toExpression()->constant(0),
                 Strength::REQUIRED,
             );
             $css[] = new Constraint(
                 RelationalOperator::GreaterThanOrEqualTo,
-                new Expression(
-                    [new Term($element->height)],
-                    0,
-                ),
+                $element->height->toExpression()->constant(0),
                 Strength::REQUIRED,
             );
             $css[] = new Constraint(
                 RelationalOperator::GreaterThanOrEqualTo,
-                new Expression(
-                    [new Term($element->left())],
-                    $destArea->left(),
-                ),
+                $element->left()->toExpression()->constant($destArea->left()),
                 Strength::REQUIRED,
             );
             $css[] = new Constraint(
                 RelationalOperator::GreaterThanOrEqualTo,
-                new Expression(
-                    [new Term($element->top())],
-                    $destArea->top(),
-                ),
+                $element->top()->toExpression()->constant($destArea->top()),
                 Strength::REQUIRED,
             );
             $css[] = new Constraint(
                 RelationalOperator::LessThanOrEqualTo,
-                $element->right()->assign($destArea->right()),
+                $element->right()->constant($destArea->right()),
                 Strength::REQUIRED,
             );
             $css[] = new Constraint(
                 RelationalOperator::LessThanOrEqualTo,
-                $element->bottom()->assign($destArea->bottom()),
+                $element->bottom()->constant($destArea->bottom()),
                 Strength::REQUIRED,
             );
         }
@@ -86,12 +77,12 @@ final class CassowaryConstraintSolver implements ConstraintSolver
             $css[] = match ($layout->direction) {
                 Direction::Vertical => new Constraint(
                     RelationalOperator::Equal,
-                    $first->left()->toExpression()->assign($destArea->left()),
+                    $first->left()->toExpression()->constant($destArea->left()),
                     Strength::REQUIRED
                 ),
                 Direction::Horizontal => new Constraint(
                     RelationalOperator::Equal,
-                    $first->top()->toExpression()->assign($destArea->top()),
+                    $first->top()->toExpression()->constant($destArea->top()),
                     Strength::REQUIRED
                 ),
             };
@@ -102,12 +93,12 @@ final class CassowaryConstraintSolver implements ConstraintSolver
             $css[] = match ($layout->direction) {
                 Direction::Horizontal => new Constraint(
                     RelationalOperator::Equal,
-                    $last->right()->assign($destArea->right()),
+                    $last->right()->constant($destArea->right()),
                     Strength::REQUIRED
                 ),
                 Direction::Vertical => new Constraint(
                     RelationalOperator::Equal,
-                    $last->bottom()->assign($destArea->bottom()),
+                    $last->bottom()->constant($destArea->bottom()),
                     Strength::REQUIRED
                 ),
             };
@@ -153,22 +144,22 @@ final class CassowaryConstraintSolver implements ConstraintSolver
                     $css[] = match (true) {
                         $constraint instanceof MinConstraint => new Constraint(
                             RelationalOperator::GreaterThanOrEqualTo,
-                            $elements[$i]->width->toExpression()->assign($constraint->min),
+                            $elements[$i]->width->toExpression()->constant($constraint->min),
                             Strength::MEDIUM,
                         ),
                         $constraint instanceof MaxConstraint => new Constraint(
                             RelationalOperator::LessThanOrEqualTo,
-                            $elements[$i]->width->toExpression()->assign($constraint->max),
+                            $elements[$i]->width->toExpression()->constant($constraint->max),
                             Strength::MEDIUM,
                         ),
                         $constraint instanceof PercentageConstraint => new Constraint(
                             RelationalOperator::Equal,
-                            $elements[$i]->width->toExpression()->assign($constraint->percentage * $destArea->width / 100.0),
+                            $elements[$i]->width->toExpression()->constant($constraint->percentage * $destArea->width / 100.0),
                             Strength::MEDIUM,
                         ),
                         $constraint instanceof LengthConstraint => new Constraint(
                             RelationalOperator::Equal,
-                            $elements[$i]->width->toExpression()->assign($constraint->length),
+                            $elements[$i]->width->toExpression()->constant($constraint->length),
                             Strength::MEDIUM,
                         ),
                         default => throw new RuntimeException(sprintf(
@@ -216,22 +207,22 @@ final class CassowaryConstraintSolver implements ConstraintSolver
                     $css[] = match (true) {
                         $constraint instanceof MinConstraint => new Constraint(
                             RelationalOperator::GreaterThanOrEqualTo,
-                            $elements[$i]->height->toExpression()->assign($constraint->min),
+                            $elements[$i]->height->toExpression()->constant($constraint->min),
                             Strength::MEDIUM,
                         ),
                         $constraint instanceof MaxConstraint => new Constraint(
                             RelationalOperator::LessThanOrEqualTo,
-                            $elements[$i]->height->toExpression()->assign($constraint->max),
+                            $elements[$i]->height->toExpression()->constant($constraint->max),
                             Strength::MEDIUM,
                         ),
                         $constraint instanceof PercentageConstraint => new Constraint(
                             RelationalOperator::Equal,
-                            $elements[$i]->height->toExpression()->assign($constraint->percentage * $destArea->height / 100.0),
+                            $elements[$i]->height->toExpression()->constant($constraint->percentage * $destArea->height / 100.0),
                             Strength::MEDIUM,
                         ),
                         $constraint instanceof LengthConstraint => new Constraint(
                             RelationalOperator::Equal,
-                            $elements[$i]->height->toExpression()->assign($constraint->length),
+                            $elements[$i]->height->toExpression()->constant($constraint->length),
                             Strength::MEDIUM,
                         ),
                         default => throw new RuntimeException(sprintf(
@@ -244,6 +235,41 @@ final class CassowaryConstraintSolver implements ConstraintSolver
 
         $solver->addConstraints($css);
 
-        return $css;
+
+        $changes = $solver->fetchChanges();
+        foreach ($changes as $change) {
+            $variable = $change[0];
+            $value = $change[1];
+            [$index, $attr] = $vars->offsetGet($variable);
+            $value = $value < 0.0 ? 0 : intval($value);
+            switch ($attr) {
+                case 0:
+                    $areas[$index]->position->x = $value;
+                    break;
+                case 1:
+                    $areas[$index]->position->y = $value;
+                    break;
+                case 2:
+                    $areas[$index]->width = $value;
+                    break;
+                case 3:
+                    $areas[$index]->height = $value;
+                    break;
+            }
+        }
+
+        if ($layout->expandToFill) {
+            $last = $areas[array_key_last($areas)];
+            switch ($layout->direction) {
+                case Direction::Horizontal:
+                    $last->height = $destArea->bottom() - $last->position->y;
+                    break;
+                case Direction::Vertical:
+                    $last->width = $destArea->right() - $last->position->x;
+                    break;
+            };
+        }
+
+        return new Areas($areas);
     }
 }
