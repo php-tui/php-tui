@@ -62,7 +62,7 @@ class QuadrilateralTest extends TestCase
                 ),
                 new Constraint(
                     RelationalOperator::Equal,
-                    $midPoints[$start]->x->toExpression()->add($points[$start]->y->add($points[$end]->y)->div(2)),
+                    $midPoints[$start]->y->toExpression()->add($points[$start]->y->add($points[$end]->y)->div(2)),
                     Strength::REQUIRED
                 )
             ]);
