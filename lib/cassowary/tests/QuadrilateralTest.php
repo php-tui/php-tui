@@ -139,8 +139,14 @@ class QuadrilateralTest extends TestCase
 
         $changes = $solver->fetchChanges();
 
-        dump($changes);
-        dd($midPoints);
+        self::assertEquals(
+            [10.0, 105],
+            $changes->getValues(
+                $midPoints[0]->x,
+                $midPoints[0]->y
+            ),
+        );
+
         throw new TodoException('TODO: Assert changes');
     }
 }

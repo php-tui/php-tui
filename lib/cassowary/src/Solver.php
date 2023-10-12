@@ -16,6 +16,7 @@ class Solver
      * @param SplObjectStorage<Variable> $changed
      * @param list<Row> $infeasibleRows
      * @param list<array{Variable,float}> $infeasibleRows
+     * @param list<array{variable,float}> $publicchanges
      */
     final private function __construct(
         private SplObjectStorage $constraints,
@@ -212,10 +213,12 @@ class Solver
      */ 
     private function getVarSymbol(Variable $variable): Symbol
     {
-        [$whatIsThis1, $symbol, $whatIsThis2] = (function () use ($variable) {
+        [$whatIsThis1, $symbol, $count] = (function () use ($variable) {
             if (false === $this->varData->offsetExists($variable)) {
                 $symbol = $this->spawnSymbol(SymbolType::External);
                 $this->varForSymbol->offsetSet($symbol, $variable);
+
+                // TODO: use object here
                 $value = [NAN, $symbol, 0];
                 $this->varData->offsetSet($variable, $value);
                 return $value;
@@ -227,7 +230,7 @@ class Solver
         $this->varData->offsetSet($variable, [
             $whatIsThis1,
             $symbol,
-            ++$whatIsThis2,
+            ++$count,
         ]);
 
         return $symbol;
@@ -405,7 +408,7 @@ class Solver
     /**
      * @return list<array{Variable,float}>
      */
-    public function fetchChanges(): array
+    public function fetchChanges(): Changes
     {
         if ($this->shouldClearChanges) {
             $this->clearChanges();
@@ -417,14 +420,16 @@ class Solver
             if ($this->varData->offsetExists($variable)) {
                 $varData = $this->varData->offsetGet($variable);
                 $newValue = $this->rows->offsetExists($varData[1]) ? $this->rows->offsetGet($varData[1])->constant : 0.0;
+
                 $oldValue = $varData[0];
                 if ($oldValue !== $newValue) {
                     $this->publicChanges[] = [$variable, $newValue];
                     $varData[0] = $newValue;
+                    $this->varData->offsetSet($variable, $varData);
                 }
             }
         }
-        return $this->publicChanges;
+        return new Changes($this->publicChanges);
     }
 
     private function clearChanges(): void
