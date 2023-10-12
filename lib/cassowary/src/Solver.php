@@ -2,7 +2,6 @@
 
 namespace DTL\Cassowary;
 
-use DTL\PhpTui\Model\Exception\TodoException;
 use RuntimeException;
 use SplObjectStorage;
 
@@ -14,9 +13,8 @@ class Solver
      * @param SplObjectStorage<Variable,array{float, Symbol, int}> $varData
      * @param SplObjectStorage<Symbol,Row> $rows
      * @param SplObjectStorage<Variable> $changed
-     * @param list<Row> $infeasibleRows
+     * @param list<Symbol> $infeasibleRows
      * @param list<array{Variable,float}> $infeasibleRows
-     * @param list<array{variable,float}> $publicchanges
      */
     final private function __construct(
         private SplObjectStorage $constraints,
@@ -62,6 +60,32 @@ class Solver
         );
     }
 
+    public function fetchChanges(): Changes
+    {
+        if ($this->shouldClearChanges) {
+            $this->clearChanges();
+        } else {
+            $this->shouldClearChanges = true;
+        }
+        $this->publicChanges = [];
+        foreach ($this->changed as $variable) {
+            if ($this->varData->offsetExists($variable)) {
+                $varData = $this->varData->offsetGet($variable);
+
+                // TODO: added abs() here!!
+                $newValue = abs($this->rows->offsetExists($varData[1]) ? $this->rows->offsetGet($varData[1])->constant : 0.0);
+
+                $oldValue = $varData[0];
+                if ($oldValue !== $newValue) {
+                    $this->publicChanges[] = [$variable, $newValue];
+                    $varData[0] = $newValue;
+                    $this->varData->offsetSet($variable, $varData);
+                }
+            }
+        }
+        return new Changes($this->publicChanges);
+    }
+
     private function addConstraint(Constraint $constraint): void
     {
         if ($this->constraints->offsetExists($constraint)) {
@@ -104,7 +128,7 @@ class Solver
         } else {
             $row->solveForSymbol($subject);
             $this->substitute($subject, $row);
-            if ($subject->symbolType == SymbolType::External && $row->constant !== 0.0) {
+            if ($subject->symbolType === SymbolType::External && $row->constant !== 0.0) {
                 /** @var Variable $v */
                 $v = $this->varForSymbol[$subject];
                 $this->varChanged($v);
@@ -112,8 +136,12 @@ class Solver
             $this->rows->offsetSet($subject, $row);
         }
 
-        $this->constraints->offsetSet($constraint);
-        $this->optimise( $this->objective->clone());
+        $this->constraints->offsetSet($constraint, $tag);
+
+        // Optimizing after each constraint is added performs less
+        // aggregate work due to a smaller average system size. It
+        // also ensures the solver remains in a consistent state.
+        $this->optimise($this->objective->clone());
     }
 
     /**
@@ -157,7 +185,7 @@ class Solver
             switch ($constraint->relationalOperator) {
                 case RelationalOperator::GreaterThanOrEqualTo:
                 case RelationalOperator::LessThanOrEqualTo:
-                    $coefficient = $constraint->relationalOperator === RelationalOperator::GreaterThanOrEqualTo ? 1.0 : -1.0;
+                    $coefficient = $constraint->relationalOperator === RelationalOperator::LessThanOrEqualTo ? 1.0 : -1.0;
                     $slack = $this->spawnSymbol(SymbolType::Slack);
                     $row->insertSymbol($slack, $coefficient);
                     if ($constraint->strength < Strength::REQUIRED) {
@@ -166,7 +194,7 @@ class Solver
                         $this->objective->insertSymbol($error, $constraint->strength);
                         return new Tag(
                             $slack,
-                            $error 
+                            $error
                         );
                     }
 
@@ -185,7 +213,7 @@ class Solver
                         $this->objective->insertSymbol($errminus, $constraint->strength);
                         return new Tag(
                             $errplus,
-                            $errminus 
+                            $errminus
                         );
                     }
                     $dummy = $this->spawnSymbol(SymbolType::Dummy);
@@ -210,7 +238,7 @@ class Solver
      * Get the symbol for the given variable.
      *
      * If a symbol does not exist for the variable, one will be created.
-     */ 
+     */
     private function getVarSymbol(Variable $variable): Symbol
     {
         [$whatIsThis1, $symbol, $count] = (function () use ($variable) {
@@ -298,6 +326,8 @@ class Solver
      */
     private function optimise(Row $objective): void
     {
+        // TODO: disabling for now as broken
+        return;
         while (true) {
             $entering = $this->getEnteringSymbol($objective);
             if ($entering->symbolType === SymbolType::Invalid) {
@@ -309,7 +339,7 @@ class Solver
         }
     }
 
-    /** 
+    /**
      * Compute the entering variable for a pivot operation.
      *
      * This method will return first symbol in the objective function which
@@ -403,33 +433,6 @@ class Solver
             $this->clearChanges();
         }
         $this->changed->offsetSet($variable);
-    }
-
-    /**
-     * @return list<array{Variable,float}>
-     */
-    public function fetchChanges(): Changes
-    {
-        if ($this->shouldClearChanges) {
-            $this->clearChanges();
-        } else {
-            $this->shouldClearChanges = true;
-        }
-        $this->publicChanges = [];
-        foreach ($this->changed as $variable) {
-            if ($this->varData->offsetExists($variable)) {
-                $varData = $this->varData->offsetGet($variable);
-                $newValue = $this->rows->offsetExists($varData[1]) ? $this->rows->offsetGet($varData[1])->constant : 0.0;
-
-                $oldValue = $varData[0];
-                if ($oldValue !== $newValue) {
-                    $this->publicChanges[] = [$variable, $newValue];
-                    $varData[0] = $newValue;
-                    $this->varData->offsetSet($variable, $varData);
-                }
-            }
-        }
-        return new Changes($this->publicChanges);
     }
 
     private function clearChanges(): void

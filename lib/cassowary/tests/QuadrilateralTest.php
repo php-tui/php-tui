@@ -142,13 +142,20 @@ class QuadrilateralTest extends TestCase
 
         self::assertEquals(
             [10.0, 105],
-            $changes->getValues(
-                $midPoints[0]->x,
-                $midPoints[0]->y
-            ),
+            $changes->getValues($midPoints[0]->x, $midPoints[0]->y),
         );
-
-        throw new TodoException('TODO: Assert changes');
+        self::assertEquals(
+            [105.0, 200],
+            $changes->getValues($midPoints[1]->x, $midPoints[1]->y),
+        );
+        self::assertEquals(
+            [200.0, 105],
+            $changes->getValues($midPoints[2]->x, $midPoints[2]->y),
+        );
+        self::assertEquals(
+            [105.0, 10.0],
+            $changes->getValues($midPoints[3]->x, $midPoints[3]->y),
+        );
     }
 }
 
