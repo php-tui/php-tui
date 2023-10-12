@@ -108,9 +108,12 @@ class Solver
                 $v = $this->varForSymbol[$subject];
                 $this->varChanged($v);
             }
+            $this->rows->offsetSet($subject, $row);
         }
 
         $this->constraints->offsetSet($constraint);
+        $objective = $this->objective->clone();
+        $this->optimise($objective);
     }
 
     /**
