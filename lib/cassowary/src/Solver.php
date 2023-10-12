@@ -13,15 +13,18 @@ class Solver
      * @param SplObjectStorage<Symbol,Variable> $varForSymbol
      * @param SplObjectStorage<Variable,array{float, Symbol, int}> $varData
      * @param SplObjectStorage<Symbol,Row> $rows
+     * @param SplObjectStorage<Variable> $changed
      */
-    final public function __construct(
+    final private function __construct(
         private SplObjectStorage $constraints,
         private SplObjectStorage $varForSymbol,
         private SplObjectStorage $varData,
         private SplObjectStorage $rows,
+        private SplObjectStorage $changed,
         private Row $objective,
         private ?Row $artificial,
         private int $idTick,
+        private bool $shouldClearChanges = false,
     ) {
     }
 
@@ -38,6 +41,8 @@ class Solver
     public static function new(): self
     {
         return new self(
+            /** @phpstan-ignore-next-line */
+            new SplObjectStorage(),
             /** @phpstan-ignore-next-line */
             new SplObjectStorage(),
             /** @phpstan-ignore-next-line */
@@ -91,9 +96,16 @@ class Solver
                     $constraint->__toString()
                 ));
             }
+        } else {
+            $row->solveForSymbol($subject);
+            $this->substitute($subject, $row);
+            if ($subject->symbolType == SymbolType::External && $row->constant !== 0.0) {
+                /** @var Variable $v */
+                $v = $this->varForSymbol[$subject];
+                $this->varChanged($v);
+            }
         }
 
-        throw new TodoException('HERE');
         $this->constraints->offsetSet($constraint);
     }
 
@@ -339,5 +351,14 @@ class Solver
     private function substitute(Symbol $entering, Row $row): void
     {
         throw new TodoException('Substitute');
+    }
+
+    private function varChanged(Variable $variable): void
+    {
+        if ($this->shouldClearChanges) {
+            $this->changed = new SplObjectStorage();
+            $this->shouldClearChanges = false;
+        }
+        $this->changed->offsetSet($variable);
     }
 }

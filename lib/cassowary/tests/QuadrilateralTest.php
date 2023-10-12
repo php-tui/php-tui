@@ -139,9 +139,7 @@ class QuadrilateralTest extends TestCase
         }
 
         $solver->fetchChanges();
-        throw new TodoException(
-            'TODO: Assert changes'
-        );
+        throw new TodoException('TODO: Assert changes');
     }
 }
 

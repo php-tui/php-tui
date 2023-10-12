@@ -95,7 +95,7 @@ class Row
         $this->solveForSymbol($rhs);
     }
 
-    private function solveForSymbol(Symbol $symbol): void
+    public function solveForSymbol(Symbol $symbol): void
     {
         $coefficient = -1.0 / (function () use ($symbol) {
             if ($this->cells->offsetExists($symbol)) {
