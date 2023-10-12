@@ -57,7 +57,7 @@ class Solver
             new SplObjectStorage(),
             Row::new(0.0),
             null,
-            0,
+            1,
         );
     }
 
@@ -112,8 +112,7 @@ class Solver
         }
 
         $this->constraints->offsetSet($constraint);
-        $objective = $this->objective->clone();
-        $this->optimise($objective);
+        $this->optimise( $this->objective->clone());
     }
 
     /**
@@ -179,7 +178,8 @@ class Solver
                         $errplus = $this->spawnSymbol(SymbolType::Error);
                         $errminus = $this->spawnSymbol(SymbolType::Error);
                         $row->insertSymbol($errplus, -1.0);
-                        $row->insertSymbol($errplus, 1.0);
+                        $row->insertSymbol($errminus, 1.0);
+
                         $this->objective->insertSymbol($errplus, $constraint->strength);
                         $this->objective->insertSymbol($errminus, $constraint->strength);
                         return new Tag(
@@ -214,11 +214,10 @@ class Solver
     {
         [$whatIsThis1, $symbol, $whatIsThis2] = (function () use ($variable) {
             if (false === $this->varData->offsetExists($variable)) {
-                $symbol = new Symbol($this->idTick, SymbolType::External);
+                $symbol = $this->spawnSymbol(SymbolType::External);
                 $this->varForSymbol->offsetSet($symbol, $variable);
                 $value = [NAN, $symbol, 0];
                 $this->varData->offsetSet($variable, $value);
-                $this->idTick++;
                 return $value;
             }
 

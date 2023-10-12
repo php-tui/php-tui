@@ -38,13 +38,12 @@ class QuadrilateralTest extends TestCase
         $multiplier = 2.0;
 
         foreach (range(0, 3) as $i) {
-            $a = new Constraint(
-                RelationalOperator::Equal,
-                $points[$i]->x->toExpression()->assign($pointStarts[$i][1]),
-                12.0
-            );
             $solver->addConstraints([
-                $a,
+                new Constraint(
+                    RelationalOperator::Equal,
+                    $points[$i]->x->toExpression()->assign($pointStarts[$i][0]),
+                    Strength::WEAK * $weight
+                ),
                 new Constraint(
                     RelationalOperator::Equal,
                     $points[$i]->y->toExpression()->assign($pointStarts[$i][1]),
@@ -140,6 +139,7 @@ class QuadrilateralTest extends TestCase
 
         $changes = $solver->fetchChanges();
 
+        dump($changes);
         dd($midPoints);
         throw new TodoException('TODO: Assert changes');
     }

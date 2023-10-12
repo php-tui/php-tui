@@ -2,10 +2,11 @@
 
 namespace DTL\Cassowary;
 
+use Countable;
 use RuntimeException;
 use SplObjectStorage;
 
-class Row
+class Row implements Countable
 {
     /**
      * @param SplObjectStorage<Symbol,float> $cells
@@ -124,5 +125,10 @@ class Row
         $coefficient = $this->cells->offsetGet($symbol);
         $this->cells->offsetUnset($symbol);
         return $this->insertRow($row, $coefficient);
+    }
+
+    public function count(): int
+    {
+        return $this->cells->count();
     }
 }
