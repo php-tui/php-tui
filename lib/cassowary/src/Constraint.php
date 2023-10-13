@@ -19,7 +19,7 @@ final class Constraint implements Stringable
     public function __toString(): string
     {
         return sprintf(
-            '{operator: %s, lhsession: %s, strength: %s}',
+            '{operator: %s, expression: %s, strength: %s}',
             $this->relationalOperator->name,
             $this->expression->__toString(),
             $this->strength
@@ -34,7 +34,7 @@ final class Constraint implements Stringable
             $rhs = $rhs->toExpression();
         }
         if (is_float($rhs)) {
-            $expr->constant($rhs);
+            $expr->constant($rhs *= -1);
         } else {
             $expr = $expr->add($rhs->negate());
         }

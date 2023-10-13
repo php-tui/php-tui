@@ -166,6 +166,6 @@ class Point {
 
     public static function new(): self
     {
-        return new self(new Variable(0.0), new Variable(0.0));
+        return new self(Variable::new(), Variable::new());
     }
 }

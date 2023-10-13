@@ -7,7 +7,9 @@ use Stringable;
 
 class Variable implements Stringable
 {
-    public function __construct(public float $float, public ?string $label = null)
+    private static $idIndex = 0;
+
+    private function __construct(public int $id, public ?string $label = null)
     {
     }
 
@@ -39,11 +41,16 @@ class Variable implements Stringable
 
     public function __toString(): string
     {
-        return sprintf('%f', $this->float);
+        return sprintf('Variable(%d)', $this->id);
     }
 
-    public static function new(float $value = 0.0): self
+    public static function new(): self
     {
-        return new self($value);
+        return new self(self::$idIndex++);
+    }
+
+    public function sub(Variable $variable): Expression
+    {
+        return new Expression([new Term($this, 1.0), new Term($variable, -1.0)], 0.0);
     }
 }

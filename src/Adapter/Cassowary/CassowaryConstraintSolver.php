@@ -11,6 +11,7 @@ use DTL\Cassowary\Term;
 use DTL\Cassowary\Variable;
 use DTL\PhpTui\Model\Area;
 use DTL\PhpTui\Model\Areas;
+use DTL\PhpTui\Model\Constraint as DTLConstraint;
 use DTL\PhpTui\Model\ConstraintSolver;
 use DTL\PhpTui\Model\Constraint\LengthConstraint;
 use DTL\PhpTui\Model\Constraint\MaxConstraint;
@@ -58,6 +59,34 @@ final class CassowaryConstraintSolver implements ConstraintSolver
             );
         }
 
+        // ensure the first element toches the left/top edge of the area
+        if (count($elements)) {
+            $first = $elements[array_key_first($elements)];
+            $solver->addConstraint(Constraint::equalTo($first->start, $areaStart, Strength::REQUIRED));
+        }
+
+        // ensure the last element touches the right/boottom edge of the area
+        if (count($elements)) {
+            $last = $elements[array_key_last($elements)];
+            $solver->addConstraint(Constraint::equalTo($last->end, $areaEnd, Strength::REQUIRED));
+        }
+
+        foreach ($constraints as $i => $constraint) {
+            $element = $elements[$i];
+            $solver->addConstraint($this->resolveConstraint($constraint, $element, $areaSize));
+        }
+
         return new Areas($areas);
+    }
+
+    private function resolveConstraint(DTLConstraint $constraint, Element $element, float $areaSize): Constraint
+    {
+        if ($constraint instanceof PercentageConstraint) {
+            return Constraint::equalTo(
+                $element->size(),
+                $areaSize * ($constraint->percentage / 100),
+                Strength::STRONG
+            );
+        }
     }
 }

@@ -14,28 +14,23 @@ final class Element
     public static function empty(): self
     {
         return new self(
-            new Variable(0.0),
-            new Variable(0.0),
+            Variable::new(),
+            Variable::new(),
         );
     }
 
-    public function left(): Variable
+    public function start(): Variable
     {
-        return $this->x;
+        return $this->start;
     }
 
-    public function top(): Variable
+    public function end(): Variable
     {
-        return $this->y;
+        return $this->end;
     }
 
-    public function right(): Expression
+    public function size(): Expression
     {
-        return $this->x->add($this->width);
-    }
-
-    public function bottom(): Expression
-    {
-        return $this->y->add($this->height);
+        return $this->end->sub($this->start);
     }
 }

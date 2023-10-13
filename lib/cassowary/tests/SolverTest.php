@@ -16,12 +16,9 @@ class SolverTest extends TestCase
     public function testDuplicateConstraint(): void
     {
         $this->expectException(AddConstraintaintError::class);
-        $this->expectExceptionMessage(
-            'Constraint {operator: Equal, expression: (10.000000 * 1.000000) constant: 0.000000, strength: 1001001000}'
-        );
         $constraint = new Constraint(
             relationalOperator: RelationalOperator::Equal,
-            expression: (new Variable(10))->toExpression(),
+            expression: (Variable::new())->toExpression(),
             strength: Strength::REQUIRED 
         );
         Solver::new()->addConstraints([
@@ -32,9 +29,9 @@ class SolverTest extends TestCase
 
     public function testAddConstraint(): void
     {
-        $variable = new Variable(10.0);
-        $variable2 = new Variable(1);
-        $variable3 = new Variable(1);
+        $variable = Variable::new();
+        $variable2 = Variable::new();
+        $variable3 = Variable::new();
         $solver = Solver::new();
         $solver->addConstraints([
             new Constraint(

@@ -23,7 +23,7 @@ class ConstraintTest extends TestCase
             terms: [
                 new Term($var1, 1.0),
             ],
-            constant: 10.0
+            constant: -10.0
         ), $c->expression);
     }
 
@@ -38,7 +38,7 @@ class ConstraintTest extends TestCase
             terms: [
                 new Term($var1, 1.0),
             ],
-            constant: 10.0
+            constant: -10.0
         ), $c->expression);
     }
 
@@ -53,7 +53,7 @@ class ConstraintTest extends TestCase
             terms: [
                 new Term($var1, 1.0),
             ],
-            constant: 10.0
+            constant: -10.0
         ), $c->expression);
     }
 
