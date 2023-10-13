@@ -8,10 +8,7 @@ use SplObjectStorage;
 
 class Row implements Countable
 {
-    /**
-     * @param SplObjectStorage<Symbol,float> $cells
-     */
-    public function __construct(public float $constant, public SplObjectStorage $cells)
+    public function __construct(public float $constant, public CellMap $cells)
     {
     }
 
@@ -19,8 +16,7 @@ class Row implements Countable
     {
         return new self(
             $constant,
-            /** @phpstan-ignore-next-line */
-            new SplObjectStorage(),
+            new CellMap(),
         );
 
     }
@@ -39,12 +35,19 @@ class Row implements Countable
 
     public function insertSymbol(Symbol $symbol, float $coefficient): void
     {
+        // Occupied
         if ($this->cells->offsetExists($symbol)) {
             $newCoefficient = $this->cells->offsetGet($symbol) + $coefficient;
+
             $this->cells->offsetSet($symbol, $newCoefficient);
+
             if (SolverUtil::nearZero($newCoefficient)) {
                 $this->cells->offsetUnset($symbol);
             }
+            return;
+        } // else Vacant
+
+        if (SolverUtil::nearZero($coefficient)) {
             return;
         }
 
@@ -81,8 +84,7 @@ class Row implements Countable
 
     public function clone(): self
     {
-        /** @var SplObjectStorage<Symbol,float> */
-        $newCells = new SplObjectStorage();
+        $newCells = new CellMap();
         foreach ($this->cells as $symbol) {
             $coefficient = $this->cells->offsetGet($symbol);
             $newCells->offsetSet(clone $symbol, $coefficient);

@@ -216,6 +216,7 @@ class Solver
                             $errminus
                         );
                     }
+
                     $dummy = $this->spawnSymbol(SymbolType::Dummy);
                     $row->insertSymbol($dummy, 1.0);
                     return new Tag(
@@ -285,19 +286,19 @@ class Solver
      */
     private static function chooseSubject(Row $row, Tag $tag): Symbol
     {
-        foreach ($row->cells as $cell) {
-            if ($cell->symbolType === SymbolType::External) {
-                return $cell;
+        foreach ($row->cells as $symbol) {
+            if ($symbol->symbolType === SymbolType::External) {
+                return $symbol;
             }
         }
 
-        if ($tag->marker->symbolType == SymbolType::Slack || $tag->marker->symbolType == SymbolType::Error) {
+        if ($tag->marker->symbolType == SymbolType::Slack || $tag->marker->symbolType === SymbolType::Error) {
             if ($row->coefficientFor($tag->marker) < 0.0) {
                 return $tag->marker;
             }
         }
 
-        if ($tag->other->symbolType == SymbolType::Slack || $tag->other->symbolType == SymbolType::Error) {
+        if ($tag->other->symbolType == SymbolType::Slack || $tag->other->symbolType === SymbolType::Error) {
             if ($row->coefficientFor($tag->other) < 0.0) {
                 return $tag->other;
             }
@@ -311,7 +312,16 @@ class Solver
         $artificial = $this->spawnSymbol(SymbolType::Slack);
         $this->rows->offsetSet($artificial, $row->clone());
         $this->artificial = $row->clone();
-        $this->optimise($this->artificial);
+
+        // Optimize the artificial objective. This is successful
+        // only if the artificial objective is optimized to zero.
+        $artificial = $this->artificial->clone();
+        $this->optimise($artificial);
+        $success = SolverUtil::nearZero($this->artificial->constant);
+        $this->artificial = null;
+
+        dd('SUCCESS HERE');
+
 
 
         return true;
@@ -376,6 +386,7 @@ class Solver
         $found = null;
         foreach ($this->rows as $symbol) {
             $row = $this->rows->offsetGet($symbol);
+
             if ($symbol->symbolType === SymbolType::External) {
                 continue;
             }
