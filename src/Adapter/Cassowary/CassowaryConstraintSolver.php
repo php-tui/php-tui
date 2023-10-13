@@ -26,248 +26,36 @@ final class CassowaryConstraintSolver implements ConstraintSolver
     public function solve(Layout $layout, Area $area, array $constraints): Areas
     {
         $solver = Solver::new();
-        /** @var SplObjectStorage<Variable,array{int,int}> */
-        $vars = new SplObjectStorage();
-        $elements = array_map(fn () => Element::empty(), $constraints, $constraints);
-        $areas = array_map(fn () => Area::empty(), $constraints);
-        $destArea = $area->inner($layout->margin);
-        foreach ($elements as $i => $element) {
-            $vars[$element->x] = [$i, 0];
-            $vars[$element->y] = [$i, 1];
-            $vars[$element->width] = [$i, 2];
-            $vars[$element->height] = [$i, 3];
-        }
-        $css = [];
+        $inner = $area->inner($layout->margin);
 
-        foreach ($elements as $element) {
-            $css[] = new Constraint(
-                RelationalOperator::GreaterThanOrEqualTo,
-                $element->width->toExpression()->constant(0),
-                Strength::REQUIRED,
-            );
-            $css[] = new Constraint(
-                RelationalOperator::GreaterThanOrEqualTo,
-                $element->height->toExpression()->constant(0),
-                Strength::REQUIRED,
-            );
-            $css[] = new Constraint(
-                RelationalOperator::GreaterThanOrEqualTo,
-                $element->left()->toExpression()->constant($destArea->left()),
-                Strength::REQUIRED,
-            );
-            $css[] = new Constraint(
-                RelationalOperator::GreaterThanOrEqualTo,
-                $element->top()->toExpression()->constant($destArea->top()),
-                Strength::REQUIRED,
-            );
-            $css[] = new Constraint(
-                RelationalOperator::LessThanOrEqualTo,
-                $element->right()->constant($destArea->right()),
-                Strength::REQUIRED,
-            );
-            $css[] = new Constraint(
-                RelationalOperator::LessThanOrEqualTo,
-                $element->bottom()->constant($destArea->bottom()),
-                Strength::REQUIRED,
-            );
-        }
-
-        if (count($elements)) {
-            $first = $elements[array_key_first($elements)];
-            $css[] = match ($layout->direction) {
-                Direction::Vertical => new Constraint(
-                    RelationalOperator::Equal,
-                    $first->left()->toExpression()->constant($destArea->left()),
-                    Strength::REQUIRED
-                ),
-                Direction::Horizontal => new Constraint(
-                    RelationalOperator::Equal,
-                    $first->top()->toExpression()->constant($destArea->top()),
-                    Strength::REQUIRED
-                ),
-            };
-        }
-
-        if ($layout->expandToFill && count($elements)) {
-            $last = $elements[array_key_last($elements)];
-            $css[] = match ($layout->direction) {
-                Direction::Horizontal => new Constraint(
-                    RelationalOperator::Equal,
-                    $last->right()->constant($destArea->right()),
-                    Strength::REQUIRED
-                ),
-                Direction::Vertical => new Constraint(
-                    RelationalOperator::Equal,
-                    $last->bottom()->constant($destArea->bottom()),
-                    Strength::REQUIRED
-                ),
-            };
-        }
-
-        match ($layout->direction) {
-            Direction::Horizontal => (function () use ($elements, $css, $layout, $destArea) {
-                $lastElement = null;
-                foreach ($elements as $element) {
-                    if (null === $lastElement) {
-                        $lastElement = $element;
-                        continue;
-                    }
-                    $css[] = new Constraint(
-                        RelationalOperator::Equal,
-                        $lastElement->x->add(
-                            $lastElement->width
-                        )->add(
-                            $element->x
-                        ),
-                        Strength::REQUIRED
-                    );
-                    $lastElement = $element;
-                }
-
-                foreach ($layout->constraints as $i => $constraint) {
-                    $css[] = new Constraint(
-                        RelationalOperator::Equal,
-                        new Expression(
-                            [new Term($elements[$i]->y)],
-                            (float)$destArea->position->y,
-                        ),
-                        Strength::REQUIRED
-                    );
-                    $css[] = new Constraint(
-                        RelationalOperator::Equal,
-                        new Expression(
-                            [new Term($elements[$i]->height)],
-                            (float)$destArea->height,
-                        ),
-                        Strength::REQUIRED
-                    );
-                    $css[] = match (true) {
-                        $constraint instanceof MinConstraint => new Constraint(
-                            RelationalOperator::GreaterThanOrEqualTo,
-                            $elements[$i]->width->toExpression()->constant($constraint->min),
-                            Strength::MEDIUM,
-                        ),
-                        $constraint instanceof MaxConstraint => new Constraint(
-                            RelationalOperator::LessThanOrEqualTo,
-                            $elements[$i]->width->toExpression()->constant($constraint->max),
-                            Strength::MEDIUM,
-                        ),
-                        $constraint instanceof PercentageConstraint => new Constraint(
-                            RelationalOperator::Equal,
-                            $elements[$i]->width->toExpression()->constant($constraint->percentage * $destArea->width / 100.0),
-                            Strength::MEDIUM,
-                        ),
-                        $constraint instanceof LengthConstraint => new Constraint(
-                            RelationalOperator::Equal,
-                            $elements[$i]->width->toExpression()->constant($constraint->length),
-                            Strength::MEDIUM,
-                        ),
-                        default => throw new RuntimeException(sprintf(
-                            'Do not know how to handle constraint: %s', $constraint::class
-                        ))
-                    };
-                }
-            })(),
-            Direction::Vertical => (function () use ($elements, $css, $layout, $destArea) {
-                $lastElement = null;
-                foreach ($elements as $element) {
-                    if (null === $lastElement) {
-                        $lastElement = $element;
-                        continue;
-                    }
-                    $css[] = new Constraint(
-                        RelationalOperator::Equal,
-                        $lastElement->y->add(
-                            $lastElement->width
-                        )->add(
-                            $element->y
-                        ),
-                        Strength::REQUIRED
-                    );
-                    $lastElement = $element;
-                }
-
-                foreach ($layout->constraints as $i => $constraint) {
-                    $css[] = new Constraint(
-                        RelationalOperator::Equal,
-                        new Expression(
-                            [new Term($elements[$i]->x)],
-                            (float)$destArea->position->x,
-                        ),
-                        Strength::REQUIRED
-                    );
-                    $css[] = new Constraint(
-                        RelationalOperator::Equal,
-                        new Expression(
-                            [new Term($elements[$i]->width)],
-                            (float)$destArea->width,
-                        ),
-                        Strength::REQUIRED
-                    );
-                    $css[] = match (true) {
-                        $constraint instanceof MinConstraint => new Constraint(
-                            RelationalOperator::GreaterThanOrEqualTo,
-                            $elements[$i]->height->toExpression()->constant($constraint->min),
-                            Strength::MEDIUM,
-                        ),
-                        $constraint instanceof MaxConstraint => new Constraint(
-                            RelationalOperator::LessThanOrEqualTo,
-                            $elements[$i]->height->toExpression()->constant($constraint->max),
-                            Strength::MEDIUM,
-                        ),
-                        $constraint instanceof PercentageConstraint => new Constraint(
-                            RelationalOperator::Equal,
-                            $elements[$i]->height->toExpression()->constant($constraint->percentage * $destArea->height / 100.0),
-                            Strength::MEDIUM,
-                        ),
-                        $constraint instanceof LengthConstraint => new Constraint(
-                            RelationalOperator::Equal,
-                            $elements[$i]->height->toExpression()->constant($constraint->length),
-                            Strength::MEDIUM,
-                        ),
-                        default => throw new RuntimeException(sprintf(
-                            'Do not know how to handle constraint: %s', $constraint::class
-                        ))
-                    };
-                }
-            })(),
+        [$areaStart, $areaEnd] = match ($layout->direction) {
+            Direction::Horizontal => [$inner->x, $inner->right()],
+            Direction::Vertical => [$inner->y, $inner->bottom()],
         };
 
-        $solver->addConstraints($css);
+        $areaSize = $areaEnd - $areaStart;
 
+        $elements = array_map(fn () => new Element(), $layout->constraints);
 
-        $changes = $solver->fetchChanges();
-        foreach ($changes as $change) {
-            $variable = $change[0];
-            $value = $change[1];
-            [$index, $attr] = $vars->offsetGet($variable);
-            $value = $value < 0.0 ? 0 : intval($value);
-            switch ($attr) {
-                case 0:
-                    $areas[$index]->position->x = $value;
-                    break;
-                case 1:
-                    $areas[$index]->position->y = $value;
-                    break;
-                case 2:
-                    $areas[$index]->width = $value;
-                    break;
-                case 3:
-                    $areas[$index]->height = $value;
-                    break;
-            }
+        // ensure that all the elements are inside the area
+        foreach ($elements as $element) {
+            $solver->addConstraints([
+                Constraint::greaterThanOrEqualTo($element->start, $areaStart, Strength::REQUIRED),
+                Constraint::lessThanOrEqualTo($element->end, $areaEnd, Strength::REQUIRED),
+                Constraint::lessThanOrEqualTo($element->start, $element->end, Strength::REQUIRED),
+            ]);
         }
 
-        if ($layout->expandToFill) {
-            $last = $areas[array_key_last($areas)];
-            switch ($layout->direction) {
-                case Direction::Horizontal:
-                    $last->height = $destArea->bottom() - $last->position->y;
-                    break;
-                case Direction::Vertical:
-                    $last->width = $destArea->right() - $last->position->x;
-                    break;
-            };
+        // ensure there are no gaps between the elements
+        $previousElement = null;
+        foreach ($elements as $element) {
+            if ($previousElement === null) {
+                $previousElement = $element;
+                continue;
+            }
+            $solver->addConstraint(
+                Constraint::equalTo($previousElement->end, $element->start, Strength::REQUIRED)
+            );
         }
 
         return new Areas($areas);

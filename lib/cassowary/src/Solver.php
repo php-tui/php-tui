@@ -86,7 +86,7 @@ class Solver
         return new Changes($this->publicChanges);
     }
 
-    private function addConstraint(Constraint $constraint): void
+    public function addConstraint(Constraint $constraint): void
     {
         if ($this->constraints->offsetExists($constraint)) {
             throw new AddConstraintaintError(sprintf(

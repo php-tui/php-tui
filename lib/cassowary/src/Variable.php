@@ -41,4 +41,9 @@ class Variable implements Stringable
     {
         return sprintf('%f', $this->float);
     }
+
+    public static function new(float $value = 0.0): self
+    {
+        return new self($value);
+    }
 }

@@ -42,6 +42,15 @@ final class Expression implements Stringable
         return $this;
     }
 
+    public function negate(): self
+    {
+        foreach ($this->terms as $term) {
+            $term->coefficient *= -1;
+        }
+
+        return $this;
+    }
+
     public function __toString(): string
     {
         return sprintf(

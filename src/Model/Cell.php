@@ -44,7 +44,7 @@ final class Cell
             $this->modifier->add($modifier);
         }
         foreach ($style->subModifiers as $modifier) {
-            $this->modifier->sub($modifier);
+            $this->modifier->sub($modifier);rhs->
         }
         return $this;
     }
