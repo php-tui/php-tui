@@ -5,8 +5,9 @@ namespace DTL\Cassowary;
 use Countable;
 use RuntimeException;
 use SplObjectStorage;
+use Stringable;
 
-class Row implements Countable
+class Row implements Countable, Stringable
 {
     public function __construct(public float $constant, public CellMap $cells)
     {
@@ -84,12 +85,13 @@ class Row implements Countable
 
     public function clone(): self
     {
-        $newCells = new CellMap();
-        foreach ($this->cells as $symbol) {
-            $coefficient = $this->cells->offsetGet($symbol);
-            $newCells->offsetSet(clone $symbol, $coefficient);
-        }
-        return new self($this->constant, $newCells);
+        return $this;
+        // $newCells = new CellMap();
+        // foreach ($this->cells as $symbol) {
+        //     $coefficient = $this->cells->offsetGet($symbol);
+        //     $newCells->offsetSet(clone $symbol, $coefficient);
+        // }
+        // return new self($this->constant, $newCells);
     }
 
     public function solveForSymbols(Symbol $lhs, Symbol $rhs): void
@@ -132,5 +134,18 @@ class Row implements Countable
     public function count(): int
     {
         return $this->cells->count();
+    }
+
+    public function __toString(): string
+    {
+        $string = [
+            sprintf('Row -> %s', $this->constant),
+        ];
+
+        foreach ($this->cells as $cell) {
+            $string[] = sprintf('%s -> %s', $cell->__toString(), $this->cells->offsetGet($cell));
+        }
+
+        return implode("\n", $string);
     }
 }
