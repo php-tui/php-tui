@@ -40,6 +40,7 @@ class Changes implements IteratorAggregate
                     continue 2;
                 }
             }
+            $found[] = 0.0;
         }
 
         return $found;

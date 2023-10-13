@@ -74,9 +74,9 @@ final class CassowaryConstraintSolver implements ConstraintSolver
         $changes = $solver->fetchChanges();
 
         return new Areas(array_map(function (Element $element) use ($changes, $layout, $inner) {
-            [$start, $end] = $changes->getValues($element->start, $element->end);
-            $start = intval($start);
-            $end = intval($start);
+            $values = $changes->getValues($element->start, $element->end);
+            $start = intval($values[0]);
+            $end = intval($values[1]);
             $size = $end - $start;
 
             return match ($layout->direction) {

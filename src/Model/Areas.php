@@ -4,6 +4,7 @@ namespace DTL\PhpTui\Model;
 
 use ArrayIterator;
 use IteratorAggregate;
+use RuntimeException;
 use Traversable;
 /**
  * @implements IteratorAggregate<Area>
@@ -27,6 +28,18 @@ final class Areas implements IteratorAggregate
     public function toArray(): array
     {
         return $this->areas;
+    }
+
+    public function get(int $offset): Area
+    {
+        if (!isset($this->areas[$offset])) {
+            throw new RuntimeException(sprintf(
+                'Area at offset %d not set, known offsets: %s',
+                implode(', ', array_keys($this->areas))
+            ));
+        }
+
+        return $this->areas[$offset];
     }
 
 }

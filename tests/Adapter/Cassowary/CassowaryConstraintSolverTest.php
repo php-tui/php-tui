@@ -12,19 +12,19 @@ class CassowaryConstraintSolverTest extends TestCase
 {
     public function testSolveVertical(): void
     {
-        Layout::default()
+        $splits = Layout::default()
             ->direction(Direction::Vertical)
             ->constraints([
-                Constraint::min(10),
+                Constraint::length(10),
                 Constraint::max(10),
-                Constraint::percentage(100),
-                Constraint::length(100),
             ])
             ->split(Area::fromDimensions(100,100));
+        self::assertCount(2, $splits);
     }
+
     public function testSolveHorizontal(): void
     {
-        Layout::default()
+        $splits = Layout::default()
             ->direction(Direction::Horizontal)
             ->constraints([
                 Constraint::min(10),
@@ -33,5 +33,6 @@ class CassowaryConstraintSolverTest extends TestCase
                 Constraint::length(100),
             ])
             ->split(Area::fromDimensions(100,100));
+        self::assertCount(4, $splits);
     }
 }
