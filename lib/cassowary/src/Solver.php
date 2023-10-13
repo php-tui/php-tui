@@ -17,7 +17,7 @@ class Solver
      * @param list<array{Variable,float}> $infeasibleRows
      */
     final private function __construct(
-        private SplObjectStorage $constraints,
+        public readonly SplObjectStorage $constraints,
         private SplObjectStorage $varForSymbol,
         private SplObjectStorage $varData,
         private SplObjectStorage $rows,
@@ -326,8 +326,6 @@ class Solver
      */
     private function optimise(Row $objective): void
     {
-        // TODO: disabling for now as broken
-        return;
         while (true) {
             $entering = $this->getEnteringSymbol($objective);
             if ($entering->symbolType === SymbolType::Invalid) {
@@ -418,7 +416,7 @@ class Solver
                 $this->varChanged($this->varForSymbol[$otherSymbol]);
             }
             if ($otherSymbol->symbolType === SymbolType::External && $otherRow->constant < 0.0) {
-                $this->infeasibleRows[] = $otherRow;
+                $this->infeasibleRows[] = $otherSymbol;
             }
         }
         $this->objective->substitute($symbol, $row);

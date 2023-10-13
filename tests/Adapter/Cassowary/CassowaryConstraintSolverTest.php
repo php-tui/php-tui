@@ -19,7 +19,7 @@ class CassowaryConstraintSolverTest extends TestCase
                 Constraint::max(5),
                 Constraint::min(1),
             ])
-            ->split(Area::fromPrimitives(2, 2, 10,10));
+            ->split(Area::fromPrimitives(0, 0, 128, 33));
         self::assertCount(3, $splits);
         self::assertEquals(10, array_sum(array_map(fn (Area $a) => $a->height, $splits->toArray())));
         self::assertEquals(10, array_sum(array_map(fn (Area $a) => $a->width, $splits->toArray())));
