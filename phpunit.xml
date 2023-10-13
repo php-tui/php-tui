@@ -13,6 +13,7 @@
     <testsuites>
         <testsuite name="default">
             <directory>tests</directory>
+            <directory>lib/cassowary/tests</directory>
         </testsuite>
     </testsuites>
 
