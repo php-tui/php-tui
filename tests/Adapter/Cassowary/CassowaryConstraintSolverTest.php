@@ -15,11 +15,14 @@ class CassowaryConstraintSolverTest extends TestCase
         $splits = Layout::default()
             ->direction(Direction::Vertical)
             ->constraints([
-                Constraint::length(10),
-                Constraint::max(10),
+                Constraint::percentage(10),
+                Constraint::max(5),
+                Constraint::min(1),
             ])
-            ->split(Area::fromDimensions(100,100));
-        self::assertCount(2, $splits);
+            ->split(Area::fromPrimitives(2, 2, 10,10));
+        self::assertCount(3, $splits);
+        self::assertEquals(10, array_sum(array_map(fn (Area $a) => $a->height, $splits->toArray())));
+        self::assertEquals(10, array_sum(array_map(fn (Area $a) => $a->width, $splits->toArray())));
     }
 
     public function testSolveHorizontal(): void
