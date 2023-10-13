@@ -57,16 +57,29 @@ class ConstraintTest extends TestCase
         ), $c->expression);
     }
 
-    public function testRightHandSideIsAVariable(): void
+    public function testRightHandSideIsAVariableOrExpression(): void
     {
         $var1 = Variable::new(10.0);
         $var2 = Variable::new(5.0);
+        $var3 = Variable::new(7.0);
+
         $c = Constraint::equalTo($var1, $var2, Strength::WEAK);
 
         self::assertEquals(new Expression(
             terms: [
                 new Term($var1, 1.0),
                 new Term($var2, -1.0),
+            ],
+            constant: 0
+        ), $c->expression);
+
+        $c = Constraint::equalTo($var1, $var2->add($var3), Strength::WEAK);
+
+        self::assertEquals(new Expression(
+            terms: [
+                new Term($var1, 1.0),
+                new Term($var2, -1.0),
+                new Term($var3, -1.0),
             ],
             constant: 0
         ), $c->expression);
