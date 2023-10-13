@@ -7,7 +7,7 @@ use DTL\Cassowary\Variable;
 
 final class Element
 {
-    public function __construct(public Variable $start, public Variable $end)
+    private function __construct(public Variable $start, public Variable $end)
     {
     }
 

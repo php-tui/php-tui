@@ -3,12 +3,8 @@
 namespace DTL\PhpTui\Adapter\Cassowary;
 
 use DTL\Cassowary\Constraint;
-use DTL\Cassowary\Expression;
-use DTL\Cassowary\RelationalOperator;
 use DTL\Cassowary\Solver;
 use DTL\Cassowary\Strength;
-use DTL\Cassowary\Term;
-use DTL\Cassowary\Variable;
 use DTL\PhpTui\Model\Area;
 use DTL\PhpTui\Model\Areas;
 use DTL\PhpTui\Model\Constraint as DTLConstraint;
@@ -20,7 +16,6 @@ use DTL\PhpTui\Model\Constraint\PercentageConstraint;
 use DTL\PhpTui\Model\Direction;
 use DTL\PhpTui\Model\Layout;
 use RuntimeException;
-use SplObjectStorage;
 
 final class CassowaryConstraintSolver implements ConstraintSolver
 {
@@ -30,13 +25,13 @@ final class CassowaryConstraintSolver implements ConstraintSolver
         $inner = $area->inner($layout->margin);
 
         [$areaStart, $areaEnd] = match ($layout->direction) {
-            Direction::Horizontal => [$inner->x, $inner->right()],
-            Direction::Vertical => [$inner->y, $inner->bottom()],
+            Direction::Horizontal => [$inner->position->x, $inner->right()],
+            Direction::Vertical => [$inner->position->y, $inner->bottom()],
         };
 
         $areaSize = $areaEnd - $areaStart;
 
-        $elements = array_map(fn () => new Element(), $layout->constraints);
+        $elements = array_map(fn () => Element::empty(), $layout->constraints);
 
         // ensure that all the elements are inside the area
         foreach ($elements as $element) {
@@ -73,20 +68,76 @@ final class CassowaryConstraintSolver implements ConstraintSolver
 
         foreach ($constraints as $i => $constraint) {
             $element = $elements[$i];
-            $solver->addConstraint($this->resolveConstraint($constraint, $element, $areaSize));
+            $solver->addConstraints($this->resolveConstraints($constraint, $element, $areaSize));
         }
 
-        return new Areas($areas);
-    }
+        $changes = $solver->fetchChanges();
 
-    private function resolveConstraint(DTLConstraint $constraint, Element $element, float $areaSize): Constraint
+        return new Areas(array_map(function (Element $element) use ($changes, $layout, $inner) {
+            [$start, $end] = $changes->getValues($element->start, $element->end);
+            $size = $end - $start;
+
+            return match ($layout->direction) {
+                Direction::Horizontal => Area::fromPrimitives($start, $inner->position->y, $size, $inner->height),
+                Direction::Vertical => Area::fromPrimitives($inner->position->x, $start, $inner->width, $size),
+            };
+        }, $elements));
+    }
+    /**
+     * @return list<Constraint>
+     */
+    private function resolveConstraints(DTLConstraint $constraint, Element $element, float $areaSize): array
     {
         if ($constraint instanceof PercentageConstraint) {
-            return Constraint::equalTo(
-                $element->size(),
-                $areaSize * ($constraint->percentage / 100),
-                Strength::STRONG
-            );
+            return [
+                Constraint::equalTo(
+                    $element->size(),
+                    $areaSize * ($constraint->percentage / 100),
+                    Strength::STRONG
+                )
+            ];
         }
+        if ($constraint instanceof LengthConstraint) {
+            return [
+                Constraint::equalTo(
+                    $element->size(),
+                    $constraint->length,
+                    Strength::STRONG
+                )
+            ];
+        }
+        if ($constraint instanceof MinConstraint) {
+            return [
+                Constraint::greaterThanOrEqualTo(
+                    $element->size(),
+                    $constraint->min,
+                    Strength::STRONG
+                ),
+                Constraint::equalTo(
+                    $element->size(),
+                    $constraint->min,
+                    Strength::MEDIUM
+                ),
+            ];
+        }
+        if ($constraint instanceof MaxConstraint) {
+            return [
+                Constraint::lessThanOrEqualTo(
+                    $element->size(),
+                    $constraint->max,
+                    Strength::STRONG
+                ),
+                Constraint::equalTo(
+                    $element->size(),
+                    $constraint->max,
+                    Strength::MEDIUM
+                ),
+            ];
+        }
+
+        throw new RuntimeException(sprintf(
+            'Do not know how to build constraint of class "%s"',
+            $constraint::class
+        ));
     }
 }
