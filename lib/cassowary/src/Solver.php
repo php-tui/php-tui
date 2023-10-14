@@ -14,7 +14,6 @@ class Solver
      * @param SplObjectStorage<Symbol,Row> $rows
      * @param SplObjectStorage<Variable> $changed
      * @param list<Symbol> $infeasibleRows
-     * @param list<array{Variable,float}> $infeasibleRows
      */
     final private function __construct(
         public readonly SplObjectStorage $constraints,
@@ -141,7 +140,7 @@ class Solver
         // Optimizing after each constraint is added performs less
         // aggregate work due to a smaller average system size. It
         // also ensures the solver remains in a consistent state.
-        $this->optimise($this->objective->clone());
+        $this->optimise($this->objective);
     }
 
     /**
@@ -227,6 +226,7 @@ class Solver
                     throw new RuntimeException(sprintf('Cannot handle operator: %s', $constraint->relationalOperator->name));
             };
         })();
+
 
         if ($row->constant < 0.0) {
             $row->reverseSign();
@@ -315,7 +315,7 @@ class Solver
 
         // Optimize the artificial objective. This is successful
         // only if the artificial objective is optimized to zero.
-        $artificial = $this->artificial->clone();
+        $artificial = $this->artificial;
         $this->optimise($artificial);
         $success = SolverUtil::nearZero($this->artificial->constant);
         $this->artificial = null;
@@ -341,9 +341,18 @@ class Solver
             if ($entering->symbolType === SymbolType::Invalid) {
                 return;
             }
+
             [$leaving, $row] = $this->getLeavingRow($entering);
+
+            // pivot the entering symbol into the basis
             $row->solveForSymbols($leaving, $entering);
+
             $this->substitute($entering, $row);
+            if ($entering->symbolType == SymbolType::External && $row->constant != 0.0) {
+                $v = $this->varForSymbol->offsetGet($entering);
+                $this->varChanged($v);
+            }
+            $this->rows->offsetSet($entering, $row);
         }
     }
 
@@ -384,30 +393,32 @@ class Solver
     {
         $ratio = INF;
         $found = null;
+        $foundRow = null;
         foreach ($this->rows as $symbol) {
             $row = $this->rows->offsetGet($symbol);
 
             if ($symbol->symbolType === SymbolType::External) {
                 continue;
             }
+
             $temp = $row->coefficientFor($entering);
             if ($temp < 0.0) {
                 $tempRatio = -$row->constant / $temp;
                 if ($tempRatio < $ratio) {
                     $ratio = $tempRatio;
                     $found = $symbol;
+                    $foundRow = $row;
                 }
             }
         }
 
-        if (null === $found) {
+        if (null === $found || null === $foundRow) {
             throw new AddConstraintaintError(sprintf(
                 'Could not find leaving row for entering symbol: %s',
                 $entering->__toString()
             ));
         }
 
-        $foundRow = $this->rows->offsetGet($found);
         $this->rows->offsetUnset($found);
         return [$found, $foundRow];
     }
@@ -423,10 +434,11 @@ class Solver
         foreach ($this->rows as $otherSymbol) {
             $otherRow = $this->rows->offsetGet($otherSymbol);
             $constantChanged = $otherRow->substitute($symbol, $row);
+
             if ($otherSymbol->symbolType === SymbolType::External && $constantChanged) {
                 $this->varChanged($this->varForSymbol[$otherSymbol]);
             }
-            if ($otherSymbol->symbolType === SymbolType::External && $otherRow->constant < 0.0) {
+            if ($otherSymbol->symbolType !== SymbolType::External && $otherRow->constant < 0.0) {
                 $this->infeasibleRows[] = $otherSymbol;
             }
         }

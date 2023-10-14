@@ -83,21 +83,10 @@ class Row implements Countable, Stringable
         return true;
     }
 
-    public function clone(): self
-    {
-        return $this;
-        // $newCells = new CellMap();
-        // foreach ($this->cells as $symbol) {
-        //     $coefficient = $this->cells->offsetGet($symbol);
-        //     $newCells->offsetSet(clone $symbol, $coefficient);
-        // }
-        // return new self($this->constant, $newCells);
-    }
-
     public function solveForSymbols(Symbol $lhs, Symbol $rhs): void
     {
         $this->insertSymbol($lhs, -1.0);
-        $this->solveForSymbol($rhs);
+        //$this->solveForSymbol($rhs);
     }
 
     public function solveForSymbol(Symbol $symbol): void
@@ -138,14 +127,19 @@ class Row implements Countable, Stringable
 
     public function __toString(): string
     {
-        $string = [
-            sprintf('Row -> %s', $this->constant),
-        ];
+        $string = [];
 
         foreach ($this->cells as $cell) {
-            $string[] = sprintf('%s -> %s', $cell->__toString(), $this->cells->offsetGet($cell));
+            $string[] = sprintf('%s: %s', $cell->__toString(), $this->cells->offsetGet($cell));
         }
 
-        return implode("\n", $string);
+        return sprintf('Row#%d { cells: {%s}, constant: %s', spl_object_id($this), implode(", ", $string), $this->constant);
+    }
+
+    public function clone(): self
+    {
+        // do not copy the symbols! the symbols need to have the same instances throughout, but we need to
+        // create new instances of the Row and CellMap for artificials
+        return new self($this->constant, clone $this->cells);
     }
 }
