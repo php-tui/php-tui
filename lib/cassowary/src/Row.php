@@ -86,7 +86,7 @@ class Row implements Countable, Stringable
     public function solveForSymbols(Symbol $lhs, Symbol $rhs): void
     {
         $this->insertSymbol($lhs, -1.0);
-        //$this->solveForSymbol($rhs);
+        $this->solveForSymbol($rhs);
     }
 
     public function solveForSymbol(Symbol $symbol): void

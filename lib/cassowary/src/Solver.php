@@ -71,7 +71,6 @@ class Solver
             if ($this->varData->offsetExists($variable)) {
                 $varData = $this->varData->offsetGet($variable);
 
-                // TODO: added abs() here!!
                 $newValue = $this->rows->offsetExists($varData[1]) ? $this->rows->offsetGet($varData[1])->constant : 0.0;
 
                 $oldValue = $varData[0];
@@ -94,6 +93,12 @@ class Solver
             ));
         }
 
+        // Creating a row causes symbols to reserved for the variables
+        // in the constraint. If this method exits with an exception,
+        // then its possible those variables will linger in the var map.
+        // Since its likely that those variables will be used in other
+        // constraints and since exceptional conditions are uncommon,
+        // i'm not too worried about aggressive cleanup of the var map.
         [$row, $tag] = $this->createRow($constraint);
 
         $subject = Solver::chooseSubject($row, $tag);
@@ -167,12 +172,14 @@ class Solver
         $expr = $constraint->expression;
         $row = Row::new($expr->constant);
 
+        // Substitute the current basic variables into the row.
         foreach ($expr->terms as $term) {
             if (SolverUtil::nearZero($term->coefficient)) {
                 continue;
             }
 
             $symbol = $this->getVarSymbol($term->variable);
+
             if ($this->rows->offsetExists($symbol)) {
                 $row->insertRow($this->rows->offsetGet($symbol), $term->coefficient);
             } else {
@@ -311,11 +318,11 @@ class Solver
     {
         $artificialSymbol = $this->spawnSymbol(SymbolType::Slack);
         $this->rows->offsetSet($artificialSymbol, $row->clone());
-        $artificial = $row->clone();
-        $this->artificial = $artificial;
 
         // Optimize the artificial objective. This is successful
         // only if the artificial objective is optimized to zero.
+        $artificial = $row->clone();
+        $this->artificial = $artificial;
         $this->optimise($artificial);
         $success = SolverUtil::nearZero($artificial->constant);
         $this->artificial = null;
@@ -365,7 +372,7 @@ class Solver
             $row->solveForSymbols($leaving, $entering);
 
             $this->substitute($entering, $row);
-            if ($entering->symbolType == SymbolType::External && $row->constant != 0.0) {
+            if ($entering->symbolType === SymbolType::External && $row->constant != 0.0) {
                 $v = $this->varForSymbol->offsetGet($entering);
                 $this->varChanged($v);
             }

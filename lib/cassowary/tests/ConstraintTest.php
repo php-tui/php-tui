@@ -59,9 +59,9 @@ class ConstraintTest extends TestCase
 
     public function testRightHandSideIsAVariableOrExpression(): void
     {
-        $var1 = Variable::new(10.0);
-        $var2 = Variable::new(5.0);
-        $var3 = Variable::new(7.0);
+        $var1 = Variable::new();
+        $var2 = Variable::new();
+        $var3 = Variable::new();
 
         $c = Constraint::equalTo($var1, $var2, Strength::WEAK);
 

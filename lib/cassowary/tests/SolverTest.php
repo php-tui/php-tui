@@ -27,7 +27,7 @@ class SolverTest extends TestCase
         ]);
     }
 
-    public function testSolver(): void
+    public function testExample1(): void
     {
         $s = Solver::new();
         $v0 = Variable::new();
@@ -76,6 +76,22 @@ class SolverTest extends TestCase
                 $changes->getValue($v3),
             ],
         );
+    }
+    public function testExample2(): void
+    {
+        $v0 = Variable::new();
+        $v1 = Variable::new();
+        $s = Solver::new();
+        $s->addConstraints([
+            Constraint::greaterThanOrEqualTo($v1, 0, Strength::REQUIRED),
+            Constraint::lessThanOrEqualTo($v1, 33, Strength::REQUIRED),
+            Constraint::lessThanOrEqualTo($v0->sub($v1), 0, Strength::REQUIRED),
+            Constraint::equalTo($v0, 0, Strength::REQUIRED),
+            Constraint::equalTo($v1, 33, Strength::REQUIRED),
+            Constraint::greaterThanOrEqualTo($v1->sub($v0), 1, Strength::STRONG),
+            Constraint::equalTo($v1->sub($v0), 1, Strength::MEDIUM),
+        ]);
+        dump($s->fetchChanges());
     }
 
 }
