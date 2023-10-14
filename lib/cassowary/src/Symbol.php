@@ -20,4 +20,9 @@ class Symbol implements Stringable
         return sprintf('Symbol{id: %s type: %s}', $this->id, $this->symbolType->name);
     }
 
+    public function isPivotable(): bool
+    {
+        return $this->symbolType === SymbolType::Slack || $this->symbolType === SymbolType::Error;
+    }
+
 }

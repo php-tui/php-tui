@@ -309,22 +309,39 @@ class Solver
 
     private function addWithArtificialVariable(Row $row): bool
     {
-        $artificial = $this->spawnSymbol(SymbolType::Slack);
-        $this->rows->offsetSet($artificial, $row->clone());
-        $this->artificial = $row->clone();
+        $artificialSymbol = $this->spawnSymbol(SymbolType::Slack);
+        $this->rows->offsetSet($artificialSymbol, $row->clone());
+        $artificial = $row->clone();
+        $this->artificial = $artificial;
 
         // Optimize the artificial objective. This is successful
         // only if the artificial objective is optimized to zero.
-        $artificial = $this->artificial;
         $this->optimise($artificial);
-        $success = SolverUtil::nearZero($this->artificial->constant);
+        $success = SolverUtil::nearZero($artificial->constant);
         $this->artificial = null;
 
-        dd('SUCCESS HERE');
+        if ($this->rows->offsetExists($artificialSymbol)) {
+            $row = $this->rows->offsetGet($artificialSymbol);
+            $this->rows->offsetUnset($artificialSymbol);
+            if ($row->cells->count() === 0) {
+                return $success;
+            }
+            $entering = $row->anyPivoltableSymbol();
+            if ($entering->symbolType === SymbolType::Invalid) {
+                return false;
+            }
+            $row->solveForSymbols($artificialSymbol, $entering);
+            $this->substitute($entering, $row);
+            $this->rows->offsetSet($entering, $row);
+        }
 
+        foreach ($this->rows as $symbol) {
+            $row = $this->rows->offsetGet($symbol);
+            $row->remove($symbol);
+        }
+        $this->objective->remove($artificialSymbol);
 
-
-        return true;
+        return $success;
 
     }
 

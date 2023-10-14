@@ -24,6 +24,21 @@ class Changes implements IteratorAggregate
         return new ArrayIterator($this->changes);
     }
 
+    public function getValue(Variable $target): float
+    {
+        foreach ($this->changes as $pair) {
+            [$variable, $value] = $pair;
+            if ($variable === $target) {
+                return $value;
+            }
+        }
+
+        throw new RuntimeException(sprintf(
+            'Could not find value "%s"',
+            $target->__toString()
+        ));
+    }
+
     /**
      * This is inefficient, use only for testing
      * @return float[]

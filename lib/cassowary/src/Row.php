@@ -142,4 +142,19 @@ class Row implements Countable, Stringable
         // create new instances of the Row and CellMap for artificials
         return new self($this->constant, clone $this->cells);
     }
+
+    public function anyPivoltableSymbol(): Symbol
+    {
+        foreach ($this->cells as $symbol) {
+            if ($symbol->isPivotable()) {
+                return $symbol;
+            }
+        }
+        return Symbol::invalid();
+    }
+
+    public function remove(Symbol $artificialSymbol): void
+    {
+        $this->cells->offsetUnset($artificialSymbol);
+    }
 }
