@@ -84,4 +84,23 @@ class ConstraintTest extends TestCase
             constant: 0
         ), $c->expression);
     }
+
+    public function testA(): void
+    {
+        $x = Variable::new();
+        $y = Variable::new();
+
+        $c = Constraint::equalTo($x->add(2.0), $y->add(10.0), Strength::REQUIRED);
+
+         self::assertEquals(
+             new Expression(
+                 terms: [
+                     new Term($x, 1.0),
+                     new Term($y, -1.0),
+                 ],
+                 constant: -8.0,
+             ),
+             $c->expression
+         );
+    }
 }

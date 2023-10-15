@@ -47,6 +47,7 @@ final class Expression implements Stringable
         foreach ($this->terms as $term) {
             $term->coefficient *= -1;
         }
+        $this->constant *= - 1;
 
         return $this;
     }

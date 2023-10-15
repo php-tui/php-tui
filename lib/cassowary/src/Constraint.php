@@ -34,7 +34,7 @@ final class Constraint implements Stringable
             $rhs = $rhs->toExpression();
         }
         if (is_float($rhs)) {
-            $expr->constant($rhs *= -1);
+            $expr->constant($expr->constant + ($rhs * -1));
         } else {
             $expr = $expr->add($rhs->negate());
         }

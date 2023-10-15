@@ -485,4 +485,13 @@ class Solver
         $this->changed = new SplObjectStorage();
         $this->shouldClearChanges = false;
     }
+
+    public function __toString(): string
+    {
+        $string = [];
+        foreach ($this->constraints as $constraint) {
+            $string[] = $constraint->__toString();
+        }
+        return implode("\n", $string);
+    }
 }
