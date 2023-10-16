@@ -5,6 +5,7 @@ namespace DTL\Cassowary;
 use ArrayIterator;
 use IteratorAggregate;
 use RuntimeException;
+use SplObjectStorage;
 use Traversable;
 
 /**
@@ -45,20 +46,26 @@ class Changes implements IteratorAggregate
      */
     public function getValues(Variable ...$targets): array
     {
-        $found = [];
+        /** @var SplObjectStorage<Variable,float> $found */
+        $found = new SplObjectStorage();
 
         foreach ($this->changes as [$variable, $value]) {
             foreach ($targets as $i => $target) {
                 if ($variable === $target) {
-                    $found[] = $value;
-                    unset($targets[$i]);
+                    if (!$found->offsetExists($variable)) {
+                        $found[$target] = $value;
+                    }
                     continue 2;
                 }
             }
-            $found[] = 0.0;
         }
 
-        return $found;
+        return array_map(function (Variable $target) use ($found) {
+            if (!$found->offsetExists($target)) {
+                return 0.0;
+            }
+            return $found[$target];
+        }, $targets);
     }
 
 

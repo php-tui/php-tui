@@ -40,101 +40,37 @@ class QuadrilateralTest extends TestCase
 
         foreach (range(0, 3) as $i) {
             $solver->addConstraints([
-                new Constraint(
-                    RelationalOperator::Equal,
-                    $points[$i]->x->toExpression()->constant($pointStarts[$i][0]),
-                    Strength::WEAK * $weight
-                ),
-                new Constraint(
-                    RelationalOperator::Equal,
-                    $points[$i]->y->toExpression()->constant($pointStarts[$i][1]),
-                    Strength::WEAK * $weight
-                )
+                Constraint::equalTo($points[$i]->x, $pointStarts[$i][0], Strength::WEAK),
+                Constraint::equalTo($points[$i]->y, $pointStarts[$i][1], Strength::WEAK),
             ]);
             $weight *= $multiplier;
         }
 
         foreach ([[0,1], [1,2], [2,3], [3,0]] as [$start, $end]) {
             $solver->addConstraints([
-                new Constraint(
-                    RelationalOperator::Equal,
-                    $midPoints[$start]->x->toExpression()->add($points[$start]->x->add($points[$end]->x)->div(2)),
-                    Strength::REQUIRED
-                ),
-                new Constraint(
-                    RelationalOperator::Equal,
-                    $midPoints[$start]->y->toExpression()->add($points[$start]->y->add($points[$end]->y)->div(2)),
-                    Strength::REQUIRED
-                )
+                Constraint::equalTo($midPoints[$start]->x, $points[$start]->x->add($points[$end]->x)->div(2), Strength::REQUIRED),
+                Constraint::equalTo($midPoints[$start]->y, $points[$start]->y->add($points[$end]->y)->div(2), Strength::REQUIRED),
             ]);
         }
         $solver->addConstraints([
-            new Constraint(
-                RelationalOperator::LessThanOrEqualTo,
-                $points[0]->x->add(20.0)->add($points[2]->x),
-                Strength::STRONG,
-            ),
-            new Constraint(
-                RelationalOperator::LessThanOrEqualTo,
-                $points[0]->x->add(20.0)->add($points[3]->x),
-                Strength::STRONG,
-            ),
-            new Constraint(
-                RelationalOperator::LessThanOrEqualTo,
-                $points[1]->x->add(20.0)->add($points[2]->x),
-                Strength::STRONG,
-            ),
-            new Constraint(
-                RelationalOperator::LessThanOrEqualTo,
-                $points[1]->x->add(20.0)->add($points[3]->x),
-                Strength::STRONG,
-            ),
+            Constraint::lessThanOrEqualTo($points[0]->x->add(20.0), $points[2]->x, Strength::STRONG),
+            Constraint::lessThanOrEqualTo($points[0]->x->add(20.0), $points[3]->x, Strength::STRONG),
+            Constraint::lessThanOrEqualTo($points[1]->x->add(20.0), $points[2]->x, Strength::STRONG),
+            Constraint::lessThanOrEqualTo($points[1]->x->add(20.0), $points[3]->x, Strength::STRONG),
 
-            new Constraint(
-                RelationalOperator::LessThanOrEqualTo,
-                $points[0]->y->add(20.0)->add($points[1]->y),
-                Strength::STRONG,
-            ),
-            new Constraint(
-                RelationalOperator::LessThanOrEqualTo,
-                $points[0]->y->add(20.0)->add($points[2]->y),
-                Strength::STRONG,
-            ),
-            new Constraint(
-                RelationalOperator::LessThanOrEqualTo,
-                $points[3]->y->add(20.0)->add($points[1]->y),
-                Strength::STRONG,
-            ),
-            new Constraint(
-                RelationalOperator::LessThanOrEqualTo,
-                $points[3]->y->add(20.0)->add($points[2]->y),
-                Strength::STRONG,
-            ),
+            Constraint::lessThanOrEqualTo($points[0]->y->add(20.0), $points[1]->y, Strength::STRONG),
+            Constraint::lessThanOrEqualTo($points[0]->y->add(20.0), $points[2]->y, Strength::STRONG),
+            Constraint::lessThanOrEqualTo($points[3]->y->add(20.0), $points[1]->y, Strength::STRONG),
+            Constraint::lessThanOrEqualTo($points[3]->y->add(20.0), $points[2]->y, Strength::STRONG),
         ]);
 
 
         foreach ($points as $point) {
             $solver->addConstraints([
-                new Constraint(
-                    RelationalOperator::GreaterThanOrEqualTo,
-                    $point->x->toExpression()->constant(0.0),
-                    Strength::REQUIRED,
-                ),
-                new Constraint(
-                    RelationalOperator::GreaterThanOrEqualTo,
-                    $point->y->toExpression()->constant(0.0),
-                    Strength::REQUIRED,
-                ),
-                new Constraint(
-                    RelationalOperator::LessThanOrEqualTo,
-                    $point->x->toExpression()->constant(500.0),
-                    Strength::REQUIRED,
-                ),
-                new Constraint(
-                    RelationalOperator::LessThanOrEqualTo,
-                    $point->y->toExpression()->constant(500.0),
-                    Strength::REQUIRED,
-                ),
+                Constraint::greaterThanOrEqualTo($point->x, 0.0, Strength::REQUIRED),
+                Constraint::greaterThanOrEqualTo($point->y, 0.0, Strength::REQUIRED),
+                Constraint::lessThanOrEqualTo($point->x, 500.0, Strength::REQUIRED),
+                Constraint::lessThanOrEqualTo($point->y, 500.0, Strength::REQUIRED),
             ]);
         }
 
