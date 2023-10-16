@@ -3,6 +3,7 @@
 namespace DTL\PhpTui\Model\Widget;
 
 use DTL\PhpTui\Model\Style;
+use Iterator;
 
 final class Span
 {
@@ -23,5 +24,18 @@ final class Span
     public function patchStyle(Style $style): void
     {
         $this->style->patch($style);
+    }
+
+    /**
+     * @return list<StyledGrapheme>
+     */
+    public function toStyledGraphemes(Style $baseStyle): array
+    {
+        return array_map(function (string $grapheme) use ($baseStyle) {
+            return new StyledGrapheme(
+                symbol: $grapheme,
+                style: $baseStyle->patch($this->style),
+            );
+        }, mb_str_split($this->content));
     }
 }

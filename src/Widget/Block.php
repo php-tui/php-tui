@@ -6,13 +6,14 @@ use DTL\PhpTui\Model\Area;
 use DTL\PhpTui\Model\Buffer;
 use DTL\PhpTui\Model\Position;
 use DTL\PhpTui\Model\Style;
+use DTL\PhpTui\Model\Widget;
 use DTL\PhpTui\Model\Widget\BorderType;
 use DTL\PhpTui\Model\Widget\Borders;
 use DTL\PhpTui\Model\Widget\HorizontalAlignment;
 use DTL\PhpTui\Model\Widget\Title;
 use DTL\PhpTui\Model\Widget\VerticalAlignment;
 
-final class Block
+final class Block implements Widget
 {
 
     /**

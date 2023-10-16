@@ -25,7 +25,7 @@ final class Style
         );
     }
 
-    public function patch(Style $other): void
+    public function patch(Style $other): self
     {
         $this->fg = $other->fg ?: $this->fg;
         $this->bg = $other->bg ?: $this->bg;
@@ -33,5 +33,7 @@ final class Style
 
         $this->addModifiers->remove($other->subModifiers);
         $this->addModifiers->insert($other->addModifiers);
+
+        return $this;
     }
 }

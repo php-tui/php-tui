@@ -17,7 +17,7 @@ final class Line implements IteratorAggregate
      */
     public function __construct(
         public readonly array $spans,
-        public readonly HorizontalAlignment $alignment
+        public readonly ?HorizontalAlignment $alignment = null
     ) {
     }
 
