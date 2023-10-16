@@ -10,7 +10,7 @@ use Generator;
 class LineTruncator implements LineComposer
 {
     /**
-     * @param list<array{list<StyledGrapheme>, HorizontalAlignment}> $lines
+     * @param list<array{list<StyledGrapheme>,HorizontalAlignment}> $lines
      */
     public function __construct(
         private array $lines,
@@ -30,7 +30,9 @@ class LineTruncator implements LineComposer
         $currentAlignment = HorizontalAlignment::Left;
 
         foreach ($this->lines as $line) {
+            /** @var HorizontalAlignment $alignment */
             [$line, $alignment] = $line;
+
             $currentAlignment = $alignment;
 
             /** @var StyledGrapheme $styledGrapheme */
@@ -84,7 +86,8 @@ class LineTruncator implements LineComposer
         return '';
     }
 
-    private static function trimOffset(string $string, int $horizontalOffset)
+    private static function trimOffset(string $string, int $horizontalOffset): string
     {
+        return mb_substr($string, 0, $horizontalOffset);
     }
 }

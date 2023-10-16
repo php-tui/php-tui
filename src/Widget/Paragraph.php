@@ -62,7 +62,12 @@ class Paragraph implements Widget
             return [ $graphemes, $line->alignment ?: $this->alignment ];
         }, $this->text->lines);
 
-        $lineComposer = $this->createLineComposer($styled, $textArea, $this->wrap, $this->scroll[1]);
+        $lineComposer = $this->createLineComposer(
+            $styled,
+            $textArea,
+            $this->wrap,
+            $this->scroll[1]
+        );
 
         $y = 0;
         foreach ($lineComposer->nextLine() as $line) {
@@ -104,7 +109,7 @@ class Paragraph implements Widget
     }
 
     /**
-     * @param array{list<StyledGrapheme>,HorizontalAlignment} $styled
+     * @param list<array{list<StyledGrapheme>,HorizontalAlignment}> $styled
      */
     private function createLineComposer(array $styled, Area $textArea, ?Wrap $wrap, int $horizontalOffset): LineComposer
     {

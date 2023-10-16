@@ -40,12 +40,8 @@ final class Cell
         if ($style->underline) {
             $this->underline = $style->underline;
         }
-        foreach ($style->addModifiers as $modifier) {
-            $this->modifier->add($modifier);
-        }
-        foreach ($style->subModifiers as $modifier) {
-            $this->modifier->sub($modifier);
-        }
+        $this->modifier->insert($style->addModifiers);
+        $this->modifier->remove($style->subModifiers);
         return $this;
     }
 
