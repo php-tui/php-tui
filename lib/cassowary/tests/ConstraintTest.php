@@ -85,7 +85,7 @@ class ConstraintTest extends TestCase
         ), $c->expression);
     }
 
-    public function testA(): void
+    public function testAddBothSides(): void
     {
         $x = Variable::new();
         $y = Variable::new();
@@ -99,6 +99,26 @@ class ConstraintTest extends TestCase
                      new Term($y, -1.0),
                  ],
                  constant: -8.0,
+             ),
+             $c->expression
+         );
+    }
+
+    public function testDiv(): void
+    {
+        $x = Variable::new();
+        $y = Variable::new();
+
+        $c = Constraint::equalTo($x, $y->add($x)->div(2), Strength::REQUIRED);
+
+         self::assertEquals(
+             new Expression(
+                 terms: [
+                     new Term($x, 1.0),
+                     new Term($y, -0.5),
+                     new Term($x, -0.5),
+                 ],
+                 constant: 0.0,
              ),
              $c->expression
          );
