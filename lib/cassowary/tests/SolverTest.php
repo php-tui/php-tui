@@ -27,71 +27,155 @@ class SolverTest extends TestCase
         ]);
     }
 
-    public function testExample1(): void
+    public function testVariableAdd(): void
     {
-        $s = Solver::new();
-        $v0 = Variable::new();
-        $v1 = Variable::new();
-        $v2 = Variable::new();
-        $v3 = Variable::new();
-        $v4 = Variable::new();
-        $v5 = Variable::new();
-        $v6 = Variable::new();
-        $s->addConstraints([
-            Constraint::greaterThanOrEqualTo($v0, 0, Strength::REQUIRED),
-            Constraint::lessThanOrEqualTo($v1, 33.0, Strength::REQUIRED),
-            Constraint::lessThanOrEqualTo($v0, $v1, Strength::REQUIRED),
-            Constraint::greaterThanOrEqualTo($v2, 0, Strength::REQUIRED),
+        $solver = Solver::new();
+        $x = Variable::new();
 
-            Constraint::lessThanOrEqualTo($v3, 33.0, Strength::REQUIRED),
-            Constraint::lessThanOrEqualTo($v2, $v3, Strength::REQUIRED),
-            Constraint::greaterThanOrEqualTo($v4, 0.0, Strength::REQUIRED),
-            Constraint::lessThanOrEqualTo($v5, 33.0, Strength::REQUIRED),
+        $solver->addConstraint(Constraint::equalTo($x->add(2.0), 20, Strength::REQUIRED));
 
-            Constraint::lessThanOrEqualTo($v4, $v5, Strength::REQUIRED),
-            Constraint::equalTo($v1, $v2, Strength::REQUIRED),
-            Constraint::equalTo($v1, $v4, Strength::REQUIRED),
-            Constraint::equalTo($v0, 0.0, Strength::REQUIRED),
+        self::assertEquals(18, $solver->fetchChanges()->getValue($x));
+    }
 
-            Constraint::equalTo($v5, 33.0, Strength::REQUIRED),
-            Constraint::equalTo($v1->sub($v0), 3.3, Strength::STRONG),
-            Constraint::lessThanOrEqualTo($v3->sub($v2), 5.0, Strength::STRONG),
-            Constraint::equalTo($v3->sub($v2), 5.0, Strength::MEDIUM),
+    public function testCompareTwoVariableAdds(): void
+    {
+        $solver = Solver::new();
+        $x = Variable::new();
+        $y = Variable::new();
 
-            Constraint::greaterThanOrEqualTo($v5->sub($v4), 5.0, Strength::MEDIUM),
-            Constraint::equalTo($v5->sub($v4), 1.0, Strength::MEDIUM),
+        $solver->addConstraints([
+            Constraint::equalTo($x, 20, Strength::REQUIRED),
+            Constraint::equalTo($x->add(2.0), $y->add(10.0), Strength::REQUIRED),
         ]);
-        $changes = $s->fetchChanges();
+
+        $changes = $solver->fetchChanges();
+
+        self::assertEquals(20, $changes->getValue($x));
+        self::assertEquals(12, $changes->getValue($y));
+    }
+
+    public function testVarEqualsVar(): void
+    {
+        $x = Variable::new();
+        $y = Variable::new();
+        $solver = Solver::new();
+        $solver->addConstraint(Constraint::equalTo($x, $y, Strength::REQUIRED));
+        $changes = $solver->fetchChanges();
+        self::assertCount(0, $changes, 'Variable did not change');
+    }
+
+    public function testCassowary(): void
+    {
+        $x = Variable::new();
+        $y = Variable::new();
+        $solver = Solver::new();
+
+        // constraints are good
+        $solver->addConstraints([
+            Constraint::lessThanOrEqualTo($x, $y, Strength::REQUIRED),
+            Constraint::equalTo($y, $x->add(3.0), Strength::REQUIRED),
+            Constraint::equalTo($x, 10, Strength::WEAK),
+        ]);
+        $solver->addConstraint(Constraint::equalTo($y, 10, Strength::WEAK));
+
+        $changes = $solver->fetchChanges();
+
+        $xValue = $changes->getValue($x);
+        $yValue = $changes->getValue($y);
+
+        self::assertEquals(10, $xValue);
+        self::assertEquals(13, $yValue);
+    }
+
+    public function testQuadrilateral(): void
+    {
+        $points = [
+            Point::new(),
+            Point::new(),
+            Point::new(),
+            Point::new(),
+        ];
+        $points[0]->x->label = '0.x';
+        $pointStarts = [
+            [10.0, 10.0],
+            [10.0, 200.0],
+            [200.0, 200.0],
+            [200.0, 10.0],
+        ];
+        $midPoints = [
+            Point::new(),
+            Point::new(),
+            Point::new(),
+            Point::new(),
+        ];
+        $solver = Solver::new();
+        $weight = 1.0;
+        $multiplier = 2.0;
+
+        foreach (range(0, 3) as $i) {
+            $solver->addConstraints([
+                Constraint::equalTo($points[$i]->x, $pointStarts[$i][0], Strength::WEAK),
+                Constraint::equalTo($points[$i]->y, $pointStarts[$i][1], Strength::WEAK),
+            ]);
+            $weight *= $multiplier;
+        }
+
+        foreach ([[0,1], [1,2], [2,3], [3,0]] as [$start, $end]) {
+            $solver->addConstraints([
+                Constraint::equalTo($midPoints[$start]->x, $points[$start]->x->add($points[$end]->x)->div(2), Strength::REQUIRED),
+                Constraint::equalTo($midPoints[$start]->y, $points[$start]->y->add($points[$end]->y)->div(2), Strength::REQUIRED),
+            ]);
+        }
+        $solver->addConstraints([
+            Constraint::lessThanOrEqualTo($points[0]->x->add(20.0), $points[2]->x, Strength::STRONG),
+            Constraint::lessThanOrEqualTo($points[0]->x->add(20.0), $points[3]->x, Strength::STRONG),
+            Constraint::lessThanOrEqualTo($points[1]->x->add(20.0), $points[2]->x, Strength::STRONG),
+            Constraint::lessThanOrEqualTo($points[1]->x->add(20.0), $points[3]->x, Strength::STRONG),
+
+            Constraint::lessThanOrEqualTo($points[0]->y->add(20.0), $points[1]->y, Strength::STRONG),
+            Constraint::lessThanOrEqualTo($points[0]->y->add(20.0), $points[2]->y, Strength::STRONG),
+            Constraint::lessThanOrEqualTo($points[3]->y->add(20.0), $points[1]->y, Strength::STRONG),
+            Constraint::lessThanOrEqualTo($points[3]->y->add(20.0), $points[2]->y, Strength::STRONG),
+        ]);
+
+
+        foreach ($points as $point) {
+            $solver->addConstraints([
+                Constraint::greaterThanOrEqualTo($point->x, 0.0, Strength::REQUIRED),
+                Constraint::greaterThanOrEqualTo($point->y, 0.0, Strength::REQUIRED),
+                Constraint::lessThanOrEqualTo($point->x, 500.0, Strength::REQUIRED),
+                Constraint::lessThanOrEqualTo($point->y, 500.0, Strength::REQUIRED),
+            ]);
+        }
+
+        $changes = $solver->fetchChanges();
+
         self::assertEquals(
-            [
-                24.7,
-                33.0,
-                28.0,
-                33.0,
-            ],
-            [
-                $changes->getValue($v0),
-                $changes->getValue($v5),
-                $changes->getValue($v1),
-                $changes->getValue($v3),
-            ],
+            [10.0, 105],
+            $changes->getValues($midPoints[0]->x, $midPoints[0]->y),
+        );
+        self::assertEquals(
+            [105.0, 200],
+            $changes->getValues($midPoints[1]->x, $midPoints[1]->y),
+        );
+        self::assertEquals(
+            [200.0, 105],
+            $changes->getValues($midPoints[2]->x, $midPoints[2]->y),
+        );
+        self::assertEquals(
+            [105.0, 10.0],
+            $changes->getValues($midPoints[3]->x, $midPoints[3]->y),
         );
     }
-    public function testExample2(): void
+}
+
+class Point {
+    public function __construct(public Variable $x, public Variable $y)
     {
-        $v0 = Variable::new();
-        $v1 = Variable::new();
-        $s = Solver::new();
-        $s->addConstraints([
-            Constraint::greaterThanOrEqualTo($v1, 0, Strength::REQUIRED),
-            Constraint::lessThanOrEqualTo($v1, 33, Strength::REQUIRED),
-            Constraint::lessThanOrEqualTo($v0->sub($v1), 0, Strength::REQUIRED),
-            Constraint::equalTo($v0, 0, Strength::REQUIRED),
-            Constraint::equalTo($v1, 33, Strength::REQUIRED),
-            Constraint::greaterThanOrEqualTo($v1->sub($v0), 1, Strength::STRONG),
-            Constraint::equalTo($v1->sub($v0), 1, Strength::MEDIUM),
-        ]);
-        dump($s->fetchChanges());
     }
 
+    public static function new(): self
+    {
+        return new self(Variable::new(), Variable::new());
+    }
 }
