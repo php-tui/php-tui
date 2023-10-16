@@ -145,6 +145,12 @@ class Row implements Countable, Stringable
         return new self($this->constant, clone $this->cells);
     }
 
+    /**
+     * Get the first Slack or Error symbol in the row.
+     *
+     * If no such symbol is present, and Invalid symbol will be returned.
+     * Never returns an External symbol
+     */
     public function anyPivoltableSymbol(): Symbol
     {
         foreach ($this->cells as $symbol) {
