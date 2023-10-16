@@ -18,7 +18,7 @@ class CassowaryConstraintSolverTest extends TestCase
                 Constraint::percentage(50),
                 Constraint::percentage(50),
             ])
-                ->split(Area::fromDimensions(100,100));
+            ->split(Area::fromDimensions(100,100));
 
         self::assertEquals([0, 0, 50, 100], $splits->get(0)->toArray());
         self::assertEquals([50, 0, 50, 100], $splits->get(1)->toArray());

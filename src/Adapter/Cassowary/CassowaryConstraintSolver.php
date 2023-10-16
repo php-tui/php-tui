@@ -52,6 +52,7 @@ final class CassowaryConstraintSolver implements ConstraintSolver
             $solver->addConstraint(
                 Constraint::equalTo($previousElement->end, $element->start, Strength::REQUIRED)
             );
+            $previousElement = $element;
         }
 
         // ensure the first element toches the left/top edge of the area
