@@ -12,6 +12,7 @@ use DTL\PhpTui\Model\Widget;
 use DTL\PhpTui\Model\Widget\HorizontalAlignment;
 use DTL\PhpTui\Model\Widget\Line;
 use DTL\PhpTui\Model\Widget\Span;
+use DTL\PhpTui\Model\Widget\StyledGrapheme;
 use DTL\PhpTui\Model\Widget\Text;
 use DTL\PhpTui\Widget\Paragraph\Wrap;
 
@@ -66,13 +67,19 @@ class Paragraph implements Widget
         $y = 0;
         foreach ($lineComposer->nextLine() as $line) {
             [$currentLine, $currentLineWidth, $currentLineAlignment] = $line;
+
             if ($y >= $this->scroll[0]) {
+
                 $x = $this->getLineOffset($currentLineWidth, $textArea->width, $currentLineAlignment);
+
                 foreach ($currentLine as $grapheme) {
                     if ($grapheme->symbolWidth() === 0) {
                         continue;
                     }
-                    $cell = $buffer->get(Position::at($textArea->left() + $x, $textArea->top() + $y - $this->scroll[0]));
+                    $cell = $buffer->get(Position::at(
+                        $textArea->left() + $x,
+                        $textArea->top() + $y - $this->scroll[0]
+                    ));
                     $cell->setChar($grapheme->symbol === '' ? ' ' : $grapheme->symbol);
                     $x += $grapheme->symbolWidth();
                 }
@@ -97,7 +104,7 @@ class Paragraph implements Widget
     }
 
     /**
-     * @param array{list<StyledGrapheme>, HorizontalAlignment} $styled
+     * @param array{list<StyledGrapheme>,HorizontalAlignment} $styled
      */
     private function createLineComposer(array $styled, Area $textArea, ?Wrap $wrap, int $horizontalOffset): LineComposer
     {

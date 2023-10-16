@@ -37,7 +37,11 @@ class ParagraphTest extends TestCase
         yield 'wrap' => [
             Area::fromDimensions(8, 3),
             Paragraph::new(Text::raw('Gday mate lets put another shrimp on the barby')),
-            'Gday    ',
+            implode("\n", [
+                'Gday mat',
+                'e lets p',
+                'ut anoth',
+            ]),
         ];
     }
 }

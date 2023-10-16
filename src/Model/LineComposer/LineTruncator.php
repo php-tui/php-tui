@@ -24,18 +24,17 @@ class LineTruncator implements LineComposer
         if ($this->maxLineWidth === 0) {
             return;
         }
-
         $currentLineWidth = 0;
-        $linesExhausted = true;
         $horizontalOffset = $this->horizontalOffset;
+        $currentLine = [];
         $currentAlignment = HorizontalAlignment::Left;
+
         foreach ($this->lines as $line) {
-            $linesExhausted = false;
-            [$currentLine, $alignment] = $line;
+            [$line, $alignment] = $line;
             $currentAlignment = $alignment;
 
             /** @var StyledGrapheme $styledGrapheme */
-            foreach ($currentLine as $styledGrapheme) {
+            foreach ($line as $styledGrapheme) {
                 // ignore characters wider than the total max width
                 if ($styledGrapheme->symbolWidth() > $this->maxLineWidth) {
                     continue;
@@ -43,11 +42,12 @@ class LineTruncator implements LineComposer
 
                 if ($currentLineWidth + $styledGrapheme->symbolWidth() > $this->maxLineWidth) {
                     yield [
-                        $this->currentLine,
+                        $currentLine,
                         $currentLineWidth,
                         $currentAlignment
                     ];
-                    continue;
+                    $currentLine = [];
+                    $currentLineWidth = 0;
                 }
 
                 $symbol = $this->resolveSymbol(
@@ -56,13 +56,13 @@ class LineTruncator implements LineComposer
                     $styledGrapheme,
                 );
 
+                $currentLine[] = new StyledGrapheme($symbol, $styledGrapheme->style);
                 $currentLineWidth += mb_strlen($symbol);
-                $this->currentLine[] = new StyledGrapheme($symbol, $styledGrapheme->style);
             }
         }
 
         yield [
-            $this->currentLine,
+            $currentLine,
             $currentLineWidth,
             $currentAlignment
         ];
@@ -79,7 +79,12 @@ class LineTruncator implements LineComposer
             $horizontalOffset = 0;
             return $symbol;
         }
+        $horizontalOffset -= $styledGrapheme->symbolWidth();
 
         return '';
+    }
+
+    private static function trimOffset(string $string, int $horizontalOffset)
+    {
     }
 }
