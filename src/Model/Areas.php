@@ -6,6 +6,7 @@ use ArrayIterator;
 use IteratorAggregate;
 use RuntimeException;
 use Traversable;
+
 /**
  * @implements IteratorAggregate<Area>
  */
@@ -35,6 +36,7 @@ final class Areas implements IteratorAggregate
         if (!isset($this->areas[$offset])) {
             throw new RuntimeException(sprintf(
                 'Area at offset %d not set, known offsets: %s',
+                $offset,
                 implode(', ', array_keys($this->areas))
             ));
         }

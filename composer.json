@@ -28,5 +28,15 @@
     },
     "require": {
         "symfony/console": "^6.3"
+    },
+    "scripts": {
+        "phpstan": "./vendor/bin/phpstan",
+        "php-cs-fixer": "./vendor/bin/php-cs-fixer fix",
+        "phpunit": "./vendor/bin/phpunit",
+        "integrate": [
+            "@php-cs-fixer",
+            "@phpstan",
+            "@phpunit"
+        ]
     }
 }

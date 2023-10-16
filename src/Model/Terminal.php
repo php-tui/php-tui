@@ -15,6 +15,7 @@ final class Terminal
         private Backend $backend,
         private array $buffers,
         private int $current,
+        /** @phpstan-ignore-next-line */
         private bool $hiddenCursor,
         private Viewport $viewport,
         private Area $viewportArea,

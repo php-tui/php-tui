@@ -15,8 +15,7 @@ final class Layout
         public Margin $margin,
         public array $constraints,
         public bool $expandToFill,
-    )
-    {
+    ) {
     }
 
     public static function default(): self

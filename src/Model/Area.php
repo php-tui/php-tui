@@ -72,6 +72,9 @@ final class Area implements Stringable
         );
     }
 
+    /**
+     * @return array{int,int,int,int}
+     */
     public function toArray(): array
     {
         return [

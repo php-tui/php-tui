@@ -103,10 +103,10 @@ final class CassowaryConstraintSolver implements ConstraintSolver
     {
         if ($constraint instanceof PercentageConstraint) {
             $constraint = Constraint::equalTo(
-                    $element->size(),
-                    $areaSize * ($constraint->percentage / 100.0),
-                    Strength::STRONG
-                );
+                $element->size(),
+                $areaSize * ($constraint->percentage / 100.0),
+                Strength::STRONG
+            );
             return [
                 $constraint
             ];

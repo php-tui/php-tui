@@ -32,7 +32,7 @@ class LayoutTest extends TestCase
             )
         );
     }
-    
+
     public function testSplitEquallyInUnderspecifiedCase(): void
     {
         $target = Area::fromPrimitives(100, 100, 10, 10);
