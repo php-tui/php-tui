@@ -41,4 +41,21 @@ final class Modifiers
     {
         return self::fromInt($modifier->value);
     }
+
+    public function remove(Modifiers $modifiers): self
+    {
+        $this->modifiers = $this->modifiers & ~$modifiers->toInt();
+        return $this;
+    }
+
+    public function insert(Modifiers $modifiers): self
+    {
+        $this->modifiers = $this->modifiers | $modifiers->toInt();
+        return $this;
+    }
+
+    public function toBin(): string
+    {
+        return decbin($this->modifiers);
+    }
 }
