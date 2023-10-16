@@ -26,8 +26,10 @@ class Row implements Countable, Stringable
     {
         $diff = $other->constant * $coefficient;
         $this->constant += $diff;
+
         foreach ($other->cells as $symbol) {
             $otherCoefficient = $other->cells->offsetGet($symbol);
+
             $this->insertSymbol($symbol, $otherCoefficient * $coefficient);
         }
 

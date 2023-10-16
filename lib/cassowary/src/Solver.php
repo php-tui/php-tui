@@ -181,7 +181,8 @@ class Solver
             $symbol = $this->getVarSymbol($term->variable);
 
             if ($this->rows->offsetExists($symbol)) {
-                $row->insertRow($this->rows->offsetGet($symbol), $term->coefficient);
+                $otherRow = $this->rows->offsetGet($symbol);
+                $row->insertRow($otherRow, $term->coefficient);
             } else {
                 $row->insertSymbol($symbol, $term->coefficient);
             }
@@ -249,22 +250,22 @@ class Solver
      */
     private function getVarSymbol(Variable $variable): Symbol
     {
-        [$whatIsThis1, $symbol, $count] = (function () use ($variable) {
+        [$val, $symbol, $count] = (function () use ($variable) {
             if (false === $this->varData->offsetExists($variable)) {
                 $symbol = $this->spawnSymbol(SymbolType::External);
                 $this->varForSymbol->offsetSet($symbol, $variable);
 
                 // TODO: use object here
-                $value = [NAN, $symbol, 0];
-                $this->varData->offsetSet($variable, $value);
-                return $value;
+                $data = [NAN, $symbol, 0];
+                $this->varData->offsetSet($variable, $data);
+                return $data;
             }
 
             return $this->varData->offsetGet($variable);
         })();
 
         $this->varData->offsetSet($variable, [
-            $whatIsThis1,
+            $val,
             $symbol,
             ++$count,
         ]);
@@ -299,13 +300,13 @@ class Solver
             }
         }
 
-        if ($tag->marker->symbolType == SymbolType::Slack || $tag->marker->symbolType === SymbolType::Error) {
+        if ($tag->marker->symbolType === SymbolType::Slack || $tag->marker->symbolType === SymbolType::Error) {
             if ($row->coefficientFor($tag->marker) < 0.0) {
                 return $tag->marker;
             }
         }
 
-        if ($tag->other->symbolType == SymbolType::Slack || $tag->other->symbolType === SymbolType::Error) {
+        if ($tag->other->symbolType === SymbolType::Slack || $tag->other->symbolType === SymbolType::Error) {
             if ($row->coefficientFor($tag->other) < 0.0) {
                 return $tag->other;
             }
@@ -318,13 +319,13 @@ class Solver
     {
         $artificialSymbol = $this->spawnSymbol(SymbolType::Slack);
         $this->rows->offsetSet($artificialSymbol, $row->clone());
-
+        $this->artificial = $row->clone();
         // Optimize the artificial objective. This is successful
         // only if the artificial objective is optimized to zero.
-        $artificial = $row->clone();
-        $this->artificial = $artificial;
-        $this->optimise($artificial);
-        $success = SolverUtil::nearZero($artificial->constant);
+        $this->optimise($this->artificial);
+
+        /** @phpstan-ignore-next-line */
+        $success = SolverUtil::nearZero($this->artificial->constant);
         $this->artificial = null;
 
         if ($this->rows->offsetExists($artificialSymbol)) {
@@ -344,7 +345,7 @@ class Solver
 
         foreach ($this->rows as $symbol) {
             $row = $this->rows->offsetGet($symbol);
-            $row->remove($symbol);
+            $row->remove($artificialSymbol);
         }
         $this->objective->remove($artificialSymbol);
 
