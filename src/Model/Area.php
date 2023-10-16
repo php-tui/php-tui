@@ -71,4 +71,14 @@ final class Area implements Stringable
             $this->height - 2 * $margin->vertical,
         );
     }
+
+    public function toArray(): array
+    {
+        return [
+            $this->position->x,
+            $this->position->y,
+            $this->width,
+            $this->height,
+        ];
+    }
 }

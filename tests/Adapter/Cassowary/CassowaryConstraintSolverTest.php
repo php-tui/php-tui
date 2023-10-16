@@ -10,37 +10,33 @@ use PHPUnit\Framework\TestCase;
 
 class CassowaryConstraintSolverTest extends TestCase
 {
-    public function testSolveHorizontal(): void
+    public function testPercentage(): void
     {
         $splits = Layout::default()
             ->direction(Direction::Horizontal)
             ->constraints([
-                Constraint::min(10),
-                Constraint::max(10),
-                //Constraint::percentage(10),
-                Constraint::length(10),
+                Constraint::percentage(50),
+                Constraint::percentage(50),
             ])
-            ->split(Area::fromDimensions(100,100));
-        dump($splits);
-        self::assertCount(4, $splits);
-        self::assertEquals(400, array_sum(array_map(fn (Area $a) => $a->height, $splits->toArray())));
-        self::assertEquals(100, array_sum(array_map(fn (Area $a) => $a->width, $splits->toArray())));
+                ->split(Area::fromDimensions(100,100));
+
+        self::assertEquals([0, 0, 50, 100], $splits->get(0)->toArray());
+        self::assertEquals([50, 0, 50, 100], $splits->get(1)->toArray());
     }
 
-    public function testSolveVertical(): void
+    public function testMultiplePercentages(): void
     {
         $splits = Layout::default()
-            ->direction(Direction::Vertical)
+            ->direction(Direction::Horizontal)
             ->constraints([
-                Constraint::percentage(10),
-                Constraint::max(5),
-                Constraint::min(1),
+                Constraint::percentage(50),
+                Constraint::percentage(25),
+                Constraint::percentage(25),
             ])
-            ->split(Area::fromPrimitives(0, 0, 128, 33));
-        self::assertCount(3, $splits);
+            ->split(Area::fromDimensions(100,100));
 
-        // this is wrong!
-        self::assertEquals(38, array_sum(array_map(fn (Area $a) => $a->height, $splits->toArray())));
-        self::assertEquals(384, array_sum(array_map(fn (Area $a) => $a->width, $splits->toArray())));
+        self::assertEquals([0, 0, 50, 100], $splits->get(0)->toArray());
+        self::assertEquals([50, 0, 25, 100], $splits->get(1)->toArray());
+        self::assertEquals([75, 0, 25, 100], $splits->get(2)->toArray());
     }
 }

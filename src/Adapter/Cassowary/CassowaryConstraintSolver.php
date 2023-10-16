@@ -80,8 +80,18 @@ final class CassowaryConstraintSolver implements ConstraintSolver
             $size = $end - $start;
 
             return match ($layout->direction) {
-                Direction::Horizontal => Area::fromPrimitives($start, $inner->position->y, $size, $inner->height),
-                Direction::Vertical => Area::fromPrimitives($inner->position->x, $start, $inner->width, $size),
+                Direction::Horizontal => Area::fromPrimitives(
+                    $start,
+                    $inner->position->y,
+                    $size,
+                    $inner->height
+                ),
+                Direction::Vertical => Area::fromPrimitives(
+                    $inner->position->x,
+                    $start,
+                    $inner->width,
+                    $size
+                ),
             };
         }, $elements));
     }
@@ -91,12 +101,13 @@ final class CassowaryConstraintSolver implements ConstraintSolver
     private function resolveConstraints(DTLConstraint $constraint, Element $element, float $areaSize): array
     {
         if ($constraint instanceof PercentageConstraint) {
-            return [
-                Constraint::equalTo(
+            $constraint = Constraint::equalTo(
                     $element->size(),
-                    $areaSize * ($constraint->percentage / 100),
+                    $areaSize * ($constraint->percentage / 100.0),
                     Strength::STRONG
-                )
+                );
+            return [
+                $constraint
             ];
         }
         if ($constraint instanceof LengthConstraint) {
