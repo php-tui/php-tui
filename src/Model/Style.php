@@ -20,8 +20,8 @@ final class Style
             null,
             null,
             null,
-            [],
-            [],
+            Modifiers::none(),
+            Modifiers::none(),
         );
     }
 

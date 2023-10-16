@@ -3,6 +3,7 @@
 namespace DTL\PhpTui\Model\Widget;
 
 use ArrayIterator;
+use DTL\PhpTui\Model\Style;
 use IteratorAggregate;
 use Traversable;
 
@@ -40,5 +41,12 @@ final class Line implements IteratorAggregate
     public function getIterator(): Traversable
     {
         return new ArrayIterator($this->spans);
+    }
+
+    public function patchStyle(Style $style): void
+    {
+        foreach ($this->spans as $span) {
+            $span->patchStyle($style);
+        }
     }
 }

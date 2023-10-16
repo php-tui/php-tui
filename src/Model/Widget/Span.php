@@ -19,4 +19,9 @@ final class Span
     {
         return mb_strlen($this->content);
     }
+
+    public function patchStyle(Style $style): void
+    {
+        $this->style->patch($style);
+    }
 }
