@@ -268,4 +268,22 @@ final class Block implements Widget
             $area->width - max(0, $leftBorderDx, $rightBorderDx),
         ];
     }
+
+    public function style(Style $style): self
+    {
+        $this->style = $style;
+        return $this;
+    }
+
+    public function borderStyle(Style $style): self
+    {
+        $this->borderStyle = $style;
+        return $this;
+    }
+
+    public function titleStyle(Style $style): self
+    {
+        $this->titleStyle = $style;
+        return $this;
+    }
 }

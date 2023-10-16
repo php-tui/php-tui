@@ -7,7 +7,7 @@ use Iterator;
 
 final class Span
 {
-    public function __construct(public readonly string $content, public readonly Style $style)
+    public function __construct(public readonly string $content, public Style $style)
     {
     }
 
@@ -37,5 +37,11 @@ final class Span
                 style: $baseStyle->patch($this->style),
             );
         }, mb_str_split($this->content));
+    }
+
+    public function style(Style $style): self
+    {
+        $this->style = $style;
+        return $this;
     }
 }

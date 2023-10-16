@@ -25,6 +25,12 @@ final class Style
         );
     }
 
+    public function fg(Color $color): self
+    {
+        $this->fg = $color;
+        return $this;
+    }
+
     public function patch(Style $other): self
     {
         $this->fg = $other->fg ?: $this->fg;
@@ -34,6 +40,18 @@ final class Style
         $this->addModifiers->remove($other->subModifiers);
         $this->addModifiers->insert($other->addModifiers);
 
+        return $this;
+    }
+
+    public function bg(Color $color): self
+    {
+        $this->bg = $color;
+        return $this;
+    }
+
+    public function addModifier(Modifier $modifier): self
+    {
+        $this->addModifiers->add($modifier);
         return $this;
     }
 }

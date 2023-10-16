@@ -20,7 +20,7 @@ class Paragraph implements Widget
 {
     /** @param array{int,int} $scroll */
     private function __construct(
-        private ?Block $block = null,
+        private ?Block $block,
         private Style $style,
         private ?Wrap $wrap,
         private Text $text,
@@ -97,6 +97,18 @@ class Paragraph implements Widget
         }
     }
 
+    public function style(Style $style): self
+    {
+        $this->style=  $style;
+        return $this;
+    }
+
+    public function alignment(HorizontalAlignment  $alignment): self
+    {
+        $this->alignment = $alignment;
+        return $this;
+    }
+
     private function resolveTextArea(Area $area, Buffer $buffer): Area
     {
         if ($this->block) {
@@ -123,5 +135,17 @@ class Paragraph implements Widget
             HorizontalAlignment::Right => $maxWidth - $width,
             HorizontalAlignment::Left => 0,
         };
+    }
+
+    public function wrap(Wrap $wrap): self
+    {
+        $this->wrap = $wrap;
+        return $this;
+    }
+
+    public function block(Block $block): self
+    {
+        $this->block = $block;
+        return $this;
     }
 }

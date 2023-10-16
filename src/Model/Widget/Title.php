@@ -21,4 +21,21 @@ final class Title
         $this->horizontalAlignment = $alignment;
         return $this;
     }
+
+    public static function fromLine(Line $line): self
+    {
+        return new self($line, HorizontalAlignment::Left, VerticalAlignment::Top);
+    }
+
+    public function verticalAlignment(VerticalAlignment $alignment): self
+    {
+        $this->verticalAlignment = $alignment;
+        return $this;
+    }
+
+    public function horizontalAlignment(HorizontalAlignment $alignment): self
+    {
+        $this->horizontalAlignment = $alignment;
+        return $this;
+    }
 }

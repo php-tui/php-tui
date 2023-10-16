@@ -31,6 +31,14 @@ final class Line implements IteratorAggregate
         );
     }
 
+    /**
+     * @param Span[] $spans
+     */
+    public static function fromSpans(array $spans): self
+    {
+        return new self($spans);
+    }
+
     public static function fromString(string $string): self
     {
         return new self([
