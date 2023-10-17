@@ -25,6 +25,7 @@ final class Block implements Widget
         private array $titles,
         private BorderType $borderType,
         private Style $borderStyle,
+        private Style $style,
     ) {
     }
 
@@ -34,7 +35,8 @@ final class Block implements Widget
             Borders::NONE,
             [],
             BorderType::Plain,
-            Style::default()
+            Style::default(),
+            Style::default(),
         );
     }
 
@@ -94,6 +96,7 @@ final class Block implements Widget
 
     private function renderBorders(Area $area, Buffer $buffer): void
     {
+        $buffer->setStyle($area, $this->style);
         $lineSet = $this->borderType->lineSet();
         if ($this->borders & Borders::LEFT) {
             foreach (range($area->top(), $area->bottom() - 1) as $y) {
@@ -283,7 +286,7 @@ final class Block implements Widget
 
     public function titleStyle(Style $style): self
     {
-        $this->titleStyle = $style;
+        // TODO: titleStyle
         return $this;
     }
 }

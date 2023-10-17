@@ -1,5 +1,6 @@
 <?php
 
+use DTL\PhpTui\Adapter\Symfony\SymfonyBackend;
 use DTL\PhpTui\Model\AnsiColor;
 use DTL\PhpTui\Model\Area;
 use DTL\PhpTui\Model\Backend\DummyBackend;
@@ -8,7 +9,6 @@ use DTL\PhpTui\Model\Constraint;
 use DTL\PhpTui\Model\Direction;
 use DTL\PhpTui\Model\Layout;
 use DTL\PhpTui\Model\Modifier;
-use DTL\PhpTui\Model\Modifiers;
 use DTL\PhpTui\Model\Style;
 use DTL\PhpTui\Model\Terminal;
 use DTL\PhpTui\Model\Widget\BorderType;
@@ -28,6 +28,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 $terminal = new SymfonyTerminal();
 $backend = new DummyBackend($terminal->getWidth(), $terminal->getHeight());
+$backend = SymfonyBackend::new();
 $terminal = Terminal::fullscreen($backend);
 $terminal->draw(function (Buffer $buffer): void {
     [$titleArea, $layout] = calculate_layout($buffer->area());
@@ -61,7 +62,7 @@ $terminal->draw(function (Buffer $buffer): void {
                 Modifier::Italic
             )
         )
-        ->title(Title::fromString("Styled block"));
+        ->title(Title::fromString('Styled block'));
     $paragraph->block($block)->render($layout[5][0], $buffer);
 
     // styled borders
@@ -78,7 +79,7 @@ $terminal->draw(function (Buffer $buffer): void {
                 Modifier::Italic
             )
         )
-        ->title(Title::fromString("Styled borders"));
+        ->title(Title::fromString('Styled borders'));
     $paragraph->block($block)->render($layout[5][1], $buffer);
 
     // style title content
@@ -163,7 +164,7 @@ function render_title(Buffer $buffer, Area $area): void
 
 function placeholder_paragraph(): Paragraph
 {
-    $text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
+    $text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.';
     return Paragraph::new(
         Text::styled(
             $text,
@@ -187,5 +188,3 @@ function render_border_type(Paragraph $paragraph, BorderType $borderType, Buffer
         ->title(Title::fromString(sprintf('BordersType::%s', $borderType->name)))
         ->render($area, $buffer);
 }
-
-

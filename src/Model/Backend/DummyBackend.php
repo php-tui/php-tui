@@ -33,7 +33,7 @@ final class DummyBackend implements Backend
     public function draw(BufferUpdates $updates): void
     {
         foreach ($updates as $update) {
-            $this->grid[$update->position->y][$update->position->x] = $update->char;
+            $this->grid[$update->position->y][$update->position->x] = $update->cell->char;
         }
     }
 

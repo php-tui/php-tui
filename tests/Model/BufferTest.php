@@ -88,7 +88,7 @@ class BufferTest extends TestCase
                 self::assertCount(1, $updates);
                 self::assertEquals(4, $updates->at(0)->position->x);
                 self::assertEquals(0, $updates->at(0)->position->y);
-                self::assertEquals('4', $updates->at(0)->char);
+                self::assertEquals('4', $updates->at(0)->cell->char);
             }
         ];
         yield 'lst char diff and second line' => [

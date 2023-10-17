@@ -10,3 +10,4 @@ TODO
 - [ ] Cursor positioning after after draw (removed "frame" concept)
 - [ ] Change modifiers to use bitmask
 - [ ] Layout SegmentSize
+- [ ] `Block::titleStyle()` is currently a no-op
