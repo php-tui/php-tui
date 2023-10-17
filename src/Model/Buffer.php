@@ -77,7 +77,7 @@ final class Buffer implements Countable
         for ($i = 0; $i < count($next); $i++) {
             $previousCell = $previous[$i];
             $currentCell = $next[$i];
-            if ($previousCell->char !== $currentCell->char) {
+            if ($previousCell != $currentCell) {
                 $updates[] = new BufferUpdate(Position::fromIndex($i, $this->area), $currentCell);
             }
         }
