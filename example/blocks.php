@@ -22,12 +22,14 @@ use DTL\PhpTui\Model\Widget\VerticalAlignment;
 use DTL\PhpTui\Widget\Block;
 use DTL\PhpTui\Widget\Paragraph;
 use DTL\PhpTui\Widget\Paragraph\Wrap;
+use Symfony\Component\Console\Cursor;
+use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Terminal as SymfonyTerminal;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$terminal = new SymfonyTerminal();
-$backend = new DummyBackend($terminal->getWidth(), $terminal->getHeight());
+$cursor = new Cursor(new ConsoleOutput());
+$cursor->clearScreen();
 $backend = SymfonyBackend::new();
 $terminal = Terminal::fullscreen($backend);
 $terminal->draw(function (Buffer $buffer): void {
@@ -36,17 +38,17 @@ $terminal->draw(function (Buffer $buffer): void {
 
     $paragraph = placeholder_paragraph();
 
-    render_borders($paragraph, Borders::ALL, $buffer, $layout[0][0]);
-    render_borders($paragraph, Borders::NONE, $buffer, $layout[0][1]);
-    render_borders($paragraph, Borders::LEFT, $buffer, $layout[1][0]);
-    render_borders($paragraph, Borders::RIGHT, $buffer, $layout[1][1]);
-    render_borders($paragraph, Borders::TOP, $buffer, $layout[2][0]);
-    render_borders($paragraph, Borders::BOTTOM, $buffer, $layout[2][1]);
+    render_borders(deep_clone($paragraph), Borders::ALL, $buffer, $layout[0][0]);
+    render_borders(deep_clone($paragraph), Borders::NONE, $buffer, $layout[0][1]);
+    render_borders(deep_clone($paragraph), Borders::LEFT, $buffer, $layout[1][0]);
+    render_borders(deep_clone($paragraph), Borders::RIGHT, $buffer, $layout[1][1]);
+    render_borders(deep_clone($paragraph), Borders::TOP, $buffer, $layout[2][0]);
+    render_borders(deep_clone($paragraph), Borders::BOTTOM, $buffer, $layout[2][1]);
 
-    render_border_type($paragraph, BorderType::Plain, $buffer, $layout[3][0]);
-    render_border_type($paragraph, BorderType::Rounded, $buffer, $layout[3][1]);
-    render_border_type($paragraph, BorderType::Double, $buffer, $layout[4][0]);
-    render_border_type($paragraph, BorderType::Thick, $buffer, $layout[4][1]);
+    render_border_type(deep_clone($paragraph), BorderType::Plain, $buffer, $layout[3][0]);
+    render_border_type(deep_clone($paragraph), BorderType::Rounded, $buffer, $layout[3][1]);
+    render_border_type(deep_clone($paragraph), BorderType::Double, $buffer, $layout[4][0]);
+    render_border_type(deep_clone($paragraph), BorderType::Thick, $buffer, $layout[4][1]);
 
     // styled block
     $block = Block::default()
@@ -63,7 +65,7 @@ $terminal->draw(function (Buffer $buffer): void {
             )
         )
         ->title(Title::fromString('Styled block'));
-    $paragraph->block($block)->render($layout[5][0], $buffer);
+    deep_clone($paragraph)->block($block)->render($layout[5][0], $buffer);
 
     // styled borders
     $block = Block::default()
@@ -80,7 +82,7 @@ $terminal->draw(function (Buffer $buffer): void {
             )
         )
         ->title(Title::fromString('Styled borders'));
-    $paragraph->block($block)->render($layout[5][1], $buffer);
+    deep_clone($paragraph)->block($block)->render($layout[5][1], $buffer);
 
     // style title content
     $block = Block::default()
@@ -89,7 +91,7 @@ $terminal->draw(function (Buffer $buffer): void {
             Span::fromString('Styled ')->style(Style::default()->fg(AnsiColor::Blue)),
             Span::fromString('title content')->style(Style::default()->fg(AnsiColor::Green)),
         ])));
-    $paragraph->block($block)->render($layout[6][1], $buffer);
+    deep_clone($paragraph)->block($block)->render($layout[6][1], $buffer);
 
     // multiple titles
     $block = Block::default()
@@ -100,7 +102,7 @@ $terminal->draw(function (Buffer $buffer): void {
         ->title(Title::fromLine(Line::fromSpans([
             Span::fromString('Titles')->style(Style::default()->fg(AnsiColor::Red)),
         ])));
-    $paragraph->block($block)->render($layout[7][0], $buffer);
+    deep_clone($paragraph)->block($block)->render($layout[7][0], $buffer);
 
     // multiple title positions
     $block = Block::default()
@@ -111,16 +113,17 @@ $terminal->draw(function (Buffer $buffer): void {
         ->title(Title::fromString('bottom left')->verticalAlignment(VerticalAlignment::Bottom)->horizontalAlignment(HorizontalAlignment::Left))
         ->title(Title::fromString('bottom center')->verticalAlignment(VerticalAlignment::Bottom)->horizontalAlignment(HorizontalAlignment::Center))
         ->title(Title::fromString('bottom right')->verticalAlignment(VerticalAlignment::Bottom)->horizontalAlignment(HorizontalAlignment::Right));
-    $paragraph->block($block)->render($layout[7][1], $buffer);
+    deep_clone($paragraph)->block($block)->render($layout[7][1], $buffer);
 
     // render padding
     $block = Block::default()
         ->borders(Borders::ALL)
         ->title(Title::fromString('padding not yet supported'));
-    $paragraph->block($block)->render($layout[8][0], $buffer);
+    deep_clone($paragraph)->block($block)->render($layout[8][0], $buffer);
 });
 
-echo $backend->flushed();
+echo $backend->flush();
+readline();
 
 /**
  * @return array{Area, list<list<Area>>}
@@ -187,4 +190,14 @@ function render_border_type(Paragraph $paragraph, BorderType $borderType, Buffer
         ->borderType($borderType)
         ->title(Title::fromString(sprintf('BordersType::%s', $borderType->name)))
         ->render($area, $buffer);
+}
+
+/**
+ * @template T of object
+ * @param T $object
+ * @return T
+ */
+function deep_clone(object $object): object
+{
+    return unserialize(serialize($object));
 }
