@@ -33,8 +33,8 @@ final class Buffer implements Countable
 
     public function setStyle(Area $area, Style $style): void
     {
-        foreach (range($this->area->top(), $this->area->bottom() - 1) as $y) {
-            foreach (range($this->area->left(), $this->area->right() -1) as $x) {
+        foreach (range($area->top(), $area->bottom() - 1) as $y) {
+            foreach (range($area->left(), $area->right() -1) as $x) {
                 $this->get(Position::at($x, $y))->setStyle($style);
             }
         }
@@ -189,5 +189,14 @@ final class Buffer implements Countable
         $index = $position->toIndex($this->area);
 
         return $this->content[$index];
+    }
+
+    public function __toString(): string
+    {
+        $out = [];
+        foreach ($this->content as $cell) {
+            $out[] = $cell->__toString();
+        }
+        return implode("\n", $out);
     }
 }
