@@ -262,8 +262,8 @@ final class Block implements Widget
      */
     private function calculateTitleAreaOffsets(Area $area): array
     {
-        $leftBorderDx = (bool)$this->borders & Borders::LEFT;
-        $rightBorderDx = (bool)$this->borders & Borders::RIGHT;
+        $leftBorderDx = (bool)($this->borders & Borders::LEFT);
+        $rightBorderDx = (bool)($this->borders & Borders::RIGHT);
 
         return [
             $leftBorderDx,

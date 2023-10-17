@@ -249,9 +249,9 @@ class BlockTest extends TestCase
         Block::default()->borders(Borders::ALL)->render($buffer->area(), $buffer);
         self::assertEquals([
             '┌───┐',
-            '|   |',
-            '|   |',
-            '|   |',
+            '│   │',
+            '│   │',
+            '│   │',
             '└───┘',
         ], $buffer->toLines());
     }
@@ -262,9 +262,9 @@ class BlockTest extends TestCase
         Block::default()->borderType(BorderType::Rounded)->borders(Borders::ALL)->render($buffer->area(), $buffer);
         self::assertEquals([
             '╭───╮',
-            '|   |',
-            '|   |',
-            '|   |',
+            '│   │',
+            '│   │',
+            '│   │',
             '╰───╯',
         ], $buffer->toLines());
     }
@@ -278,10 +278,10 @@ class BlockTest extends TestCase
             ->title(Title::fromString('G\'day')->horizontalAlignmnet(HorizontalAlignment::Left))
             ->render($buffer->area(), $buffer);
         self::assertEquals([
-            "G'day──╮",
-            '|      |',
-            '|      |',
-            '|      |',
+            "╭G'day─╮",
+            '│      │',
+            '│      │',
+            '│      │',
             '╰──────╯',
         ], $buffer->toLines());
     }

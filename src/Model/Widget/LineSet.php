@@ -39,7 +39,7 @@ final class LineSet
     public static function rounded(): self
     {
         return new self(
-            vertical: '|',
+            vertical: '│',
             horizontal: '─',
             topRight: '╮',
             topLeft: '╭',
