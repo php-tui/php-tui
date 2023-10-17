@@ -9,7 +9,8 @@ class StyledGrapheme
     public function __construct(
         public string $symbol,
         public Style $style
-    ) {}
+    ) {
+    }
 
     public function symbolWidth(): int
     {

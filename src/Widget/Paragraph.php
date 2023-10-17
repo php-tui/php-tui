@@ -110,6 +110,18 @@ class Paragraph implements Widget
         return $this;
     }
 
+    public function wrap(Wrap $wrap): self
+    {
+        $this->wrap = $wrap;
+        return $this;
+    }
+
+    public function block(Block $block): self
+    {
+        $this->block = $block;
+        return $this;
+    }
+
     private function resolveTextArea(Area $area, Buffer $buffer): Area
     {
         if ($this->block) {
@@ -136,17 +148,5 @@ class Paragraph implements Widget
             HorizontalAlignment::Right => $maxWidth - $width,
             HorizontalAlignment::Left => 0,
         };
-    }
-
-    public function wrap(Wrap $wrap): self
-    {
-        $this->wrap = $wrap;
-        return $this;
-    }
-
-    public function block(Block $block): self
-    {
-        $this->block = $block;
-        return $this;
     }
 }

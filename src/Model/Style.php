@@ -10,8 +10,7 @@ final class Style
         public ?Color $underline,
         public Modifiers $addModifiers,
         public Modifiers $subModifiers
-    )
-    {
+    ) {
     }
 
     public static function default(): self

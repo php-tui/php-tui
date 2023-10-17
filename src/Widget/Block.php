@@ -94,6 +94,24 @@ final class Block implements Widget
         return $this;
     }
 
+    public function style(Style $style): self
+    {
+        $this->style = $style;
+        return $this;
+    }
+
+    public function borderStyle(Style $style): self
+    {
+        $this->borderStyle = $style;
+        return $this;
+    }
+
+    public function titleStyle(Style $style): self
+    {
+        // TODO: titleStyle
+        return $this;
+    }
+
     private function renderBorders(Area $area, Buffer $buffer): void
     {
         $buffer->setStyle($area, $this->style);
@@ -266,27 +284,9 @@ final class Block implements Widget
         $rightBorderDx = (bool)($this->borders & Borders::RIGHT);
 
         return [
-            $leftBorderDx,
-            $rightBorderDx,
+            $leftBorderDx ? 1 : 0,
+            $rightBorderDx ? 1 : 0,
             $area->width - max(0, $leftBorderDx, $rightBorderDx),
         ];
-    }
-
-    public function style(Style $style): self
-    {
-        $this->style = $style;
-        return $this;
-    }
-
-    public function borderStyle(Style $style): self
-    {
-        $this->borderStyle = $style;
-        return $this;
-    }
-
-    public function titleStyle(Style $style): self
-    {
-        // TODO: titleStyle
-        return $this;
     }
 }

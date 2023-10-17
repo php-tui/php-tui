@@ -94,6 +94,10 @@ class SymfonyBackend implements Backend
             AnsiColor::LightMagenta => 'bright-magenta',
             AnsiColor::LightCyan => 'bright-cyan',
             AnsiColor::White => 'bright-white',
+            default => throw new RuntimeException(sprintf(
+                'Do not know how to convert color to Symfony color: %s',
+                $color->name
+            ))
         };
     }
 }

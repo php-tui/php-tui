@@ -17,6 +17,15 @@ final class Buffer implements Countable
     ) {
     }
 
+    public function __toString(): string
+    {
+        $out = [];
+        foreach ($this->content as $cell) {
+            $out[] = $cell->__toString();
+        }
+        return implode("\n", $out);
+    }
+
     public static function empty(Area $area): self
     {
         return self::filled($area, Cell::empty());
@@ -192,14 +201,5 @@ final class Buffer implements Countable
         $index = $position->toIndex($this->area);
 
         return $this->content[$index];
-    }
-
-    public function __toString(): string
-    {
-        $out = [];
-        foreach ($this->content as $cell) {
-            $out[] = $cell->__toString();
-        }
-        return implode("\n", $out);
     }
 }

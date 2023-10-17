@@ -13,6 +13,18 @@ final class Cell
     ) {
     }
 
+    public function __toString(): string
+    {
+        return sprintf(
+            '#%-5s "%s" fg:%s bg:%s modifiers:%s',
+            spl_object_id($this),
+            $this->char,
+            $this->fg->debugName(),
+            $this->bg->debugName(),
+            $this->modifier->toBin(),
+        );
+    }
+
     public static function empty(): self
     {
         return new self(' ', AnsiColor::Reset, AnsiColor::Reset, AnsiColor::Reset, Modifiers::none());
@@ -49,17 +61,5 @@ final class Cell
     {
         $this->setChar(' ');
         $this->setStyle(Style::default());
-    }
-
-    public function __toString(): string
-    {
-        return sprintf(
-            '#%-5s "%s" fg:%s bg:%s modifiers:%s',
-            spl_object_id($this),
-            $this->char,
-            $this->fg->debugName(),
-            $this->bg->debugName(),
-            $this->modifier->toBin(),
-        );
     }
 }

@@ -9,7 +9,8 @@ final class Text
     /**
      * @param list<Line> $lines
      */
-    public function __construct(public array $lines) {
+    public function __construct(public array $lines)
+    {
     }
 
     public static function raw(string $string): self

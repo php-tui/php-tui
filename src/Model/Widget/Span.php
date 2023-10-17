@@ -3,7 +3,6 @@
 namespace DTL\PhpTui\Model\Widget;
 
 use DTL\PhpTui\Model\Style;
-use Iterator;
 
 final class Span
 {
