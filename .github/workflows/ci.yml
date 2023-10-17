@@ -1,0 +1,106 @@
+name: "CI"
+
+on:
+    pull_request:
+    push:
+        branches:
+            - 'main'
+
+env:
+    fail-fast: true
+    TZ: "Europe/Paris"
+
+jobs:
+    phpunit:
+        name: "PHPUnit (${{ matrix.php-version }})"
+
+        runs-on: "ubuntu-latest"
+
+        strategy:
+            matrix:
+                php-version:
+                    - '8.1'
+                    - '8.2'
+
+        steps:
+            -
+                name: "Checkout code"
+                uses: "actions/checkout@v2"
+            -
+                name: "Install PHP"
+                uses: "shivammathur/setup-php@v2"
+                with:
+                    coverage: "none"
+                    extensions: "${{ env.REQUIRED_PHP_EXTENSIONS }}"
+                    php-version: "${{ matrix.php-version }}"
+                    tools: composer:v2
+
+            -
+                name: "Composer install"
+                uses: "ramsey/composer-install@v1"
+                with:
+                    composer-options: "--no-scripts"
+            -
+                name: "Run PHPUnit"
+                run: "php -dzend.assertions=1 vendor/bin/phpunit"
+    phpstan:
+        name: "PHPStan (${{ matrix.php-version }})"
+
+        runs-on: "ubuntu-latest"
+
+        strategy:
+            matrix:
+                php-version:
+                    - '8.1'
+
+        steps:
+            -
+                name: "Checkout code"
+                uses: "actions/checkout@v2"
+            -
+                name: "Install PHP"
+                uses: "shivammathur/setup-php@v2"
+                with:
+                    coverage: "none"
+                    extensions: "${{ env.REQUIRED_PHP_EXTENSIONS }}"
+                    php-version: "${{ matrix.php-version }}"
+                    tools: composer:v2
+
+            -
+                name: "Composer install"
+                uses: "ramsey/composer-install@v1"
+                with:
+                    composer-options: "--no-scripts"
+            -
+                name: "Run PHPStan"
+                run: "vendor/bin/phpstan analyse"
+    php-cs-fixer:
+        name: "PHP-CS-Fixer (${{ matrix.php-version }})"
+
+        runs-on: "ubuntu-latest"
+
+        strategy:
+            matrix:
+                php-version:
+                    - '8.1'
+        steps:
+            -
+                name: "Checkout code"
+                uses: "actions/checkout@v2"
+            -
+                name: "Install PHP"
+                uses: "shivammathur/setup-php@v2"
+                with:
+                    coverage: "none"
+                    extensions: "${{ env.REQUIRED_PHP_EXTENSIONS }}"
+                    php-version: "${{ matrix.php-version }}"
+                    tools: composer:v2
+
+            -
+                name: "Composer install"
+                uses: "ramsey/composer-install@v1"
+                with:
+                    composer-options: "--no-scripts"
+            -
+                name: "Run PHP-CS_Fixer"
+                run: "PHP_CS_FIXER_IGNORE_ENV=1 vendor/bin/php-cs-fixer fix --dry-run --diff"
