@@ -3,7 +3,6 @@
 namespace DTL\PhpTui\Tests\Model\Widget;
 
 use DTL\PhpTui\Model\AnsiColor;
-use DTL\PhpTui\Model\Color;
 use DTL\PhpTui\Model\Style;
 use DTL\PhpTui\Model\Widget\Text;
 use PHPUnit\Framework\TestCase;

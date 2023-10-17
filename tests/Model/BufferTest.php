@@ -8,7 +8,6 @@ use DTL\PhpTui\Model\Area;
 use DTL\PhpTui\Model\Buffer;
 use DTL\PhpTui\Model\BufferUpdates;
 use DTL\PhpTui\Model\Cell;
-use DTL\PhpTui\Model\Color;
 use DTL\PhpTui\Model\Position;
 use DTL\PhpTui\Model\Style;
 use DTL\PhpTui\Model\Widget\Line;
@@ -80,7 +79,7 @@ class BufferTest extends TestCase
         $b2 = Buffer::fromLines(['a']);
         self::assertCount(0, $b1->diff($b2));
 
-        $b2->get(Position::at(0,0))->fg = AnsiColor::Red;
+        $b2->get(Position::at(0, 0))->fg = AnsiColor::Red;
         self::assertCount(1, $b1->diff($b2));
     }
 

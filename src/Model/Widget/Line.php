@@ -43,7 +43,7 @@ final class Line implements IteratorAggregate
     {
         return new self([
             Span::fromString($string)
-        ], HorizontalAlignment::Left);
+        ], null);
     }
 
     public function getIterator(): Traversable
