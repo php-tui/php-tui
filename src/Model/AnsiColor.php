@@ -21,4 +21,9 @@ enum AnsiColor implements Color
     case LightMagenta;
     case LightCyan;
     case White;
+
+    public function debugName(): string
+    {
+        return $this->name;
+    }
 }
