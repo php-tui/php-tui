@@ -38,10 +38,18 @@ class SymfonyBackend implements Backend
         $underline = AnsiColor::Reset;
         $modifier = Modifier::None;
         $lastPos = null;
+        $buffer = [];
 
         foreach ($updates as $update) {
             $attributes = [];
-            $this->cursor->moveToPosition($update->position->x + 1, $update->position->y);
+            if (null === $lastPos || ($update->position->y !== $lastPos->y || $update->position->x !== $lastPos->x + 1)) {
+                if ($buffer) {
+                    $this->output->write(implode('', $buffer));
+                }
+                $buffer = [];
+                $this->cursor->moveToPosition($update->position->x + 1, $update->position->y);
+            }
+            $lastPos = $update->position;
 
             if ($update->cell->fg !== AnsiColor::Reset) {
                 $attributes[] = sprintf('fg=%s', $this->resolveColor($update->cell->fg));
@@ -51,11 +59,13 @@ class SymfonyBackend implements Backend
             }
 
             if ($attributes) {
-                $this->output->write(sprintf('<%s>%s</>', implode(';', $attributes), $update->cell->char));
+                $buffer[] = sprintf('<%s>%s</>', implode(';', $attributes), $update->cell->char);
                 continue;
             }
-            $this->output->write($update->cell->char);
+            $buffer[] = $update->cell->char;
         }
+
+        $this->output->write(implode('', $buffer));
 
     }
 
