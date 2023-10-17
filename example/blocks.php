@@ -134,7 +134,7 @@ function calculate_layout(Area $area): array
         ->direction(Direction::Vertical)
         ->constraints([
             Constraint::length(1),
-            Constraint::min(10)
+            Constraint::min(0)
         ])
         ->split($area);
     $titleArea = $layout->get(0);
@@ -149,9 +149,10 @@ function calculate_layout(Area $area): array
             ->toArray();
     }, Layout::default()
         ->direction(Direction::Vertical)
-        ->constraints(array_map(fn () => Constraint::max(6), array_fill(0, 9, true)))
+        ->constraints(array_map(fn () => Constraint::max(4), array_fill(0, 9, true)))
         ->split($layout->get(1))
         ->toArray());
+
 
     return [$titleArea, $mainAreas];
 }
