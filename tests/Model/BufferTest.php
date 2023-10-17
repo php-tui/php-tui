@@ -3,11 +3,13 @@
 namespace DTL\PhpTui\Tests\Model;
 
 use Closure;
+use DTL\PhpTui\Model\AnsiColor;
 use DTL\PhpTui\Model\Area;
 use DTL\PhpTui\Model\Buffer;
 use DTL\PhpTui\Model\BufferUpdates;
 use DTL\PhpTui\Model\Cell;
 use DTL\PhpTui\Model\Position;
+use DTL\PhpTui\Model\Style;
 use DTL\PhpTui\Model\Widget\Line;
 use Generator;
 use PHPUnit\Framework\TestCase;
@@ -39,6 +41,24 @@ class BufferTest extends TestCase
             EOT, $buffer->toString());
 
     }
+
+    public function testSetStyle(): void
+    {
+        $buffer = Buffer::fromLines([
+            '1234',
+            '1234',
+            '1234',
+            '1234',
+        ]);
+        $buffer->setStyle(Area::fromPrimitives(1, 1, 2, 2), Style::default()->fg(AnsiColor::Red));
+
+        self::assertEquals(AnsiColor::Reset, $buffer->get(Position::at(0, 0))->fg);
+        self::assertEquals(AnsiColor::Red, $buffer->get(Position::at(1, 1))->fg);
+        self::assertEquals(AnsiColor::Red, $buffer->get(Position::at(2, 2))->fg);
+        self::assertEquals(AnsiColor::Reset, $buffer->get(Position::at(3, 3))->fg);
+    }
+
+
 
     public function testPutLine(): void
     {
