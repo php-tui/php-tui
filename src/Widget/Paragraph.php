@@ -86,6 +86,7 @@ class Paragraph implements Widget
                         $textArea->top() + $y - $this->scroll[0]
                     ));
                     $cell->setChar($grapheme->symbol === '' ? ' ' : $grapheme->symbol);
+                    $cell->setStyle($grapheme->style);
                     $x += $grapheme->symbolWidth();
                 }
             }

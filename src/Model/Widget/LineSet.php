@@ -22,7 +22,7 @@ final class LineSet
     public static function plain(): self
     {
         return new self(
-            vertical: '|',
+            vertical: '│',
             horizontal: '─',
             topRight: '┐',
             topLeft: '┌',

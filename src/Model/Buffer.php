@@ -33,6 +33,9 @@ final class Buffer implements Countable
 
     public function setStyle(Area $area, Style $style): void
     {
+        if ($area->height === 0) {
+            return;
+        }
         foreach (range($area->top(), $area->bottom() - 1) as $y) {
             foreach (range($area->left(), $area->right() -1) as $x) {
                 $this->get(Position::at($x, $y))->setStyle($style);
