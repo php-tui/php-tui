@@ -101,4 +101,10 @@ final class Canvas implements Widget
         $this->yBounds = new AxisBounds($min, $max);
         return $this;
     }
+
+    public function marker(Marker $marker): self
+    {
+        $this->marker = $marker;
+        return $this;
+    }
 }

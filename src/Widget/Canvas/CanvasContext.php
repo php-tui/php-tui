@@ -25,7 +25,7 @@ final class CanvasContext
     {
         $dot = Symbols::DOT;
         $block = BlockSet::FULL;
-        $bar = BarSet::FULL;
+        $bar = BarSet::HALF;
         $grid = match ($marker) {
             Marker::Dot => CharGrid::new($width, $height, $dot),
             Marker::Block => CharGrid::new($width, $height, $block),
