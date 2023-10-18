@@ -9,6 +9,7 @@ use DTL\PhpTui\Model\AxisBounds;
 use DTL\PhpTui\Model\Buffer;
 use DTL\PhpTui\Model\Color;
 use DTL\PhpTui\Model\Marker;
+use DTL\PhpTui\Model\Position;
 use DTL\PhpTui\Model\Style;
 use DTL\PhpTui\Model\Widget;
 use DTL\PhpTui\Widget\Canvas\CanvasContext;
@@ -59,6 +60,24 @@ final class Canvas implements Widget
         $painter($context);
         $context->finish();
 
+
+        foreach ($context->layers as $layer) {
+            foreach ($layer->chars as $index => $char) {
+                if ($char === ' ' || $char === "\u{2800}") {
+                    continue;
+                }
+                $color = $layer->colors[$index];
+                $x = ($index % $width) + $canvasArea->left();
+                $y = ($index / $width) + $canvasArea->top();
+                $cell = $buffer->get(Position::at(intval($x), intval($y)))->setChar($char);
+                if ($color->fg !== AnsiColor::Reset) {
+                    $cell->fg = $color->fg;
+                }
+                if ($color->bg !== AnsiColor::Reset) {
+                    $cell->bg = $color->bg;
+                }
+            }
+        }
 
     }
 

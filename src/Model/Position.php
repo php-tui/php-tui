@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace DTL\PhpTui\Model;
 
@@ -66,5 +66,10 @@ final class Position implements Stringable
     public function withX(int $x): self
     {
         return new self($x, $this->y);
+    }
+
+    public function withY(int $y): self
+    {
+        return new self($this->x, $y);
     }
 }

@@ -4,6 +4,7 @@ namespace DTL\PhpTui\Widget\Canvas;
 
 use DTL\PhpTui\Model\AnsiColor;
 use DTL\PhpTui\Model\Color;
+use DTL\PhpTui\Model\Position;
 
 final class CharGrid extends Grid
 {
@@ -36,7 +37,7 @@ final class CharGrid extends Grid
     public function save(): Layer
     {
         return new Layer(
-            string: implode('', $this->cells),
+            chars: $this->cells,
             colors: array_map(fn (Color $color) => new FgBgColor($color, AnsiColor::Reset), $this->colors),
         );
     }
@@ -45,5 +46,16 @@ final class CharGrid extends Grid
     {
         $this->cells = array_map(fn ($_) => ' ', $this->cells);
         $this->colors = array_map(fn ($_) => AnsiColor::Reset, $this->colors);
+    }
+
+    public function paint(Position $position, Color $color): void
+    {
+        $index = $position->y * $this->resolution->x + $position->x;
+        if (isset($this->cells[$index])) {
+            $this->cells[$index] = $this->cellChar;
+        }
+        if (isset($this->colors[$index])) {
+            $this->colors[$index] = $color;
+        }
     }
 }

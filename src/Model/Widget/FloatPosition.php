@@ -2,6 +2,7 @@
 
 namespace DTL\PhpTui\Model\Widget;
 
+use DTL\PhpTui\Model\AxisBounds;
 use Stringable;
 
 final class FloatPosition implements Stringable
@@ -15,8 +16,13 @@ final class FloatPosition implements Stringable
         return sprintf('(%s,%s)', $this->x, $this->y);
     }
 
-    public static function at(int $x, int $y): self
+    public static function at(float $x, float $y): self
     {
         return new self($x, $y);
+    }
+
+    public function outOfBounds(AxisBounds $xBounds, AxisBounds $yBounds): bool
+    {
+        return (false === $xBounds->contains($this->x)) || (false === $yBounds->contains($this->y));
     }
 }

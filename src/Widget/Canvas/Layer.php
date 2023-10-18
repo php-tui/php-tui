@@ -2,12 +2,12 @@
 
 namespace DTL\PhpTui\Widget\Canvas;
 
-class Layer
+final class Layer
 {
     /**
      * @param FgBgColor[] $colors
      */
-    public function __construct(public string $string, public array $colors)
+    public function __construct(public array $chars, public array $colors)
     {
     }
 

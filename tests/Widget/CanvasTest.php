@@ -5,6 +5,7 @@ namespace DTL\PhpTui\Tests\Widget;
 use DTL\PhpTui\Model\AnsiColor;
 use DTL\PhpTui\Model\Area;
 use DTL\PhpTui\Model\Buffer;
+use DTL\PhpTui\Model\Cell;
 use DTL\PhpTui\Model\Marker;
 use DTL\PhpTui\Widget\Canvas;
 use DTL\PhpTui\Widget\Canvas\CanvasContext;
@@ -41,7 +42,7 @@ class CanvasTest extends TestCase
             }
         )->xBounds(0.0, 10.0)->yBounds(0.0, 10.0);
         $area = Area::fromPrimitives(0, 0, 5, 5);
-        $buffer = Buffer::empty($area);
+        $buffer = Buffer::filled($area, Cell::fromChar('x'));
         $canvas->render($area, $buffer);
         self::assertEquals($expected, $buffer->toLines());
     }
@@ -53,11 +54,11 @@ class CanvasTest extends TestCase
         yield [
             Marker::Bar,
             [
-                '▄xxxx',
-                '▄xxxx',
-                '▄xxxx',
-                '▄xxxx',
-                '▄▄▄▄▄"',
+                '█xxxx',
+                '█xxxx',
+                '█xxxx',
+                '█xxxx',
+                '█████',
             ]
         ];
     }
