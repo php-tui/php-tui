@@ -1,14 +1,14 @@
 <?php
 
-namespace DTL\PhpTui\Tests\Widget\Canvas;
+namespace DTL\PhpTui\Tests\Widget\Canvas\Shape;
 
 use DTL\PhpTui\Model\Buffer;
 use DTL\PhpTui\Model\Area;
 use DTL\PhpTui\Model\Marker;
 use DTL\PhpTui\Widget\Canvas;
 use DTL\PhpTui\Widget\Canvas\CanvasContext;
-use DTL\PhpTui\Widget\Canvas\Map;
-use DTL\PhpTui\Widget\Canvas\MapResolution;
+use DTL\PhpTui\Widget\Canvas\Shape\Map;
+use DTL\PhpTui\Widget\Canvas\Shape\MapResolution;
 use Generator;
 use PHPUnit\Framework\TestCase;
 

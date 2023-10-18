@@ -9,7 +9,7 @@ use DTL\PhpTui\Model\Cell;
 use DTL\PhpTui\Model\Marker;
 use DTL\PhpTui\Widget\Canvas;
 use DTL\PhpTui\Widget\Canvas\CanvasContext;
-use DTL\PhpTui\Widget\Canvas\Line;
+use DTL\PhpTui\Widget\Canvas\Shape\Line;
 use Generator;
 use PHPUnit\Framework\TestCase;
 

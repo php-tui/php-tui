@@ -1,6 +1,6 @@
 <?php
 
-namespace DTL\PhpTui\Tests\Widget\Canvas;
+namespace DTL\PhpTui\Tests\Widget\Canvas\Shape;
 
 use DTL\PhpTui\Model\AnsiColor;
 use DTL\PhpTui\Model\Area;
@@ -8,7 +8,7 @@ use DTL\PhpTui\Model\Buffer;
 use DTL\PhpTui\Model\Marker;
 use DTL\PhpTui\Widget\Canvas;
 use DTL\PhpTui\Widget\Canvas\CanvasContext;
-use DTL\PhpTui\Widget\Canvas\Line;
+use DTL\PhpTui\Widget\Canvas\Shape\Line;
 use DTL\PhpTui\Widget\Canvas\Painter;
 use DTL\PhpTui\Widget\Canvas\Resolution;
 use Generator;

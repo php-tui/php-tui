@@ -1,6 +1,6 @@
 <?php
 
-namespace DTL\PhpTui\Widget\Canvas;
+namespace DTL\PhpTui\Widget\Canvas\Shape;
 
 class MapData
 {

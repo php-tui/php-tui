@@ -1,10 +1,12 @@
 <?php
 
-namespace DTL\PhpTui\Widget\Canvas;
+namespace DTL\PhpTui\Widget\Canvas\Shape;
 
 use DTL\PhpTui\Model\AnsiColor;
 use DTL\PhpTui\Model\Color;
 use DTL\PhpTui\Model\Widget\FloatPosition;
+use DTL\PhpTui\Widget\Canvas\Painter;
+use DTL\PhpTui\Widget\Canvas\Shape;
 
 class Map implements Shape
 {
