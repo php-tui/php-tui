@@ -121,6 +121,12 @@ final class Block implements Widget
         return $this;
     }
 
+    public function padding(Padding $padding): self
+    {
+        $this->padding = $padding;
+        return $this;
+    }
+
     private function renderBorders(Area $area, Buffer $buffer): void
     {
         $buffer->setStyle($area, $this->style);
@@ -302,11 +308,5 @@ final class Block implements Widget
             $rightBorderDx ? 1 : 0,
             $area->width - max(0, $leftBorderDx, $rightBorderDx),
         ];
-    }
-
-    public function padding(Padding $padding): self
-    {
-        $this->padding = $padding;
-        return $this;
     }
 }

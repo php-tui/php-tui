@@ -41,7 +41,6 @@ class SymfonyBackend implements Backend
 
         foreach ($updates as $update) {
             $attributes = [];
-            $options = [];
             if (null === $lastPos || ($update->position->y !== $lastPos->y || $update->position->x !== $lastPos->x + 1)) {
                 $buffer[] = sprintf("\x1b[%d;%dH", $update->position->y + 1, $update->position->x + 1);
             }
@@ -54,12 +53,10 @@ class SymfonyBackend implements Backend
                 $attributes[] = sprintf('bg=%s', $this->resolveColor($update->cell->bg));
             }
 
-            if ($attributes || $options) {
+            if ($attributes) {
                 $buffer[] = sprintf(
-                    '<%s%s%s>%s</>',
+                    '<%s>%s</>',
                     implode(';', $attributes),
-                    $options && $attributes ? ';' : '',
-                    $options ? sprintf('options=%s', implode(',',$options)) : '',
                     $update->cell->char
                 );
                 continue;

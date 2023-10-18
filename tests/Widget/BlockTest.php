@@ -300,7 +300,7 @@ class BlockTest extends TestCase
         Paragraph::new(Text::raw('Foob'))->render($block->inner($buffer->area()), $buffer);
         $block->render($buffer->area(), $buffer);
         self::assertEquals([
-            "╭──────╮",
+            '╭──────╮',
             '│      │',
             '│ Foob │',
             '│      │',
