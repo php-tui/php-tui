@@ -8,6 +8,7 @@ use DTL\PhpTui\Model\Marker;
 use DTL\PhpTui\Model\Widget\BarSet;
 use DTL\PhpTui\Model\Widget\BlockSet;
 use DTL\PhpTui\Model\Widget\FloatPosition;
+use DTL\PhpTui\Model\Widget\Line;
 use DTL\PhpTui\Model\Widget\Symbols;
 
 final class CanvasContext
@@ -70,8 +71,8 @@ final class CanvasContext
         $this->dirty = false;
     }
 
-    public function print(float $x, float $y, string $string): void
+    public function print(float $x, float $y, Line $line): void
     {
-        $this->labels->add(new Label(FloatPosition::at($x, $y), $string));
+        $this->labels->add(new Label(FloatPosition::at($x, $y), $line));
     }
 }

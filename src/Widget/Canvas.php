@@ -96,7 +96,7 @@ final class Canvas implements Widget
             );
             $buffer->putLine(
                 Position::at($x, $y),
-                Line::fromString($label->string),
+                $label->line,
                 $canvasArea->right() - $x
             );
         }

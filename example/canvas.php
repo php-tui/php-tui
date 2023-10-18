@@ -4,14 +4,17 @@ use DTL\PhpTui\Adapter\Symfony\SymfonyBackend;
 use DTL\PhpTui\Model\AnsiColor;
 use DTL\PhpTui\Model\Area;
 use DTL\PhpTui\Model\Buffer;
+use DTL\PhpTui\Model\Color;
 use DTL\PhpTui\Model\Constraint;
 use DTL\PhpTui\Model\Direction;
 use DTL\PhpTui\Model\Layout;
 use DTL\PhpTui\Model\Marker;
 use DTL\PhpTui\Model\Position;
+use DTL\PhpTui\Model\Style;
 use DTL\PhpTui\Model\Terminal;
 use DTL\PhpTui\Model\Widget;
 use DTL\PhpTui\Model\Widget\Borders;
+use DTL\PhpTui\Model\Widget\Line;
 use DTL\PhpTui\Model\Widget\Title;
 use DTL\PhpTui\Widget\Block;
 use DTL\PhpTui\Widget\Canvas;
@@ -100,6 +103,7 @@ class App
             ->marker($this->marker)
             ->paint(function (CanvasContext $context) {
                 $context->draw(Map::default()->resolution(MapResolution::High)->color(AnsiColor::Green));
+                $context->print($this->x, -$this->y, Line::fromString('You are here!')->patchStyle(Style::default()->fg(AnsiColor::Yellow)));
             })
             ->xBounds(-180, 180)
             ->yBounds(-90, 90);
@@ -177,10 +181,10 @@ class App
 
                 for ($i = 0; $i <= 100; $i++) {
                     if ($i % 10 != 0) {
-                        $context->print($i + 1.0, 0.0, sprintf('%d', $i % 10));
+                        $context->print($i + 1.0, 0.0, Line::fromString(sprintf('%d', $i % 10)));
                     }
                     if ($i % 2 == 0 && $i % 10 != 0) {
-                        $context->print(0.0, $i, sprintf('%d', $i % 10));
+                        $context->print(0.0, $i, Line::fromString(sprintf('%d', $i % 10)));
                     }
                 }
             });
