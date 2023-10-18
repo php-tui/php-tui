@@ -22,7 +22,7 @@ class Painter
         if ($width === 0 || $height === 0) {
             return null;
         }
-        $x = (($floatPosition->x - $this->context->xBounds->min) * ($this->resolution->x - 1.0) / $width);
+        $x = (($floatPosition->x - $this->context->xBounds->min) * ($this->resolution->width - 1.0) / $width);
         $y = (($this->context->yBounds->max - $floatPosition->y) * ($this->resolution->y - 1.0) / $height);
 
         return Position::at(intval($x), intval($y));

@@ -50,7 +50,7 @@ final class BrailleGrid extends Grid
 
     public function paint(Position $position, Color $color): void
     {
-        $index = intval($position->y / 4 * $this->resolution->x + $position->x / 2);
+        $index = intval($position->y / 4 * $this->resolution->width + $position->x / 2);
         if (isset($this->codePoints[$index])) {
             $this->codePoints[$index] |= BrailleSet::DOTS[$position->y % 4][$position->x % 2];
         }

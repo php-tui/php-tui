@@ -50,7 +50,7 @@ final class CharGrid extends Grid
 
     public function paint(Position $position, Color $color): void
     {
-        $index = $position->y * $this->resolution->x + $position->x;
+        $index = $position->y * $this->resolution->width + $position->x;
         if (isset($this->cells[$index])) {
             $this->cells[$index] = $this->cellChar;
         }
