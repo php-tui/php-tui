@@ -43,11 +43,7 @@ class SymfonyBackend implements Backend
         foreach ($updates as $update) {
             $attributes = [];
             if (null === $lastPos || ($update->position->y !== $lastPos->y || $update->position->x !== $lastPos->x + 1)) {
-                if ($buffer) {
-                    $this->output->write(implode('', $buffer));
-                }
-                $buffer = [];
-                $this->cursor->moveToPosition($update->position->x + 1, $update->position->y);
+                $buffer[] = sprintf("\x1b[%d;%dH", $update->position->y + 1, $update->position->x + 1);
             }
             $lastPos = $update->position;
 
