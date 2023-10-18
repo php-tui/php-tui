@@ -10,4 +10,9 @@ final class MaxConstraint extends Constraint
     {
     }
 
+    public function __toString(): string
+    {
+        return sprintf('Max(%d)', $this->max);
+    }
+
 }

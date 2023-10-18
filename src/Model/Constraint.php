@@ -7,12 +7,13 @@ use DTL\PhpTui\Model\Constraint\MaxConstraint;
 
 use DTL\PhpTui\Model\Constraint\MinConstraint;
 use DTL\PhpTui\Model\Constraint\PercentageConstraint;
+use Stringable;
 
 /**
  * Implemented this "interface" as an abstract class
  * to allow easy access to factory methods
  */
-abstract class Constraint
+abstract class Constraint implements Stringable
 {
     public static function length(int $length): LengthConstraint
     {
