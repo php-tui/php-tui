@@ -15,7 +15,8 @@ final class BrailleGrid extends Grid
      * @param Color[] $colors
      */
     private function __construct(
-        private Resolution $resolution,
+        private int $width,
+        private int $height,
         private array $codePoints,
         private array $colors
     ){}
@@ -23,7 +24,7 @@ final class BrailleGrid extends Grid
     public static function new(int $width, int $height): self {
         $length = $width * $height;
         return new self(
-            new Resolution($width, $height),
+            $width, $height,
             array_fill(0, $length, BrailleSet::BLANK),
             array_fill(0, $length, AnsiColor::Reset),
         );
@@ -31,7 +32,7 @@ final class BrailleGrid extends Grid
 
     public function resolution(): Resolution
     {
-        return $this->resolution;
+        return new Resolution($this->width * 2, $this->height * 4);
     }
 
     public function save(): Layer
@@ -50,7 +51,7 @@ final class BrailleGrid extends Grid
 
     public function paint(Position $position, Color $color): void
     {
-        $index = intval($position->y / 4 * $this->resolution->width + $position->x / 2);
+        $index = (intval($position->y / 4)) * $this->width + intval($position->x / 2);
         if (isset($this->codePoints[$index])) {
             $this->codePoints[$index] |= BrailleSet::DOTS[$position->y % 4][$position->x % 2];
         }
