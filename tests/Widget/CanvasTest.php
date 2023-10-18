@@ -84,11 +84,11 @@ class CanvasTest extends TestCase
         yield [
             Marker::Braille,
             [
-                '•xxxx',
-                '•xxxx',
-                '•xxxx',
-                '•xxxx',
-                '•••••',
+                '⡇xxxx',
+                '⡇xxxx',
+                '⡇xxxx',
+                '⡇xxxx',
+                '⣇⣀⣀⣀⣀',
             ]
         ];
     }
