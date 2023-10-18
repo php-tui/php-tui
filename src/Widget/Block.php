@@ -26,6 +26,7 @@ final class Block implements Widget
         private BorderType $borderType,
         private Style $borderStyle,
         private Style $style,
+        private Style $titleStyle,
     ) {
     }
 
@@ -35,6 +36,7 @@ final class Block implements Widget
             Borders::NONE,
             [],
             BorderType::Plain,
+            Style::default(),
             Style::default(),
             Style::default(),
         );
@@ -108,7 +110,7 @@ final class Block implements Widget
 
     public function titleStyle(Style $style): self
     {
-        // TODO: titleStyle
+        $this->titleStyle = $style;
         return $this;
     }
 
@@ -225,6 +227,11 @@ final class Block implements Widget
         ) as $title) {
             $titleX = $offset;
             $offset += $title->title->width() + 1;
+
+            foreach ($title->title->spans as $span) {
+                $titleStyle = clone $this->titleStyle;
+                $span->style = $titleStyle->patch($span->style);
+            }
 
             $buffer->putLine(
                 Position::at(

@@ -11,3 +11,4 @@ TODO
 - [ ] Change modifiers to use bitmask
 - [ ] Layout SegmentSize
 - [ ] `Block::titleStyle()` is currently a no-op
+- [ ] Set cursor position from Widget

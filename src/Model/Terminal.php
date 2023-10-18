@@ -64,8 +64,6 @@ final class Terminal
         $this->autoresize();
         $closure($this->buffer());
 
-        // TODO: cursor position
-
         $this->flush();
         $this->swapBuffers();
     }

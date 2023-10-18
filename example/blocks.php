@@ -84,6 +84,13 @@ $terminal->draw(function (Buffer $buffer): void {
         ->title(Title::fromString('Styled borders'));
     deep_clone($paragraph)->block($block)->render($layout[5][1], $buffer);
 
+    // style title
+    $block = Block::default()
+        ->borders(Borders::ALL)
+        ->title(Title::fromString('Styled title'))
+        ->titleStyle(Style::default()->fg(AnsiColor::Blue)->bg(AnsiColor::White)->addModifier(Modifier::Bold)->addModifier(Modifier::Italic));
+    deep_clone($paragraph)->block($block)->render($layout[6][0], $buffer);
+
     // style title content
     $block = Block::default()
         ->borders(Borders::ALL)
