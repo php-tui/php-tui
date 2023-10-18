@@ -20,6 +20,7 @@ use DTL\PhpTui\Model\Widget\Text;
 use DTL\PhpTui\Model\Widget\Title;
 use DTL\PhpTui\Model\Widget\VerticalAlignment;
 use DTL\PhpTui\Widget\Block;
+use DTL\PhpTui\Widget\Block\Padding;
 use DTL\PhpTui\Widget\Paragraph;
 use DTL\PhpTui\Widget\Paragraph\Wrap;
 use Symfony\Component\Console\Cursor;
@@ -125,9 +126,16 @@ $terminal->draw(function (Buffer $buffer): void {
     // render padding
     $block = Block::default()
         ->borders(Borders::ALL)
-        ->title(Title::fromString('padding not yet supported'))
+        ->title(Title::fromString('padding'))
         ->padding(Padding::fromPrimitives(5, 10, 1, 2));
     deep_clone($paragraph)->block($block)->render($layout[8][0], $buffer);
+
+    // render nested blocks
+    $outerBlock = Block::default()->borders(Borders::ALL)->title(Title::fromString('Outer block'));
+    $innerBlock = Block::default()->borders(Borders::ALL)->title(Title::fromString('Inner block'));
+    $inner = $outerBlock->inner($layout[8][1]);
+    $outerBlock->render($layout[8][1], $buffer);
+    deep_clone($paragraph)->block($innerBlock)->render($inner, $buffer);
 });
 
 echo $backend->flush();

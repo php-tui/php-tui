@@ -67,8 +67,8 @@ final class Block implements Widget
         }
         $x += $this->padding->left;
         $y += $this->padding->top;
-        $width = $width - $this->padding->left + $this->padding->right;
-        $height = $height - $this->padding->top + $this->padding->bottom;
+        $width = $width - ($this->padding->left + $this->padding->right);
+        $height = $height - ($this->padding->top + $this->padding->bottom);
 
         return Area::fromPrimitives($x, $y, $width, $height);
     }
