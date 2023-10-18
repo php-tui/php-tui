@@ -81,7 +81,7 @@ class CanvasTest extends TestCase
                 '•••••',
             ]
         ];
-        yield [
+        yield 'braille' => [
             Marker::Braille,
             [
                 '⡇xxxx',

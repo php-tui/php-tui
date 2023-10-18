@@ -30,6 +30,7 @@ final class CanvasContext
             Marker::Dot => CharGrid::new($width, $height, $dot),
             Marker::Block => CharGrid::new($width, $height, $block),
             Marker::Bar => CharGrid::new($width, $height, $bar),
+            Marker::Braille => BrailleGrid::new($width, $height),
             default => throw new TodoException(sprintf(
                 'Marker type "%s" not currently supported',
                 $marker->name
