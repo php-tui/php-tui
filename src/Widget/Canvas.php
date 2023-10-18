@@ -45,7 +45,11 @@ final class Canvas implements Widget
         if (null === $painter) {
             return;
         }
-        $canvasArea = $this->block ? $this->block->inner($area) : $area;
+        $canvasArea = $area;
+        if ($this->block) {
+            $canvasArea = $this->block->inner($area);
+            $this->block->render($area, $buffer);
+        }
 
         $buffer->setStyle($area, Style::default()->bg($this->backgroundColor));
         $width = $canvasArea->width;
@@ -79,6 +83,7 @@ final class Canvas implements Widget
             }
         }
 
+        // TODO: draw labels
     }
 
     /**
