@@ -34,8 +34,7 @@ final class Canvas implements Widget
             yBounds: new AxisBounds(0, 0),
             painter: null,
             backgroundColor: AnsiColor::Reset,
-            // TODO: make this braille when it is supported
-            marker: Marker::Block,
+            marker: Marker::Braille,
         );
     }
 
