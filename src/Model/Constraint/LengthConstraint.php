@@ -9,4 +9,9 @@ class LengthConstraint extends Constraint
     public function __construct(public int $length)
     {
     }
+
+    public function __toString(): string
+    {
+        return sprintf('Length(%d)', $this->length);
+    }
 }

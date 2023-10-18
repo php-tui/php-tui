@@ -1,5 +1,7 @@
 parameters:
     level: max
+    excludePaths:
+        - src/Widget/Canvas/Data
     paths:
         - src
         - tests

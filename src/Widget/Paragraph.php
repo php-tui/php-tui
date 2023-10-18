@@ -144,7 +144,7 @@ class Paragraph implements Widget
     private function getLineOffset(int $width, int $maxWidth, HorizontalAlignment $alignment): int
     {
         return match ($alignment) {
-            HorizontalAlignment::Center => ($maxWidth / 2) - $width / 2,
+            HorizontalAlignment::Center => intval(($maxWidth / 2) - $width / 2),
             HorizontalAlignment::Right => $maxWidth - $width,
             HorizontalAlignment::Left => 0,
         };

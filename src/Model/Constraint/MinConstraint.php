@@ -10,4 +10,9 @@ final class MinConstraint extends Constraint
     {
     }
 
+    public function __toString(): string
+    {
+        return sprintf('Min(%d)', $this->min);
+    }
+
 }

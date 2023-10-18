@@ -7,9 +7,12 @@ use DTL\PhpTui\Model\Buffer;
 use DTL\PhpTui\Model\Widget\BorderType;
 use DTL\PhpTui\Model\Widget\Borders;
 use DTL\PhpTui\Model\Widget\HorizontalAlignment;
+use DTL\PhpTui\Model\Widget\Text;
 use DTL\PhpTui\Model\Widget\Title;
 use DTL\PhpTui\Widget\Block;
 use DTL\PhpTui\Model\Area;
+use DTL\PhpTui\Widget\Block\Padding;
+use DTL\PhpTui\Widget\Paragraph;
 use Generator;
 use PHPUnit\Framework\TestCase;
 
@@ -281,6 +284,25 @@ class BlockTest extends TestCase
             "╭G'day─╮",
             '│      │',
             '│      │',
+            '│      │',
+            '╰──────╯',
+        ], $buffer->toLines());
+    }
+
+    public function testRendersWithPadding(): void
+    {
+        $buffer = Buffer::empty(Area::fromDimensions(8, 5));
+        $block = Block::default()
+            ->borderType(BorderType::Rounded)
+            ->borders(Borders::ALL)
+            ->padding(Padding::fromPrimitives(1, 1, 1, 1));
+
+        Paragraph::new(Text::raw('Foob'))->render($block->inner($buffer->area()), $buffer);
+        $block->render($buffer->area(), $buffer);
+        self::assertEquals([
+            '╭──────╮',
+            '│      │',
+            '│ Foob │',
             '│      │',
             '╰──────╯',
         ], $buffer->toLines());

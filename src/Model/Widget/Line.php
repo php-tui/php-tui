@@ -51,10 +51,11 @@ final class Line implements IteratorAggregate
         return new ArrayIterator($this->spans);
     }
 
-    public function patchStyle(Style $style): void
+    public function patchStyle(Style $style): self
     {
         foreach ($this->spans as $span) {
             $span->patchStyle($style);
         }
+        return $this;
     }
 }

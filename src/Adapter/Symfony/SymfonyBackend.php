@@ -9,21 +9,20 @@ use DTL\PhpTui\Model\BufferUpdates;
 use DTL\PhpTui\Model\Color;
 use DTL\PhpTui\Model\Modifier;
 use RuntimeException;
-use Symfony\Component\Console\Cursor;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Terminal;
 
 class SymfonyBackend implements Backend
 {
-    public function __construct(private Terminal $terminal, private Cursor $cursor, private OutputInterface $output)
+    public function __construct(private Terminal $terminal, private OutputInterface $output)
     {
     }
 
     public static function new(): self
     {
         $output = new ConsoleOutput();
-        return new self(new Terminal(), new Cursor($output), $output);
+        return new self(new Terminal(), $output);
     }
 
 
@@ -43,11 +42,7 @@ class SymfonyBackend implements Backend
         foreach ($updates as $update) {
             $attributes = [];
             if (null === $lastPos || ($update->position->y !== $lastPos->y || $update->position->x !== $lastPos->x + 1)) {
-                if ($buffer) {
-                    $this->output->write(implode('', $buffer));
-                }
-                $buffer = [];
-                $this->cursor->moveToPosition($update->position->x + 1, $update->position->y);
+                $buffer[] = sprintf("\x1b[%d;%dH", $update->position->y + 1, $update->position->x + 1);
             }
             $lastPos = $update->position;
 
@@ -59,7 +54,11 @@ class SymfonyBackend implements Backend
             }
 
             if ($attributes) {
-                $buffer[] = sprintf('<%s>%s</>', implode(';', $attributes), $update->cell->char);
+                $buffer[] = sprintf(
+                    '<%s>%s</>',
+                    implode(';', $attributes),
+                    $update->cell->char
+                );
                 continue;
             }
             $buffer[] = $update->cell->char;
