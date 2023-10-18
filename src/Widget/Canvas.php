@@ -12,6 +12,7 @@ use DTL\PhpTui\Model\Marker;
 use DTL\PhpTui\Model\Position;
 use DTL\PhpTui\Model\Style;
 use DTL\PhpTui\Model\Widget;
+use DTL\PhpTui\Model\Widget\Line;
 use DTL\PhpTui\Widget\Canvas\CanvasContext;
 
 final class Canvas implements Widget
@@ -64,7 +65,6 @@ final class Canvas implements Widget
         $painter($context);
         $context->finish();
 
-
         foreach ($context->layers as $layer) {
             foreach ($layer->chars as $index => $char) {
                 if ($char === ' ' || $char === "\u{2800}") {
@@ -83,7 +83,23 @@ final class Canvas implements Widget
             }
         }
 
-        // TODO: draw labels
+        foreach ($context->labels->withinBounds($this->xBounds, $this->yBounds) as $label) {
+            $x = intval(
+                ((
+                    $label->position->x - $this->xBounds->min
+                ) * ($canvasArea->width -1) / $this->xBounds->length()) + $canvasArea->left()
+            );
+            $y = intval(
+                ((
+                    $this->yBounds->max - $label->position->y
+                ) * ($canvasArea->height -1) / $this->yBounds->length()) + $canvasArea->top()
+            );
+            $buffer->putLine(
+                Position::at($x, $y),
+                Line::fromString($label->string),
+                $canvasArea->right() - $x
+            );
+        }
     }
 
     /**

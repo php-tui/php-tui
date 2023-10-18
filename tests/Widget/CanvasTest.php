@@ -92,4 +92,23 @@ class CanvasTest extends TestCase
             ]
         ];
     }
+
+    public function testLabels(): void
+    {
+        $canvas = Canvas::default()->paint(
+            function (CanvasContext $context) use ($horizontalLine, $verticalLine): void {
+                $context->print(0,0,'Hello');
+            }
+        )->xBounds(0.0, 10.0)->yBounds(0.0, 5, 5);
+        $area = Area::fromPrimitives(0, 0, 5, 5);
+        $buffer = Buffer::empty($area);
+        $canvas->render($area, $buffer);
+        self::assertEquals([ 
+            '     ',
+            '     ',
+            '     ',
+            '     ',
+            'Hello',
+        ], $buffer->toLines());
+    }
 }

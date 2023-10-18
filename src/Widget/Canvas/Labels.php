@@ -3,6 +3,7 @@
 namespace DTL\PhpTui\Widget\Canvas;
 
 use ArrayIterator;
+use DTL\PhpTui\Model\AxisBounds;
 use IteratorAggregate;
 use Traversable;
 /**
@@ -29,5 +30,12 @@ class Labels implements IteratorAggregate
     public function getIterator(): Traversable
     {
         return new ArrayIterator($this->labels);
+    }
+
+    public function withinBounds(AxisBounds $xBounds, AxisBounds $yBounds): self
+    {
+        return new self(array_filter($this->labels, function (Label $label) use ($xBounds, $yBounds) {
+            return $xBounds->contains($label->position->x) && $yBounds->contains($label->position->y);
+        }));
     }
 }
