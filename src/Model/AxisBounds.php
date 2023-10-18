@@ -10,7 +10,7 @@ final class AxisBounds
 
     public function contains(float $value): bool
     {
-        return $value >= $this->min || $value <= $this->max;
+        return $value >= $this->min && $value <= $this->max;
     }
 
     public function length(): int
