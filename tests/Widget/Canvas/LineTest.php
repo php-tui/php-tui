@@ -130,5 +130,35 @@ class LineTest extends TestCase
                 "•         ",
             ]
         ];
+        yield 'diagonal dy < dx, x1 < x2' => [
+            Line::fromPrimitives(10.0, 0.0, 0.0, 5.0, AnsiColor::Red),
+            [
+                "          ",
+                "          ",
+                "          ",
+                "          ",
+                "•         ",
+                " ••       ",
+                "   ••     ",
+                "     ••   ",
+                "       •• ",
+                "         •",
+            ]
+        ];
+        yield 'diagonal dy > dx, y1 > y2' => [
+            Line::fromPrimitives(0.0, 10.0, 5.0, 0.0, AnsiColor::Red),
+            [
+                "•         ",
+                "•         ",
+                " •        ",
+                " •        ",
+                "  •       ",
+                "  •       ",
+                "   •      ",
+                "   •      ",
+                "    •     ",
+                "    •     ",
+            ]
+        ];
     }
 }
