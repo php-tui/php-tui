@@ -71,5 +71,15 @@ class CanvasTest extends TestCase
                 '█████',
             ]
         ];
+        yield [
+            Marker::Dot,
+            [
+                '•xxxx',
+                '•xxxx',
+                '•xxxx',
+                '•xxxx',
+                '•••••',
+            ]
+        ];
     }
 }
