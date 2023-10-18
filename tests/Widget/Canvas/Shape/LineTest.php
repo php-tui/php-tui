@@ -9,8 +9,6 @@ use DTL\PhpTui\Model\Marker;
 use DTL\PhpTui\Widget\Canvas;
 use DTL\PhpTui\Widget\Canvas\CanvasContext;
 use DTL\PhpTui\Widget\Canvas\Shape\Line;
-use DTL\PhpTui\Widget\Canvas\Painter;
-use DTL\PhpTui\Widget\Canvas\Resolution;
 use Generator;
 use PHPUnit\Framework\TestCase;
 
@@ -18,6 +16,7 @@ class LineTest extends TestCase
 {
     /**
      * @dataProvider provideLine
+     * @param array<int,string> $expected
      */
     public function testLine(Line $line, array $expected): void
     {
@@ -25,7 +24,7 @@ class LineTest extends TestCase
             ->marker(Marker::Dot)
             ->xBounds(0, 10)
             ->yBounds(0, 10)
-            ->paint(function (CanvasContext $context) use ($line) {
+            ->paint(function (CanvasContext $context) use ($line): void {
                 $context->draw($line);
             });
         $area = Area::fromDimensions(10, 10);
@@ -118,46 +117,46 @@ class LineTest extends TestCase
         yield 'diagonal dy > dx, y1 < y2' => [
             Line::fromPrimitives(0.0, 0.0, 5.0, 10.0, AnsiColor::Red),
             [
-                "    •     ",
-                "    •     ",
-                "   •      ",
-                "   •      ",
-                "  •       ",
-                "  •       ",
-                " •        ",
-                " •        ",
-                "•         ",
-                "•         ",
+                '    •     ',
+                '    •     ',
+                '   •      ',
+                '   •      ',
+                '  •       ',
+                '  •       ',
+                ' •        ',
+                ' •        ',
+                '•         ',
+                '•         ',
             ]
         ];
         yield 'diagonal dy < dx, x1 < x2' => [
             Line::fromPrimitives(10.0, 0.0, 0.0, 5.0, AnsiColor::Red),
             [
-                "          ",
-                "          ",
-                "          ",
-                "          ",
-                "•         ",
-                " ••       ",
-                "   ••     ",
-                "     ••   ",
-                "       •• ",
-                "         •",
+                '          ',
+                '          ',
+                '          ',
+                '          ',
+                '•         ',
+                ' ••       ',
+                '   ••     ',
+                '     ••   ',
+                '       •• ',
+                '         •',
             ]
         ];
         yield 'diagonal dy > dx, y1 > y2' => [
             Line::fromPrimitives(0.0, 10.0, 5.0, 0.0, AnsiColor::Red),
             [
-                "•         ",
-                "•         ",
-                " •        ",
-                " •        ",
-                "  •       ",
-                "  •       ",
-                "   •      ",
-                "   •      ",
-                "    •     ",
-                "    •     ",
+                '•         ',
+                '•         ',
+                ' •        ',
+                ' •        ',
+                '  •       ',
+                '  •       ',
+                '   •      ',
+                '   •      ',
+                '    •     ',
+                '    •     ',
             ]
         ];
     }

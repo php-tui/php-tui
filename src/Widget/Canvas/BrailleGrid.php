@@ -10,7 +10,7 @@ use IntlChar;
 
 final class BrailleGrid extends Grid
 {
-    /** 
+    /**
      * @param int[] $codePoints
      * @param Color[] $colors
      */
@@ -19,12 +19,15 @@ final class BrailleGrid extends Grid
         private int $height,
         private array $codePoints,
         private array $colors
-    ){}
+    ) {
+    }
 
-    public static function new(int $width, int $height): self {
+    public static function new(int $width, int $height): self
+    {
         $length = $width * $height;
         return new self(
-            $width, $height,
+            $width,
+            $height,
             array_fill(0, $length, BrailleSet::BLANK),
             array_fill(0, $length, AnsiColor::Reset),
         );

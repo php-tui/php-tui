@@ -15,6 +15,7 @@ use PHPUnit\Framework\TestCase;
 class RectangleTest extends TestCase
 {
     /**
+     * @param array<int,string> $expected
      * @dataProvider provideRectangle
      */
     public function testRectangle(Rectangle $circle, array $expected): void
@@ -39,16 +40,16 @@ class RectangleTest extends TestCase
         yield 'circle' => [
             Rectangle::fromPrimitives(0, 0, 10, 10, AnsiColor::Reset),
             [
-            "██████████",
-            "█        █",
-            "█        █",
-            "█        █",
-            "█        █",
-            "█        █",
-            "█        █",
-            "█        █",
-            "█        █",
-            "██████████",
+            '██████████',
+            '█        █',
+            '█        █',
+            '█        █',
+            '█        █',
+            '█        █',
+            '█        █',
+            '█        █',
+            '█        █',
+            '██████████',
             ]
         ];
     }

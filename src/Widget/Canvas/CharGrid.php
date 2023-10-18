@@ -8,7 +8,7 @@ use DTL\PhpTui\Model\Position;
 
 final class CharGrid extends Grid
 {
-    /** 
+    /**
      * @param string[] $cells
      * @param Color[] $colors
      */
@@ -17,9 +17,11 @@ final class CharGrid extends Grid
         private array $cells,
         private array $colors,
         private string $cellChar
-    ){}
+    ) {
+    }
 
-    public static function new(int $width, int $height, string $cellChar): self {
+    public static function new(int $width, int $height, string $cellChar): self
+    {
         $length = $width * $height;
         return new self(
             new Resolution($width, $height),

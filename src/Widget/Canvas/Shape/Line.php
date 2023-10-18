@@ -87,7 +87,7 @@ class Line implements Shape
         $diffY = abs($point2->y - $point1->y);
         $diff = 2 * $diffY - $diffX;
         $y = $point1->y;
-        foreach (range($point1->x,$point2->x) as $x) {
+        foreach (range($point1->x, $point2->x) as $x) {
             $painter->paint(Position::at($x, $y), $this->color);
             if ($diff > 0) {
                 if ($point1->y > $point2->y) {
@@ -107,7 +107,7 @@ class Line implements Shape
         $diffY = $point2->y - $point1->y;
         $diff = 2 * $diffX - $diffY;
         $x = $point1->x;
-        foreach (range($point1->y,$point2->y) as $y) {
+        foreach (range($point1->y, $point2->y) as $y) {
             $painter->paint(Position::at($x, $y), $this->color);
             if ($diff > 0) {
                 if ($point1->x > $point2->x) {

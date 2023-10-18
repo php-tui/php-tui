@@ -19,7 +19,7 @@ class Painter
         }
         $width = $this->context->xBounds->length();
         $height = $this->context->yBounds->length();
-        if ($width === 0 || $height === 0) {
+        if ($width === 0.0 || $height === 0.0) {
             return null;
         }
         $x = (($floatPosition->x - $this->context->xBounds->min) * ($this->resolution->width - 1.0) / $width);

@@ -2,13 +2,15 @@
 
 namespace DTL\PhpTui\Widget\Canvas\Shape;
 
+use DTL\PhpTui\Widget\Canvas\Shape\Data\MapData;
+
 enum MapResolution
 {
     case High;
     case Low;
 
     /**
-     * @return list<array{int,int}>
+     * @return list<array{float,float}>
      */
     public function data(): array
     {

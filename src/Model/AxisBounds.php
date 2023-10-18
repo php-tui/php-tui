@@ -4,7 +4,7 @@ namespace DTL\PhpTui\Model;
 
 final class AxisBounds
 {
-    public function __construct(public int $min, public int $max)
+    public function __construct(public float $min, public float $max)
     {
     }
 
@@ -13,7 +13,7 @@ final class AxisBounds
         return $value >= $this->min && $value <= $this->max;
     }
 
-    public function length(): int
+    public function length(): float
     {
         return abs($this->max - $this->min);
     }

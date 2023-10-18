@@ -69,4 +69,3 @@ final class CanvasContext
         $this->dirty = false;
     }
 }
-

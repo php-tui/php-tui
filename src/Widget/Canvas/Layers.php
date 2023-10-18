@@ -5,6 +5,7 @@ namespace DTL\PhpTui\Widget\Canvas;
 use ArrayIterator;
 use IteratorAggregate;
 use Traversable;
+
 /**
  * @implements IteratorAggregate<Layer>
  */
@@ -13,7 +14,9 @@ final class Layers implements IteratorAggregate
     /**
      * @param Layer[] $layers
      */
-    public function __construct(public array $layers) {}
+    public function __construct(public array $layers)
+    {
+    }
 
     public static function none(): self
     {

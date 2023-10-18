@@ -13,5 +13,5 @@ abstract class Grid
 
     abstract public function reset(): void;
 
-    abstract public function paint(Position $position, Color $color);
+    abstract public function paint(Position $position, Color $color): void;
 }

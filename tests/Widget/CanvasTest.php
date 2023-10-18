@@ -36,7 +36,7 @@ class CanvasTest extends TestCase
             AnsiColor::Reset
         );
         $canvas = Canvas::default()->paint(
-            function (CanvasContext $context) use ($horizontalLine, $verticalLine) {
+            function (CanvasContext $context) use ($horizontalLine, $verticalLine): void {
                 $context->draw($verticalLine);
                 $context->draw($horizontalLine);
             }

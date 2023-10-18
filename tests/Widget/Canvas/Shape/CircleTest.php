@@ -16,6 +16,7 @@ class CircleTest extends TestCase
 {
     /**
      * @dataProvider provideCircle
+     * @param array<int,string> $expected
      */
     public function testCircle(Circle $circle, array $expected): void
     {
