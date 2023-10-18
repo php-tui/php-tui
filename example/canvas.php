@@ -19,6 +19,7 @@ use DTL\PhpTui\Widget\Canvas\CanvasContext;
 use DTL\PhpTui\Widget\Canvas\Shape\Circle;
 use DTL\PhpTui\Widget\Canvas\Shape\Map;
 use DTL\PhpTui\Widget\Canvas\Shape\MapResolution;
+use DTL\PhpTui\Widget\Canvas\Shape\Rectangle;
 use Symfony\Component\Console\Cursor;
 use Symfony\Component\Console\Output\ConsoleOutput;
 
@@ -89,6 +90,7 @@ class App
 
         $this->mapCanvas($mainLayout->get(0))->render($mainLayout->get(0), $buffer);
         $this->pongCanvas($rightLayout->get(0))->render($rightLayout->get(0), $buffer);
+        $this->boxesCanvas($rightLayout->get(1))->render($rightLayout->get(1), $buffer);
     }
 
     private function mapCanvas(Area $area): Widget
@@ -145,6 +147,43 @@ class App
         }
 
         $this->ball->position->update($this->ball->position->x + $this->vx , $this->ball->position->y + $this->vy);
+    }
+
+    private function boxesCanvas(Area $area): Widget
+    {
+        [$left, $right, $bottom, $top] = [ 0.0, $area->width, 0.0, $area->height * 2 - 4.0];
+        return Canvas::default()
+            ->block(Block::default()->borders(Borders::ALL)->title(Title::fromString('Rectangles')))
+            ->marker($this->marker)
+            ->xBounds($left, $right)
+            ->yBounds($bottom, $top)
+            ->paint(function (CanvasContext $context) {
+                for ($i = 0; $i <= 11; $i++) {
+                    $context->draw(Rectangle::fromPrimitives(
+                        x: $i * $i + 3 * $i / 2.0 + 2.0,
+                        y: 2.0,
+                        width: $i,
+                        height: $i,
+                        color: AnsiColor::Red,
+                    ));
+                    $context->draw(Rectangle::fromPrimitives(
+                        x: $i * $i + 3 * $i / 2.0 + 2.0,
+                        y: 21.0,
+                        width: $i,
+                        height: $i,
+                        color: AnsiColor::Blue,
+                    ));
+                }
+
+                for ($i = 0; $i <= 100; $i++) {
+                    if ($i % 10 != 0) {
+                        $context->print($i + 1.0, 0.0, sprintf('%d', $i % 10));
+                    }
+                    if ($i % 2 == 0 && $i % 10 != 0) {
+                        $context->print(0.0, $i, sprintf('%d', $i % 10));
+                    }
+                }
+            });
     }
 }
 

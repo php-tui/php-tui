@@ -7,6 +7,7 @@ use DTL\PhpTui\Model\Exception\TodoException;
 use DTL\PhpTui\Model\Marker;
 use DTL\PhpTui\Model\Widget\BarSet;
 use DTL\PhpTui\Model\Widget\BlockSet;
+use DTL\PhpTui\Model\Widget\FloatPosition;
 use DTL\PhpTui\Model\Widget\Symbols;
 
 final class CanvasContext
@@ -67,5 +68,10 @@ final class CanvasContext
         $this->layers->add($this->grid->save());
         $this->grid->reset();
         $this->dirty = false;
+    }
+
+    public function print(float $x, float $y, string $string): void
+    {
+        $this->labels->add(new Label(FloatPosition::at($x, $y), $string));
     }
 }
