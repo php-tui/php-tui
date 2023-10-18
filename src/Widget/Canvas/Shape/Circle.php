@@ -10,9 +10,9 @@ use DTL\PhpTui\Widget\Canvas\Shape;
 final class Circle implements Shape
 {
     public function __construct(
-        private FloatPosition $position,
-        private float $radius,
-        private Color $color,
+        public FloatPosition $position,
+        public float $radius,
+        public Color $color,
     ) {
     }
 

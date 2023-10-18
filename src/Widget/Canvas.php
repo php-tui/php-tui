@@ -107,4 +107,10 @@ final class Canvas implements Widget
         $this->marker = $marker;
         return $this;
     }
+
+    public function block(Block $block): self
+    {
+        $this->block = $block;
+        return $this;
+    }
 }

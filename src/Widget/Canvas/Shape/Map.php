@@ -33,4 +33,10 @@ class Map implements Shape
     {
         return new self(MapResolution::Low, AnsiColor::Reset);
     }
+
+    public function color(Color $color): self
+    {
+        $this->color = $color;
+        return $this;
+    }
 }

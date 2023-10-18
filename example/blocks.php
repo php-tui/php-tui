@@ -186,11 +186,11 @@ function render_borders(Paragraph $paragraph, int $borders, Buffer $buffer, Area
 }
 function render_border_type(Paragraph $paragraph, BorderType $borderType, Buffer $buffer, Area $area): void
 {
-    Block::default()
+    $block = Block::default()
         ->borders(Borders::ALL)
         ->borderType($borderType)
-        ->title(Title::fromString(sprintf('BordersType::%s', $borderType->name)))
-        ->render($area, $buffer);
+        ->title(Title::fromString(sprintf('BordersType::%s', $borderType->name)));
+    $paragraph->block($block)->render($area, $buffer);
 }
 
 /**

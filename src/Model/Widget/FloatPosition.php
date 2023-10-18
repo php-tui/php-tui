@@ -25,4 +25,10 @@ final class FloatPosition implements Stringable
     {
         return (false === $xBounds->contains($this->x)) || (false === $yBounds->contains($this->y));
     }
+
+    public function update(int $x, int $y): void
+    {
+        $this->x = $x;
+        $this->y = $y;
+    }
 }
