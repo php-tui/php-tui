@@ -23,4 +23,8 @@ class Line implements Shape
     ): self {
         return new self(FloatPosition::at($x1, $y1), FloatPosition::at($x2, $y2), $color);
     }
+
+    public function draw(Painter $painter): void
+    {
+    }
 }

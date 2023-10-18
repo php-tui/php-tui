@@ -48,6 +48,24 @@ final class CanvasContext
 
     public function draw(Shape $shape): void
     {
+        $this->dirty = true;
+        $painter = new Painter($this, $this->grid->resolution());
+        $shape->draw($painter);
+    }
+
+    public function finish(): void
+    {
+        if (!$this->dirty) {
+            return;
+        }
+        $this->saveLayer();
+    }
+
+    private function saveLayer(): void
+    {
+        $this->layers->add($this->grid->save());
+        $this->grid->reset();
+        $this->dirty = false;
     }
 }
 

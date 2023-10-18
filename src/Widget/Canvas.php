@@ -40,7 +40,8 @@ final class Canvas implements Widget
 
     public function render(Area $area, Buffer $buffer): void
     {
-        if (null === $this->painter) {
+        $painter = $this->painter;
+        if (null === $painter) {
             return;
         }
         $canvasArea = $this->block ? $this->block->inner($area) : $area;
@@ -55,6 +56,8 @@ final class Canvas implements Widget
             $this->yBounds,
             $this->marker,
         );
+        $painter($context);
+        $context->finish();
 
 
     }
