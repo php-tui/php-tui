@@ -12,7 +12,7 @@ enum MapResolution
      */
     public function data(): array
     {
-        match ($this->value) {
+        return match ($this) {
             self::High => MapData::high(),
             self::Low => MapData::low(),
         };

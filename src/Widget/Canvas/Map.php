@@ -4,6 +4,7 @@ namespace DTL\PhpTui\Widget\Canvas;
 
 use DTL\PhpTui\Model\AnsiColor;
 use DTL\PhpTui\Model\Color;
+use DTL\PhpTui\Model\Widget\FloatPosition;
 
 class Map implements Shape
 {
@@ -13,11 +14,16 @@ class Map implements Shape
 
     public function draw(Painter $painter): void
     {
+        foreach ($this->mapResolution->data() as [$x, $y]) {
+            if ($point = $painter->getPoint(FloatPosition::at($x, $y))) {
+                $painter->paint($point, $this->color);
+            }
+        }
     }
 
     public function resolution(MapResolution $resolution): self
     {
-        $this->resolution = $resolution;
+        $this->mapResolution = $resolution;
         return $this;
     }
 
