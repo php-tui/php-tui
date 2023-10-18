@@ -125,7 +125,8 @@ $terminal->draw(function (Buffer $buffer): void {
     // render padding
     $block = Block::default()
         ->borders(Borders::ALL)
-        ->title(Title::fromString('padding not yet supported'));
+        ->title(Title::fromString('padding not yet supported'))
+        ->padding(Padding::fromPrimitives(5, 10, 1, 2));
     deep_clone($paragraph)->block($block)->render($layout[8][0], $buffer);
 });
 

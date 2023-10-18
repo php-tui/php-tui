@@ -12,6 +12,7 @@ use DTL\PhpTui\Model\Widget\Borders;
 use DTL\PhpTui\Model\Widget\HorizontalAlignment;
 use DTL\PhpTui\Model\Widget\Title;
 use DTL\PhpTui\Model\Widget\VerticalAlignment;
+use DTL\PhpTui\Widget\Block\Padding;
 
 final class Block implements Widget
 {
@@ -27,6 +28,7 @@ final class Block implements Widget
         private Style $borderStyle,
         private Style $style,
         private Style $titleStyle,
+        private Padding $padding,
     ) {
     }
 
@@ -39,6 +41,7 @@ final class Block implements Widget
             Style::default(),
             Style::default(),
             Style::default(),
+            Padding::none(),
         );
     }
 
@@ -62,6 +65,10 @@ final class Block implements Widget
         if ($this->borders & Borders::BOTTOM) {
             $height = max(0, $height - 1);
         }
+        $x += $this->padding->left;
+        $y += $this->padding->top;
+        $width = $width - $this->padding->left + $this->padding->right;
+        $height = $height - $this->padding->top + $this->padding->bottom;
 
         return Area::fromPrimitives($x, $y, $width, $height);
     }
@@ -295,5 +302,11 @@ final class Block implements Widget
             $rightBorderDx ? 1 : 0,
             $area->width - max(0, $leftBorderDx, $rightBorderDx),
         ];
+    }
+
+    public function padding(Padding $padding): self
+    {
+        $this->padding = $padding;
+        return $this;
     }
 }
