@@ -6,6 +6,7 @@ use ArrayIterator;
 use DTL\PhpTui\Model\AxisBounds;
 use IteratorAggregate;
 use Traversable;
+
 /**
  * @implements IteratorAggregate<Label>
  */
@@ -14,7 +15,8 @@ class Labels implements IteratorAggregate
     /**
      * @param array<int,Label> $labels
      */
-    public function __construct(private array $labels) {
+    public function __construct(private array $labels)
+    {
     }
 
     public static function none(): self

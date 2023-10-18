@@ -9,21 +9,20 @@ use DTL\PhpTui\Model\BufferUpdates;
 use DTL\PhpTui\Model\Color;
 use DTL\PhpTui\Model\Modifier;
 use RuntimeException;
-use Symfony\Component\Console\Cursor;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Terminal;
 
 class SymfonyBackend implements Backend
 {
-    public function __construct(private Terminal $terminal, private Cursor $cursor, private OutputInterface $output)
+    public function __construct(private Terminal $terminal, private OutputInterface $output)
     {
     }
 
     public static function new(): self
     {
         $output = new ConsoleOutput();
-        return new self(new Terminal(), new Cursor($output), $output);
+        return new self(new Terminal(), $output);
     }
 
 

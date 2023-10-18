@@ -12,7 +12,6 @@ use DTL\PhpTui\Model\Marker;
 use DTL\PhpTui\Model\Position;
 use DTL\PhpTui\Model\Style;
 use DTL\PhpTui\Model\Widget;
-use DTL\PhpTui\Model\Widget\Line;
 use DTL\PhpTui\Widget\Canvas\CanvasContext;
 
 final class Canvas implements Widget

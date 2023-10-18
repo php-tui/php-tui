@@ -4,7 +4,6 @@ namespace DTL\PhpTui\Widget;
 
 use DTL\PhpTui\Model\Area;
 use DTL\PhpTui\Model\Buffer;
-use DTL\PhpTui\Model\Marker;
 use DTL\PhpTui\Model\Position;
 use DTL\PhpTui\Model\Style;
 use DTL\PhpTui\Model\Widget;
@@ -289,11 +288,5 @@ final class Block implements Widget
             $rightBorderDx ? 1 : 0,
             $area->width - max(0, $leftBorderDx, $rightBorderDx),
         ];
-    }
-
-    public function marker(Marker $marker): self
-    {
-        $this->marker = $marker;
-        return $this;
     }
 }

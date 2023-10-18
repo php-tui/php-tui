@@ -64,15 +64,15 @@ final class CanvasContext
         $this->saveLayer();
     }
 
+    public function print(float $x, float $y, Line $line): void
+    {
+        $this->labels->add(new Label(FloatPosition::at($x, $y), $line));
+    }
+
     private function saveLayer(): void
     {
         $this->layers->add($this->grid->save());
         $this->grid->reset();
         $this->dirty = false;
-    }
-
-    public function print(float $x, float $y, Line $line): void
-    {
-        $this->labels->add(new Label(FloatPosition::at($x, $y), $line));
     }
 }

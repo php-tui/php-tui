@@ -10,7 +10,6 @@ use DTL\PhpTui\Model\Cell;
 use DTL\PhpTui\Model\Position;
 use DTL\PhpTui\Model\Style;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\Console\Cursor;
 use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\Console\Terminal;
 
@@ -19,7 +18,7 @@ class SymfonyBackendTest extends TestCase
     public function testBackend(): void
     {
         $output = new BufferedOutput();
-        $backend = new SymfonyBackend(new Terminal(), new Cursor($output), $output);
+        $backend = new SymfonyBackend(new Terminal(), $output);
         $backend->draw(new BufferUpdates([
             new BufferUpdate(
                 Position::at(0, 0),

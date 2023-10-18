@@ -7,6 +7,7 @@ use DTL\PhpTui\Model\Area;
 use DTL\PhpTui\Model\Buffer;
 use DTL\PhpTui\Model\Cell;
 use DTL\PhpTui\Model\Marker;
+use DTL\PhpTui\Model\Widget\Line as DTLLine;
 use DTL\PhpTui\Widget\Canvas;
 use DTL\PhpTui\Widget\Canvas\CanvasContext;
 use DTL\PhpTui\Widget\Canvas\Shape\Line;
@@ -96,14 +97,14 @@ class CanvasTest extends TestCase
     public function testLabels(): void
     {
         $canvas = Canvas::default()->paint(
-            function (CanvasContext $context) use ($horizontalLine, $verticalLine): void {
-                $context->print(0,0,'Hello');
+            function (CanvasContext $context): void {
+                $context->print(0, 0, DTLLine::fromString('Hello'));
             }
-        )->xBounds(0.0, 10.0)->yBounds(0.0, 5, 5);
+        )->xBounds(0.0, 10.0)->yBounds(0.0, 5);
         $area = Area::fromPrimitives(0, 0, 5, 5);
         $buffer = Buffer::empty($area);
         $canvas->render($area, $buffer);
-        self::assertEquals([ 
+        self::assertEquals([
             '     ',
             '     ',
             '     ',
