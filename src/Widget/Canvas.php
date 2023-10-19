@@ -132,4 +132,10 @@ final class Canvas implements Widget
         $this->block = $block;
         return $this;
     }
+
+    public function backgroundColor(Color $color): self
+    {
+        $this->backgroundColor = $color;
+        return $this;
+    }
 }
