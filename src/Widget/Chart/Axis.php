@@ -13,4 +13,9 @@ final class Axis
     {
         return new self(AxisBounds::default());
     }
+
+    public function bounds(AxisBounds $bounds): self
+    {
+        return new self($bounds);
+    }
 }

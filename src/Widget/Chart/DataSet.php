@@ -2,6 +2,7 @@
 
 namespace DTL\PhpTui\Widget\Chart;
 
+use DTL\PhpTui\Model\AxisBounds;
 use DTL\PhpTui\Model\Marker;
 use DTL\PhpTui\Model\Style;
 

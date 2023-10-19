@@ -9,6 +9,7 @@ use DTL\PhpTui\Model\Color;
 use DTL\PhpTui\Model\Style;
 use DTL\PhpTui\Model\Widget;
 use DTL\PhpTui\Widget\Canvas\CanvasContext;
+use DTL\PhpTui\Widget\Canvas\Shape\Points;
 use DTL\PhpTui\Widget\Chart\Axis;
 use DTL\PhpTui\Widget\Chart\ChartLayout;
 use DTL\PhpTui\Widget\Chart\DataSet;
@@ -47,9 +48,10 @@ final class Chart implements Widget
                 ->xBounds($this->xAxis->bounds)
                 ->yBounds($this->yAxis->bounds)
                 ->marker($dataSet->marker)
-                ->paint(function (CanvasContext $context) {
-                    $context->draw(new Points($dataSet->data, $dataSet->style->fg ?: Color::Reset));
-                });
+                ->paint(function (CanvasContext $context) use ($dataSet) {
+                    $context->draw(Points::new($dataSet->data, $dataSet->style->fg ?: AnsiColor::Reset));
+                })
+                ->render($chartArea, $buffer);
 
         }
 
@@ -67,6 +69,17 @@ final class Chart implements Widget
             dataSets: $dataSets,
             style: Style::default()
         );
+    }
+
+    public function xAxis(Axis $axis): self
+    {
+        $this->xAxis = $axis;
+        return $this;
+    }
+    public function yAxis(Axis $axis): self
+    {
+        $this->yAxis = $axis;
+        return $this;
     }
 
     private function resolveLayout(Area $area): ?ChartLayout
