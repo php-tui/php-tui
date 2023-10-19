@@ -4,6 +4,7 @@ namespace DTL\PhpTui\Tests\Widget;
 
 use DTL\PhpTui\Model\AnsiColor;
 use DTL\PhpTui\Model\Area;
+use DTL\PhpTui\Model\AxisBounds;
 use DTL\PhpTui\Model\Buffer;
 use DTL\PhpTui\Model\Cell;
 use DTL\PhpTui\Model\Marker;
@@ -41,7 +42,7 @@ class CanvasTest extends TestCase
                 $context->draw($verticalLine);
                 $context->draw($horizontalLine);
             }
-        )->xBounds(0.0, 10.0)->yBounds(0.0, 10.0)->marker($marker);
+        )->xBounds(AxisBounds::new(0.0, 10.0))->yBounds(AxisBounds::new(0.0, 10.0))->marker($marker);
         $area = Area::fromPrimitives(0, 0, 5, 5);
         $buffer = Buffer::filled($area, Cell::fromChar('x'));
         $canvas->render($area, $buffer);
@@ -100,7 +101,7 @@ class CanvasTest extends TestCase
             function (CanvasContext $context): void {
                 $context->print(0, 0, DTLLine::fromString('Hello'));
             }
-        )->xBounds(0.0, 10.0)->yBounds(0.0, 5);
+        )->xBounds(AxisBounds::new(0.0, 10.0))->yBounds(AxisBounds::new(0.0, 5));
         $area = Area::fromPrimitives(0, 0, 5, 5);
         $buffer = Buffer::empty($area);
         $canvas->render($area, $buffer);

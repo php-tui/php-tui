@@ -4,6 +4,7 @@ namespace DTL\PhpTui\Tests\Widget\Canvas\Shape;
 
 use DTL\PhpTui\Model\AnsiColor;
 use DTL\PhpTui\Model\Area;
+use DTL\PhpTui\Model\AxisBounds;
 use DTL\PhpTui\Model\Buffer;
 use DTL\PhpTui\Model\Marker;
 use DTL\PhpTui\Widget\Canvas;
@@ -22,8 +23,8 @@ class RectangleTest extends TestCase
     {
         $canvas = Canvas::default()
             ->marker(Marker::Block)
-            ->xBounds(0, 10)
-            ->yBounds(0, 10)
+            ->xBounds(AxisBounds::new(0, 10))
+            ->yBounds(AxisBounds::new(0, 10))
             ->paint(function (CanvasContext $context) use ($circle): void {
                 $context->draw($circle);
             });

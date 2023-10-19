@@ -109,15 +109,15 @@ final class Canvas implements Widget
         return $this;
     }
 
-    public function xBounds(float $min, float $max): self
+    public function xBounds(AxisBounds $axisBounds): self
     {
-        $this->xBounds = new AxisBounds($min, $max);
+        $this->xBounds = $axisBounds;
         return $this;
     }
 
-    public function yBounds(float $min, float $max): self
+    public function yBounds(AxisBounds $axisBounds): self
     {
-        $this->yBounds = new AxisBounds($min, $max);
+        $this->yBounds = $axisBounds;
         return $this;
     }
 

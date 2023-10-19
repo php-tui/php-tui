@@ -6,11 +6,11 @@ use DTL\PhpTui\Model\AxisBounds;
 
 final class Axis
 {
-    public function __construct(public AxisBounds $xBounds, public AxisBounds $yBounds)
+    public function __construct(public AxisBounds $bounds)
     {
     }
     public static function default(): self
     {
-        return new self();
+        return new self(AxisBounds::default());
     }
 }

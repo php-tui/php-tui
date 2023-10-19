@@ -3,6 +3,7 @@
 use DTL\PhpTui\Adapter\Symfony\SymfonyBackend;
 use DTL\PhpTui\Model\AnsiColor;
 use DTL\PhpTui\Model\Area;
+use DTL\PhpTui\Model\AxisBounds;
 use DTL\PhpTui\Model\Buffer;
 use DTL\PhpTui\Model\Color;
 use DTL\PhpTui\Model\Constraint;
@@ -105,8 +106,8 @@ class App
                 $context->draw(Map::default()->resolution(MapResolution::High)->color(AnsiColor::Green));
                 $context->print($this->x, -$this->y, Line::fromString('You are here!')->patchStyle(Style::default()->fg(AnsiColor::Yellow)));
             })
-            ->xBounds(-180, 180)
-            ->yBounds(-90, 90);
+            ->xBounds(AxisBounds::new(-180, 180))
+            ->yBounds(AxisBounds::new(-90, 90));
     }
 
     private function pongCanvas(Area $area): Widget
@@ -117,8 +118,8 @@ class App
             ->paint(function (CanvasContext $context) {
                 $context->draw($this->ball);
             })
-            ->xBounds(10, 210)
-            ->yBounds(10, 110);
+            ->xBounds(AxisBounds::new(10, 210))
+            ->yBounds(AxisBounds::new(10, 110));
     }
 
     private function onTick(): void
@@ -159,8 +160,8 @@ class App
         return Canvas::default()
             ->block(Block::default()->borders(Borders::ALL)->title(Title::fromString('Rectangles')))
             ->marker($this->marker)
-            ->xBounds($left, $right)
-            ->yBounds($bottom, $top)
+            ->xBounds(AxisBounds::new($left, $right))
+            ->yBounds(AxisBounds::new($bottom, $top))
             ->paint(function (CanvasContext $context) {
                 for ($i = 0; $i <= 11; $i++) {
                     $context->draw(Rectangle::fromPrimitives(

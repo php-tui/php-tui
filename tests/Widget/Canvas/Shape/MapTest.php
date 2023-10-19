@@ -2,6 +2,7 @@
 
 namespace DTL\PhpTui\Tests\Widget\Canvas\Shape;
 
+use DTL\PhpTui\Model\AxisBounds;
 use DTL\PhpTui\Model\Buffer;
 use DTL\PhpTui\Model\Area;
 use DTL\PhpTui\Model\Marker;
@@ -22,8 +23,8 @@ class MapTest extends TestCase
     {
         $canvas = Canvas::default()
             ->marker($marker)
-            ->xBounds(-180, 180)
-            ->yBounds(-90, 90)
+            ->xBounds(AxisBounds::new(-180, 180))
+            ->yBounds(AxisBounds::new(-90, 90))
             ->paint(function (CanvasContext $context) use ($resolution): void {
                 $context->draw(Map::default()->resolution($resolution));
             });

@@ -4,6 +4,7 @@ namespace DTL\PhpTui\Tests\Widget\Canvas\Shape;
 
 use DTL\PhpTui\Model\AnsiColor;
 use DTL\PhpTui\Model\Area;
+use DTL\PhpTui\Model\AxisBounds;
 use DTL\PhpTui\Model\Buffer;
 use DTL\PhpTui\Model\Marker;
 use DTL\PhpTui\Widget\Canvas;
@@ -22,8 +23,8 @@ class PointsTest extends TestCase
     {
         $canvas = Canvas::default()
             ->marker(Marker::Dot)
-            ->xBounds(0, 2)
-            ->yBounds(0, 2)
+            ->xBounds(AxisBounds::new(0, 2))
+            ->yBounds(AxisBounds::new(0, 2))
             ->paint(function (CanvasContext $context) use ($points): void {
                 $context->draw($points);
             });
