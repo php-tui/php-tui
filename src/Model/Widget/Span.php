@@ -43,4 +43,9 @@ final class Span
         $this->style = $style;
         return $this;
     }
+
+    public static function styled(string $string, Style $style): self
+    {
+        return new self($string, $style);
+    }
 }

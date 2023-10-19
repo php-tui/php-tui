@@ -185,7 +185,7 @@ final class Chart implements Widget
             return;
         }
         $firstLabel = $labels[array_key_first($labels)];
-        $widthBetweenTicks = $layout->graphArea->width / count($labels);
+        $widthBetweenTicks = intval($layout->graphArea->width / count($labels));
         $labelArea = $this->firstXLabelArea($layout->labelX, $firstLabel->width(), $widthBetweenTicks, $chartArea, $layout->graphArea);
         $labelAlignment = match ($this->xAxis->labelAlignment) {
             HorizontalAlignment::Left => HorizontalAlignment::Right,
@@ -261,5 +261,11 @@ final class Chart implements Widget
                 $this->renderLabel($buffer, $label, $labelArea, $this->yAxis->labelAlignment);
             }
         }
+    }
+
+    public function block(Block $block): self
+    {
+        $this->block = $block;
+        return $this;
     }
 }

@@ -13,3 +13,4 @@ TODO
 - [ ] Cursor positioning after after draw (removed "frame" concept)
 - [ ] Change modifiers to use bitmask
 - [ ] Layout SegmentSize
+- [ ] Chart legend
