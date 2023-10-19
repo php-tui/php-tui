@@ -53,14 +53,14 @@ final class Chart implements Widget
         $this->renderYLabels($buffer, $layout, $chartArea);
 
         if ($layout->xAxisY !== null) {
-            for ($x = $chartArea->left(); $x < $chartArea->right(); $x++) {
+            for ($x = $layout->graphArea->left(); $x < $layout->graphArea->right(); $x++) {
                 $buffer->get(Position::at($x, $layout->xAxisY))
                     ->setChar(LineSet::HORIZONTAL)
                     ->setStyle($this->xAxis->style);
             }
         }
         if ($layout->yAxisX !== null) {
-            for ($y = $chartArea->top(); $y < $chartArea->bottom(); $y++) {
+            for ($y = $layout->graphArea->top(); $y < $layout->graphArea->bottom(); $y++) {
                 $buffer->get(Position::at($layout->yAxisX, $y))
                     ->setChar(LineSet::VERTICAL)
                     ->setStyle($this->yAxis->style);
@@ -184,18 +184,24 @@ final class Chart implements Widget
         if (count($labels) < 2) {
             return;
         }
-        $firstLabel = $labels[array_key_first($labels)];
         $widthBetweenTicks = intval($layout->graphArea->width / count($labels));
-        $labelArea = $this->firstXLabelArea($layout->labelX, $firstLabel->width(), $widthBetweenTicks, $chartArea, $layout->graphArea);
         $labelAlignment = match ($this->xAxis->labelAlignment) {
             HorizontalAlignment::Left => HorizontalAlignment::Right,
             HorizontalAlignment::Center => HorizontalAlignment::Center,
             HorizontalAlignment::Right => HorizontalAlignment::Left,
         };
 
+        $firstLabel = $labels[array_key_first($labels)];
+        array_shift($labels);
+        $labelArea = $this->firstXLabelArea(
+            $layout->labelX,
+            $firstLabel->width(),
+            $widthBetweenTicks,
+            $chartArea,
+            $layout->graphArea
+        );
         $this->renderLabel($buffer, $firstLabel, $labelArea, $labelAlignment);
 
-        array_shift($labels);
         $lastLabel = array_pop($labels);
         if (null === $lastLabel) {
             throw new RuntimeException('Last label is null, this should not happen');
@@ -211,14 +217,14 @@ final class Chart implements Widget
 
     }
 
-    private function firstXLabelArea(int $y, int $labelWidth, int $maxWithAfterYAxis, Area $chartArea, Area $area): Area
+    private function firstXLabelArea(int $y, int $labelWidth, int $maxWithAfterYAxis, Area $chartArea, Area $graphArea): Area
     {
         [$minX, $maxX] =  match ($this->xAxis->labelAlignment) {
-            HorizontalAlignment::Left => [$chartArea->left(), $area->left()],
-            HorizontalAlignment::Center => [$chartArea->left(), $area->left() + min($maxWithAfterYAxis, $labelWidth)],
+            HorizontalAlignment::Left => [$chartArea->left(), $graphArea->left()],
+            HorizontalAlignment::Center => [$chartArea->left(), $graphArea->left() + min($maxWithAfterYAxis, $labelWidth)],
             HorizontalAlignment::Right => [
-                $chartArea->left()  > 0 ? $chartArea->left() - 1 : 0,
-                $area->left() + $maxWithAfterYAxis
+                max($graphArea->left() - 1, 0),
+                $graphArea->left() + $maxWithAfterYAxis
             ],
         };
 
