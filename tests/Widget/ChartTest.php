@@ -47,6 +47,38 @@ class ChartTest extends TestCase
         );
     }
 
+    public function testRenderAxisLines(): void
+    {
+        $chart = Chart::new(
+            [
+                DataSet::new('data1')
+                    ->marker(Marker::Dot)
+                    ->style(Style::default()->fg(AnsiColor::Green))
+                    ->data(
+                        array_map(function (int $x, int $y) {
+                            return [$x, $y];
+                        }, range(0, 7), [0, 1, 2, 1, 0, -1, -2, -1])
+                    )
+            ]
+        )->xAxis(
+            Axis::default()->bounds(AxisBounds::new(0, 7))->labels([])
+        )->yAxis(
+            Axis::default()->bounds(AxisBounds::new(-2, 2))->labels([])
+        );
+
+        self::assertEquals(
+            [
+                '│ •     ',
+                '│• •    ',
+                '│•  •   ',
+                '│    • •',
+                '│     • ',
+                '└───────',
+            ],
+            $this->render($chart, 8, 6)
+        );
+    }
+
     public function testRenderAxisLabels(): void
     {
         $chart = Chart::new(
@@ -68,12 +100,13 @@ class ChartTest extends TestCase
 
         self::assertEquals(
             [
-                '│ •     ',
-                '│• •    ',
-                '│•  •   ',
-                '│    • •',
-                '│     • ',
-                '└───────',
+                '2│ •     ',
+                ' │• •    ',
+                ' │•  •   ',
+                '1│    • •',
+                ' │     • ',
+                ' └───────',
+                '   1  2  ',
             ],
             $this->render($chart, 8, 6)
         );

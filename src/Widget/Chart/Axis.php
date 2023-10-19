@@ -16,7 +16,7 @@ final class Axis
     }
     public static function default(): self
     {
-        return new self(AxisBounds::default(), Style::default(), []);
+        return new self(AxisBounds::default(), Style::default(), null);
     }
 
     public function style(Style $style): self

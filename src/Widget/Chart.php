@@ -117,11 +117,11 @@ final class Chart implements Widget
             return null;
         }
 
-        if ($this->xAxis->labels && $y > $area->top()) {
+        if ($this->xAxis->labels !== null && $y > $area->top()) {
             $xAxisY = $y;
             $y -= 1;
         }
-        if ($this->yAxis->labels && $x + 1 < $area->right()) {
+        if ($this->yAxis->labels !== null && $x + 1 < $area->right()) {
             $yAxisX = $x;
             $x += 1;
         }
