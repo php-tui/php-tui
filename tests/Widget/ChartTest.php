@@ -100,13 +100,12 @@ class ChartTest extends TestCase
 
         self::assertEquals(
             [
-                '2│ •     ',
-                ' │• •    ',
-                ' │•  •   ',
-                '1│    • •',
-                ' │     • ',
-                ' └───────',
-                '   1  2  ',
+                ' │•••   ',
+                ' │• •   ',
+                ' │   • •',
+                ' │    • ',
+                '─└──────',
+                '1│    2 ',
             ],
             $this->render($chart, 8, 6)
         );

@@ -13,9 +13,11 @@ use DTL\PhpTui\Model\Widget\LineSet;
 use DTL\PhpTui\Model\Widget\Span;
 use DTL\PhpTui\Widget\Canvas\CanvasContext;
 use DTL\PhpTui\Widget\Canvas\Shape\Points;
+use DTL\PhpTui\Widget\Canvas\Shape\Rectangle;
 use DTL\PhpTui\Widget\Chart\Axis;
 use DTL\PhpTui\Widget\Chart\ChartLayout;
 use DTL\PhpTui\Widget\Chart\DataSet;
+use RuntimeException;
 
 final class Chart implements Widget
 {
@@ -193,6 +195,22 @@ final class Chart implements Widget
         };
 
         $this->renderLabel($buffer, $firstLabel, $labelArea, $labelAlignment);
+
+        array_shift($labels);
+        $lastLabel = array_pop($labels);
+        if (null === $lastLabel) {
+            throw new RuntimeException('Last label is null, this should not happen');
+        }
+        foreach ($labels as $i => $label) {
+            // compensate for two labels we removed
+            $i = $i + 2;
+            $x = $layout->graphArea->left() + ($i + 1) * $widthBetweenTicks + 1;
+            $labelArea = Area::fromPrimitives($x, $layout->labelX, $widthBetweenTicks -1, 1);
+            $this->renderLabel($buffer, $label, $labelArea, HorizontalAlignment::Center);
+        }
+        $x = $layout->graphArea->right() - $widthBetweenTicks;
+        $labelArea = Area::fromPrimitives($x, $layout->labelX, $widthBetweenTicks, 1);
+        $this->renderLabel($buffer, $lastLabel, $labelArea, HorizontalAlignment::Center);
 
     }
 
