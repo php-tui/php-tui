@@ -6,8 +6,10 @@ use DTL\PhpTui\Model\AnsiColor;
 use DTL\PhpTui\Model\Area;
 use DTL\PhpTui\Model\Buffer;
 use DTL\PhpTui\Model\Color;
+use DTL\PhpTui\Model\Position;
 use DTL\PhpTui\Model\Style;
 use DTL\PhpTui\Model\Widget;
+use DTL\PhpTui\Model\Widget\LineSet;
 use DTL\PhpTui\Widget\Canvas\CanvasContext;
 use DTL\PhpTui\Widget\Canvas\Shape\Points;
 use DTL\PhpTui\Widget\Chart\Axis;
@@ -42,6 +44,28 @@ final class Chart implements Widget
         if (null === $layout) {
             return;
         }
+
+        if ($layout->xAxisY) {
+            for ($x = $chartArea->left(); $x < $chartArea->right(); $x++) {
+                $buffer->get(Position::at($x, $layout->xAxisY))
+                    ->setChar(LineSet::HORIZONTAL)
+                    ->setStyle($this->xAxis->style);
+            }
+        }
+        if ($layout->yAxisX) {
+            for ($y = $chartArea->top(); $y < $chartArea->bottom(); $y++) {
+                $buffer->get(Position::at($layout->yAxisX, $y))
+                    ->setChar(LineSet::VERTICAL)
+                    ->setStyle($this->yAxis->style);
+            }
+        }
+        if ($layout->yAxisX && $layout->xAxisY) {
+                $buffer->get(Position::at($layout->yAxisX, $layout->xAxisY))
+                    ->setChar(LineSet::BOTTOM_LEFT)
+                    ->setStyle($this->yAxis->style);
+        }
+
+
         foreach ($this->dataSets as $dataSet) {
             Canvas::default()
                 ->backgroundColor($this->style->bg ?: AnsiColor::Reset)
@@ -51,7 +75,7 @@ final class Chart implements Widget
                 ->paint(function (CanvasContext $context) use ($dataSet) {
                     $context->draw(Points::new($dataSet->data, $dataSet->style->fg ?: AnsiColor::Reset));
                 })
-                ->render($chartArea, $buffer);
+                ->render($layout->graphArea, $buffer);
 
         }
 
@@ -86,18 +110,29 @@ final class Chart implements Widget
     {
         $x = $area->left();
         $y = $area->bottom() - 1;
+        $xAxisY = null;
+        $yAxisX = null;
 
         if ($x >= $area->right() || $y < 1) {
             return null;
+        }
+
+        if ($this->xAxis->labels && $y > $area->top()) {
+            $xAxisY = $y;
+            $y -= 1;
+        }
+        if ($this->yAxis->labels && $x + 1 < $area->right()) {
+            $yAxisX = $x;
+            $x += 1;
         }
 
         $graphArea = Area::fromPrimitives(
             $x,
             $area->top(),
             $area->right() - $x,
-            $area->top() + 1
+            $y - $area->top() + 1
         );
 
-        return new ChartLayout($graphArea);
+        return new ChartLayout($graphArea, $xAxisY, $yAxisX);
     }
 }

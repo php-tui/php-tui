@@ -6,7 +6,7 @@ use DTL\PhpTui\Model\Area;
 
 class ChartLayout
 {
-    public function __construct(public Area $graphArea)
+    public function __construct(public Area $graphArea, public ?int $xAxisY, public ?int $yAxisX)
     {
     }
 
