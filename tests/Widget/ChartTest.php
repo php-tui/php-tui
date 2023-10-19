@@ -123,7 +123,7 @@ class ChartTest extends TestCase
                 ' • • • • • •',
                 '• • • • • • ',
                 '────────────',
-                '1  2   3  4 ',
+                '1   2  3  4 ',
             ],
             $this->render($chart, 12, 4)
         );
