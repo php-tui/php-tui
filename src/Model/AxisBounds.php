@@ -17,4 +17,14 @@ final class AxisBounds
     {
         return abs($this->max - $this->min);
     }
+
+    public static function default(): self
+    {
+        return new self(0.0, 0.0);
+    }
+
+    public static function new(float $min, float $max): self
+    {
+        return new self($min, $max);
+    }
 }

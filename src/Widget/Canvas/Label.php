@@ -11,4 +11,8 @@ class Label
     {
     }
 
+    public function width(): int
+    {
+        return $this->line->width();
+    }
 }
