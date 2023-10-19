@@ -47,6 +47,8 @@ final class Chart implements Widget
             return;
         }
 
+        $this->renderXLabels($buffer, $layout, $chartArea);
+
         if ($layout->xAxisY !== null) {
             for ($x = $chartArea->left(); $x < $chartArea->right(); $x++) {
                 $buffer->get(Position::at($x, $layout->xAxisY))
@@ -115,18 +117,24 @@ final class Chart implements Widget
         $xAxisY = null;
         $yAxisX = null;
         $labelY = null;
+        $labelX = null;
 
         if ($x >= $area->right() || $y < 1) {
             return null;
         }
 
         if ($this->xAxis->labels !== null && $y > $area->top()) {
-            $xAxisY = $y;
+            $labelX = $y;
             $y -= 1;
         }
 
         $yLabelX = $this->yAxis->labels !== null ? $x : null;
         $x += $this->maxWidthOfLabelsLeftOfYAxis($area, $this->yAxis->labels !== null);
+
+        if ($this->xAxis->labels !== null && $y > $area->top()) {
+            $xAxisY = $y;
+            $y -= 1;
+        }
 
         if ($this->yAxis->labels !== null && $x + 1 < $area->right()) {
             $yAxisX = $x;
@@ -141,7 +149,7 @@ final class Chart implements Widget
             $y - $area->top() + 1
         );
 
-        return new ChartLayout($graphArea, $xAxisY, $yAxisX);
+        return new ChartLayout($graphArea, $xAxisY, $yAxisX, $labelX, $labelY);
     }
 
     private function maxWidthOfLabelsLeftOfYAxis(Area $area, bool $hasYAxis): int
@@ -164,5 +172,53 @@ final class Chart implements Widget
         }
 
         return min($maxWidth, $area->width / 3);
+    }
+
+    private function renderXLabels(Buffer $buffer, ChartLayout $layout, Area $chartArea): void
+    {
+        if (null === $layout->labelX) {
+            return;
+        }
+        $labels = $this->xAxis->labels ?: [];
+        if (count($labels) < 2) {
+            return;
+        }
+        $firstLabel = $labels[array_key_first($labels)];
+        $widthBetweenTicks = $layout->graphArea->width / count($labels);
+        $labelArea = $this->firstXLabelArea($layout->labelX, $firstLabel->width(), $widthBetweenTicks, $chartArea, $layout->graphArea);
+        $labelAlignment = match ($this->xAxis->labelAlignment) {
+            HorizontalAlignment::Left => HorizontalAlignment::Right,
+            HorizontalAlignment::Center => HorizontalAlignment::Center,
+            HorizontalAlignment::Right => HorizontalAlignment::Left,
+        };
+
+        $this->renderLabel($buffer, $firstLabel, $labelArea, $labelAlignment);
+
+    }
+
+    private function firstXLabelArea(int $y, int $labelWidth, int $maxWithAfterYAxis, Area $chartArea, Area $area): Area
+    {
+        [$minX, $maxX] =  match ($this->xAxis->labelAlignment) {
+            HorizontalAlignment::Left => [$chartArea->left(), $area->left()],
+            HorizontalAlignment::Center => [$chartArea->left(), $area->left() + min($maxWithAfterYAxis, $labelWidth)],
+            HorizontalAlignment::Right => [
+                $chartArea->left()  > 0 ? $chartArea->left() - 1 : 0,
+                $area->left() + $maxWithAfterYAxis
+            ],
+        };
+
+        return Area::fromPrimitives($minX, $y, $maxX - $minX, 1);
+    }
+
+    private function renderLabel(Buffer $buffer, Span $label, Area $labelArea, HorizontalAlignment $labelAlignment): void
+    {
+        $boundedLabelWidth = min($labelArea->width, $label->width());
+        $x = match ($labelAlignment) {
+            HorizontalAlignment::Left => $labelArea->left(),
+            HorizontalAlignment::Center => $labelArea->left() + $labelArea->width / 2 - $boundedLabelWidth / 2,
+            HorizontalAlignment::Right => $labelArea->right() - $boundedLabelWidth,
+        };
+
+        $buffer->putSpan(Position::at($x, $labelArea->top()), $label, $boundedLabelWidth);
     }
 }

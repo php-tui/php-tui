@@ -4,6 +4,7 @@ namespace DTL\PhpTui\Model;
 
 use Countable;
 use DTL\PhpTui\Model\Widget\Line;
+use DTL\PhpTui\Model\Widget\Span;
 use OutOfBoundsException;
 
 final class Buffer implements Countable
@@ -194,6 +195,16 @@ final class Buffer implements Countable
         }
 
         return $position;
+    }
+
+    public function putSpan(Position $position, Span $span, int $width): void
+    {
+        $this->putString(
+            $position,
+            $span->content,
+            $span->style,
+            $width,
+        );
     }
 
     public function get(Position $position): Cell
