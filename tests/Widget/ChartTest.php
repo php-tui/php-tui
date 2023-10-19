@@ -98,7 +98,7 @@ class ChartTest extends TestCase
         );
     }
 
-    public function testRenderManyLabels(): void
+    public function testRenderManyXLabels(): void
     {
         $chart = Chart::new()
             ->addDataset(DataSet::new('data1')
@@ -158,6 +158,47 @@ class ChartTest extends TestCase
                 '1│    • ',
             ],
             $this->render($chart, 8, 6)
+        );
+    }
+
+    public function testRenderManyXAndYLabels(): void
+    {
+        $chart = Chart::new()
+            ->addDataset(DataSet::new('data1')
+                    ->marker(Marker::Dot)
+                    ->style(Style::default()->fg(AnsiColor::Green))
+                    ->data($this->series(0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1))
+            )
+            ->xAxis(
+                Axis::default()->bounds(AxisBounds::new(0, 11))->labels([
+                    Span::fromString('1'),
+                    Span::fromString('2'),
+                    Span::fromString('3'),
+                    Span::fromString('4'),
+                ])
+            )
+            ->yAxis(
+               Axis::default()->bounds(AxisBounds::new(0, 1))->labels([
+                    Span::fromString('one'),
+                    Span::fromString('two'),
+                    Span::fromString('three'),
+                    Span::fromString('four'),
+               ])
+            );
+
+        self::assertEquals(
+            [
+                ' four│ •  •  •  •  •   •',
+                '     │                  ',
+                'three│                  ',
+                '     │                  ',
+                '  two│                  ',
+                '  one│•  •  •  •  •  •  ',
+                '     └──────────────────',
+                '     1      2   3    4  ',
+
+            ],
+            $this->render($chart, 24, 8)
         );
     }
     /**
