@@ -91,7 +91,7 @@ final class Chart implements Widget
     /**
      * @param DataSet[] $dataSets
      */
-    public static function new(array $dataSets): self
+    public static function new(array $dataSets = []): self
     {
         return new self(
             block: null,
@@ -266,6 +266,12 @@ final class Chart implements Widget
     public function block(Block $block): self
     {
         $this->block = $block;
+        return $this;
+    }
+
+    public function addDataset(DataSet $dataSet): self
+    {
+        $this->dataSets[] = $dataSet;
         return $this;
     }
 }
