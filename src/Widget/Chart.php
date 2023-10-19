@@ -50,6 +50,7 @@ final class Chart implements Widget
         }
 
         $this->renderXLabels($buffer, $layout, $chartArea);
+        $this->renderYLabels($buffer, $layout, $chartArea);
 
         if ($layout->xAxisY !== null) {
             for ($x = $chartArea->left(); $x < $chartArea->right(); $x++) {
@@ -237,5 +238,29 @@ final class Chart implements Widget
         };
 
         $buffer->putSpan(Position::at(intval($x), $labelArea->top()), $label, $boundedLabelWidth);
+    }
+
+    private function renderYLabels(Buffer $buffer, ChartLayout $layout, Area $chartArea): void
+    {
+        if ($layout->labelY === null) {
+            return;
+        }
+        $labels = $this->yAxis->labels;
+        if (null === $labels) {
+            return;
+        }
+        $labelsLen = count($labels);
+        foreach ($labels as $i => $label) {
+            $dy = $i * ($layout->graphArea->height - 1) / ($labelsLen - 1);
+            if ($dy < $layout->graphArea->bottom()) {
+                $labelArea = Area::fromPrimitives(
+                    $layout->labelY,
+                    max(0, $layout->graphArea->bottom() - 1 - $dy),
+                    max(0, ($layout->graphArea->left() - ($chartArea->left() - 1))),
+                    1
+                );
+                $this->renderLabel($buffer, $label, $labelArea, $this->yAxis->labelAlignment);
+            }
+        }
     }
 }
