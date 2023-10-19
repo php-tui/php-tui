@@ -26,9 +26,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 class App {
     private function __construct(
-        private array $data1,
-        private array $data2,
-        private AxisBounds $window,
+        private int $tick,
     )
     {
     }
@@ -36,13 +34,7 @@ class App {
     public static function run(): self
     {
         $app = new self(
-            data1: array_map(function (int $x, int $y) {
-                return [$x, $y];
-            }, range(0, 128), range(0, 128)),
-            data2: array_map(function (int $x, int $y) {
-                return [$x, $y];
-            }, range(0, 128), range(128, 0)),
-            window: new AxisBounds(0, 128),
+            0
         );
         $cursor = new Cursor(new ConsoleOutput());
         $cursor->hide();
@@ -78,11 +70,11 @@ class App {
             DataSet::new('data1')
                 ->marker(Marker::Dot)
                 ->style(Style::default()->fg(AnsiColor::Cyan))
-                ->data($this->data1),
+                ->data($this->sinData(0)),
             DataSet::new('data1')
                 ->marker(Marker::Braille)
                 ->style(Style::default()->fg(AnsiColor::Yellow))
-                ->data($this->data2),
+                ->data($this->sinData(90)),
         ];
 
         $chart1 = Chart::new($dataSets)
@@ -96,7 +88,7 @@ class App {
                     //->title('X Axis')
                     ->style(Style::default()->fg(AnsiColor::Gray))
                 ->labels($xLabels)
-                ->bounds($this->window)
+                ->bounds(AxisBounds::new(0, 400))
             )
             ->yAxis(
                 Axis::default()
@@ -107,7 +99,7 @@ class App {
                     Span::fromString('0'),
                     Span::fromString('20'),
                 ])
-                ->bounds($this->window)
+                ->bounds(AxisBounds::new(-400,400))
             );
 
         $chart1->render($chunks->get(0), $buffer);
@@ -115,6 +107,19 @@ class App {
 
     private function onTick(): void
     {
+        $this->tick++;
+    }
+
+    private function sinData(int $offset): array
+    {
+        $data = [];
+        for ($i = 0; $i < 400; $i++) {
+            $point = intval(sin(
+                ($this->tick + $i + $offset) % 360 / 10
+            ) * 400);
+            $data[] = [$i, $point];
+        }
+        return $data;
     }
 
 }
