@@ -22,12 +22,12 @@ class PointsTest extends TestCase
     {
         $canvas = Canvas::default()
             ->marker(Marker::Dot)
-            ->xBounds(0, 10)
-            ->yBounds(0, 10)
+            ->xBounds(0, 2)
+            ->yBounds(0, 2)
             ->paint(function (CanvasContext $context) use ($points): void {
                 $context->draw($points);
             });
-        $area = Area::fromDimensions(10, 10);
+        $area = Area::fromDimensions(3, 3);
         $buffer = Buffer::empty($area);
         $canvas->render($area, $buffer);
         self::assertEquals($expected, $buffer->toLines());
@@ -40,31 +40,17 @@ class PointsTest extends TestCase
         yield 'out of bounds' => [
             Points::new([[100,100],[100,100]], AnsiColor::Red),
             [
-                '          ',
-                '          ',
-                '          ',
-                '          ',
-                '          ',
-                '          ',
-                '          ',
-                '          ',
-                '          ',
-                '          ',
+                '   ',
+                '   ',
+                '   ',
             ]
         ];
         yield 'points' => [
             Points::new([[0,0],[1,1],[2,2]], AnsiColor::Red),
             [
-                '•         ',
-                ' •        ',
-                '  •       ',
-                '          ',
-                '          ',
-                '          ',
-                '          ',
-                '          ',
-                '          ',
-                '          ',
+                '  •',
+                ' • ',
+                '•  ',
             ]
         ];
     }
