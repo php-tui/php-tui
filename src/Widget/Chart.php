@@ -119,15 +119,14 @@ final class Chart implements Widget
         $y = $area->bottom() - 1;
         $xAxisY = null;
         $yAxisX = null;
-        $labelY = null;
-        $labelX = null;
+        $xLabelY = null;
 
         if ($x >= $area->right() || $y < 1) {
             return null;
         }
 
         if ($this->xAxis->labels && $y > $area->top()) {
-            $labelX = $y;
+            $xLabelY = $y;
             $y -= 1;
         }
 
@@ -151,7 +150,7 @@ final class Chart implements Widget
             $y - $area->top() + 1
         );
 
-        return new ChartLayout($graphArea, $xAxisY, $yAxisX, $labelX, $labelY);
+        return new ChartLayout($graphArea, $xAxisY, $yAxisX, $xLabelY, $yLabelX);
     }
 
     private function maxWidthOfLabelsLeftOfYAxis(Area $area, bool $hasYAxis): int
@@ -251,12 +250,12 @@ final class Chart implements Widget
         }
         $labelsLen = count($labels);
         foreach ($labels as $i => $label) {
-            $dy = $i * ($layout->graphArea->height - 1) / ($labelsLen - 1);
+            $dy = intval($i * ($layout->graphArea->height - 1) / ($labelsLen - 1));
             if ($dy < $layout->graphArea->bottom()) {
                 $labelArea = Area::fromPrimitives(
                     $layout->labelY,
                     max(0, $layout->graphArea->bottom() - 1 - $dy),
-                    max(0, ($layout->graphArea->left() - ($chartArea->left() - 1))),
+                    max(0, ($layout->graphArea->left() - $chartArea->left()) - 1),
                     1
                 );
                 $this->renderLabel($buffer, $label, $labelArea, $this->yAxis->labelAlignment);
