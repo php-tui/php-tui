@@ -45,21 +45,21 @@ final class Chart implements Widget
             return;
         }
 
-        if ($layout->xAxisY) {
+        if ($layout->xAxisY !== null) {
             for ($x = $chartArea->left(); $x < $chartArea->right(); $x++) {
                 $buffer->get(Position::at($x, $layout->xAxisY))
                     ->setChar(LineSet::HORIZONTAL)
                     ->setStyle($this->xAxis->style);
             }
         }
-        if ($layout->yAxisX) {
+        if ($layout->yAxisX !== null) {
             for ($y = $chartArea->top(); $y < $chartArea->bottom(); $y++) {
                 $buffer->get(Position::at($layout->yAxisX, $y))
                     ->setChar(LineSet::VERTICAL)
                     ->setStyle($this->yAxis->style);
             }
         }
-        if ($layout->yAxisX && $layout->xAxisY) {
+        if ($layout->yAxisX !== null && $layout->xAxisY !== null) {
                 $buffer->get(Position::at($layout->yAxisX, $layout->xAxisY))
                     ->setChar(LineSet::BOTTOM_LEFT)
                     ->setStyle($this->yAxis->style);
