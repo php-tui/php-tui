@@ -5,11 +5,12 @@ namespace DTL\PhpTui\Widget;
 use DTL\PhpTui\Model\AnsiColor;
 use DTL\PhpTui\Model\Area;
 use DTL\PhpTui\Model\Buffer;
-use DTL\PhpTui\Model\Color;
 use DTL\PhpTui\Model\Position;
 use DTL\PhpTui\Model\Style;
 use DTL\PhpTui\Model\Widget;
+use DTL\PhpTui\Model\Widget\HorizontalAlignment;
 use DTL\PhpTui\Model\Widget\LineSet;
+use DTL\PhpTui\Model\Widget\Span;
 use DTL\PhpTui\Widget\Canvas\CanvasContext;
 use DTL\PhpTui\Widget\Canvas\Shape\Points;
 use DTL\PhpTui\Widget\Chart\Axis;
@@ -27,7 +28,8 @@ final class Chart implements Widget
         private Axis $yAxis,
         private array $dataSets,
         private Style $style
-    ) {}
+    ) {
+    }
 
     public function render(Area $area, Buffer $buffer): void
     {
@@ -60,9 +62,9 @@ final class Chart implements Widget
             }
         }
         if ($layout->yAxisX !== null && $layout->xAxisY !== null) {
-                $buffer->get(Position::at($layout->yAxisX, $layout->xAxisY))
-                    ->setChar(LineSet::BOTTOM_LEFT)
-                    ->setStyle($this->yAxis->style);
+            $buffer->get(Position::at($layout->yAxisX, $layout->xAxisY))
+                ->setChar(LineSet::BOTTOM_LEFT)
+                ->setStyle($this->yAxis->style);
         }
 
 
@@ -72,7 +74,7 @@ final class Chart implements Widget
                 ->xBounds($this->xAxis->bounds)
                 ->yBounds($this->yAxis->bounds)
                 ->marker($dataSet->marker)
-                ->paint(function (CanvasContext $context) use ($dataSet) {
+                ->paint(function (CanvasContext $context) use ($dataSet): void {
                     $context->draw(Points::new($dataSet->data, $dataSet->style->fg ?: AnsiColor::Reset));
                 })
                 ->render($layout->graphArea, $buffer);
@@ -112,6 +114,7 @@ final class Chart implements Widget
         $y = $area->bottom() - 1;
         $xAxisY = null;
         $yAxisX = null;
+        $labelY = null;
 
         if ($x >= $area->right() || $y < 1) {
             return null;
@@ -121,10 +124,15 @@ final class Chart implements Widget
             $xAxisY = $y;
             $y -= 1;
         }
+
+        $yLabelX = $this->yAxis->labels !== null ? $x : null;
+        $x += $this->maxWidthOfLabelsLeftOfYAxis($area, $this->yAxis->labels !== null);
+
         if ($this->yAxis->labels !== null && $x + 1 < $area->right()) {
             $yAxisX = $x;
             $x += 1;
         }
+
 
         $graphArea = Area::fromPrimitives(
             $x,
@@ -134,5 +142,27 @@ final class Chart implements Widget
         );
 
         return new ChartLayout($graphArea, $xAxisY, $yAxisX);
+    }
+
+    private function maxWidthOfLabelsLeftOfYAxis(Area $area, bool $hasYAxis): int
+    {
+        $maxWidth = $this->yAxis->labels !== null ? max(
+            array_map(function (Span $label) {
+                return $label->width();
+            }, $this->yAxis->labels)
+        ) : 0;
+
+        if ($this->xAxis->labels !== null && count($this->xAxis->labels)) {
+            $first = $this->xAxis->labels[array_key_first($this->xAxis->labels)];
+            $firstLabelWidth = $first->width();
+            $widthOfYAxis = match ($this->xAxis->labelAlignment) {
+                HorizontalAlignment::Left => $firstLabelWidth - $hasYAxis ? 1 : 0,
+                HorizontalAlignment::Center => $firstLabelWidth / 2,
+                HorizontalAlignment::Right => 0,
+            };
+            $maxWidth = max($maxWidth, $widthOfYAxis);
+        }
+
+        return min($maxWidth, $area->width / 3);
     }
 }
