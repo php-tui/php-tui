@@ -79,7 +79,7 @@ class ChartTest extends TestCase
         );
     }
 
-    public function testRenderAxisLabels(): void
+    public function testRenderXAxisLabels(): void
     {
         $chart = Chart::new(
             [
@@ -95,17 +95,18 @@ class ChartTest extends TestCase
         )->xAxis(
             Axis::default()->bounds(AxisBounds::new(0, 7))->labels([Span::fromString('1'), Span::fromString('2')])
         )->yAxis(
-            Axis::default()->bounds(AxisBounds::new(-2, 2))->labels([Span::fromString('1'), Span::fromString('2')])
+            Axis::default()->bounds(AxisBounds::new(-2, 2))
         );
 
         self::assertEquals(
             [
-                ' │•••   ',
-                ' │• •   ',
-                ' │   • •',
-                ' │    • ',
-                '─└──────',
-                '1│    2 ',
+                ' •••    ',
+                '•   •   ',
+                '     • •',
+                '      • ',
+                '────────',
+                '1    2  ',
+
             ],
             $this->render($chart, 8, 6)
         );

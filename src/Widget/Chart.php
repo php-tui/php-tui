@@ -125,7 +125,7 @@ final class Chart implements Widget
             return null;
         }
 
-        if ($this->xAxis->labels !== null && $y > $area->top()) {
+        if ($this->xAxis->labels && $y > $area->top()) {
             $labelX = $y;
             $y -= 1;
         }
@@ -143,7 +143,6 @@ final class Chart implements Widget
             $x += 1;
         }
 
-
         $graphArea = Area::fromPrimitives(
             $x,
             $area->top(),
@@ -156,8 +155,8 @@ final class Chart implements Widget
 
     private function maxWidthOfLabelsLeftOfYAxis(Area $area, bool $hasYAxis): int
     {
-        $maxWidth = $this->yAxis->labels !== null ? max(
-            array_map(function (Span $label) {
+        $maxWidth = $this->yAxis->labels ? max(
+            ...array_map(function (Span $label) {
                 return $label->width();
             }, $this->yAxis->labels)
         ) : 0;
@@ -237,6 +236,6 @@ final class Chart implements Widget
             HorizontalAlignment::Right => $labelArea->right() - $boundedLabelWidth,
         };
 
-        $buffer->putSpan(Position::at($x, $labelArea->top()), $label, $boundedLabelWidth);
+        $buffer->putSpan(Position::at(intval($x), $labelArea->top()), $label, $boundedLabelWidth);
     }
 }
