@@ -13,7 +13,6 @@ use DTL\PhpTui\Model\Widget\LineSet;
 use DTL\PhpTui\Model\Widget\Span;
 use DTL\PhpTui\Widget\Canvas\CanvasContext;
 use DTL\PhpTui\Widget\Canvas\Shape\Points;
-use DTL\PhpTui\Widget\Canvas\Shape\Rectangle;
 use DTL\PhpTui\Widget\Chart\Axis;
 use DTL\PhpTui\Widget\Chart\ChartLayout;
 use DTL\PhpTui\Widget\Chart\DataSet;
@@ -110,6 +109,18 @@ final class Chart implements Widget
     public function yAxis(Axis $axis): self
     {
         $this->yAxis = $axis;
+        return $this;
+    }
+
+    public function block(Block $block): self
+    {
+        $this->block = $block;
+        return $this;
+    }
+
+    public function addDataset(DataSet $dataSet): self
+    {
+        $this->dataSets[] = $dataSet;
         return $this;
     }
 
@@ -265,17 +276,5 @@ final class Chart implements Widget
                 $this->renderLabel($buffer, $label, $labelArea, $this->yAxis->labelAlignment);
             }
         }
-    }
-
-    public function block(Block $block): self
-    {
-        $this->block = $block;
-        return $this;
-    }
-
-    public function addDataset(DataSet $dataSet): self
-    {
-        $this->dataSets[] = $dataSet;
-        return $this;
     }
 }

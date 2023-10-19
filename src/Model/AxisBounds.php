@@ -23,7 +23,7 @@ final class AxisBounds
         return new self(0.0, 0.0);
     }
 
-    public static function new(int $min, int $max): self
+    public static function new(float $min, float $max): self
     {
         return new self($min, $max);
     }

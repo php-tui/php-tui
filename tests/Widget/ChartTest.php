@@ -101,7 +101,8 @@ class ChartTest extends TestCase
     public function testRenderManyXLabels(): void
     {
         $chart = Chart::new()
-            ->addDataset(DataSet::new('data1')
+            ->addDataset(
+                DataSet::new('data1')
                     ->marker(Marker::Dot)
                     ->style(Style::default()->fg(AnsiColor::Green))
                     ->data($this->series(0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1))
@@ -115,7 +116,7 @@ class ChartTest extends TestCase
                 ])
             )
             ->yAxis(
-               Axis::default()->bounds(AxisBounds::new(0, 1))
+                Axis::default()->bounds(AxisBounds::new(0, 1))
             );
 
         self::assertEquals(
@@ -164,7 +165,8 @@ class ChartTest extends TestCase
     public function testRenderManyXAndYLabels(): void
     {
         $chart = Chart::new()
-            ->addDataset(DataSet::new('data1')
+            ->addDataset(
+                DataSet::new('data1')
                     ->marker(Marker::Dot)
                     ->style(Style::default()->fg(AnsiColor::Green))
                     ->data($this->series(0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1))
@@ -178,7 +180,7 @@ class ChartTest extends TestCase
                 ])
             )
             ->yAxis(
-               Axis::default()->bounds(AxisBounds::new(0, 1))->labels([
+                Axis::default()->bounds(AxisBounds::new(0, 1))->labels([
                     Span::fromString('one'),
                     Span::fromString('two'),
                     Span::fromString('three'),

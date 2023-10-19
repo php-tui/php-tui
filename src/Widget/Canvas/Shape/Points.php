@@ -2,7 +2,6 @@
 
 namespace DTL\PhpTui\Widget\Canvas\Shape;
 
-use DTL\PhpTui\Model\AnsiColor;
 use DTL\PhpTui\Model\Color;
 use DTL\PhpTui\Model\Widget\FloatPosition;
 use DTL\PhpTui\Widget\Canvas\Painter;

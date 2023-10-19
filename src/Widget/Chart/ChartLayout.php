@@ -12,8 +12,7 @@ class ChartLayout
         public ?int $yAxisX,
         public ?int $labelX,
         public ?int $labelY
-    )
-    {
+    ) {
     }
 
 }

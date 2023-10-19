@@ -2,7 +2,6 @@
 
 namespace DTL\PhpTui\Widget\Chart;
 
-use DTL\PhpTui\Model\AxisBounds;
 use DTL\PhpTui\Model\Marker;
 use DTL\PhpTui\Model\Style;
 
@@ -17,7 +16,8 @@ final class DataSet
         public Marker $marker,
         public GraphType $graphType,
         public Style $style
-    ) {}
+    ) {
+    }
 
     public static function new(string $name): self
     {
@@ -26,7 +26,7 @@ final class DataSet
             data: [],
             marker: Marker::Dot,
             graphType: GraphType::Scatter,
-            style: Style::default() ,
+            style: Style::default(),
         );
     }
 
