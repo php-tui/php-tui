@@ -100,7 +100,7 @@ final class Table implements Widget
             $currentHeight += $tableRow->totalHeight();
             $tableRowArea = Area::fromPrimitives($innerOffset, $row, $tableArea->width, $tableRow->height);
             $buffer->setStyle($tableRowArea, $tableRow->style);
-            $isSelected = $this->state->selected ?? false;
+            $isSelected = $this->state->selected === $i + $start;
             if ($selectionWidth > 0 && $isSelected) {
                 $buffer->putString(
                     Position::at(
@@ -128,10 +128,10 @@ final class Table implements Widget
                     )
                 );
             }
+            if ($isSelected) {
+                $buffer->setStyle($tableRowArea, $this->highlightStyle);
+            }
         }
-
-
-
     }
 
     public static function default(): self
@@ -264,5 +264,17 @@ final class Table implements Widget
         }
 
         return [$start, $end];
+    }
+
+    public function select(int $selection): self
+    {
+        $this->state->selected = $selection;
+        return $this;
+    }
+
+    public function offset(int $offset): self
+    {
+        $this->state->offset = $offset;
+        return $this;
     }
 }

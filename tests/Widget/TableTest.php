@@ -28,6 +28,86 @@ class TableTest extends TestCase
      */
     public static function provideTableRender(): Generator
     {
+        yield 'not enough rows' => [
+            Area::fromDimensions(10, 4),
+            Table::default()
+                ->header(TableRow::fromCells([
+                    TableCell::fromString('Ones'),
+                    TableCell::fromString('Twos'),
+                ]))
+                ->widths([
+                    Constraint::percentage(50),
+                    Constraint::percentage(50),
+                ])
+                ->rows([
+                    TableRow::fromCells([
+                        TableCell::fromString('1'),
+                        TableCell::fromString('2'),
+                    ]),
+                ]),
+            [
+                'Ones Twos ',
+                '1    2    ',
+                '          ',
+                '          ',
+            ]
+           ,
+        ];
+
+        yield 'no widths' => [
+            Area::fromDimensions(10, 4),
+            Table::default()
+                ->header(TableRow::fromCells([
+                    TableCell::fromString('Ones'),
+                    TableCell::fromString('Twos'),
+                ]))
+                ->rows([
+                    TableRow::fromCells([
+                        TableCell::fromString('1'),
+                        TableCell::fromString('2'),
+                    ]),
+                ]),
+            [
+                '          ',
+                '          ',
+                '          ',
+                '          ',
+            ]
+           ,
+        ];
+
+        yield 'select' => [
+            Area::fromDimensions(10, 4),
+            Table::default()
+                ->select(0)
+                ->offset(0)
+                ->header(TableRow::fromCells([
+                    TableCell::fromString('Ones'),
+                    TableCell::fromString('Twos'),
+                ]))
+                ->widths([
+                    Constraint::percentage(50),
+                    Constraint::percentage(50),
+                ])
+                ->rows([
+                    TableRow::fromCells([
+                        TableCell::fromString('1'),
+                        TableCell::fromString('2'),
+                    ]),
+                    TableRow::fromCells([
+                        TableCell::fromString('1-1'),
+                        TableCell::fromString('2-2'),
+                    ]),
+                ]),
+            [
+                '  Ones Two',
+                '>>1    2  ',
+                '  1-1  2-2',
+                '          ',
+            ]
+           ,
+        ];
+
         yield [
             Area::fromDimensions(10, 4),
             Table::default()
