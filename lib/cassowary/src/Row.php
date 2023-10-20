@@ -3,6 +3,7 @@
 namespace DTL\Cassowary;
 
 use Countable;
+use DTL\PhpTui\Widget\Table\TableCell;
 use RuntimeException;
 use SplObjectStorage;
 use Stringable;
