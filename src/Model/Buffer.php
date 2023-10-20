@@ -191,7 +191,7 @@ final class Buffer implements Countable
             );
             $w = max(0, $position->x - $newPosition->x);
             $position = $position->withX($newPosition->x);
-            $remainingWidth -= max(0, $remainingWidth - $x);
+            $remainingWidth -= max(0, $remainingWidth - $position->x);
         }
 
         return $position;
