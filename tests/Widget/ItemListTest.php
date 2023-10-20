@@ -95,6 +95,22 @@ class ItemListTest extends TestCase
                 '3  ',
             ]
         ];
+        yield 'with selected and offset' => [
+            Area::fromDimensions(3, 2),
+            ItemList::default()
+                ->offset(1)
+                ->select(2)
+                ->items([
+                    ListItem::new(Text::raw('1')),
+                    ListItem::new(Text::raw('2')),
+                    ListItem::new(Text::raw('3')),
+                    ListItem::new(Text::raw('4')),
+                ]),
+            [
+                '  2',
+                '>>3',
+            ]
+        ];
     }
 }
 
