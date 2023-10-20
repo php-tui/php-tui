@@ -6,6 +6,22 @@ PHP TUI library heavily inspired by Rust TUI /
 
 ![screenshot](https://github.com/dantleech/php-tui/assets/530801/e27a8253-e3a4-4af2-868e-514f1bd3db2a)
 
+Widgets
+-------
+
+- [x] Canvas
+- [x] Chart
+- [x] Block
+- [x] Paragraph
+- [x] List
+- [ ] Table
+- [ ] Tabs
+- [ ] Calendar
+- [ ] Barchart
+- [ ] Scrollbar
+- [ ] Sparkline
+- [ ] Gauge
+
 TODO
 ----
 
