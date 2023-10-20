@@ -57,11 +57,6 @@ class ItemList implements Widget
         $currentHeight = 0;
         $selectionSpacing = $this->highlightSpacing->shouldAdd($this->state->selected !== null);
         foreach (array_slice($this->items, $start, $end-$start) as $i => $item) {
-            /** @var ListItem $item */
-            if ($i < $this->state->offset) {
-                continue;
-            }
-
             [$x, $y, $currentHeight] = (function () use ($item, $listArea, $currentHeight) {
                 if ($this->startCorner === Corner::BottomLeft) {
                     $currentHeight += $item->height();
@@ -131,48 +126,6 @@ class ItemList implements Widget
         return $this;
     }
 
-    /**
-     * @return array{int,int}
-     */
-    private function getItemsBounds(int $maxHeight): array
-    {
-        $offset = min($this->state->offset, max(count($this->items) - 1, 0));
-        $start = $end = $offset;
-        $height = 0;
-        foreach ($this->items as $i => $item) {
-            if ($i < $offset) {
-                continue;
-            }
-
-            if ($height + $item->height() > $maxHeight) {
-                break;
-            }
-            $height += $item->height();
-            $end += 1;
-        }
-
-        $selected = min(count($this->items) - 1, $this->state->selected ?? 0);
-        while ($selected >= $end) {
-            $height = $height += $this->items[$end]->height();
-            $end += 1;
-            while ($height > $maxHeight) {
-                $height = max(0, $height - $this->items[$start]->height());
-                $start += 1;
-            }
-        }
-        while ($selected < $start) {
-            $start -= 1;
-            $height = $height += $this->items[$start]->height();
-            while ($height > $maxHeight) {
-                $end -= 1;
-                $height = max(0, $height - $this->items[$end]->height());
-            }
-        }
-
-        return [$start, $end];
-
-    }
-
     public function startCorner(Corner $corner): self
     {
         $this->startCorner = $corner;
@@ -184,5 +137,50 @@ class ItemList implements Widget
         $this->state->selected = $selection;
         return $this;
     }
-}
 
+    public function offset(int $offset): self
+    {
+        $this->state->offset = $offset;
+        return $this;
+    }
+
+    /**
+     * @return array{int,int}
+     */
+    private function getItemsBounds(int $maxHeight): array
+    {
+        $offset = min($this->state->offset, max(count($this->items) - 1, 0));
+        $start = $end = $offset;
+        $height = 0;
+        foreach (array_slice($this->items, $start) as $item) {
+            if ($height + $item->height() > $maxHeight) {
+                break;
+            }
+            $height += $item->height();
+            $end += 1;
+        }
+
+        if ($this->state->selected !== null) {
+            $selected = min(count($this->items) - 1, $this->state->selected ?? 0);
+            while ($selected >= $end) {
+                $height = $height += $this->items[$end]->height();
+                $end += 1;
+                while ($height > $maxHeight) {
+                    $height = max(0, $height - $this->items[$start]->height());
+                    $start += 1;
+                }
+            }
+            while ($selected < $start) {
+                $start -= 1;
+                $height = $height += $this->items[$start]->height();
+                while ($height > $maxHeight) {
+                    $end -= 1;
+                    $height = max(0, $height - $this->items[$end]->height());
+                }
+            }
+        }
+
+        return [$start, $end];
+
+    }
+}
