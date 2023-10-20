@@ -85,6 +85,8 @@ final class Table implements Widget
                     )
                 );
             }
+            $currentHeight += $maxHeaderHight;
+            $rowsHeight = max(0, $rowsHeight - $maxHeaderHight);
         }
         if (count($this->rows) === 0) {
             return;

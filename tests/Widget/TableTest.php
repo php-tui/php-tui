@@ -26,7 +26,7 @@ class TableTest extends TestCase
     /**
      * @return Generator<array{Area,Table,list<string>}>
      */
-    public function provideTableRender(): Generator
+    public static function provideTableRender(): Generator
     {
         yield [
             Area::fromDimensions(10, 4),
@@ -53,6 +53,7 @@ class TableTest extends TestCase
                 'Ones Twos ',
                 '1    2    ',
                 '1-1  2-2  ',
+                '          ',
             ]
            ,
         ];
