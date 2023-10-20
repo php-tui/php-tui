@@ -4,6 +4,7 @@ namespace DTL\PhpTui\Tests\Widget;
 
 use DTL\PhpTui\Model\Area;
 use DTL\PhpTui\Model\Buffer;
+use DTL\PhpTui\Model\Corner;
 use DTL\PhpTui\Model\Widget\Text;
 use DTL\PhpTui\Widget\ItemList;
 use DTL\PhpTui\Widget\ItemList\ListItem;
@@ -27,7 +28,7 @@ class ItemListTest extends TestCase
      */
     public static function provideRenderItemList(): Generator
     {
-        yield [
+        yield 'simple' => [
             Area::fromDimensions(5, 5),
             ItemList::default()
                 ->items([
@@ -40,6 +41,43 @@ class ItemListTest extends TestCase
                 '     ',
                 '     ',
                 '     ',
+            ]
+        ];
+        yield 'start from BL corner' => [
+            Area::fromDimensions(5, 5),
+            ItemList::default()
+                ->startCorner(Corner::BottomLeft)
+                ->items([
+                    ListItem::new(Text::raw('1')),
+                    ListItem::new(Text::raw('2')),
+                    ListItem::new(Text::raw('3')),
+                    ListItem::new(Text::raw('4')),
+                ]),
+            [
+                '     ',
+                '4    ',
+                '3    ',
+                '2    ',
+                '1    ',
+            ]
+        ];
+        yield 'highlight' => [
+            Area::fromDimensions(5, 5),
+            ItemList::default()
+                ->startCorner(Corner::BottomLeft)
+                ->select(1)
+                ->items([
+                    ListItem::new(Text::raw('1')),
+                    ListItem::new(Text::raw('2')),
+                    ListItem::new(Text::raw('3')),
+                    ListItem::new(Text::raw('4')),
+                ]),
+            [
+                '     ',
+                '  4  ',
+                '  3  ',
+                '>>2  ',
+                '  1  ',
             ]
         ];
     }

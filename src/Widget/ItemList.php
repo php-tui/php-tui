@@ -172,4 +172,17 @@ class ItemList implements Widget
         return [$start, $end];
 
     }
+
+    public function startCorner(Corner $corner): self
+    {
+        $this->startCorner = $corner;
+        return $this;
+    }
+
+    public function select(int $selection): self
+    {
+        $this->state->selected = $selection;
+        return $this;
+    }
 }
+
