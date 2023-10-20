@@ -144,6 +144,18 @@ class ItemList implements Widget
         return $this;
     }
 
+    public function state(ItemListState $state): self
+    {
+        $this->state = $state;
+        return $this;
+    }
+
+    public function block(Block $block): self
+    {
+        $this->block = $block;
+        return $this;
+    }
+
     /**
      * @return array{int,int}
      */
@@ -182,17 +194,5 @@ class ItemList implements Widget
 
         return [$start, $end];
 
-    }
-
-    public function state(ItemListState $state): self
-    {
-        $this->state = $state;
-        return $this;
-    }
-
-    public function block(Block $block): self
-    {
-        $this->block = $block;
-        return $this;
     }
 }
