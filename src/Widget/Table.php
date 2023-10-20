@@ -12,7 +12,6 @@ use DTL\PhpTui\Model\Style;
 use DTL\PhpTui\Model\Widget;
 use DTL\PhpTui\Model\Widget\HorizontalAlignment;
 use DTL\PhpTui\Widget\ItemList\HighlightSpacing;
-use DTL\PhpTui\Widget\ItemList\ItemListState;
 use DTL\PhpTui\Widget\Table\TableCell;
 use DTL\PhpTui\Widget\Table\TableRow;
 use DTL\PhpTui\Widget\Table\TableState;
@@ -34,7 +33,6 @@ final class Table implements Widget
         private array $rows,
         private HighlightSpacing $highlightSpacing,
         private TableState $state,
-
     ) {
     }
 
@@ -166,6 +164,51 @@ final class Table implements Widget
     }
 
     /**
+     * @param Constraint[] $widths
+     */
+    public function widths(array $widths): self
+    {
+        $this->widths = $widths;
+        return $this;
+    }
+
+    public function select(int $selection): self
+    {
+        $this->state->selected = $selection;
+        return $this;
+    }
+
+    public function offset(int $offset): self
+    {
+        $this->state->offset = $offset;
+        return $this;
+    }
+
+    public function block(Block $block): self
+    {
+        $this->block = $block;
+        return $this;
+    }
+
+    public function state(TableState $state): self
+    {
+        $this->state = $state;
+        return $this;
+    }
+
+    public function highlightSymbol(string $symbol): self
+    {
+        $this->highlightSymbol = $symbol;
+        return $this;
+    }
+
+    public function highlightStyle(Style $style): self
+    {
+        $this->highlightStyle = $style;
+        return $this;
+    }
+
+    /**
      * @return list<array{int,int}>
      */
     private function getColumnsWidths(int $maxWidth, int $selectionWidth): array
@@ -193,15 +236,6 @@ final class Table implements Widget
             $widths[] = [$chunk->position->x, $chunk->width];
         }
         return $widths;
-    }
-
-    /**
-     * @param Constraint[] $widths
-     */
-    public function widths(array $widths): self
-    {
-        $this->widths = $widths;
-        return $this;
     }
 
     private function renderCell(Buffer $buffer, TableCell $cell, Area $area): void
@@ -265,41 +299,5 @@ final class Table implements Widget
         }
 
         return [$start, $end];
-    }
-
-    public function select(int $selection): self
-    {
-        $this->state->selected = $selection;
-        return $this;
-    }
-
-    public function offset(int $offset): self
-    {
-        $this->state->offset = $offset;
-        return $this;
-    }
-
-    public function block(Block $block): self
-    {
-        $this->block = $block;
-        return $this;
-    }
-
-    public function state(TableState $state): self
-    {
-        $this->state = $state;
-        return $this;
-    }
-
-    public function highlightSymbol(string $symbol): self
-    {
-        $this->highlightSymbol = $symbol;
-        return $this;
-    }
-
-    public function highlightStyle(Style $style): self
-    {
-        $this->highlightStyle = $style;
-        return $this;
     }
 }

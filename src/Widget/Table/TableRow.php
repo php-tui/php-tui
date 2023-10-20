@@ -2,7 +2,6 @@
 
 namespace DTL\PhpTui\Widget\Table;
 
-use DTL\PhpTui\Model\Cell;
 use DTL\PhpTui\Model\Style;
 
 final class TableRow
