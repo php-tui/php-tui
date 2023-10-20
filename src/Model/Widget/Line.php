@@ -58,4 +58,9 @@ final class Line implements IteratorAggregate
         }
         return $this;
     }
+
+    public static function fromSpan(Span $span): self
+    {
+        return new self([$span], HorizontalAlignment::Left);
+    }
 }
