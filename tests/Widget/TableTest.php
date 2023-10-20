@@ -137,5 +137,30 @@ class TableTest extends TestCase
             ]
            ,
         ];
+
+        yield 'offset out of range' => [
+            Area::fromDimensions(10, 4),
+            Table::default()
+                ->offset(5)
+                ->rows([
+                    TableRow::fromCells([TableCell::fromString('1'), TableCell::fromString('2')]),
+                    TableRow::fromCells([TableCell::fromString('1'), TableCell::fromString('2')]),
+                    TableRow::fromCells([TableCell::fromString('1'), TableCell::fromString('2')]),
+                    TableRow::fromCells([TableCell::fromString('1'), TableCell::fromString('2')]),
+                    TableRow::fromCells([TableCell::fromString('1'), TableCell::fromString('2')]),
+                    TableRow::fromCells([TableCell::fromString('1'), TableCell::fromString('2')]),
+                    TableRow::fromCells([TableCell::fromString('1'), TableCell::fromString('2')]),
+                    TableRow::fromCells([TableCell::fromString('1'), TableCell::fromString('2')]),
+                    TableRow::fromCells([TableCell::fromString('1'), TableCell::fromString('2')]),
+                    TableRow::fromCells([TableCell::fromString('1'), TableCell::fromString('2')]),
+                ]),
+            [
+                'Ones Twos ',
+                '1    2    ',
+                '1-1  2-2  ',
+                '          ',
+            ]
+           ,
+        ];
     }
 }
