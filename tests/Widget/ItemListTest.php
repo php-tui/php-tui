@@ -111,6 +111,22 @@ class ItemListTest extends TestCase
                 '>>3',
             ]
         ];
+        yield 'scroll to selected if offset out of range' => [
+            Area::fromDimensions(3, 2),
+            ItemList::default()
+                ->offset(0)
+                ->select(3)
+                ->items([
+                    ListItem::new(Text::raw('1')),
+                    ListItem::new(Text::raw('2')),
+                    ListItem::new(Text::raw('3')),
+                    ListItem::new(Text::raw('4')),
+                ]),
+            [
+                '  3',
+                '>>4',
+            ]
+        ];
     }
 }
 
