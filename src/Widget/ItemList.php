@@ -72,7 +72,7 @@ class ItemList implements Widget
             $itemStyle = $this->style->patch($item->style);
             $buffer->setStyle($area, $itemStyle);
 
-            $isSelected = $this->state->selected === $i;
+            $isSelected = $this->state->selected === $i + $start;
             foreach ($item->content->lines as $j => $line) {
                 $symbol = $isSelected && $j === 0 ?
                     $highlightSymbol :
