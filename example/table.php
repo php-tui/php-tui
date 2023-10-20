@@ -95,6 +95,9 @@ class App
         $table = Table::default()
             ->state($this->state)
             ->block(Block::default()->title(Title::fromString('List'))->borders(Borders::ALL))
+            ->select(rand(0, count(self::EVENTS)))
+            ->highlightSymbol('X')
+            ->highlightStyle(Style::default()->bg(AnsiColor::Cyan)->fg(AnsiColor::Black))
             ->widths([
                 Constraint::percentage(10),
                 Constraint::min(10),

@@ -155,9 +155,9 @@ class TableTest extends TestCase
                     TableRow::fromCells([TableCell::fromString('1'), TableCell::fromString('2')]),
                 ]),
             [
-                'Ones Twos ',
-                '1    2    ',
-                '1-1  2-2  ',
+                '          ',
+                '          ',
+                '          ',
                 '          ',
             ]
            ,

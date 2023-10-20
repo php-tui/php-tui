@@ -95,18 +95,18 @@ final class Table implements Widget
 
         [$start, $end] = $this->getRowBounds($rowsHeight);
         $this->state->offset = $start;
-        foreach (array_slice($this->rows, $start, $end) as $i => $tableRow) {
-            [$row, $innerOffset] = [$tableArea->top() + $currentHeight, $tableArea->left()];
+        foreach (array_slice($this->rows, $start, $end - $start) as $i => $tableRow) {
+            [$rowY, $innerOffset] = [$tableArea->top() + $currentHeight, $tableArea->left()];
 
             $currentHeight += $tableRow->totalHeight();
-            $tableRowArea = Area::fromPrimitives($innerOffset, $row, $tableArea->width, $tableRow->height);
+            $tableRowArea = Area::fromPrimitives($innerOffset, $rowY, $tableArea->width, $tableRow->height);
             $buffer->setStyle($tableRowArea, $tableRow->style);
             $isSelected = $this->state->selected === $i + $start;
             if ($selectionWidth > 0 && $isSelected) {
                 $buffer->putString(
                     Position::at(
                         $innerOffset,
-                        $row,
+                        $rowY,
                     ),
                     $highlightSymbol,
                     $tableRow->style,
@@ -123,7 +123,7 @@ final class Table implements Widget
                     $cell,
                     Area::fromPrimitives(
                         $innerOffset + $width[0],
-                        $row,
+                        $rowY,
                         $width[1],
                         $tableRow->height,
                     )
@@ -288,6 +288,18 @@ final class Table implements Widget
     public function state(TableState $state): self
     {
         $this->state = $state;
+        return $this;
+    }
+
+    public function highlightSymbol(string $symbol): self
+    {
+        $this->highlightSymbol = $symbol;
+        return $this;
+    }
+
+    public function highlightStyle(Style $style): self
+    {
+        $this->highlightStyle = $style;
         return $this;
     }
 }
