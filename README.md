@@ -14,7 +14,7 @@ Widgets
 - [x] Block
 - [x] Paragraph
 - [x] List
-- [ ] Table
+- [x] Table
 - [ ] Tabs
 - [ ] Calendar
 - [ ] Barchart
