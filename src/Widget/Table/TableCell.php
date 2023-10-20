@@ -16,4 +16,9 @@ final class TableCell
     {
         return new self(Text::fromLine(Line::fromString($string)), Style::default());
     }
+
+    public static function fromLine(Line $line): self
+    {
+        return new self(Text::fromLine($line), Style::default());
+    }
 }

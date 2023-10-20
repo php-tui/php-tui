@@ -12,6 +12,7 @@ use DTL\PhpTui\Model\Style;
 use DTL\PhpTui\Model\Widget;
 use DTL\PhpTui\Model\Widget\HorizontalAlignment;
 use DTL\PhpTui\Widget\ItemList\HighlightSpacing;
+use DTL\PhpTui\Widget\ItemList\ItemListState;
 use DTL\PhpTui\Widget\Table\TableCell;
 use DTL\PhpTui\Widget\Table\TableRow;
 use DTL\PhpTui\Widget\Table\TableState;
@@ -275,6 +276,18 @@ final class Table implements Widget
     public function offset(int $offset): self
     {
         $this->state->offset = $offset;
+        return $this;
+    }
+
+    public function block(Block $block): self
+    {
+        $this->block = $block;
+        return $this;
+    }
+
+    public function state(TableState $state): self
+    {
+        $this->state = $state;
         return $this;
     }
 }
