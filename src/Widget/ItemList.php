@@ -8,17 +8,17 @@ use DTL\PhpTui\Model\Corner;
 use DTL\PhpTui\Model\Position;
 use DTL\PhpTui\Model\Style;
 use DTL\PhpTui\Model\Widget;
-use DTL\PhpTui\Widget\Table\HighlightSpacing;
-use DTL\PhpTui\Widget\Table\TableItem;
-use DTL\PhpTui\Widget\Table\TableState;
+use DTL\PhpTui\Widget\ItemList\HighlightSpacing;
+use DTL\PhpTui\Widget\ItemList\ListItem;
+use DTL\PhpTui\Widget\ItemList\TableState;
 
 /**
  * Port of the Ratatui List - which is a reserved word in PHP
  */
-class Table implements Widget
+class ItemList implements Widget
 {
     /**
-     * @param list<TableItem> $items
+     * @param list<ListItem> $items
      */
     public function __construct(
         private ?Block $block,
@@ -57,8 +57,8 @@ class Table implements Widget
         $currentHeight = 0;
         $selectionSpacing = $this->highlightSpacing->shouldAdd($this->state->selected !== null);
         foreach (array_slice($this->items, $start, $end-$start) as $i => $item) {
-            /** @var TableItem $item */
-            if ($i === $this->state->offset) {
+            /** @var ListItem $item */
+            if ($i < $this->state->offset) {
                 continue;
             }
 
@@ -68,9 +68,9 @@ class Table implements Widget
                     return [$listArea->left(), $listArea->bottom() - $currentHeight, $currentHeight];
                 }
 
-                $pos = [$listArea->left(), $listArea->top() + $currentHeight, $currentHeight];
+                $y = $listArea->top() + $currentHeight;
                 $currentHeight += $item->height();
-                return $pos;
+                return [$listArea->left(), $y, $currentHeight];
             })();
 
             $area = Area::fromPrimitives($x, $y, $listArea->width, $item->height());
@@ -107,6 +107,30 @@ class Table implements Widget
 
     }
 
+    public static function default(): self
+    {
+        return new self(
+            block: null,
+            items: [],
+            style: Style::default(),
+            startCorner: Corner::TopLeft,
+            highlightStyle: Style::default(),
+            highlightSymbol: '>>',
+            state: new TableState(0, null),
+            highlightSpacing: HighlightSpacing::WhenSelected,
+        );
+    }
+
+    /**
+     * @param list<ListItem> $items
+     */
+    public function items(array $items): self
+    {
+        $this->items = $items;
+
+        return $this;
+    }
+
     /**
      * @return array{int,int}
      */
@@ -116,7 +140,7 @@ class Table implements Widget
         $start = $end = $offset;
         $height = 0;
         foreach ($this->items as $i => $item) {
-            if ($i === $offset) {
+            if ($i < $offset) {
                 continue;
             }
 

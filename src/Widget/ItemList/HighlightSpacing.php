@@ -1,6 +1,6 @@
 <?php
 
-namespace DTL\PhpTui\Widget\Table;
+namespace DTL\PhpTui\Widget\ItemList;
 
 enum HighlightSpacing
 {
