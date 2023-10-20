@@ -34,4 +34,9 @@ final class Text
 
         return $this;
     }
+
+    public function height(): int
+    {
+        return count($this->lines);
+    }
 }
