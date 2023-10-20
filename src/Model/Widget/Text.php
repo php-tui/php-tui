@@ -20,6 +20,11 @@ final class Text
         }, explode("\n", $string)));
     }
 
+    public static function fromLine(Line $line): self
+    {
+        return new self([$line]);
+    }
+
     public static function styled(string $string, Style $style): self
     {
         $text = self::raw($string);

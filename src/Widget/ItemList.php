@@ -10,7 +10,7 @@ use DTL\PhpTui\Model\Style;
 use DTL\PhpTui\Model\Widget;
 use DTL\PhpTui\Widget\ItemList\HighlightSpacing;
 use DTL\PhpTui\Widget\ItemList\ListItem;
-use DTL\PhpTui\Widget\ItemList\TableState;
+use DTL\PhpTui\Widget\ItemList\ItemListState;
 
 /**
  * Port of the Ratatui List - which is a reserved word in PHP
@@ -27,7 +27,7 @@ class ItemList implements Widget
         private Corner $startCorner,
         private Style $highlightStyle,
         private string $highlightSymbol,
-        private TableState $state,
+        private ItemListState $state,
         private HighlightSpacing $highlightSpacing,
     ) {
     }
@@ -111,7 +111,7 @@ class ItemList implements Widget
             startCorner: Corner::TopLeft,
             highlightStyle: Style::default(),
             highlightSymbol: '>>',
-            state: new TableState(0, null),
+            state: new ItemListState(0, null),
             highlightSpacing: HighlightSpacing::WhenSelected,
         );
     }
@@ -182,5 +182,17 @@ class ItemList implements Widget
 
         return [$start, $end];
 
+    }
+
+    public function state(ItemListState $state): self
+    {
+        $this->state = $state;
+        return $this;
+    }
+
+    public function block(Block $block): self
+    {
+        $this->block = $block;
+        return $this;
     }
 }
