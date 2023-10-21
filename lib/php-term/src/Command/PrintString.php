@@ -6,7 +6,7 @@ use DTL\PhpTerm\TermCommand;
 
 final class PrintString implements TermCommand
 {
-    public function __construct(private string $string)
+    public function __construct(public readonly string $string)
     {
     }
 

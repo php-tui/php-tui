@@ -4,6 +4,7 @@ namespace DTL\PhpTerm;
 
 enum TermColor
 {
+    case Reset;
     case Black;
     case Red;
     case Green;

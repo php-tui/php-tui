@@ -3,6 +3,7 @@
 namespace DTL\PhpTerm;
 
 use DTL\PhpTerm\Backend\AnsiBackend;
+use DTL\PhpTerm\Writer\StreamWriter;
 
 class TermControl
 {
@@ -17,7 +18,7 @@ class TermControl
 
     public static function new(TermBackend $backend = null): self
     {
-        return new self($backend ?: new AnsiBackend());
+        return new self($backend ?: AnsiBackend::new(StreamWriter::stdout()));
     }
 
     public function queue(TermCommand $command): self

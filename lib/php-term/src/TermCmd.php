@@ -60,9 +60,9 @@ class TermCmd
         return new SetBackgroundColor($color);
     }
 
-    public static function moveCursor(int $line, int $row): MoveCursor
+    public static function moveCursor(int $line, int $col): MoveCursor
     {
-        return new MoveCursor($line, $row);
+        return new MoveCursor($line, $col);
     }
 
     public static function reset(): Reset

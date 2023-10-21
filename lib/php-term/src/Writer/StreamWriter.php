@@ -13,7 +13,7 @@ class StreamWriter implements TermWriter
     {
     }
 
-    public function stdout(): self
+    public static function stdout(): self
     {
         return new self(STDOUT);
     }

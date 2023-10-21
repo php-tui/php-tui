@@ -1,5 +1,6 @@
 <?php
 
+use DTL\PhpTui\Adapter\PhpTerm\PhpTermBackend;
 use DTL\PhpTui\Adapter\Symfony\SymfonyBackend;
 use DTL\PhpTui\Model\AnsiColor;
 use DTL\PhpTui\Model\Area;
@@ -64,13 +65,13 @@ class App
         $cursor = new Cursor(new ConsoleOutput());
         $cursor->hide();
         $cursor->clearScreen();
-        $backend = SymfonyBackend::new();
+        $backend = PhpTermBackend::new();
         $terminal = Terminal::fullscreen($backend);
         while (true) {
             $terminal->draw(function (Buffer $buffer) use ($app): void {
                 $app->ui($buffer);
             });
-            usleep(1000);
+            usleep(100000);
             $app->onTick();
         }
     }

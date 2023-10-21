@@ -5,6 +5,7 @@ namespace DTL\PhpTerm\Backend;
 use DTL\PhpTerm\Command\AlternateScreenEnable;
 use DTL\PhpTerm\Command\CursorShow;
 use DTL\PhpTerm\Command\MoveCursor;
+use DTL\PhpTerm\Command\PrintString;
 use DTL\PhpTerm\Command\Reset;
 use DTL\PhpTerm\Command\SetBackgroundColor;
 use DTL\PhpTerm\Command\SetForegroundColor;
@@ -40,9 +41,22 @@ final class AnsiBackend implements TermBackend
 
     private function drawCommand(TermCommand $command): void
     {
-        $this->writer->write($this->csi(match (true) {
-            $command instanceof SetBackgroundColor => sprintf('48;%dm', $this->colorIndex($command->color)),
-            $command instanceof SetForegroundColor => sprintf('38;%dm', $this->colorIndex($command->color)),
+        if ($command instanceof PrintString) {
+            $this->writer->write($command->string);
+            return;
+        }
+        if ($command instanceof SetForegroundColor && $command->color === TermColor::Reset) {
+            $this->writer->write($this->esc('39m'));
+            return;
+        }
+        if ($command instanceof SetBackgroundColor && $command->color === TermColor::Reset) {
+            $this->writer->write($this->esc('49m'));
+            return;
+        }
+
+        $this->writer->write($this->esc(match (true) {
+            $command instanceof SetForegroundColor => sprintf('38;5;%dm', $this->colorIndex($command->color)),
+            $command instanceof SetBackgroundColor => sprintf('48;5;%dm', $this->colorIndex($command->color)),
             $command instanceof SetRgbBackgroundColor => sprintf('48;2;%d;%d;%dm', $command->r, $command->g, $command->b),
             $command instanceof SetRgbForegroundColor => sprintf('38;2;%d;%d;%dm', $command->r, $command->g, $command->b),
             $command instanceof CursorShow => sprintf('?25%s', $command->show ? 'h' : 'l'),
@@ -58,7 +72,7 @@ final class AnsiBackend implements TermBackend
 
     private function csi(string $code): string
     {
-        return sprintf('\e[%s', $code);
+        return sprintf("\x1b[%s", $code);
     }
 
     private function colorIndex(TermColor $termColor): int
@@ -80,6 +94,7 @@ final class AnsiBackend implements TermBackend
             TermColor::LightMagenta => 13,
             TermColor::LightCyan => 14,
             TermColor::White => 15,
+            default => throw new RuntimeException(sprintf('Do not know how to handle color: %s', $termColor->name)),
         };
     }
 
@@ -96,5 +111,10 @@ final class AnsiBackend implements TermBackend
             TermModifier::Strike => 9,
             TermModifier::Reverse => 7,
         };
+    }
+
+    private function esc(string $command): string
+    {
+        return sprintf("\033[%s", $command);
     }
 }
