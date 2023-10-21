@@ -122,11 +122,59 @@ class PhpTermBackend implements Backend
         if ($removed->contains(Modifier::Italic)) {
             $this->control->queue(TermCmd::italic(false));
         }
+        if ($removed->contains(Modifier::Bold)) {
+            $this->control->queue(TermCmd::bold(false));
+        }
+        if ($removed->contains(Modifier::Reversed)) {
+            $this->control->queue(TermCmd::reverse(false));
+        }
+        if ($removed->contains(Modifier::Dim)) {
+            $this->control->queue(TermCmd::dim(false));
+        }
+        if ($removed->contains(Modifier::Hidden)) {
+            $this->control->queue(TermCmd::hidden(false));
+        }
+        if ($removed->contains(Modifier::SlowBlink)) {
+            $this->control->queue(TermCmd::blink(false));
+        }
+        if ($removed->contains(Modifier::Underlined)) {
+            $this->control->queue(TermCmd::underline(false));
+        }
+        if ($removed->contains(Modifier::RapidBlink)) {
+            $this->control->queue(TermCmd::blink(false));
+        }
+        if ($removed->contains(Modifier::CrossedOut)) {
+            $this->control->queue(TermCmd::strike(false));
+        }
 
         $added = $to->sub($from);
 
         if ($added->contains(Modifier::Italic)) {
             $this->control->queue(TermCmd::italic(true));
+        }
+        if ($added->contains(Modifier::Bold)) {
+            $this->control->queue(TermCmd::bold(true));
+        }
+        if ($added->contains(Modifier::Reversed)) {
+            $this->control->queue(TermCmd::reverse(true));
+        }
+        if ($added->contains(Modifier::Dim)) {
+            $this->control->queue(TermCmd::dim(true));
+        }
+        if ($added->contains(Modifier::Hidden)) {
+            $this->control->queue(TermCmd::hidden(true));
+        }
+        if ($added->contains(Modifier::SlowBlink)) {
+            $this->control->queue(TermCmd::blink(true));
+        }
+        if ($added->contains(Modifier::Underlined)) {
+            $this->control->queue(TermCmd::underline(true));
+        }
+        if ($added->contains(Modifier::RapidBlink)) {
+            $this->control->queue(TermCmd::blink(true));
+        }
+        if ($added->contains(Modifier::CrossedOut)) {
+            $this->control->queue(TermCmd::strike(true));
         }
     }
 }
