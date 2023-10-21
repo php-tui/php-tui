@@ -27,6 +27,7 @@ class BufferTest extends TestCase
         $buffer = Buffer::filled(Area::fromPrimitives(0, 0, 10, 10), Cell::fromChar('X'));
         self::assertCount(100, $buffer);
         self::assertEquals(array_fill(0, 100, Cell::fromChar('X')), $buffer->content());
+        self::assertNotSame($buffer->get(Position::at(0,0))->modifier, $buffer->get(Position::at(1,1))->modifier, 'cells are propertly cloned!');
     }
 
     public function testFromLines(): void

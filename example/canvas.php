@@ -1,5 +1,7 @@
 <?php
 
+use DTL\PhpTerm\Backend\BufferBackend;
+use DTL\PhpTerm\TermControl;
 use DTL\PhpTui\Adapter\PhpTerm\PhpTermBackend;
 use DTL\PhpTui\Adapter\Symfony\SymfonyBackend;
 use DTL\PhpTui\Model\AnsiColor;
@@ -28,6 +30,7 @@ use DTL\PhpTui\Widget\Canvas\Shape\MapResolution;
 use DTL\PhpTui\Widget\Canvas\Shape\Rectangle;
 use Symfony\Component\Console\Cursor;
 use Symfony\Component\Console\Output\ConsoleOutput;
+use Symfony\Component\Console\Terminal as SymfonyTerminal;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
@@ -66,13 +69,15 @@ class App
         $cursor = new Cursor(new ConsoleOutput());
         $cursor->hide();
         $cursor->clearScreen();
+        $b = BufferBackend::new();
+        $backend = new PhpTermBackend(TermControl::new($b), new SymfonyTerminal());
         $backend = PhpTermBackend::new();
         $terminal = Terminal::fullscreen($backend);
         while (true) {
-            $terminal->draw(function (Buffer $buffer) use ($app): void {
+            $terminal->draw(function (Buffer $buffer) use ($app, $b): void {
                 $app->ui($buffer);
             });
-            usleep(100000);
+            usleep(16000);
             $app->onTick();
         }
     }

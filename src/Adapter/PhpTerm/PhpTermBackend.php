@@ -52,7 +52,7 @@ class PhpTermBackend implements Backend
 
             if (false === $update->cell->modifier->equals($modifier)) {
                 $this->queueModifiers($modifier, $update->cell->modifier);
-                $modifier = $update->cell->modifier;
+                $modifier = clone $update->cell->modifier;
             }
 
             if ($update->cell->fg !== $fg) {
@@ -114,6 +114,9 @@ class PhpTermBackend implements Backend
 
     private function queueModifiers(Modifiers $from, Modifiers $to): void
     {
+        // TODO: make this immutable!
+        $from = clone $from;
+        $to = clone $to;
         $removed = $from->sub($to);
 
         if ($removed->contains(Modifier::Italic)) {

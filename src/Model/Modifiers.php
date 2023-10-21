@@ -20,6 +20,7 @@ final class Modifiers
             $this->modifiers = $this->modifiers & ~$modifier->modifiers;
             return $this;
         }
+
         $this->modifiers = $this->modifiers & ~$modifier->value;
         return $this;
     }

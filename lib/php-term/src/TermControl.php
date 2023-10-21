@@ -33,4 +33,8 @@ class TermControl
         $this->queue = [];
         return $this;
     }
+
+    public function getWidth()
+    {
+    }
 }

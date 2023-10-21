@@ -73,4 +73,15 @@ final class Cell
             $this->char === $currentCell->char
         ;
     }
+
+    public function clone(): self
+    {
+        return new self(
+            char: $this->char,
+            fg: $this->fg,
+            bg: $this->bg,
+            underline: $this->underline,
+            modifier: clone $this->modifier,
+        );
+    }
 }
