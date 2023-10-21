@@ -1,10 +1,10 @@
 <?php
 
-namespace DTL\PhpTerm\Command;
+namespace DTL\PhpTerm\Action;
 
-use DTL\PhpTerm\TermCommand;
+use DTL\PhpTerm\Action;
 
-final class SetRgbBackgroundColor implements TermCommand
+final class SetRgbForegroundColor implements Action
 {
     public function __construct(public readonly int $r, public readonly int $g, public readonly int $b)
     {

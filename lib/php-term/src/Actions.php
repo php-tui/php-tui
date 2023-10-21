@@ -1,19 +1,19 @@
 <?php
 
 namespace DTL\PhpTerm;
-use DTL\PhpTerm\Command\AlternateScreenEnable;
-use DTL\PhpTerm\Command\MoveCursor;
-use DTL\PhpTerm\Command\Reset;
-use DTL\PhpTerm\Command\SetModifier;
-use DTL\PhpTerm\Command\CursorShow;
-use DTL\PhpTerm\Command\SetBackgroundColor;
-use DTL\PhpTerm\Command\SetRgbBackgroundColor;
-use DTL\PhpTerm\Command\SetRgbForegroundColor;
-use DTL\PhpTerm\Command\SetForegroundColor;
+use DTL\PhpTerm\Action\AlternateScreenEnable;
+use DTL\PhpTerm\Action\MoveCursor;
+use DTL\PhpTerm\Action\Reset;
+use DTL\PhpTerm\Action\SetModifier;
+use DTL\PhpTerm\Action\CursorShow;
+use DTL\PhpTerm\Action\SetBackgroundColor;
+use DTL\PhpTerm\Action\SetRgbBackgroundColor;
+use DTL\PhpTerm\Action\SetRgbForegroundColor;
+use DTL\PhpTerm\Action\SetForegroundColor;
 
-use DTL\PhpTerm\Command\PrintString;
+use DTL\PhpTerm\Action\PrintString;
 
-class TermCmd
+final class Actions
 {
     public static function alternateScreenEnable(): AlternateScreenEnable
     {
@@ -50,12 +50,12 @@ class TermCmd
         return new SetRgbBackgroundColor($r, $g, $b);
     }
 
-    public static function setForegroundColor(TermColor $color): SetForegroundColor
+    public static function setForegroundColor(Colors $color): SetForegroundColor
     {
         return new SetForegroundColor($color);
     }
 
-    public static function setBackgroundColor(TermColor $color): SetBackgroundColor
+    public static function setBackgroundColor(Colors $color): SetBackgroundColor
     {
         return new SetBackgroundColor($color);
     }
@@ -72,41 +72,45 @@ class TermCmd
 
     public static function bold(bool $enable): SetModifier
     {
-        return new SetModifier(TermModifier::Bold, $enable);
+        return new SetModifier(Attribute::Bold, $enable);
     }
 
     public static function dim(bool $enable): SetModifier
     {
-        return new SetModifier(TermModifier::Dim, $enable);
+        return new SetModifier(Attribute::Dim, $enable);
     }
 
     public static function italic(bool $enable): SetModifier
     {
-        return new SetModifier(TermModifier::Italic, $enable);
+        return new SetModifier(Attribute::Italic, $enable);
     }
 
     public static function underline(bool $enable): SetModifier
     {
-        return new SetModifier(TermModifier::Underline, $enable);
+        return new SetModifier(Attribute::Underline, $enable);
     }
 
-    public static function blink(bool $enable): SetModifier
+    public static function slowBlink(bool $enable): SetModifier
     {
-        return new SetModifier(TermModifier::Blink, $enable);
+        return new SetModifier(Attribute::SlowBlink, $enable);
+    }
+    public static function rapidBlink(bool $enable): SetModifier
+    {
+        return new SetModifier(Attribute::RapidBlink, $enable);
     }
 
     public static function reverse(bool $enable): SetModifier
     {
-        return new SetModifier(TermModifier::Reverse, $enable);
+        return new SetModifier(Attribute::Reverse, $enable);
     }
 
     public static function hidden(bool $enable): SetModifier
     {
-        return new SetModifier(TermModifier::Hidden, $enable);
+        return new SetModifier(Attribute::Hidden, $enable);
     }
 
     public static function strike(bool $enable): SetModifier
     {
-        return new SetModifier(TermModifier::Strike, $enable);
+        return new SetModifier(Attribute::Strike, $enable);
     }
 }

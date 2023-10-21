@@ -2,7 +2,7 @@
 
 namespace DTL\PhpTerm;
 
-enum TermModifier
+enum Attribute
 {
     case Reset;
     case Bold;
@@ -10,7 +10,8 @@ enum TermModifier
     case Italic;
     case Underline;
     case Strike;
-    case Blink;
+    case SlowBlink;
+    case RapidBlink;
     case Hidden;
     case Reverse;
 }

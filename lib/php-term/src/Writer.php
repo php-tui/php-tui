@@ -2,7 +2,7 @@
 
 namespace DTL\PhpTerm;
 
-interface TermWriter
+interface Writer
 {
     public function write(string $bytes): void;
 }

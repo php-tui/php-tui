@@ -2,9 +2,9 @@
 
 namespace DTL\PhpTui\Adapter\PhpTerm;
 
-use DTL\PhpTerm\TermColor;
-use DTL\PhpTerm\TermCmd;
-use DTL\PhpTerm\TermControl;
+use DTL\PhpTerm\Actions;
+use DTL\PhpTerm\Colors;
+use DTL\PhpTerm\Terminal as PhpTermTerminal;
 use DTL\PhpTui\Model\AnsiColor;
 use DTL\PhpTui\Model\Area;
 use DTL\PhpTui\Model\Backend;
@@ -17,13 +17,13 @@ use Symfony\Component\Console\Terminal;
 
 class PhpTermBackend implements Backend
 {
-    public function __construct(private TermControl $control, private Terminal $terminal)
+    public function __construct(private PhpTermTerminal $control, private Terminal $terminal)
     {
     }
 
     public static function new(): self
     {
-        return new self(TermControl::new(), new Terminal());
+        return new self(PhpTermTerminal::new(), new Terminal());
     }
 
 
@@ -46,7 +46,7 @@ class PhpTermBackend implements Backend
 
             // do not move the cursor if its been implicitly moved by printing the last symbol
             if (null === $lastPos || ($update->position->y !== $lastPos->y || $update->position->x !== $lastPos->x + 1)) {
-                $this->control->queue(TermCmd::moveCursor($update->position->y + 1, $update->position->x + 1));
+                $this->control->queue(Actions::moveCursor($update->position->y + 1, $update->position->x + 1));
             }
             $lastPos = $update->position;
 
@@ -56,20 +56,20 @@ class PhpTermBackend implements Backend
             }
 
             if ($update->cell->fg !== $fg) {
-                $this->control->queue(TermCmd::setForegroundColor($this->resolveColor($update->cell->fg)));
+                $this->control->queue(Actions::setForegroundColor($this->resolveColor($update->cell->fg)));
                 $fg = $update->cell->fg;
             }
 
             if ($update->cell->bg !== $bg) {
-                $this->control->queue(TermCmd::setBackgroundColor($this->resolveColor($update->cell->bg)));
+                $this->control->queue(Actions::setBackgroundColor($this->resolveColor($update->cell->bg)));
                 $bg = $update->cell->bg;
             }
-            $this->control->queue(TermCmd::printString($update->cell->char));
+            $this->control->queue(Actions::printString($update->cell->char));
         }
 
-        $this->control->queue(TermCmd::setForegroundColor(TermColor::Reset));
-        $this->control->queue(TermCmd::setBackgroundColor(TermColor::Reset));
-        $this->control->queue(TermCmd::reset());
+        $this->control->queue(Actions::setForegroundColor(Colors::Reset));
+        $this->control->queue(Actions::setBackgroundColor(Colors::Reset));
+        $this->control->queue(Actions::reset());
     }
 
     public function flush(): void
@@ -77,7 +77,7 @@ class PhpTermBackend implements Backend
         $this->control->flush();
     }
 
-    private function resolveColor(Color $color): TermColor
+    private function resolveColor(Color $color): Colors
     {
         if ($color instanceof AnsiColor) {
             return $this->toPhpTermColor($color);
@@ -89,26 +89,26 @@ class PhpTermBackend implements Backend
         ));
     }
 
-    private function toPhpTermColor(AnsiColor $color): TermColor
+    private function toPhpTermColor(AnsiColor $color): Colors
     {
         return match($color) {
-            AnsiColor::Black => TermColor::Black,
-            AnsiColor::Red => TermColor::Red,
-            AnsiColor::Green => TermColor::Green,
-            AnsiColor::Yellow => TermColor::Yellow,
-            AnsiColor::Blue => TermColor::Blue,
-            AnsiColor::Magenta => TermColor::Magenta,
-            AnsiColor::Cyan => TermColor::Cyan,
-            AnsiColor::Gray => TermColor::Gray,
-            AnsiColor::DarkGray => TermColor::DarkGray,
-            AnsiColor::LightRed => TermColor::LightRed,
-            AnsiColor::LightGreen => TermColor::LightGreen,
-            AnsiColor::LightYellow => TermColor::LightYellow,
-            AnsiColor::LightBlue => TermColor::LightBlue,
-            AnsiColor::LightMagenta => TermColor::LightMagenta,
-            AnsiColor::LightCyan => TermColor::LightCyan,
-            AnsiColor::White => TermColor::White,
-            AnsiColor::Reset => TermColor::Reset,
+            AnsiColor::Black => Colors::Black,
+            AnsiColor::Red => Colors::Red,
+            AnsiColor::Green => Colors::Green,
+            AnsiColor::Yellow => Colors::Yellow,
+            AnsiColor::Blue => Colors::Blue,
+            AnsiColor::Magenta => Colors::Magenta,
+            AnsiColor::Cyan => Colors::Cyan,
+            AnsiColor::Gray => Colors::Gray,
+            AnsiColor::DarkGray => Colors::DarkGray,
+            AnsiColor::LightRed => Colors::LightRed,
+            AnsiColor::LightGreen => Colors::LightGreen,
+            AnsiColor::LightYellow => Colors::LightYellow,
+            AnsiColor::LightBlue => Colors::LightBlue,
+            AnsiColor::LightMagenta => Colors::LightMagenta,
+            AnsiColor::LightCyan => Colors::LightCyan,
+            AnsiColor::White => Colors::White,
+            AnsiColor::Reset => Colors::Reset,
         };
     }
 
@@ -120,61 +120,61 @@ class PhpTermBackend implements Backend
         $removed = $from->sub($to);
 
         if ($removed->contains(Modifier::Italic)) {
-            $this->control->queue(TermCmd::italic(false));
+            $this->control->queue(Actions::italic(false));
         }
         if ($removed->contains(Modifier::Bold)) {
-            $this->control->queue(TermCmd::bold(false));
+            $this->control->queue(Actions::bold(false));
         }
         if ($removed->contains(Modifier::Reversed)) {
-            $this->control->queue(TermCmd::reverse(false));
+            $this->control->queue(Actions::reverse(false));
         }
         if ($removed->contains(Modifier::Dim)) {
-            $this->control->queue(TermCmd::dim(false));
+            $this->control->queue(Actions::dim(false));
         }
         if ($removed->contains(Modifier::Hidden)) {
-            $this->control->queue(TermCmd::hidden(false));
+            $this->control->queue(Actions::hidden(false));
         }
         if ($removed->contains(Modifier::SlowBlink)) {
-            $this->control->queue(TermCmd::blink(false));
+            $this->control->queue(Actions::slowBlink(false));
         }
         if ($removed->contains(Modifier::Underlined)) {
-            $this->control->queue(TermCmd::underline(false));
+            $this->control->queue(Actions::underline(false));
         }
         if ($removed->contains(Modifier::RapidBlink)) {
-            $this->control->queue(TermCmd::blink(false));
+            $this->control->queue(Actions::rapidBlink(false));
         }
         if ($removed->contains(Modifier::CrossedOut)) {
-            $this->control->queue(TermCmd::strike(false));
+            $this->control->queue(Actions::strike(false));
         }
 
         $added = $to->sub($from);
 
         if ($added->contains(Modifier::Italic)) {
-            $this->control->queue(TermCmd::italic(true));
+            $this->control->queue(Actions::italic(true));
         }
         if ($added->contains(Modifier::Bold)) {
-            $this->control->queue(TermCmd::bold(true));
+            $this->control->queue(Actions::bold(true));
         }
         if ($added->contains(Modifier::Reversed)) {
-            $this->control->queue(TermCmd::reverse(true));
+            $this->control->queue(Actions::reverse(true));
         }
         if ($added->contains(Modifier::Dim)) {
-            $this->control->queue(TermCmd::dim(true));
+            $this->control->queue(Actions::dim(true));
         }
         if ($added->contains(Modifier::Hidden)) {
-            $this->control->queue(TermCmd::hidden(true));
+            $this->control->queue(Actions::hidden(true));
         }
         if ($added->contains(Modifier::SlowBlink)) {
-            $this->control->queue(TermCmd::blink(true));
+            $this->control->queue(Actions::slowBlink(true));
         }
         if ($added->contains(Modifier::Underlined)) {
-            $this->control->queue(TermCmd::underline(true));
+            $this->control->queue(Actions::underline(true));
         }
         if ($added->contains(Modifier::RapidBlink)) {
-            $this->control->queue(TermCmd::blink(true));
+            $this->control->queue(Actions::rapidBlink(true));
         }
         if ($added->contains(Modifier::CrossedOut)) {
-            $this->control->queue(TermCmd::strike(true));
+            $this->control->queue(Actions::strike(true));
         }
     }
 }

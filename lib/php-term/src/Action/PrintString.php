@@ -1,10 +1,10 @@
 <?php
 
-namespace DTL\PhpTerm\Command;
+namespace DTL\PhpTerm\Action;
 
-use DTL\PhpTerm\TermCommand;
+use DTL\PhpTerm\Action;
 
-final class PrintString implements TermCommand
+final class PrintString implements Action
 {
     public function __construct(public readonly string $string)
     {
