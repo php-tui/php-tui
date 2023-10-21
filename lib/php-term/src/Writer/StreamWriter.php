@@ -2,9 +2,9 @@
 
 namespace DTL\PhpTerm\Writer;
 
-use DTL\PhpTerm\TermWriter;
+use DTL\PhpTerm\Writer;
 
-class StreamWriter implements TermWriter
+class StreamWriter implements Writer
 {
     /**
      * @param resource $stream

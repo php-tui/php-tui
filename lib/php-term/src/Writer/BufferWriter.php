@@ -2,9 +2,9 @@
 
 namespace DTL\PhpTerm\Writer;
 
-use DTL\PhpTerm\TermWriter;
+use DTL\PhpTerm\Writer;
 
-final class BufferWriter implements TermWriter
+final class BufferWriter implements Writer
 {
     private function __construct(private string $buffer)
     {

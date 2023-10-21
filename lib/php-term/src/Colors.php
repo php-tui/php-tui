@@ -2,7 +2,7 @@
 
 namespace DTL\PhpTerm;
 
-enum TermColor
+enum Colors
 {
     case Reset;
     case Black;

@@ -1,10 +1,10 @@
 <?php
 
-namespace DTL\PhpTerm\Command;
+namespace DTL\PhpTerm\Action;
 
-use DTL\PhpTerm\TermCommand;
+use DTL\PhpTerm\Action;
 
-class AlternateScreenEnable implements TermCommand
+class AlternateScreenEnable implements Action
 {
     public function __construct(public readonly bool $enable)
     {

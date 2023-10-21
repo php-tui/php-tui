@@ -2,9 +2,9 @@
 
 namespace DTL\PhpTui\Tests\Adapter\PhpTerm;
 
-use DTL\PhpTerm\Backend\BufferBackend;
-use DTL\PhpTerm\TermCommand;
-use DTL\PhpTerm\TermControl;
+use DTL\PhpTerm\Painter\BufferPainter;
+use DTL\PhpTerm\Action;
+use DTL\PhpTerm\Terminal;
 use DTL\PhpTui\Adapter\PhpTerm\PhpTermBackend;
 use DTL\PhpTui\Model\AnsiColor;
 use DTL\PhpTui\Model\BufferUpdate;
@@ -14,13 +14,13 @@ use DTL\PhpTui\Model\Cell;
 use DTL\PhpTui\Model\Position;
 use DTL\PhpTui\Model\BufferUpdates;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\Console\Terminal;
+use Symfony\Component\Console\Terminal as SymfonyTerminal;
 
 class PhpTermBackendTest extends TestCase
 {
     public function testDiagnonalLine(): void
     {
-        $buffer = BufferBackend::new();
+        $buffer = BufferPainter::new();
         $this->draw($buffer, new BufferUpdates([
             new BufferUpdate(
                 Position::at(0, 0),
@@ -47,12 +47,12 @@ class PhpTermBackendTest extends TestCase
             'SetForegroundColor(Reset)',
             'SetBackgroundColor(Reset)',
             'Reset()',
-        ], array_map(fn (TermCommand $command) => $command->__toString(), $buffer->commands()));
+        ], array_map(fn (Action $action) => $action->__toString(), $buffer->actions()));
     }
 
     public function testDoesNotMoveCursorUnnecessarily(): void
     {
-        $buffer = BufferBackend::new();
+        $buffer = BufferPainter::new();
         $this->draw($buffer, new BufferUpdates([
             new BufferUpdate(
                 Position::at(0, 0),
@@ -77,11 +77,11 @@ class PhpTermBackendTest extends TestCase
             'SetForegroundColor(Reset)',
             'SetBackgroundColor(Reset)',
             'Reset()',
-        ], array_map(fn (TermCommand $command) => $command->__toString(), $buffer->commands()));
+        ], array_map(fn (Action $action) => $action->__toString(), $buffer->actions()));
     }
     public function testModifiersReset(): void
     {
-        $buffer = BufferBackend::new();
+        $buffer = BufferPainter::new();
         $this->draw($buffer, new BufferUpdates([
             new BufferUpdate(
                 Position::at(0, 0),
@@ -110,9 +110,9 @@ class PhpTermBackendTest extends TestCase
             'SetModifier(Reverse,on)',
             'SetModifier(Dim,on)',
             'SetModifier(Hidden,on)',
-            'SetModifier(Blink,on)',
+            'SetModifier(SlowBlink,on)',
             'SetModifier(Underline,on)',
-            'SetModifier(Blink,on)',
+            'SetModifier(RapidBlink,on)',
             'SetModifier(Strike,on)',
             'Print("X")',
             'SetModifier(Italic,off)',
@@ -120,20 +120,20 @@ class PhpTermBackendTest extends TestCase
             'SetModifier(Reverse,off)',
             'SetModifier(Dim,off)',
             'SetModifier(Hidden,off)',
-            'SetModifier(Blink,off)',
+            'SetModifier(SlowBlink,off)',
             'SetModifier(Underline,off)',
-            'SetModifier(Blink,off)',
+            'SetModifier(RapidBlink,off)',
             'SetModifier(Strike,off)',
             'Print("X")',
             'SetForegroundColor(Reset)',
             'SetBackgroundColor(Reset)',
             'Reset()',
-        ], array_map(fn (TermCommand $command) => $command->__toString(), $buffer->commands()));
+        ], array_map(fn (Action $action) => $action->__toString(), $buffer->actions()));
     }
 
-    private function draw(BufferBackend $buffer, BufferUpdates $updates): void
+    private function draw(BufferPainter $buffer, BufferUpdates $updates): void
     {
-        $backend = new PhpTermBackend(TermControl::new($buffer), new Terminal());
+        $backend = new PhpTermBackend(Terminal::new($buffer), new SymfonyTerminal());
         $backend->draw($updates);
         $backend->flush();
     }

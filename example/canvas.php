@@ -1,7 +1,7 @@
 <?php
 
-use DTL\PhpTerm\Backend\BufferBackend;
-use DTL\PhpTerm\TermControl;
+use DTL\PhpTerm\Painter\BufferPainter;
+use DTL\PhpTerm\Terminal as DTLTerminal;
 use DTL\PhpTui\Adapter\PhpTerm\PhpTermBackend;
 use DTL\PhpTui\Adapter\Symfony\SymfonyBackend;
 use DTL\PhpTui\Model\AnsiColor;
@@ -69,8 +69,7 @@ class App
         $cursor = new Cursor(new ConsoleOutput());
         $cursor->hide();
         $cursor->clearScreen();
-        $b = BufferBackend::new();
-        $backend = new PhpTermBackend(TermControl::new($b), new SymfonyTerminal());
+        $b = BufferPainter::new();
         $backend = PhpTermBackend::new();
         $terminal = Terminal::fullscreen($backend);
         while (true) {
