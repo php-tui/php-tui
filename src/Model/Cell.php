@@ -65,12 +65,12 @@ final class Cell
 
     public function equals(Cell $currentCell): bool
     {
-        return 
+        return
             $this->underline === $currentCell->underline &&
             $this->modifier->toInt() === $currentCell->modifier->toInt() &&
             $this->fg === $currentCell->fg &&
             $this->bg === $currentCell->bg &&
             $this->char === $currentCell->char
-            ;
+        ;
     }
 }
