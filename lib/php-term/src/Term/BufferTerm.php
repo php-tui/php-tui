@@ -23,7 +23,9 @@ class BufferTerm implements TermBackend
     {
         $this->commands = array_merge($this->commands, $commands);
     }
-
+    /**
+     * @return TermCommand[]
+     */
     public function commands(): array
     {
         return $this->commands;
