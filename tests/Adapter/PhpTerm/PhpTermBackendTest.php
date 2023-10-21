@@ -11,6 +11,8 @@ use DTL\PhpTui\Adapter\PhpTerm\PhpTermBackend;
 use DTL\PhpTui\Model\AnsiColor;
 use DTL\PhpTui\Model\Backend\DummyBackend;
 use DTL\PhpTui\Model\BufferUpdate;
+use DTL\PhpTui\Model\Modifier;
+use DTL\PhpTui\Model\Modifiers;
 use DTL\PhpTui\Model\Style;
 use DTL\PhpTui\Model\Cell;
 use DTL\PhpTui\Model\Position;
@@ -77,6 +79,26 @@ class PhpTermBackendTest extends TestCase
             'Print("X")',
             'SetForegroundColor(Reset)',
             'Print("X")',
+            'Print("X")',
+            'SetForegroundColor(Reset)',
+            'SetBackgroundColor(Reset)',
+            'Reset()',
+        ], array_map(fn (TermCommand $command) => $command->__toString(), $buffer->commands()));
+    }
+    public function testModifiers(): void
+    {
+        $buffer = BufferBackend::new();
+        $this->draw($buffer, new BufferUpdates([
+            new BufferUpdate(
+                Position::at(0, 0),
+                Cell::fromChar('X')->setStyle(Style::default()->addModifier(Modifier::Italic)),
+            ),
+        ]));
+        self::assertEquals([
+            'MoveCursor(line=1,col=1)',
+            'SetForegroundColor(Reset)',
+            'SetBackgroundColor(Reset)',
+            'SetModifier(Italic)',
             'Print("X")',
             'SetForegroundColor(Reset)',
             'SetBackgroundColor(Reset)',
