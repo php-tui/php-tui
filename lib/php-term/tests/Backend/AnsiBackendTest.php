@@ -23,14 +23,14 @@ class AnsiBackendTest extends TestCase
         $this->assertAnsiCode('?1049l', TermCmd::alternateScreenDisable());
         $this->assertAnsiCode('2;3H', TermCmd::moveCursor(2, 3));
         $this->assertAnsiCode('0m', TermCmd::reset());
-        $this->assertAnsiCode('1m', TermCmd::bold());
-        $this->assertAnsiCode('2m', TermCmd::dim());
-        $this->assertAnsiCode('3m', TermCmd::italic());
-        $this->assertAnsiCode('4m', TermCmd::underline());
-        $this->assertAnsiCode('5m', TermCmd::blink());
-        $this->assertAnsiCode('7m', TermCmd::reverse());
-        $this->assertAnsiCode('8m', TermCmd::hidden());
-        $this->assertAnsiCode('9m', TermCmd::strike());
+        $this->assertAnsiCode('1m', TermCmd::bold(true));
+        $this->assertAnsiCode('2m', TermCmd::dim(true));
+        $this->assertAnsiCode('3m', TermCmd::italic(true));
+        $this->assertAnsiCode('4m', TermCmd::underline(true));
+        $this->assertAnsiCode('5m', TermCmd::blink(true));
+        $this->assertAnsiCode('7m', TermCmd::reverse(true));
+        $this->assertAnsiCode('8m', TermCmd::hidden(true));
+        $this->assertAnsiCode('9m', TermCmd::strike(true));
     }
 
     private function assertAnsiCode(string $string, TermCommand $command): void

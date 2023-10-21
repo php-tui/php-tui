@@ -11,6 +11,7 @@ use DTL\PhpTui\Model\Backend;
 use DTL\PhpTui\Model\BufferUpdates;
 use DTL\PhpTui\Model\Color;
 use DTL\PhpTui\Model\Modifier;
+use DTL\PhpTui\Model\Modifiers;
 use RuntimeException;
 use Symfony\Component\Console\Terminal;
 
@@ -35,9 +36,9 @@ class PhpTermBackend implements Backend
     public function draw(BufferUpdates $updates): void
     {
         $underline = AnsiColor::Reset;
-        $modifier = Modifier::None;
-        $bg = Modifier::None;
-        $fg = Modifier::None;
+        $modifier = Modifiers::none();
+        $bg = AnsiColor::Reset;
+        $fg = AnsiColor::Reset;
         $lastPos = null;
 
         foreach ($updates as $update) {
@@ -48,6 +49,11 @@ class PhpTermBackend implements Backend
                 $this->control->queue(TermCmd::moveCursor($update->position->y + 1, $update->position->x + 1));
             }
             $lastPos = $update->position;
+
+            if (false === $update->cell->modifier->equals($modifier)) {
+                $this->queueModifiers($modifier, $update->cell->modifier);
+                $modifier = $update->cell->modifier;
+            }
 
             if ($update->cell->fg !== $fg) {
                 $this->control->queue(TermCmd::setForegroundColor($this->resolveColor($update->cell->fg)));
@@ -104,5 +110,17 @@ class PhpTermBackend implements Backend
             AnsiColor::White => TermColor::White,
             AnsiColor::Reset => TermColor::Reset,
         };
+    }
+
+    private function queueModifiers(Modifiers $from, Modifiers $to): void
+    {
+        $removed = $from->sub($to);
+        if ($removed->contains(Modifier::Italic)) {
+            $this->control->queue(TermCmd::italic(false));
+        }
+        $added = $to->sub($from);
+        if ($added->contains(Modifier::Italic)) {
+            $this->control->queue(TermCmd::italic(true));
+        }
     }
 }

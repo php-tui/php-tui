@@ -42,7 +42,6 @@ class PhpTermBackendTest extends TestCase
         self::assertEquals([
             'MoveCursor(line=1,col=1)',
             'SetForegroundColor(Red)',
-            'SetBackgroundColor(Reset)',
             'Print("X")',
             'MoveCursor(line=2,col=2)',
             'SetForegroundColor(Reset)',
@@ -75,7 +74,6 @@ class PhpTermBackendTest extends TestCase
         self::assertEquals([
             'MoveCursor(line=1,col=1)',
             'SetForegroundColor(Red)',
-            'SetBackgroundColor(Reset)',
             'Print("X")',
             'SetForegroundColor(Reset)',
             'Print("X")',
@@ -96,8 +94,6 @@ class PhpTermBackendTest extends TestCase
         ]));
         self::assertEquals([
             'MoveCursor(line=1,col=1)',
-            'SetForegroundColor(Reset)',
-            'SetBackgroundColor(Reset)',
             'SetModifier(Italic)',
             'Print("X")',
             'SetForegroundColor(Reset)',

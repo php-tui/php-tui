@@ -11,6 +11,7 @@ use DTL\PhpTui\Model\Constraint;
 use DTL\PhpTui\Model\Direction;
 use DTL\PhpTui\Model\Layout;
 use DTL\PhpTui\Model\Marker;
+use DTL\PhpTui\Model\Modifier;
 use DTL\PhpTui\Model\Position;
 use DTL\PhpTui\Model\Style;
 use DTL\PhpTui\Model\Terminal;
@@ -105,7 +106,7 @@ class App
             ->marker($this->marker)
             ->paint(function (CanvasContext $context) {
                 $context->draw(Map::default()->resolution(MapResolution::High)->color(AnsiColor::Green));
-                $context->print($this->x, -$this->y, Line::fromString('You are here!')->patchStyle(Style::default()->fg(AnsiColor::Yellow)));
+                $context->print($this->x, -$this->y, Line::fromString('You are here!')->patchStyle(Style::default()->fg(AnsiColor::Yellow)->addModifier(Modifier::Italic)));
             })
             ->xBounds(AxisBounds::new(-180, 180))
             ->yBounds(AxisBounds::new(-90, 90));

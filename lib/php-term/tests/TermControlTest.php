@@ -28,14 +28,14 @@ final class TermControlTest extends TestCase
             ->queue(TermCmd::setBackgroundColor(TermColor::Blue))
             ->queue(TermCmd::moveCursor(1, 2))
             ->queue(TermCmd::reset())
-            ->queue(TermCmd::bold())
-            ->queue(TermCmd::dim())
-            ->queue(TermCmd::italic())
-            ->queue(TermCmd::underline())
-            ->queue(TermCmd::blink())
-            ->queue(TermCmd::reverse())
-            ->queue(TermCmd::hidden())
-            ->queue(TermCmd::strike())
+            ->queue(TermCmd::bold(true))
+            ->queue(TermCmd::dim(true))
+            ->queue(TermCmd::italic(true))
+            ->queue(TermCmd::underline(true))
+            ->queue(TermCmd::blink(true))
+            ->queue(TermCmd::reverse(true))
+            ->queue(TermCmd::hidden(true))
+            ->queue(TermCmd::strike(true))
             ->flush();
 
         self::assertCount(19, $dummy->commands());
@@ -52,14 +52,14 @@ final class TermControlTest extends TestCase
                 'SetBackgroundColor(Blue)',
                 'MoveCursor(line=1,col=2)',
                 'Reset()',
-                'SetModifier(Bold)',
-                'SetModifier(Dim)',
-                'SetModifier(Italic)',
-                'SetModifier(Underline)',
-                'SetModifier(Blink)',
-                'SetModifier(Reverse)',
-                'SetModifier(Hidden)',
-                'SetModifier(Strike)',
+                'SetModifier(Bold,on)',
+                'SetModifier(Dim,on)',
+                'SetModifier(Italic,on)',
+                'SetModifier(Underline,on)',
+                'SetModifier(Blink,on)',
+                'SetModifier(Reverse,on)',
+                'SetModifier(Hidden,on)',
+                'SetModifier(Strike,on)',
             ],
             array_map(fn (TermCommand $cmd) => $cmd->__toString(), $dummy->commands())
         );

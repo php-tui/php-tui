@@ -70,43 +70,43 @@ class TermCmd
         return new Reset();
     }
 
-    public static function bold(): SetModifier
+    public static function bold(bool $enable): SetModifier
     {
-        return new SetModifier(TermModifier::Bold);
+        return new SetModifier(TermModifier::Bold, $enable);
     }
 
-    public static function dim(): SetModifier
+    public static function dim(bool $enable): SetModifier
     {
-        return new SetModifier(TermModifier::Dim);
+        return new SetModifier(TermModifier::Dim, $enable);
     }
 
-    public static function italic(): SetModifier
+    public static function italic(bool $enable): SetModifier
     {
-        return new SetModifier(TermModifier::Italic);
+        return new SetModifier(TermModifier::Italic, $enable);
     }
 
-    public static function underline(): SetModifier
+    public static function underline(bool $enable): SetModifier
     {
-        return new SetModifier(TermModifier::Underline);
+        return new SetModifier(TermModifier::Underline, $enable);
     }
 
-    public static function blink(): SetModifier
+    public static function blink(bool $enable): SetModifier
     {
-        return new SetModifier(TermModifier::Blink);
+        return new SetModifier(TermModifier::Blink, $enable);
     }
 
-    public static function reverse(): SetModifier
+    public static function reverse(bool $enable): SetModifier
     {
-        return new SetModifier(TermModifier::Reverse);
+        return new SetModifier(TermModifier::Reverse, $enable);
     }
 
-    public static function hidden(): SetModifier
+    public static function hidden(bool $enable): SetModifier
     {
-        return new SetModifier(TermModifier::Hidden);
+        return new SetModifier(TermModifier::Hidden, $enable);
     }
 
-    public static function strike(): SetModifier
+    public static function strike(bool $enable): SetModifier
     {
-        return new SetModifier(TermModifier::Strike);
+        return new SetModifier(TermModifier::Strike, $enable);
     }
 }

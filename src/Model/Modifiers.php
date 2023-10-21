@@ -14,8 +14,12 @@ final class Modifiers
         return $this;
     }
 
-    public function sub(Modifier $modifier): self
+    public function sub(Modifiers|Modifier $modifier): self
     {
+        if ($modifier instanceof Modifiers) {
+            $this->modifiers = $this->modifiers & ~$modifier->modifiers;
+            return $this;
+        }
         $this->modifiers = $this->modifiers & ~$modifier->value;
         return $this;
     }
@@ -57,5 +61,16 @@ final class Modifiers
     public function toBin(): string
     {
         return decbin($this->modifiers);
+    }
+
+    public function equals(Modifiers $modifier): bool
+    {
+        return $this->modifiers === $modifier->modifiers;
+    }
+
+    public function contains(Modifier $modifier): bool
+    {
+        $val = ($this->modifiers & $modifier->value) !== 0;
+        return $val;
     }
 }
