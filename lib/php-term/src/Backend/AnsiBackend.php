@@ -63,16 +63,14 @@ final class AnsiBackend implements TermBackend
             $command instanceof AlternateScreenEnable => sprintf('?1049%s', $command->enable ? 'h' : 'l'),
             $command instanceof MoveCursor => sprintf('%d;%dH', $command->line, $command->col),
             $command instanceof Reset => '0m',
-            $command instanceof SetModifier => sprintf('%dm', $this->modifierIndex($command->modifier)),
+            $command instanceof SetModifier => $command->enable ?
+                sprintf('%dm', $this->modifierOnIndex($command->modifier)) :
+                sprintf('%dm', $this->modifierOffIndex($command->modifier)),
+
             default => throw new RuntimeException(sprintf(
                 'Do not know how to handle command: %s', $command::class
             ))
         }));
-    }
-
-    private function csi(string $code): string
-    {
-        return sprintf("\x1b[%s", $code);
     }
 
     private function colorIndex(TermColor $termColor): int
@@ -98,7 +96,7 @@ final class AnsiBackend implements TermBackend
         };
     }
 
-    private function modifierIndex(TermModifier $modifier): int
+    private function modifierOnIndex(TermModifier $modifier): int
     {
         return match($modifier) {
             TermModifier::Reset => 0,
@@ -113,6 +111,20 @@ final class AnsiBackend implements TermBackend
         };
     }
 
+    private function modifierOffIndex(TermModifier $modifier): int
+    {
+        return match($modifier) {
+            TermModifier::Reset => 0,
+            TermModifier::Bold => 22,
+            TermModifier::Dim => 22,
+            TermModifier::Italic => 23,
+            TermModifier::Underline => 24,
+            TermModifier::Blink => 25,
+            TermModifier::Hidden => 28,
+            TermModifier::Strike => 29,
+            TermModifier::Reverse => 27,
+        };
+    }
     private function esc(string $command): string
     {
         return sprintf("\033[%s", $command);

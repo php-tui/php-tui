@@ -25,6 +25,7 @@ class ModifiersTest extends TestCase
     }
     public function testSub(): void
     {
+        // subtract modifier
         self::assertEquals(
             Modifier::None->value,
             Modifiers::fromModifier(Modifier::Italic)->sub(Modifier::Italic)->toInt()
@@ -32,6 +33,15 @@ class ModifiersTest extends TestCase
         self::assertEquals(
             Modifier::Bold->value,
             Modifiers::fromModifier(Modifier::Italic)->add(Modifier::Bold)->sub(Modifier::Italic)->toInt()
+        );
+
+        // subtracts modifiers
+        self::assertEquals(
+            Modifier::Bold->value,
+            Modifiers::fromModifier(Modifier::Italic)
+                ->add(Modifier::Bold)
+                ->sub(Modifiers::fromModifier(Modifier::Italic))
+                ->toInt()
         );
     }
 

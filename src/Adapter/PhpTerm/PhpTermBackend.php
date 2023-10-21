@@ -115,10 +115,13 @@ class PhpTermBackend implements Backend
     private function queueModifiers(Modifiers $from, Modifiers $to): void
     {
         $removed = $from->sub($to);
+
         if ($removed->contains(Modifier::Italic)) {
             $this->control->queue(TermCmd::italic(false));
         }
+
         $added = $to->sub($from);
+
         if ($added->contains(Modifier::Italic)) {
             $this->control->queue(TermCmd::italic(true));
         }

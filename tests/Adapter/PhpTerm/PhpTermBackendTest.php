@@ -91,10 +91,16 @@ class PhpTermBackendTest extends TestCase
                 Position::at(0, 0),
                 Cell::fromChar('X')->setStyle(Style::default()->addModifier(Modifier::Italic)),
             ),
+            new BufferUpdate(
+                Position::at(1, 0),
+                Cell::fromChar('X')->setStyle(Style::default()),
+            ),
         ]));
         self::assertEquals([
             'MoveCursor(line=1,col=1)',
-            'SetModifier(Italic)',
+            'SetModifier(Italic,on)',
+            'Print("X")',
+            'SetModifier(Italic,off)',
             'Print("X")',
             'SetForegroundColor(Reset)',
             'SetBackgroundColor(Reset)',
