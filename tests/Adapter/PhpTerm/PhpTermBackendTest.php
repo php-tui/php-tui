@@ -85,7 +85,8 @@ class PhpTermBackendTest extends TestCase
         $this->draw($buffer, new BufferUpdates([
             new BufferUpdate(
                 Position::at(0, 0),
-                Cell::fromChar('X')->setStyle(Style::default()
+                Cell::fromChar('X')->setStyle(
+                    Style::default()
                     ->addModifier(Modifier::Italic)
                     ->addModifier(Modifier::Bold)
                     ->addModifier(Modifier::Reversed)
