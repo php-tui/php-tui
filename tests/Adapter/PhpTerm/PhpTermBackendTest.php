@@ -2,17 +2,13 @@
 
 namespace DTL\PhpTui\Tests\Adapter\PhpTerm;
 
-use DTL\PhpTerm\Backend\AnsiBackend;
 use DTL\PhpTerm\Backend\BufferBackend;
 use DTL\PhpTerm\TermCommand;
 use DTL\PhpTerm\TermControl;
-use DTL\PhpTerm\Writer\BufferWriter;
 use DTL\PhpTui\Adapter\PhpTerm\PhpTermBackend;
 use DTL\PhpTui\Model\AnsiColor;
-use DTL\PhpTui\Model\Backend\DummyBackend;
 use DTL\PhpTui\Model\BufferUpdate;
 use DTL\PhpTui\Model\Modifier;
-use DTL\PhpTui\Model\Modifiers;
 use DTL\PhpTui\Model\Style;
 use DTL\PhpTui\Model\Cell;
 use DTL\PhpTui\Model\Position;
