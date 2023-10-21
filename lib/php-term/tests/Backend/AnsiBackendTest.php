@@ -13,8 +13,8 @@ class AnsiBackendTest extends TestCase
 {
     public function testControlSequences(): void
     {
-        $this->assertAnsiCode('48;2m', TermCmd::setBackgroundColor(TermColor::Green));
-        $this->assertAnsiCode('38;4m', TermCmd::setForegroundColor(TermColor::Blue));
+        $this->assertAnsiCode('48;5;2m', TermCmd::setBackgroundColor(TermColor::Green));
+        $this->assertAnsiCode('38;5;4m', TermCmd::setForegroundColor(TermColor::Blue));
         $this->assertAnsiCode('48;2;2;3;4m', TermCmd::setRgbBackgroundColor(2, 3, 4));
         $this->assertAnsiCode('38;2;2;3;4m', TermCmd::setRgbForegroundColor(2, 3, 4));
         $this->assertAnsiCode('?25l', TermCmd::cursorHide());
@@ -38,6 +38,6 @@ class AnsiBackendTest extends TestCase
         $writer = BufferWriter::new();
         $term = AnsiBackend::new($writer);
         $term->draw([$command]);
-        self::assertEquals(sprintf('\e[%s', $string), $writer->toString(), $command::class);
+        self::assertEquals(json_encode(sprintf("\033[%s", $string)), json_encode($writer->toString()), $command::class);
     }
 }
