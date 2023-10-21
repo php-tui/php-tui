@@ -79,13 +79,23 @@ class PhpTermBackendTest extends TestCase
             'Reset()',
         ], array_map(fn (TermCommand $command) => $command->__toString(), $buffer->commands()));
     }
-    public function testModifiers(): void
+    public function testModifiersReset(): void
     {
         $buffer = BufferBackend::new();
         $this->draw($buffer, new BufferUpdates([
             new BufferUpdate(
                 Position::at(0, 0),
-                Cell::fromChar('X')->setStyle(Style::default()->addModifier(Modifier::Italic)),
+                Cell::fromChar('X')->setStyle(Style::default()
+                    ->addModifier(Modifier::Italic)
+                    ->addModifier(Modifier::Bold)
+                    ->addModifier(Modifier::Reversed)
+                    ->addModifier(Modifier::Dim)
+                    ->addModifier(Modifier::Hidden)
+                    ->addModifier(Modifier::SlowBlink)
+                    ->addModifier(Modifier::Underlined)
+                    ->addModifier(Modifier::RapidBlink)
+                    ->addModifier(Modifier::CrossedOut)
+                ),
             ),
             new BufferUpdate(
                 Position::at(1, 0),
@@ -95,8 +105,24 @@ class PhpTermBackendTest extends TestCase
         self::assertEquals([
             'MoveCursor(line=1,col=1)',
             'SetModifier(Italic,on)',
+            'SetModifier(Bold,on)',
+            'SetModifier(Reversed,on)',
+            'SetModifier(Dim,on)',
+            'SetModifier(Hidden,on)',
+            'SetModifier(SlowBlink,on)',
+            'SetModifier(Underlined,on)',
+            'SetModifier(RapidBlink,on)',
+            'SetModifier(CrossedOut,on)',
             'Print("X")',
             'SetModifier(Italic,off)',
+            'SetModifier(Bold,off)',
+            'SetModifier(Reversed,off)',
+            'SetModifier(Dim,off)',
+            'SetModifier(Hidden,off)',
+            'SetModifier(SlowBlink,off)',
+            'SetModifier(Underlined,off)',
+            'SetModifier(RapidBlink,off)',
+            'SetModifier(CrossedOut,off)',
             'Print("X")',
             'SetForegroundColor(Reset)',
             'SetBackgroundColor(Reset)',
