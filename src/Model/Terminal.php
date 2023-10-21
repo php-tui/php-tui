@@ -66,6 +66,7 @@ final class Terminal
 
         $this->flush();
         $this->swapBuffers();
+        $this->backend->flush();
     }
 
     private function autoresize(): void
@@ -102,6 +103,5 @@ final class Terminal
     {
         $this->buffers[1 - $this->current]->reset();
         $this->current = 1 - $this->current;
-        $this->backend->flush();
     }
 }

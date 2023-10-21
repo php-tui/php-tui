@@ -36,7 +36,7 @@ final class Buffer implements Countable
     {
         $content = [];
         for ($i = 0; $i < $area->area(); $i++) {
-            $content[] = clone $cell;
+            $content[] = $cell->clone();
         }
         return new self($area, $content);
     }
@@ -90,7 +90,7 @@ final class Buffer implements Countable
         for ($i = 0; $i < count($next); $i++) {
             $previousCell = $previous[$i];
             $currentCell = $next[$i];
-            if ($previousCell != $currentCell) {
+            if (false === $previousCell->equals($currentCell)) {
                 $updates[] = new BufferUpdate(Position::fromIndex($i, $this->area), $currentCell);
             }
         }
@@ -170,7 +170,7 @@ final class Buffer implements Countable
 
     public function reset(): void
     {
-        foreach ($this->content as $cell) {
+        foreach ($this->content as $i => $cell) {
             $cell->reset();
         }
     }

@@ -1,5 +1,6 @@
 <?php
 
+use DTL\PhpTui\Adapter\PhpTerm\PhpTermBackend;
 use DTL\PhpTui\Adapter\Symfony\SymfonyBackend;
 use DTL\PhpTui\Model\AnsiColor;
 use DTL\PhpTui\Model\Area;
@@ -31,7 +32,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 $cursor = new Cursor(new ConsoleOutput());
 $cursor->clearScreen();
-$backend = SymfonyBackend::new();
+$backend = PhpTermBackend::new();
 $terminal = Terminal::fullscreen($backend);
 $terminal->draw(function (Buffer $buffer): void {
     [$titleArea, $layout] = calculate_layout($buffer->area());

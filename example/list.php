@@ -1,7 +1,6 @@
 <?php
 
-use DTL\PhpTui\Adapter\Symfony\SymfonyBackend;
-
+use DTL\PhpTui\Adapter\PhpTerm\PhpTermBackend;
 use DTL\PhpTui\Model\AnsiColor;
 use DTL\PhpTui\Model\AxisBounds;
 use DTL\PhpTui\Model\Buffer;
@@ -78,7 +77,7 @@ class App
         $cursor = new Cursor(new ConsoleOutput());
         $cursor->hide();
         $cursor->clearScreen();
-        $backend = SymfonyBackend::new();
+        $backend = PhpTermBackend::new();
         $terminal = Terminal::fullscreen($backend);
         while (true) {
             $terminal->draw(function (Buffer $buffer) use ($app): void {

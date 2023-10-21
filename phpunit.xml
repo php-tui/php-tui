@@ -17,6 +17,7 @@
         <testsuite name="default">
             <directory>tests</directory>
             <directory>lib/cassowary/tests</directory>
+            <directory>lib/php-term/tests</directory>
         </testsuite>
     </testsuites>
 

@@ -62,4 +62,26 @@ final class Cell
         $this->setChar(' ');
         $this->setStyle(Style::default());
     }
+
+    public function equals(Cell $currentCell): bool
+    {
+        return
+            $this->underline === $currentCell->underline &&
+            $this->modifier->toInt() === $currentCell->modifier->toInt() &&
+            $this->fg === $currentCell->fg &&
+            $this->bg === $currentCell->bg &&
+            $this->char === $currentCell->char
+        ;
+    }
+
+    public function clone(): self
+    {
+        return new self(
+            char: $this->char,
+            fg: $this->fg,
+            bg: $this->bg,
+            underline: $this->underline,
+            modifier: clone $this->modifier,
+        );
+    }
 }
