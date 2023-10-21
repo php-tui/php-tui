@@ -70,7 +70,6 @@ final class Modifiers
 
     public function contains(Modifier $modifier): bool
     {
-        $val = ($this->modifiers & $modifier->value) !== 0;
-        return $val;
+        return ($this->modifiers & $modifier->value) === $modifier->value;
     }
 }

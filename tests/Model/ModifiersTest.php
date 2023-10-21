@@ -58,4 +58,12 @@ class ModifiersTest extends TestCase
             Modifiers::fromModifier(Modifier::Italic)->insert(Modifiers::fromModifier(Modifier::Bold))->toBin()
         );
     }
+
+    public function testContains(): void
+    {
+        self::assertTrue(Modifiers::fromModifier(Modifier::Italic)->contains(Modifier::Italic));
+        self::assertTrue(Modifiers::fromModifier(Modifier::Italic)->add(Modifier::Bold)->contains(Modifier::Italic));
+        self::assertFalse(Modifiers::fromModifier(Modifier::Italic)->add(Modifier::Bold)->contains(Modifier::Reversed));
+
+    }
 }
