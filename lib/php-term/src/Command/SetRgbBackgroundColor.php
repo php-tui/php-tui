@@ -6,7 +6,7 @@ use DTL\PhpTerm\TermCommand;
 
 final class SetRgbBackgroundColor implements TermCommand
 {
-    public function __construct(private int $r, private int $g, private int $b)
+    public function __construct(public readonly int $r, public readonly int $g, public readonly int $b)
     {
     }
 

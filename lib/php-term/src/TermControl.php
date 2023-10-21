@@ -2,7 +2,7 @@
 
 namespace DTL\PhpTerm;
 
-use DTL\PhpTerm\Term\AnsiTerm;
+use DTL\PhpTerm\Backend\AnsiBackend;
 
 class TermControl
 {
@@ -17,7 +17,7 @@ class TermControl
 
     public static function new(TermBackend $backend = null): self
     {
-        return new self($backend ?: new AnsiTerm());
+        return new self($backend ?: new AnsiBackend());
     }
 
     public function queue(TermCommand $command): self

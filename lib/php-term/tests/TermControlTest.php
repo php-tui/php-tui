@@ -6,14 +6,14 @@ use DTL\PhpTerm\TermCmd;
 use DTL\PhpTerm\TermColor;
 use DTL\PhpTerm\TermCommand;
 use DTL\PhpTerm\TermControl;
-use DTL\PhpTerm\Term\BufferTerm;
+use DTL\PhpTerm\Backend\BufferBackend;
 use PHPUnit\Framework\TestCase;
 
 final class TermControlTest extends TestCase
 {
     public function testGetTerminalAttr(): void
     {
-        $dummy = BufferTerm::new();
+        $dummy = BufferBackend::new();
 
         $term = TermControl::new($dummy)
 

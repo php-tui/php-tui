@@ -6,7 +6,7 @@ use DTL\PhpTerm\TermCommand;
 
 final class CursorShow  implements TermCommand
 {
-    public function __construct(private bool $show)
+    public function __construct(public readonly bool $show)
     {
     }
 

@@ -6,7 +6,7 @@ use DTL\PhpTerm\TermCommand;
 
 final class MoveCursor implements TermCommand
 {
-    public function __construct(private int $line, private int $col)
+    public function __construct(public readonly int $line, public readonly int $col)
     {
     }
 

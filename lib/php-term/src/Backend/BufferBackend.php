@@ -1,11 +1,11 @@
 <?php
 
-namespace DTL\PhpTerm\Term;
+namespace DTL\PhpTerm\Backend;
 
 use DTL\PhpTerm\TermBackend;
 use DTL\PhpTerm\TermCommand;
 
-class BufferTerm implements TermBackend
+class BufferBackend implements TermBackend
 {
     /**
      * @param TermCommand[] $commands

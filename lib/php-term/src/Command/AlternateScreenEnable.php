@@ -6,7 +6,7 @@ use DTL\PhpTerm\TermCommand;
 
 class AlternateScreenEnable implements TermCommand
 {
-    public function __construct(private bool $enable)
+    public function __construct(public readonly bool $enable)
     {
     }
 

@@ -7,7 +7,7 @@ use DTL\PhpTerm\TermModifier;
 
 final class SetModifier implements TermCommand
 {
-    public function __construct(private TermModifier $modifier)
+    public function __construct(public readonly TermModifier $modifier)
     {
     }
 
