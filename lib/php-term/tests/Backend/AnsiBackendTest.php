@@ -26,7 +26,9 @@ class AnsiBackendTest extends TestCase
         $this->assertAnsiCode('1m', TermCmd::bold(true));
         $this->assertAnsiCode('2m', TermCmd::dim(true));
         $this->assertAnsiCode('3m', TermCmd::italic(true));
+        $this->assertAnsiCode('23m', TermCmd::italic(false));
         $this->assertAnsiCode('4m', TermCmd::underline(true));
+        $this->assertAnsiCode('24m', TermCmd::underline(false));
         $this->assertAnsiCode('5m', TermCmd::blink(true));
         $this->assertAnsiCode('7m', TermCmd::reverse(true));
         $this->assertAnsiCode('8m', TermCmd::hidden(true));
