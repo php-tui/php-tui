@@ -4,6 +4,7 @@ namespace DTL\PhpTui\Adapter\PhpTerm;
 
 use DTL\PhpTerm\Actions;
 use DTL\PhpTerm\Colors;
+use DTL\PhpTerm\Size;
 use DTL\PhpTerm\Terminal as PhpTermTerminal;
 use DTL\PhpTui\Model\AnsiColor;
 use DTL\PhpTui\Model\Area;
@@ -13,24 +14,28 @@ use DTL\PhpTui\Model\Color;
 use DTL\PhpTui\Model\Modifier;
 use DTL\PhpTui\Model\Modifiers;
 use RuntimeException;
-use Symfony\Component\Console\Terminal;
 
 class PhpTermBackend implements Backend
 {
-    public function __construct(private PhpTermTerminal $control, private Terminal $terminal)
+    public function __construct(private PhpTermTerminal $control)
     {
     }
 
     public static function new(): self
     {
-        return new self(PhpTermTerminal::new(), new Terminal());
+        return new self(PhpTermTerminal::new());
     }
 
 
     public function size(): Area
     {
-        return Area::fromPrimitives(0, 0, $this->terminal->getWidth(), $this->terminal->getHeight());
-
+        $size = $this->control->info(Size::class);
+        if (null === $size) {
+            throw new RuntimeException(
+                'Could not determine terminal size!'
+            );
+        }
+        return Area::fromDimensions($size->cols, $size->lines);
     }
 
     public function draw(BufferUpdates $updates): void

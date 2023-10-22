@@ -14,7 +14,6 @@ use DTL\PhpTui\Model\Cell;
 use DTL\PhpTui\Model\Position;
 use DTL\PhpTui\Model\BufferUpdates;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\Console\Terminal as SymfonyTerminal;
 
 class PhpTermBackendTest extends TestCase
 {
@@ -133,7 +132,7 @@ class PhpTermBackendTest extends TestCase
 
     private function draw(BufferPainter $buffer, BufferUpdates $updates): void
     {
-        $backend = new PhpTermBackend(Terminal::new($buffer), new SymfonyTerminal());
+        $backend = new PhpTermBackend(Terminal::new($buffer));
         $backend->draw($updates);
         $backend->flush();
     }
