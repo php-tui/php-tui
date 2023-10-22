@@ -3,6 +3,7 @@
 namespace DTL\PhpTerm\Tests\InformationProvider;
 
 use DTL\PhpTerm\InformationProvider\AggregateInformationProvider;
+use DTL\PhpTerm\InformationProvider\ClosureInformationProvider;
 use DTL\PhpTerm\TerminalInformation;
 use PHPUnit\Framework\TestCase;
 

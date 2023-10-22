@@ -1,6 +1,6 @@
 <?php
 
-namespace DTL\PhpTerm\Tests\InformationProvider;
+namespace DTL\PhpTerm\InformationProvider;
 
 use Closure;
 use DTL\PhpTerm\InformationProvider;
