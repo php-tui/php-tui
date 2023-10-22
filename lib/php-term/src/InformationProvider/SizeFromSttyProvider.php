@@ -24,12 +24,30 @@ final class SizeFromSttyProvider implements InformationProvider
         if ($classFqn !== Size::class) {
             return null;
         }
-        return null;
+        $out = $this->queryStty();
+        if (null === $out) {
+            return null;
+        }
+        return $this->parse($out);
 
     }
 
-    private function queryStty(): string
+    private function queryStty(): ?string
     {
-        $out = $this->runner->run(['stty', '-a']);
+        $result = $this->runner->run(['stty', '-a']);
+        if ($result->exitCode !== 0) {
+            return null;
+        }
+
+        return $result->stdout;
+    }
+
+    private function parse(string $out): ?Size
+    {
+        if (false === preg_match('{rows ([0-9]+); columns ([0-9]+);}is', $out, $matches)) {
+            return null;
+        }
+
+        return new Size(intval($matches[1]), intval($matches[2]));
     }
 }
