@@ -32,7 +32,7 @@ class PhpTermBackend implements Backend
         $size = $this->control->info(Size::class);
         if (null === $size) {
             throw new RuntimeException(
-              'Could not determine terminal size!'
+                'Could not determine terminal size!'
             );
         }
         return Area::fromDimensions($size->cols, $size->lines);
