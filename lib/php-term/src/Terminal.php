@@ -12,7 +12,7 @@ class Terminal
      */
     private array $queue = [];
 
-    public function __construct(private Painter $renderer)
+    public function __construct(private Painter $painter, private)
     {
     }
 
@@ -29,7 +29,7 @@ class Terminal
 
     public function flush(): self
     {
-        $this->renderer->paint($this->queue);
+        $this->painter->paint($this->queue);
         $this->queue = [];
         return $this;
     }
