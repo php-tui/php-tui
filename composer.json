@@ -28,9 +28,6 @@
         "phpunit/phpunit": "^10.4",
         "symfony/var-dumper": "^6.3"
     },
-    "require": {
-        "symfony/console": "^6.3"
-    },
     "scripts": {
         "phpstan": "./vendor/bin/phpstan --memory-limit=1G",
         "php-cs-fixer": "./vendor/bin/php-cs-fixer fix",
