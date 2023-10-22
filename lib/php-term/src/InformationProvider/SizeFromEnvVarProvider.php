@@ -24,4 +24,9 @@ class SizeFromEnvVarProvider implements InformationProvider
         /** @phpstan-ignore-next-line */
         return new Size(intval($lines), intval($cols));
     }
+
+    public static function new(): self
+    {
+        return new self();
+    }
 }

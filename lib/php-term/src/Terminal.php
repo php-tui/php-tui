@@ -4,6 +4,7 @@ namespace DTL\PhpTerm;
 
 use DTL\PhpTerm\InformationProvider\AggregateInformationProvider;
 use DTL\PhpTerm\InformationProvider\SizeFromEnvVarProvider;
+use DTL\PhpTerm\InformationProvider\SizeFromSttyProvider;
 use DTL\PhpTerm\Painter\AnsiPainter;
 use DTL\PhpTerm\Writer\StreamWriter;
 
@@ -25,7 +26,8 @@ class Terminal
     public static function new(Painter $backend = null): self
     {
         return new self($backend ?: AnsiPainter::new(StreamWriter::stdout()), AggregateInformationProvider::new([
-            new SizeFromEnvVarProvider(),
+            SizeFromEnvVarProvider::new(),
+            SizeFromSttyProvider::new(),
         ]));
     }
 

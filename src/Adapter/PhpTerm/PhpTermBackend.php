@@ -35,7 +35,7 @@ class PhpTermBackend implements Backend
               'Could not determine terminal size!'
             );
         }
-        return Area::fromDimensions($size->cols, $size->cols);
+        return Area::fromDimensions($size->cols, $size->lines);
     }
 
     public function draw(BufferUpdates $updates): void

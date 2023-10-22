@@ -5,7 +5,6 @@ namespace DTL\PhpTerm\Tests\InformationProvider;
 use DTL\PhpTerm\InformationProvider\SizeFromSttyProvider;
 use DTL\PhpTerm\ProcessResult;
 use DTL\PhpTerm\ProcessRunner\ClosureRunner;
-use DTL\PhpTerm\ProcessRunner\DummyRunner;
 use DTL\PhpTerm\Size;
 use PHPUnit\Framework\TestCase;
 
