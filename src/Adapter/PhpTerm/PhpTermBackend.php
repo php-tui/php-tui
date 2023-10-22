@@ -4,6 +4,7 @@ namespace DTL\PhpTui\Adapter\PhpTerm;
 
 use DTL\PhpTerm\Actions;
 use DTL\PhpTerm\Colors;
+use DTL\PhpTerm\Size;
 use DTL\PhpTerm\Terminal as PhpTermTerminal;
 use DTL\PhpTui\Model\AnsiColor;
 use DTL\PhpTui\Model\Area;
@@ -29,8 +30,8 @@ class PhpTermBackend implements Backend
 
     public function size(): Area
     {
-        return Area::fromPrimitives(0, 0, $this->terminal->getWidth(), $this->terminal->getHeight());
-
+        $size = $this->control->info(Size::class);
+        return Area::fromDimensions($size->cols, $size->cols);
     }
 
     public function draw(BufferUpdates $updates): void
