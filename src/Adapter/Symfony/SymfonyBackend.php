@@ -1,13 +1,13 @@
 <?php
 
-namespace DTL\PhpTui\Adapter\Symfony;
+namespace PhpTui\Tui\Adapter\Symfony;
 
-use DTL\PhpTui\Model\AnsiColor;
-use DTL\PhpTui\Model\Area;
-use DTL\PhpTui\Model\Backend;
-use DTL\PhpTui\Model\BufferUpdates;
-use DTL\PhpTui\Model\Color;
-use DTL\PhpTui\Model\Modifier;
+use PhpTui\Tui\Model\AnsiColor;
+use PhpTui\Tui\Model\Area;
+use PhpTui\Tui\Model\Backend;
+use PhpTui\Tui\Model\BufferUpdates;
+use PhpTui\Tui\Model\Color;
+use PhpTui\Tui\Model\Modifier;
 use RuntimeException;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Output\OutputInterface;

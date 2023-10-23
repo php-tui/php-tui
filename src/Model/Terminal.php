@@ -1,10 +1,10 @@
 <?php
 
-namespace DTL\PhpTui\Model;
+namespace PhpTui\Tui\Model;
 
 use Closure;
-use DTL\PhpTui\Model\Viewport\Fullscreen;
-use DTL\PhpTui\Model\Viewport\Inline;
+use PhpTui\Tui\Model\Viewport\Fullscreen;
+use PhpTui\Tui\Model\Viewport\Inline;
 
 final class Terminal
 {

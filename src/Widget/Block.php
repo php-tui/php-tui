@@ -1,18 +1,18 @@
 <?php
 
-namespace DTL\PhpTui\Widget;
+namespace PhpTui\Tui\Widget;
 
-use DTL\PhpTui\Model\Area;
-use DTL\PhpTui\Model\Buffer;
-use DTL\PhpTui\Model\Position;
-use DTL\PhpTui\Model\Style;
-use DTL\PhpTui\Model\Widget;
-use DTL\PhpTui\Model\Widget\BorderType;
-use DTL\PhpTui\Model\Widget\Borders;
-use DTL\PhpTui\Model\Widget\HorizontalAlignment;
-use DTL\PhpTui\Model\Widget\Title;
-use DTL\PhpTui\Model\Widget\VerticalAlignment;
-use DTL\PhpTui\Widget\Block\Padding;
+use PhpTui\Tui\Model\Area;
+use PhpTui\Tui\Model\Buffer;
+use PhpTui\Tui\Model\Position;
+use PhpTui\Tui\Model\Style;
+use PhpTui\Tui\Model\Widget;
+use PhpTui\Tui\Model\Widget\BorderType;
+use PhpTui\Tui\Model\Widget\Borders;
+use PhpTui\Tui\Model\Widget\HorizontalAlignment;
+use PhpTui\Tui\Model\Widget\Title;
+use PhpTui\Tui\Model\Widget\VerticalAlignment;
+use PhpTui\Tui\Widget\Block\Padding;
 
 final class Block implements Widget
 {

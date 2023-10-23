@@ -1,15 +1,15 @@
 <?php
 
-namespace DTL\PhpTui\Tests\Widget\Canvas\Shape;
+namespace PhpTui\Tui\Tests\Widget\Canvas\Shape;
 
-use DTL\PhpTui\Model\AxisBounds;
-use DTL\PhpTui\Model\Buffer;
-use DTL\PhpTui\Model\Area;
-use DTL\PhpTui\Model\Marker;
-use DTL\PhpTui\Widget\Canvas;
-use DTL\PhpTui\Widget\Canvas\CanvasContext;
-use DTL\PhpTui\Widget\Canvas\Shape\Map;
-use DTL\PhpTui\Widget\Canvas\Shape\MapResolution;
+use PhpTui\Tui\Model\AxisBounds;
+use PhpTui\Tui\Model\Buffer;
+use PhpTui\Tui\Model\Area;
+use PhpTui\Tui\Model\Marker;
+use PhpTui\Tui\Widget\Canvas;
+use PhpTui\Tui\Widget\Canvas\CanvasContext;
+use PhpTui\Tui\Widget\Canvas\Shape\Map;
+use PhpTui\Tui\Widget\Canvas\Shape\MapResolution;
 use Generator;
 use PHPUnit\Framework\TestCase;
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace DTL\PhpTui\Model;
+namespace PhpTui\Tui\Model;
 
-use DTL\PhpTui\Model\Widget\HorizontalAlignment;
-use DTL\PhpTui\Model\Widget\StyledGrapheme;
+use PhpTui\Tui\Model\Widget\HorizontalAlignment;
+use PhpTui\Tui\Model\Widget\StyledGrapheme;
 use Generator;
 
 interface LineComposer

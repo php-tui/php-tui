@@ -1,6 +1,6 @@
 <?php
 
-namespace DTL\PhpTui\Widget\Canvas;
+namespace PhpTui\Tui\Widget\Canvas;
 
 interface Shape
 {

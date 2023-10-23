@@ -1,10 +1,10 @@
 <?php
 
-namespace DTL\PhpTui\Tests\Model\Widget;
+namespace PhpTui\Tui\Tests\Model\Widget;
 
-use DTL\PhpTui\Model\AnsiColor;
-use DTL\PhpTui\Model\Style;
-use DTL\PhpTui\Model\Widget\Text;
+use PhpTui\Tui\Model\AnsiColor;
+use PhpTui\Tui\Model\Style;
+use PhpTui\Tui\Model\Widget\Text;
 use PHPUnit\Framework\TestCase;
 
 class TextTest extends TestCase

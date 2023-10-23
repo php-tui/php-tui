@@ -1,8 +1,8 @@
 <?php
 
-namespace DTL\PhpTui\Model\Constraint;
+namespace PhpTui\Tui\Model\Constraint;
 
-use DTL\PhpTui\Model\Constraint;
+use PhpTui\Tui\Model\Constraint;
 
 final class MaxConstraint extends Constraint
 {

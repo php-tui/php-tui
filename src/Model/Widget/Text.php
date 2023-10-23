@@ -1,8 +1,8 @@
 <?php
 
-namespace DTL\PhpTui\Model\Widget;
+namespace PhpTui\Tui\Model\Widget;
 
-use DTL\PhpTui\Model\Style;
+use PhpTui\Tui\Model\Style;
 
 final class Text
 {

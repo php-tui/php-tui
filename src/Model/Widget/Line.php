@@ -1,9 +1,9 @@
 <?php
 
-namespace DTL\PhpTui\Model\Widget;
+namespace PhpTui\Tui\Model\Widget;
 
 use ArrayIterator;
-use DTL\PhpTui\Model\Style;
+use PhpTui\Tui\Model\Style;
 use IteratorAggregate;
 use Traversable;
 

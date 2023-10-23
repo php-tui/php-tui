@@ -1,10 +1,10 @@
 <?php
 
-namespace DTL\PhpTui\Widget\Canvas;
+namespace PhpTui\Tui\Widget\Canvas;
 
-use DTL\PhpTui\Model\AnsiColor;
-use DTL\PhpTui\Model\Color;
-use DTL\PhpTui\Model\Position;
+use PhpTui\Tui\Model\AnsiColor;
+use PhpTui\Tui\Model\Color;
+use PhpTui\Tui\Model\Position;
 
 final class CharGrid extends Grid
 {

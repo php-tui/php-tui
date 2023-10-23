@@ -1,21 +1,21 @@
 <?php
 
-namespace DTL\PhpTui\Widget;
+namespace PhpTui\Tui\Widget;
 
-use DTL\PhpTui\Model\AnsiColor;
-use DTL\PhpTui\Model\Area;
-use DTL\PhpTui\Model\Buffer;
-use DTL\PhpTui\Model\Position;
-use DTL\PhpTui\Model\Style;
-use DTL\PhpTui\Model\Widget;
-use DTL\PhpTui\Model\Widget\HorizontalAlignment;
-use DTL\PhpTui\Model\Widget\LineSet;
-use DTL\PhpTui\Model\Widget\Span;
-use DTL\PhpTui\Widget\Canvas\CanvasContext;
-use DTL\PhpTui\Widget\Canvas\Shape\Points;
-use DTL\PhpTui\Widget\Chart\Axis;
-use DTL\PhpTui\Widget\Chart\ChartLayout;
-use DTL\PhpTui\Widget\Chart\DataSet;
+use PhpTui\Tui\Model\AnsiColor;
+use PhpTui\Tui\Model\Area;
+use PhpTui\Tui\Model\Buffer;
+use PhpTui\Tui\Model\Position;
+use PhpTui\Tui\Model\Style;
+use PhpTui\Tui\Model\Widget;
+use PhpTui\Tui\Model\Widget\HorizontalAlignment;
+use PhpTui\Tui\Model\Widget\LineSet;
+use PhpTui\Tui\Model\Widget\Span;
+use PhpTui\Tui\Widget\Canvas\CanvasContext;
+use PhpTui\Tui\Widget\Canvas\Shape\Points;
+use PhpTui\Tui\Widget\Chart\Axis;
+use PhpTui\Tui\Widget\Chart\ChartLayout;
+use PhpTui\Tui\Widget\Chart\DataSet;
 use RuntimeException;
 
 final class Chart implements Widget

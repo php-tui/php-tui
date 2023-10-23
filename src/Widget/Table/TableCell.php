@@ -1,10 +1,10 @@
 <?php
 
-namespace DTL\PhpTui\Widget\Table;
+namespace PhpTui\Tui\Widget\Table;
 
-use DTL\PhpTui\Model\Style;
-use DTL\PhpTui\Model\Widget\Line;
-use DTL\PhpTui\Model\Widget\Text;
+use PhpTui\Tui\Model\Style;
+use PhpTui\Tui\Model\Widget\Line;
+use PhpTui\Tui\Model\Widget\Text;
 
 final class TableCell
 {

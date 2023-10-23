@@ -1,10 +1,10 @@
 <?php
 
-namespace DTL\PhpTui\Model;
+namespace PhpTui\Tui\Model;
 
 use Countable;
-use DTL\PhpTui\Model\Widget\Line;
-use DTL\PhpTui\Model\Widget\Span;
+use PhpTui\Tui\Model\Widget\Line;
+use PhpTui\Tui\Model\Widget\Span;
 use OutOfBoundsException;
 
 final class Buffer implements Countable

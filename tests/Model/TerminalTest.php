@@ -1,11 +1,11 @@
 <?php
 
-namespace DTL\PhpTui\Tests\Model;
+namespace PhpTui\Tui\Tests\Model;
 
-use DTL\PhpTui\Model\Backend\DummyBackend;
-use DTL\PhpTui\Model\Buffer;
-use DTL\PhpTui\Model\Position;
-use DTL\PhpTui\Model\Terminal;
+use PhpTui\Tui\Model\Backend\DummyBackend;
+use PhpTui\Tui\Model\Buffer;
+use PhpTui\Tui\Model\Position;
+use PhpTui\Tui\Model\Terminal;
 use PHPUnit\Framework\TestCase;
 
 class TerminalTest extends TestCase

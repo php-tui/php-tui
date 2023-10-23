@@ -1,25 +1,25 @@
 <?php
 
-use DTL\PhpTui\Adapter\PhpTerm\PhpTermBackend;
-use DTL\PhpTui\Adapter\Symfony\SymfonyBackend;
+use PhpTui\Tui\Adapter\PhpTerm\PhpTermBackend;
+use PhpTui\Tui\Adapter\Symfony\SymfonyBackend;
 
-use DTL\PhpTui\Model\AnsiColor;
-use DTL\PhpTui\Model\AxisBounds;
-use DTL\PhpTui\Model\Buffer;
-use DTL\PhpTui\Model\Constraint;
-use DTL\PhpTui\Model\Direction;
-use DTL\PhpTui\Model\Layout;
-use DTL\PhpTui\Model\Marker;
-use DTL\PhpTui\Model\Style;
-use DTL\PhpTui\Model\Terminal;
-use DTL\PhpTui\Model\Widget\Borders;
-use DTL\PhpTui\Model\Widget\Line;
-use DTL\PhpTui\Model\Widget\Span;
-use DTL\PhpTui\Model\Widget\Title;
-use DTL\PhpTui\Widget\Block;
-use DTL\PhpTui\Widget\Chart;
-use DTL\PhpTui\Widget\Chart\Axis;
-use DTL\PhpTui\Widget\Chart\DataSet;
+use PhpTui\Tui\Model\AnsiColor;
+use PhpTui\Tui\Model\AxisBounds;
+use PhpTui\Tui\Model\Buffer;
+use PhpTui\Tui\Model\Constraint;
+use PhpTui\Tui\Model\Direction;
+use PhpTui\Tui\Model\Layout;
+use PhpTui\Tui\Model\Marker;
+use PhpTui\Tui\Model\Style;
+use PhpTui\Tui\Model\Terminal;
+use PhpTui\Tui\Model\Widget\Borders;
+use PhpTui\Tui\Model\Widget\Line;
+use PhpTui\Tui\Model\Widget\Span;
+use PhpTui\Tui\Model\Widget\Title;
+use PhpTui\Tui\Widget\Block;
+use PhpTui\Tui\Widget\Chart;
+use PhpTui\Tui\Widget\Chart\Axis;
+use PhpTui\Tui\Widget\Chart\DataSet;
 use Symfony\Component\Console\Cursor;
 use Symfony\Component\Console\Output\ConsoleOutput;
 

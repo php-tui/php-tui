@@ -1,20 +1,20 @@
 <?php
 
-namespace DTL\PhpTui\Adapter\Cassowary;
+namespace PhpTui\Tui\Adapter\Cassowary;
 
 use PhpTui\Cassowary\Constraint;
 use PhpTui\Cassowary\Solver;
 use PhpTui\Cassowary\Strength;
-use DTL\PhpTui\Model\Area;
-use DTL\PhpTui\Model\Areas;
-use DTL\PhpTui\Model\Constraint as DTLConstraint;
-use DTL\PhpTui\Model\ConstraintSolver;
-use DTL\PhpTui\Model\Constraint\LengthConstraint;
-use DTL\PhpTui\Model\Constraint\MaxConstraint;
-use DTL\PhpTui\Model\Constraint\MinConstraint;
-use DTL\PhpTui\Model\Constraint\PercentageConstraint;
-use DTL\PhpTui\Model\Direction;
-use DTL\PhpTui\Model\Layout;
+use PhpTui\Tui\Model\Area;
+use PhpTui\Tui\Model\Areas;
+use PhpTui\Tui\Model\Constraint as DTLConstraint;
+use PhpTui\Tui\Model\ConstraintSolver;
+use PhpTui\Tui\Model\Constraint\LengthConstraint;
+use PhpTui\Tui\Model\Constraint\MaxConstraint;
+use PhpTui\Tui\Model\Constraint\MinConstraint;
+use PhpTui\Tui\Model\Constraint\PercentageConstraint;
+use PhpTui\Tui\Model\Direction;
+use PhpTui\Tui\Model\Layout;
 use RuntimeException;
 
 final class CassowaryConstraintSolver implements ConstraintSolver

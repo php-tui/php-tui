@@ -1,20 +1,20 @@
 <?php
 
-namespace DTL\PhpTui\Widget;
+namespace PhpTui\Tui\Widget;
 
-use DTL\PhpTui\Model\Area;
-use DTL\PhpTui\Model\Buffer;
-use DTL\PhpTui\Model\Constraint;
-use DTL\PhpTui\Model\Direction;
-use DTL\PhpTui\Model\Layout;
-use DTL\PhpTui\Model\Position;
-use DTL\PhpTui\Model\Style;
-use DTL\PhpTui\Model\Widget;
-use DTL\PhpTui\Model\Widget\HorizontalAlignment;
-use DTL\PhpTui\Widget\ItemList\HighlightSpacing;
-use DTL\PhpTui\Widget\Table\TableCell;
-use DTL\PhpTui\Widget\Table\TableRow;
-use DTL\PhpTui\Widget\Table\TableState;
+use PhpTui\Tui\Model\Area;
+use PhpTui\Tui\Model\Buffer;
+use PhpTui\Tui\Model\Constraint;
+use PhpTui\Tui\Model\Direction;
+use PhpTui\Tui\Model\Layout;
+use PhpTui\Tui\Model\Position;
+use PhpTui\Tui\Model\Style;
+use PhpTui\Tui\Model\Widget;
+use PhpTui\Tui\Model\Widget\HorizontalAlignment;
+use PhpTui\Tui\Widget\ItemList\HighlightSpacing;
+use PhpTui\Tui\Widget\Table\TableCell;
+use PhpTui\Tui\Widget\Table\TableRow;
+use PhpTui\Tui\Widget\Table\TableState;
 
 final class Table implements Widget
 {

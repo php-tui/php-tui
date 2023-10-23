@@ -1,10 +1,10 @@
 <?php
 
-namespace DTL\PhpTui\Model\LineComposer;
+namespace PhpTui\Tui\Model\LineComposer;
 
-use DTL\PhpTui\Model\LineComposer;
-use DTL\PhpTui\Model\Widget\HorizontalAlignment;
-use DTL\PhpTui\Model\Widget\StyledGrapheme;
+use PhpTui\Tui\Model\LineComposer;
+use PhpTui\Tui\Model\Widget\HorizontalAlignment;
+use PhpTui\Tui\Model\Widget\StyledGrapheme;
 use Generator;
 
 class LineTruncator implements LineComposer

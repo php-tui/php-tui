@@ -5,14 +5,14 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "DTL\\PhpTui\\": "src/",
-            "DTL\\PhpTerm\\": "lib/php-term/src"
+            "PhpTui\\Tui\\": "src/",
+            "PhpTui\\Term\\": "lib/term/src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "DTL\\PhpTui\\Tests\\": "tests/",
-            "DTL\\PhpTerm\\Tests\\": "lib/php-term/tests/"
+            "PhpTui\\Tui\\Tests\\": "tests/",
+            "PhpTui\\Term\\Tests\\": "lib/term/tests/"
         }
     },
     "authors": [

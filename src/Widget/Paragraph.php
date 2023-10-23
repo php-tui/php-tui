@@ -1,20 +1,20 @@
 <?php
 
-namespace DTL\PhpTui\Widget;
+namespace PhpTui\Tui\Widget;
 
-use DTL\PhpTui\Model\Area;
-use DTL\PhpTui\Model\Buffer;
-use DTL\PhpTui\Model\LineComposer;
-use DTL\PhpTui\Model\LineComposer\LineTruncator;
-use DTL\PhpTui\Model\Position;
-use DTL\PhpTui\Model\Style;
-use DTL\PhpTui\Model\Widget;
-use DTL\PhpTui\Model\Widget\HorizontalAlignment;
-use DTL\PhpTui\Model\Widget\Line;
-use DTL\PhpTui\Model\Widget\Span;
-use DTL\PhpTui\Model\Widget\StyledGrapheme;
-use DTL\PhpTui\Model\Widget\Text;
-use DTL\PhpTui\Widget\Paragraph\Wrap;
+use PhpTui\Tui\Model\Area;
+use PhpTui\Tui\Model\Buffer;
+use PhpTui\Tui\Model\LineComposer;
+use PhpTui\Tui\Model\LineComposer\LineTruncator;
+use PhpTui\Tui\Model\Position;
+use PhpTui\Tui\Model\Style;
+use PhpTui\Tui\Model\Widget;
+use PhpTui\Tui\Model\Widget\HorizontalAlignment;
+use PhpTui\Tui\Model\Widget\Line;
+use PhpTui\Tui\Model\Widget\Span;
+use PhpTui\Tui\Model\Widget\StyledGrapheme;
+use PhpTui\Tui\Model\Widget\Text;
+use PhpTui\Tui\Widget\Paragraph\Wrap;
 
 class Paragraph implements Widget
 {

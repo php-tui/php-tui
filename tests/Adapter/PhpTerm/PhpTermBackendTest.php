@@ -1,18 +1,18 @@
 <?php
 
-namespace DTL\PhpTui\Tests\Adapter\PhpTerm;
+namespace PhpTui\Tui\Tests\Adapter\PhpTerm;
 
-use DTL\PhpTerm\Painter\BufferPainter;
-use DTL\PhpTerm\Action;
-use DTL\PhpTerm\Terminal;
-use DTL\PhpTui\Adapter\PhpTerm\PhpTermBackend;
-use DTL\PhpTui\Model\AnsiColor;
-use DTL\PhpTui\Model\BufferUpdate;
-use DTL\PhpTui\Model\Modifier;
-use DTL\PhpTui\Model\Style;
-use DTL\PhpTui\Model\Cell;
-use DTL\PhpTui\Model\Position;
-use DTL\PhpTui\Model\BufferUpdates;
+use PhpTui\Term\Painter\BufferPainter;
+use PhpTui\Term\Action;
+use PhpTui\Term\Terminal;
+use PhpTui\Tui\Adapter\PhpTerm\PhpTermBackend;
+use PhpTui\Tui\Model\AnsiColor;
+use PhpTui\Tui\Model\BufferUpdate;
+use PhpTui\Tui\Model\Modifier;
+use PhpTui\Tui\Model\Style;
+use PhpTui\Tui\Model\Cell;
+use PhpTui\Tui\Model\Position;
+use PhpTui\Tui\Model\BufferUpdates;
 use PHPUnit\Framework\TestCase;
 
 class PhpTermBackendTest extends TestCase

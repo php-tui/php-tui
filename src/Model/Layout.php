@@ -1,9 +1,9 @@
 <?php
 
-namespace DTL\PhpTui\Model;
+namespace PhpTui\Tui\Model;
 
-use DTL\PhpTui\Adapter\Cassowary\CassowaryConstraintSolver;
-use DTL\PhpTui\Model\Layout\StaticCachingConstraintSolver;
+use PhpTui\Tui\Adapter\Cassowary\CassowaryConstraintSolver;
+use PhpTui\Tui\Model\Layout\StaticCachingConstraintSolver;
 
 final class Layout
 {

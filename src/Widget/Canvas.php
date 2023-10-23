@@ -1,18 +1,18 @@
 <?php
 
-namespace DTL\PhpTui\Widget;
+namespace PhpTui\Tui\Widget;
 
 use Closure;
-use DTL\PhpTui\Model\AnsiColor;
-use DTL\PhpTui\Model\Area;
-use DTL\PhpTui\Model\AxisBounds;
-use DTL\PhpTui\Model\Buffer;
-use DTL\PhpTui\Model\Color;
-use DTL\PhpTui\Model\Marker;
-use DTL\PhpTui\Model\Position;
-use DTL\PhpTui\Model\Style;
-use DTL\PhpTui\Model\Widget;
-use DTL\PhpTui\Widget\Canvas\CanvasContext;
+use PhpTui\Tui\Model\AnsiColor;
+use PhpTui\Tui\Model\Area;
+use PhpTui\Tui\Model\AxisBounds;
+use PhpTui\Tui\Model\Buffer;
+use PhpTui\Tui\Model\Color;
+use PhpTui\Tui\Model\Marker;
+use PhpTui\Tui\Model\Position;
+use PhpTui\Tui\Model\Style;
+use PhpTui\Tui\Model\Widget;
+use PhpTui\Tui\Widget\Canvas\CanvasContext;
 
 final class Canvas implements Widget
 {

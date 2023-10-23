@@ -1,6 +1,6 @@
 <?php
 
-namespace DTL\PhpTui\Model\Exception;
+namespace PhpTui\Tui\Model\Exception;
 
 use RuntimeException;
 

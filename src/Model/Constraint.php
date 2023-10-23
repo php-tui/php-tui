@@ -1,12 +1,12 @@
 <?php
 
-namespace DTL\PhpTui\Model;
+namespace PhpTui\Tui\Model;
 
-use DTL\PhpTui\Model\Constraint\LengthConstraint;
-use DTL\PhpTui\Model\Constraint\MaxConstraint;
+use PhpTui\Tui\Model\Constraint\LengthConstraint;
+use PhpTui\Tui\Model\Constraint\MaxConstraint;
 
-use DTL\PhpTui\Model\Constraint\MinConstraint;
-use DTL\PhpTui\Model\Constraint\PercentageConstraint;
+use PhpTui\Tui\Model\Constraint\MinConstraint;
+use PhpTui\Tui\Model\Constraint\PercentageConstraint;
 use Stringable;
 
 /**

@@ -1,11 +1,11 @@
 <?php
 
-namespace DTL\PhpTui\Tests\Widget;
+namespace PhpTui\Tui\Tests\Widget;
 
-use DTL\PhpTui\Model\Area;
-use DTL\PhpTui\Model\Buffer;
-use DTL\PhpTui\Model\Widget\Text;
-use DTL\PhpTui\Widget\Paragraph;
+use PhpTui\Tui\Model\Area;
+use PhpTui\Tui\Model\Buffer;
+use PhpTui\Tui\Model\Widget\Text;
+use PhpTui\Tui\Widget\Paragraph;
 use Generator;
 use PHPUnit\Framework\TestCase;
 

@@ -1,15 +1,15 @@
 <?php
 
-namespace DTL\PhpTui\Widget\Canvas;
+namespace PhpTui\Tui\Widget\Canvas;
 
-use DTL\PhpTui\Model\AxisBounds;
-use DTL\PhpTui\Model\Exception\TodoException;
-use DTL\PhpTui\Model\Marker;
-use DTL\PhpTui\Model\Widget\BarSet;
-use DTL\PhpTui\Model\Widget\BlockSet;
-use DTL\PhpTui\Model\Widget\FloatPosition;
-use DTL\PhpTui\Model\Widget\Line;
-use DTL\PhpTui\Model\Widget\Symbols;
+use PhpTui\Tui\Model\AxisBounds;
+use PhpTui\Tui\Model\Exception\TodoException;
+use PhpTui\Tui\Model\Marker;
+use PhpTui\Tui\Model\Widget\BarSet;
+use PhpTui\Tui\Model\Widget\BlockSet;
+use PhpTui\Tui\Model\Widget\FloatPosition;
+use PhpTui\Tui\Model\Widget\Line;
+use PhpTui\Tui\Model\Widget\Symbols;
 
 final class CanvasContext
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace DTL\PhpTui\Widget\Table;
+namespace PhpTui\Tui\Widget\Table;
 
-use DTL\PhpTui\Model\Style;
+use PhpTui\Tui\Model\Style;
 
 final class TableRow
 {

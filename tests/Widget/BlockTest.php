@@ -1,18 +1,18 @@
 <?php
 
-namespace DTL\PhpTui\Tests\Widget;
+namespace PhpTui\Tui\Tests\Widget;
 
 use Closure;
-use DTL\PhpTui\Model\Buffer;
-use DTL\PhpTui\Model\Widget\BorderType;
-use DTL\PhpTui\Model\Widget\Borders;
-use DTL\PhpTui\Model\Widget\HorizontalAlignment;
-use DTL\PhpTui\Model\Widget\Text;
-use DTL\PhpTui\Model\Widget\Title;
-use DTL\PhpTui\Widget\Block;
-use DTL\PhpTui\Model\Area;
-use DTL\PhpTui\Widget\Block\Padding;
-use DTL\PhpTui\Widget\Paragraph;
+use PhpTui\Tui\Model\Buffer;
+use PhpTui\Tui\Model\Widget\BorderType;
+use PhpTui\Tui\Model\Widget\Borders;
+use PhpTui\Tui\Model\Widget\HorizontalAlignment;
+use PhpTui\Tui\Model\Widget\Text;
+use PhpTui\Tui\Model\Widget\Title;
+use PhpTui\Tui\Widget\Block;
+use PhpTui\Tui\Model\Area;
+use PhpTui\Tui\Widget\Block\Padding;
+use PhpTui\Tui\Widget\Paragraph;
 use Generator;
 use PHPUnit\Framework\TestCase;
 

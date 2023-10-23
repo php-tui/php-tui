@@ -1,8 +1,8 @@
 <?php
 
-namespace DTL\PhpTui\Widget\Chart;
+namespace PhpTui\Tui\Widget\Chart;
 
-use DTL\PhpTui\Model\Area;
+use PhpTui\Tui\Model\Area;
 
 class ChartLayout
 {

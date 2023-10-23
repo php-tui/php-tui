@@ -1,6 +1,6 @@
 <?php
 
-namespace DTL\PhpTui\Model;
+namespace PhpTui\Tui\Model;
 
 interface Color
 {

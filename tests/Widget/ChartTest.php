@@ -1,17 +1,17 @@
 <?php
 
-namespace DTL\PhpTui\Tests\Widget;
+namespace PhpTui\Tui\Tests\Widget;
 
-use DTL\PhpTui\Model\AnsiColor;
-use DTL\PhpTui\Model\Area;
-use DTL\PhpTui\Model\AxisBounds;
-use DTL\PhpTui\Model\Buffer;
-use DTL\PhpTui\Model\Marker;
-use DTL\PhpTui\Model\Style;
-use DTL\PhpTui\Model\Widget\Span;
-use DTL\PhpTui\Widget\Chart;
-use DTL\PhpTui\Widget\Chart\Axis;
-use DTL\PhpTui\Widget\Chart\DataSet;
+use PhpTui\Tui\Model\AnsiColor;
+use PhpTui\Tui\Model\Area;
+use PhpTui\Tui\Model\AxisBounds;
+use PhpTui\Tui\Model\Buffer;
+use PhpTui\Tui\Model\Marker;
+use PhpTui\Tui\Model\Style;
+use PhpTui\Tui\Model\Widget\Span;
+use PhpTui\Tui\Widget\Chart;
+use PhpTui\Tui\Widget\Chart\Axis;
+use PhpTui\Tui\Widget\Chart\DataSet;
 use PHPUnit\Framework\TestCase;
 
 class ChartTest extends TestCase

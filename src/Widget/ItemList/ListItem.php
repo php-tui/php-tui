@@ -1,9 +1,9 @@
 <?php
 
-namespace DTL\PhpTui\Widget\ItemList;
+namespace PhpTui\Tui\Widget\ItemList;
 
-use DTL\PhpTui\Model\Style;
-use DTL\PhpTui\Model\Widget\Text;
+use PhpTui\Tui\Model\Style;
+use PhpTui\Tui\Model\Widget\Text;
 
 final class ListItem
 {

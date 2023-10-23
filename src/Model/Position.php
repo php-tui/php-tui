@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace DTL\PhpTui\Model;
+namespace PhpTui\Tui\Model;
 
 use OutOfBoundsException;
 use Stringable;

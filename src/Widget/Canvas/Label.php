@@ -1,9 +1,9 @@
 <?php
 
-namespace DTL\PhpTui\Widget\Canvas;
+namespace PhpTui\Tui\Widget\Canvas;
 
-use DTL\PhpTui\Model\Widget\FloatPosition;
-use DTL\PhpTui\Model\Widget\Line;
+use PhpTui\Tui\Model\Widget\FloatPosition;
+use PhpTui\Tui\Model\Widget\Line;
 
 class Label
 {

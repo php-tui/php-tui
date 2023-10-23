@@ -1,9 +1,9 @@
 <?php
 
-namespace DTL\PhpTui\Widget\Chart;
+namespace PhpTui\Tui\Widget\Chart;
 
-use DTL\PhpTui\Model\Marker;
-use DTL\PhpTui\Model\Style;
+use PhpTui\Tui\Model\Marker;
+use PhpTui\Tui\Model\Style;
 
 final class DataSet
 {

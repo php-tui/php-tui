@@ -1,9 +1,9 @@
 <?php
 
-namespace DTL\PhpTui\Tests\Model;
+namespace PhpTui\Tui\Tests\Model;
 
-use DTL\PhpTui\Model\Area;
-use DTL\PhpTui\Model\Position;
+use PhpTui\Tui\Model\Area;
+use PhpTui\Tui\Model\Position;
 use PHPUnit\Framework\TestCase;
 
 class PositionTest extends TestCase

@@ -1,11 +1,11 @@
 <?php
 
-namespace DTL\PhpTui\Widget\Canvas\Shape;
+namespace PhpTui\Tui\Widget\Canvas\Shape;
 
-use DTL\PhpTui\Model\Color;
-use DTL\PhpTui\Model\Widget\FloatPosition;
-use DTL\PhpTui\Widget\Canvas\Painter;
-use DTL\PhpTui\Widget\Canvas\Shape;
+use PhpTui\Tui\Model\Color;
+use PhpTui\Tui\Model\Widget\FloatPosition;
+use PhpTui\Tui\Widget\Canvas\Painter;
+use PhpTui\Tui\Widget\Canvas\Shape;
 
 final class Rectangle implements Shape
 {

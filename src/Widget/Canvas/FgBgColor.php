@@ -1,8 +1,8 @@
 <?php
 
-namespace DTL\PhpTui\Widget\Canvas;
+namespace PhpTui\Tui\Widget\Canvas;
 
-use DTL\PhpTui\Model\Color;
+use PhpTui\Tui\Model\Color;
 
 final class FgBgColor
 {

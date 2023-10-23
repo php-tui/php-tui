@@ -1,9 +1,9 @@
 <?php
 
-namespace DTL\PhpTui\Widget\Canvas;
+namespace PhpTui\Tui\Widget\Canvas;
 
 use ArrayIterator;
-use DTL\PhpTui\Model\AxisBounds;
+use PhpTui\Tui\Model\AxisBounds;
 use IteratorAggregate;
 use Traversable;
 

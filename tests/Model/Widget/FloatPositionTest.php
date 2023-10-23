@@ -1,9 +1,9 @@
 <?php
 
-namespace DTL\PhpTui\Tests\Model\Widget;
+namespace PhpTui\Tui\Tests\Model\Widget;
 
-use DTL\PhpTui\Model\AxisBounds;
-use DTL\PhpTui\Model\Widget\FloatPosition;
+use PhpTui\Tui\Model\AxisBounds;
+use PhpTui\Tui\Model\Widget\FloatPosition;
 use PHPUnit\Framework\TestCase;
 
 class FloatPositionTest extends TestCase

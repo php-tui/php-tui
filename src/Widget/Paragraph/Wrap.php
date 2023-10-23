@@ -1,6 +1,6 @@
 <?php
 
-namespace DTL\PhpTui\Widget\Paragraph;
+namespace PhpTui\Tui\Widget\Paragraph;
 
 final class Wrap
 {

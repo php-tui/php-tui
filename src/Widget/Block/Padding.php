@@ -1,6 +1,6 @@
 <?php
 
-namespace DTL\PhpTui\Widget\Block;
+namespace PhpTui\Tui\Widget\Block;
 
 class Padding
 {

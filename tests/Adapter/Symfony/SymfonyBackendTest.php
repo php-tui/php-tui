@@ -1,14 +1,14 @@
 <?php
 
-namespace DTL\PhpTui\Tests\Adapter\Symfony;
+namespace PhpTui\Tui\Tests\Adapter\Symfony;
 
-use DTL\PhpTui\Adapter\Symfony\SymfonyBackend;
-use DTL\PhpTui\Model\AnsiColor;
-use DTL\PhpTui\Model\BufferUpdate;
-use DTL\PhpTui\Model\BufferUpdates;
-use DTL\PhpTui\Model\Cell;
-use DTL\PhpTui\Model\Position;
-use DTL\PhpTui\Model\Style;
+use PhpTui\Tui\Adapter\Symfony\SymfonyBackend;
+use PhpTui\Tui\Model\AnsiColor;
+use PhpTui\Tui\Model\BufferUpdate;
+use PhpTui\Tui\Model\BufferUpdates;
+use PhpTui\Tui\Model\Cell;
+use PhpTui\Tui\Model\Position;
+use PhpTui\Tui\Model\Style;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\Console\Terminal;

@@ -1,13 +1,13 @@
 <?php
 
-namespace DTL\PhpTui\Tests\Widget;
+namespace PhpTui\Tui\Tests\Widget;
 
-use DTL\PhpTui\Model\Area;
-use DTL\PhpTui\Model\Buffer;
-use DTL\PhpTui\Model\Constraint;
-use DTL\PhpTui\Widget\Table;
-use DTL\PhpTui\Widget\Table\TableCell;
-use DTL\PhpTui\Widget\Table\TableRow;
+use PhpTui\Tui\Model\Area;
+use PhpTui\Tui\Model\Buffer;
+use PhpTui\Tui\Model\Constraint;
+use PhpTui\Tui\Widget\Table;
+use PhpTui\Tui\Widget\Table\TableCell;
+use PhpTui\Tui\Widget\Table\TableRow;
 use Generator;
 use PHPUnit\Framework\TestCase;
 

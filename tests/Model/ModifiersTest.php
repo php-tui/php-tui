@@ -1,9 +1,9 @@
 <?php
 
-namespace DTL\PhpTui\Tests\Model;
+namespace PhpTui\Tui\Tests\Model;
 
-use DTL\PhpTui\Model\Modifier;
-use DTL\PhpTui\Model\Modifiers;
+use PhpTui\Tui\Model\Modifier;
+use PhpTui\Tui\Model\Modifiers;
 use PHPUnit\Framework\TestCase;
 
 class ModifiersTest extends TestCase

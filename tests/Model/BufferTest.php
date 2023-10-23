@@ -1,16 +1,16 @@
 <?php
 
-namespace DTL\PhpTui\Tests\Model;
+namespace PhpTui\Tui\Tests\Model;
 
 use Closure;
-use DTL\PhpTui\Model\AnsiColor;
-use DTL\PhpTui\Model\Area;
-use DTL\PhpTui\Model\Buffer;
-use DTL\PhpTui\Model\BufferUpdates;
-use DTL\PhpTui\Model\Cell;
-use DTL\PhpTui\Model\Position;
-use DTL\PhpTui\Model\Style;
-use DTL\PhpTui\Model\Widget\Line;
+use PhpTui\Tui\Model\AnsiColor;
+use PhpTui\Tui\Model\Area;
+use PhpTui\Tui\Model\Buffer;
+use PhpTui\Tui\Model\BufferUpdates;
+use PhpTui\Tui\Model\Cell;
+use PhpTui\Tui\Model\Position;
+use PhpTui\Tui\Model\Style;
+use PhpTui\Tui\Model\Widget\Line;
 use Generator;
 use PHPUnit\Framework\TestCase;
 

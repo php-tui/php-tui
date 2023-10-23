@@ -1,12 +1,12 @@
 <?php
 
-namespace DTL\PhpTui\Model\Layout;
+namespace PhpTui\Tui\Model\Layout;
 
-use DTL\PhpTui\Model\Area;
-use DTL\PhpTui\Model\Areas;
-use DTL\PhpTui\Model\Constraint;
-use DTL\PhpTui\Model\ConstraintSolver;
-use DTL\PhpTui\Model\Layout;
+use PhpTui\Tui\Model\Area;
+use PhpTui\Tui\Model\Areas;
+use PhpTui\Tui\Model\Constraint;
+use PhpTui\Tui\Model\ConstraintSolver;
+use PhpTui\Tui\Model\Layout;
 
 class StaticCachingConstraintSolver implements ConstraintSolver
 {

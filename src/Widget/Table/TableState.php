@@ -1,6 +1,6 @@
 <?php
 
-namespace DTL\PhpTui\Widget\Table;
+namespace PhpTui\Tui\Widget\Table;
 
 class TableState
 {

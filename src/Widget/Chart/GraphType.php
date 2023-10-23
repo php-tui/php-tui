@@ -1,6 +1,6 @@
 <?php
 
-namespace DTL\PhpTui\Widget\Chart;
+namespace PhpTui\Tui\Widget\Chart;
 
 enum GraphType
 {

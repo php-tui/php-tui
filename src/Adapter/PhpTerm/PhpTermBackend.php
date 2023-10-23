@@ -1,18 +1,18 @@
 <?php
 
-namespace DTL\PhpTui\Adapter\PhpTerm;
+namespace PhpTui\Tui\Adapter\PhpTerm;
 
-use DTL\PhpTerm\Actions;
-use DTL\PhpTerm\Colors;
-use DTL\PhpTerm\Size;
-use DTL\PhpTerm\Terminal as PhpTermTerminal;
-use DTL\PhpTui\Model\AnsiColor;
-use DTL\PhpTui\Model\Area;
-use DTL\PhpTui\Model\Backend;
-use DTL\PhpTui\Model\BufferUpdates;
-use DTL\PhpTui\Model\Color;
-use DTL\PhpTui\Model\Modifier;
-use DTL\PhpTui\Model\Modifiers;
+use PhpTui\Term\Actions;
+use PhpTui\Term\Colors;
+use PhpTui\Term\Size;
+use PhpTui\Term\Terminal as PhpTermTerminal;
+use PhpTui\Tui\Model\AnsiColor;
+use PhpTui\Tui\Model\Area;
+use PhpTui\Tui\Model\Backend;
+use PhpTui\Tui\Model\BufferUpdates;
+use PhpTui\Tui\Model\Color;
+use PhpTui\Tui\Model\Modifier;
+use PhpTui\Tui\Model\Modifiers;
 use RuntimeException;
 
 class PhpTermBackend implements Backend

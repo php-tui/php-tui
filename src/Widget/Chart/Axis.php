@@ -1,11 +1,11 @@
 <?php
 
-namespace DTL\PhpTui\Widget\Chart;
+namespace PhpTui\Tui\Widget\Chart;
 
-use DTL\PhpTui\Model\AxisBounds;
-use DTL\PhpTui\Model\Style;
-use DTL\PhpTui\Model\Widget\HorizontalAlignment;
-use DTL\PhpTui\Model\Widget\Span;
+use PhpTui\Tui\Model\AxisBounds;
+use PhpTui\Tui\Model\Style;
+use PhpTui\Tui\Model\Widget\HorizontalAlignment;
+use PhpTui\Tui\Model\Widget\Span;
 
 final class Axis
 {

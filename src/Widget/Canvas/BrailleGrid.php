@@ -1,11 +1,11 @@
 <?php
 
-namespace DTL\PhpTui\Widget\Canvas;
+namespace PhpTui\Tui\Widget\Canvas;
 
-use DTL\PhpTui\Model\AnsiColor;
-use DTL\PhpTui\Model\Color;
-use DTL\PhpTui\Model\Position;
-use DTL\PhpTui\Model\Widget\BrailleSet;
+use PhpTui\Tui\Model\AnsiColor;
+use PhpTui\Tui\Model\Color;
+use PhpTui\Tui\Model\Position;
+use PhpTui\Tui\Model\Widget\BrailleSet;
 use IntlChar;
 
 final class BrailleGrid extends Grid

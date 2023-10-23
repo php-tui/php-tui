@@ -1,10 +1,10 @@
 <?php
 
-namespace DTL\PhpTui\Model\Backend;
+namespace PhpTui\Tui\Model\Backend;
 
-use DTL\PhpTui\Model\Area;
-use DTL\PhpTui\Model\Backend;
-use DTL\PhpTui\Model\BufferUpdates;
+use PhpTui\Tui\Model\Area;
+use PhpTui\Tui\Model\Backend;
+use PhpTui\Tui\Model\BufferUpdates;
 
 final class DummyBackend implements Backend
 {

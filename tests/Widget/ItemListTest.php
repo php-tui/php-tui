@@ -1,13 +1,13 @@
 <?php
 
-namespace DTL\PhpTui\Tests\Widget;
+namespace PhpTui\Tui\Tests\Widget;
 
-use DTL\PhpTui\Model\Area;
-use DTL\PhpTui\Model\Buffer;
-use DTL\PhpTui\Model\Corner;
-use DTL\PhpTui\Model\Widget\Text;
-use DTL\PhpTui\Widget\ItemList;
-use DTL\PhpTui\Widget\ItemList\ListItem;
+use PhpTui\Tui\Model\Area;
+use PhpTui\Tui\Model\Buffer;
+use PhpTui\Tui\Model\Corner;
+use PhpTui\Tui\Model\Widget\Text;
+use PhpTui\Tui\Widget\ItemList;
+use PhpTui\Tui\Widget\ItemList\ListItem;
 use Generator;
 use PHPUnit\Framework\TestCase;
 

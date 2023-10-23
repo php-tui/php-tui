@@ -1,11 +1,11 @@
 <?php
 
-namespace DTL\PhpTui\Tests\Model;
+namespace PhpTui\Tui\Tests\Model;
 
-use DTL\PhpTui\Model\Area;
-use DTL\PhpTui\Model\Constraint;
-use DTL\PhpTui\Model\Direction;
-use DTL\PhpTui\Model\Layout;
+use PhpTui\Tui\Model\Area;
+use PhpTui\Tui\Model\Constraint;
+use PhpTui\Tui\Model\Direction;
+use PhpTui\Tui\Model\Layout;
 use PHPUnit\Framework\TestCase;
 
 class LayoutTest extends TestCase

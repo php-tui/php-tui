@@ -1,16 +1,16 @@
 <?php
 
-namespace DTL\PhpTui\Widget;
+namespace PhpTui\Tui\Widget;
 
-use DTL\PhpTui\Model\Area;
-use DTL\PhpTui\Model\Buffer;
-use DTL\PhpTui\Model\Corner;
-use DTL\PhpTui\Model\Position;
-use DTL\PhpTui\Model\Style;
-use DTL\PhpTui\Model\Widget;
-use DTL\PhpTui\Widget\ItemList\HighlightSpacing;
-use DTL\PhpTui\Widget\ItemList\ListItem;
-use DTL\PhpTui\Widget\ItemList\ItemListState;
+use PhpTui\Tui\Model\Area;
+use PhpTui\Tui\Model\Buffer;
+use PhpTui\Tui\Model\Corner;
+use PhpTui\Tui\Model\Position;
+use PhpTui\Tui\Model\Style;
+use PhpTui\Tui\Model\Widget;
+use PhpTui\Tui\Widget\ItemList\HighlightSpacing;
+use PhpTui\Tui\Widget\ItemList\ListItem;
+use PhpTui\Tui\Widget\ItemList\ItemListState;
 
 /**
  * Port of the Ratatui List - which is a reserved word in PHP

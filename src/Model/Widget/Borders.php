@@ -1,6 +1,6 @@
 <?php
 
-namespace DTL\PhpTui\Model\Widget;
+namespace PhpTui\Tui\Model\Widget;
 
 final class Borders
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace DTL\PhpTui\Model\Widget;
+namespace PhpTui\Tui\Model\Widget;
 
-use DTL\PhpTui\Model\AxisBounds;
+use PhpTui\Tui\Model\AxisBounds;
 use Stringable;
 
 final class FloatPosition implements Stringable

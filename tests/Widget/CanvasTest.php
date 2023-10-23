@@ -1,17 +1,17 @@
 <?php
 
-namespace DTL\PhpTui\Tests\Widget;
+namespace PhpTui\Tui\Tests\Widget;
 
-use DTL\PhpTui\Model\AnsiColor;
-use DTL\PhpTui\Model\Area;
-use DTL\PhpTui\Model\AxisBounds;
-use DTL\PhpTui\Model\Buffer;
-use DTL\PhpTui\Model\Cell;
-use DTL\PhpTui\Model\Marker;
-use DTL\PhpTui\Model\Widget\Line as DTLLine;
-use DTL\PhpTui\Widget\Canvas;
-use DTL\PhpTui\Widget\Canvas\CanvasContext;
-use DTL\PhpTui\Widget\Canvas\Shape\Line;
+use PhpTui\Tui\Model\AnsiColor;
+use PhpTui\Tui\Model\Area;
+use PhpTui\Tui\Model\AxisBounds;
+use PhpTui\Tui\Model\Buffer;
+use PhpTui\Tui\Model\Cell;
+use PhpTui\Tui\Model\Marker;
+use PhpTui\Tui\Model\Widget\Line as DTLLine;
+use PhpTui\Tui\Widget\Canvas;
+use PhpTui\Tui\Widget\Canvas\CanvasContext;
+use PhpTui\Tui\Widget\Canvas\Shape\Line;
 use Generator;
 use PHPUnit\Framework\TestCase;
 

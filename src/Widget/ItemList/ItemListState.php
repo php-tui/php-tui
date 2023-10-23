@@ -1,6 +1,6 @@
 <?php
 
-namespace DTL\PhpTui\Widget\ItemList;
+namespace PhpTui\Tui\Widget\ItemList;
 
 final class ItemListState
 {
