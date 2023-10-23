@@ -1,6 +1,8 @@
 PHP TUI
 =======
 
+[![CI](https://github.com/php-tui/php-tui/actions/workflows/ci.yml/badge.svg)](https://github.com/php-tui/php-tui/actions/workflows/ci.yml)
+
 ```
          █████ 
      ████████████████████      
