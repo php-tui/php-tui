@@ -2,8 +2,8 @@
 
 namespace DTL\PhpTui\Adapter\Cassowary;
 
-use DTL\Cassowary\Expression;
-use DTL\Cassowary\Variable;
+use PhpTui\Cassowary\Expression;
+use PhpTui\Cassowary\Variable;
 
 final class Element
 {

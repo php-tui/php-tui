@@ -2,9 +2,9 @@
 
 namespace DTL\PhpTui\Adapter\Cassowary;
 
-use DTL\Cassowary\Constraint;
-use DTL\Cassowary\Solver;
-use DTL\Cassowary\Strength;
+use PhpTui\Cassowary\Constraint;
+use PhpTui\Cassowary\Solver;
+use PhpTui\Cassowary\Strength;
 use DTL\PhpTui\Model\Area;
 use DTL\PhpTui\Model\Areas;
 use DTL\PhpTui\Model\Constraint as DTLConstraint;
