@@ -6,14 +6,12 @@
     "autoload": {
         "psr-4": {
             "DTL\\PhpTui\\": "src/",
-            "DTL\\Cassowary\\": "lib/cassowary/src",
             "DTL\\PhpTerm\\": "lib/php-term/src"
         }
     },
     "autoload-dev": {
         "psr-4": {
             "DTL\\PhpTui\\Tests\\": "tests/",
-            "DTL\\Cassowary\\Tests\\": "lib/cassowary/tests/",
             "DTL\\PhpTerm\\Tests\\": "lib/php-term/tests/"
         }
     },
@@ -23,6 +21,7 @@
         }
     ],
     "require-dev": {
+        "phptui/cassowary": "^0.1.0",
         "friendsofphp/php-cs-fixer": "^3.34",
         "phpstan/phpstan": "^1.10",
         "phpunit/phpunit": "^10.4",
