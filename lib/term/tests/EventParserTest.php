@@ -72,13 +72,23 @@ class EventParserTest extends TestCase
         ];
         /// Home key.
         yield 'Home' => [
-            "[H",
+            "\x1B[H",
             KeyEvent::new(KeyCode::Home),
         ];
         /// End key.
         yield 'End' => [
-            "[F",
+            "\x1B[F",
             KeyEvent::new(KeyCode::End),
+        ];
+        /// Delete key.
+        yield 'Delete' => [
+            "\x1B[3~",
+            KeyEvent::new(KeyCode::Delete),
+        ];
+        /// Tab key.
+        yield 'Tab' => [
+            "\t",
+            KeyEvent::new(KeyCode::Tab),
         ];
         /// Page up key.
         yield 'PageUp' => [
@@ -90,20 +100,10 @@ class EventParserTest extends TestCase
             "special key code",
             KeyEvent::new(KeyCode::PageDown),
         ];
-        /// Tab key.
-        yield 'Tab' => [
-            "\t",
-            KeyEvent::new(KeyCode::Tab),
-        ];
         /// Shift + Tab key.
         yield 'BackTab' => [
             "special key code",
             KeyEvent::new(KeyCode::BackTab),
-        ];
-        /// Delete key.
-        yield 'Delete' => [
-            "\x1B[3~",
-            KeyEvent::new(KeyCode::Delete),
         ];
         /// Insert key.
         yield 'Insert' => [

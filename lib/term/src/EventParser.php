@@ -99,6 +99,8 @@ class EventParser
             'C' => KeyEvent::new(KeyCode::Right),
             'A' => KeyEvent::new(KeyCode::Up),
             'B' => KeyEvent::new(KeyCode::Down),
+            'H' => KeyEvent::new(KeyCode::Home),
+            'F' => KeyEvent::new(KeyCode::End),
             default => throw new ParseError(sprintf('TODO: Could not handle CSI byte: %s', $buffer[2])),
         };
     }
