@@ -40,8 +40,6 @@ enum KeyCode
     ///
     /// `KeyCode::Char('c')` represents `c` character; etc.
     case Char;
-    /// Null.
-    case Null;
     /// Escape key.
     case Esc;
 }

@@ -42,92 +42,87 @@ class EventParserTest extends TestCase
             true,
         ];
         yield 'Backspace' => [
-            '',
+            "\x7F",
             KeyEvent::new(KeyCode::Backspace),
         ];
         /// Enter key.
         yield 'Enter' => [
-            '',
+            "\r",
             KeyEvent::new(KeyCode::Enter),
         ];
         /// Left arrow key.
         yield 'Left' => [
-            '',
+            "\x1B[D",
             KeyEvent::new(KeyCode::Left),
         ];
         /// Right arrow key.
         yield 'Right' => [
-            '',
+            "\x1B[C",
             KeyEvent::new(KeyCode::Right),
         ];
         /// Up arrow key.
         yield 'Up' => [
-            '',
+            "\x1B[A",
             KeyEvent::new(KeyCode::Up),
         ];
         /// Down arrow key.
         yield 'Down' => [
-            '',
+            "\x1B[B",
             KeyEvent::new(KeyCode::Down),
         ];
         /// Home key.
         yield 'Home' => [
-            '',
+            "[H",
             KeyEvent::new(KeyCode::Home),
         ];
         /// End key.
         yield 'End' => [
-            '',
+            "[F",
             KeyEvent::new(KeyCode::End),
         ];
         /// Page up key.
         yield 'PageUp' => [
-            '',
+            "special key code ",
             KeyEvent::new(KeyCode::PageUp),
         ];
         /// Page down key.
         yield 'PageDown' => [
-            '',
+            "special key code",
             KeyEvent::new(KeyCode::PageDown),
         ];
         /// Tab key.
         yield 'Tab' => [
-            '',
+            "\t",
             KeyEvent::new(KeyCode::Tab),
         ];
         /// Shift + Tab key.
         yield 'BackTab' => [
-            '',
+            "special key code",
             KeyEvent::new(KeyCode::BackTab),
         ];
         /// Delete key.
         yield 'Delete' => [
-            '',
+            "\x1B[3~",
             KeyEvent::new(KeyCode::Delete),
         ];
         /// Insert key.
         yield 'Insert' => [
-            '',
+            "special",
             KeyEvent::new(KeyCode::Insert),
         ];
         /// F key.
         ///
         /// `KeyCode::F(1)` represents F1 key; etc.
         yield 'FKey' => [
-            '',
+            "[P",
             KeyEvent::new(KeyCode::FKey),
         ];
         /// A character.
         ///
         /// `KeyCode::Char('c')` represents `c` character; etc.
         yield 'Char' => [
-            '',
+            "a",
             KeyEvent::new(KeyCode::Char),
-        ];
-        /// Null.
-        yield 'Null' => [
-            '',
-            KeyEvent::new(KeyCode::Null),
         ];
     }
 }

@@ -59,7 +59,9 @@ class EventParser
 
         return match ($buffer[0]) {
             "\x1B" => $this->parseEsc($buffer, $inputAvailable),
-            default => throw new ParseError('TODO'),
+            "\x7F" => KeyEvent::new(KeyCode::Backspace),
+            "\r" => KeyEvent::new(KeyCode::Enter),
+            default => throw new ParseError(sprintf('TODO: cannot handle first byte "%s"', $buffer[0])),
         };
     }
 
@@ -77,6 +79,27 @@ class EventParser
             return KeyEvent::new(KeyCode::Esc);
         }
 
-        return null;
+        return match ($buffer[1]) {
+            '[' => $this->parseCsi($buffer),
+            default => throw new ParseError(sprintf('TODO: Could not handle second byte: %s', $buffer[1])),
+        };
+    }
+
+    /**
+     * @param string[] $buffer
+     */
+    private function parseCsi(array $buffer): ?Event
+    {
+        if (count($buffer) === 2) {
+            return null;
+        }
+
+        return match ($buffer[2]) {
+            'D' => KeyEvent::new(KeyCode::Left),
+            'C' => KeyEvent::new(KeyCode::Right),
+            'A' => KeyEvent::new(KeyCode::Up),
+            'B' => KeyEvent::new(KeyCode::Down),
+            default => throw new ParseError(sprintf('TODO: Could not handle CSI byte: %s', $buffer[2])),
+        };
     }
 }
