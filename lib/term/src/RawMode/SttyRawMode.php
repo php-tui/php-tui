@@ -35,6 +35,12 @@ class SttyRawMode implements RawMode
                 'Could not set raw mode'
             );
         }
+        $result = $this->runner->run(['stty', '-echo']);
+        if ($result->exitCode !== 0) {
+            throw new RuntimeException(
+                'Could not hide cursor'
+            );
+        }
     }
 
     public function disable(): void

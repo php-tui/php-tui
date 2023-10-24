@@ -6,6 +6,7 @@ use PhpTui\Term\Event;
 use PhpTui\Term\EventParser;
 use PhpTui\Term\EventProvider;
 use PhpTui\Term\Reader;
+use PhpTui\Term\Reader\StreamReader;
 
 final class SyncEventProvider implements EventProvider
 {
@@ -16,6 +17,11 @@ final class SyncEventProvider implements EventProvider
 
     public function __construct(private Reader $reader, private EventParser $parser)
     {
+    }
+
+    public static function new(): self
+    {
+        return new self(StreamReader::tty(), EventParser::new());
     }
 
     public function next(): ?Event

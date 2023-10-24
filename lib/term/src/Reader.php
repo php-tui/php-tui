@@ -2,6 +2,7 @@
 
 namespace PhpTui\Term;
 
-final class Reader
+interface Reader
 {
+    public function read(): ?string;
 }

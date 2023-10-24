@@ -21,9 +21,9 @@ class PhpTermBackend implements Backend
     {
     }
 
-    public static function new(): self
+    public static function new(?PhpTermTerminal $terminal = null): self
     {
-        return new self(PhpTermTerminal::new());
+        return new self($terminal ?: PhpTermTerminal::new());
     }
 
 

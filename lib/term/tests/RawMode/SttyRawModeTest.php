@@ -21,7 +21,11 @@ class SttyRawModeTest extends TestCase
             }
             if ($command === ['stty', 'raw']) {
                 $called[] = $command;
-                return new ProcessResult(0, 'original mode string', '');
+                return new ProcessResult(0, '', '');
+            }
+            if ($command === ['stty', '-echo']) {
+                $called[] = $command;
+                return new ProcessResult(0, '', '');
             }
             if ($command === ['stty', 'original mode string']) {
                 $called[] = $command;
@@ -34,11 +38,12 @@ class SttyRawModeTest extends TestCase
 
         $raw = SttyRawMode::new($runner);
         $raw->enable();
-        self::assertCount(2, $called);
+        self::assertCount(3, $called);
         $raw->disable();
         self::assertEquals([
             ['stty', '-g'],
             ['stty', 'raw'],
+            ['stty', '-echo'],
             ['stty', 'original mode string'],
         ], $called);
     }

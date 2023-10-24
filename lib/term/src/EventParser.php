@@ -192,4 +192,9 @@ class EventParser
 
         return CharKeyEvent::new($char, $modifiers);
     }
+
+    public static function new(): self
+    {
+        return new self();
+    }
 }

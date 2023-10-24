@@ -2,6 +2,7 @@
 
 namespace PhpTui\Term;
 
+use PhpTui\Term\EventProvider\SyncEventProvider;
 use PhpTui\Term\InformationProvider\AggregateInformationProvider;
 use PhpTui\Term\InformationProvider\SizeFromEnvVarProvider;
 use PhpTui\Term\InformationProvider\SizeFromSttyProvider;
@@ -20,6 +21,7 @@ class Terminal
         private Painter $painter,
         private InformationProvider $infoProvider,
         private RawMode $rawMode,
+        private EventProvider $eventProvider
     )
     {
     }
@@ -30,10 +32,15 @@ class Terminal
      */
     public static function new(Painter $backend = null): self
     {
-        return new self($backend ?: AnsiPainter::new(StreamWriter::stdout()), AggregateInformationProvider::new([
-            SizeFromEnvVarProvider::new(),
-            SizeFromSttyProvider::new(),
-        ]), SttyRawMode::new());
+        return new self(
+            $backend ?: AnsiPainter::new(StreamWriter::stdout()),
+            AggregateInformationProvider::new([
+                SizeFromEnvVarProvider::new(),
+                SizeFromSttyProvider::new()
+            ]),
+            SttyRawMode::new(),
+            SyncEventProvider::new(),
+        );
     }
 
     /**
@@ -56,6 +63,11 @@ class Terminal
     {
         $this->queue[] = $action;
         return $this;
+    }
+
+    public function events(): EventProvider
+    {
+        return $this->eventProvider;
     }
 
     public function enableRawMode(): void
