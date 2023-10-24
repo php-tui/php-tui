@@ -2,7 +2,8 @@
 
 namespace PhpTui\Term;
 
-use PhpTui\Term\Event\KeyCode;
+use PhpTui\Term\Event\FocusEvent;
+use PhpTui\Term\KeyCode;
 use PhpTui\Term\Event\KeyEvent;
 
 class EventParser
@@ -101,6 +102,8 @@ class EventParser
             'B' => KeyEvent::new(KeyCode::Down),
             'H' => KeyEvent::new(KeyCode::Home),
             'F' => KeyEvent::new(KeyCode::End),
+            'I' => FocusEvent::gained(),
+            'O' => FocusEvent::lost(),
             default => throw new ParseError(sprintf('TODO: Could not handle CSI byte: %s', $buffer[2])),
         };
     }

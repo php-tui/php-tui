@@ -6,7 +6,8 @@ use Generator;
 use PHPUnit\Framework\TestCase;
 use PhpTui\Term\Event;
 use PhpTui\Term\EventParser;
-use PhpTui\Term\Event\KeyCode;
+use PhpTui\Term\Event\FocusEvent;
+use PhpTui\Term\KeyCode;
 use PhpTui\Term\Event\KeyEvent;
 
 class EventParserTest extends TestCase
@@ -79,6 +80,14 @@ class EventParserTest extends TestCase
         yield 'End' => [
             "\x1B[F",
             KeyEvent::new(KeyCode::End),
+        ];
+        yield 'FocusGained' => [
+            "\x1B[I",
+            FocusEvent::gained(),
+        ];
+        yield 'FocusLost' => [
+            "\x1B[O",
+            FocusEvent::lost(),
         ];
         /// Delete key.
         yield 'Delete' => [

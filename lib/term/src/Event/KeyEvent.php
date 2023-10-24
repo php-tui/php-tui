@@ -3,6 +3,7 @@
 namespace PhpTui\Term\Event;
 
 use PhpTui\Term\Event;
+use PhpTui\Term\KeyCode;
 
 class KeyEvent implements Event
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpTui\Term\Event;
+namespace PhpTui\Term;
 
 enum KeyCode
 {
