@@ -41,6 +41,5 @@ class SttyRawModeTest extends TestCase
             ['stty', 'raw'],
             ['stty', 'original mode string'],
         ], $called);
-
     }
 }

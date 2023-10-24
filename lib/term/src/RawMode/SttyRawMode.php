@@ -28,7 +28,7 @@ class SttyRawMode implements RawMode
                 'Could not get stty settings'
             );
         }
-        $this->originalSettings = $result->stdout;
+        $this->originalSettings = trim($result->stdout);
         $result = $this->runner->run(['stty', 'raw']);
         if ($result->exitCode !== 0) {
             throw new RuntimeException(
@@ -44,9 +44,9 @@ class SttyRawMode implements RawMode
         }
         $result = $this->runner->run(['stty', $this->originalSettings]);
         if ($result->exitCode !== 0) {
-            throw new RuntimeException(
-                'Could not restore from raw mode'
-            );
+            throw new RuntimeException(sprintf(
+                'Could not restore from raw mode: %s', $result->stderr
+            ));
         }
     }
 }
