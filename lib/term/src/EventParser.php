@@ -139,9 +139,9 @@ class EventParser
     /**
      * @param string[] $buffer
      */
-    private function parseCsiSpecialKeyCode(array $buffer): ?Event
+    private function parseCsiSpecialKeyCode(array $buffer): Event
     {
-        $str = implode('', array_slice($buffer, 2, (string)array_key_last($buffer)));
+        $str = implode('', array_slice($buffer, 2, (int)array_key_last($buffer)));
 
         $split = array_map(
             fn (string $substr) => (int)array_reduce(
@@ -174,7 +174,7 @@ class EventParser
     /**
      * @param string[] $buffer
      */
-    private function parseUtf8Char(array $buffer): ?Event
+    private function parseUtf8Char(array $buffer): Event
     {
         if (count($buffer) !== 1) {
             throw new ParseError('Multibyte characters not supported');
@@ -183,7 +183,7 @@ class EventParser
         return $this->charToEvent($char);
     }
 
-    private function charToEvent(string $char): ?Event
+    private function charToEvent(string $char): Event
     {
         $modifiers = 0;
         if (strtoupper($char) === $char) {

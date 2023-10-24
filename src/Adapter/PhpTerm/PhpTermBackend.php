@@ -82,6 +82,16 @@ class PhpTermBackend implements Backend
         $this->terminal->flush();
     }
 
+    public function enableRawMode(): void
+    {
+        $this->terminal->enableRawMode();
+    }
+
+    public function disableRawMode(): void
+    {
+        $this->terminal->disableRawMode();
+    }
+
     private function resolveColor(Color $color): Colors
     {
         if ($color instanceof AnsiColor) {
@@ -181,15 +191,5 @@ class PhpTermBackend implements Backend
         if ($added->contains(Modifier::CrossedOut)) {
             $this->terminal->queue(Actions::strike(true));
         }
-    }
-
-    public function enableRawMode(): void
-    {
-        $this->terminal->enableRawMode();
-    }
-
-    public function disableRawMode(): void
-    {
-        $this->terminal->disableRawMode();
     }
 }

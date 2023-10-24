@@ -18,7 +18,7 @@ final class InMemoryReader implements Reader
 
     public function read(): ?string
     {
-        while (false !== $chunk = array_shift($this->chunks)) {
+        while (null !== $chunk = array_shift($this->chunks)) {
             return $chunk;
         }
 

@@ -25,6 +25,6 @@ final class ProcRunner implements ProcessRunner
         fclose($pipes[2]);
         $exitCode = proc_close($process);
 
-        return new ProcessResult($exitCode, $stdout, $stderr);
+        return new ProcessResult($exitCode, $stdout ?: '', $stderr ?: '');
     }
 }
