@@ -43,6 +43,7 @@ class EventParser
                 continue;
             }
             $this->events[] = $event;
+            $this->buffer = [];
         }
     }
 
