@@ -7,4 +7,4 @@ Low-level terminal abstraction loosely based on
 TODO
 ----
 
-- [ ] Add support for functional key codes from kitty keyboard protocol.
+- [ ] Implement the rest of the event parser from crossterm!

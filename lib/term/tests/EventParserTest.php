@@ -6,16 +6,21 @@ use Generator;
 use PHPUnit\Framework\TestCase;
 use PhpTui\Term\Event;
 use PhpTui\Term\EventParser;
+use PhpTui\Term\Event\CharKeyEvent;
 use PhpTui\Term\Event\FocusEvent;
+use PhpTui\Term\Event\FunctionKeyEvent;
 use PhpTui\Term\KeyCode;
 use PhpTui\Term\Event\KeyEvent;
+use PhpTui\Term\KeyModifiers;
 
 class EventParserTest extends TestCase
 {
     /**
      * @dataProvider provideParse
+     * @dataProvider provideCsiSpecialKeyCode
+     * dataProvider provideCsiUEncoded
      */
-    public function testParse(string $line, ?Event $expected, ?bool $moreInput = false): void
+    public function testParse(string $line, ?Event $expected, bool $moreInput = false): void
     {
         $parser = new EventParser();
         $parser->advance($line, $moreInput);
@@ -29,7 +34,7 @@ class EventParserTest extends TestCase
     }
 
     /**
-     * @return Generator<array{0:string,1:?KeyEvent,2?:bool}>
+     * @return Generator<array{0:string,1:?Event,2?:bool}>
      */
     public static function provideParse(): Generator
     {
@@ -89,49 +94,94 @@ class EventParserTest extends TestCase
             "\x1B[O",
             FocusEvent::lost(),
         ];
-        /// Delete key.
-        yield 'Delete' => [
-            "\x1B[3~",
-            KeyEvent::new(KeyCode::Delete),
-        ];
         /// Tab key.
         yield 'Tab' => [
             "\t",
             KeyEvent::new(KeyCode::Tab),
         ];
-        /// Page up key.
-        yield 'PageUp' => [
-            "special key code ",
-            KeyEvent::new(KeyCode::PageUp),
-        ];
-        /// Page down key.
-        yield 'PageDown' => [
-            "special key code",
-            KeyEvent::new(KeyCode::PageDown),
-        ];
-        /// Shift + Tab key.
-        yield 'BackTab' => [
-            "special key code",
-            KeyEvent::new(KeyCode::BackTab),
-        ];
-        /// Insert key.
-        yield 'Insert' => [
-            "special",
-            KeyEvent::new(KeyCode::Insert),
-        ];
         /// F key.
         ///
         /// `KeyCode::F(1)` represents F1 key; etc.
-        yield 'FKey' => [
-            "[P",
-            KeyEvent::new(KeyCode::FKey),
+        yield 'F1' => [
+            "\x1B[P",
+            FunctionKeyEvent::new(1),
+        ];
+        yield 'F2' => [
+            "\x1B[Q",
+            FunctionKeyEvent::new(2),
+        ];
+        yield 'F3' => [
+            "\x1B[R",
+            FunctionKeyEvent::new(3),
+        ];
+        yield 'F4' => [
+            "\x1B[S",
+            FunctionKeyEvent::new(4),
         ];
         /// A character.
         ///
         /// `KeyCode::Char('c')` represents `c` character; etc.
         yield 'Char' => [
             "a",
-            KeyEvent::new(KeyCode::Char),
+            CharKeyEvent::new('a'),
+        ];
+        yield 'Uppercase Char' => [
+            "A",
+            CharKeyEvent::new('A', KeyModifiers::SHIFT),
+        ];
+    }
+
+    /**
+     * @return Generator<array{0:string,1:?Event,2?:bool}>
+     */
+    public static function provideCsiSpecialKeyCode(): Generator
+    {
+        /// Delete key.
+        yield 'Delete' => [
+            "\x1B[3~",
+            KeyEvent::new(KeyCode::Delete),
+        ];
+        /// Home key.
+        yield 'Home 1' => [
+            "\x1B[1~",
+            KeyEvent::new(KeyCode::Home),
+        ];
+        /// Home key.
+        yield 'Home 2' => [
+            "\x1B[7~",
+            KeyEvent::new(KeyCode::Home),
+        ];
+        /// Insert key.
+        yield 'Insert' => [
+            "\x1B[2~",
+            KeyEvent::new(KeyCode::Insert),
+        ];
+        yield 'CSI End 1' => [
+            "\x1B[4~",
+            KeyEvent::new(KeyCode::End),
+        ];
+        yield 'CSI End 2' => [
+            "\x1B[8~",
+            KeyEvent::new(KeyCode::End),
+        ];
+        /// Page up key.
+        yield 'PageUp' => [
+            "\x1B[5~",
+            KeyEvent::new(KeyCode::PageUp),
+        ];
+        /// Page down key.
+        yield 'PageDown' => [
+            "\x1B[6~",
+            KeyEvent::new(KeyCode::PageDown),
+        ];
+    }
+
+    public function provideCsiUEncoded(): Generator
+    {
+        /// Shift + Tab key.
+        yield 'BackTab' => [
+            "special key code",
+            KeyEvent::new(KeyCode::BackTab),
         ];
     }
 }

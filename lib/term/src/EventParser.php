@@ -2,8 +2,9 @@
 
 namespace PhpTui\Term;
 
+use PhpTui\Term\Event\CharKeyEvent;
 use PhpTui\Term\Event\FocusEvent;
-use PhpTui\Term\KeyCode;
+use PhpTui\Term\Event\FunctionKeyEvent;
 use PhpTui\Term\Event\KeyEvent;
 
 class EventParser
@@ -37,15 +38,11 @@ class EventParser
             $more = $index + 1 < strlen($line) || $more;
 
             $this->buffer[] = $byte;
-            try {
-                $event = $this->parseEvent($this->buffer, $more);
-                if ($event === null) {
-                    continue;
-                }
-                $this->events[] = $event;
-            } catch (ParseError $error) {
+            $event = $this->parseEvent($this->buffer, $more);
+            if ($event === null) {
                 continue;
             }
+            $this->events[] = $event;
         }
     }
 
@@ -62,7 +59,8 @@ class EventParser
             "\x1B" => $this->parseEsc($buffer, $inputAvailable),
             "\x7F" => KeyEvent::new(KeyCode::Backspace),
             "\r" => KeyEvent::new(KeyCode::Enter),
-            default => throw new ParseError(sprintf('TODO: cannot handle first byte "%s"', $buffer[0])),
+            "\t" => KeyEvent::new(KeyCode::Tab),
+            default => $this->parseUtf8Char($buffer),
         };
     }
 
@@ -104,6 +102,11 @@ class EventParser
             'F' => KeyEvent::new(KeyCode::End),
             'I' => FocusEvent::gained(),
             'O' => FocusEvent::lost(),
+            // https://sw.kovidgoyal.net/kitty/keyboard-protocol/#legacy-functional-keys
+            'P' => FunctionKeyEvent::new(1),
+            'Q' => FunctionKeyEvent::new(2),
+            'R' => FunctionKeyEvent::new(3), // this is omitted from crossterm
+            'S' => FunctionKeyEvent::new(4),
             '0','1','2','3','4','5','6','7','8','9' => $this->parseCsiMore($buffer),
             default => throw new ParseError(sprintf('TODO: Could not handle CSI byte: %s', $buffer[2])),
         };
@@ -155,10 +158,37 @@ class EventParser
         $first = $split[array_key_first($split)];
 
         $keycode = match ($first) {
+            1,7 => KeyCode::Home,
+            2 => KeyCode::Insert,
+            4,8 => KeyCode::End,
+            5 => KeyCode::PageUp,
+            6 => KeyCode::PageDown,
             3 => KeyCode::Delete,
             default => throw new ParseError(sprintf('Could not handle special CSI byte: %s', $first)),
         };
 
         return KeyEvent::new($keycode);
+    }
+
+    /**
+     * @param string[] $buffer
+     */
+    private function parseUtf8Char(array $buffer): ?Event
+    {
+        if (count($buffer) !== 1) {
+            throw new ParseError('Multibyte characters not supported');
+        }
+        $char = $buffer[0];
+        return $this->charToEvent($char);
+    }
+
+    private function charToEvent(string $char): ?Event
+    {
+        $modifiers = 0;
+        if (strtoupper($char) === $char) {
+            $modifiers = KeyModifiers::SHIFT;
+        }
+
+        return CharKeyEvent::new($char, $modifiers);
     }
 }
