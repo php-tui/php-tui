@@ -104,7 +104,61 @@ class EventParser
             'F' => KeyEvent::new(KeyCode::End),
             'I' => FocusEvent::gained(),
             'O' => FocusEvent::lost(),
+            '0','1','2','3','4','5','6','7','8','9' => $this->parseCsiMore($buffer),
             default => throw new ParseError(sprintf('TODO: Could not handle CSI byte: %s', $buffer[2])),
         };
+    }
+
+    /**
+     * @param string[] $buffer
+     */
+    private function parseCsiMore(array $buffer): ?Event
+    {
+        // numbered escape code
+        if (count($buffer) === 3) {
+            return null;
+        }
+
+        $lastByte = $buffer[array_key_last($buffer)];
+        // the final byte of a CSI sequence can be in the range 64-126
+        $ord = ord($lastByte);
+        if ($ord < 64 || $ord > 126) {
+            return null;
+        }
+
+        return match ($lastByte) {
+            '~' => $this->parseCsiSpecialKeyCode($buffer),
+            default => throw new ParseError(sprintf('TODO: Could not handle last CSI byte: %s', $lastByte)),
+        };
+    }
+
+    /**
+     * @param string[] $buffer
+     */
+    private function parseCsiSpecialKeyCode(array $buffer): ?Event
+    {
+        $str = implode('', array_slice($buffer, 2, (string)array_key_last($buffer)));
+
+        $split = array_map(
+            fn (string $substr) => (int)array_reduce(
+                str_split($substr),
+                function (string $ac, string $char) {
+                    if (false === is_numeric($char)) {
+                        return $ac;
+                    }
+                    return $ac . $char;
+                },
+                ''
+            ),
+            explode(';', $str),
+        );
+        $first = $split[array_key_first($split)];
+
+        $keycode = match ($first) {
+            3 => KeyCode::Delete,
+            default => throw new ParseError(sprintf('Could not handle special CSI byte: %s', $first)),
+        };
+
+        return KeyEvent::new($keycode);
     }
 }
