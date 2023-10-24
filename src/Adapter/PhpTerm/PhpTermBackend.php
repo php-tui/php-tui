@@ -17,7 +17,7 @@ use RuntimeException;
 
 class PhpTermBackend implements Backend
 {
-    public function __construct(private PhpTermTerminal $control)
+    public function __construct(private PhpTermTerminal $terminal)
     {
     }
 
@@ -29,7 +29,7 @@ class PhpTermBackend implements Backend
 
     public function size(): Area
     {
-        $size = $this->control->info(Size::class);
+        $size = $this->terminal->info(Size::class);
         if (null === $size) {
             throw new RuntimeException(
                 'Could not determine terminal size!'
@@ -51,7 +51,7 @@ class PhpTermBackend implements Backend
 
             // do not move the cursor if its been implicitly moved by printing the last symbol
             if (null === $lastPos || ($update->position->y !== $lastPos->y || $update->position->x !== $lastPos->x + 1)) {
-                $this->control->queue(Actions::moveCursor($update->position->y + 1, $update->position->x + 1));
+                $this->terminal->queue(Actions::moveCursor($update->position->y + 1, $update->position->x + 1));
             }
             $lastPos = $update->position;
 
@@ -61,25 +61,25 @@ class PhpTermBackend implements Backend
             }
 
             if ($update->cell->fg !== $fg) {
-                $this->control->queue(Actions::setForegroundColor($this->resolveColor($update->cell->fg)));
+                $this->terminal->queue(Actions::setForegroundColor($this->resolveColor($update->cell->fg)));
                 $fg = $update->cell->fg;
             }
 
             if ($update->cell->bg !== $bg) {
-                $this->control->queue(Actions::setBackgroundColor($this->resolveColor($update->cell->bg)));
+                $this->terminal->queue(Actions::setBackgroundColor($this->resolveColor($update->cell->bg)));
                 $bg = $update->cell->bg;
             }
-            $this->control->queue(Actions::printString($update->cell->char));
+            $this->terminal->queue(Actions::printString($update->cell->char));
         }
 
-        $this->control->queue(Actions::setForegroundColor(Colors::Reset));
-        $this->control->queue(Actions::setBackgroundColor(Colors::Reset));
-        $this->control->queue(Actions::reset());
+        $this->terminal->queue(Actions::setForegroundColor(Colors::Reset));
+        $this->terminal->queue(Actions::setBackgroundColor(Colors::Reset));
+        $this->terminal->queue(Actions::reset());
     }
 
     public function flush(): void
     {
-        $this->control->flush();
+        $this->terminal->flush();
     }
 
     private function resolveColor(Color $color): Colors
@@ -125,61 +125,71 @@ class PhpTermBackend implements Backend
         $removed = $from->sub($to);
 
         if ($removed->contains(Modifier::Italic)) {
-            $this->control->queue(Actions::italic(false));
+            $this->terminal->queue(Actions::italic(false));
         }
         if ($removed->contains(Modifier::Bold)) {
-            $this->control->queue(Actions::bold(false));
+            $this->terminal->queue(Actions::bold(false));
         }
         if ($removed->contains(Modifier::Reversed)) {
-            $this->control->queue(Actions::reverse(false));
+            $this->terminal->queue(Actions::reverse(false));
         }
         if ($removed->contains(Modifier::Dim)) {
-            $this->control->queue(Actions::dim(false));
+            $this->terminal->queue(Actions::dim(false));
         }
         if ($removed->contains(Modifier::Hidden)) {
-            $this->control->queue(Actions::hidden(false));
+            $this->terminal->queue(Actions::hidden(false));
         }
         if ($removed->contains(Modifier::SlowBlink)) {
-            $this->control->queue(Actions::slowBlink(false));
+            $this->terminal->queue(Actions::slowBlink(false));
         }
         if ($removed->contains(Modifier::Underlined)) {
-            $this->control->queue(Actions::underline(false));
+            $this->terminal->queue(Actions::underline(false));
         }
         if ($removed->contains(Modifier::RapidBlink)) {
-            $this->control->queue(Actions::rapidBlink(false));
+            $this->terminal->queue(Actions::rapidBlink(false));
         }
         if ($removed->contains(Modifier::CrossedOut)) {
-            $this->control->queue(Actions::strike(false));
+            $this->terminal->queue(Actions::strike(false));
         }
 
         $added = $to->sub($from);
 
         if ($added->contains(Modifier::Italic)) {
-            $this->control->queue(Actions::italic(true));
+            $this->terminal->queue(Actions::italic(true));
         }
         if ($added->contains(Modifier::Bold)) {
-            $this->control->queue(Actions::bold(true));
+            $this->terminal->queue(Actions::bold(true));
         }
         if ($added->contains(Modifier::Reversed)) {
-            $this->control->queue(Actions::reverse(true));
+            $this->terminal->queue(Actions::reverse(true));
         }
         if ($added->contains(Modifier::Dim)) {
-            $this->control->queue(Actions::dim(true));
+            $this->terminal->queue(Actions::dim(true));
         }
         if ($added->contains(Modifier::Hidden)) {
-            $this->control->queue(Actions::hidden(true));
+            $this->terminal->queue(Actions::hidden(true));
         }
         if ($added->contains(Modifier::SlowBlink)) {
-            $this->control->queue(Actions::slowBlink(true));
+            $this->terminal->queue(Actions::slowBlink(true));
         }
         if ($added->contains(Modifier::Underlined)) {
-            $this->control->queue(Actions::underline(true));
+            $this->terminal->queue(Actions::underline(true));
         }
         if ($added->contains(Modifier::RapidBlink)) {
-            $this->control->queue(Actions::rapidBlink(true));
+            $this->terminal->queue(Actions::rapidBlink(true));
         }
         if ($added->contains(Modifier::CrossedOut)) {
-            $this->control->queue(Actions::strike(true));
+            $this->terminal->queue(Actions::strike(true));
         }
+    }
+
+    public function enableRawMode(): void
+    {
+        $this->terminal->enableRawMode();
+    }
+
+    public function disableRawMode(): void
+    {
+        $this->terminal->disableRawMode();
     }
 }

@@ -6,6 +6,7 @@ use PhpTui\Term\InformationProvider\AggregateInformationProvider;
 use PhpTui\Term\InformationProvider\SizeFromEnvVarProvider;
 use PhpTui\Term\InformationProvider\SizeFromSttyProvider;
 use PhpTui\Term\Painter\AnsiPainter;
+use PhpTui\Term\RawMode\SttyRawMode;
 use PhpTui\Term\Writer\StreamWriter;
 
 class Terminal
@@ -15,7 +16,11 @@ class Terminal
      */
     private array $queue = [];
 
-    public function __construct(private Painter $painter, private InformationProvider $infoProvider)
+    public function __construct(
+        private Painter $painter,
+        private InformationProvider $infoProvider,
+        private RawMode $rawMode,
+    )
     {
     }
 
@@ -28,7 +33,7 @@ class Terminal
         return new self($backend ?: AnsiPainter::new(StreamWriter::stdout()), AggregateInformationProvider::new([
             SizeFromEnvVarProvider::new(),
             SizeFromSttyProvider::new(),
-        ]));
+        ]), SttyRawMode::new());
     }
 
     /**
@@ -44,10 +49,23 @@ class Terminal
         return $info;
     }
 
+    /**
+     * Queue a painter action.
+     */
     public function queue(Action $action): self
     {
         $this->queue[] = $action;
         return $this;
+    }
+
+    public function enableRawMode(): void
+    {
+        $this->rawMode->enable();
+    }
+
+    public function disableRawMode(): void
+    {
+        $this->rawMode->disable();
     }
 
     public function flush(): self
