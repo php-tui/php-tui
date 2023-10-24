@@ -2,6 +2,7 @@
 
 namespace PhpTui\Term;
 
+use PhpTui\Term\Action\AlternateScreenEnable;
 use PhpTui\Term\EventProvider\SyncEventProvider;
 use PhpTui\Term\InformationProvider\AggregateInformationProvider;
 use PhpTui\Term\InformationProvider\SizeFromEnvVarProvider;
@@ -85,5 +86,10 @@ class Terminal
         $this->painter->paint($this->queue);
         $this->queue = [];
         return $this;
+    }
+
+    public function execute(Action $action): void
+    {
+        $this->painter->paint([$action]);
     }
 }

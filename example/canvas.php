@@ -1,7 +1,9 @@
 <?php
 
+use PhpTui\Term\Actions;
+use PhpTui\Term\Event\CharKeyEvent;
 use PhpTui\Term\Painter\BufferPainter;
-use PhpTui\Term\Terminal as DTLTerminal;
+use PhpTui\Term\Terminal;
 use PhpTui\Tui\Adapter\PhpTerm\PhpTermBackend;
 use PhpTui\Tui\Adapter\Symfony\SymfonyBackend;
 use PhpTui\Tui\Model\AnsiColor;
@@ -30,7 +32,6 @@ use PhpTui\Tui\Widget\Canvas\Shape\MapResolution;
 use PhpTui\Tui\Widget\Canvas\Shape\Rectangle;
 use Symfony\Component\Console\Cursor;
 use Symfony\Component\Console\Output\ConsoleOutput;
-use Symfony\Component\Console\Terminal as SymfonyTerminal;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
@@ -66,17 +67,27 @@ class App
     public static function run(): void
     {
         $app = App::new();
-        $cursor = new Cursor(new ConsoleOutput());
-        $cursor->hide();
-        $cursor->clearScreen();
         $b = BufferPainter::new();
-        $backend = PhpTermBackend::new();
-        $display = Display::fullscreen($backend);
+        $terminal = Terminal::new();
+        $terminal->enableRawMode();
+        $terminal->execute(Actions::alternateScreenEnable());
+        $terminal->execute(Actions::cursorHide());
+        $display = Display::fullscreen(PhpTermBackend::new($terminal));
         while (true) {
+            while (null !== $event = $terminal->events()->next()) {
+                if ($event instanceof CharKeyEvent) {
+                    if ($event->char === 'q') {
+                        $terminal->disableRawMode();
+                        $terminal->execute(Actions::alternateScreenDisable());
+                        $terminal->execute(Actions::cursorShow());
+                        break 2;
+                    }
+                }
+            }
             $display->draw(function (Buffer $buffer) use ($app, $b): void {
                 $app->ui($buffer);
             });
-            usleep(16000);
+            usleep(10000);
             $app->onTick();
         }
     }
