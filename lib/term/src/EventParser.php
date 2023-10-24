@@ -5,7 +5,7 @@ namespace PhpTui\Term;
 use PhpTui\Term\Event\CharKeyEvent;
 use PhpTui\Term\Event\FocusEvent;
 use PhpTui\Term\Event\FunctionKeyEvent;
-use PhpTui\Term\Event\KeyEvent;
+use PhpTui\Term\Event\CodedKeyEvent;
 
 class EventParser
 {
@@ -57,9 +57,9 @@ class EventParser
 
         return match ($buffer[0]) {
             "\x1B" => $this->parseEsc($buffer, $inputAvailable),
-            "\x7F" => KeyEvent::new(KeyCode::Backspace),
-            "\r" => KeyEvent::new(KeyCode::Enter),
-            "\t" => KeyEvent::new(KeyCode::Tab),
+            "\x7F" => CodedKeyEvent::new(KeyCode::Backspace),
+            "\r" => CodedKeyEvent::new(KeyCode::Enter),
+            "\t" => CodedKeyEvent::new(KeyCode::Tab),
             default => $this->parseUtf8Char($buffer),
         };
     }
@@ -75,7 +75,7 @@ class EventParser
                 return null;
             }
 
-            return KeyEvent::new(KeyCode::Esc);
+            return CodedKeyEvent::new(KeyCode::Esc);
         }
 
         return match ($buffer[1]) {
@@ -94,12 +94,12 @@ class EventParser
         }
 
         return match ($buffer[2]) {
-            'D' => KeyEvent::new(KeyCode::Left),
-            'C' => KeyEvent::new(KeyCode::Right),
-            'A' => KeyEvent::new(KeyCode::Up),
-            'B' => KeyEvent::new(KeyCode::Down),
-            'H' => KeyEvent::new(KeyCode::Home),
-            'F' => KeyEvent::new(KeyCode::End),
+            'D' => CodedKeyEvent::new(KeyCode::Left),
+            'C' => CodedKeyEvent::new(KeyCode::Right),
+            'A' => CodedKeyEvent::new(KeyCode::Up),
+            'B' => CodedKeyEvent::new(KeyCode::Down),
+            'H' => CodedKeyEvent::new(KeyCode::Home),
+            'F' => CodedKeyEvent::new(KeyCode::End),
             'I' => FocusEvent::gained(),
             'O' => FocusEvent::lost(),
             // https://sw.kovidgoyal.net/kitty/keyboard-protocol/#legacy-functional-keys
@@ -167,7 +167,7 @@ class EventParser
             default => throw new ParseError(sprintf('Could not handle special CSI byte: %s', $first)),
         };
 
-        return KeyEvent::new($keycode);
+        return CodedKeyEvent::new($keycode);
     }
 
     /**

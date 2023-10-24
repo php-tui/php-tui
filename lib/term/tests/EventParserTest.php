@@ -10,7 +10,7 @@ use PhpTui\Term\Event\CharKeyEvent;
 use PhpTui\Term\Event\FocusEvent;
 use PhpTui\Term\Event\FunctionKeyEvent;
 use PhpTui\Term\KeyCode;
-use PhpTui\Term\Event\KeyEvent;
+use PhpTui\Term\Event\CodedKeyEvent;
 use PhpTui\Term\KeyModifiers;
 
 class EventParserTest extends TestCase
@@ -40,7 +40,7 @@ class EventParserTest extends TestCase
     {
         yield 'esc' => [
             "\x1B",
-            KeyEvent::new(KeyCode::Esc),
+            CodedKeyEvent::new(KeyCode::Esc),
         ];
         yield 'possible esc sequence' => [
             "\x1B",
@@ -49,42 +49,42 @@ class EventParserTest extends TestCase
         ];
         yield 'Backspace' => [
             "\x7F",
-            KeyEvent::new(KeyCode::Backspace),
+            CodedKeyEvent::new(KeyCode::Backspace),
         ];
         /// Enter key.
         yield 'Enter' => [
             "\r",
-            KeyEvent::new(KeyCode::Enter),
+            CodedKeyEvent::new(KeyCode::Enter),
         ];
         /// Left arrow key.
         yield 'Left' => [
             "\x1B[D",
-            KeyEvent::new(KeyCode::Left),
+            CodedKeyEvent::new(KeyCode::Left),
         ];
         /// Right arrow key.
         yield 'Right' => [
             "\x1B[C",
-            KeyEvent::new(KeyCode::Right),
+            CodedKeyEvent::new(KeyCode::Right),
         ];
         /// Up arrow key.
         yield 'Up' => [
             "\x1B[A",
-            KeyEvent::new(KeyCode::Up),
+            CodedKeyEvent::new(KeyCode::Up),
         ];
         /// Down arrow key.
         yield 'Down' => [
             "\x1B[B",
-            KeyEvent::new(KeyCode::Down),
+            CodedKeyEvent::new(KeyCode::Down),
         ];
         /// Home key.
         yield 'Home' => [
             "\x1B[H",
-            KeyEvent::new(KeyCode::Home),
+            CodedKeyEvent::new(KeyCode::Home),
         ];
         /// End key.
         yield 'End' => [
             "\x1B[F",
-            KeyEvent::new(KeyCode::End),
+            CodedKeyEvent::new(KeyCode::End),
         ];
         yield 'FocusGained' => [
             "\x1B[I",
@@ -97,7 +97,7 @@ class EventParserTest extends TestCase
         /// Tab key.
         yield 'Tab' => [
             "\t",
-            KeyEvent::new(KeyCode::Tab),
+            CodedKeyEvent::new(KeyCode::Tab),
         ];
         /// F key.
         ///
@@ -139,40 +139,40 @@ class EventParserTest extends TestCase
         /// Delete key.
         yield 'Delete' => [
             "\x1B[3~",
-            KeyEvent::new(KeyCode::Delete),
+            CodedKeyEvent::new(KeyCode::Delete),
         ];
         /// Home key.
         yield 'Home 1' => [
             "\x1B[1~",
-            KeyEvent::new(KeyCode::Home),
+            CodedKeyEvent::new(KeyCode::Home),
         ];
         /// Home key.
         yield 'Home 2' => [
             "\x1B[7~",
-            KeyEvent::new(KeyCode::Home),
+            CodedKeyEvent::new(KeyCode::Home),
         ];
         /// Insert key.
         yield 'Insert' => [
             "\x1B[2~",
-            KeyEvent::new(KeyCode::Insert),
+            CodedKeyEvent::new(KeyCode::Insert),
         ];
         yield 'CSI End 1' => [
             "\x1B[4~",
-            KeyEvent::new(KeyCode::End),
+            CodedKeyEvent::new(KeyCode::End),
         ];
         yield 'CSI End 2' => [
             "\x1B[8~",
-            KeyEvent::new(KeyCode::End),
+            CodedKeyEvent::new(KeyCode::End),
         ];
         /// Page up key.
         yield 'PageUp' => [
             "\x1B[5~",
-            KeyEvent::new(KeyCode::PageUp),
+            CodedKeyEvent::new(KeyCode::PageUp),
         ];
         /// Page down key.
         yield 'PageDown' => [
             "\x1B[6~",
-            KeyEvent::new(KeyCode::PageDown),
+            CodedKeyEvent::new(KeyCode::PageDown),
         ];
     }
 
@@ -181,7 +181,7 @@ class EventParserTest extends TestCase
         /// Shift + Tab key.
         yield 'BackTab' => [
             "special key code",
-            KeyEvent::new(KeyCode::BackTab),
+            CodedKeyEvent::new(KeyCode::BackTab),
         ];
     }
 }
