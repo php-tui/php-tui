@@ -11,7 +11,7 @@ use PhpTui\Tui\Model\Direction;
 use PhpTui\Tui\Model\Layout;
 use PhpTui\Tui\Model\Modifier;
 use PhpTui\Tui\Model\Style;
-use PhpTui\Tui\Model\Terminal;
+use PhpTui\Tui\Model\Display;
 use PhpTui\Tui\Model\Widget\BorderType;
 use PhpTui\Tui\Model\Widget\Borders;
 use PhpTui\Tui\Model\Widget\HorizontalAlignment;
@@ -33,7 +33,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 $cursor = new Cursor(new ConsoleOutput());
 $cursor->clearScreen();
 $backend = PhpTermBackend::new();
-$terminal = Terminal::fullscreen($backend);
+$terminal = Display::fullscreen($backend);
 $terminal->draw(function (Buffer $buffer): void {
     [$titleArea, $layout] = calculate_layout($buffer->area());
     render_title($buffer, $titleArea);

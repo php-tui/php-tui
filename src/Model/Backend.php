@@ -9,8 +9,4 @@ interface Backend
     public function draw(BufferUpdates $updates): void;
 
     public function flush(): void;
-
-    public function enableRawMode(): void;
-
-    public function disableRawMode(): void;
 }

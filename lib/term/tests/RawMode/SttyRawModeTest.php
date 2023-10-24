@@ -17,15 +17,15 @@ class SttyRawModeTest extends TestCase
         $runner = ClosureRunner::new(function (array $command) use (&$called) {
             if ($command === ['stty', '-g']) {
                 $called[] = $command;
-                return new ProcessResult(0, 'original mode string');
+                return new ProcessResult(0, 'original mode string', '');
             }
             if ($command === ['stty', 'raw']) {
                 $called[] = $command;
-                return new ProcessResult(0, 'original mode string');
+                return new ProcessResult(0, 'original mode string', '');
             }
             if ($command === ['stty', 'original mode string']) {
                 $called[] = $command;
-                return new ProcessResult(0, '');
+                return new ProcessResult(0, '', '');
             }
             throw new RuntimeException(
                 sprintf('Unexpected command: %s', json_encode($command))

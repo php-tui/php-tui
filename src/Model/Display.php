@@ -6,7 +6,7 @@ use Closure;
 use PhpTui\Tui\Model\Viewport\Fullscreen;
 use PhpTui\Tui\Model\Viewport\Inline;
 
-final class Terminal
+final class Display
 {
     /**
      * @param array{Buffer,Buffer} $buffers
@@ -103,15 +103,5 @@ final class Terminal
     {
         $this->buffers[1 - $this->current]->reset();
         $this->current = 1 - $this->current;
-    }
-
-    public function enableRawMode(): void
-    {
-        $this->backend->enableRawMode();
-    }
-
-    public function disableRawMode(): void
-    {
-        $this->backend->disableRawMode();
     }
 }

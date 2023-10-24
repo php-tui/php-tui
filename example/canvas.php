@@ -16,7 +16,7 @@ use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Model\Modifier;
 use PhpTui\Tui\Model\Position;
 use PhpTui\Tui\Model\Style;
-use PhpTui\Tui\Model\Terminal;
+use PhpTui\Tui\Model\Display;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\Widget\Borders;
 use PhpTui\Tui\Model\Widget\Line;
@@ -71,9 +71,9 @@ class App
         $cursor->clearScreen();
         $b = BufferPainter::new();
         $backend = PhpTermBackend::new();
-        $terminal = Terminal::fullscreen($backend);
+        $display = Display::fullscreen($backend);
         while (true) {
-            $terminal->draw(function (Buffer $buffer) use ($app, $b): void {
+            $display->draw(function (Buffer $buffer) use ($app, $b): void {
                 $app->ui($buffer);
             });
             usleep(16000);
