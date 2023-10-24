@@ -6,7 +6,7 @@ use Closure;
 use PhpTui\Tui\Model\Viewport\Fullscreen;
 use PhpTui\Tui\Model\Viewport\Inline;
 
-final class Terminal
+final class Display
 {
     /**
      * @param array{Buffer,Buffer} $buffers

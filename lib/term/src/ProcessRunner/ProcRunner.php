@@ -19,11 +19,12 @@ final class ProcRunner implements ProcessRunner
             throw new RuntimeException(sprintf('Could not spawn process: "%s"', implode('", "', $command)));
         }
 
-        $info = stream_get_contents($pipes[1]);
+        $stdout = stream_get_contents($pipes[1]);
+        $stderr = stream_get_contents($pipes[2]);
         fclose($pipes[1]);
         fclose($pipes[2]);
         $exitCode = proc_close($process);
 
-        return new ProcessResult($exitCode, $info);
+        return new ProcessResult($exitCode, $stdout ?: '', $stderr ?: '');
     }
 }

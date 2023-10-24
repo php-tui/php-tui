@@ -11,7 +11,7 @@ use PhpTui\Tui\Model\Direction;
 use PhpTui\Tui\Model\Layout;
 use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Model\Style;
-use PhpTui\Tui\Model\Terminal;
+use PhpTui\Tui\Model\Display;
 use PhpTui\Tui\Model\Widget\Borders;
 use PhpTui\Tui\Model\Widget\Line;
 use PhpTui\Tui\Model\Widget\Span;
@@ -80,7 +80,7 @@ class App
         $cursor->hide();
         $cursor->clearScreen();
         $backend = PhpTermBackend::new();
-        $terminal = Terminal::fullscreen($backend);
+        $terminal = Display::fullscreen($backend);
         while (true) {
             $terminal->draw(function (Buffer $buffer) use ($app): void {
                 $app->ui($buffer);

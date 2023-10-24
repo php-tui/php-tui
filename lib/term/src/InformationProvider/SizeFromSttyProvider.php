@@ -28,6 +28,8 @@ final class SizeFromSttyProvider implements InformationProvider
         if (null === $out) {
             return null;
         }
+        /**
+         * @phpstan-ignore-next-line */
         return $this->parse($out);
 
     }
