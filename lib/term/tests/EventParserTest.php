@@ -99,6 +99,46 @@ class EventParserTest extends TestCase
             "\t",
             CodedKeyEvent::new(KeyCode::Tab),
         ];
+        yield 'Left (D)' => [
+            "\x1BOD",
+            CodedKeyEvent::new(KeyCode::Left),
+        ];
+        yield 'Right (C)' => [
+            "\x1BOC",
+            CodedKeyEvent::new(KeyCode::Right),
+        ];
+        yield 'Up (A)' => [
+            "\x1BOA",
+            CodedKeyEvent::new(KeyCode::Up),
+        ];
+        yield 'Down (B)' => [
+            "\x1BOB",
+            CodedKeyEvent::new(KeyCode::Down),
+        ];
+        yield 'Home (H)' => [
+            "\x1BOH",
+            CodedKeyEvent::new(KeyCode::Home),
+        ];
+        yield 'End (F)' => [
+            "\x1BOF",
+            CodedKeyEvent::new(KeyCode::End),
+        ];
+        yield 'F1 (P)' => [
+            "\x1BOP",
+            FunctionKeyEvent::new(1),
+        ];
+        yield 'F2 (Q)' => [
+            "\x1BOQ",
+            FunctionKeyEvent::new(2),
+        ];
+        yield 'F3 (R)' => [
+            "\x1BOR",
+            FunctionKeyEvent::new(3),
+        ];
+        yield 'F4 (S)' => [
+            "\x1BOS",
+            FunctionKeyEvent::new(4),
+        ];
         /// F key.
         ///
         /// `KeyCode::F(1)` represents F1 key; etc.

@@ -81,7 +81,26 @@ class EventParser
 
         return match ($buffer[1]) {
             '[' => $this->parseCsi($buffer),
-            default => throw new ParseError(sprintf('TODO: Could not handle second byte: %s', $buffer[1])),
+            'O' => (function () use ($buffer) {
+                if (count($buffer) === 2) {
+                    return null;
+                }
+
+                return match ($buffer[2]) {
+                    'P' => FunctionKeyEvent::new(1),
+                    'Q' => FunctionKeyEvent::new(2),
+                    'R' => FunctionKeyEvent::new(3),
+                    'S' => FunctionKeyEvent::new(4),
+                    'H' => CodedKeyEvent::new(KeyCode::Home),
+                    'F' => CodedKeyEvent::new(KeyCode::End),
+                    'D' => CodedKeyEvent::new(KeyCode::Left),
+                    'C' => CodedKeyEvent::new(KeyCode::Right),
+                    'A' => CodedKeyEvent::new(KeyCode::Up),
+                    'B' => CodedKeyEvent::new(KeyCode::Down),
+                    default => throw ParseError::couldNotParseOffset($buffer, 2)
+                };
+            })(),
+            default => throw ParseError::couldNotParseOffset($buffer, 1),
         };
     }
 
