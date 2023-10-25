@@ -2,6 +2,8 @@
 
 namespace PhpTui\Term;
 
-interface Event
+use Stringable;
+
+interface Event extends Stringable
 {
 }

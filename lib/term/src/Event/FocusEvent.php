@@ -20,4 +20,9 @@ final class FocusEvent implements Event
     {
         return new self(Focus::Lost);
     }
+
+    public function __toString(): string
+    {
+        return sprintf('Focus(%s)', $this->focus->name);
+    }
 }

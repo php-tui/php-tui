@@ -21,4 +21,9 @@ class CodedKeyEvent implements KeyEvent
     {
         return new self($keyCode, $modifiers);
     }
+
+    public function __toString(): string
+    {
+        return sprintf('CodedKeyEvent(code: %s, modifiers: %s)', $this->code->name, $this->modifiers);
+    }
 }

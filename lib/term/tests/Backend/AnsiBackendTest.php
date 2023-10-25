@@ -2,6 +2,7 @@
 
 namespace PhpTui\Term\Tests\Backend;
 
+use PhpTui\Term\ClearType;
 use PhpTui\Term\Colors;
 use PhpTui\Term\Actions;
 use PhpTui\Term\Action;
@@ -33,6 +34,7 @@ class AnsiBackendTest extends TestCase
         $this->assertAnsiCode('7m', Actions::reverse(true));
         $this->assertAnsiCode('8m', Actions::hidden(true));
         $this->assertAnsiCode('9m', Actions::strike(true));
+        $this->assertAnsiCode('2J', Actions::clear(ClearType::All));
     }
 
     private function assertAnsiCode(string $string, Action $command): void
