@@ -57,9 +57,9 @@ final class App
     ) {
     }
 
-    public static function new(): self
+    public static function new(?Terminal $terminal = null): self
     {
-        $terminal = Terminal::new();
+        $terminal = $terminal ?: Terminal::new();
 
         $pages = [];
         // build up an exhaustive set of pages

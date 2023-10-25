@@ -31,16 +31,20 @@ class Terminal
      * Create a new terminal, if no backend is provided a standard ANSI
      * terminal will be created.
      */
-    public static function new(Painter $backend = null): self
+    public static function new(
+        Painter $painter = null,
+        InformationProvider  $infoProvider = null,
+        EventProvider $eventProvider = null,
+    ): self
     {
         return new self(
-            $backend ?: AnsiPainter::new(StreamWriter::stdout()),
-            AggregateInformationProvider::new([
+            $painter ?: AnsiPainter::new(StreamWriter::stdout()),
+            $infoProvider ?: AggregateInformationProvider::new([
                 SizeFromEnvVarProvider::new(),
                 SizeFromSttyProvider::new()
             ]),
             SttyRawMode::new(),
-            SyncEventProvider::new(),
+            $eventProvider ?: SyncEventProvider::new(),
         );
     }
 
