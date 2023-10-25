@@ -35,6 +35,7 @@ class Terminal
         Painter $painter = null,
         InformationProvider  $infoProvider = null,
         EventProvider $eventProvider = null,
+        RawMode $rawMode = null,
     ): self
     {
         return new self(
@@ -43,7 +44,7 @@ class Terminal
                 SizeFromEnvVarProvider::new(),
                 SizeFromSttyProvider::new()
             ]),
-            SttyRawMode::new(),
+            $rawMode ?: SttyRawMode::new(),
             $eventProvider ?: SyncEventProvider::new(),
         );
     }

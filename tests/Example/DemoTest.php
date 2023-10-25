@@ -6,6 +6,9 @@ use PHPUnit\Framework\TestCase;
 use PhpTui\Term\Event;
 use PhpTui\Term\EventProvider\LoadedEventProvider;
 use PhpTui\Term\Event\CharKeyEvent;
+use PhpTui\Term\InformationProvider\AggregateInformationProvider;
+use PhpTui\Term\Painter\BufferPainter;
+use PhpTui\Term\RawMode\NullRawMode;
 use PhpTui\Term\Terminal;
 use PhpTui\Tui\Example\Demo\App;
 use PhpTui\Tui\Model\Backend\DummyBackend;
@@ -67,9 +70,12 @@ class DemoTest extends TestCase
     private function execute(?Event ...$events): DummyBackend
     {
         $terminal = Terminal::new(
+            infoProvider: new AggregateInformationProvider([]),
+            rawMode: new NullRawMode(),
             eventProvider: LoadedEventProvider::fromEvents(
                 ...$events
             ),
+            painter: BufferPainter::new(),
         );
 
         $backend = DummyBackend::fromDimensions(80, 20);
