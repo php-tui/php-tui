@@ -121,6 +121,7 @@ class EventParser
             'B' => CodedKeyEvent::new(KeyCode::Down),
             'H' => CodedKeyEvent::new(KeyCode::Home),
             'F' => CodedKeyEvent::new(KeyCode::End),
+            'Z' => CodedKeyEvent::new(KeyCode::BackTab, KeyModifiers::SHIFT, KeyEventKind::Press),
             'I' => FocusEvent::gained(),
             'O' => FocusEvent::lost(),
             // https://sw.kovidgoyal.net/kitty/keyboard-protocol/#legacy-functional-keys
@@ -152,7 +153,7 @@ class EventParser
 
         return match ($lastByte) {
             '~' => $this->parseCsiSpecialKeyCode($buffer),
-            default => throw new ParseError(sprintf('TODO: Could not handle last CSI byte: %s', $lastByte)),
+            default => $this->parseCsiModifierKeyCode($buffer),
         };
     }
 
@@ -231,5 +232,13 @@ class EventParser
     public static function new(): self
     {
         return new self();
+    }
+
+    /**
+     * @param string[] $buffer
+     */
+    private function parseCsiModifierKeyCode(array $buffer): ?Event
+    {
+        dd($buffer);
     }
 }

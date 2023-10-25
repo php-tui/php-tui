@@ -18,6 +18,7 @@ class EventParserTest extends TestCase
     /**
      * @dataProvider provideParse
      * @dataProvider provideCsiSpecialKeyCode
+     * @dataProvider provideCsiModifierKeyCode
      * dataProvider provideCsiUEncoded
      */
     public function testParse(string $line, ?Event $expected, bool $moreInput = false): void
@@ -80,6 +81,10 @@ class EventParserTest extends TestCase
         yield 'Home' => [
             "\x1B[H",
             CodedKeyEvent::new(KeyCode::Home),
+        ];
+        yield 'BackTab' => [
+            "\x1B[Z",
+            CodedKeyEvent::new(KeyCode::BackTab, KeyModifiers::SHIFT),
         ];
         /// End key.
         yield 'End' => [
@@ -230,6 +235,17 @@ class EventParserTest extends TestCase
         yield 'BackTab' => [
             "special key code",
             CodedKeyEvent::new(KeyCode::BackTab),
+        ];
+    }
+
+    /**
+     * @return Generator<array{0:string,1:?Event,2?:bool}>
+     */
+    public static function provideCsiModifierKeyCode(): Generator
+    {
+        yield 'Shift F1' => [
+            "\x1B[1;2R",
+            FunctionKeyEvent::new(1, KeyModifiers::SHIFT),
         ];
     }
 }
