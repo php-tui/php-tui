@@ -239,6 +239,17 @@ class EventParser
      */
     private function parseCsiModifierKeyCode(array $buffer): ?Event
     {
-        dd($buffer);
+        $str = implode('', array_slice($buffer, 2, array_key_last($buffer)));
+        // split string into bytes
+        $parts = (array)explode(';', $str);
+
+        $this->modifierAndKindParsed($parts);
+    }
+
+    /**
+     * @param string[] $parts
+     */
+    private function modifierAndKindParsed(array $parts): void
+    {
     }
 }

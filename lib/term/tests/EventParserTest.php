@@ -11,6 +11,7 @@ use PhpTui\Term\Event\FocusEvent;
 use PhpTui\Term\Event\FunctionKeyEvent;
 use PhpTui\Term\KeyCode;
 use PhpTui\Term\Event\CodedKeyEvent;
+use PhpTui\Term\KeyEventKind;
 use PhpTui\Term\KeyModifiers;
 
 class EventParserTest extends TestCase
@@ -243,6 +244,10 @@ class EventParserTest extends TestCase
      */
     public static function provideCsiModifierKeyCode(): Generator
     {
+        yield 'special key code with types' => [
+            "\x1B[;1;3B",
+            CodedKeyEvent::new(KeyCode::Down, KeyModifiers::NONE, KeyEventKind::Release),
+        ];
         yield 'Shift F1' => [
             "\x1B[1;2R",
             FunctionKeyEvent::new(1, KeyModifiers::SHIFT),
