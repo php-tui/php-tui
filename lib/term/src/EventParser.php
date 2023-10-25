@@ -82,7 +82,7 @@ class EventParser
         return match ($buffer[1]) {
             '[' => $this->parseCsi($buffer),
             "\x1B" => CodedKeyEvent::new(KeyCode::Esc),
-            'O' => (function () use ($buffer) {
+            'O' => (function () use ($buffer, $inputAvailable) {
                 if (count($buffer) === 2) {
                     return null;
                 }
@@ -98,10 +98,10 @@ class EventParser
                     'C' => CodedKeyEvent::new(KeyCode::Right),
                     'A' => CodedKeyEvent::new(KeyCode::Up),
                     'B' => CodedKeyEvent::new(KeyCode::Down),
-                    default => throw ParseError::couldNotParseOffset($buffer, 2)
+                    default => throw ParseError::couldNotParseOffset($buffer, 22),
                 };
             })(),
-            default => throw ParseError::couldNotParseOffset($buffer, 1),
+            default => $this->parseEvent(array_slice($buffer, 1), $inputAvailable),
         };
     }
 
@@ -129,7 +129,7 @@ class EventParser
             'R' => FunctionKeyEvent::new(3), // this is omitted from crossterm
             'S' => FunctionKeyEvent::new(4),
             '0','1','2','3','4','5','6','7','8','9' => $this->parseCsiMore($buffer),
-            default => throw new ParseError(sprintf('TODO: Could not handle CSI byte: %s', $buffer[2])),
+            default => throw ParseError::couldNotParseOffset($buffer, 2),
         };
     }
 
@@ -185,10 +185,25 @@ class EventParser
             5 => KeyCode::PageUp,
             6 => KeyCode::PageDown,
             3 => KeyCode::Delete,
-            default => throw new ParseError(sprintf('Could not handle special CSI byte: %s', $first)),
+            default => null,
         };
-
-        return CodedKeyEvent::new($keycode);
+        if (null !== $keycode) {
+            return CodedKeyEvent::new($keycode);
+        }
+        return match($first) {
+            11,12,13,14,15 => FunctionKeyEvent::new($first - 10),
+            17,18,19,20,21 => FunctionKeyEvent::new($first - 11),
+            23,24,25,26 => FunctionKeyEvent::new($first - 12),
+            28,29 => FunctionKeyEvent::new($first - 15),
+            31,32,33,34 => FunctionKeyEvent::new($first - 17),
+            default => throw new ParseError(
+                sprintf(
+                    'Could not parse char "%s" in CSI event: %s',
+                    $first,
+                    json_encode(implode('', $buffer))
+                )
+            ),
+        };
     }
 
     /**

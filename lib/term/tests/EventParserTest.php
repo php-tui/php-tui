@@ -162,6 +162,10 @@ class EventParserTest extends TestCase
             "\x1B\x1B",
             CodedKeyEvent::new(KeyCode::Esc),
         ];
+        yield 'escape then chra' => [
+            "\x1Ba",
+            CharKeyEvent::new('a'),
+        ];
         /// A character.
         ///
         /// `KeyCode::Char('c')` represents `c` character; etc.
