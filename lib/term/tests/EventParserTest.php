@@ -158,6 +158,10 @@ class EventParserTest extends TestCase
             "\x1B[S",
             FunctionKeyEvent::new(4),
         ];
+        yield 'double escape' => [
+            "\x1B\x1B",
+            CodedKeyEvent::new(KeyCode::Esc),
+        ];
         /// A character.
         ///
         /// `KeyCode::Char('c')` represents `c` character; etc.

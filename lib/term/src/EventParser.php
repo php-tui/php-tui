@@ -81,6 +81,7 @@ class EventParser
 
         return match ($buffer[1]) {
             '[' => $this->parseCsi($buffer),
+            "\x1B" => CodedKeyEvent::new(KeyCode::Esc),
             'O' => (function () use ($buffer) {
                 if (count($buffer) === 2) {
                     return null;
