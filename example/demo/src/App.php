@@ -28,37 +28,56 @@ use PhpTui\Tui\Model\Widget\Title;
 use PhpTui\Tui\Widget\Block;
 use PhpTui\Tui\Widget\Paragraph;
 
+/**
+ * A simple, synchronous, application which aims to demo
+ * all of the supported functionality.
+ *
+ * The demo app introduces Component interface to create UI elements/pages
+ * which are responsible for:
+ *
+ * - Building the widget that will be displayed
+ * - Handling events
+ * - Maintaining their own state
+ *
+ * Taking this further it would also make sense to introduce a event bus to allow
+ * components to propagate state and communicate with eachother.
+ */
 final class App
 {
     /**
      * @param array<string,Component> $pages
-     * @param int[] $frameRate
+     * @param int[] $frameSamples
      */
     private function __construct(
         private Terminal $terminal,
         private Display $display,
-
         private ActivePage $activePage,
         private array $pages,
-        private array $frameRate,
-    )
-    {
+        private array $frameSamples,
+    ) {
     }
 
     public static function new(): self
     {
         $terminal = Terminal::new();
+
+        $pages = [];
+        // build up an exhaustive set of pages
+        foreach (ActivePage::cases() as $case) {
+            $pages[$case->name] = match ($case) {
+                ActivePage::Events => new EventsPage(),
+                ActivePage::Canvas => new CanvasPage(),
+                ActivePage::Chart => new ChartPage(),
+                ActivePage::List => new ItemListPage(),
+                ActivePage::Table => new TablePage(),
+            };
+        }
+
         return new self(
             $terminal,
             Display::fullscreen(PhpTermBackend::new($terminal)),
             ActivePage::Events,
-            [
-                ActivePage::Events->name => new EventsPage(),
-                ActivePage::Canvas->name => new CanvasPage(),
-                ActivePage::Chart->name => new ChartPage(),
-                ActivePage::List->name => new ItemListPage(),
-                ActivePage::Table->name => new TablePage(),
-            ],
+            $pages,
             [],
         );
     }
@@ -104,6 +123,8 @@ final class App
             });
             $this->incFramerate();
 
+            // sleep for 10ms - note that it's encouraged to implement apps
+            // using an async library such as Amp or React
             usleep(10_000);
         }
 
@@ -158,22 +179,22 @@ final class App
     private function incFramerate(): void
     {
         $time = time();
-        $this->frameRate[] = time();
+        $this->frameSamples[] = time();
     }
 
     private function frameRate(): float
     {
-        if (count($this->frameRate) === 0) {
+        if (count($this->frameSamples) === 0) {
             return 0.0;
         }
 
         $time = time();
-        foreach ($this->frameRate as $i => $frameRate) {
+        foreach ($this->frameSamples as $i => $frameRate) {
             if ($frameRate < $time - 2) {
-                unset($this->frameRate[$i]);
+                unset($this->frameSamples[$i]);
             }
         }
-        $bySecond = array_reduce($this->frameRate, function (array $ac, int $timestamp) {
+        $bySecond = array_reduce($this->frameSamples, function (array $ac, int $timestamp) {
             if (!isset($ac[$timestamp])) {
                 $ac[$timestamp] = 0;
             }

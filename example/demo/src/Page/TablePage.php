@@ -11,12 +11,8 @@ use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\Widget\Borders;
 use PhpTui\Tui\Model\Widget\Span;
 use PhpTui\Tui\Model\Widget\Line;
-use PhpTui\Tui\Model\Widget\Text;
 use PhpTui\Tui\Model\Widget\Title;
 use PhpTui\Tui\Widget\Block;
-use PhpTui\Tui\Widget\ItemList\ItemListState;
-use PhpTui\Tui\Widget\ItemList\ListItem;
-use PhpTui\Tui\Widget\ItemList;
 use PhpTui\Tui\Widget\Table;
 use PhpTui\Tui\Widget\Table\TableCell;
 use PhpTui\Tui\Widget\Table\TableRow;
@@ -25,33 +21,34 @@ use PhpTui\Tui\Widget\Table\TableState;
 final class TablePage implements Component
 {
     const EVENTS = [
-        ["Event1", "INFO"],
-        ["Event2", "INFO"],
-        ["Event3", "CRITICAL"],
-        ["Event4", "ERROR"],
-        ["Event5", "INFO"],
-        ["Event6", "INFO"],
-        ["Event7", "WARNING"],
-        ["Event8", "INFO"],
-        ["Event9", "INFO"],
-        ["Event10", "INFO"],
-        ["Event11", "CRITICAL"],
-        ["Event12", "INFO"],
-        ["Event13", "INFO"],
-        ["Event14", "INFO"],
-        ["Event15", "INFO"],
-        ["Event16", "INFO"],
-        ["Event17", "ERROR"],
-        ["Event18", "ERROR"],
-        ["Event19", "INFO"],
-        ["Event20", "INFO"],
-        ["Event21", "WARNING"],
-        ["Event22", "INFO"],
-        ["Event23", "INFO"],
-        ["Event24", "WARNING"],
-        ["Event25", "INFO"],
-        ["Event26", "INFO"],
+        ['Event1', 'INFO'],
+        ['Event2', 'INFO'],
+        ['Event3', 'CRITICAL'],
+        ['Event4', 'ERROR'],
+        ['Event5', 'INFO'],
+        ['Event6', 'INFO'],
+        ['Event7', 'WARNING'],
+        ['Event8', 'INFO'],
+        ['Event9', 'INFO'],
+        ['Event10', 'INFO'],
+        ['Event11', 'CRITICAL'],
+        ['Event12', 'INFO'],
+        ['Event13', 'INFO'],
+        ['Event14', 'INFO'],
+        ['Event15', 'INFO'],
+        ['Event16', 'INFO'],
+        ['Event17', 'ERROR'],
+        ['Event18', 'ERROR'],
+        ['Event19', 'INFO'],
+        ['Event20', 'INFO'],
+        ['Event21', 'WARNING'],
+        ['Event22', 'INFO'],
+        ['Event23', 'INFO'],
+        ['Event24', 'WARNING'],
+        ['Event25', 'INFO'],
+        ['Event26', 'INFO'],
     ];
+
     private TableState $state;
     public function __construct()
     {

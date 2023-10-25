@@ -63,7 +63,7 @@ class ChartPage implements Component
                     Span::fromString('0'),
                     Span::fromString('20'),
                 ])
-                ->bounds(AxisBounds::new(-400,400))
+                ->bounds(AxisBounds::new(-400, 400))
             );
     }
 

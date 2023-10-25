@@ -94,6 +94,13 @@ class PhpTermBackend implements Backend
         $this->terminal->disableRawMode();
     }
 
+    public function clearRegion(ClearType $type): void
+    {
+        match ($type) {
+            ClearType::ALL => $this->terminal->execute(Actions::clear(PhpTuiClearType::All))
+        };
+    }
+
     private function resolveColor(Color $color): Colors
     {
         if ($color instanceof AnsiColor) {
@@ -193,12 +200,5 @@ class PhpTermBackend implements Backend
         if ($added->contains(Modifier::CrossedOut)) {
             $this->terminal->queue(Actions::strike(true));
         }
-    }
-
-    public function clearRegion(ClearType $type): void
-    {
-        match ($type) {
-            ClearType::ALL => $this->terminal->execute(Actions::clear(PhpTuiClearType::All))
-        };
     }
 }

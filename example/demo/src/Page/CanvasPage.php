@@ -17,13 +17,13 @@ use PhpTui\Tui\Widget\Canvas as PhpTuiCanvas;
 use PhpTui\Tui\Widget\Canvas\CanvasContext;
 use PhpTui\Tui\Model\Widget\Borders;
 use PhpTui\Tui\Widget\Block;
-use PhpTui\Tui\Widget\Canvas\Shape\Line;
 use PhpTui\Tui\Widget\Canvas\Shape\MapResolution;
 use PhpTui\Tui\Widget\Canvas\Shape\Map;
 
 class CanvasPage implements Component
 {
     private float $x = 0.0;
+
     private float $y = 0.0;
 
     public function build(): Widget
@@ -31,7 +31,7 @@ class CanvasPage implements Component
         return PhpTuiCanvas::default()
             ->block(Block::default()->borders(Borders::ALL)->title(Title::fromString('World')))
             ->marker(Marker::Braille)
-            ->paint(function (CanvasContext $context) {
+            ->paint(function (CanvasContext $context): void {
                 $context->draw(Map::default()->resolution(MapResolution::High)->color(AnsiColor::Green));
                 $context->print($this->x, -$this->y, PhpTuiLine::fromString('You are here!')->patchStyle(Style::default()->fg(AnsiColor::Yellow)->addModifier(Modifier::Italic)));
             })

@@ -5,6 +5,7 @@ namespace PhpTui\Tui\Model\Backend;
 use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Backend;
 use PhpTui\Tui\Model\BufferUpdates;
+use PhpTui\Tui\Model\ClearType;
 
 final class DummyBackend implements Backend
 {
@@ -60,6 +61,10 @@ final class DummyBackend implements Backend
     public function flush(): void
     {
         $this->flushed = $this->toString();
+    }
+
+    public function clearRegion(ClearType $type): void
+    {
     }
 
     /**

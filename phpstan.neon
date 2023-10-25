@@ -3,6 +3,7 @@ parameters:
     excludePaths:
         - src/Widget/Canvas/Data
     paths:
+        - example
         - lib
         - src
         - tests
