@@ -57,10 +57,8 @@ final class App
     ) {
     }
 
-    public static function new(?Terminal $terminal = null): self
+    public static function new(?Terminal $terminal = null, ?Display $display = null): self
     {
-        $terminal = $terminal ?: Terminal::new();
-
         $pages = [];
         // build up an exhaustive set of pages
         foreach (ActivePage::cases() as $case) {
@@ -73,9 +71,10 @@ final class App
             };
         }
 
+        $terminal = $terminal ?: Terminal::new();
         return new self(
             $terminal,
-            Display::fullscreen(PhpTermBackend::new($terminal)),
+            $display ?: Display::fullscreen(PhpTermBackend::new($terminal)),
             ActivePage::Events,
             $pages,
             [],

@@ -8,13 +8,13 @@ use PhpTui\Term\EventProvider;
 final class LoadedEventProvider implements EventProvider
 {
     /**
-     * @param Event[] $events
+     * @param ?Event[] $events
      */
     private function __construct(private array $events)
     {
     }
 
-    public static function fromEvents(Event ...$events): self
+    public static function fromEvents(?Event ...$events): self
     {
         return new self($events);
     }

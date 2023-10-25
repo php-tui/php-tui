@@ -1,0 +1,20 @@
+┌─────────────────────────────────────────────────────────────────────────0 FPS┐
+│[q]quit [1]events [2]canvas [3]chart [4]list [5]table                         │
+└──────────────────────────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────────────────────┐
+│INFO Event                                                                    │
+│INFO Event                                                                    │
+│CRITICAL Event3                                                               │
+│ERROR Event4                                                                  │
+│INFO Event                                                                    │
+│INFO Event                                                                    │
+│WARNING Event7                                                                │
+│INFO Event                                                                    │
+│INFO Event                                                                    │
+│INFO Event                                                                    │
+│CRITICAL Event11                                                              │
+│INFO Event                                                                    │
+│INFO Event                                                                    │
+│INFO Event                                                                    │
+│INFO Event                                                                    │
+└──────────────────────────────────────────────────────────────────────────────┘
