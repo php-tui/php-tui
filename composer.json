@@ -12,6 +12,7 @@
     "autoload-dev": {
         "psr-4": {
             "PhpTui\\Tui\\Tests\\": "tests/",
+            "PhpTui\\Tui\\Example\\Demo\\": "example/demo/src",
             "PhpTui\\Term\\Tests\\": "lib/term/tests/"
         }
     },

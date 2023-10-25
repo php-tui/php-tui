@@ -14,4 +14,8 @@ class FunctionKeyEvent implements KeyEvent
         return new self($number);
     }
 
+    public function __toString(): string
+    {
+        return sprintf('FunctionKey(%s)', $this->number);
+    }
 }

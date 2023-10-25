@@ -9,4 +9,6 @@ interface Backend
     public function draw(BufferUpdates $updates): void;
 
     public function flush(): void;
+
+    public function clearRegion(ClearType $type): void;
 }

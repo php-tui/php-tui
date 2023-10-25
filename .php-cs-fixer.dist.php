@@ -4,6 +4,7 @@ use PhpCsFixer\Config;
 use PhpCsFixer\Finder;
 
 $finder = Finder::create()
+    ->in('example')
     ->in('src')
     ->in('tests')
 ;

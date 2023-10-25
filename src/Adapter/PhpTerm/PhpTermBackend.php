@@ -3,6 +3,7 @@
 namespace PhpTui\Tui\Adapter\PhpTerm;
 
 use PhpTui\Term\Actions;
+use PhpTui\Term\ClearType as PhpTuiClearType;
 use PhpTui\Term\Colors;
 use PhpTui\Term\Size;
 use PhpTui\Term\Terminal as PhpTermTerminal;
@@ -10,6 +11,7 @@ use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Backend;
 use PhpTui\Tui\Model\BufferUpdates;
+use PhpTui\Tui\Model\ClearType;
 use PhpTui\Tui\Model\Color;
 use PhpTui\Tui\Model\Modifier;
 use PhpTui\Tui\Model\Modifiers;
@@ -90,6 +92,13 @@ class PhpTermBackend implements Backend
     public function disableRawMode(): void
     {
         $this->terminal->disableRawMode();
+    }
+
+    public function clearRegion(ClearType $type): void
+    {
+        match ($type) {
+            ClearType::ALL => $this->terminal->execute(Actions::clear(PhpTuiClearType::All))
+        };
     }
 
     private function resolveColor(Color $color): Colors

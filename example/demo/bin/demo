@@ -1,0 +1,10 @@
+#!/usr/bin/env php
+<?php
+
+use PhpTui\Tui\Example\Demo\App;
+
+require __DIR__ . '/../../../vendor/autoload.php';
+
+$app = App::new();
+exit($app->run());
+

@@ -3,6 +3,7 @@
 namespace PhpTui\Term\Painter;
 
 use PhpTui\Term\Action\AlternateScreenEnable;
+use PhpTui\Term\Action\Clear;
 use PhpTui\Term\Action\CursorShow;
 use PhpTui\Term\Action\MoveCursor;
 use PhpTui\Term\Action\PrintString;
@@ -12,6 +13,7 @@ use PhpTui\Term\Action\SetForegroundColor;
 use PhpTui\Term\Action\SetModifier;
 use PhpTui\Term\Action\SetRgbBackgroundColor;
 use PhpTui\Term\Action\SetRgbForegroundColor;
+use PhpTui\Term\ClearType;
 use PhpTui\Term\Painter;
 use PhpTui\Term\Colors;
 use PhpTui\Term\Action;
@@ -63,6 +65,9 @@ final class AnsiPainter implements Painter
             $action instanceof AlternateScreenEnable => sprintf('?1049%s', $action->enable ? 'h' : 'l'),
             $action instanceof MoveCursor => sprintf('%d;%dH', $action->line, $action->col),
             $action instanceof Reset => '0m',
+            $action instanceof Clear => match ($action->clearType) {
+                ClearType::All => '2J',
+            },
             $action instanceof SetModifier => $action->enable ?
                 sprintf('%dm', $this->modifierOnIndex($action->modifier)) :
                 sprintf('%dm', $this->modifierOffIndex($action->modifier)),
