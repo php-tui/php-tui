@@ -3,6 +3,7 @@
 namespace PhpTui\Tui\Adapter\PhpTerm;
 
 use PhpTui\Term\Actions;
+use PhpTui\Term\ClearType as PhpTuiClearType;
 use PhpTui\Term\Colors;
 use PhpTui\Term\Size;
 use PhpTui\Term\Terminal as PhpTermTerminal;
@@ -10,6 +11,7 @@ use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Backend;
 use PhpTui\Tui\Model\BufferUpdates;
+use PhpTui\Tui\Model\ClearType;
 use PhpTui\Tui\Model\Color;
 use PhpTui\Tui\Model\Modifier;
 use PhpTui\Tui\Model\Modifiers;
@@ -191,5 +193,12 @@ class PhpTermBackend implements Backend
         if ($added->contains(Modifier::CrossedOut)) {
             $this->terminal->queue(Actions::strike(true));
         }
+    }
+
+    public function clearRegion(ClearType $type): void
+    {
+        match ($type) {
+            ClearType::ALL => $this->terminal->execute(Actions::clear(PhpTuiClearType::All))
+        };
     }
 }

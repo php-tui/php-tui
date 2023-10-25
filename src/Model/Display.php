@@ -76,7 +76,7 @@ final class Display
         }
 
         $size = $this->backend->size();
-        if ($size === $this->lastKnownSize) {
+        if ($size == $this->lastKnownSize) {
             return;
         }
 
@@ -89,7 +89,8 @@ final class Display
         $nextArea = $this->viewport->computeArea($this->backend, $size, $offsetInPreviousViewport);
 
         $this->setViewportArea($nextArea);
-
+        $this->clear();
+        $this->lastKnownSize = $size;
     }
 
     private function setViewportArea(Area $area): void
@@ -103,5 +104,10 @@ final class Display
     {
         $this->buffers[1 - $this->current]->reset();
         $this->current = 1 - $this->current;
+    }
+
+    private function clear(): void
+    {
+        $this->backend->clearRegion(ClearType::ALL);
     }
 }
