@@ -8,7 +8,7 @@ use PhpTui\Term\EventProvider;
 final class LoadedEventProvider implements EventProvider
 {
     /**
-     * @param ?Event[] $events
+     * @param list<null|Event> $events
      */
     private function __construct(private array $events)
     {
@@ -16,7 +16,7 @@ final class LoadedEventProvider implements EventProvider
 
     public static function fromEvents(?Event ...$events): self
     {
-        return new self($events);
+        return new self(array_values($events));
     }
 
 

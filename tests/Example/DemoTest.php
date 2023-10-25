@@ -81,7 +81,7 @@ class DemoTest extends TestCase
     private function assertSnapshot(string $name, DummyBackend $backend): void
     {
         $name = substr($name, strrpos($name, ':') + 5);
-        $filename = sprintf('%s/snapshot/%s.snapshot', __DIR__ , $name);
+        $filename = sprintf('%s/snapshot/%s.snapshot', __DIR__, $name);
         if (!file_exists($filename) || getenv('SNAPSHOT_APPROVE')) {
             file_put_contents($filename, $backend->flushed());
         }
