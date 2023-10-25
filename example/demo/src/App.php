@@ -6,8 +6,11 @@ use PhpTui\Term\Actions;
 use PhpTui\Term\Event\CharKeyEvent;
 use PhpTui\Term\Terminal;
 use PhpTui\Tui\Adapter\PhpTerm\PhpTermBackend;
-use PhpTui\Tui\Example\Demo\Page\Canvas;
-use PhpTui\Tui\Example\Demo\Page\Events;
+use PhpTui\Tui\Example\Demo\Page\CanvasPage;
+use PhpTui\Tui\Example\Demo\Page\ChartPage;
+use PhpTui\Tui\Example\Demo\Page\EventsPage;
+use PhpTui\Tui\Example\Demo\Page\ItemListPage;
+use PhpTui\Tui\Example\Demo\Page\TablePage;
 use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Buffer;
 use PhpTui\Tui\Model\Constraint;
@@ -29,6 +32,7 @@ final class App
 {
     /**
      * @param array<string,Component> $pages
+     * @param int[] $frameRate
      */
     private function __construct(
         private Terminal $terminal,
@@ -36,7 +40,6 @@ final class App
 
         private ActivePage $activePage,
         private array $pages,
-        /** @var array<int,int> */
         private array $frameRate,
     )
     {
@@ -48,10 +51,13 @@ final class App
         return new self(
             $terminal,
             Display::fullscreen(PhpTermBackend::new($terminal)),
-            ActivePage::Home,
+            ActivePage::Events,
             [
-                ActivePage::Home->name => new Events(),
-                ActivePage::Canvas->name => new Canvas(),
+                ActivePage::Events->name => new EventsPage(),
+                ActivePage::Canvas->name => new CanvasPage(),
+                ActivePage::Chart->name => new ChartPage(),
+                ActivePage::List->name => new ItemListPage(),
+                ActivePage::Table->name => new TablePage(),
             ],
             [],
         );
@@ -59,21 +65,35 @@ final class App
 
     public function run(): int
     {
+        // enable "raw" mode to remove default terminal behavior (e.g. echoing key presses)
         $this->terminal->enableRawMode();
+        // hide the cursor
         $this->terminal->execute(Actions::cursorHide());
+        // switch to the "alternate" screen so that we can return the user where they left off
         $this->terminal->execute(Actions::alternateScreenEnable());
 
+        // the main loop
         while (true) {
+            // handle events sent to the terminal
             while (null !== $event = $this->terminal->events()->next()) {
                 if ($event instanceof CharKeyEvent) {
                     if ($event->char === 'q') {
                         break 2;
                     }
                     if ($event->char === '1') {
-                        $this->activePage = ActivePage::Home;
+                        $this->activePage = ActivePage::Events;
                     }
                     if ($event->char === '2') {
                         $this->activePage = ActivePage::Canvas;
+                    }
+                    if ($event->char === '3') {
+                        $this->activePage = ActivePage::Chart;
+                    }
+                    if ($event->char === '4') {
+                        $this->activePage = ActivePage::List;
+                    }
+                    if ($event->char === '5') {
+                        $this->activePage = ActivePage::Table;
                     }
                 }
                 $this->activePage()->handle($event);
@@ -117,11 +137,17 @@ final class App
     {
         return Paragraph::new(Text::fromLine(Line::fromSpans([
             Span::styled('[q]', Style::default()->fg(AnsiColor::Green)),
-            Span::fromString(' quit '),
+            Span::fromString('quit '),
             Span::styled('[1]', Style::default()->fg(AnsiColor::Green)),
-            Span::fromString(' home '),
+            Span::fromString('events '),
             Span::styled('[2]', Style::default()->fg(AnsiColor::Green)),
-            Span::fromString(' canvas'),
+            Span::fromString('canvas '),
+            Span::styled('[3]', Style::default()->fg(AnsiColor::Green)),
+            Span::fromString('chart '),
+            Span::styled('[4]', Style::default()->fg(AnsiColor::Green)),
+            Span::fromString('list '),
+            Span::styled('[5]', Style::default()->fg(AnsiColor::Green)),
+            Span::fromString('table '),
         ])))->block(
             Block::default()
                 ->borders(Borders::ALL)->style(Style::default()->fg(AnsiColor::Red))

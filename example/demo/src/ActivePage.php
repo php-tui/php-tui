@@ -4,6 +4,9 @@ namespace PhpTui\Tui\Example\Demo;
 
 enum ActivePage
 {
-    case Home;
+    case Events;
     case Canvas;
+    case Chart;
+    case List;
+    case Table;
 }

@@ -12,7 +12,7 @@ use PhpTui\Tui\Widget\Block;
 use PhpTui\Tui\Widget\ItemList;
 use PhpTui\Tui\Widget\ItemList\ListItem;
 
-final class Events implements Component
+final class EventsPage implements Component
 {
     /** @var Event[] */
     private array $events = [];

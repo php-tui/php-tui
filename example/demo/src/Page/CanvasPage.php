@@ -21,7 +21,7 @@ use PhpTui\Tui\Widget\Canvas\Shape\Line;
 use PhpTui\Tui\Widget\Canvas\Shape\MapResolution;
 use PhpTui\Tui\Widget\Canvas\Shape\Map;
 
-class Canvas implements Component
+class CanvasPage implements Component
 {
     private float $x = 0.0;
     private float $y = 0.0;
