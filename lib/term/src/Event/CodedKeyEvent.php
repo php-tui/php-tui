@@ -25,6 +25,11 @@ class CodedKeyEvent implements KeyEvent
 
     public function __toString(): string
     {
-        return sprintf('CodedKeyEvent(code: %s, modifiers: %s, kind: %s)', $this->code->name, $this->modifiers, $this->kind->name);
+        return sprintf(
+            'CodedKeyEvent(code: %s, modifiers: %s, kind: %s)',
+            $this->code->name,
+            KeyModifiers::toString($this->modifiers),
+            $this->kind->name,
+        );
     }
 }

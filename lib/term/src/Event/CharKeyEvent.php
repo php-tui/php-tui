@@ -24,6 +24,10 @@ final class CharKeyEvent implements KeyEvent
 
     public function __toString(): string
     {
-        return sprintf('CharKeyEvent(char: %s, modifiers: %s)', $this->char, $this->modifiers);
+        return sprintf(
+            'CharKeyEvent(char: %s, modifiers: %s)',
+            $this->char,
+            KeyModifiers::toString($this->modifiers)
+        );
     }
 }
