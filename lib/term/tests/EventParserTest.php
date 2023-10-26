@@ -245,12 +245,32 @@ class EventParserTest extends TestCase
     public static function provideCsiModifierKeyCode(): Generator
     {
         yield 'special key code with types' => [
-            "\x1B[1:3B",
+            "\x1B[1;1:3B",
             CodedKeyEvent::new(KeyCode::Down, KeyModifiers::NONE, KeyEventKind::Release),
         ];
         yield 'Shift F1' => [
             "\x1B[1;2P",
             FunctionKeyEvent::new(1, KeyModifiers::SHIFT),
+        ];
+        yield 'Alt F1' => [
+            "\x1B[1;3P",
+            FunctionKeyEvent::new(1, KeyModifiers::ALT),
+        ];
+        yield 'Ctl F1' => [
+            "\x1B[1;5P",
+            FunctionKeyEvent::new(1, KeyModifiers::CONTROL),
+        ];
+        yield 'Super F1' => [
+            "\x1B[1;9P",
+            FunctionKeyEvent::new(1, KeyModifiers::SUPER),
+        ];
+        yield 'Hyper F1' => [
+            "\x1B[1;17P",
+            FunctionKeyEvent::new(1, KeyModifiers::HYPER),
+        ];
+        yield 'Meta F1' => [
+            "\x1B[1;33P",
+            FunctionKeyEvent::new(1, KeyModifiers::META),
         ];
     }
 }

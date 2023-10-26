@@ -17,9 +17,9 @@ class FunctionKeyEvent implements KeyEvent
     public function __toString(): string
     {
         return sprintf(
-            'FunctionKey(number: %s, modifier: %d, kind: %s)',
+            'FunctionKey(number: %s, modifier: %s, kind: %s)',
             $this->number,
-            $this->modifiers,
+            KeyModifiers::toString($this->modifiers),
             $this->kind->name
         );
     }

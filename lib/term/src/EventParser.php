@@ -2,13 +2,12 @@
 
 namespace PhpTui\Term;
 
-use ParseError;
 use PhpTui\Term\Event\CharKeyEvent;
 use PhpTui\Term\Event\FocusEvent;
 use PhpTui\Term\Event\FunctionKeyEvent;
 use PhpTui\Term\Event\CodedKeyEvent;
 
-class EventParser
+final class EventParser
 {
     /**
      * @var string[]
@@ -235,9 +234,9 @@ class EventParser
     /**
      * @param string[] $buffer
      */
-    private function parseCsiModifierKeyCode(array $buffer): ?Event
+    private function parseCsiModifierKeyCode(array $buffer): Event
     {
-        $str = implode('', array_slice($buffer, 2, array_key_last($buffer)));
+        $str = implode('', array_slice($buffer, 2, (int)array_key_last($buffer)));
         // split string into bytes
         $parts = (array)explode(';', $str);
 
