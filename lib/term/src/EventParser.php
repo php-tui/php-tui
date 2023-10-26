@@ -2,6 +2,7 @@
 
 namespace PhpTui\Term;
 
+use ParseError;
 use PhpTui\Term\Event\CharKeyEvent;
 use PhpTui\Term\Event\FocusEvent;
 use PhpTui\Term\Event\FunctionKeyEvent;
@@ -38,13 +39,23 @@ class EventParser
             $more = $index + 1 < strlen($line) || $more;
 
             $this->buffer[] = $byte;
-            $event = $this->parseEvent($this->buffer, $more);
+            try {
+                $event = $this->parseEvent($this->buffer, $more);
+            } catch (ParseError $error) {
+                $this->buffer = [];
+                continue;
+            }
             if ($event === null) {
                 continue;
             }
             $this->events[] = $event;
             $this->buffer = [];
         }
+    }
+
+    public static function new(): self
+    {
+        return new self();
     }
 
     /**
@@ -82,7 +93,7 @@ class EventParser
         return match ($buffer[1]) {
             '[' => $this->parseCsi($buffer),
             "\x1B" => CodedKeyEvent::new(KeyCode::Esc),
-            'O' => (function () use ($buffer, $inputAvailable) {
+            'O' => (function () use ($buffer) {
                 if (count($buffer) === 2) {
                     return null;
                 }
@@ -129,6 +140,7 @@ class EventParser
             'Q' => FunctionKeyEvent::new(2),
             'R' => FunctionKeyEvent::new(3), // this is omitted from crossterm
             'S' => FunctionKeyEvent::new(4),
+            ';' => $this->parseCsiModifierKeyCode($buffer),
             '0','1','2','3','4','5','6','7','8','9' => $this->parseCsiMore($buffer),
             default => throw ParseError::couldNotParseOffset($buffer, 2),
         };
@@ -165,16 +177,7 @@ class EventParser
         $str = implode('', array_slice($buffer, 2, (int)array_key_last($buffer)));
 
         $split = array_map(
-            fn (string $substr) => (int)array_reduce(
-                str_split($substr),
-                function (string $ac, string $char) {
-                    if (false === is_numeric($char)) {
-                        return $ac;
-                    }
-                    return $ac . $char;
-                },
-                ''
-            ),
+            fn (string $substr) => self::filterToInt($substr) ?? 0,
             explode(';', $str),
         );
         $first = $split[array_key_first($split)];
@@ -229,11 +232,6 @@ class EventParser
         return CharKeyEvent::new($char, $modifiers);
     }
 
-    public static function new(): self
-    {
-        return new self();
-    }
-
     /**
      * @param string[] $buffer
      */
@@ -243,13 +241,124 @@ class EventParser
         // split string into bytes
         $parts = (array)explode(';', $str);
 
-        $this->modifierAndKindParsed($parts);
+        [$modifiers, $kind] = (function () use ($parts) {
+            $modifierAndKindCode  = $this->modifierAndKindParsed($parts);
+            if (null !== $modifierAndKindCode) {
+                return [
+                    $this->parseModifiers($modifierAndKindCode[0]),
+                    $this->parseKeyEventKind($modifierAndKindCode[1]),
+                ];
+            }
+
+            // TODO: if buffer.len > 3
+
+            return [KeyModifiers::NONE, KeyEventKind::Press];
+        })();
+
+        $key = $buffer[array_key_last($buffer)];
+        $codedKey = match ($key) {
+            'A' => KeyCode::Up,
+            'B' => KeyCode::Down,
+            'C' => KeyCode::Right,
+            'D' => KeyCode::Left,
+            'F' => KeyCode::End,
+            'H' => KeyCode::Home,
+            default => null,
+        };
+        if (null !== $codedKey) {
+            return CodedKeyEvent::new($codedKey, $modifiers, $kind);
+        }
+        $fNumber = match ($key) {
+            'P' => 1,
+            'Q' => 2,
+            'R' => 3,
+            'S' => 4,
+            default => null,
+        };
+        if (null !== $fNumber) {
+            return FunctionKeyEvent::new($fNumber, $modifiers, $kind);
+        }
+
+        throw new ParseError('Could not parse event');
     }
 
     /**
      * @param string[] $parts
+     * @return ?array{int,int}
      */
-    private function modifierAndKindParsed(array $parts): void
+    private function modifierAndKindParsed(array $parts): ?array
     {
+        if (!isset($parts[1])) {
+            throw new ParseError('Could not parse modifier');
+        }
+        $parts = explode(':', $parts[1]);
+        $modifierMask = self::filterToInt($parts[0]);
+        if (null === $modifierMask) {
+            return null;
+        }
+        if (isset($parts[1])) {
+            $kindCode = self::filterToInt($parts[1]);
+            if (null === $kindCode) {
+                return null;
+            }
+            return [$modifierMask, $kindCode];
+        }
+        return [$modifierMask, 1];
+    }
+
+    private static function filterToInt(string $substr): ?int
+    {
+        $str = array_reduce(
+            str_split($substr),
+            function (string $ac, string $char) {
+                if (false === is_numeric($char)) {
+                    return $ac;
+                }
+                return $ac . $char;
+            },
+            ''
+        );
+        if ($str === '') {
+            return null;
+        }
+        return intval($str);
+    }
+
+    /**
+     * @return int-mask-of<KeyModifiers::*>
+     */
+    private function parseModifiers(int $mask): int
+    {
+        $modifierMask = max(0, $mask - 1);
+        $modifiers = KeyModifiers::NONE;
+        if (($modifierMask & 1) !== 0) {
+            $modifiers |= KeyModifiers::SHIFT;
+        }
+        if (($modifierMask & 2) !== 0) {
+            $modifiers |= KeyModifiers::ALT;
+        }
+        if (($modifierMask & 4) !== 0) {
+            $modifiers |= KeyModifiers::CONTROL;
+        }
+        if (($modifierMask & 8) !== 0) {
+            $modifiers |= KeyModifiers::SUPER;
+        }
+        if (($modifierMask & 16) !== 0) {
+            $modifiers |= KeyModifiers::HYPER;
+        }
+        if (($modifierMask & 32) !== 0) {
+            $modifiers |= KeyModifiers::META;
+        }
+        return $modifiers;
+    }
+
+    private function parseKeyEventKind(int $kind): KeyEventKind
+    {
+        return match ($kind) {
+            1 => KeyEventKind::Press,
+            2 => KeyEventKind::Repeat,
+            3 => KeyEventKind::Release,
+            default => KeyEventKind::Press,
+        };
     }
 }

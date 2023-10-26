@@ -2,6 +2,7 @@
 
 namespace PhpTui\Term\Event;
 
+use PhpTui\Term\KeyEventKind;
 use PhpTui\Term\KeyModifiers;
 
 class FunctionKeyEvent implements KeyEvent
@@ -9,20 +10,25 @@ class FunctionKeyEvent implements KeyEvent
     /**
      * @param int-mask-of<KeyModifiers::*> $modifiers
      */
-    private function __construct(public int $number, public int $modifiers)
+    private function __construct(public int $number, public int $modifiers, public KeyEventKind $kind)
     {
     }
 
     public function __toString(): string
     {
-        return sprintf('FunctionKey(number: %s, modifier: %d)', $this->number, $this->modifiers);
+        return sprintf(
+            'FunctionKey(number: %s, modifier: %d, kind: %s)',
+            $this->number,
+            $this->modifiers,
+            $this->kind->name
+        );
     }
 
     /**
      * @param int-mask-of<KeyModifiers::*> $modifiers
      */
-    public static function new(int $number, int $modifiers = KeyModifiers::NONE): self
+    public static function new(int $number, int $modifiers = KeyModifiers::NONE, KeyEventKind $kind = KeyEventKind::Press): self
     {
-        return new self($number, $modifiers);
+        return new self($number, $modifiers, $kind);
     }
 }

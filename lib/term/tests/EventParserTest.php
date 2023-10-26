@@ -245,11 +245,11 @@ class EventParserTest extends TestCase
     public static function provideCsiModifierKeyCode(): Generator
     {
         yield 'special key code with types' => [
-            "\x1B[;1;3B",
+            "\x1B[1:3B",
             CodedKeyEvent::new(KeyCode::Down, KeyModifiers::NONE, KeyEventKind::Release),
         ];
         yield 'Shift F1' => [
-            "\x1B[1;2R",
+            "\x1B[1;2P",
             FunctionKeyEvent::new(1, KeyModifiers::SHIFT),
         ];
     }
