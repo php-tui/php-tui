@@ -6,6 +6,7 @@ use PhpTui\Term\Actions;
 use PhpTui\Term\Event\CharKeyEvent;
 use PhpTui\Term\Terminal;
 use PhpTui\Tui\Adapter\PhpTerm\PhpTermBackend;
+use PhpTui\Tui\Example\Demo\Page\BlocksPage;
 use PhpTui\Tui\Example\Demo\Page\CanvasPage;
 use PhpTui\Tui\Example\Demo\Page\ChartPage;
 use PhpTui\Tui\Example\Demo\Page\EventsPage;
@@ -68,6 +69,7 @@ final class App
                 ActivePage::Chart => new ChartPage(),
                 ActivePage::List => new ItemListPage(),
                 ActivePage::Table => new TablePage(),
+                ActivePage::Blocks => new BlocksPage(),
             };
         }
 
@@ -112,6 +114,9 @@ final class App
                     }
                     if ($event->char === '5') {
                         $this->activePage = ActivePage::Table;
+                    }
+                    if ($event->char === '6') {
+                        $this->activePage = ActivePage::Blocks;
                     }
                 }
                 $this->activePage()->handle($event);
@@ -168,6 +173,8 @@ final class App
             Span::fromString('list '),
             Span::styled('[5]', Style::default()->fg(AnsiColor::Green)),
             Span::fromString('table '),
+            Span::styled('[6]', Style::default()->fg(AnsiColor::Green)),
+            Span::fromString('blocks '),
         ])))->block(
             Block::default()
                 ->borders(Borders::ALL)->style(Style::default()->fg(AnsiColor::Red))

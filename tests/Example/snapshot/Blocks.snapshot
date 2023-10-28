@@ -1,0 +1,20 @@
+┌─────────────────────────────────────────────────────────────────────────0 FPS┐
+│[q]quit [1]events [2]canvas [3]chart [4]list [5]table [6]blocks               │
+└──────────────────────────────────────────────────────────────────────────────┘
+┌Borders::ALL──────────────────────────┐Borders::NONE                           
+│Lorem ipsum dolor sit amet, consectetu│Lorem ipsum dolor sit amet, consectetur 
+│r adipiscing elit, sed do eiusmod temp│adipiscing elit, sed do eiusmod tempor i
+└──────────────────────────────────────┘ncididunt ut labore et dolore magna aliq
+┌Borders::LEFT                          Borders::RIGHT                         ┐
+│Lorem ipsum dolor sit amet, consecteturLorem ipsum dolor sit amet, consectetur│
+│ adipiscing elit, sed do eiusmod tempor adipiscing elit, sed do eiusmod tempor│
+└ incididunt ut labore et dolore magna a incididunt ut labore et dolore magna a┘
+Borders::TOP───────────────────────────┐Borders::BOTTOM                         
+Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet, consectetur 
+adipiscing elit, sed do eiusmod tempor iadipiscing elit, sed do eiusmod tempor i
+ncididunt ut labore et dolore magna aliq└──────────────────────────────────────┘
+┌BordersType::Plain────────────────────┐╭BordersType::Rounded──────────────────╮
+│Lorem ipsum dolor sit amet, consectetu││Lorem ipsum dolor sit amet, consectetu│
+│r adipiscing elit, sed do eiusmod temp││r adipiscing elit, sed do eiusmod temp│
+└──────────────────────────────────────┘╰──────────────────────────────────────╯
+╚BordersType::Double═══════════════════╗┗BordersType::Thick━━━━━━━━━━━━━━━━━━━━┓

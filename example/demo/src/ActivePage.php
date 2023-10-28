@@ -9,4 +9,5 @@ enum ActivePage
     case Chart;
     case List;
     case Table;
+    case Blocks;
 }
