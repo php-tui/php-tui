@@ -102,7 +102,7 @@ final class Display
 
     private function swapBuffers(): void
     {
-        /** @phpstan-ignore-next-line */
+        /** @phpstan-ignore-next-line phpstan says that array{Buffer,Buffer} doesn't accept non-empty-array<int,Buffer> */
         $this->buffers[1 - $this->current] = Buffer::empty($this->viewportArea);
         $this->current = 1 - $this->current;
     }
