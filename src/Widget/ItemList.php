@@ -21,7 +21,6 @@ class ItemList implements Widget
      * @param list<ListItem> $items
      */
     public function __construct(
-        private ?Block $block,
         private array $items,
         private Style $style,
         private Corner $startCorner,
@@ -37,10 +36,7 @@ class ItemList implements Widget
         $buffer->setStyle($area, $this->style);
 
         /** @var Area $listArea */
-        $listArea = $this->block ? (function (Block $block, Area $area, Buffer $buffer): Area {
-            $block->render($area, $buffer);
-            return $block->inner($area);
-        })($this->block, $area, $buffer) : $area;
+        $listArea = $area;
 
         if ($listArea->width < 1 || $listArea->height < 1) {
             return;
@@ -105,7 +101,6 @@ class ItemList implements Widget
     public static function default(): self
     {
         return new self(
-            block: null,
             items: [],
             style: Style::default(),
             startCorner: Corner::TopLeft,
@@ -147,12 +142,6 @@ class ItemList implements Widget
     public function state(ItemListState $state): self
     {
         $this->state = $state;
-        return $this;
-    }
-
-    public function block(Block $block): self
-    {
-        $this->block = $block;
         return $this;
     }
 

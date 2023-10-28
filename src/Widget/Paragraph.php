@@ -20,7 +20,6 @@ class Paragraph implements Widget
 {
     /** @param array{int,int} $scroll */
     private function __construct(
-        private ?Block $block,
         private Style $style,
         private ?Wrap $wrap,
         private Text $text,
@@ -32,7 +31,6 @@ class Paragraph implements Widget
     public static function new(Text $text): self
     {
         return new self(
-            block: null,
             style: Style::default(),
             wrap: null,
             text: $text,
@@ -44,7 +42,7 @@ class Paragraph implements Widget
     public function render(Area $area, Buffer $buffer): void
     {
         $buffer->setStyle($area, $this->style);
-        $textArea = $this->resolveTextArea($area, $buffer);
+        $textArea = $area;
 
         if ($textArea->height < 1) {
             return;
@@ -114,23 +112,6 @@ class Paragraph implements Widget
     {
         $this->wrap = $wrap;
         return $this;
-    }
-
-    public function block(Block $block): self
-    {
-        $this->block = $block;
-        return $this;
-    }
-
-    private function resolveTextArea(Area $area, Buffer $buffer): Area
-    {
-        if ($this->block) {
-            $inner = $this->block->inner($area);
-            $this->block->render($area, $buffer);
-            return $inner;
-        }
-
-        return $area;
     }
 
     /**

@@ -29,6 +29,7 @@ final class Block implements Widget
         private Style $style,
         private Style $titleStyle,
         private Padding $padding,
+        private ?Widget $widget,
     ) {
     }
 
@@ -42,35 +43,14 @@ final class Block implements Widget
             Style::default(),
             Style::default(),
             Padding::none(),
+            null,
         );
     }
 
-    public function inner(Area $area): Area
+    public function widget(Widget $widget): self
     {
-        $x = $area->position->x;
-        $y = $area->position->y;
-        $width = $area->width;
-        $height = $area->height;
-        if ($this->borders & Borders::LEFT) {
-            $x = min($x + 1, $area->right());
-            $width = max(0, $width - 1);
-        }
-        if ($this->borders & Borders::TOP || [] !== $this->titles) {
-            $y = min($y + 1, $area->bottom());
-            $height = max(0, $height-1);
-        }
-        if ($this->borders & Borders::RIGHT) {
-            $width = max(0, $width - 1);
-        }
-        if ($this->borders & Borders::BOTTOM) {
-            $height = max(0, $height - 1);
-        }
-        $x += $this->padding->left;
-        $y += $this->padding->top;
-        $width = $width - ($this->padding->left + $this->padding->right);
-        $height = $height - ($this->padding->top + $this->padding->bottom);
-
-        return Area::fromPrimitives($x, $y, $width, $height);
+        $this->widget = $widget;
+        return $this;
     }
 
     /**
@@ -125,6 +105,34 @@ final class Block implements Widget
     {
         $this->padding = $padding;
         return $this;
+    }
+
+    public function inner(Area $area): Area
+    {
+        $x = $area->position->x;
+        $y = $area->position->y;
+        $width = $area->width;
+        $height = $area->height;
+        if ($this->borders & Borders::LEFT) {
+            $x = min($x + 1, $area->right());
+            $width = max(0, $width - 1);
+        }
+        if ($this->borders & Borders::TOP || [] !== $this->titles) {
+            $y = min($y + 1, $area->bottom());
+            $height = max(0, $height-1);
+        }
+        if ($this->borders & Borders::RIGHT) {
+            $width = max(0, $width - 1);
+        }
+        if ($this->borders & Borders::BOTTOM) {
+            $height = max(0, $height - 1);
+        }
+        $x += $this->padding->left;
+        $y += $this->padding->top;
+        $width = $width - ($this->padding->left + $this->padding->right);
+        $height = $height - ($this->padding->top + $this->padding->bottom);
+
+        return Area::fromPrimitives($x, $y, $width, $height);
     }
 
     private function renderBorders(Area $area, Buffer $buffer): void
@@ -182,6 +190,9 @@ final class Block implements Widget
                 ->setStyle($this->borderStyle);
         }
 
+        if ($this->widget) {
+            $this->widget->render($this->inner($area), $buffer);
+        }
     }
 
     private function renderTitles(Area $area, Buffer $buffer): void
@@ -309,4 +320,5 @@ final class Block implements Widget
             $area->width - max(0, $leftBorderDx, $rightBorderDx),
         ];
     }
+
 }

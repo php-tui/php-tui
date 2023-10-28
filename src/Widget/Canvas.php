@@ -17,7 +17,6 @@ use PhpTui\Tui\Widget\Canvas\CanvasContext;
 final class Canvas implements Widget
 {
     private function __construct(
-        private ?Block $block,
         private AxisBounds $xBounds,
         private AxisBounds $yBounds,
         private ?Closure $painter,
@@ -29,7 +28,6 @@ final class Canvas implements Widget
     public static function default(): self
     {
         return new self(
-            block: null,
             xBounds: new AxisBounds(0, 0),
             yBounds: new AxisBounds(0, 0),
             painter: null,
@@ -44,18 +42,13 @@ final class Canvas implements Widget
         if (null === $painter) {
             return;
         }
-        $canvasArea = $area;
-        if ($this->block) {
-            $canvasArea = $this->block->inner($area);
-            $this->block->render($area, $buffer);
-        }
 
         $buffer->setStyle($area, Style::default()->bg($this->backgroundColor));
-        $width = $canvasArea->width;
+        $width = $area->width;
 
         $context = CanvasContext::new(
-            $canvasArea->width,
-            $canvasArea->height,
+            $area->width,
+            $area->height,
             $this->xBounds,
             $this->yBounds,
             $this->marker,
@@ -69,8 +62,8 @@ final class Canvas implements Widget
                     continue;
                 }
                 $color = $layer->colors[$index];
-                $x = ($index % $width) + $canvasArea->left();
-                $y = ($index / $width) + $canvasArea->top();
+                $x = ($index % $width) + $area->left();
+                $y = ($index / $width) + $area->top();
                 $cell = $buffer->get(Position::at(intval($x), intval($y)))->setChar($char);
                 $cell->fg = $color->fg;
                 $cell->bg = $color->bg;
@@ -81,17 +74,17 @@ final class Canvas implements Widget
             $x = intval(
                 ((
                     $label->position->x - $this->xBounds->min
-                ) * ($canvasArea->width -1) / $this->xBounds->length()) + $canvasArea->left()
+                ) * ($area->width -1) / $this->xBounds->length()) + $area->left()
             );
             $y = intval(
                 ((
                     $this->yBounds->max - $label->position->y
-                ) * ($canvasArea->height -1) / $this->yBounds->length()) + $canvasArea->top()
+                ) * ($area->height -1) / $this->yBounds->length()) + $area->top()
             );
             $buffer->putLine(
                 Position::at($x, $y),
                 $label->line,
-                $canvasArea->right() - $x
+                $area->right() - $x
             );
         }
     }
@@ -120,12 +113,6 @@ final class Canvas implements Widget
     public function marker(Marker $marker): self
     {
         $this->marker = $marker;
-        return $this;
-    }
-
-    public function block(Block $block): self
-    {
-        $this->block = $block;
         return $this;
     }
 

@@ -28,15 +28,20 @@ class CanvasPage implements Component
 
     public function build(): Widget
     {
-        return PhpTuiCanvas::default()
-            ->block(Block::default()->borders(Borders::ALL)->title(Title::fromString('World')))
-            ->marker(Marker::Braille)
-            ->paint(function (CanvasContext $context): void {
-                $context->draw(Map::default()->resolution(MapResolution::High)->color(AnsiColor::Green));
-                $context->print($this->x, -$this->y, PhpTuiLine::fromString('You are here!')->patchStyle(Style::default()->fg(AnsiColor::Yellow)->addModifier(Modifier::Italic)));
-            })
-            ->xBounds(AxisBounds::new(-180, 180))
-            ->yBounds(AxisBounds::new(-90, 90));
+        return Block::default()
+            ->borders(Borders::ALL)
+            ->title(Title::fromString('World'))
+            ->widget(
+                PhpTuiCanvas::default()
+                    ->marker(Marker::Braille)
+                    ->paint(function (CanvasContext $context): void {
+                        $context->draw(Map::default()->resolution(MapResolution::High)->color(AnsiColor::Green));
+                        $context->print($this->x, -$this->y, PhpTuiLine::fromString('You are here!')->patchStyle(Style::default()->fg(AnsiColor::Yellow)->addModifier(Modifier::Italic)));
+                    })
+                    ->xBounds(AxisBounds::new(-180, 180))
+                    ->yBounds(AxisBounds::new(-90, 90))
+            )
+        ;
     }
 
     public function handle(Event $event): void

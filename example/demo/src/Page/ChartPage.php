@@ -41,29 +41,29 @@ class ChartPage implements Component
                 ->data($this->sinData(90)),
         ];
 
-        return Chart::new($dataSets)
-            ->block(
-                Block::default()
-                    ->title(Title::fromLine(Line::fromString('Chart 1')))
-                    ->borders(Borders::ALL)
-            )
-            ->xAxis(
-                Axis::default()
-                    //->title('X Axis')
-                    ->style(Style::default()->fg(AnsiColor::Gray))
-                ->labels($xLabels)
-                ->bounds(AxisBounds::new(0, 400))
-            )
-            ->yAxis(
-                Axis::default()
-                    //->title('X Axis')
-                ->style(Style::default()->fg(AnsiColor::Gray))
-                ->labels([
-                    Span::fromString('-20'),
-                    Span::fromString('0'),
-                    Span::fromString('20'),
-                ])
-                ->bounds(AxisBounds::new(-400, 400))
+        return Block::default()
+            ->title(Title::fromLine(Line::fromString('Chart 1')))
+            ->borders(Borders::ALL)
+            ->widget(
+                Chart::new($dataSets)
+                    ->xAxis(
+                        Axis::default()
+                            //->title('X Axis')
+                            ->style(Style::default()->fg(AnsiColor::Gray))
+                        ->labels($xLabels)
+                        ->bounds(AxisBounds::new(0, 400))
+                    )
+                    ->yAxis(
+                        Axis::default()
+                            //->title('X Axis')
+                        ->style(Style::default()->fg(AnsiColor::Gray))
+                        ->labels([
+                            Span::fromString('-20'),
+                            Span::fromString('0'),
+                            Span::fromString('20'),
+                        ])
+                        ->bounds(AxisBounds::new(-400, 400))
+                    )
             );
     }
 
