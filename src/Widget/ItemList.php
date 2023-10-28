@@ -36,15 +36,16 @@ class ItemList implements Widget
         $buffer->setStyle($area, $this->style);
 
         /** @var Area $listArea */
+        $listArea = $area;
 
-        if ($area->width < 1 || $area->height < 1) {
+        if ($listArea->width < 1 || $listArea->height < 1) {
             return;
         }
 
         if (count($this->items) === 0) {
             return;
         }
-        $listHeight = $area->height;
+        $listHeight = $listArea->height;
         [$start, $end] = $this->getItemsBounds($listHeight);
         $this->state->offset = $start;
         $highlightSymbol = $this->highlightSymbol ?? '';
@@ -52,18 +53,18 @@ class ItemList implements Widget
         $currentHeight = 0;
         $selectionSpacing = $this->highlightSpacing->shouldAdd($this->state->selected !== null);
         foreach (array_slice($this->items, $start, $end-$start) as $i => $item) {
-            [$x, $y, $currentHeight] = (function () use ($item, $area, $currentHeight) {
+            [$x, $y, $currentHeight] = (function () use ($item, $listArea, $currentHeight) {
                 if ($this->startCorner === Corner::BottomLeft) {
                     $currentHeight += $item->height();
-                    return [$area->left(), $area->bottom() - $currentHeight, $currentHeight];
+                    return [$listArea->left(), $listArea->bottom() - $currentHeight, $currentHeight];
                 }
 
-                $y = $area->top() + $currentHeight;
+                $y = $listArea->top() + $currentHeight;
                 $currentHeight += $item->height();
-                return [$area->left(), $y, $currentHeight];
+                return [$listArea->left(), $y, $currentHeight];
             })();
 
-            $area = Area::fromPrimitives($x, $y, $area->width, $item->height());
+            $area = Area::fromPrimitives($x, $y, $listArea->width, $item->height());
             $itemStyle = $this->style->patch($item->style);
             $buffer->setStyle($area, $itemStyle);
 
@@ -74,19 +75,19 @@ class ItemList implements Widget
                     $blankSymbol
                 ;
 
-                [$elemPosition, $maxElementWidth] = (function () use ($area, $selectionSpacing, $buffer, $x, $j, $y, $symbol, $itemStyle) {
+                [$elemPosition, $maxElementWidth] = (function () use ($listArea, $selectionSpacing, $buffer, $x, $j, $y, $symbol, $itemStyle) {
                     if ($selectionSpacing === true) {
                         $pos = $buffer->putString(
                             Position::at($x, $y + $j),
                             $symbol,
                             $itemStyle,
-                            $area->width,
+                            $listArea->width,
                         );
 
-                        return [Position::at($pos->x, $y + $j), ($area->width - ($pos->x - $x))];
+                        return [Position::at($pos->x, $y + $j), ($listArea->width - ($pos->x - $x))];
                     }
 
-                    return [Position::at($x, $y + $j), $area->width];
+                    return [Position::at($x, $y + $j), $listArea->width];
                 })();
                 $buffer->putLine($elemPosition, $line, $maxElementWidth);
                 if ($isSelected) {
