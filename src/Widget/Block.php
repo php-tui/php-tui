@@ -53,34 +53,6 @@ final class Block implements Widget
         return $this;
     }
 
-    public function inner(Area $area): Area
-    {
-        $x = $area->position->x;
-        $y = $area->position->y;
-        $width = $area->width;
-        $height = $area->height;
-        if ($this->borders & Borders::LEFT) {
-            $x = min($x + 1, $area->right());
-            $width = max(0, $width - 1);
-        }
-        if ($this->borders & Borders::TOP || [] !== $this->titles) {
-            $y = min($y + 1, $area->bottom());
-            $height = max(0, $height-1);
-        }
-        if ($this->borders & Borders::RIGHT) {
-            $width = max(0, $width - 1);
-        }
-        if ($this->borders & Borders::BOTTOM) {
-            $height = max(0, $height - 1);
-        }
-        $x += $this->padding->left;
-        $y += $this->padding->top;
-        $width = $width - ($this->padding->left + $this->padding->right);
-        $height = $height - ($this->padding->top + $this->padding->bottom);
-
-        return Area::fromPrimitives($x, $y, $width, $height);
-    }
-
     /**
      * @param int-mask-of<Borders::*> $flag
      */
@@ -320,4 +292,33 @@ final class Block implements Widget
             $area->width - max(0, $leftBorderDx, $rightBorderDx),
         ];
     }
+
+    private function inner(Area $area): Area
+    {
+        $x = $area->position->x;
+        $y = $area->position->y;
+        $width = $area->width;
+        $height = $area->height;
+        if ($this->borders & Borders::LEFT) {
+            $x = min($x + 1, $area->right());
+            $width = max(0, $width - 1);
+        }
+        if ($this->borders & Borders::TOP || [] !== $this->titles) {
+            $y = min($y + 1, $area->bottom());
+            $height = max(0, $height-1);
+        }
+        if ($this->borders & Borders::RIGHT) {
+            $width = max(0, $width - 1);
+        }
+        if ($this->borders & Borders::BOTTOM) {
+            $height = max(0, $height - 1);
+        }
+        $x += $this->padding->left;
+        $y += $this->padding->top;
+        $width = $width - ($this->padding->left + $this->padding->right);
+        $height = $height - ($this->padding->top + $this->padding->bottom);
+
+        return Area::fromPrimitives($x, $y, $width, $height);
+    }
+
 }
