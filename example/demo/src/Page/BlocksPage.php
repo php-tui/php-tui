@@ -28,7 +28,6 @@ class BlocksPage implements Component
 {
     public function build(): Widget
     {
-        $lorem = $this->placeholderParagraph();
         $grid = Grid::default()
             ->direction(Direction::Horizontal)
             ->constraints([
@@ -40,29 +39,29 @@ class BlocksPage implements Component
                     ->direction(Direction::Vertical)
                     ->constraints(array_map(fn () => Constraint::max(4), array_fill(0, 9, true)))
                     ->widgets([
-                        $this->borders($this->clone($lorem), Borders::ALL),
-                        $this->borders($this->clone($lorem), Borders::LEFT),
-                        $this->borders($this->clone($lorem), Borders::TOP),
-                        $this->borderType($this->clone($lorem), BorderType::Plain),
-                        $this->borderType($this->clone($lorem), BorderType::Double),
-                        $this->styledBlock($this->clone($lorem)),
-                        $this->styledTitle($this->clone($lorem)),
-                        $this->multipleTitles($this->clone($lorem)),
-                        $this->padding($this->clone($lorem)),
+                        $this->borders($this->lorem(), Borders::ALL),
+                        $this->borders($this->lorem(), Borders::LEFT),
+                        $this->borders($this->lorem(), Borders::TOP),
+                        $this->borderType($this->lorem(), BorderType::Plain),
+                        $this->borderType($this->lorem(), BorderType::Double),
+                        $this->styledBlock($this->lorem()),
+                        $this->styledTitle($this->lorem()),
+                        $this->multipleTitles($this->lorem()),
+                        $this->padding($this->lorem()),
                     ]),
                 Grid::default()
                     ->direction(Direction::Vertical)
                     ->constraints(array_map(fn () => Constraint::max(4), array_fill(0, 9, true)))
                     ->widgets([
-                        $this->borders($this->clone($lorem), Borders::NONE),
-                        $this->borders($this->clone($lorem), Borders::RIGHT),
-                        $this->borders($this->clone($lorem), Borders::BOTTOM),
-                        $this->borderType($this->clone($lorem), BorderType::Rounded),
-                        $this->borderType($this->clone($lorem), BorderType::Thick),
-                        $this->styledBorders($this->clone($lorem)),
-                        $this->styledTitleContent($this->clone($lorem)),
-                        $this->multipleTitlePositions($this->clone($lorem)),
-                        $this->nestedBlocks($this->clone($lorem)),
+                        $this->borders($this->lorem(), Borders::NONE),
+                        $this->borders($this->lorem(), Borders::RIGHT),
+                        $this->borders($this->lorem(), Borders::BOTTOM),
+                        $this->borderType($this->lorem(), BorderType::Rounded),
+                        $this->borderType($this->lorem(), BorderType::Thick),
+                        $this->styledBorders($this->lorem()),
+                        $this->styledTitleContent($this->lorem()),
+                        $this->multipleTitlePositions($this->lorem()),
+                        $this->nestedBlocks($this->lorem()),
 
                     ]),
             ])
@@ -75,7 +74,7 @@ class BlocksPage implements Component
     {
     }
 
-    public function placeholderParagraph(): Paragraph
+    public function lorem(): Paragraph
     {
         $text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.';
         return Paragraph::new(
@@ -106,21 +105,20 @@ class BlocksPage implements Component
     private function clone(object $object): object
     {
         /** @phpstan-ignore-next-line */
-        return unserialize(serialize($object));
     }
 
     private function borderType(Paragraph $paragraph, BorderType $borderType): Widget
     {
-        $block = Block::default()
+        return Block::default()
             ->borders(Borders::ALL)
             ->borderType($borderType)
-            ->title(Title::fromString(sprintf('BordersType::%s', $borderType->name)));
-        return $paragraph->block($block);
+            ->title(Title::fromString(sprintf('BordersType::%s', $borderType->name)))
+            ->widget($paragraph);
     }
 
     private function styledBlock(Paragraph $paragraph): Widget
     {
-        $block = Block::default()
+        return Block::default()
             ->borders(Borders::ALL)
             ->style(
                 Style::default()->fg(
@@ -133,13 +131,13 @@ class BlocksPage implements Component
                     Modifier::Italic
                 )
             )
-            ->title(Title::fromString('Styled block'));
-        return $paragraph->block($block);
+            ->title(Title::fromString('Styled block'))
+            ->widget($paragraph);
     }
 
     private function styledBorders(Paragraph $paragraph): Widget
     {
-        $block = Block::default()
+        return Block::default()
             ->borders(Borders::ALL)
             ->borderStyle(
                 Style::default()->fg(
@@ -152,69 +150,77 @@ class BlocksPage implements Component
                     Modifier::Italic
                 )
             )
-            ->title(Title::fromString('Styled borders'));
-        return $paragraph->block($block);
+            ->title(Title::fromString('Styled borders'))
+            ->widget($paragraph);
     }
 
     private function styledTitle(Paragraph $paragraph): Widget
     {
-        $block = Block::default()
+        return Block::default()
             ->borders(Borders::ALL)
             ->title(Title::fromString('Styled title'))
-            ->titleStyle(Style::default()->fg(AnsiColor::Blue)->bg(AnsiColor::White)->addModifier(Modifier::Bold)->addModifier(Modifier::Italic));
-        return $paragraph->block($block);
+            ->titleStyle(Style::default()->fg(AnsiColor::Blue)->bg(AnsiColor::White)->addModifier(Modifier::Bold)->addModifier(Modifier::Italic))
+            ->widget($paragraph);
+
     }
 
     private function styledTitleContent(Paragraph $paragraph): Widget
     {
-        $block = Block::default()
+        return Block::default()
             ->borders(Borders::ALL)
             ->title(Title::fromLine(Line::fromSpans([
                 Span::fromString('Styled ')->style(Style::default()->fg(AnsiColor::Blue)),
                 Span::fromString('title content')->style(Style::default()->fg(AnsiColor::Green)),
-            ])));
-        return $paragraph->block($block);
+            ])))
+            ->widget($paragraph);
     }
 
     private function multipleTitles(Paragraph $paragraph): Widget
     {
-        $block = Block::default()
+        return Block::default()
             ->borders(Borders::ALL)
             ->title(Title::fromLine(Line::fromSpans([
                 Span::fromString('Multiple')->style(Style::default()->fg(AnsiColor::Blue)),
             ])))
             ->title(Title::fromLine(Line::fromSpans([
                 Span::fromString('Titles')->style(Style::default()->fg(AnsiColor::Red)),
-            ])));
-        return $paragraph->block($block);
+            ])))
+            ->widget($paragraph);
     }
 
     private function multipleTitlePositions(Paragraph $paragraph): Widget
     {
-        $block = Block::default()
+        return Block::default()
             ->borders(Borders::ALL)
             ->title(Title::fromString('top left'))
             ->title(Title::fromString('top center')->horizontalAlignmnet(HorizontalAlignment::Center))
             ->title(Title::fromString('top right')->verticalAlignment(VerticalAlignment::Top)->horizontalAlignment(HorizontalAlignment::Right))
             ->title(Title::fromString('bottom left')->verticalAlignment(VerticalAlignment::Bottom)->horizontalAlignment(HorizontalAlignment::Left))
             ->title(Title::fromString('bottom center')->verticalAlignment(VerticalAlignment::Bottom)->horizontalAlignment(HorizontalAlignment::Center))
-            ->title(Title::fromString('bottom right')->verticalAlignment(VerticalAlignment::Bottom)->horizontalAlignment(HorizontalAlignment::Right));
-        return $paragraph->block($block);
+            ->title(Title::fromString('bottom right')->verticalAlignment(VerticalAlignment::Bottom)->horizontalAlignment(HorizontalAlignment::Right))
+            ->widget($paragraph);
     }
 
     private function padding(Paragraph $paragraph): Widget
     {
-        $block = Block::default()
+        return Block::default()
             ->borders(Borders::ALL)
             ->title(Title::fromString('padding'))
-            ->padding(Padding::fromPrimitives(5, 10, 1, 2));
-        return $paragraph->block($block);
+            ->padding(Padding::fromPrimitives(5, 10, 1, 2))
+            ->widget($paragraph);
     }
 
     private function nestedBlocks(Paragraph $paragraph): Widget
     {
-        $outerBlock = Block::default()->borders(Borders::ALL)->title(Title::fromString('Outer block'));
-        $innerBlock = Block::default()->borders(Borders::ALL)->title(Title::fromString('Inner block: TODO refactor block to allow adding an inner widget'));
-        return $paragraph->block($innerBlock);
+        return Block::default()
+            ->borders(Borders::ALL)
+            ->title(Title::fromString('Outer block'))
+            ->widget(
+                Block::default()
+                    ->borders(Borders::ALL)
+                    ->title(Title::fromString('Inner block'))
+                    ->widget($paragraph)
+            )
+        ;
     }
 }

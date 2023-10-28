@@ -29,6 +29,7 @@ final class Block implements Widget
         private Style $style,
         private Style $titleStyle,
         private Padding $padding,
+        private ?Widget $widget,
     ) {
     }
 
@@ -42,7 +43,14 @@ final class Block implements Widget
             Style::default(),
             Style::default(),
             Padding::none(),
+            null,
         );
+    }
+
+    public function widget(Widget $widget): self
+    {
+        $this->widget = $widget;
+        return $this;
     }
 
     public function inner(Area $area): Area
@@ -182,6 +190,9 @@ final class Block implements Widget
                 ->setStyle($this->borderStyle);
         }
 
+        if ($this->widget) {
+            $this->widget->render($this->inner($area), $buffer);
+        }
     }
 
     private function renderTitles(Area $area, Buffer $buffer): void
