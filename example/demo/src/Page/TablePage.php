@@ -57,29 +57,32 @@ final class TablePage implements Component
 
     public function build(): Widget
     {
-        return Table::default()
-            ->state($this->state)
-            ->block(Block::default()->title(Title::fromString('Table'))->borders(Borders::ALL))
-            ->select(rand(0, count(self::EVENTS)))
-            ->highlightSymbol('X')
-            ->highlightStyle(Style::default()->bg(AnsiColor::Cyan)->fg(AnsiColor::Black))
-            ->widths([
-                Constraint::percentage(10),
-                Constraint::min(10),
-            ])
-            ->rows(array_map(function (array $event) {
-                return TableRow::fromCells([
-                    TableCell::fromLine(Line::fromSpan(
-                        Span::styled($event[1], match ($event[1]) {
-                            'INFO' => Style::default()->fg(AnsiColor::Green),
-                            'WARNING' => Style::default()->fg(AnsiColor::Yellow),
-                            'CRITICAL' => Style::default()->fg(AnsiColor::Red),
-                            default => Style::default()->fg(AnsiColor::Cyan),
-                        }),
-                    )),
-                    TableCell::fromLine(Line::fromString($event[0])),
-                ]);
-            }, array_merge(self::EVENTS, self::EVENTS)));
+        return Block::default()->title(Title::fromString('Table'))->borders(Borders::ALL)
+            ->widget(
+                Table::default()
+                    ->state($this->state)
+                    ->select(rand(0, count(self::EVENTS)))
+                    ->highlightSymbol('X')
+                    ->highlightStyle(Style::default()->bg(AnsiColor::Cyan)->fg(AnsiColor::Black))
+                    ->widths([
+                        Constraint::percentage(10),
+                        Constraint::min(10),
+                    ])
+                    ->rows(array_map(function (array $event) {
+                        return TableRow::fromCells([
+                            TableCell::fromLine(Line::fromSpan(
+                                Span::styled($event[1], match ($event[1]) {
+                                    'INFO' => Style::default()->fg(AnsiColor::Green),
+                                    'WARNING' => Style::default()->fg(AnsiColor::Yellow),
+                                    'CRITICAL' => Style::default()->fg(AnsiColor::Red),
+                                    default => Style::default()->fg(AnsiColor::Cyan),
+                                }),
+                            )),
+                            TableCell::fromLine(Line::fromString($event[0])),
+                        ]);
+                    }, array_merge(self::EVENTS, self::EVENTS)))
+            )
+        ;
     }
 
     public function handle(Event $event): void

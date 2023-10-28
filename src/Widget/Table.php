@@ -23,7 +23,6 @@ final class Table implements Widget
      * @param list<TableRow> $rows
      */
     public function __construct(
-        private ?Block $block,
         private Style $style,
         private array $widths,
         private int $columnSpacing,
@@ -40,12 +39,7 @@ final class Table implements Widget
     {
         $buffer->setStyle($area, $this->style);
 
-        /** @var Area $tableArea */
-        $tableArea = $this->block ? (function (Block $block, Area $area, Buffer $buffer): Area {
-            $block->render($area, $buffer);
-            return $block->inner($area);
-        })($this->block, $area, $buffer) : $area;
-
+        $tableArea = $area;
         $selectionWidth = $this->highlightSpacing->shouldAdd(
             $this->state->selected !== null
         ) ? mb_strlen($this->highlightSymbol) : 0;
@@ -136,7 +130,6 @@ final class Table implements Widget
     public static function default(): self
     {
         return new self(
-            block: null,
             style: Style::default(),
             widths: [],
             columnSpacing: 0,
@@ -181,12 +174,6 @@ final class Table implements Widget
     public function offset(int $offset): self
     {
         $this->state->offset = $offset;
-        return $this;
-    }
-
-    public function block(Block $block): self
-    {
-        $this->block = $block;
         return $this;
     }
 
