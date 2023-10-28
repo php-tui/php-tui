@@ -96,17 +96,6 @@ class BlocksPage implements Component
             ->widget($paragraph);
     }
 
-    /**
-     * TODO: refactor to make these things immutable!
-     * @template T of object
-     * @param T $object
-     * @return T
-     */
-    private function clone(object $object): object
-    {
-        /** @phpstan-ignore-next-line */
-    }
-
     private function borderType(Paragraph $paragraph, BorderType $borderType): Widget
     {
         return Block::default()
