@@ -72,12 +72,8 @@ final class Canvas implements Widget
                 $x = ($index % $width) + $canvasArea->left();
                 $y = ($index / $width) + $canvasArea->top();
                 $cell = $buffer->get(Position::at(intval($x), intval($y)))->setChar($char);
-                if ($color->fg !== AnsiColor::Reset) {
-                    $cell->fg = $color->fg;
-                }
-                if ($color->bg !== AnsiColor::Reset) {
-                    $cell->bg = $color->bg;
-                }
+                $cell->fg = $color->fg;
+                $cell->bg = $color->bg;
             }
         }
 

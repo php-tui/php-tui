@@ -57,12 +57,6 @@ final class Cell
         return $this;
     }
 
-    public function reset(): void
-    {
-        $this->setChar(' ');
-        $this->setStyle(Style::default());
-    }
-
     public function equals(Cell $currentCell): bool
     {
         return

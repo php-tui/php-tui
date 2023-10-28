@@ -124,7 +124,7 @@ final class App
 
             // sleep for 10ms - note that it's encouraged to implement apps
             // using an async library such as Amp or React
-            usleep(10_000);
+            usleep(100_000);
         }
 
         $this->terminal->disableRawMode();
