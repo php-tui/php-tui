@@ -24,7 +24,6 @@ final class Chart implements Widget
      * @param DataSet[] $dataSets
      */
     private function __construct(
-        private ?Block $block,
         private Axis $xAxis,
         private Axis $yAxis,
         private array $dataSets,
@@ -38,18 +37,14 @@ final class Chart implements Widget
             return;
         }
         $buffer->setStyle($area, $this->style);
-        $chartArea = $this->block ? (function (Block $block, Area $area, Buffer $buffer) {
-            $block->render($area, $buffer);
-            return $block->inner($area);
-        })($this->block, $area, $buffer) : $area;
 
-        $layout = $this->resolveLayout($chartArea);
+        $layout = $this->resolveLayout($area);
         if (null === $layout) {
             return;
         }
 
-        $this->renderXLabels($buffer, $layout, $chartArea);
-        $this->renderYLabels($buffer, $layout, $chartArea);
+        $this->renderXLabels($buffer, $layout, $area);
+        $this->renderYLabels($buffer, $layout, $area);
 
         if ($layout->xAxisY !== null) {
             for ($x = $layout->graphArea->left(); $x < $layout->graphArea->right(); $x++) {
@@ -93,7 +88,6 @@ final class Chart implements Widget
     public static function new(array $dataSets = []): self
     {
         return new self(
-            block: null,
             xAxis: Axis::default(),
             yAxis: Axis::default(),
             dataSets: $dataSets,
@@ -109,12 +103,6 @@ final class Chart implements Widget
     public function yAxis(Axis $axis): self
     {
         $this->yAxis = $axis;
-        return $this;
-    }
-
-    public function block(Block $block): self
-    {
-        $this->block = $block;
         return $this;
     }
 
