@@ -67,6 +67,17 @@ class DemoTest extends TestCase
         $this->assertSnapshot(__METHOD__, $backend);
     }
 
+    public function testBlocks(): void
+    {
+        srand(0);
+        $backend = $this->execute(
+            CharKeyEvent::new('6'),
+            null,
+            CharKeyEvent::new('q'),
+        );
+        $this->assertSnapshot(__METHOD__, $backend);
+    }
+
     private function execute(?Event ...$events): DummyBackend
     {
         $terminal = Terminal::new(

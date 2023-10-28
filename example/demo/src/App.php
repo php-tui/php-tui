@@ -173,6 +173,8 @@ final class App
             Span::fromString('list '),
             Span::styled('[5]', Style::default()->fg(AnsiColor::Green)),
             Span::fromString('table '),
+            Span::styled('[6]', Style::default()->fg(AnsiColor::Green)),
+            Span::fromString('blocks '),
         ])))->block(
             Block::default()
                 ->borders(Borders::ALL)->style(Style::default()->fg(AnsiColor::Red))
