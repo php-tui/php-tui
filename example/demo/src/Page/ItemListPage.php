@@ -55,21 +55,24 @@ final class ItemListPage implements Component
 
     public function build(): Widget
     {
-        return ItemList::default()
-            ->state($this->state)
-            ->block(Block::default()->borders(Borders::ALL))
-            ->items(array_map(function (array $event) {
-                return ListItem::new(Text::fromLine(Line::fromSpans([
-                    Span::styled($event[1], match ($event[1]) {
-                        'INFO' => Style::default()->fg(AnsiColor::Green),
-                        'WARNING' => Style::default()->fg(AnsiColor::Yellow),
-                        'CRITICAL' => Style::default()->fg(AnsiColor::Red),
-                        default => Style::default()->fg(AnsiColor::Cyan),
-                    }),
-                    Span::fromString(' '),
-                    Span::fromString($event[0]),
-                ])));
-            }, array_merge(self::EVENTS, self::EVENTS)));
+        return Block::default()->borders(Borders::ALL)
+            ->widget(
+                ItemList::default()
+                    ->state($this->state)
+                    ->items(array_map(function (array $event) {
+                        return ListItem::new(Text::fromLine(Line::fromSpans([
+                            Span::styled($event[1], match ($event[1]) {
+                                'INFO' => Style::default()->fg(AnsiColor::Green),
+                                'WARNING' => Style::default()->fg(AnsiColor::Yellow),
+                                'CRITICAL' => Style::default()->fg(AnsiColor::Red),
+                                default => Style::default()->fg(AnsiColor::Cyan),
+                            }),
+                            Span::fromString(' '),
+                            Span::fromString($event[0]),
+                        ])));
+                    }, array_merge(self::EVENTS, self::EVENTS)))
+            )
+        ;
     }
 
     public function handle(Event $event): void

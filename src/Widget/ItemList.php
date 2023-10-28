@@ -21,7 +21,6 @@ class ItemList implements Widget
      * @param list<ListItem> $items
      */
     public function __construct(
-        private ?Block $block,
         private array $items,
         private Style $style,
         private Corner $startCorner,
@@ -37,19 +36,15 @@ class ItemList implements Widget
         $buffer->setStyle($area, $this->style);
 
         /** @var Area $listArea */
-        $listArea = $this->block ? (function (Block $block, Area $area, Buffer $buffer): Area {
-            $block->render($area, $buffer);
-            return $block->inner($area);
-        })($this->block, $area, $buffer) : $area;
 
-        if ($listArea->width < 1 || $listArea->height < 1) {
+        if ($area->width < 1 || $area->height < 1) {
             return;
         }
 
         if (count($this->items) === 0) {
             return;
         }
-        $listHeight = $listArea->height;
+        $listHeight = $area->height;
         [$start, $end] = $this->getItemsBounds($listHeight);
         $this->state->offset = $start;
         $highlightSymbol = $this->highlightSymbol ?? '';
@@ -57,18 +52,18 @@ class ItemList implements Widget
         $currentHeight = 0;
         $selectionSpacing = $this->highlightSpacing->shouldAdd($this->state->selected !== null);
         foreach (array_slice($this->items, $start, $end-$start) as $i => $item) {
-            [$x, $y, $currentHeight] = (function () use ($item, $listArea, $currentHeight) {
+            [$x, $y, $currentHeight] = (function () use ($item, $area, $currentHeight) {
                 if ($this->startCorner === Corner::BottomLeft) {
                     $currentHeight += $item->height();
-                    return [$listArea->left(), $listArea->bottom() - $currentHeight, $currentHeight];
+                    return [$area->left(), $area->bottom() - $currentHeight, $currentHeight];
                 }
 
-                $y = $listArea->top() + $currentHeight;
+                $y = $area->top() + $currentHeight;
                 $currentHeight += $item->height();
-                return [$listArea->left(), $y, $currentHeight];
+                return [$area->left(), $y, $currentHeight];
             })();
 
-            $area = Area::fromPrimitives($x, $y, $listArea->width, $item->height());
+            $area = Area::fromPrimitives($x, $y, $area->width, $item->height());
             $itemStyle = $this->style->patch($item->style);
             $buffer->setStyle($area, $itemStyle);
 
@@ -79,19 +74,19 @@ class ItemList implements Widget
                     $blankSymbol
                 ;
 
-                [$elemPosition, $maxElementWidth] = (function () use ($listArea, $selectionSpacing, $buffer, $x, $j, $y, $symbol, $itemStyle) {
+                [$elemPosition, $maxElementWidth] = (function () use ($area, $selectionSpacing, $buffer, $x, $j, $y, $symbol, $itemStyle) {
                     if ($selectionSpacing === true) {
                         $pos = $buffer->putString(
                             Position::at($x, $y + $j),
                             $symbol,
                             $itemStyle,
-                            $listArea->width,
+                            $area->width,
                         );
 
-                        return [Position::at($pos->x, $y + $j), ($listArea->width - ($pos->x - $x))];
+                        return [Position::at($pos->x, $y + $j), ($area->width - ($pos->x - $x))];
                     }
 
-                    return [Position::at($x, $y + $j), $listArea->width];
+                    return [Position::at($x, $y + $j), $area->width];
                 })();
                 $buffer->putLine($elemPosition, $line, $maxElementWidth);
                 if ($isSelected) {
@@ -105,7 +100,6 @@ class ItemList implements Widget
     public static function default(): self
     {
         return new self(
-            block: null,
             items: [],
             style: Style::default(),
             startCorner: Corner::TopLeft,
@@ -147,12 +141,6 @@ class ItemList implements Widget
     public function state(ItemListState $state): self
     {
         $this->state = $state;
-        return $this;
-    }
-
-    public function block(Block $block): self
-    {
-        $this->block = $block;
         return $this;
     }
 
