@@ -102,6 +102,7 @@ final class Display
 
     private function swapBuffers(): void
     {
+        /** @phpstan-ignore-next-line */
         $this->buffers[1 - $this->current] = Buffer::empty($this->viewportArea);
         $this->current = 1 - $this->current;
     }

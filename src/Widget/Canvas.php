@@ -9,8 +9,6 @@ use PhpTui\Tui\Model\AxisBounds;
 use PhpTui\Tui\Model\Buffer;
 use PhpTui\Tui\Model\Color;
 use PhpTui\Tui\Model\Marker;
-use PhpTui\Tui\Model\Modifier;
-use PhpTui\Tui\Model\Modifiers;
 use PhpTui\Tui\Model\Position;
 use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Widget;
