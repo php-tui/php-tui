@@ -171,7 +171,7 @@ final class App
         ])))->block(
             Block::default()
                 ->borders(Borders::ALL)->style(Style::default()->fg(AnsiColor::Red))
-            ->title(Title::fromString(sprintf('%d FPS', 10))->horizontalAlignmnet(HorizontalAlignment::Right))
+            ->title(Title::fromString(sprintf('%d FPS', $this->frameRate()))->horizontalAlignmnet(HorizontalAlignment::Right))
         );
     }
 
