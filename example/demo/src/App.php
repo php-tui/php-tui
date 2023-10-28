@@ -160,26 +160,28 @@ final class App
 
     private function header(): Widget
     {
-        return Paragraph::new(Text::fromLine(Line::fromSpans([
-            Span::styled('[q]', Style::default()->fg(AnsiColor::Green)),
-            Span::fromString('quit '),
-            Span::styled('[1]', Style::default()->fg(AnsiColor::Green)),
-            Span::fromString('events '),
-            Span::styled('[2]', Style::default()->fg(AnsiColor::Green)),
-            Span::fromString('canvas '),
-            Span::styled('[3]', Style::default()->fg(AnsiColor::Green)),
-            Span::fromString('chart '),
-            Span::styled('[4]', Style::default()->fg(AnsiColor::Green)),
-            Span::fromString('list '),
-            Span::styled('[5]', Style::default()->fg(AnsiColor::Green)),
-            Span::fromString('table '),
-            Span::styled('[6]', Style::default()->fg(AnsiColor::Green)),
-            Span::fromString('blocks '),
-        ])))->block(
-            Block::default()
+        return Block::default()
                 ->borders(Borders::ALL)->style(Style::default()->fg(AnsiColor::Red))
-            ->title(Title::fromString(sprintf('%d FPS', $this->frameRate()))->horizontalAlignmnet(HorizontalAlignment::Right))
-        );
+                ->title(Title::fromString(sprintf('%d FPS', $this->frameRate()))->horizontalAlignmnet(HorizontalAlignment::Right))
+                ->widget(
+                    Paragraph::new(Text::fromLine(Line::fromSpans([
+                        Span::styled('[q]', Style::default()->fg(AnsiColor::Green)),
+                        Span::fromString('quit '),
+                        Span::styled('[1]', Style::default()->fg(AnsiColor::Green)),
+                        Span::fromString('events '),
+                        Span::styled('[2]', Style::default()->fg(AnsiColor::Green)),
+                        Span::fromString('canvas '),
+                        Span::styled('[3]', Style::default()->fg(AnsiColor::Green)),
+                        Span::fromString('chart '),
+                        Span::styled('[4]', Style::default()->fg(AnsiColor::Green)),
+                        Span::fromString('list '),
+                        Span::styled('[5]', Style::default()->fg(AnsiColor::Green)),
+                        Span::fromString('table '),
+                        Span::styled('[6]', Style::default()->fg(AnsiColor::Green)),
+                        Span::fromString('blocks '),
+                    ])))
+                )
+        ;
     }
 
     private function incFramerate(): void

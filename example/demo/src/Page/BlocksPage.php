@@ -90,10 +90,10 @@ class BlocksPage implements Component
      */
     public function borders(Paragraph $paragraph, int $borders): Widget
     {
-        $block = Block::default()
+        return Block::default()
             ->borders($borders)
-            ->title(Title::fromString(sprintf('Borders::%s', Borders::toString($borders))));
-        return $paragraph->block($block);
+            ->title(Title::fromString(sprintf('Borders::%s', Borders::toString($borders))))
+            ->widget($paragraph);
     }
 
     /**
