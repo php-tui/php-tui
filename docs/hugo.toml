@@ -1,0 +1,7 @@
+baseURL = 'http://example.org/'
+languageCode = 'en-gb'
+title = 'PHP-TUI'
+
+[module]
+[[module.imports]]
+path = 'github.com/alex-shpak/hugo-book'
