@@ -9,6 +9,8 @@ use PhpTui\Tui\Model\AxisBounds;
 use PhpTui\Tui\Model\Buffer;
 use PhpTui\Tui\Model\Color;
 use PhpTui\Tui\Model\Marker;
+use PhpTui\Tui\Model\Modifier;
+use PhpTui\Tui\Model\Modifiers;
 use PhpTui\Tui\Model\Position;
 use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Widget;
@@ -72,12 +74,8 @@ final class Canvas implements Widget
                 $x = ($index % $width) + $canvasArea->left();
                 $y = ($index / $width) + $canvasArea->top();
                 $cell = $buffer->get(Position::at(intval($x), intval($y)))->setChar($char);
-                if ($color->fg !== AnsiColor::Reset) {
-                    $cell->fg = $color->fg;
-                }
-                if ($color->bg !== AnsiColor::Reset) {
-                    $cell->bg = $color->bg;
-                }
+                $cell->fg = $color->fg;
+                $cell->bg = $color->bg;
             }
         }
 

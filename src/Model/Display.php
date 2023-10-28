@@ -102,7 +102,7 @@ final class Display
 
     private function swapBuffers(): void
     {
-        $this->buffers[1 - $this->current]->reset();
+        $this->buffers[1 - $this->current] = Buffer::empty($this->viewportArea);
         $this->current = 1 - $this->current;
     }
 

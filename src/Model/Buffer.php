@@ -168,13 +168,6 @@ final class Buffer implements Countable
         return $this->area;
     }
 
-    public function reset(): void
-    {
-        foreach ($this->content as $i => $cell) {
-            $cell->reset();
-        }
-    }
-
     public function putLine(Position $position, Line $line, int $width): Position
     {
         $remainingWidth = $width;
