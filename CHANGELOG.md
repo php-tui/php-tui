@@ -1,7 +1,7 @@
 CHANGELOG
 =========
 
-## master
+## main
 
 Changes:
 
