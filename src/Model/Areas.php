@@ -44,4 +44,9 @@ final class Areas implements IteratorAggregate
         return $this->areas[$offset];
     }
 
+    public function has(int $offset): bool
+    {
+        return isset($this->areas[$offset]);
+    }
+
 }

@@ -5,9 +5,10 @@ namespace PhpTui\Tui\Widget;
 use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Buffer;
 use PhpTui\Tui\Model\Constraint;
-use PhpTui\Tui\Model\Constraint\PercentageConstraint;
 use PhpTui\Tui\Model\Direction;
+use PhpTui\Tui\Model\Layout;
 use PhpTui\Tui\Model\Widget;
+use RuntimeException;
 
 class Grid implements Widget
 {
@@ -24,6 +25,22 @@ class Grid implements Widget
 
     public function render(Area $area, Buffer $buffer): void
     {
+        $layout = Layout::default()
+            ->constraints($this->constraints)
+            ->direction($this->direction)
+            ->split($area);
+
+        foreach ($this->widgets as $index => $widget) {
+            if (!$layout->has($index)) {
+                throw new RuntimeException(sprintf(
+                    'Widget at offset %d has no corresponding constraint. ' .
+                    'Ensure that the number of constraints match or exceed the number of widgets',
+                    $index
+                ));
+            }
+            $cellArea = $layout->get($index);
+            $widget->render($cellArea, $buffer);
+        }
     }
 
     public static function default(): self

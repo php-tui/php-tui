@@ -7,15 +7,30 @@ use PhpTui\Tui\Model\Buffer;
 use PhpTui\Tui\Model\Constraint;
 use PhpTui\Tui\Model\Direction;
 use PhpTui\Tui\Model\Widget\Borders;
+use PhpTui\Tui\Model\Widget\Text;
 use PhpTui\Tui\Widget\Block;
 use PhpTui\Tui\Widget\Grid;
-use PhpTui\Tui\Widget\Grid\GridCell;
-use PhpTui\Tui\Widget\Grid\GridRow;
 use Generator;
 use PHPUnit\Framework\TestCase;
+use PhpTui\Tui\Widget\Paragraph;
+use RuntimeException;
 
 class GridTest extends TestCase
 {
+    public function testNotEnoughConstraints(): void
+    {
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('Widget at offset 0 has no corresponding constraint. Ensure that the number of constraints match or exceed the number of widgets');
+        $area = Area::fromDimensions(10, 10);
+        $buffer = Buffer::empty($area);
+        $grid = Grid::default()
+            ->widgets([
+                Paragraph::new(Text::raw('Hello World'))
+            ]);
+        $grid->render($area, $buffer);
+
+    }
+
     /**
      * @dataProvider provideGridRender
      * @param array<int,string> $expected
@@ -53,10 +68,16 @@ class GridTest extends TestCase
                         ])
                 ]),
             [
-                'Ones Twos ',
-                '1    2    ',
-                '          ',
-                '          ',
+                '┌────────┐',
+                '│        │',
+                '│        │',
+                '│        │',
+                '└────────┘',
+                '┌───┐┌───┐',
+                '│   ││   │',
+                '│   ││   │',
+                '│   ││   │',
+                '└───┘└───┘',
             ]
            ,
         ];
