@@ -18,6 +18,9 @@ use PhpTui\Tui\Widget\Chart\ChartLayout;
 use PhpTui\Tui\Widget\Chart\DataSet;
 use RuntimeException;
 
+/**
+ * Renders a a composite of scatter or line graphs.
+ */
 final class Chart implements Widget
 {
     /**
@@ -34,6 +37,7 @@ final class Chart implements Widget
         private Axis $yAxis,
         /**
          * The data sets.
+         * @var DataSet[]
          */
         private array $dataSets,
         /**

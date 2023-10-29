@@ -16,6 +16,9 @@ use PhpTui\Tui\Model\Widget\StyledGrapheme;
 use PhpTui\Tui\Model\Widget\Text;
 use PhpTui\Tui\Widget\Paragraph\Wrap;
 
+/**
+ * This widget has the ability to show and wrap text.
+ */
 class Paragraph implements Widget
 {
     /** @param array{int,int} $scroll */
