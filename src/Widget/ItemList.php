@@ -182,6 +182,11 @@ class ItemList implements Widget
         }
 
         return [$start, $end];
+    }
 
+    public function highlightSymbol(string $symbol): self
+    {
+        $this->highlightSymbol = $symbol;
+        return $this;
     }
 }

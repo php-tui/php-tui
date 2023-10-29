@@ -1,18 +1,14 @@
 <?php
 
 use PhpTui\Tui\Adapter\PhpTerm\PhpTermBackend;
-
 use PhpTui\Tui\Model\Buffer;
 use PhpTui\Tui\Model\Constraint;
 use PhpTui\Tui\Model\Direction;
 use PhpTui\Tui\Model\Display;
-use PhpTui\Tui\Model\Widget\BorderType;
 use PhpTui\Tui\Model\Widget\Borders;
-use PhpTui\Tui\Model\Widget\Text;
 use PhpTui\Tui\Model\Widget\Title;
 use PhpTui\Tui\Widget\Block;
 use PhpTui\Tui\Widget\Grid;
-use PhpTui\Tui\Widget\Paragraph;
 
 require 'vendor/autoload.php';
 
@@ -40,4 +36,3 @@ $display->draw(function (Buffer $buffer): void {
         ->render($buffer->area(), $buffer);
 });
 $display->flush();
-
