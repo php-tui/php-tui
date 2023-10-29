@@ -5,3 +5,5 @@ started life as a PHP port of
 [Ratatui](https://github.com/ratatui-org/ratatui).
 
 You can use it to make full screen, animated, terminal applications.
+
+{{< button href="https://github.com/php-tui/php-tui" >}}Check it out on Github{{< /button >}}
