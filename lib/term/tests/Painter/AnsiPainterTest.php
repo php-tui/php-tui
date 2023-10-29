@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpTui\Term\Tests\Backend;
+namespace PhpTui\Term\Tests\Painter;
 
 use PhpTui\Term\ClearType;
 use PhpTui\Term\Colors;
@@ -10,7 +10,7 @@ use PhpTui\Term\Painter\AnsiPainter;
 use PhpTui\Term\Writer\BufferWriter;
 use PHPUnit\Framework\TestCase;
 
-class AnsiBackendTest extends TestCase
+class AnsiPainterTest extends TestCase
 {
     public function testControlSequences(): void
     {
