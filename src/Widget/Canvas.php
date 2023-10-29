@@ -14,6 +14,9 @@ use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Widget\Canvas\CanvasContext;
 
+/**
+ * The canvas widget provides a surface, of arbitrary scale, upon which shapes can be drawn.
+ */
 final class Canvas implements Widget
 {
     private function __construct(
