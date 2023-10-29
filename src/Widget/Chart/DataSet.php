@@ -50,4 +50,10 @@ final class DataSet
         $this->data = $data;
         return $this;
     }
+
+    public function graphType(GraphType $graphType): self
+    {
+        $this->graphType = $graphType;
+        return $this;
+    }
 }
