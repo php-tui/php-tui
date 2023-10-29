@@ -9,7 +9,7 @@ use PhpTui\Tui\Model\Viewport\Inline;
 final class Display
 {
     /**
-     * @param array{Buffer,Buffer} $buffers
+     * @param array<int,Buffer> $buffers
      */
     public function __construct(
         private Backend $backend,
@@ -95,14 +95,13 @@ final class Display
 
     private function setViewportArea(Area $area): void
     {
-        $this->buffers[$this->current]->resize($area);
-        $this->buffers[1 - $this->current]->resize($area);
+        $this->buffers[$this->current] = Buffer::empty($area);
+        $this->buffers[1 - $this->current] = Buffer::empty($area);
         $this->viewportArea = $area;
     }
 
     private function swapBuffers(): void
     {
-        /** @phpstan-ignore-next-line phpstan says that array{Buffer,Buffer} doesn't accept non-empty-array<int,Buffer> */
         $this->buffers[1 - $this->current] = Buffer::empty($this->viewportArea);
         $this->current = 1 - $this->current;
     }

@@ -139,19 +139,6 @@ final class Buffer implements Countable
         return $position->withX($position->x + count($chars));
     }
 
-    public function resize(Area $area): void
-    {
-        (function () use ($area): void {
-            if (count($this->content) > $area->area()) {
-                $this->content = array_slice($this->content, 0, $area->area());
-                return;
-            }
-            for ($i = count($this->content); $i < $area->area(); $i++) {
-                $this->content[] = Cell::empty();
-            }
-        })();
-        $this->area = $area;
-    }
     /**
      * @return string[]
      */
