@@ -8,6 +8,9 @@ use PhpTui\Term\Painter;
 
 class StringPainter implements Painter
 {
+    /**
+     * @var array<int,array<int,string>>
+     */
     private array $grid = [];
 
     private int $cursorX = 0;

@@ -5,7 +5,6 @@ namespace PhpTui\Tui\Tests\Example;
 use Generator;
 use PHPUnit\Framework\TestCase;
 use PhpTui\Term\AnsiParser;
-use PhpTui\Term\Painter\BufferPainter;
 use PhpTui\Term\Painter\StringPainter;
 use RuntimeException;
 
