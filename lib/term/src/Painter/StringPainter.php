@@ -28,6 +28,9 @@ class StringPainter implements Painter
 
     public function toString(): string
     {
+        if (empty($this->grid)) {
+            return '';
+        }
         $maxX = max(
             ...array_map(
                 fn (array $cells) => max(
