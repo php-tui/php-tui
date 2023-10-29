@@ -17,8 +17,18 @@ class Grid implements Widget
      * @param Constraint[] $constraints
      */
     private function __construct(
+        /**
+         * The direction of the grid
+         */
         public Direction $direction,
+        /**
+         * The widgets. There should be at least as many constraints as widgets.
+         */
         public array $widgets,
+        /**
+         * The constraints define the widget (Direction::Horizontal) or height
+         * (Direction::Vertical) of the cells.
+         */
         public array $constraints,
     ) {
     }

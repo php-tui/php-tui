@@ -14,21 +14,49 @@ use PhpTui\Tui\Model\Widget\Title;
 use PhpTui\Tui\Model\Widget\VerticalAlignment;
 use PhpTui\Tui\Widget\Block\Padding;
 
+/**
+ * The block widget is a container for other widgets and can provide a border,
+ * title and padding.
+ */
 final class Block implements Widget
 {
-
     /**
      * @param int-mask-of<Borders::*> $borders
      * @param Title[] $titles
      */
     public function __construct(
+        /**
+         * Bit mask which determines the border configuration, e.g. Borders::ALL
+         */
         private int $borders,
+        /**
+         * Titles for the block. You can have multiple titles and each title can
+         * be positioned in a different place.
+         */
         private array $titles,
+        /**
+         * Type of border, e.g. `BorderType::Rounded`
+         */
         private BorderType $borderType,
+        /**
+         * Style of the border.
+         */
         private Style $borderStyle,
+        /**
+         * Style of the block's inner area.
+         */
         private Style $style,
+        /**
+         * Style of the titles.
+         */
         private Style $titleStyle,
+        /**
+         * Padding to apply to the inner widget.
+         */
         private Padding $padding,
+        /**
+         * The inner widget.
+         */
         private ?Widget $widget,
     ) {
     }
