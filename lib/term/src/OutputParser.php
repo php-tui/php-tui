@@ -94,7 +94,7 @@ final class OutputParser
 
         return match ($buffer[2]) {
             '0','1','2','3','4','5','6','7','8','9' => $this->parseCsiSeq($buffer),
-            default => throw new ParseError('Could not parse CSI sequence: %s', json_encode(implode('', $buffer))),
+            default => throw new ParseError(sprintf('Could not parse CSI sequence: %s', json_encode(implode('', $buffer)))),
         };
 
     }
