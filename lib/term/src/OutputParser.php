@@ -119,6 +119,7 @@ final class OutputParser
 
         return match ($lastByte) {
             'm' => $this->parseGraphicsMode($buffer),
+            'H' => $this->parseCursorPosition($buffer),
             default => throw new ParseError(sprintf(
                 'Do not know how to parse CSI sequence: %s',
                 json_encode(implode('', $buffer))
@@ -200,5 +201,18 @@ final class OutputParser
             },
             default => throw ParseError::couldNotParseOffset($buffer, 4),
         };
+    }
+
+    /**
+     * @param string[] $buffer
+     */
+    private function parseCursorPosition(array $buffer): ?Action
+    {
+        $string = implode('', array_slice($buffer, 2, -1));
+        $parts = explode(';', $string);
+        if (count($parts) !== 2) {
+            throw new ParseError(sprintf('Could not parse cursor position from: "%s"', $string));
+        }
+        return Actions::moveCursor($parts[0], $parts[1]);
     }
 }
