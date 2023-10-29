@@ -145,6 +145,12 @@ class ItemList implements Widget
         return $this;
     }
 
+    public function highlightSymbol(string $symbol): self
+    {
+        $this->highlightSymbol = $symbol;
+        return $this;
+    }
+
     /**
      * @return array{int,int}
      */
@@ -182,11 +188,5 @@ class ItemList implements Widget
         }
 
         return [$start, $end];
-    }
-
-    public function highlightSymbol(string $symbol): self
-    {
-        $this->highlightSymbol = $symbol;
-        return $this;
     }
 }
