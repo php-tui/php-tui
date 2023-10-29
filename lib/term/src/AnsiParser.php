@@ -243,4 +243,14 @@ final class AnsiParser
         }
         return Actions::moveCursor(intval($parts[0]), intval($parts[1]));
     }
+
+    /**
+     * @return Action[]
+     */
+    public static function parseString(string $output, bool $throw = false): array
+    {
+        $parser = new self($throw);
+        $parser->advance($output, true);
+        return $parser->drain();
+    }
 }
