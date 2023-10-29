@@ -16,21 +16,51 @@ use PhpTui\Tui\Widget\Table\TableCell;
 use PhpTui\Tui\Widget\Table\TableRow;
 use PhpTui\Tui\Widget\Table\TableState;
 
+/**
+ * Shows tabular data arranged in columns. The column spacing is determined by
+ * the "width" constraints.
+ */
 final class Table implements Widget
 {
-    /**
-     * @param array<int,Constraint> $widths
-     * @param list<TableRow> $rows
-     */
     public function __construct(
+        /**
+         * Style of the area occupied by the table.
+         */
         private Style $style,
+        /**
+         * Constraints to use to determine the column widths.
+         * @var list<\PhpTui\Tui\Model\Constraint>
+         */
         private array $widths,
+        /**
+         * Spacing to enforce between columns.
+         */
         private int $columnSpacing,
+        /**
+         * Style used when a row is highlighted.
+         */
         private Style $highlightStyle,
+        /**
+         * Symbol to show when the row is highlighted.
+         */
         private string $highlightSymbol,
+        /**
+         * Optional header.
+         */
         private ?TableRow $header,
+        /**
+         * Table rows.
+         * @var list<\PhpTui\Tui\Widget\Table\TableRow>
+         */
         private array $rows,
+        /**
+         * Highlight spacing strategy.
+         */
         private HighlightSpacing $highlightSpacing,
+
+        /**
+         * Hold the state of the table (i.e. selected row, current offset).
+         */
         private TableState $state,
     ) {
     }
@@ -258,29 +288,29 @@ final class Table implements Widget
         $start = $end = $offset;
         $height = 0;
         foreach (array_slice($this->rows, $start) as $row) {
-            if ($height + $row->height() > $maxHeight) {
+            if ($height + $row->height > $maxHeight) {
                 break;
             }
-            $height += $row->height();
+            $height += $row->height;
             $end += 1;
         }
 
         if ($this->state->selected !== null) {
             $selected = min(count($this->rows) - 1, $this->state->selected ?? 0);
             while ($selected >= $end) {
-                $height = $height += $this->rows[$end]->height();
+                $height = $height += $this->rows[$end]->height;
                 $end += 1;
                 while ($height > $maxHeight) {
-                    $height = max(0, $height - $this->rows[$start]->height());
+                    $height = max(0, $height - $this->rows[$start]->height);
                     $start += 1;
                 }
             }
             while ($selected < $start) {
                 $start -= 1;
-                $height = $height += $this->rows[$start]->height();
+                $height = $height += $this->rows[$start]->height;
                 while ($height > $maxHeight) {
                     $end -= 1;
-                    $height = max(0, $height - $this->rows[$end]->height());
+                    $height = max(0, $height - $this->rows[$end]->height);
                 }
             }
         }

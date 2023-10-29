@@ -14,13 +14,32 @@ use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Widget\Canvas\CanvasContext;
 
+/**
+ * The canvas widget provides a surface, of arbitrary scale, upon which shapes can be drawn.
+ */
 final class Canvas implements Widget
 {
     private function __construct(
+        /**
+         * Bounds of the X Axis. Must be set if the canvas is to render.
+         */
         private AxisBounds $xBounds,
+        /**
+         * Bounds of the Y Axis. Must be set if the canvas is to render.
+         */
         private AxisBounds $yBounds,
+        /**
+         * The painter closure can draw shapes onto the canvas.
+         * @var Closure(CanvasContext): void
+         */
         private ?Closure $painter,
+        /**
+         * Background color
+         */
         private Color $backgroundColor,
+        /**
+         * The marker type to use, e.g. `Marker::Braille`
+         */
         private Marker $marker,
     ) {
     }

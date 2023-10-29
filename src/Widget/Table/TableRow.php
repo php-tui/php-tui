@@ -38,8 +38,15 @@ final class TableRow
         return $this->cells[$index];
     }
 
-    public function height(): int
+    public function bottomMargin(int $bottomMargin): self
     {
-        return $this->height;
+        $this->bottomMargin = $bottomMargin;
+        return $this;
+    }
+
+    public function height(int $height): self
+    {
+        $this->height = $height;
+        return $this;
     }
 }

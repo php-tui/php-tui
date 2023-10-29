@@ -1,0 +1,12 @@
+#!/usr/bin/env php
+<?php
+
+use PhpTui\Docgen\Docgen;
+
+require __DIR__ .'/../vendor/autoload.php';
+
+$docgen = Docgen::new(
+    (string)realpath(__DIR__ . '/../'),
+    (string)realpath(__DIR__ . '/../docs/content/docs')
+);
+$docgen->generate();

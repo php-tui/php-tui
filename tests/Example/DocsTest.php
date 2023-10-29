@@ -4,6 +4,8 @@ namespace PhpTui\Tui\Tests\Example;
 
 use Generator;
 use PHPUnit\Framework\TestCase;
+use PhpTui\Term\AnsiParser;
+use PhpTui\Term\Painter\StringPainter;
 use RuntimeException;
 
 class DocsTest extends TestCase
@@ -25,8 +27,8 @@ class DocsTest extends TestCase
             pipes: $pipes,
             cwd: __DIR__ . '/../../',
             env_vars: [
-                'LINES' => 5,
-                'COLUMNS' => 10,
+                'LINES' => 20,
+                'COLUMNS' => 50,
             ],
         );
         if (!is_resource($process)) {
@@ -34,12 +36,26 @@ class DocsTest extends TestCase
                 'Could not spawn process'
             ));
         }
-        $output = explode("\n", (string)stream_get_contents($pipes[1]));
+        $output = (string)stream_get_contents($pipes[1]);
         $exitCode = proc_close($process);
-        // TODO: parse the output and dump it somewhere to be used in the docs
         self::assertEquals(0, $exitCode);
 
+        $actions = AnsiParser::parseString($output, throw: false);
+
+        $painter = new StringPainter();
+        $painter->paint($actions);
+        $output = $painter->toString();
+
+        $snapshot = substr($path, 0, -3) . 'snapshot';
+        if (!file_exists($snapshot) || getenv('SNAPSHOT_APPROVE')) {
+            file_put_contents($snapshot, $output);
+            return;
+        }
+        $existing = file_get_contents($snapshot);
+        self::assertEquals($output, $existing);
+
     }
+
     /**
      * @return Generator<array{string}>
      */

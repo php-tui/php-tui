@@ -13,7 +13,7 @@ use PhpTui\Tui\Widget\ItemList\ListItem;
 use PhpTui\Tui\Widget\ItemList\ItemListState;
 
 /**
- * Port of the Ratatui List - which is a reserved word in PHP
+ * The ItemList widget allows you to list and highlight items.
  */
 class ItemList implements Widget
 {
@@ -145,6 +145,12 @@ class ItemList implements Widget
         return $this;
     }
 
+    public function highlightSymbol(string $symbol): self
+    {
+        $this->highlightSymbol = $symbol;
+        return $this;
+    }
+
     /**
      * @return array{int,int}
      */
@@ -182,6 +188,5 @@ class ItemList implements Widget
         }
 
         return [$start, $end];
-
     }
 }
