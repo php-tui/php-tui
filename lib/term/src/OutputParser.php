@@ -2,6 +2,8 @@
 
 namespace PhpTui\Term;
 
+use PhpTui\Term\Action\PrintString;
+
 /**
  * Parse ANSI escape sequences (back) to painter actions.
  */
@@ -28,7 +30,29 @@ final class OutputParser
     {
         $actions = $this->actions;
         $this->actions = [];
-        return $actions;
+        $strings = [];
+
+        // compress strings
+        $newActions = [];
+        foreach ($actions as $action) {
+            if ($action instanceof PrintString) {
+                $strings[] = $action;
+                continue;
+            }
+            if ($strings) {
+                $newActions[] = Actions::printString(
+                    implode('', array_map(fn (PrintString $s) => $s->string, $strings))
+                );
+                $strings = [];
+            }
+            $newActions[] = $action;
+        }
+        if ($strings) {
+            $newActions[] = Actions::printString(
+                implode('', array_map(fn (PrintString $s) => $s->string, $strings))
+            );
+        }
+        return $newActions;
     }
 
     public function advance(string $line, bool $more): void

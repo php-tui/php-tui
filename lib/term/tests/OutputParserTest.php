@@ -99,6 +99,16 @@ class OutputParserTest extends TestCase
                 Actions::reset(),
             ],
         ];
+
+        yield 'text' => [
+            ["\033[0mHello World\033[2;3HGood"],
+            [
+                Actions::reset(),
+                Actions::printString('Hello World'),
+                Actions::moveCursor(2,3),
+                Actions::printString('Good'),
+            ],
+        ];
     }
 }
 
