@@ -130,7 +130,7 @@ final class OutputParser
     /**
      * @param string[] $buffer
      */
-    private function parseGraphicsMode(array $buffer): ?Action
+    private function parseGraphicsMode(array $buffer): Action
     {
         $string = implode('', array_slice($buffer, 2, -1));
         $parts = explode(';', $string);
