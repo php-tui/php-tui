@@ -288,29 +288,29 @@ final class Table implements Widget
         $start = $end = $offset;
         $height = 0;
         foreach (array_slice($this->rows, $start) as $row) {
-            if ($height + $row->height() > $maxHeight) {
+            if ($height + $row->height > $maxHeight) {
                 break;
             }
-            $height += $row->height();
+            $height += $row->height;
             $end += 1;
         }
 
         if ($this->state->selected !== null) {
             $selected = min(count($this->rows) - 1, $this->state->selected ?? 0);
             while ($selected >= $end) {
-                $height = $height += $this->rows[$end]->height();
+                $height = $height += $this->rows[$end]->height;
                 $end += 1;
                 while ($height > $maxHeight) {
-                    $height = max(0, $height - $this->rows[$start]->height());
+                    $height = max(0, $height - $this->rows[$start]->height);
                     $start += 1;
                 }
             }
             while ($selected < $start) {
                 $start -= 1;
-                $height = $height += $this->rows[$start]->height();
+                $height = $height += $this->rows[$start]->height;
                 while ($height > $maxHeight) {
                     $end -= 1;
-                    $height = max(0, $height - $this->rows[$end]->height());
+                    $height = max(0, $height - $this->rows[$end]->height);
                 }
             }
         }
