@@ -6,6 +6,9 @@ use PhpTui\Term\Action\PrintString;
 
 /**
  * Parse ANSI escape sequences (back) to painter actions.
+ *
+ * Note this is primarily only intended to support ANSI escape sequences
+ * emitted by this library (i.e. the Painter actions).
  */
 final class OutputParser
 {
