@@ -176,11 +176,11 @@ class EventParserTest extends TestCase
         ///
         /// `KeyCode::Char('c')` represents `c` character; etc.
         yield 'Char' => [
-            "a",
+            'a',
             CharKeyEvent::new('a'),
         ];
         yield 'Uppercase Char' => [
-            "A",
+            'A',
             CharKeyEvent::new('A', KeyModifiers::SHIFT),
         ];
     }
@@ -234,7 +234,7 @@ class EventParserTest extends TestCase
     {
         /// Shift + Tab key.
         yield 'BackTab' => [
-            "special key code",
+            'special key code',
             CodedKeyEvent::new(KeyCode::BackTab),
         ];
     }
