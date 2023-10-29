@@ -21,5 +21,16 @@ composer require phptui/php-tui
 
 Now create the file `map.php` with the following content:
 
-{{% include file="/data/example/getting-started/map.php" language="php" %}}
+{{% codeInclude file="/data/example/docs/getting-started/map.php" language="php" %}}
+
+Execute the script:
+
+```
+$ php map.php
+```
+
+And you should see the following:
+
+{{% terminal file="/data/example/docs/getting-started/map.snapshot" %}}
+
 

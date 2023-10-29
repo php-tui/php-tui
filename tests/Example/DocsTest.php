@@ -48,7 +48,7 @@ class DocsTest extends TestCase
         $output = $painter->toString();
 
         $snapshot = substr($path, 0, -3) . 'snapshot';
-        if (!file_exists($snapshot)) {
+        if (!file_exists($snapshot) || getenv('SNAPSHOT_APPROVE')) {
             file_put_contents($snapshot, $output);
             return;
         }
