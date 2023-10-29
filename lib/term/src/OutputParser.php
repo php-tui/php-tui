@@ -149,6 +149,7 @@ final class OutputParser
         return match ($parts[0]) {
             '48' => Actions::setRgbBackgroundColor(...Colors256::indexToRgb(intval($parts[2]))),
             '38' => Actions::setRgbForegroundColor(...Colors256::indexToRgb(intval($parts[2]))),
+            '0' => Actions::reset(),
             default => throw new ParseError(sprintf('Could not parse graphics mode: %s', json_encode(implode('', $buffer)))),
         };
     }
@@ -206,13 +207,13 @@ final class OutputParser
     /**
      * @param string[] $buffer
      */
-    private function parseCursorPosition(array $buffer): ?Action
+    private function parseCursorPosition(array $buffer): Action
     {
         $string = implode('', array_slice($buffer, 2, -1));
         $parts = explode(';', $string);
         if (count($parts) !== 2) {
             throw new ParseError(sprintf('Could not parse cursor position from: "%s"', $string));
         }
-        return Actions::moveCursor($parts[0], $parts[1]);
+        return Actions::moveCursor(intval($parts[0]), intval($parts[1]));
     }
 }
