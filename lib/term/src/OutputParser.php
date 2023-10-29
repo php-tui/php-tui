@@ -94,6 +94,7 @@ final class OutputParser
 
         return match ($buffer[2]) {
             '0','1','2','3','4','5','6','7','8','9' => $this->parseCsiSeq($buffer),
+            '?' => $this->parsePrivateModes($buffer),
             default => throw new ParseError(sprintf('Could not parse CSI sequence: %s', json_encode(implode('', $buffer)))),
         };
 
@@ -148,6 +149,42 @@ final class OutputParser
             '48' => Actions::setRgbBackgroundColor(...Colors256::indexToRgb(intval($parts[2]))),
             '38' => Actions::setRgbForegroundColor(...Colors256::indexToRgb(intval($parts[2]))),
             default => throw new ParseError(sprintf('Could not parse graphics mode: %s', json_encode(implode('', $buffer)))),
+        };
+    }
+
+    /**
+     * @param string[] $buffer
+     */
+    private function parsePrivateModes(array $buffer): ?Action
+    {
+        $last = $buffer[array_key_last($buffer)];
+        if (count($buffer) === 3) {
+            return null;
+        }
+        return match ($buffer[3]) {
+            '2' => $this->parsePrivateModes2($buffer),
+            default => throw new ParseError(sprintf('Could not parse graphics mode: %s', json_encode(implode('', $buffer)))),
+        };
+    }
+
+    /**
+     * @param string[] $buffer
+     */
+    private function parsePrivateModes2(array $buffer): ?Action
+    {
+        if (count($buffer) === 4) {
+            return null;
+        }
+        if (count($buffer) === 5) {
+            return null;
+        }
+        return match ($buffer[4]) {
+            '5' => match ($buffer[5]) {
+                'l' => Actions::cursorHide(),
+                'h' => Actions::cursorShow(),
+                default => throw ParseError::couldNotParseBuffer($buffer),
+            },
+            default => throw ParseError::couldNotParseBuffer($buffer),
         };
     }
 }

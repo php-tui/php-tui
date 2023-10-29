@@ -18,4 +18,15 @@ class ParseError extends RuntimeException
             json_encode(implode('', $buffer))
         ));
     }
+
+    /**
+     * @param string[] $buffer
+     */
+    public static function couldNotParseBuffer(array $buffer): self
+    {
+        return new self(sprintf(
+            'Could not parse graphics mode: %s',
+            json_encode(implode('', $buffer))
+        ));
+    }
 }
