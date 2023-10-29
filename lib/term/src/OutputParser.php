@@ -163,6 +163,7 @@ final class OutputParser
         }
         return match ($buffer[3]) {
             '2' => $this->parsePrivateModes2($buffer),
+            '1' => $this->parsePrivateModes2($buffer),
             default => throw new ParseError(sprintf('Could not parse graphics mode: %s', json_encode(implode('', $buffer)))),
         };
     }
@@ -184,7 +185,20 @@ final class OutputParser
                 'h' => Actions::cursorShow(),
                 default => throw ParseError::couldNotParseBuffer($buffer),
             },
-            default => throw ParseError::couldNotParseBuffer($buffer),
+            '0' => match ($buffer[5]) {
+                '4' => (function () use ($buffer) {
+                    if (count($buffer) === 6 || count($buffer) === 7) {
+                        return null;
+                    }
+                    return match ($buffer[7]) {
+                        'h' => Actions::alternateScreenEnable(),
+                        'l' => Actions::alternateScreenDisable(),
+                        default => throw ParseError::couldNotParseOffset($buffer, 7),
+                    };
+                })(),
+                default => throw ParseError::couldNotParseOffset($buffer, 5),
+            },
+            default => throw ParseError::couldNotParseOffset($buffer, 4),
         };
     }
 }
