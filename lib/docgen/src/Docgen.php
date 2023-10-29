@@ -5,6 +5,7 @@ namespace PhpTui\Docgen;
 use Generator;
 use PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocNode;
 use PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTextNode;
+use PHPStan\PhpDocParser\Ast\PhpDoc\VarTagValueNode;
 use PHPStan\PhpDocParser\Lexer\Lexer;
 use PHPStan\PhpDocParser\Parser\ConstExprParser;
 use PHPStan\PhpDocParser\Parser\PhpDocParser;
@@ -13,6 +14,8 @@ use PHPStan\PhpDocParser\Parser\TypeParser;
 use PhpTui\Tui\Model\Widget;
 use Roave\BetterReflection\BetterReflection;
 use Roave\BetterReflection\Reflection\ReflectionClass;
+use Roave\BetterReflection\Reflection\ReflectionParameter;
+use Roave\BetterReflection\Reflection\ReflectionProperty;
 use Roave\BetterReflection\Reflector\DefaultReflector;
 use Roave\BetterReflection\SourceLocator\SourceStubber\ReflectionSourceStubber;
 use Roave\BetterReflection\SourceLocator\Type\AggregateSourceLocator;
@@ -42,13 +45,34 @@ final class Docgen
         foreach ($this->classes(Widget::class, 'src/**/*.php') as $widget) {
             $node = $this->parsePhpDoc($widget->getDocComment());
             $this->writeTo(sprintf(
-                'widgets/%s.md',
+                'reference/widgets/%s.md',
                 $widget->getShortName()
             ), $this->renderWidget(new WidgetDoc(
                 name: lcfirst($widget->getShortName()),
                 className: $widget->getName(),
                 description: $this->description($node),
-                params: []
+                params: array_values(array_filter(array_map(function (ReflectionProperty $prop): false|WidgetParam {
+                    if (false === $prop->isPromoted()) {
+                        return false;
+                    }
+                    $phpType = $prop->getType() ? $prop->getType()->__toString() : '';
+                    $phpDoc = $this->parsePhpDoc($prop->getDocComment());
+                    $type = null;
+                    if ($phpDoc) {
+                        $type = implode(
+                            '|',
+                            array_map(
+                                fn (VarTagValueNode $node) => $node->__toString(),
+                                $phpDoc->getVarTagValues()
+                            )
+                        );
+                    }
+                    return new WidgetParam(
+                        type: $type ?: $phpType,
+                        name: $prop->getName(),
+                        description: $this->description($phpDoc),
+                    );
+                }, $widget->getProperties()))),
             )));
         }
     }
@@ -126,16 +150,37 @@ final class Docgen
                 $text[] = $child->text;
             }
         }
-        return implode("\n", $text);
+        return str_replace("\n", "", implode(" ", $text));
     }
 
     private function renderWidget(WidgetDoc $widgetDoc): string
     {
-        return implode("\n", [
+        $doc = [
             sprintf('## %s', ucfirst($widgetDoc->name)),
             '',
             $widgetDoc->description,
-            '## Example'.
+        ];
+        if ($widgetDoc->params) {
+            $doc = array_merge($doc, [
+            '### Parameters',
+            '',
+            'Configure the widget using the builder methods named as follows:',
+            '',
+            '| Name | Type | Description |',
+            '| --- | --- | --- |',
+            ]);
+            foreach ($widgetDoc->params as $param) {
+                $doc[] = sprintf(
+                    '| **%s** | `%s` | %s |',
+                    $param->name,
+                    str_replace('|', '\|', $param->type),
+                    $param->description
+                );
+            }
+        }
+
+        $doc = array_merge($doc, [
+            '### Example'.
             '',
             'The following code example:',
             '',
@@ -145,6 +190,7 @@ final class Docgen
             '',
             sprintf('{{%% terminal file="/data/example/docs/widget/%s.snapshot" %%}}', $widgetDoc->name)
         ]);
+        return implode("\n", $doc);
 
     }
 
@@ -154,7 +200,8 @@ final class Docgen
         $res = file_put_contents($path, $content);
         if (false === $res) {
             throw new RuntimeException(sprintf(
-                'Could not write doc file "%s"', $path
+                'Could not write doc file "%s"',
+                $path
             ));
         }
     }
