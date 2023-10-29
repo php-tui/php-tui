@@ -7,9 +7,9 @@ use PHPUnit\Framework\TestCase;
 use PhpTui\Term\Action;
 use PhpTui\Term\Actions;
 use PhpTui\Term\Colors;
-use PhpTui\Term\OutputParser;
+use PhpTui\Term\AnsiParser;
 
-class OutputParserTest extends TestCase
+class AnsiParserTest extends TestCase
 {
     /**
      * @param Action[] $expected
@@ -18,7 +18,7 @@ class OutputParserTest extends TestCase
      */
     public function testParse(array $chunks, array $expected): void
     {
-        $parser = new OutputParser(throw: true);
+        $parser = new AnsiParser(throw: true);
         foreach ($chunks as $i => $line) {
             $parser->advance($line, $i === count($chunks) - 1);
         }

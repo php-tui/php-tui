@@ -10,7 +10,7 @@ use PhpTui\Term\Action\PrintString;
  * Note this is primarily only intended to support ANSI escape sequences
  * emitted by this library (i.e. the Painter actions).
  */
-final class OutputParser
+final class AnsiParser
 {
     /**
      * @var string[]
