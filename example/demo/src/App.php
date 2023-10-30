@@ -11,6 +11,7 @@ use PhpTui\Tui\Example\Demo\Page\CanvasPage;
 use PhpTui\Tui\Example\Demo\Page\ChartPage;
 use PhpTui\Tui\Example\Demo\Page\EventsPage;
 use PhpTui\Tui\Example\Demo\Page\ItemListPage;
+use PhpTui\Tui\Example\Demo\Page\NyanPage;
 use PhpTui\Tui\Example\Demo\Page\TablePage;
 use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Buffer;
@@ -70,6 +71,7 @@ final class App
                 ActivePage::List => new ItemListPage(),
                 ActivePage::Table => new TablePage(),
                 ActivePage::Blocks => new BlocksPage(),
+                ActivePage::Nyan => new NyanPage(),
             };
         }
 
@@ -118,6 +120,9 @@ final class App
                     if ($event->char === '6') {
                         $this->activePage = ActivePage::Blocks;
                     }
+                    if ($event->char === '7') {
+                        $this->activePage = ActivePage::Nyan;
+                    }
                 }
                 $this->activePage()->handle($event);
             }
@@ -129,7 +134,7 @@ final class App
 
             // sleep for 10ms - note that it's encouraged to implement apps
             // using an async library such as Amp or React
-            usleep(10_000);
+            usleep(50_000);
         }
 
         $this->terminal->disableRawMode();
@@ -179,6 +184,8 @@ final class App
                         Span::fromString('table '),
                         Span::styled('[6]', Style::default()->fg(AnsiColor::Green)),
                         Span::fromString('blocks '),
+                        Span::styled('[7]', Style::default()->fg(AnsiColor::Green)),
+                        Span::fromString('nyan '),
                     ])))
                 )
         ;

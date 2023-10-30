@@ -49,6 +49,9 @@ final class CanvasContext
         );
     }
 
+    /**
+     * Draw any object that may implement the Shape interface
+     */
     public function draw(Shape $shape): void
     {
         $this->dirty = true;
@@ -69,7 +72,11 @@ final class CanvasContext
         $this->labels->add(new Label(FloatPosition::at($x, $y), $line));
     }
 
-    private function saveLayer(): void
+    /** 
+     * Save the existing state of the grid as a layer to be rendered and reset the grid to its
+     * initial state for the next layer.
+     */
+    public function saveLayer(): void
     {
         $this->layers->add($this->grid->save());
         $this->grid->reset();

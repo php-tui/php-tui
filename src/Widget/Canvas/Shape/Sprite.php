@@ -19,9 +19,10 @@ class Sprite implements Shape
     public function __construct(
         private array $rows,
         private Color $color,
-        private FloatPosition $position,
+        public  FloatPosition $position,
         private string $alphaChar = ' ',
         private float $xScale = 1.0,
+        private int $density = 1,
         private float $yScale = 1.0,
     ) {
     }
@@ -31,15 +32,16 @@ class Sprite implements Shape
         $maxX = max(...array_map(fn (string $row) => mb_strlen($row), $this->rows));
         foreach (array_reverse($this->rows) as $y => $row) {
             $chars = mb_str_split($row);
-            for ($x = 0; $x < $maxX; $x++) {
-                if (!isset($chars[$x])) {
-                    $chars[$x] = $this->alphaChar;
+            for ($x = 1; $x < $maxX; $x+=1/$this->density) {
+                $intX = intval(floor($x));
+                if (!isset($chars[$intX])) {
+                    $chars[$intX] = $this->alphaChar;
                 }
-                if ($chars[$x] === $this->alphaChar) {
+                if ($chars[$intX] === $this->alphaChar) {
                     continue;
                 }
                 $point = $painter->getPoint(FloatPosition::at(
-                    1 + $this->position->x + $x * $this->xScale,
+                    $this->position->x + $x * $this->xScale,
                     $this->position->y + $y * $this->yScale,
                 ));
                 if (null === $point) {
