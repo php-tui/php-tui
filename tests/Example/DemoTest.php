@@ -89,6 +89,17 @@ class DemoTest extends TestCase
         $this->assertSnapshot(__METHOD__, $backend);
     }
 
+    public function testColors(): void
+    {
+        $backend = $this->execute(
+            CharKeyEvent::new('8'),
+            null,
+            CharKeyEvent::new('q'),
+        );
+        $this->assertSnapshot(__METHOD__, $backend);
+    }
+
+
     private function execute(?Event ...$events): DummyBackend
     {
         $terminal = Terminal::new(

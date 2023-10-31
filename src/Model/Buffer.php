@@ -193,4 +193,24 @@ final class Buffer implements Countable
 
         return $this->content[$index];
     }
+
+    /**
+     * Insert the contents of the given buffer at the given position.
+     */
+    public function putBuffer(Position $position, Buffer $buffer): void
+    {
+        $bArea = $buffer->area();
+
+        foreach ($buffer->content as $bi => $cell) {
+            $y = $position->y + intval(floor($bi / $bArea->width));
+            $x = $position->x + intval($bi % $bArea->width);
+            if ($y > $this->area()->height) {
+                continue;
+            }
+            if ($x > $this->area()->width) {
+                continue;
+            }
+            $this->content[Position::at($x, $y)->toIndex($this->area())] = $cell;
+        }
+    }
 }
