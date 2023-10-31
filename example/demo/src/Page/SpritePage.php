@@ -7,6 +7,7 @@ use PhpTui\Tui\Example\Demo\Component;
 use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\AxisBounds;
 use PhpTui\Tui\Model\Marker;
+use PhpTui\Tui\Model\RgbColor;
 use PhpTui\Tui\Model\Widget\FloatPosition;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Widget\Canvas;
@@ -75,6 +76,32 @@ class SpritePage implements Component
                 $context->draw($this->points);
                 $context->saveLayer();
                 $context->draw($this->elephant);
+                $context->saveLayer();
+
+                $elephant2 = clone $this->elephant;
+                $elephant2->xScale = $elephant2->xScale / 2;
+                $elephant2->yScale = $elephant2->yScale / 2;
+                $elephant2->position->change(
+                    fn (float $x, float $y) => [
+                        $x + 40,
+                        10 + 1 * (sin(0.25 * ($this->ticker * 0.5)) * self::HEIGHT / 3)
+                    ]
+                );
+                $elephant2->color = RgbColor::fromHsv(100, 100, 100);
+                $context->draw($elephant2);
+                $context->saveLayer();
+
+                $elephant3 = clone $elephant2;
+                $elephant3->xScale = $elephant3->xScale / 2;
+                $elephant3->yScale = $elephant3->yScale / 2;
+                $elephant3->position->change(
+                    fn (float $x, float $y) => [
+                        $x + 25,
+                        10 + 1 * (sin(0.25 * ($this->ticker * 0.25)) * self::HEIGHT)
+                    ]
+                );
+                $elephant3->color = RgbColor::fromHsv(10, 100, 100);
+                $context->draw($elephant3);
                 $context->saveLayer();
             });
     }

@@ -18,12 +18,12 @@ class Sprite implements Shape
      */
     public function __construct(
         private array $rows,
-        private Color $color,
+        public Color $color,
         public  FloatPosition $position,
         private string $alphaChar = ' ',
-        private float $xScale = 1.0,
+        public float $xScale = 1.0,
         private int $density = 1,
-        private float $yScale = 1.0,
+        public float $yScale = 1.0,
     ) {
     }
 
