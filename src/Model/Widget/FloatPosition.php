@@ -2,7 +2,9 @@
 
 namespace PhpTui\Tui\Model\Widget;
 
+use Closure;
 use PhpTui\Tui\Model\AxisBounds;
+use RuntimeException;
 use Stringable;
 
 final class FloatPosition implements Stringable
@@ -30,5 +32,24 @@ final class FloatPosition implements Stringable
     {
         $this->x = $x;
         $this->y = $y;
+    }
+
+    /**
+     * Mutate the position with a closure which is passed the current X and Y coordinates.
+     * @param Closure(float,float):array{float,float} $closure
+     */
+    public function change(Closure $closure): void
+    {
+        $new = $closure($this->x, $this->y);
+        if (!is_array($new)) {
+            throw new RuntimeException(sprintf('Change closure must return an array, got: %s', gettype($new)));
+        }
+        /** @phpstan-ignore-next-line runtime check */
+        if (count($new) !== 2) {
+            throw new RuntimeException(sprintf('Change closure must return a tuple of two elements ([$x, $y]), got %d', count($new)));
+        }
+
+        $this->x = $new[0];
+        $this->y = $new[1];
     }
 }
