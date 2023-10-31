@@ -17,7 +17,7 @@ class BdfParserTest extends TestCase
         
         self::assertEquals($font->metadata, new BdfMetadata(
             version: 2.1,
-            name: 'test font',
+            name: '"test font"',
             pointSize: 16,
             resolution: new BdfSize(75, 75),
             boundingBox: new BdfBoundingBox(
