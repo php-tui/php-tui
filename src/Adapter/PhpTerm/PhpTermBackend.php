@@ -2,6 +2,11 @@
 
 namespace PhpTui\Tui\Adapter\PhpTerm;
 
+use PhpTui\Term\Action;
+use PhpTui\Term\Action\SetBackgroundColor;
+use PhpTui\Term\Action\SetForegroundColor;
+use PhpTui\Term\Action\SetRgbBackgroundColor;
+use PhpTui\Term\Action\SetRgbForegroundColor;
 use PhpTui\Term\Actions;
 use PhpTui\Term\ClearType as PhpTuiClearType;
 use PhpTui\Term\Colors;
@@ -15,6 +20,7 @@ use PhpTui\Tui\Model\ClearType;
 use PhpTui\Tui\Model\Color;
 use PhpTui\Tui\Model\Modifier;
 use PhpTui\Tui\Model\Modifiers;
+use PhpTui\Tui\Model\RgbColor;
 use RuntimeException;
 
 class PhpTermBackend implements Backend
@@ -63,12 +69,12 @@ class PhpTermBackend implements Backend
             }
 
             if ($update->cell->fg !== $fg) {
-                $this->terminal->queue(Actions::setForegroundColor($this->resolveColor($update->cell->fg)));
+                $this->terminal->queue($this->setForegroundColor($update->cell->fg));
                 $fg = $update->cell->fg;
             }
 
             if ($update->cell->bg !== $bg) {
-                $this->terminal->queue(Actions::setBackgroundColor($this->resolveColor($update->cell->bg)));
+                $this->terminal->queue($this->setBackgroundColor($update->cell->bg));
                 $bg = $update->cell->bg;
             }
             $this->terminal->queue(Actions::printString($update->cell->char));
@@ -200,5 +206,28 @@ class PhpTermBackend implements Backend
         if ($added->contains(Modifier::CrossedOut)) {
             $this->terminal->queue(Actions::strike(true));
         }
+    }
+
+    private function setForegroundColor(Color $color): Action
+    {
+        if ($color instanceof AnsiColor) {
+            return new SetForegroundColor($this->resolveColor($color));
+        }
+        if ($color instanceof RgbColor) {
+            return new SetRgbForegroundColor($color->r, $color->g, $color->b);
+        }
+
+        throw new RuntimeException(sprintf('Do not know how to set color of type "%s"', $color::class));
+    }
+
+    private function setBackgroundColor(Color $color): Action
+    {
+        if ($color instanceof AnsiColor) {
+            return new SetBackgroundColor($this->resolveColor($color));
+        }
+        if ($color instanceof RgbColor) {
+            return new SetRgbBackgroundColor($color->r, $color->g, $color->b);
+        }
+        throw new RuntimeException(sprintf('Do not know how to set color of type "%s"', $color::class));
     }
 }

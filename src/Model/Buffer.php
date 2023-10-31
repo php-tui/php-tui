@@ -131,6 +131,9 @@ final class Buffer implements Countable
             min($width, count($this->content))
         );
         foreach ($chars as $char) {
+            if ($index >= count($this->content)) {
+                break;
+            }
             $this->content[$index]->setChar($char);
             $this->content[$index]->setStyle($style);
             $index++;
