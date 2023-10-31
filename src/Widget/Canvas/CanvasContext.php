@@ -72,7 +72,7 @@ final class CanvasContext
         $this->labels->add(new Label(FloatPosition::at($x, $y), $line));
     }
 
-    /** 
+    /**
      * Save the existing state of the grid as a layer to be rendered and reset the grid to its
      * initial state for the next layer.
      */

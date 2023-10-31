@@ -7,9 +7,7 @@ use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\AxisBounds;
 use PhpTui\Tui\Model\Buffer;
 use PhpTui\Tui\Model\Marker;
-use PhpTui\Tui\Model\Position;
 use PhpTui\Tui\Model\Widget\FloatPosition;
-use PhpTui\Tui\Tests\Model\Widget\FloatPositionTest;
 use PhpTui\Tui\Widget\Canvas;
 use PhpTui\Tui\Widget\Canvas\CanvasContext;
 use Generator;
@@ -51,7 +49,7 @@ class SpriteTest extends TestCase
                 alphaChar: ' ',
                 xScale: 1,
                 yScale: 1,
-                position: FloatPosition::at(0,0)
+                position: FloatPosition::at(0, 0)
             ),
             Marker::Block,
             [
@@ -85,7 +83,7 @@ class SpriteTest extends TestCase
                 alphaChar: ' ',
                 xScale: 1,
                 yScale: 1,
-                position: FloatPosition::at(0,0)
+                position: FloatPosition::at(0, 0)
             ),
             Marker::Block,
             [
@@ -119,7 +117,7 @@ class SpriteTest extends TestCase
                 alphaChar: ' ',
                 xScale: 0.5,
                 yScale: 0.5,
-                position: FloatPosition::at(4,2)
+                position: FloatPosition::at(4, 2)
             ),
             Marker::Braille,
             [
@@ -154,7 +152,7 @@ class SpriteTest extends TestCase
                 alphaChar: '█',
                 xScale: 1,
                 yScale: 1,
-                position: FloatPosition::at(0,0)
+                position: FloatPosition::at(0, 0)
             ),
             Marker::Block,
             [
