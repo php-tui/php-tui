@@ -26,22 +26,47 @@ class SpriteTest extends TestCase
     {
         $canvas = Canvas::default()
             ->marker($marker)
-            ->xBounds(AxisBounds::new(0, 36))
+            ->xBounds(AxisBounds::new(0, 34))
             ->yBounds(AxisBounds::new(0, 10))
             ->paint(function (CanvasContext $context) use ($sprite): void {
                 $context->draw($sprite);
             });
-        $area = Area::fromDimensions(36, 10);
+        $area = Area::fromDimensions(34, 10);
         $buffer = Buffer::empty($area);
         $canvas->render($area, $buffer);
         self::assertEquals(implode("\n", $expected), $buffer->toString());
     }
 
     /**
-     * @return Generator<array{Sprite,array<int,string>}>
+     * @return Generator<array{Sprite,Marker,array<int,string>}>
      */
     public static function provideSprite(): Generator
     {
+        yield 'block line' => [
+            new Sprite(
+                rows: [
+                    '█████████████████████████████████',
+                ],
+                color: AnsiColor::Green,
+                alphaChar: ' ',
+                xScale: 1,
+                yScale: 1,
+                position: FloatPosition::at(0,0)
+            ),
+            Marker::Block,
+            [
+                    '                                  ',
+                    '                                  ',
+                    '                                  ',
+                    '                                  ',
+                    '                                  ',
+                    '                                  ',
+                    '                                  ',
+                    '                                  ',
+                    '                                  ',
+                    '█████████████████████████████████ ',
+            ]
+        ];
         yield 'identity' => [
             new Sprite(
                 rows: [
@@ -64,16 +89,16 @@ class SpriteTest extends TestCase
             ),
             Marker::Block,
             [
-                '       █████                        ',
-                '   ████████████████████             ',
-                ' █████████████████████████          ',
-                '█████ ███████████████████████       ',
-                '█████████████████████████████████   ',
-                '█████████████████████████████   ██  ',
-                '███  ████████████████████████       ',
-                '███  ███████████████████████        ',
-                '███  ███████████████████████        ',
-                '███  ████ ████  ████  ██████        ',
+                    '       █████                      ',
+                    '   ████████████████████           ',
+                    ' █████████████████████████        ',
+                    '█████ ███████████████████████     ',
+                    '█████████████████████████████████ ',
+                    '█████████████████████████████   ██',
+                    '███  ████████████████████████     ',
+                    '███  ███████████████████████      ',
+                    '███  ███████████████████████      ',
+                    '███  ████ ████  ████  ██████      ',
             ]
         ];
         yield 'scale to 50%' => [
@@ -99,16 +124,16 @@ class SpriteTest extends TestCase
             Marker::Braille,
             [
 
-                '                                    ',
-                '                                    ',
-                '                                    ',
-                '      ⣀⣀⣒⣒⣂⣀⣀⣀⣀⣀                    ',
-                '    ⢀⣒⣒⢒⣒⣒⣒⣒⣒⣒⣒⣒⣒⣂⣀                 ',
-                '    ⢐⣒⣒⣒⣒⣒⣒⣒⣒⣒⣒⣒⣒⣒⣒⠒⢒⡀              ',
-                '    ⢐⣒ ⣒⣒⣒⣒⣒⣒⣒⣒⣒⣒⣒⡒                 ',
-                '    ⢐⣒ ⣒⣒⢒⣒⡒⢒⣒⡒⢒⣒⣒⡂                 ',
-                '                                    ',
-                '                                    ',
+                '                                  ',
+                '                                  ',
+                '                                  ',
+                '      ⣀⣀⣒⣒⣂⣀⣀⣀⣀⣀                  ',
+                '    ⢀⣒⣒⢒⣒⣒⣒⣒⣒⣒⣒⣒⣒⣂⣀               ',
+                '    ⢐⣒⣒⣒⣒⣒⣒⣒⣒⣒⣒⣒⣒⣒⣒⠒⢒⡀            ',
+                '    ⢐⣒ ⣒⣒⣒⣒⣒⣒⣒⣒⣒⣒⣒⡒               ',
+                '    ⢐⣒ ⣒⣒⢒⣒⡒⢒⣒⡒⢒⣒⣒⡂               ',
+                '                                  ',
+                '                                  ',
             ]
         ];
         yield 'change alpha color' => [
@@ -133,16 +158,16 @@ class SpriteTest extends TestCase
             ),
             Marker::Block,
             [
-                '███████     ██████████████████████  ',
-                '███                    ███████████  ',
-                '█                         ████████  ',
-                '     █                       █████  ',
-                '                                 █  ',
-                '                             ███    ',
-                '   ██                        █████  ',
-                '   ██                       ██████  ',
-                '   ██                       ██████  ',
-                '   ██    █    ██    ██      ██████  '
+                '███████     ██████████████████████',
+                '███                    ███████████',
+                '█                         ████████',
+                '     █                       █████',
+                '                                 █',
+                '                             ███  ',
+                '   ██                        █████',
+                '   ██                       ██████',
+                '   ██                       ██████',
+                '   ██    █    ██    ██      ██████'
             ]
         ];
     }

@@ -48,7 +48,7 @@ class Sprite implements Shape
                         continue;
                     }
                     $point = $painter->getPoint(FloatPosition::at(
-                        $this->position->x + $x * $this->xScale,
+                        1 + $this->position->x + $x * $this->xScale,
                         $this->position->y + $y * $this->yScale,
                     ));
                     if (null === $point) {
