@@ -11,7 +11,7 @@ use PhpTui\Tui\Example\Demo\Page\CanvasPage;
 use PhpTui\Tui\Example\Demo\Page\ChartPage;
 use PhpTui\Tui\Example\Demo\Page\EventsPage;
 use PhpTui\Tui\Example\Demo\Page\ItemListPage;
-use PhpTui\Tui\Example\Demo\Page\NyanPage;
+use PhpTui\Tui\Example\Demo\Page\SpritePage;
 use PhpTui\Tui\Example\Demo\Page\TablePage;
 use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Buffer;
@@ -71,7 +71,7 @@ final class App
                 ActivePage::List => new ItemListPage(),
                 ActivePage::Table => new TablePage(),
                 ActivePage::Blocks => new BlocksPage(),
-                ActivePage::Nyan => new NyanPage(),
+                ActivePage::Sprite => new SpritePage(),
             };
         }
 
@@ -121,7 +121,7 @@ final class App
                         $this->activePage = ActivePage::Blocks;
                     }
                     if ($event->char === '7') {
-                        $this->activePage = ActivePage::Nyan;
+                        $this->activePage = ActivePage::Sprite;
                     }
                 }
                 $this->activePage()->handle($event);

@@ -48,6 +48,7 @@ class DemoTest extends TestCase
 
     public function testList(): void
     {
+        srand(0);
         $backend = $this->execute(
             CharKeyEvent::new('4'),
             null,
@@ -69,9 +70,19 @@ class DemoTest extends TestCase
 
     public function testBlocks(): void
     {
-        srand(0);
         $backend = $this->execute(
             CharKeyEvent::new('6'),
+            null,
+            CharKeyEvent::new('q'),
+        );
+        $this->assertSnapshot(__METHOD__, $backend);
+    }
+
+    public function testSprite(): void
+    {
+        srand(0);
+        $backend = $this->execute(
+            CharKeyEvent::new('7'),
             null,
             CharKeyEvent::new('q'),
         );

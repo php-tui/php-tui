@@ -1,20 +1,20 @@
 ┌─────────────────────────────────────────────────────────────────────────0 FPS┐
-│[q]quit [1]events [2]canvas [3]chart [4]list [5]table [6]blocks               │
+│[q]quit [1]events [2]canvas [3]chart [4]list [5]table [6]blocks [7]nyan       │
 └──────────────────────────────────────────────────────────────────────────────┘
 ┌Table─────────────────────────────────────────────────────────────────────────┐
+│ INFO   Event1                                                                │
+│ INFO   Event2                                                                │
+│ CRITICAEvent3                                                                │
+│ ERROR  Event4                                                                │
+│ INFO   Event5                                                                │
+│ INFO   Event6                                                                │
+│ WARNINGEvent7                                                                │
+│ INFO   Event8                                                                │
+│ INFO   Event9                                                                │
+│ INFO   Event10                                                               │
+│XCRITICAEvent11                                                               │
+│ INFO   Event12                                                               │
 │ INFO   Event13                                                               │
 │ INFO   Event14                                                               │
 │ INFO   Event15                                                               │
-│ INFO   Event16                                                               │
-│ ERROR  Event17                                                               │
-│ ERROR  Event18                                                               │
-│ INFO   Event19                                                               │
-│ INFO   Event20                                                               │
-│ WARNINGEvent21                                                               │
-│ INFO   Event22                                                               │
-│ INFO   Event23                                                               │
-│ WARNINGEvent24                                                               │
-│ INFO   Event25                                                               │
-│ INFO   Event26                                                               │
-│XINFO   Event1                                                                │
 └──────────────────────────────────────────────────────────────────────────────┘

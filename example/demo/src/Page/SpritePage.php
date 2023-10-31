@@ -6,7 +6,6 @@ use PhpTui\Term\Event;
 use PhpTui\Tui\Example\Demo\Component;
 use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\AxisBounds;
-use PhpTui\Tui\Model\Color;
 use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Model\Widget\FloatPosition;
 use PhpTui\Tui\Model\Widget;
@@ -15,14 +14,15 @@ use PhpTui\Tui\Widget\Canvas\CanvasContext;
 use PhpTui\Tui\Widget\Canvas\Shape\Points;
 use PhpTui\Tui\Widget\Canvas\Shape\Sprite;
 
-class NyanPage implements Component
+class SpritePage implements Component
 {
     const WIDTH = 100;
     const HEIGHT = 30;
 
-
     private Sprite $elephant;
+
     private int $ticker = 0;
+
     /**
      * @var list<array{float,float}>
      */
@@ -88,7 +88,7 @@ class NyanPage implements Component
         $this->ticker++;
         $yDeg = sin(0.25 * ($this->ticker)) * self::HEIGHT;
         $xDeg = sin(0.05 * ($this->ticker)) * (self::WIDTH / 20);
-            ;
+        ;
         $this->elephant->position->update(
             5 + 1 * $xDeg,
             10 + 1 * ($yDeg / 3),
@@ -103,7 +103,7 @@ class NyanPage implements Component
     {
         $points = [];
         for ($i = 0; $i < 100; $i++) {
-            $points[] = [(float)rand(0, self::WIDTH,), (float)rand(0, self::HEIGHT)];
+            $points[] = [(float)rand(0, self::WIDTH, ), (float)rand(0, self::HEIGHT)];
         }
         $this->stars = $points;
 
