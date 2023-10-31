@@ -18,7 +18,6 @@ class ColorsPage implements Component
     {
         return RawWidget::new(function (Buffer $buffer): void {
             $this->write16Colors($buffer);
-            $this->write256Colors($buffer);
         });
     }
 

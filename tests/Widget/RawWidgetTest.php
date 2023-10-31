@@ -75,7 +75,7 @@ class RawWidgetTest extends TestCase
             Area::fromDimensions(10, 10),
             Block::default()->widget(
                 RawWidget::new(function (Buffer $buffer): void {
-                    $buffer->putSpan(Position::at(0, 0), Span::fromString(str_repeat('Hello',10)), 10);
+                    $buffer->putSpan(Position::at(0, 0), Span::fromString(str_repeat('Hello', 10)), 10);
                 })
             )->padding(Padding::fromPrimitives(1, 1, 1, 1)),
             [
@@ -94,4 +94,3 @@ class RawWidgetTest extends TestCase
         ];
     }
 }
-

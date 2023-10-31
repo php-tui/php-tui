@@ -7,7 +7,6 @@ use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Buffer;
 use PhpTui\Tui\Model\Widget;
 
-
 /**
  * This widget allows you to write directly to the buffer through a closure.
  */
@@ -19,7 +18,8 @@ final class RawWidget implements Widget
          * @var Closure(Buffer $buffer):void
          */
         private Closure $widget
-    ) {}
+    ) {
+    }
 
     /**
      * @param Closure(Buffer $buffer):void $closure
