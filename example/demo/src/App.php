@@ -9,6 +9,7 @@ use PhpTui\Tui\Adapter\PhpTerm\PhpTermBackend;
 use PhpTui\Tui\Example\Demo\Page\BlocksPage;
 use PhpTui\Tui\Example\Demo\Page\CanvasPage;
 use PhpTui\Tui\Example\Demo\Page\ChartPage;
+use PhpTui\Tui\Example\Demo\Page\ColorsPage;
 use PhpTui\Tui\Example\Demo\Page\EventsPage;
 use PhpTui\Tui\Example\Demo\Page\ItemListPage;
 use PhpTui\Tui\Example\Demo\Page\SpritePage;
@@ -72,6 +73,7 @@ final class App
                 ActivePage::Table => new TablePage(),
                 ActivePage::Blocks => new BlocksPage(),
                 ActivePage::Sprite => new SpritePage(),
+                ActivePage::Colors => new ColorsPage(),
             };
         }
 
@@ -122,6 +124,9 @@ final class App
                     }
                     if ($event->char === '7') {
                         $this->activePage = ActivePage::Sprite;
+                    }
+                    if ($event->char === '8') {
+                        $this->activePage = ActivePage::Colors;
                     }
                 }
                 $this->activePage()->handle($event);
@@ -185,7 +190,9 @@ final class App
                         Span::styled('[6]', Style::default()->fg(AnsiColor::Green)),
                         Span::fromString('blocks '),
                         Span::styled('[7]', Style::default()->fg(AnsiColor::Green)),
-                        Span::fromString('nyan '),
+                        Span::fromString('sprites '),
+                        Span::styled('[8]', Style::default()->fg(AnsiColor::Green)),
+                        Span::fromString('colors '),
                     ])))
                 )
         ;

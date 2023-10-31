@@ -11,4 +11,5 @@ enum ActivePage
     case Table;
     case Blocks;
     case Sprite;
+    case Colors;
 }
