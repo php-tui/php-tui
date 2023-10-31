@@ -6,7 +6,8 @@
     "autoload": {
         "psr-4": {
             "PhpTui\\Tui\\": "src/",
-            "PhpTui\\Term\\": "lib/term/src"
+            "PhpTui\\Term\\": "lib/term/src",
+            "PhpTui\\BDF\\": "lib/bdf/src"
         }
     },
     "autoload-dev": {
@@ -14,7 +15,8 @@
             "PhpTui\\Tui\\Tests\\": "tests/",
             "PhpTui\\Tui\\Example\\Demo\\": "example/demo/src",
             "PhpTui\\Term\\Tests\\": "lib/term/tests/",
-            "PhpTui\\Docgen\\": "lib/docgen/src/"
+            "PhpTui\\Docgen\\": "lib/docgen/src/",
+            "PhpTui\\Bdf\\Tests\\": "lib/bdf/tests/"
         }
     },
     "authors": [
