@@ -49,7 +49,7 @@ class NyanPage implements Component
                 '███  ████ ████  ████  ██████ ',
             ],
             color: AnsiColor::Blue,
-            density: 100,
+            density: 4,
             alphaChar: ' ',
             xScale: 1,
             yScale: 1,
