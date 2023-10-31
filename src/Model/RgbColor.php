@@ -138,7 +138,10 @@ class RgbColor implements Color
 
         throw new OutOfBoundsException(sprintf(
             '%s must be in range %d-%d got %d',
-            $context, $min, $max, $value
+            $context,
+            $min,
+            $max,
+            $value
         ));
     }
 }

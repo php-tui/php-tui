@@ -15,9 +15,9 @@ class RgbColorTest extends TestCase
 
     public function testFromHsv(): void
     {
-        self::assertEquals(RgbColor::fromRgb(128,153,26), RgbColor::fromHsv(72, 83, 60));
-        self::assertEquals(RgbColor::fromRgb(0,0,0), RgbColor::fromHsv(360, 100, 100));
-        self::assertEquals(RgbColor::fromRgb(0,0,0), RgbColor::fromHsv(0, 0, 0));
+        self::assertEquals(RgbColor::fromRgb(128, 153, 26), RgbColor::fromHsv(72, 83, 60));
+        self::assertEquals(RgbColor::fromRgb(0, 0, 0), RgbColor::fromHsv(360, 100, 100));
+        self::assertEquals(RgbColor::fromRgb(0, 0, 0), RgbColor::fromHsv(0, 0, 0));
     }
 
     public function testFromOutOfRange(): void
