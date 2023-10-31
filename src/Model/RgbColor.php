@@ -2,11 +2,17 @@
 
 namespace PhpTui\Tui\Model;
 
+use OutOfBoundsException;
+
 class RgbColor implements Color
 {
     private function __construct(public int $r, public int $g, public int $b)
     {
+        self::assertRange('red', 0, 255, $r);
+        self::assertRange('green', 0, 255, $r);
+        self::assertRange('blue', 0, 255, $r);
     }
+
     public static function fromRgb(int $r, int $g, int $b): self
     {
         return new self($r, $g, $b);
@@ -14,6 +20,10 @@ class RgbColor implements Color
 
     public static function fromHsv(int $hue, int $saturation, int $lightness): self
     {
+        self::assertRange('hue', 0, 360, $hue);
+        self::assertRange('saturation', 0, 100, $saturation);
+        self::assertRange('lightness', 0, 100, $lightness);
+        // stolen from: https://gist.github.com/vkbo/2323023
         /*
          **  Converts HSV to RGB values
          ** –––––––––––––––––––––––––––––––––––––––––––––––––––––
@@ -118,5 +128,17 @@ class RgbColor implements Color
     public function toHex(): string
     {
         return sprintf('#%02x%02x%02x', $this->r, $this->g, $this->b);
+    }
+
+    private static function assertRange(string $context, int $min, int $max, int $value): void
+    {
+        if ($value >= $min && $value <= $max) {
+            return;
+        }
+
+        throw new OutOfBoundsException(sprintf(
+            '%s must be in range %d-%d got %d',
+            $context, $min, $max, $value
+        ));
     }
 }
