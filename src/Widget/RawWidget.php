@@ -31,7 +31,7 @@ final class RawWidget implements Widget
 
     public function render(Area $area, Buffer $buffer): void
     {
-        $subBuffer = Buffer::empty($area);
+        $subBuffer = Buffer::empty(Area::fromDimensions($area->width, $area->height));
         ($this->widget)($subBuffer);
         $buffer->putBuffer($area->position, $subBuffer);
     }

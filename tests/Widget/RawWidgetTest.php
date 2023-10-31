@@ -7,6 +7,7 @@ use PhpTui\Tui\Model\Buffer;
 use PhpTui\Tui\Model\Position;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\Widget\Line;
+use PhpTui\Tui\Model\Widget\Span;
 use PhpTui\Tui\Widget\Block;
 use PhpTui\Tui\Widget\Block\Padding;
 use PhpTui\Tui\Widget\RawWidget;
@@ -60,6 +61,27 @@ class RawWidgetTest extends TestCase
                 '          ',
                 ' Hello    ',
                 '          ',
+                '          ',
+                '          ',
+                '          ',
+                '          ',
+                '          ',
+                '          ',
+                '          ',
+            ]
+           ,
+        ];
+        yield 'overflow' => [
+            Area::fromDimensions(10, 10),
+            Block::default()->widget(
+                RawWidget::new(function (Buffer $buffer): void {
+                    $buffer->putSpan(Position::at(0, 0), Span::fromString(str_repeat('Hello',10)), 10);
+                })
+            )->padding(Padding::fromPrimitives(1, 1, 1, 1)),
+            [
+                '          ',
+                ' HelloHel ',
+                ' lo       ',
                 '          ',
                 '          ',
                 '          ',

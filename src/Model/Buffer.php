@@ -200,7 +200,6 @@ final class Buffer implements Countable
     public function putBuffer(Position $position, Buffer $buffer): void
     {
         $bArea = $buffer->area();
-        $start = $position->toIndex($this->area);
 
         foreach ($buffer->content as $bi => $cell) {
             $y = $position->y + intval(floor($bi / $bArea->width));
