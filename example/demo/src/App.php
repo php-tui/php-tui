@@ -132,7 +132,7 @@ final class App
             });
             $this->incFramerate();
 
-            // sleep for 10ms - note that it's encouraged to implement apps
+            // sleep for Xms - note that it's encouraged to implement apps
             // using an async library such as Amp or React
             usleep(50_000);
         }
