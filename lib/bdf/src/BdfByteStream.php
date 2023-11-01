@@ -92,8 +92,72 @@ final class BdfByteStream
         return array_shift($this->bytes);
     }
 
-    private function unshift(string $char): void
+    private function unshift(string $string): void
     {
-        array_unshift($this->bytes, $char);
+        if (strlen($string) === 1) {
+            array_unshift($this->bytes, $string);
+            return;
+        }
+        foreach (array_reverse(str_split($string)) as $char) {
+            array_unshift($this->bytes, $char);
+        }
+    }
+
+    /**
+     * @template T
+     * @param callable(BdfByteStream): BdfResult<mixed> $left
+     * @param callable(BdfByteStream): BdfResult<T> $value
+     * @param callable(BdfByteStream): BdfResult<mixed> $right
+     * @return Closure(BdfResult<T>)
+     */
+    public function delimited(callable $left, callable $value, callable $right): Closure
+    {
+        return function (BdfByteStream $stream) use ($left, $value, $right) {
+            $left = $left($stream);
+            $fail = fn () => BdfResult::failure(null, $stream);
+            if (false === $left->isOk()) {
+                return $fail();
+            }
+            $result = $value($left->rest);
+            $right = $right($result->rest);
+            if (false === $right->isOk()) {
+                return $fail();
+            }
+
+            return $result;
+        };
+
+    }
+
+    /**
+     * @return BdfResult<string>
+     */
+    public function takeUntil(string $target): BdfResult
+    {
+        $targetLen = strlen($target);
+        $stream = $this->clone();
+        $string = '';
+        while (null !== $byte = $stream->shift()) {
+            $string .= $byte;
+            if (strlen($string) < $targetLen) {
+                continue;
+            }
+            if (substr($string, -$targetLen) === $target) {
+                $stream->unshift($target);
+                return BdfResult::ok(substr($string, 0, -$targetLen), $stream);
+            }
+        }
+
+        return BdfResult::failure('', $this);
+    }
+
+    public function count(): int
+    {
+        return count($this->bytes);
+    }
+
+    public function toString(): string
+    {
+        return implode('', $this->bytes);
     }
 }

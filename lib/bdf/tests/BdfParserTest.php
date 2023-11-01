@@ -38,6 +38,7 @@ class BdfParserTest extends TestCase
             SIZE 16 75 75
             FONTBOUNDINGBOX 16 24 0 0
             STARTPROPERTIES 3
+            COMMENT   "foo"
             COPYRIGHT "Copyright123"
             FONT_ASCENT 1
             COMMENT comment
