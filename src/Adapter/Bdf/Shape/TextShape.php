@@ -3,9 +3,7 @@
 namespace PhpTui\Tui\Adapter\Bdf\Shape;
 
 use PhpTui\BDF\BdfFont;
-use PhpTui\Tui\Adapter\Bdf\FontRegistry;
 use PhpTui\Tui\Model\Color;
-use PhpTui\Tui\Model\Position;
 use PhpTui\Tui\Model\Widget\FloatPosition;
 use PhpTui\Tui\Widget\Canvas\Painter;
 use PhpTui\Tui\Widget\Canvas\Shape;
@@ -17,8 +15,7 @@ class TextShape implements Shape
         public readonly string $text,
         private Color $color,
         public readonly FloatPosition $position,
-    )
-    {
+    ) {
     }
 
     public function draw(Painter $painter): void

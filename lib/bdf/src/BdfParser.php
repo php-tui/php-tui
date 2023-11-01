@@ -146,7 +146,7 @@ final class BdfParser
     }
 
     /**
-     * @return list<BdfGlyph>
+     * @return array<int,BdfGlyph>
      */
     private function parseGlyphs(BdfTokenStream $tokens): array
     {
@@ -158,7 +158,7 @@ final class BdfParser
                 // TODO: exception here?
                 break;
             }
-            $glyphs[$glyph->encoding] = $glyph;
+            $glyphs[(int)$glyph->encoding] = $glyph;
         }
 
 

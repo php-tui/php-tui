@@ -9,7 +9,6 @@ use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\AxisBounds;
 use PhpTui\Tui\Model\Buffer;
 use PhpTui\Tui\Model\Marker;
-use PhpTui\Tui\Model\Position;
 use PhpTui\Tui\Model\Widget\FloatPosition;
 use PhpTui\Tui\Widget\Canvas;
 use PhpTui\Tui\Widget\Canvas\CanvasContext;
@@ -59,4 +58,3 @@ class TextShapeTest extends TestCase
         ];
     }
 }
-

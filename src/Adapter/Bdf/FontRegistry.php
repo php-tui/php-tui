@@ -6,14 +6,18 @@ use PhpTui\BDF\BdfFont;
 use PhpTui\BDF\BdfParser;
 use RuntimeException;
 
-class FontRegistry
+/**
+ * The font registry lazily loads fonts from the filesystem.
+ */
+final class FontRegistry
 {
     /**
      * @var array<string,BdfFont>
      */
     private array $loaded = [];
+
     /**
-     * @param array<string,string> $fontMap;
+     * @param array<string,string> $fontMap
      */
     public function __construct(private BdfParser $parser, private array $fontMap = [])
     {
