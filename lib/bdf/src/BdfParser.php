@@ -6,22 +6,28 @@ final class BdfParser
 {
     public function parse(string $string): BdfFont
     {
-        $bytes = BdfByteStream::fromString($string);
-        $version = $this->skipWhitespace($bytes, $this->metadataVersion(...));
+        $stream = BdfByteStream::fromString($string);
+
+        return new BdfFont(
+            metadata: $this->parseMetadata($stream),
+        );
+    }
+
+    private function parseMetadata(BdfByteStream $stream): BdfMetadata
+    {
+        $version = $this->skipWhitespace($stream, $this->metadataVersion(...));
         $name = $this->skipWhitespace($version->rest, $this->metadataName(...));
         $size = $this->skipWhitespace($name->rest, $this->metadataSize(...));
         $boundingBox = $this->skipWhitespace($size->rest, $this->metadataBoundingBox(...));
 
         [$pointSize, $resolution] = $size->value;
 
-        return new BdfFont(
-            metadata: new BdfMetadata(
-                version: $version->value,
-                name: $name->value,
-                pointSize: $pointSize,
-                resolution: $resolution,
-                boundingBox: $boundingBox->value,
-            )
+        return new BdfMetadata(
+            version: $version->value,
+            name: $name->value,
+            pointSize: $pointSize,
+            resolution: $resolution,
+            boundingBox: $boundingBox->value,
         );
     }
     /**
@@ -76,7 +82,7 @@ final class BdfParser
     private function metadataSize(BdfByteStream $stream): BdfResult
     {
         $result = $stream->takeExact('SIZE');
-        $fail = fn () => BdfResult::failure([0,new BdfSize(0,0)], $stream);
+        $fail = fn () => BdfResult::failure([0,new BdfSize(0, 0)], $stream);
         if (false === $result->isOk()) {
             return $fail();
         }
