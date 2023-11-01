@@ -7,14 +7,14 @@ final class BdfParser
     public function parse(string $string): BdfFont
     {
         $bytes = BdfByteStream::fromString($string);
-        $version = $this->skipWhitespace($bytes, $this->metadataVersion(...));
-        $name = $this->skipWhitespace($bytes, $this->metadataName(...));
-        [$pointSize, $res] = $this->skipWhitespace($bytes, $this->metadataSize(...)) ?: [null, null];
-        $boundingBox = $this->skipWhitespace($bytes, $this->metadataBoundingBox(...));
+        $result = $this->skipWhitespace($bytes, $this->metadataVersion(...));
+        $result = $this->skipWhitespace($result->rest, $this->metadataName(...));
+        $result = $this->skipWhitespace($result->rest, $this->metadataSize(...)) ?: [null, null];
+        $result = $this->skipWhitespace($result->rest, $this->metadataBoundingBox(...));
 
         return new BdfFont(
             metadata: new BdfMetadata(
-                version: (float)$version,
+                version: $version->value,
                 name: $name,
                 pointSize: $pointSize,
                 resolution: $res,
@@ -24,26 +24,32 @@ final class BdfParser
     }
     /**
      * @template T
-     * @param callable(BdfByteStream):T $inner
-     * @return T
+     * @param callable(BdfByteStream):?BdfResult<T> $inner
+     * @return BdfResult<T>
      */
-    private function skipWhitespace(BdfByteStream $stream, callable $inner): mixed
+    private function skipWhitespace(BdfByteStream $stream, callable $inner): ?BdfResult
     {
-        $stream->skipWhile(fn (string $char) => (bool)preg_match('{\s}', $char));
-        $result = $inner($stream);
-        $stream->skipWhile(fn (string $char) => (bool)preg_match('{\s}', $char));
+        $result = $stream->skipWhile(fn (string $char) => (bool)preg_match('{\s}', $char));
+        $result = $inner($result->rest);
+        $result->rest->skipWhile(fn (string $char) => (bool)preg_match('{\s}', $char));
         return $result;
     }
 
-    private function metadataVersion(BdfByteStream $stream): ?string
+    /**
+     * @return ?BdfResult<float>
+     */
+    private function metadataVersion(BdfByteStream $stream): ?BdfResult
     {
-        if (null === $stream->takeExact('STARTFONT')) {
+        if (null === $result = $stream->takeExact('STARTFONT')) {
             return null;
         }
-        return $this->skipWhitespace($stream, $this->parseString(...));
+        return $this->skipWhitespace($result->rest, $this->parseFloat(...));
     }
 
-    private function parseString(BdfByteStream $stream): ?string
+    /**
+     * @return ?BdfResult<string>
+     */
+    private function parseString(BdfByteStream $stream): ?BdfResult
     {
         return $stream->takeWhile(fn (string $char) => $char !== "\n" && $char !== "\r");
     }
@@ -94,5 +100,18 @@ final class BdfParser
             size: new BdfSize(intval($parts[0]), intval($parts[1])),
             offset: new BdfCoord(intval($parts[2]), intval($parts[3]))
         );
+    }
+
+    /**
+     * @return ?BdfResult<float>
+     */
+    private function parseFloat(BdfByteStream $stream): ?BdfResult
+    {
+        $result = $this->parseString($stream);
+        if (null === $result || !is_numeric($result->value)) {
+            return null;
+        }
+
+        return new BdfResult((float)$result->value, $result->rest);
     }
 }

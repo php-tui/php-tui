@@ -6,6 +6,9 @@ use Closure;
 
 final class BdfByteStream
 {
+    /**
+     * @param array<int,string> $bytes
+     */
     public function __construct(private array $bytes)
     {
     }
@@ -14,60 +17,83 @@ final class BdfByteStream
     {
         return new self(str_split($string));
     }
-
+    /**
+     * @return void
+     */
     public function match(string $string)
     {
     }
 
     /**
      * @param Closure(string): bool $closure
+     * @return BdfResult<null>
      */
-    public function skipWhile(Closure $closure): void
+    public function skipWhile(Closure $closure): BdfResult
     {
-        while ($this->bytes) {
-            $char = array_shift($this->bytes);
+        $stream = $this->clone();
+        while ($char = $stream->shift()) {
             if (false === $closure($char)) {
-                array_unshift($this->bytes, $char);
-                return;
+                $stream->unshift($char);
+                break;
             }
         }
+        return new BdfResult(
+            null,
+            $stream
+        );
     }
 
-    public function takeExact(string $string): ?string
+    /**
+     * @return ?BdfResult<string>
+     */
+    public function takeExact(string $string): ?BdfResult
     {
         $match = str_split($string);
-        $original = $this->bytes;
+        $stream = $this->clone();
         $i = 0;
-        while ($this->bytes) {
+        while ($byte = $stream->shift()) {
             if (!isset($match[$i])) {
                 break;
             }
-            $byte = array_shift($this->bytes);
             if ($match[$i] !== $byte) {
-                // reset
-                $this->bytes = $original;
                 return null;
             }
             $i++;
         }
-        return $string;
+        return new BdfResult($string, $stream);
     }
 
     /**
      * @param Closure(string): bool $closure
+     * @return BdfResult<string>
      */
-    public function takeWhile(Closure $closure): ?string
+    public function takeWhile(Closure $closure): ?BdfResult
     {
+        $stream = $this->clone();
         $matches = [];
-        while ($this->bytes) {
-            $byte = array_shift($this->bytes);
+        while ($byte = $stream->shift()) {
             if ($closure($byte)) {
                 $matches[] = $byte;
                 continue;
             }
-            array_unshift($this->bytes, $byte);
-            return implode('', $matches);
+            $stream->unshift($byte);
+            return new BdfResult(implode('', $matches), $stream);
         }
         return null;
+    }
+
+    private function clone(): self
+    {
+        return clone $this;
+    }
+
+    private function shift(): ?string
+    {
+        return array_shift($this->bytes);
+    }
+
+    private function unshift(string $char): void
+    {
+        array_unshift($this->bytes, $char);
     }
 }
