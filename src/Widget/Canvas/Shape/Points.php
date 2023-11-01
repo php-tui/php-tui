@@ -7,13 +7,24 @@ use PhpTui\Tui\Model\Widget\FloatPosition;
 use PhpTui\Tui\Widget\Canvas\Painter;
 use PhpTui\Tui\Widget\Canvas\Shape;
 
+/**
+ * Render a set of points on the canvas.
+ */
 class Points implements Shape
 {
     /**
      * @param array<int,array{float,float}> $coords
      */
-    public function __construct(public array $coords, public Color $color)
-    {
+    public function __construct(
+        /**
+         * Set of coordinates to draw, e.g. `[[0.0, 0.0], [2.0, 2.0], [4.0,4.0]]`
+         */
+        public array $coords,
+        /**
+         * Color of the points
+         */
+        public Color $color
+    ) {
     }
 
     public function draw(Painter $painter): void

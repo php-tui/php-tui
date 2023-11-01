@@ -12,6 +12,7 @@ use PHPStan\PhpDocParser\Parser\PhpDocParser;
 use PHPStan\PhpDocParser\Parser\TokenIterator;
 use PHPStan\PhpDocParser\Parser\TypeParser;
 use PhpTui\Tui\Model\Widget;
+use PhpTui\Tui\Widget\Canvas\Shape;
 use Roave\BetterReflection\BetterReflection;
 use Roave\BetterReflection\Reflection\ReflectionClass;
 use Roave\BetterReflection\Reflection\ReflectionParameter;
@@ -32,7 +33,6 @@ final class Docgen
      * @param iterable<int,ReflectionClass> $classes
      */
     private function __construct(
-        private string $cwd,
         private string $docsDir,
         private iterable $classes,
         private Lexer $lexer,
@@ -41,8 +41,51 @@ final class Docgen
     }
     public function generate(): void
     {
+        $this->generateWidgets();
+        $this->generateShapes();
+    }
+    private function generateShapes(): void
+    {
         $widgets = [];
-        foreach ($this->classes(Widget::class, 'src/**/*.php') as $widget) {
+        foreach ($this->classes(Shape::class, 'src/**/*.php') as $shape) {
+            $node = $this->parsePhpDoc($shape->getDocComment());
+            $this->writeTo(sprintf(
+                'reference/shapes/%s.md',
+                $shape->getShortName()
+            ), $this->renderShape(new WidgetDoc(
+                name: lcfirst($shape->getShortName()),
+                className: $shape->getName(),
+                description: $this->description($node),
+                params: array_values(array_filter(array_map(function (ReflectionProperty $prop): false|WidgetParam {
+                    if (false === $prop->isPromoted()) {
+                        return false;
+                    }
+                    $phpType = $prop->getType() ? $prop->getType()->__toString() : '';
+                    $phpDoc = $this->parsePhpDoc($prop->getDocComment());
+                    $type = null;
+                    if ($phpDoc) {
+                        $type = implode(
+                            '|',
+                            array_map(
+                                fn (VarTagValueNode $node) => $node->__toString(),
+                                $phpDoc->getVarTagValues()
+                            )
+                        );
+                    }
+                    return new WidgetParam(
+                        type: $type ?: $phpType,
+                        name: $prop->getName(),
+                        description: $this->description($phpDoc),
+                    );
+                }, $shape->getProperties()))),
+            )));
+        }
+    }
+
+    private function generateWidgets(): void
+    {
+        $widgets = [];
+        foreach ($this->classes(Widget::class, 'src/**//*.php') as $widget) {
             $node = $this->parsePhpDoc($widget->getDocComment());
             $this->writeTo(sprintf(
                 'reference/widgets/%s.md',
@@ -86,7 +129,6 @@ final class Docgen
         ]));
 
         return new self(
-            $cwd,
             $docsDir,
             $reflector->reflectAllClasses(),
             new Lexer(),
@@ -101,33 +143,11 @@ final class Docgen
      */
     private function classes(string $class, string $glob): Generator
     {
-        foreach ((array)glob($this->cwd . '/' . $glob) as $path) {
-            $path = realpath((string)$path);
-            if (!$path) {
-                continue;
-            }
-            $reflection = $this->reflectFirstClass($path);
-            if (null === $reflection) {
-                continue;
-            }
-
+        foreach ($this->classes as $reflection) {
             if ($reflection->implementsInterface($class)) {
                 yield $reflection;
             }
         }
-    }
-
-    /**
-     * @param non-empty-string $path
-     */
-    private function reflectFirstClass(string $path): ?ReflectionClass
-    {
-        foreach ($this->classes as $class) {
-            if ($class->getFileName() === $path) {
-                return $class;
-            }
-        }
-        return null;
     }
 
     private function parsePhpDoc(?string $docblock): ?PhpDocNode
@@ -153,6 +173,46 @@ final class Docgen
         return str_replace("\n", "", implode(" ", $text));
     }
 
+    private function renderShape(WidgetDoc $shapeDoc): string
+    {
+        $doc = [
+            sprintf('## %s', ucfirst($shapeDoc->name)),
+            '',
+            $shapeDoc->description,
+        ];
+        if ($shapeDoc->params) {
+            $doc = array_merge($doc, [
+            '### Parameters',
+            '',
+            'Configure the shape using the constructor arguments named as follows:',
+            '',
+            '| Name | Type | Description |',
+            '| --- | --- | --- |',
+            ]);
+            foreach ($shapeDoc->params as $param) {
+                $doc[] = sprintf(
+                    '| **%s** | `%s` | %s |',
+                    $param->name,
+                    str_replace('|', '\|', $param->type),
+                    $param->description
+                );
+            }
+        }
+
+        $doc = array_merge($doc, [
+            '### Example'.
+            '',
+            'The following code example:',
+            '',
+            sprintf('{{%% codeInclude file="/data/example/docs/shape/%s.php" language="php" %%}}', $shapeDoc->name),
+            '',
+            'Should render as:',
+            '',
+            sprintf('{{%% terminal file="/data/example/docs/shape/%s.snapshot" %%}}', $shapeDoc->name)
+        ]);
+        return implode("\n", $doc);
+
+    }
     private function renderWidget(WidgetDoc $widgetDoc): string
     {
         $doc = [

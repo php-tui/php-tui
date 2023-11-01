@@ -8,11 +8,23 @@ use PhpTui\Tui\Model\Widget\FloatPosition;
 use PhpTui\Tui\Widget\Canvas\Painter;
 use PhpTui\Tui\Widget\Canvas\Shape;
 
+/**
+ * Draw a straight line from one point to another.
+ */
 class Line implements Shape
 {
     public function __construct(
+        /**
+         * Draw from this point
+         */
         public FloatPosition $point1,
+        /**
+         * Draw to this point
+         */
         public FloatPosition $point2,
+        /**
+         * Color of the line
+         */
         public Color $color
     ) {
     }

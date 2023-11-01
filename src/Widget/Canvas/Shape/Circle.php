@@ -7,11 +7,23 @@ use PhpTui\Tui\Model\Widget\FloatPosition;
 use PhpTui\Tui\Widget\Canvas\Painter;
 use PhpTui\Tui\Widget\Canvas\Shape;
 
+/**
+ * Draws a circle at with the specified radius and color
+ */
 final class Circle implements Shape
 {
     public function __construct(
+        /**
+         * Position of the circle
+         */
         public FloatPosition $position,
+        /**
+         * Radius of the circle
+         */
         public float $radius,
+        /**
+         * Color of the circle
+         */
         public Color $color,
     ) {
     }

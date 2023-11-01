@@ -2,6 +2,9 @@ baseURL = 'http://example.org/'
 languageCode = 'en-gb'
 title = 'PHP-TUI'
 
+[markup.tableOfContents]
+  startLevel = 1
+
 [markup.goldmark.renderer]
 unsafe=true
 
