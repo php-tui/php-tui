@@ -3,6 +3,7 @@
 namespace PhpTui\BDF;
 
 use Closure;
+use RuntimeException;
 
 final class BdfTokenStream
 {
@@ -18,6 +19,11 @@ final class BdfTokenStream
     public static function fromString(string $string): self
     {
         $tokens = preg_split('{(\s)}', $string, -1, PREG_SPLIT_DELIM_CAPTURE);
+        if (false === $tokens) {
+            throw new RuntimeException(
+                'Could not tokenize string'
+            );
+        }
 
         return new self($tokens);
     }

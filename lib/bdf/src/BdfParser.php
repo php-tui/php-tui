@@ -18,7 +18,7 @@ final class BdfParser
         );
     }
 
-    private function parseMetadata(BdfTokenStream $tokens)
+    private function parseMetadata(BdfTokenStream $tokens): BdfMetadata
     {
         $version = null;
         $name = null;
