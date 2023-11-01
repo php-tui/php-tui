@@ -2,6 +2,8 @@
 
 namespace PhpTui\BDF;
 
+use RuntimeException;
+
 final class BdfFont
 {
     /**
@@ -10,6 +12,14 @@ final class BdfFont
     public function __construct(
         public readonly BdfMetadata $metadata,
         public readonly BdfProperties $properties,
-        public readonly array $glyphs,
+        private readonly array $glyphs,
     ) {}
+
+    public function codePoint(int $codePoint): BdfGlyph
+    {
+        if (!isset($this->glyphs[$codePoint])) {
+            throw new RuntimeException('No glyph for codepoint %d', $codePoint);
+        }
+        return $this->glyphs[$codePoint];
+    }
 }

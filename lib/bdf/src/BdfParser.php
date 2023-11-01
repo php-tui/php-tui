@@ -158,7 +158,7 @@ final class BdfParser
                 // TODO: exception here?
                 break;
             }
-            $glyphs[] = $glyph;
+            $glyphs[$glyph->encoding] = $glyph;
         }
 
 
