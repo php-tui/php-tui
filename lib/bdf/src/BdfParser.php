@@ -10,6 +10,7 @@ final class BdfParser
 
         return new BdfFont(
             metadata: $this->parseMetadata($stream),
+            properties: new BdfProperties(),
         );
     }
 

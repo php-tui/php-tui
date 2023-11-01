@@ -7,6 +7,7 @@ use PhpTui\BDF\BdfBoundingBox;
 use PhpTui\BDF\BdfCoord;
 use PhpTui\BDF\BdfMetadata;
 use PhpTui\BDF\BdfParser;
+use PhpTui\BDF\BdfProperty;
 use PhpTui\BDF\BdfSize;
 
 class BdfParserTest extends TestCase
@@ -25,6 +26,8 @@ class BdfParserTest extends TestCase
                 offset: new BdfCoord(0,0),
             ),
         ), $font->metadata);
+
+        self::assertEquals('Copyright123', $font->properties->get(BdfProperty::Copyright));
     }
 
     private function font(): string

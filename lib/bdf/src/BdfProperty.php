@@ -1,0 +1,65 @@
+<?php
+
+namespace PhpTui\BDF;
+
+enum BdfProperty
+{
+    case AddStyleName;
+    case AverageWidth;
+    case AvgCapitalWidth;
+    case AvgLowercaseWidth;
+    case AxisLimits;
+    case AxisNames;
+    case AxisTypes;
+    case CapHeight;
+    case CharsetEncoding;
+    case CharsetRegistry;
+    case Copyright;
+    case DefaultChar;
+    case Destination;
+    case EndSpace;
+    case FaceName;
+    case FamilyName;
+    case FigureWidth;
+    case Font;
+    case FontAscent;
+    case FontDescent;
+    case FontType;
+    case FontVersion;
+    case Foundry;
+    case FullName;
+    case ItalicAngle;
+    case MaxSpace;
+    case MinSpace;
+    case NormSpace;
+    case Notice;
+    case PixelSize;
+    case PointSize;
+    case QuadWidth;
+    case RasterizerName;
+    case RasterizerVersion;
+    case RawAscent;
+    case RawDescent;
+    case RelativeSetwidth;
+    case RelativeWeight;
+    case Resolution;
+    case ResolutionX;
+    case ResolutionY;
+    case SetwidthName;
+    case Slant;
+    case SmallCapSize;
+    case Spacing;
+    case StrikeoutAscent;
+    case StrikeoutDescent;
+    case SubscriptSize;
+    case SubscriptX;
+    case SubscriptY;
+    case SuperscriptSize;
+    case SuperscriptX;
+    case SuperscriptY;
+    case UnderlinePosition;
+    case UnderlineThickness;
+    case Weight;
+    case WeightName;
+    case XHeight;
+}
