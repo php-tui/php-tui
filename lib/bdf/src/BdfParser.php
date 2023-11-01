@@ -10,11 +10,12 @@ final class BdfParser
 
         $metadata = $this->parseMetadata($tokens);
         $properties = $this->parseProperties($tokens);
+        $glyphs = $this->parseGlyphs($tokens);
 
         return new BdfFont(
             metadata: $metadata,
             properties: $properties,
-            glyphs: [],
+            glyphs: $glyphs,
         );
     }
 
@@ -135,5 +136,13 @@ final class BdfParser
 
         return $value;
 
+    }
+
+    /**
+     * @retrun list<BdfGlyph>
+     */
+    private function parseGlyphs(BdfTokenStream $tokens): array
+    {
+        return [];
     }
 }
