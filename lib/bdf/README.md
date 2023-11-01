@@ -1,7 +1,7 @@
 PHP BDF Font Parser
 ===================
 
-Parser for
+Inferior parser for
 [BDF](https://en.wikipedia.org/wiki/Glyph_Bitmap_Distribution_Format) (bitmap) font files.
 
 Inspired by the [embedded systems BDF parser for Rust](https://lib.rs/crates/bdf-parser).
