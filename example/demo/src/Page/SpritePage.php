@@ -74,7 +74,7 @@ class SpritePage implements Component
             AnsiColor::DarkGray,
         );
 
-        $text = 'PHP-TUI: Building better TUIs! And why stop there? We can build a FORMIDABLE game engine!!!';
+        $text = 'PHP-TUI: Building better TUIs!';
         $font = FontRegistry::default()->get('default');
         $this->scroller = array_map(function (string $char, int $offset) use ($font) {
             return new TextShape(
