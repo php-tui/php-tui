@@ -42,6 +42,9 @@ class SpritePage implements Component
      */
     private Points $points;
 
+    /**
+     * @var list<TextShape>
+     */
     private array $scroller;
 
     public function __construct()
@@ -196,7 +199,7 @@ class SpritePage implements Component
     private function tickScroller(): void
     {
         foreach ($this->scroller as $i => $textShape) {
-            $textShape->position->change(function (float $x, float $y) use ($textShape, $i) {
+            $textShape->position->change(function (float $x, float $y) use ($i) {
                 $sinY = sin(0.15 * $this->ticker + ($i * 6)) / 8;
                 if ($x < 0) {
                     $x = count($this->scroller) * 6 + 6;
