@@ -10,10 +10,35 @@ use PhpTui\BDF\BdfMetadata;
 use PhpTui\BDF\BdfParser;
 use PhpTui\BDF\BdfProperty;
 use PhpTui\BDF\BdfSize;
+use RuntimeException;
 
 class BdfParserTest extends TestCase
 {
-    public function testParse(): void
+    public function testParseRealFont(): void
+    {
+        $contents = file_get_contents(__DIR__ . '/../fonts/6x10.bdf');
+
+        if (false === $contents) {
+            throw new RuntimeException(
+                'Could not read file'
+            );
+        }
+
+        $font = (new BdfParser())->parse($contents);
+        self::assertEquals(new BdfMetadata(
+            version: 2.1,
+            name: '-Misc-Fixed-Medium-R-Normal--10-100-75-75-C-60-ISO10646-1',
+            pointSize: 10,
+            resolution: new BdfSize(75, 75),
+            boundingBox: new BdfBoundingBox(
+                size: new BdfSize(6,10),
+                offset: new BdfCoord(0,-2),
+            ),
+        ), $font->metadata);
+        self::assertCount(1597, $font->glyphs);
+    }
+
+    public function testParseMinimalExample(): void
     {
         $font = (new BdfParser())->parse($this->font());
         
