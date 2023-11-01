@@ -35,7 +35,7 @@ class BdfParserTest extends TestCase
                 offset: new BdfCoord(0,-2),
             ),
         ), $font->metadata);
-        self::assertCount(1597, $font->glyphs);
+        self::assertCount(1597, $font->glyphs());
     }
 
     public function testParseMinimalExample(): void
@@ -76,7 +76,7 @@ class BdfParserTest extends TestCase
                     scalableWidth: null,
                 )
             ],
-            $font->glyphs
+            $font->glyphs()
         );
     }
 

@@ -22,4 +22,12 @@ final class BdfFont
         }
         return $this->glyphs[$codePoint];
     }
+
+    /**
+     * @return list<BdfGlyph>
+     */
+    public function glyphs(): array
+    {
+        return array_values($this->glyphs);
+    }
 }
