@@ -7,14 +7,18 @@ final class BdfParser
     public function parse(string $string): BdfFont
     {
         $stream = BdfByteStream::fromString($string);
-
+        $metadata = $this->parseMetadata($stream);
+        $properties = $this->parseProperties($metadata->rest);
         return new BdfFont(
-            metadata: $this->parseMetadata($stream),
-            properties: new BdfProperties(),
+            metadata: $metadata->value,
+            properties: $properties->value,
         );
     }
 
-    private function parseMetadata(BdfByteStream $stream): BdfMetadata
+    /**
+     * @return BdfResult<BdfMetadata>
+     */
+    private function parseMetadata(BdfByteStream $stream): BdfResult
     {
         $version = $this->skipWhitespace($stream, $this->metadataVersion(...));
         $name = $this->skipWhitespace($version->rest, $this->metadataName(...));
@@ -23,14 +27,23 @@ final class BdfParser
 
         [$pointSize, $resolution] = $size->value;
 
-        return new BdfMetadata(
+        return BdfResult::ok(new BdfMetadata(
             version: $version->value,
             name: $name->value,
             pointSize: $pointSize,
             resolution: $resolution,
             boundingBox: $boundingBox->value,
-        );
+        ), $boundingBox->rest);
     }
+
+    /**
+     * @return BdfResult<BdfProperties>
+     */
+    private function parseProperties(BdfByteStream $stream): BdfResult
+    {
+        return BdfResult::ok(new BdfProperties(), $stream);
+    }
+
     /**
      * @template T
      * @param callable(BdfByteStream):BdfResult<T> $inner
