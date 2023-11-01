@@ -13,7 +13,7 @@ final class BdfResult
     private function __construct(
         public bool $ok,
         public mixed $value,
-        public BdfByteStream $rest
+        public BdfTokenStream $rest
     )
     {
     }
@@ -23,7 +23,7 @@ final class BdfResult
      * @param TParam $value
      * @return BdfResult<TParam>
      */
-    public static function ok(mixed $value, BdfByteStream $rest): self
+    public static function ok(mixed $value, BdfTokenStream $rest): self
     {
         return new self(true, $value, $rest);
     }
@@ -33,7 +33,7 @@ final class BdfResult
      * @param TParam $value
      * @return BdfResult<TParam>
      */
-    public static function failure(mixed $value, BdfByteStream $rest): self
+    public static function failure(mixed $value, BdfTokenStream $rest): self
     {
         return new self(false, $value, $rest);
     }
