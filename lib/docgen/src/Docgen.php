@@ -33,7 +33,6 @@ final class Docgen
      * @param iterable<int,ReflectionClass> $classes
      */
     private function __construct(
-        private string $cwd,
         private string $docsDir,
         private iterable $classes,
         private Lexer $lexer,
@@ -130,7 +129,6 @@ final class Docgen
         ]));
 
         return new self(
-            $cwd,
             $docsDir,
             $reflector->reflectAllClasses(),
             new Lexer(),
@@ -150,19 +148,6 @@ final class Docgen
                 yield $reflection;
             }
         }
-    }
-
-    /**
-     * @param non-empty-string $path
-     */
-    private function reflectFirstClass(string $path): ?ReflectionClass
-    {
-        foreach ($this->classes as $class) {
-            if ($class->getFileName() === $path) {
-                return $class;
-            }
-        }
-        return null;
     }
 
     private function parsePhpDoc(?string $docblock): ?PhpDocNode

@@ -9,8 +9,6 @@ use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Model\Widget\FloatPosition;
 use PhpTui\Tui\Widget\Canvas;
 use PhpTui\Tui\Widget\Canvas\CanvasContext;
-use PhpTui\Tui\Widget\Canvas\Shape\Points;
-use PhpTui\Tui\Widget\Canvas\Shape\Rectangle;
 use PhpTui\Tui\Widget\Canvas\Shape\Sprite;
 
 require 'vendor/autoload.php';

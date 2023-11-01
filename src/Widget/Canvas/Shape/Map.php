@@ -22,8 +22,7 @@ class Map implements Shape
          * Color of the map
          */
         private Color $color
-    )
-    {
+    ) {
     }
 
     public function draw(Painter $painter): void

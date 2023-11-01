@@ -8,7 +8,6 @@ use PhpTui\Tui\Model\Display;
 use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Widget\Canvas;
 use PhpTui\Tui\Widget\Canvas\CanvasContext;
-use PhpTui\Tui\Widget\Canvas\Shape\Points;
 use PhpTui\Tui\Widget\Canvas\Shape\Rectangle;
 
 require 'vendor/autoload.php';
