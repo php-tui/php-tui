@@ -167,6 +167,10 @@ final class BdfParser
 
     private function parseGlyph(BdfTokenStream $tokens): ?BdfGlyph
     {
+        // ignore this
+        if ($tokens->current() === 'CHARS') {
+            $tokens->parseLine();
+        }
         if (!$tokens->is('STARTCHAR')) {
             return null;
         }

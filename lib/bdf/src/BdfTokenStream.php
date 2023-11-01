@@ -55,6 +55,7 @@ final class BdfTokenStream
     {
         $taken = $this->takeWhile(fn (?string $token) => $token !== "\n");
         $this->skipWhitespace();
+        $this->skipComments();
         return $taken;
     }
 
@@ -82,7 +83,9 @@ final class BdfTokenStream
 
     public function skipWhitespace(): void
     {
-        $this->takeWhile(fn (string $token) => trim($token) === '');
+        $this->takeWhile(
+            fn (string $token) => trim($token) === ''
+        );
     }
 
     public function parseInt(): ?int
@@ -92,9 +95,17 @@ final class BdfTokenStream
             $int = (int)$this->current();
             $this->advance();
             $this->skipWhitespace();
+            $this->skipComments();
             return (int)$int;
         }
 
         return null;
+    }
+
+    private function skipComments(): void
+    {
+        while ($this->current() === 'COMMENT') {
+            $this->parseLine();
+        }
     }
 }
