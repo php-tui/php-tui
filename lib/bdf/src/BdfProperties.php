@@ -11,7 +11,7 @@ final class BdfProperties
     {
     }
 
-    public function get(BdfProperty $property): ?string
+    public function get(BdfProperty $property): null|int|string
     {
         if (isset($this->properties[$property->name])) {
             return $this->properties[$property->name];
