@@ -5,6 +5,7 @@ namespace PhpTui\Bdf\Tests;
 use PHPUnit\Framework\TestCase;
 use PhpTui\BDF\BdfBoundingBox;
 use PhpTui\BDF\BdfCoord;
+use PhpTui\BDF\BdfGlyph;
 use PhpTui\BDF\BdfMetadata;
 use PhpTui\BDF\BdfParser;
 use PhpTui\BDF\BdfProperty;
@@ -27,7 +28,31 @@ class BdfParserTest extends TestCase
             ),
         ), $font->metadata);
 
-        self::assertEquals('Copyright123', $font->properties->get(BdfProperty::COPYRIGHT));
+        self::assertEquals(
+            'Copyright123',
+            $font->properties->get(BdfProperty::COPYRIGHT)
+        );
+
+        self::assertEquals([
+                new BdfGlyph(
+                    bitmap: [ 0x1f, 0x01 ],
+                    boundingBox: BdfBoundingBox::fromPrimitives(8, 8, 0, 0),
+                    encoding: '@',
+                    name: 'Char 0',
+                    deviceWidth: new BdfCoord(8, 0),
+                    scalableWidth: null,
+                ),
+                new BdfGlyph(
+                    bitmap: [ 0x2f, 0x02 ],
+                    boundingBox: BdfBoundingBox::fromPrimitives(8, 8, 0, 0),
+                    encoding: 'A',
+                    name: 'Char 1',
+                    deviceWidth: new BdfCoord(8, 0),
+                    scalableWidth: null,
+                )
+            ],
+            $font->glyphs
+        );
     }
 
     private function font(): string

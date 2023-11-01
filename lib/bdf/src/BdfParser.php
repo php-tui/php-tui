@@ -2,8 +2,6 @@
 
 namespace PhpTui\BDF;
 
-use Closure;
-
 final class BdfParser
 {
     public function parse(string $string): BdfFont
@@ -15,7 +13,8 @@ final class BdfParser
 
         return new BdfFont(
             metadata: $metadata,
-            properties: $properties, 
+            properties: $properties,
+            glyphs: [],
         );
     }
 
