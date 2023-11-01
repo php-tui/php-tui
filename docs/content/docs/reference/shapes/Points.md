@@ -1,14 +1,14 @@
 ## Points
 
-
+Render a set of points on the canvas.
 ### Parameters
 
 Configure the shape using the constructor arguments named as follows:
 
 | Name | Type | Description |
 | --- | --- | --- |
-| **coords** | `array` |  |
-| **color** | `PhpTui\Tui\Model\Color` |  |
+| **coords** | `array` | Set of coordinates to draw, e.g. `[[0.0, 0.0], [2.0, 2.0], [4.0,4.0]]` |
+| **color** | `PhpTui\Tui\Model\Color` | Color of the points |
 ### Example
 The following code example:
 

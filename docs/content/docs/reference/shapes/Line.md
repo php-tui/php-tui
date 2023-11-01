@@ -1,15 +1,15 @@
 ## Line
 
-
+Draw a straight line from one point to another.
 ### Parameters
 
 Configure the shape using the constructor arguments named as follows:
 
 | Name | Type | Description |
 | --- | --- | --- |
-| **point1** | `PhpTui\Tui\Model\Widget\FloatPosition` |  |
-| **point2** | `PhpTui\Tui\Model\Widget\FloatPosition` |  |
-| **color** | `PhpTui\Tui\Model\Color` |  |
+| **point1** | `PhpTui\Tui\Model\Widget\FloatPosition` | Draw from this point |
+| **point2** | `PhpTui\Tui\Model\Widget\FloatPosition` | Draw to this point |
+| **color** | `PhpTui\Tui\Model\Color` | Color of the line |
 ### Example
 The following code example:
 

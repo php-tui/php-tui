@@ -7,12 +7,27 @@ use PhpTui\Tui\Model\Widget\FloatPosition;
 use PhpTui\Tui\Widget\Canvas\Painter;
 use PhpTui\Tui\Widget\Canvas\Shape;
 
+/**
+ * Draw a rectangle at the given position with the given width and height
+ */
 final class Rectangle implements Shape
 {
     public function __construct(
+        /**
+         * Position to draw the rectangle (bottom left corner)
+         */
         private FloatPosition $position,
+        /**
+         * Width of the rectangle
+         */
         private int $width,
+        /**
+         * Height of the rectangle
+         */
         private int $height,
+        /**
+         * Color of the rectangle
+         */
         private Color $color,
     ) {
     }
