@@ -8,9 +8,21 @@ use PhpTui\Tui\Model\Widget\FloatPosition;
 use PhpTui\Tui\Widget\Canvas\Painter;
 use PhpTui\Tui\Widget\Canvas\Shape;
 
+/**
+ * Renders a map of the world!
+ */
 class Map implements Shape
 {
-    private function __construct(private MapResolution $mapResolution, private Color $color)
+    private function __construct(
+        /**
+         * Resolution of the map (enum low or high)
+         */
+        private MapResolution $mapResolution,
+        /**
+         * Color of the map
+         */
+        private Color $color
+    )
     {
     }
 
