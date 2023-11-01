@@ -24,8 +24,7 @@ class Points implements Shape
          * Color of the points
          */
         public Color $color
-    )
-    {
+    ) {
     }
 
     public function draw(Painter $painter): void
