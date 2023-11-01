@@ -17,6 +17,7 @@
         <testsuite name="default">
             <directory>tests</directory>
             <directory>lib/term/tests</directory>
+            <directory>lib/bdf/tests</directory>
         </testsuite>
     </testsuites>
 

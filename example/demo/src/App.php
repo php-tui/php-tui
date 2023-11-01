@@ -171,7 +171,7 @@ final class App
     private function header(): Widget
     {
         return Block::default()
-                ->borders(Borders::ALL)->style(Style::default()->fg(AnsiColor::Red))
+                ->borders(Borders::ALL)->style(Style::default()->fg(AnsiColor::White))
                 ->title(Title::fromString(sprintf('%d FPS', $this->frameRate()))->horizontalAlignmnet(HorizontalAlignment::Right))
                 ->widget(
                     Paragraph::new(Text::fromLine(Line::fromSpans([
