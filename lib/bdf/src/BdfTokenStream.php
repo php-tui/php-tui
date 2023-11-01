@@ -80,7 +80,7 @@ final class BdfTokenStream
         return $taken;
     }
 
-    private function skipWhitespace(): void
+    public function skipWhitespace(): void
     {
         $this->takeWhile(fn (string $token) => trim($token) === '');
     }

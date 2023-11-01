@@ -27,7 +27,7 @@ class BdfParserTest extends TestCase
             ),
         ), $font->metadata);
 
-        self::assertEquals('Copyright123', $font->properties->get(BdfProperty::Copyright));
+        self::assertEquals('Copyright123', $font->properties->get(BdfProperty::COPYRIGHT));
     }
 
     private function font(): string

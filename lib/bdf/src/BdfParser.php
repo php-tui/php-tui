@@ -11,10 +11,11 @@ final class BdfParser
         $tokens = BdfTokenStream::fromString($string);
 
         $metadata = $this->parseMetadata($tokens);
+        $properties = $this->parseProperties($tokens);
 
         return new BdfFont(
             metadata: $metadata,
-            properties: new BdfProperties()
+            properties: $properties, 
         );
     }
 
@@ -86,5 +87,54 @@ final class BdfParser
         }
 
         return true;
+    }
+
+    private function parseProperties(BdfTokenStream $tokens): BdfProperties
+    {
+        if (!$tokens->is('STARTPROPERTIES')) {
+            return new BdfProperties();
+        }
+
+        $tokens->advance();
+        $tokens->parseLine();
+        $properties = [];
+        while ($tokens->current() !== null && $tokens->current() !== 'ENDPROPERTIES') {
+            $propertyName = $tokens->current();
+            $tokens->advance();
+            if ($propertyName === 'COMMENT') {
+                $tokens->parseLine();
+                continue;
+            }
+            $values = $this->parseValue($tokens);
+            if ($values !== null) {
+                $properties[$propertyName] = $values;
+            }
+        }
+
+        return new BdfProperties($properties);
+    }
+
+    private function parseValue(BdfTokenStream $tokens): int|string|null
+    {
+        $tokens->skipWhitespace();
+
+        $value = $tokens->current();
+        if (null === $value) {
+            return null;
+        }
+
+        $tokens->advance();
+        $tokens->skipWhitespace();
+
+        $value = trim($value);
+        if (is_numeric($value)) {
+            return (int)$value;
+        }
+        if (substr($value, 0, 1) === '"' && substr($value, -1) === '"') {
+            return substr($value, 1, -1);
+        }
+
+        return $value;
+
     }
 }
