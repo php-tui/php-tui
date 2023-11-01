@@ -7,27 +7,29 @@ final class BdfParser
     public function parse(string $string): BdfFont
     {
         $bytes = BdfByteStream::fromString($string);
-        $result = $this->skipWhitespace($bytes, $this->metadataVersion(...));
-        $result = $this->skipWhitespace($result->rest, $this->metadataName(...));
-        $result = $this->skipWhitespace($result->rest, $this->metadataSize(...)) ?: [null, null];
-        $result = $this->skipWhitespace($result->rest, $this->metadataBoundingBox(...));
+        $version = $this->skipWhitespace($bytes, $this->metadataVersion(...));
+        $name = $this->skipWhitespace($version->rest, $this->metadataName(...));
+        $size = $this->skipWhitespace($name->rest, $this->metadataSize(...));
+        $boundingBox = $this->skipWhitespace($size->rest, $this->metadataBoundingBox(...));
+
+        [$pointSize, $resolution] = $size->value;
 
         return new BdfFont(
             metadata: new BdfMetadata(
                 version: $version->value,
-                name: $name,
+                name: $name->value,
                 pointSize: $pointSize,
-                resolution: $res,
-                boundingBox: $boundingBox,
+                resolution: $resolution,
+                boundingBox: $boundingBox->value,
             )
         );
     }
     /**
      * @template T
-     * @param callable(BdfByteStream):?BdfResult<T> $inner
+     * @param callable(BdfByteStream):BdfResult<T> $inner
      * @return BdfResult<T>
      */
-    private function skipWhitespace(BdfByteStream $stream, callable $inner): ?BdfResult
+    private function skipWhitespace(BdfByteStream $stream, callable $inner): BdfResult
     {
         $result = $stream->skipWhile(fn (string $char) => (bool)preg_match('{\s}', $char));
         $result = $inner($result->rest);
@@ -36,82 +38,99 @@ final class BdfParser
     }
 
     /**
-     * @return ?BdfResult<float>
+     * @return BdfResult<float>
      */
-    private function metadataVersion(BdfByteStream $stream): ?BdfResult
+    private function metadataVersion(BdfByteStream $stream): BdfResult
     {
-        if (null === $result = $stream->takeExact('STARTFONT')) {
-            return null;
+        $result = $stream->takeExact('STARTFONT');
+        if (false === $result->isOk()) {
+            return BdfResult::failure(0.0, $stream);
         }
+
         return $this->skipWhitespace($result->rest, $this->parseFloat(...));
     }
 
     /**
-     * @return ?BdfResult<string>
+     * @return BdfResult<string>
      */
-    private function parseString(BdfByteStream $stream): ?BdfResult
+    private function parseString(BdfByteStream $stream): BdfResult
     {
         return $stream->takeWhile(fn (string $char) => $char !== "\n" && $char !== "\r");
     }
 
-    private function metadataName(BdfByteStream $stream): ?string
+    /**
+     * @return BdfResult<string>
+     */
+    private function metadataName(BdfByteStream $stream): BdfResult
     {
-        if (null === $stream->takeExact('FONT')) {
-            return null;
+        $result = $stream->takeExact('FONT');
+        if (false === $result->isOk()) {
+            return BdfResult::failure('', $stream);
         }
-        return $this->skipWhitespace($stream, $this->parseString(...));
+        return $this->skipWhitespace($result->rest, $this->parseString(...));
     }
 
     /**
-     * @return ?array{int, BdfSize}
+     * @return BdfResult<array{int,BdfSize}>
      */
-    private function metadataSize(BdfByteStream $stream): ?array
+    private function metadataSize(BdfByteStream $stream): BdfResult
     {
-        if (null === $stream->takeExact('SIZE')) {
-            return null;
+        $result = $stream->takeExact('SIZE');
+        $fail = fn () => BdfResult::failure([0,new BdfSize(0,0)], $stream);
+        if (false === $result->isOk()) {
+            return $fail();
         }
-        $string = $this->skipWhitespace($stream, $this->parseString(...));
-        if (null === $string) {
-            return null;
+        $string = $this->skipWhitespace($result->rest, $this->parseString(...));
+        if (false === $string->isOk()) {
+            return $fail();
         }
-        $parts = explode(' ', $string);
+        $parts = explode(' ', $string->value);
         if (count($parts) !== 3) {
-            return null;
+            return $fail();
         }
 
-        return [intval($parts[0]), new BdfSize(intval($parts[1]), intval($parts[2]))];
-    }
-
-    private function metadataBoundingBox(BdfByteStream $stream): ?BdfBoundingBox
-    {
-        if (null === $stream->takeExact('FONTBOUNDINGBOX')) {
-            return null;
-        }
-        $string = $this->skipWhitespace($stream, $this->parseString(...));
-        if (null === $string) {
-            return null;
-        }
-        $parts = explode(' ', $string);
-        if (count($parts) !== 4) {
-            return null;
-        }
-
-        return new BdfBoundingBox(
-            size: new BdfSize(intval($parts[0]), intval($parts[1])),
-            offset: new BdfCoord(intval($parts[2]), intval($parts[3]))
+        return BdfResult::ok(
+            [intval($parts[0]), new BdfSize(intval($parts[1]), intval($parts[2]))],
+            $string->rest
         );
     }
 
     /**
-     * @return ?BdfResult<float>
+     * @return BdfResult<BdfBoundingBox>
      */
-    private function parseFloat(BdfByteStream $stream): ?BdfResult
+    private function metadataBoundingBox(BdfByteStream $stream): BdfResult
+    {
+        $fail = fn () => BdfResult::failure(BdfBoundingBox::empty(), $stream);
+        $result = $stream->takeExact('FONTBOUNDINGBOX');
+        if (false === $result->isOk()) {
+            return $fail();
+        }
+        $string = $this->skipWhitespace($result->rest, $this->parseString(...));
+
+        if (false === $string->isOk()) {
+            return $fail();
+        }
+        $parts = explode(' ', $string->value);
+        if (count($parts) !== 4) {
+            return $fail();
+        }
+
+        return BdfResult::ok(new BdfBoundingBox(
+            size: new BdfSize(intval($parts[0]), intval($parts[1])),
+            offset: new BdfCoord(intval($parts[2]), intval($parts[3]))
+        ), $string->rest);
+    }
+
+    /**
+     * @return BdfResult<float>
+     */
+    private function parseFloat(BdfByteStream $stream): BdfResult
     {
         $result = $this->parseString($stream);
         if (null === $result || !is_numeric($result->value)) {
-            return null;
+            return BdfResult::failure(0.0, $stream);
         }
 
-        return new BdfResult((float)$result->value, $result->rest);
+        return BdfResult::ok((float)$result->value, $result->rest);
     }
 }

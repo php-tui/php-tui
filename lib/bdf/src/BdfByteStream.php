@@ -31,55 +31,55 @@ final class BdfByteStream
     public function skipWhile(Closure $closure): BdfResult
     {
         $stream = $this->clone();
-        while ($char = $stream->shift()) {
+        while (null !== $char = $stream->shift()) {
             if (false === $closure($char)) {
                 $stream->unshift($char);
                 break;
             }
         }
-        return new BdfResult(
+        return BdfResult::ok(
             null,
             $stream
         );
     }
 
     /**
-     * @return ?BdfResult<string>
+     * @return BdfResult<string>
      */
-    public function takeExact(string $string): ?BdfResult
+    public function takeExact(string $string): BdfResult
     {
         $match = str_split($string);
         $stream = $this->clone();
         $i = 0;
-        while ($byte = $stream->shift()) {
+        while (null !== $byte = $stream->shift()) {
             if (!isset($match[$i])) {
                 break;
             }
             if ($match[$i] !== $byte) {
-                return null;
+                return BdfResult::failure('', $this);
             }
             $i++;
         }
-        return new BdfResult($string, $stream);
+        return BdfResult::ok($string, $stream);
     }
 
     /**
      * @param Closure(string): bool $closure
      * @return BdfResult<string>
      */
-    public function takeWhile(Closure $closure): ?BdfResult
+    public function takeWhile(Closure $closure): BdfResult
     {
         $stream = $this->clone();
-        $matches = [];
-        while ($byte = $stream->shift()) {
+        $matches = '';
+        while (null !== $byte = $stream->shift()) {
             if ($closure($byte)) {
-                $matches[] = $byte;
+                $matches .= $byte;
                 continue;
             }
             $stream->unshift($byte);
-            return new BdfResult(implode('', $matches), $stream);
+            return BdfResult::ok($matches, $stream);
         }
-        return null;
+        return BdfResult::failure('', $this);
     }
 
     private function clone(): self

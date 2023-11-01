@@ -8,4 +8,9 @@ class BdfBoundingBox
     {
     }
 
+    public static function empty(): self
+    {
+        return new self(new BdfSize(0, 0), new BdfCoord(0,0));
+    }
+
 }

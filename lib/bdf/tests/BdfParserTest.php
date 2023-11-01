@@ -15,7 +15,7 @@ class BdfParserTest extends TestCase
     {
         $font = (new BdfParser())->parse($this->font());
         
-        self::assertEquals($font->metadata, new BdfMetadata(
+        self::assertEquals(new BdfMetadata(
             version: 2.1,
             name: '"test font"',
             pointSize: 16,
@@ -24,8 +24,7 @@ class BdfParserTest extends TestCase
                 size: new BdfSize(16,24),
                 offset: new BdfCoord(0,0),
             ),
-        )
-        );
+        ), $font->metadata);
     }
 
     private function font(): string
