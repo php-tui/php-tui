@@ -2,6 +2,8 @@
 
 namespace PhpTui\BDF;
 
+use RuntimeException;
+
 final class BdfParser
 {
     public function parse(string $string): BdfFont
@@ -110,6 +112,11 @@ final class BdfParser
                 $properties[$propertyName] = $values;
             }
         }
+        if ($tokens->current() !== 'ENDPROPERTIES') {
+            throw new RuntimeException('No ENDPROPERTIES token found after STARTPROPERTIES');
+        }
+        $tokens->advance();
+        $tokens->skipWhitespace();
 
         return new BdfProperties($properties);
     }
@@ -139,10 +146,105 @@ final class BdfParser
     }
 
     /**
-     * @retrun list<BdfGlyph>
+     * @return list<BdfGlyph>
      */
     private function parseGlyphs(BdfTokenStream $tokens): array
     {
-        return [];
+        $tokens->skipWhitespace();
+        $glyphs = [];
+        while ($tokens->current() !== null && $tokens->current() !== 'ENDFONT') {
+            $glyph = $this->parseGlyph($tokens);
+            if (null === $glyph) {
+                // TODO: exception here?
+                break;
+            }
+            $glyphs[] = $glyph;
+        }
+
+
+        return $glyphs;
+    }
+
+    private function parseGlyph(BdfTokenStream $tokens): ?BdfGlyph
+    {
+        if (!$tokens->is('STARTCHAR')) {
+            return null;
+        }
+        $tokens->advance();
+        $tokens->skipWhitespace();
+
+        $name = $tokens->parseLine();
+
+        if (!$tokens->is('ENCODING')) {
+            return null;
+        }
+        $tokens->advance();
+        $tokens->skipWhitespace();
+        $encoding = $tokens->parseInt();
+
+        $sWidth = null;
+        if ($tokens->is('SWIDTH')) {
+            $tokens->advance();
+            $tokens->skipWhitespace();
+            $sWidthX = $tokens->parseInt();
+            $sWidthY = $tokens->parseInt();
+            if (false === $this->notNull($sWidthX, $sWidthY)) {
+                return null;
+            }
+            /** @phpstan-ignore-next-line */
+            $sWidth = new BdfCoord($sWidthX, $sWidthY);
+        }
+
+        if (!$tokens->is('DWIDTH')) {
+            return null;
+        }
+        $tokens->advance();
+        $tokens->skipWhitespace();
+        $dWidthX = $tokens->parseInt();
+        $dWidthY = $tokens->parseInt();
+        if (false === $this->notNull($dWidthX, $dWidthY)) {
+            return null;
+        }
+        /** @phpstan-ignore-next-line */
+        $dWidth = new BdfCoord($dWidthX, $dWidthY);
+
+        if (!$tokens->is('BBX')) {
+            return null;
+        }
+        $tokens->advance();
+        $tokens->skipWhitespace();
+        $bbxWidth = $tokens->parseInt();
+        $bbxHeight = $tokens->parseInt();
+        $bbxX = $tokens->parseInt();
+        $bbxY = $tokens->parseInt();
+        if (false === $this->notNull($bbxX, $bbxY, $bbxX, $bbxY)) {
+            return null;
+        }
+        /** @phpstan-ignore-next-line */
+        $bbx = BdfBoundingBox::fromPrimitives($bbxWidth, $bbxHeight, $bbxX, $bbxY);
+
+        if (!$tokens->is('BITMAP')) {
+            return null;
+        }
+        $tokens->parseLine();
+        $bitmap = [];
+        while ($tokens->current() !== null && strlen($tokens->current()) === 2) {
+            $dec = (int)hexdec($tokens->parseLine());
+            $bitmap[] = $dec;
+        }
+
+        if ($tokens->current() !== 'ENDCHAR') {
+            return null;
+        }
+        $tokens->parseLine();
+
+        return new BdfGlyph(
+            bitmap: $bitmap,
+            boundingBox: $bbx,
+            encoding: $encoding,
+            name: $name,
+            deviceWidth: $dWidth,
+            scalableWidth: $sWidth
+        );
     }
 }

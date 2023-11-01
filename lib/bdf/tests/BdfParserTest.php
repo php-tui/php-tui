@@ -37,7 +37,7 @@ class BdfParserTest extends TestCase
                 new BdfGlyph(
                     bitmap: [ 0x1f, 0x01 ],
                     boundingBox: BdfBoundingBox::fromPrimitives(8, 8, 0, 0),
-                    encoding: '@',
+                    encoding: 64,
                     name: 'Char 0',
                     deviceWidth: new BdfCoord(8, 0),
                     scalableWidth: null,
@@ -45,7 +45,7 @@ class BdfParserTest extends TestCase
                 new BdfGlyph(
                     bitmap: [ 0x2f, 0x02 ],
                     boundingBox: BdfBoundingBox::fromPrimitives(8, 8, 0, 0),
-                    encoding: 'A',
+                    encoding: 65,
                     name: 'Char 1',
                     deviceWidth: new BdfCoord(8, 0),
                     scalableWidth: null,

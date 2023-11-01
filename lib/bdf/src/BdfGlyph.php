@@ -10,7 +10,7 @@ final class BdfGlyph
     public function __construct(
         public array $bitmap,
         public BdfBoundingBox $boundingBox,
-        public ?string $encoding,
+        public ?int $encoding,
         public string $name,
         public BdfCoord $deviceWidth,
         public ?BdfCoord $scalableWidth
