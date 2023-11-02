@@ -72,4 +72,3 @@ class ImageShapeTest extends TestCase
         ];
     }
 }
-

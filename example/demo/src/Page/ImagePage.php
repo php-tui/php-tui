@@ -34,11 +34,12 @@ final class ImagePage implements Component
                     ->title(Title::fromString(sprintf('Image: %s', $name)))
                     ->borders(Borders::ALL)
                     ->borderType(BorderType::Rounded)
-                    ->widget(Canvas::default()
+                    ->widget(
+                        Canvas::default()
                         ->marker(Marker::Block)
                         ->xBounds(AxisBounds::new(0, 320))
                         ->yBounds(AxisBounds::new(0, 240))
-                        ->paint(function (CanvasContext $context) use ($shape) {
+                        ->paint(function (CanvasContext $context) use ($shape): void {
                             $context->draw($shape);
                         })
                     );
