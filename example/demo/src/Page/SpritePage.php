@@ -74,7 +74,17 @@ class SpritePage implements Component
             AnsiColor::DarkGray,
         );
 
-        $text = 'PHP-TUI: Building better TUIs!';
+        $text = implode(' ', 
+            [
+                'PHP-TUI: Building better TUIs!',
+                'Once upon a midnight dreary, while I pondered, weak and weary,',
+                'Over many a quaint and curious volume of forgotten lore - ',
+                'While I nodded, nearly napping, suddenly there came a tapping,',
+                'As of some one gently rapping, rapping at my chamber door.',
+                '"Tis some visitor," I muttered, "tapping at my chamber door -',
+                'Only this and nothing more."',
+            ]
+        );
         $font = FontRegistry::default()->get('default');
         $this->scroller = array_map(function (string $char, int $offset) use ($font) {
             return new TextShape(
@@ -83,7 +93,7 @@ class SpritePage implements Component
                 color: AnsiColor::Cyan,
                 position: FloatPosition::at($offset * 6, 0),
             );
-        }, str_split($text), range(0, mb_strlen($text) -1));
+        }, mb_str_split($text), range(0, count(mb_str_split($text)) - 1));
     }
 
     public function build(): Widget
@@ -102,10 +112,9 @@ class SpritePage implements Component
                     ->borderStyle(Style::default()->fg(AnsiColor::DarkGray))
                     ->widget(
                         Canvas::default()
-                            ->backgroundColor(AnsiColor::Black)
-                            ->marker(Marker::Braille)
+                            ->marker(Marker::HalfBlock)
                             ->xBounds(AxisBounds::new(0, self::WIDTH))
-                            ->yBounds(AxisBounds::new(0, 6))
+                            ->yBounds(AxisBounds::new(0, 7))
                             ->paint(function (CanvasContext $context): void {
                                 foreach ($this->scroller as $textShape) {
                                     $context->draw($textShape);
@@ -200,11 +209,10 @@ class SpritePage implements Component
     {
         foreach ($this->scroller as $i => $textShape) {
             $textShape->position->change(function (float $x, float $y) use ($i) {
-                $sinY = sin(0.15 * $this->ticker + ($i * 6)) / 8;
                 if ($x < 0) {
                     $x = count($this->scroller) * 6 + 6;
                 }
-                return [$x -2, $y + $sinY];
+                return [$x -2, $y];
             });
         }
     }
