@@ -24,7 +24,7 @@ final class ImageShape implements Shape
         /**
          * Position to render at (bottom left)
          */
-        public readonly FloatPosition $position,
+        public FloatPosition $position,
     ) {
     }
 
@@ -41,7 +41,12 @@ final class ImageShape implements Shape
         /** @var ImagickPixel[] $pixels */
         foreach ($this->image->getPixelIterator() as $y => $pixels) {
             foreach ($pixels as $x => $pixel) {
-                $point = $painter->getPoint(FloatPosition::at($x, $geo['height'] - intval($y) - 1));
+                $point = $painter->getPoint(
+                    FloatPosition::at(
+                        $this->position->x + $x,
+                        $this->position->y + $geo['height'] - intval($y) - 1
+                    )
+                );
                 if (null === $point) {
                     continue;
                 }

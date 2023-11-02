@@ -2,9 +2,7 @@
 
 namespace PhpTui\Tui\Tests\Adapter\ImageMagick\Shape;
 
-use Imagick;
 use PhpTui\Tui\Adapter\ImageMagick\Shape\ImageShape;
-use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\AxisBounds;
 use PhpTui\Tui\Model\Buffer;
@@ -52,7 +50,7 @@ class ImageShapeTest extends TestCase
             ];
             return;
         }
-        yield 'block line' => [
+        yield 'renders image (no colors in this test!)' => [
             ImageShape::fromFilename(__DIR__ . '/example.jpg'),
             Marker::Block,
             [
@@ -62,5 +60,16 @@ class ImageShapeTest extends TestCase
                     '██████████',
             ]
         ];
+        yield 'position image' => [
+            ImageShape::fromFilename(__DIR__ . '/example.jpg')->position(FloatPosition::at(3, 2)),
+            Marker::Block,
+            [
+                    '  ████████',
+                    '  ████████',
+                    '          ',
+                    '          ',
+            ]
+        ];
     }
 }
+
