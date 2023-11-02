@@ -93,6 +93,16 @@ class CanvasTest extends TestCase
                 '⣇⣀⣀⣀⣀',
             ]
         ];
+        yield 'half-block' => [
+            Marker::HalfBlock,
+            [
+                '⡇xxxx',
+                '⡇xxxx',
+                '⡇xxxx',
+                '⡇xxxx',
+                '⣇⣀⣀⣀⣀',
+            ]
+        ];
     }
 
     public function testLabels(): void
