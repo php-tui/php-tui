@@ -35,6 +35,12 @@ Checkout the project and run:
 ./example/demo/bin/demo
 ```
 
+Screenshots
+-----------
+
+![output](https://github.com/php-tui/php-tui/assets/530801/3f063a8d-1589-477c-b9d6-21c60a907e48)
+*Scaled, scrolling text on a canvas with elephants on a starfield*
+
 Widgets
 -------
 
