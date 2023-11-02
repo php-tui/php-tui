@@ -72,6 +72,11 @@ Widgets
 - [ ] Sparkline
 - [ ] Gauge
 
+Limitations
+-----------
+
+- Windows support: shouldn't be hard to implement, but I don't have windows so...
+
 TODO
 ----
 
