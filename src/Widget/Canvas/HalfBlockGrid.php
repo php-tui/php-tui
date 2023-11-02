@@ -77,6 +77,18 @@ class HalfBlockGrid extends Grid
         }, $paired);
         $colors = array_map(function (array $pair) {
             [$upper, $lower] = $pair;
+            if ($upper === AnsiColor::Reset && $lower === AnsiColor::Reset) {
+                return new FgBgColor(AnsiColor::Reset, AnsiColor::Reset);
+            }
+            // upper half has been set: set the foreground color
+            if ($upper !== AnsiColor::Reset && $lower === AnsiColor::Reset) {
+                return new FgBgColor($upper, AnsiColor::Reset);
+            }
+            // lower half has been set: set the foreground color
+            if ($upper === AnsiColor::Reset && $lower !== AnsiColor::Reset) {
+                return new FgBgColor($lower, AnsiColor::Reset);
+            }
+            // both set, it will be a block with one color
             return new FgBgColor($upper, $lower);
         }, $paired);
 
