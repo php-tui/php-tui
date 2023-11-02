@@ -20,6 +20,8 @@ $display->draw(function (Buffer $buffer): void {
         ->paint(function (CanvasContext $context): void {
 
             $context->draw(
+                // this is expensive, don't do this on each frame if you are
+                // animating!
                 ImageShape::fromFilename(__DIR__ . '/example.jpg')
             );
 
