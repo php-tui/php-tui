@@ -53,9 +53,7 @@ class ImageShapeTest extends TestCase
             return;
         }
         yield 'block line' => [
-            new ImageShape(
-                image: new Imagick(__DIR__ . '/example.jpg'),
-            ),
+            ImageShape::fromFilename(__DIR__ . '/example.jpg'),
             Marker::Block,
             [
                     '                                  ',
