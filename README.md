@@ -49,6 +49,9 @@ Screenshots
 ![elephants starfield](https://github.com/php-tui/php-tui/assets/530801/3f063a8d-1589-477c-b9d6-21c60a907e48)
 <p><i>Page from the PHP-TUI demo showing a scaled, scrolling text on a canvas with elephants on a starfield (framerate reduced for GIF)</i></p>
 
+![image](https://github.com/php-tui/php-tui/assets/530801/cabe761f-9f4b-4c3f-8d2f-a63f059b47fa)
+<p><i>Image rendering via. image magick</i></p>
+
 ![image](https://github.com/php-tui/php-tui/assets/530801/4d39f63b-8192-48ee-b66b-ed817cde1068)
 
 <p><i>Colors demo</i></p>
