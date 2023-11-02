@@ -28,14 +28,14 @@ class CanvasTest extends TestCase
             0.0,
             10.0,
             0.0,
-            AnsiColor::Reset
+            AnsiColor::Green
         );
         $verticalLine = Line::fromPrimitives(
             0.0,
             0.0,
             0.0,
             10.0,
-            AnsiColor::Reset
+            AnsiColor::Green
         );
         $canvas = Canvas::default()->paint(
             function (CanvasContext $context) use ($horizontalLine, $verticalLine): void {
@@ -93,15 +93,15 @@ class CanvasTest extends TestCase
                 '⣇⣀⣀⣀⣀',
             ]
         ];
-        yield 'half-block' => [
+        yield 'half-block'  => [
             Marker::HalfBlock,
             [
-                '⡇xxxx',
-                '⡇xxxx',
-                '⡇xxxx',
-                '⡇xxxx',
-                '⣇⣀⣀⣀⣀',
-            ]
+                '█xxxx',
+                '█xxxx',
+                '█xxxx',
+                '█xxxx',
+                '█▄▄▄▄',
+            ],
         ];
     }
 

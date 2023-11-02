@@ -36,7 +36,7 @@ final class ImagePage implements Component
                     ->borderType(BorderType::Rounded)
                     ->widget(
                         Canvas::default()
-                        ->marker(Marker::Block)
+                        ->marker(Marker::HalfBlock)
                         ->xBounds(AxisBounds::new(0, 320))
                         ->yBounds(AxisBounds::new(0, 240))
                         ->paint(function (CanvasContext $context) use ($shape): void {
