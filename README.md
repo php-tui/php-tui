@@ -25,7 +25,7 @@ Features
 --------
 
 - Many core features from Ratatui.
-- Advanced terminal control heavily inspired by Rust's [crossterm](https://github.com/crossterm-rs/crossterm))
+- Advanced terminal control heavily inspired by Rust's [crossterm](https://github.com/crossterm-rs/crossterm) library.
 - Font rendering
 - Layout control using the Cassowary algorithm via. [php-tui cassowary](https://github.com/php-tui/cassowary)
 
