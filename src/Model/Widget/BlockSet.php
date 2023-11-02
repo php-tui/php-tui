@@ -12,4 +12,6 @@ final class BlockSet
     public const THREE_EIGHTHS = '▍';
     public const ONE_QUARTER = '▎';
     public const ONE_EIGHTH = '▏';
+    public const UPPER_HALF = '▀';
+    public const LOWER_HALF = '▄';
 }

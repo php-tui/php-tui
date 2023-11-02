@@ -3,7 +3,6 @@
 namespace PhpTui\Tui\Widget\Canvas;
 
 use PhpTui\Tui\Model\AxisBounds;
-use PhpTui\Tui\Model\Exception\TodoException;
 use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Model\Widget\BarSet;
 use PhpTui\Tui\Model\Widget\BlockSet;
@@ -33,10 +32,7 @@ final class CanvasContext
             Marker::Block => CharGrid::new($width, $height, $block),
             Marker::Bar => CharGrid::new($width, $height, $bar),
             Marker::Braille => BrailleGrid::new($width, $height),
-            default => throw new TodoException(sprintf(
-                'Marker type "%s" not currently supported',
-                $marker->name
-            ))
+            Marker::HalfBlock => HalfBlockGrid::new($width, $height),
         };
 
         return new self(

@@ -16,7 +16,7 @@ $display->draw(function (Buffer $buffer): void {
     Canvas::default()
         ->xBounds(AxisBounds::new(0, 320))
         ->yBounds(AxisBounds::new(0, 240))
-        ->marker(Marker::Block)
+        ->marker(Marker::HalfBlock)
         ->paint(function (CanvasContext $context): void {
 
             $context->draw(
