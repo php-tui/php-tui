@@ -74,7 +74,8 @@ class SpritePage implements Component
             AnsiColor::DarkGray,
         );
 
-        $text = implode(' ', 
+        $text = implode(
+            ' ',
             [
                 'PHP-TUI: Building better TUIs!',
                 'Once upon a midnight dreary, while I pondered, weak and weary,',
@@ -208,7 +209,7 @@ class SpritePage implements Component
     private function tickScroller(): void
     {
         foreach ($this->scroller as $i => $textShape) {
-            $textShape->position->change(function (float $x, float $y) use ($i) {
+            $textShape->position->change(function (float $x, float $y) {
                 if ($x < 0) {
                     $x = count($this->scroller) * 6 + 6;
                 }
