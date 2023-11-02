@@ -27,11 +27,9 @@
       }: let 
         phpForPhpTui = (pkgs.php81.buildEnv {
           extensions = ({ enabled, all }: enabled ++ (with all; [
-            xdebug
             imagick
           ]));
           extraConfig = ''
-            xdebug.mode=debug
           '';
         });
       in {

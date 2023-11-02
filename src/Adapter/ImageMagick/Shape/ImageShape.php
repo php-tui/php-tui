@@ -3,29 +3,49 @@
 namespace PhpTui\Tui\Adapter\ImageMagick\Shape;
 
 use Imagick;
+use ImagickPixel;
 use PhpTui\Tui\Model\RgbColor;
 use PhpTui\Tui\Model\Widget\FloatPosition;
 use PhpTui\Tui\Widget\Canvas\Painter;
 use PhpTui\Tui\Widget\Canvas\Shape;
 use RuntimeException;
 
+/**
+ * Renders an image on the canvas.
+ */
 final class ImageShape implements Shape
 {
     private function __construct(
-        public readonly Imagick $image
+        /**
+         * Imagck to render (use `ImageShape::fromFilename` constructor)
+         */
+        public readonly Imagick $image,
+
+        /**
+         * Position to render at (bottom left)
+         */
+        public readonly FloatPosition $position,
     ) {
+    }
+
+    public function position(FloatPosition $position): self
+    {
+        $this->position = $position;
+        return $this;
     }
 
     public function draw(Painter $painter): void
     {
         $geo = $this->image->getImageGeometry();
-        for ($x = 0; $x < $geo['width']; $x++) {
-            for ($y = 0; $y  < $geo['height']; $y++) {
-                $point = $painter->getPoint(FloatPosition::at($x, $geo['height'] - $y));
+
+        /** @var ImagickPixel[] $pixels */
+        foreach ($this->image->getPixelIterator() as $y => $pixels) {
+            foreach ($pixels as $x => $pixel) {
+                $point = $painter->getPoint(FloatPosition::at($x, $geo['height'] - intval($y) - 1));
                 if (null === $point) {
-                    continue 2;
+                    continue;
                 }
-                $rgb = $this->image->getImagePixelColor($x, $y)->getColor();
+                $rgb = $pixel->getColor();
                 $painter->paint($point, RgbColor::fromRgb(
                     $rgb['r'],
                     $rgb['g'],
@@ -51,6 +71,6 @@ final class ImageShape implements Shape
                 $filename
             ));
         }
-        return new self($image);
+        return new self($image, new FloatPosition(0, 0));
     }
 }

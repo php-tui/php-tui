@@ -28,12 +28,12 @@ class ImageShapeTest extends TestCase
         }
         $canvas = Canvas::default()
             ->marker($marker)
-            ->xBounds(AxisBounds::new(0, 34))
-            ->yBounds(AxisBounds::new(0, 10))
+            ->xBounds(AxisBounds::new(0, 10))
+            ->yBounds(AxisBounds::new(0, 4))
             ->paint(function (CanvasContext $context) use ($image): void {
                 $context->draw($image);
             });
-        $area = Area::fromDimensions(34, 10);
+        $area = Area::fromDimensions(10, 4);
         $buffer = Buffer::empty($area);
         $canvas->render($area, $buffer);
         self::assertEquals(implode("\n", $expected), $buffer->toString());
@@ -56,16 +56,10 @@ class ImageShapeTest extends TestCase
             ImageShape::fromFilename(__DIR__ . '/example.jpg'),
             Marker::Block,
             [
-                    '                                  ',
-                    '                                  ',
-                    '                                  ',
-                    '                                  ',
-                    '                                  ',
-                    '                                  ',
-                    '                                  ',
-                    '                                  ',
-                    '                                  ',
-                    '█████████████████████████████████ ',
+                    '██████████',
+                    '██████████',
+                    '██████████',
+                    '██████████',
             ]
         ];
     }
