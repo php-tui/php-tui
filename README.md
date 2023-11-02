@@ -47,7 +47,7 @@ Screenshots
 -----------
 
 ![elephants starfield](https://github.com/php-tui/php-tui/assets/530801/3f063a8d-1589-477c-b9d6-21c60a907e48)
-<p><i></i>Scaled, scrolling text on a canvas with elephants on a starfield</i></p>
+<p><i>Page from the PHP-TUI demo showing a scaled, scrolling text on a canvas with elephants on a starfield</i></p>
 
 Widgets
 -------
