@@ -21,6 +21,14 @@ PHP TUI library heavily inspired by Rust TUI /
 
 ![screenshot](https://github.com/dantleech/php-tui/assets/530801/e27a8253-e3a4-4af2-868e-514f1bd3db2a)
 
+Features
+--------
+
+- Many core features from Ratatui.
+- Advanced terminal control heavily inspired by Rust's [crossterm](https://github.com/crossterm-rs/crossterm))
+- Font rendering
+- Layout control using the Cassowary algorithm via. [php-tui cassowary](https://github.com/php-tui/cassowary)
+
 Documentation
 -------------
 
@@ -38,8 +46,8 @@ Checkout the project and run:
 Screenshots
 -----------
 
-![output](https://github.com/php-tui/php-tui/assets/530801/3f063a8d-1589-477c-b9d6-21c60a907e48)
-<p>*Scaled, scrolling text on a canvas with elephants on a starfield*</p>
+![elephants starfield](https://github.com/php-tui/php-tui/assets/530801/3f063a8d-1589-477c-b9d6-21c60a907e48)
+<p><i></i>Scaled, scrolling text on a canvas with elephants on a starfield</i></p>
 
 Widgets
 -------
