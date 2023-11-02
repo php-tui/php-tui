@@ -1,6 +1,6 @@
 # this is a WIP flake for development and experimentation only
 {
-  description = "phpactor/phpactor";
+  description = "php-tui/php-tui";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
@@ -25,10 +25,10 @@
         system,
         ...
       }: let 
-        phpWithXdebug = (pkgs.php81.buildEnv {
+        phpForPhpTui = (pkgs.php81.buildEnv {
           extensions = ({ enabled, all }: enabled ++ (with all; [
             xdebug
-            imagemagick
+            imagick
           ]));
           extraConfig = ''
             xdebug.mode=debug
@@ -43,8 +43,8 @@
           name = "php-devshell";
 
           buildInputs = [
-            pkgs.python3
-            phpWithXdebug
+            pkgs.hugo
+            phpForPhpTui
             pkgs.php81.packages.composer
           ];
           shellHook = ''
