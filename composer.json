@@ -14,6 +14,7 @@
         "psr-4": {
             "PhpTui\\Tui\\Tests\\": "tests/",
             "PhpTui\\Tui\\Example\\Demo\\": "example/demo/src",
+            "PhpTui\\Tui\\Example\\Slideshow\\": "example/slideshow/src",
             "PhpTui\\Term\\Tests\\": "lib/term/tests/",
             "PhpTui\\Docgen\\": "lib/docgen/src/",
             "PhpTui\\Bdf\\Tests\\": "lib/bdf/tests/"

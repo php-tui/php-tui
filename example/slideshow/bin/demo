@@ -1,0 +1,21 @@
+#!/usr/bin/env php
+<?php
+
+use PhpTui\Term\Terminal;
+use PhpTui\Tui\Adapter\Bdf\FontRegistry;
+use PhpTui\Tui\Adapter\PhpTerm\PhpTermBackend;
+use PhpTui\Tui\Example\Slideshow\App;
+use PhpTui\Tui\Example\Slideshow\Slide\Splash;
+use PhpTui\Tui\Model\Display;
+
+require __DIR__ . '/../../../vendor/autoload.php';
+
+$registry = FontRegistry::default();
+$app = new App(
+    Terminal::new(),
+    Display::fullscreen(PhpTermBackend::new()),
+    [
+        new Splash($registry),
+    ]
+);
+$app->run();
