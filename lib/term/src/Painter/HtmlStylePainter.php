@@ -134,7 +134,7 @@ class HtmlStylePainter implements Painter
                             array_values($attrs),
                         )
                     ),
-                    $char,
+                    $char === ' ' ? '&nbsp;' : $char,
                 );
             }, $row, $rowAttrs));
         }, $charChunks, $attrChunks));
