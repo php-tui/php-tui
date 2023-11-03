@@ -4,6 +4,7 @@ namespace PhpTui\Tui\Adapter\Bdf\Shape;
 
 use PhpTui\BDF\BdfFont;
 use PhpTui\Tui\Model\Color;
+use PhpTui\Tui\Model\Position;
 use PhpTui\Tui\Model\Widget\FloatPosition;
 use PhpTui\Tui\Widget\Canvas\Painter;
 use PhpTui\Tui\Widget\Canvas\Shape;
@@ -33,11 +34,21 @@ class TextShape implements Shape
          * Position of the text (bottom left corner)
          */
         public readonly FloatPosition $position,
+
+        /**
+         * Scale of the font
+         */
+        private float $scaleX = 1.0,
+        /**
+         * Verttical scale of the font
+         */
+        private float $scaleY = 1.0,
     ) {
     }
 
     public function draw(Painter $painter): void
     {
+        $cellWidth = 1 * $this->scaleX;
         $charOffset = 0;
         foreach (str_split($this->text) as $char) {
             $glyph = $this->font->codePoint(ord($char));
@@ -54,14 +65,27 @@ class TextShape implements Shape
                     $xbit = $xbit << 1;
                 }
                 foreach ($offsets as $offset) {
-                    $point = $painter->getPoint(FloatPosition::at(
-                        $offset,
+                    $minX = $offset * $cellWidth;
+                    $maxX = ($offset * $cellWidth) + $cellWidth;
+
+                    $fromPoint = $painter->getPoint(FloatPosition::at(
+                        $minX,
                         $y + $glyph->boundingBox->offset->y,
                     ));
-                    if (null === $point) {
+                    if (null === $fromPoint) {
                         continue;
                     }
-                    $painter->paint($point, $this->color);
+
+                    $toPoint = $painter->getPoint(FloatPosition::at(
+                        $maxX - 1,
+                        $y + $glyph->boundingBox->offset->y,
+                    ));
+                    if (null === $toPoint) {
+                        continue;
+                    }
+                    foreach (range($fromPoint->x, $toPoint->x) as $x) {
+                        $painter->paint(Position::at($x, $fromPoint->y), $this->color);
+                    }
                 }
 
                 $y++;

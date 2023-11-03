@@ -56,5 +56,33 @@ class TextShapeTest extends TestCase
                 '█  █  ███   ███   ███   ███        █   █  ███  █      ███   ██ █ ',
             ]
         ];
+        yield 'scale x' => [
+            new TextShape(
+                font: FontRegistry::default()->get('default'),
+                scaleX: 2,
+                text: 'Hello World',
+                color: AnsiColor::Green,
+                position: FloatPosition::at(0, 0),
+            ),
+            [
+                '█      ██                ████        ████                        ',
+                '█      ██    ██████        ██          ██        ██████          ',
+                '█████████  ██      ██      ██          ██      ██      ██        ',
+                '█      ██  ██████████      ██          ██      ██      ██        ',
+                '█      ██  ██              ██          ██      ██      ██        ',
+                '█      ██    ██████      ██████      ██████      ██████          ',
+            ]
+        ];
+        yield 'scale y' => [
+            new TextShape(
+                font: FontRegistry::default()->get('default'),
+                scaleY: 2,
+                text: 'Hello World',
+                color: AnsiColor::Green,
+                position: FloatPosition::at(0, 0),
+            ),
+            [
+            ]
+        ];
     }
 }
