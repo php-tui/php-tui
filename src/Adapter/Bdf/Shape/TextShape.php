@@ -85,7 +85,12 @@ class TextShape implements Shape
     /**
      * @param array<int,array<int,bool>> $grid
      */
-    private function renderChar(Painter $painter, float $charOffset, array $grid, BdfGlyph $glyph): float
+    private function renderChar(
+        Painter $painter,
+        float $charOffset,
+        array $grid,
+        BdfGlyph $glyph
+    ): float
     {
         $charWidth = 1 * $this->scaleX;
         $charHeight = 1 * $this->scaleY;
@@ -95,11 +100,11 @@ class TextShape implements Shape
         $points = [];
         foreach ($grid as $y => $row) {
             $y1 = $yOffset;
-            $y2 = $yOffset * $this->scaleY;
-            $yOffset += 1 + abs($y2 - $y1);
+            $y2 = $yOffset + $charHeight;
+            $yOffset += abs($y2 - $y1);
 
             $xOffset = 1;
-            foreach (array_reverse($row) as $x => $render) {
+            foreach (array_reverse($row) as $render) {
                 $x1 = $xOffset;
                 $x2 = $xOffset + $charWidth;
                 $xOffset += abs($x2 - $x1);
@@ -108,7 +113,7 @@ class TextShape implements Shape
                     continue;
                 }
 
-                foreach (range($y1, $y2) as $yF) {
+                for ($yF = $y1; $yF < $y2; $yF++) {
                     for ($xF = $x1; $xF < $x2; $xF++) {
                         $points[] = $painter->getPoint(FloatPosition::at(
                             $charOffset + $this->position->x + $xF,
