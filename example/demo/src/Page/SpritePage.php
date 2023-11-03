@@ -91,6 +91,8 @@ class SpritePage implements Component
             return new TextShape(
                 font: $font,
                 text: $char,
+                scaleX: 2,
+                scaleY: 2,
                 color: AnsiColor::Cyan,
                 position: FloatPosition::at($offset * 6, 0),
             );
@@ -103,7 +105,7 @@ class SpritePage implements Component
 
         return Grid::default()
             ->constraints([
-                Constraint::length(6),
+                Constraint::length(12),
                 Constraint::percentage(70),
             ])
             ->widgets([
@@ -113,9 +115,9 @@ class SpritePage implements Component
                     ->borderStyle(Style::default()->fg(AnsiColor::DarkGray))
                     ->widget(
                         Canvas::default()
-                            ->marker(Marker::HalfBlock)
+                            ->marker(Marker::Block)
                             ->xBounds(AxisBounds::new(0, self::WIDTH))
-                            ->yBounds(AxisBounds::new(0, 7))
+                            ->yBounds(AxisBounds::new(0, 20))
                             ->paint(function (CanvasContext $context): void {
                                 foreach ($this->scroller as $textShape) {
                                     $context->draw($textShape);

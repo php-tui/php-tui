@@ -3,6 +3,7 @@
 namespace PhpTui\Tui\Adapter\Bdf\Shape;
 
 use PhpTui\BDF\BdfFont;
+use PhpTui\BDF\BdfGlyph;
 use PhpTui\Tui\Model\Color;
 use PhpTui\Tui\Model\Position;
 use PhpTui\Tui\Model\Widget\FloatPosition;
@@ -48,49 +49,84 @@ class TextShape implements Shape
 
     public function draw(Painter $painter): void
     {
-        $cellWidth = 1 * $this->scaleX;
         $charOffset = 0;
         foreach (str_split($this->text) as $char) {
             $glyph = $this->font->codePoint(ord($char));
-            $y = $this->position->y;
 
-            $lines = [];
-            foreach (array_reverse($glyph->bitmap) as $row) {
-                $xbit = 1;
-                $offsets = [];
-                for ($i = $glyph->boundingBox->size->width + 1; $i >= 0; $i--) {
-                    if (($row & $xbit) > 0) {
-                        $offsets[] = $i + $charOffset + $this->position->x;
-                    }
-                    $xbit = $xbit << 1;
-                }
-                foreach ($offsets as $offset) {
-                    $minX = $offset * $cellWidth;
-                    $maxX = ($offset * $cellWidth) + $cellWidth;
-
-                    $fromPoint = $painter->getPoint(FloatPosition::at(
-                        $minX,
-                        $y + $glyph->boundingBox->offset->y,
-                    ));
-                    if (null === $fromPoint) {
-                        continue;
-                    }
-
-                    $toPoint = $painter->getPoint(FloatPosition::at(
-                        $maxX - 1,
-                        $y + $glyph->boundingBox->offset->y,
-                    ));
-                    if (null === $toPoint) {
-                        continue;
-                    }
-                    foreach (range($fromPoint->x, $toPoint->x) as $x) {
-                        $painter->paint(Position::at($x, $fromPoint->y), $this->color);
-                    }
-                }
-
-                $y++;
-            }
-            $charOffset += $glyph->boundingBox->size->width;
+            $grid = $this->buildGrid($glyph);
+            $charOffset += $this->renderChar($painter, $charOffset, $grid, $glyph);
         }
+
+    }
+
+    /**
+     * @return list<array<int,bool>>
+     */
+    private function buildGrid(BdfGlyph $glyph): array
+    {
+        $grid = [];
+        $y = 0;
+        foreach (array_reverse($glyph->bitmap) as $row) {
+            $xbit = 1;
+            for ($i = $glyph->boundingBox->size->width + 1; $i >= 0; $i--) {
+                $x = $i + $this->position->x;
+                if (($row & $xbit) > 0) {
+                    $grid[$y][$x] = true;
+                } else {
+                    $grid[$y][$x] = false;
+                }
+                $xbit = $xbit << 1;
+            }
+            $y++;
+        }
+        return $grid;
+    }
+
+    /**
+     * @param array<int,array<int,bool>> $grid
+     */
+    private function renderChar(Painter $painter, float $charOffset, array $grid, BdfGlyph $glyph): float
+    {
+        $charWidth = 1 * $this->scaleX;
+        $charHeight = 1 * $this->scaleY;
+        $renderedWidth = 0;
+
+        $yOffset = $glyph->boundingBox->offset->y;
+        $points = [];
+        foreach ($grid as $y => $row) {
+            $y1 = $yOffset;
+            $y2 = $yOffset * $this->scaleY;
+            $yOffset += 1 + abs($y2 - $y1);
+
+            $xOffset = 1;
+            foreach (array_reverse($row) as $x => $render) {
+                $x1 = $xOffset;
+                $x2 = $xOffset + $charWidth;
+                $xOffset += abs($x2 - $x1);
+
+                if ($render === false) {
+                    continue;
+                }
+
+                foreach (range($y1, $y2) as $yF) {
+                    for ($xF = $x1; $xF < $x2; $xF++) {
+                        $points[] = $painter->getPoint(FloatPosition::at(
+                            $charOffset + $this->position->x + $xF,
+                            $this->position->y + $yF,
+                        ));
+                    }
+                }
+            }
+        }
+
+        $maxX = null;
+        foreach ($points as $point) {
+            if (null === $point) {
+                continue;
+            }
+            $painter->paint($point, $this->color);
+        }
+
+        return $glyph->boundingBox->size->width * $this->scaleX;
     }
 }
