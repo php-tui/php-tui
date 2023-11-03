@@ -4,7 +4,12 @@ namespace PhpTui\Term\Painter;
 
 use PhpTui\Term\Action\MoveCursor;
 use PhpTui\Term\Action\PrintString;
+use PhpTui\Term\Action\Reset;
+use PhpTui\Term\Action\SetForegroundColor;
+use PhpTui\Term\Action\SetRgbBackgroundColor;
+use PhpTui\Term\Action\SetRgbForegroundColor;
 use PhpTui\Term\Painter;
+use RuntimeException;
 
 class HtmlPainter implements Painter
 {
@@ -22,44 +27,124 @@ class HtmlPainter implements Painter
 
     private int $cursorY = 0;
 
+    /**
+     * @var int<1,max>
+     */
+    private int $width;
+
+    private ?SetRgbBackgroundColor $bgColor = null;
+
+    private ?SetRgbForegroundColor $fgColor = null;
+
+    /**
+     * @param array<string,string> $defaultCellAttrs
+     */
+    private function __construct(
+        int $width,
+        int $height,
+        private array $defaultCellAttrs
+    )
+    {
+        if ($width < 1 || $height < 1) {
+            throw new RuntimeException(sprintf(
+                'Width or height cannot be less than 1, got width: %d, height: %d',
+                $width,
+                $height
+            ));
+        }
+        $this->chars = array_fill(0, $width * $height, ' ');
+        $this->attributes = array_fill(0, $width * $height, []);
+        $this->width = $width;
+    }
+
+    public static function default(int $width, int $height): self
+    {
+        return new self(
+            $width,
+            $height,
+            [
+                'font-family' => 'monospace',
+                'padding' =>  '0px',
+                'font-kerning' => 'none',
+                'white-space' => 'pre',
+                'display' => 'block',
+                'float' => 'left',
+                'line-height' => '1em',
+                'font-size' => '1em',
+            ]
+        );
+    }
+
     public function paint(array $actions): void
     {
         foreach ($actions as $action) {
             if ($action instanceof PrintString) {
                 $this->printString($action);
+                continue;
             }
             if ($action instanceof MoveCursor) {
                 $this->cursorX = $action->col - 1;
                 $this->cursorY = $action->line - 1;
+                continue;
             }
+            if ($action instanceof SetRgbBackgroundColor) {
+                $this->bgColor = $action;
+                continue;
+            }
+            if ($action instanceof SetRgbForegroundColor) {
+                $this->fgColor = $action;
+                continue;
+            }
+            if ($action instanceof Reset) {
+                $this->fgColor = null;
+                $this->bgColor = null;
+                continue;
+            }
+            throw new RuntimeException(sprintf(
+                'Do not know how to handle action: %s',
+                $action::class
+            ));
+
         }
+
     }
 
     public function toString(): string
     {
-        if (empty($this->grid)) {
-            return '';
-        }
-        $maxX = max(
-            ...array_map(
-                fn (array $cells) => max(
-                    array_keys($cells)
-                ),
-                $this->grid
-            )
-        );
-        $lines = [];
-        foreach ($this->grid as $line => &$cells) {
-            for ($i = 0; $i <= $maxX; $i++) {
-                if (!isset($cells[$i])) {
-                    $cells[$i] = ' ';
-                }
-            }
-            ksort($cells);
-            $lines[] = implode('', $cells);
-        }
+        $charChunks = array_chunk($this->chars, $this->width);
+        $attrChunks = array_chunk($this->attributes, $this->width);
 
-        return implode("\n", $lines);
+        $html = implode('<div style="clear: both;"></div>', array_map(function (array $row, array $rowAttrs) {
+            return implode('', array_map(function (string $char, array $attrs) {
+                return sprintf(
+                    '<div style="%s;%s">%s</div>',
+                    implode(
+                        ';',
+                        array_map(
+                            function (string $key, string $value) {
+                                return $key . ':'. $value;
+                            },
+                            array_keys($this->defaultCellAttrs),
+                            array_values($this->defaultCellAttrs),
+                        )
+                    ),
+                    implode(
+                        ';',
+                        array_map(
+                            function (string $key, string $value) {
+                                return $key . ':'. $value;
+                            },
+                            array_keys($attrs),
+                            array_values($attrs),
+                        )
+                    ),
+                    $char,
+                );
+            }, $row, $rowAttrs));
+        }, $charChunks, $attrChunks));
+        $html .= '<div style="clear: both;"></div>';
+
+        return sprintf('%s', $html);
     }
 
     private function printString(PrintString $action): void
@@ -72,9 +157,25 @@ class HtmlPainter implements Painter
 
     private function paintChar(int $x, int $y, string $char): void
     {
-        if (!isset($this->grid[$y][$x])) {
-            $this->grid[$y][$x] = ' ';
+        $offset = ($y * $this->width + 1) + $x - 1;
+        $this->chars[$offset] = $char;
+        if ($this->bgColor) {
+            $this->attributes[$offset]['background-color'] = sprintf(
+                '#%02X%02X%02X',
+                $this->bgColor->r,
+                $this->bgColor->g,
+                $this->bgColor->b,
+            );
         }
-        $this->grid[$y][$x] = $char;
+        if ($this->fgColor) {
+            $this->attributes[$offset]['color'] = sprintf(
+                '#%02X%02X%02X',
+                $this->fgColor->r,
+                $this->fgColor->g,
+                $this->fgColor->b,
+            );
+        } else {
+            $this->attributes[$offset]['color'] = 'white';
+        }
     }
 }
