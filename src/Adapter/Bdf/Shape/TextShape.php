@@ -96,7 +96,7 @@ class TextShape implements Shape
         $charHeight = 1 * $this->scaleY;
         $renderedWidth = 0;
 
-        $yOffset = $glyph->boundingBox->offset->y;
+        $yOffset = $glyph->boundingBox->offset->y * $this->scaleY;
         $points = [];
         foreach ($grid as $y => $row) {
             $y1 = $yOffset;
