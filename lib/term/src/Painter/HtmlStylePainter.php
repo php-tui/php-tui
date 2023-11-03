@@ -5,13 +5,18 @@ namespace PhpTui\Term\Painter;
 use PhpTui\Term\Action\MoveCursor;
 use PhpTui\Term\Action\PrintString;
 use PhpTui\Term\Action\Reset;
-use PhpTui\Term\Action\SetForegroundColor;
 use PhpTui\Term\Action\SetRgbBackgroundColor;
 use PhpTui\Term\Action\SetRgbForegroundColor;
 use PhpTui\Term\Painter;
 use RuntimeException;
 
-class HtmlPainter implements Painter
+/**
+ * Painter which generates HTML span elements with style attributes
+ * to represent a terminal in HTML.
+ *
+ * This class should be considered unstable.
+ */
+class HtmlStylePainter implements Painter
 {
     /**
      * @var list<string>
@@ -43,8 +48,7 @@ class HtmlPainter implements Painter
         int $width,
         int $height,
         private array $defaultCellAttrs
-    )
-    {
+    ) {
         if ($width < 1 || $height < 1) {
             throw new RuntimeException(sprintf(
                 'Width or height cannot be less than 1, got width: %d, height: %d',

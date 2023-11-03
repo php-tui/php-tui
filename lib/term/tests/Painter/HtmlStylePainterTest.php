@@ -4,13 +4,13 @@ namespace PhpTui\Term\Tests\Painter;
 
 use PHPUnit\Framework\TestCase;
 use PhpTui\Term\Actions;
-use PhpTui\Term\Painter\HtmlPainter;
+use PhpTui\Term\Painter\HtmlStylePainter;
 
-class HtmlPainterTest extends TestCase
+class HtmlStylePainterTest extends TestCase
 {
     public function testPaint(): void
     {
-        $painter = HtmlPainter::default(2, 5);
+        $painter = HtmlStylePainter::default(2, 5);
         $painter->paint([
             Actions::printString('Hell'),
             Actions::moveCursor(2, 5),
