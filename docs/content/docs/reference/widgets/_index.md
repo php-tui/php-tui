@@ -1,6 +1,5 @@
 ---
 bookCollapseSection: true
+title: Widgets
 ---
-## Widgets
-
 Widgets are PHP-TUI's building blocks.
