@@ -37,7 +37,7 @@ class TextShape implements Shape
         public readonly FloatPosition $position,
 
         /**
-         * Scale of the font
+         * Horizontal scale of the font
          */
         private float $scaleX = 1.0,
         /**
