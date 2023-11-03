@@ -90,8 +90,7 @@ class TextShape implements Shape
         float $charOffset,
         array $grid,
         BdfGlyph $glyph
-    ): float
-    {
+    ): float {
         $charWidth = 1 * $this->scaleX;
         $charHeight = 1 * $this->scaleY;
         $renderedWidth = 0;
