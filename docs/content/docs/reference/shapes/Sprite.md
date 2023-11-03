@@ -1,6 +1,11 @@
 ## Sprite
 
 Renders a "sprite" based on a given "ascii art"Each sprite can have a single color but they can be layered on the canvas.
+{{% terminal file="/data/example/docs/shape/sprite.snapshot" %}}
+{{< details "Show code"  >}}
+{{% codeInclude file="/data/example/docs/shape/sprite.php" language="php" %}}
+
+{{< /details >}}
 ### Parameters
 
 Configure the shape using the constructor arguments named as follows:
@@ -14,11 +19,3 @@ Configure the shape using the constructor arguments named as follows:
 | **xScale** | `float` | X scale |
 | **density** | `int` | Density |
 | **yScale** | `float` | Y scale |
-### Example
-The following code example:
-
-{{% codeInclude file="/data/example/docs/shape/sprite.php" language="php" %}}
-
-Should render as:
-
-{{% terminal file="/data/example/docs/shape/sprite.snapshot" %}}

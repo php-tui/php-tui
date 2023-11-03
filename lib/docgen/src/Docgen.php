@@ -180,6 +180,13 @@ final class Docgen
             '',
             $shapeDoc->description,
         ];
+        $doc = array_merge($doc, [
+            sprintf('{{%% terminal file="/data/example/docs/shape/%s.snapshot" %%}}', $shapeDoc->name),
+            '{{< details "Show code"  >}}',
+            sprintf('{{%% codeInclude file="/data/example/docs/shape/%s.php" language="php" %%}}', $shapeDoc->name),
+            '',
+            '{{< /details >}}',
+        ]);
         if ($shapeDoc->params) {
             $doc = array_merge($doc, [
             '### Parameters',
@@ -199,17 +206,6 @@ final class Docgen
             }
         }
 
-        $doc = array_merge($doc, [
-            '### Example'.
-            '',
-            'The following code example:',
-            '',
-            sprintf('{{%% codeInclude file="/data/example/docs/shape/%s.php" language="php" %%}}', $shapeDoc->name),
-            '',
-            'Should render as:',
-            '',
-            sprintf('{{%% terminal file="/data/example/docs/shape/%s.snapshot" %%}}', $shapeDoc->name)
-        ]);
         return implode("\n", $doc);
 
     }
@@ -220,6 +216,13 @@ final class Docgen
             '',
             $widgetDoc->description,
         ];
+        $doc = array_merge($doc, [
+            sprintf('{{%% terminal file="/data/example/docs/widget/%s.snapshot" %%}}', $widgetDoc->name),
+            '{{< details "Show code"  >}}',
+            sprintf('{{%% codeInclude file="/data/example/docs/widget/%s.php" language="php" %%}}', $widgetDoc->name),
+            '',
+            '{{< /details >}}',
+        ]);
         if ($widgetDoc->params) {
             $doc = array_merge($doc, [
             '### Parameters',
@@ -238,18 +241,6 @@ final class Docgen
                 );
             }
         }
-
-        $doc = array_merge($doc, [
-            '### Example'.
-            '',
-            'The following code example:',
-            '',
-            sprintf('{{%% codeInclude file="/data/example/docs/widget/%s.php" language="php" %%}}', $widgetDoc->name),
-            '',
-            'Should render as:',
-            '',
-            sprintf('{{%% terminal file="/data/example/docs/widget/%s.snapshot" %%}}', $widgetDoc->name)
-        ]);
         return implode("\n", $doc);
 
     }

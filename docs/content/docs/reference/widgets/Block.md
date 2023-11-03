@@ -1,6 +1,11 @@
 ## Block
 
 The block widget is a container for other widgets and can provide a border,title and padding.
+{{% terminal file="/data/example/docs/widget/block.snapshot" %}}
+{{< details "Show code"  >}}
+{{% codeInclude file="/data/example/docs/widget/block.php" language="php" %}}
+
+{{< /details >}}
 ### Parameters
 
 Configure the widget using the builder methods named as follows:
@@ -15,11 +20,3 @@ Configure the widget using the builder methods named as follows:
 | **titleStyle** | `PhpTui\Tui\Model\Style` | Style of the titles. |
 | **padding** | `PhpTui\Tui\Widget\Block\Padding` | Padding to apply to the inner widget. |
 | **widget** | `PhpTui\Tui\Model\Widget\|null` | The inner widget. |
-### Example
-The following code example:
-
-{{% codeInclude file="/data/example/docs/widget/block.php" language="php" %}}
-
-Should render as:
-
-{{% terminal file="/data/example/docs/widget/block.snapshot" %}}

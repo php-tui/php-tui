@@ -1,6 +1,11 @@
 ## Rectangle
 
 Draw a rectangle at the given position with the given width and height
+{{% terminal file="/data/example/docs/shape/rectangle.snapshot" %}}
+{{< details "Show code"  >}}
+{{% codeInclude file="/data/example/docs/shape/rectangle.php" language="php" %}}
+
+{{< /details >}}
 ### Parameters
 
 Configure the shape using the constructor arguments named as follows:
@@ -11,11 +16,3 @@ Configure the shape using the constructor arguments named as follows:
 | **width** | `int` | Width of the rectangle |
 | **height** | `int` | Height of the rectangle |
 | **color** | `PhpTui\Tui\Model\Color` | Color of the rectangle |
-### Example
-The following code example:
-
-{{% codeInclude file="/data/example/docs/shape/rectangle.php" language="php" %}}
-
-Should render as:
-
-{{% terminal file="/data/example/docs/shape/rectangle.snapshot" %}}

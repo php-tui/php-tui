@@ -1,6 +1,11 @@
 ## ItemList
 
 The ItemList widget allows you to list and highlight items.
+{{% terminal file="/data/example/docs/widget/itemList.snapshot" %}}
+{{< details "Show code"  >}}
+{{% codeInclude file="/data/example/docs/widget/itemList.php" language="php" %}}
+
+{{< /details >}}
 ### Parameters
 
 Configure the widget using the builder methods named as follows:
@@ -14,11 +19,3 @@ Configure the widget using the builder methods named as follows:
 | **highlightSymbol** | `string` |  |
 | **state** | `PhpTui\Tui\Widget\ItemList\ItemListState` |  |
 | **highlightSpacing** | `PhpTui\Tui\Widget\ItemList\HighlightSpacing` |  |
-### Example
-The following code example:
-
-{{% codeInclude file="/data/example/docs/widget/itemList.php" language="php" %}}
-
-Should render as:
-
-{{% terminal file="/data/example/docs/widget/itemList.snapshot" %}}

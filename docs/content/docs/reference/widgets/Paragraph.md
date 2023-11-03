@@ -1,6 +1,11 @@
 ## Paragraph
 
 This widget has the ability to show and wrap text.
+{{% terminal file="/data/example/docs/widget/paragraph.snapshot" %}}
+{{< details "Show code"  >}}
+{{% codeInclude file="/data/example/docs/widget/paragraph.php" language="php" %}}
+
+{{< /details >}}
 ### Parameters
 
 Configure the widget using the builder methods named as follows:
@@ -12,11 +17,3 @@ Configure the widget using the builder methods named as follows:
 | **text** | `PhpTui\Tui\Model\Widget\Text` |  |
 | **scroll** | `array` |  |
 | **alignment** | `PhpTui\Tui\Model\Widget\HorizontalAlignment` |  |
-### Example
-The following code example:
-
-{{% codeInclude file="/data/example/docs/widget/paragraph.php" language="php" %}}
-
-Should render as:
-
-{{% terminal file="/data/example/docs/widget/paragraph.snapshot" %}}

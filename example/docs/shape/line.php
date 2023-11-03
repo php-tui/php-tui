@@ -23,8 +23,8 @@ $display->draw(function (Buffer $buffer): void {
             $context->draw(Line::fromPrimitives(
                 0,  // x1
                 0,  // y1
-                10, // x2
-                10, // y2
+                20, // x2
+                20, // y2
                 AnsiColor::Green
             ));
         })

@@ -1,6 +1,11 @@
 ## Table
 
 Shows tabular data arranged in columns. The column spacing is determined bythe "width" constraints.
+{{% terminal file="/data/example/docs/widget/table.snapshot" %}}
+{{< details "Show code"  >}}
+{{% codeInclude file="/data/example/docs/widget/table.php" language="php" %}}
+
+{{< /details >}}
 ### Parameters
 
 Configure the widget using the builder methods named as follows:
@@ -16,11 +21,3 @@ Configure the widget using the builder methods named as follows:
 | **rows** | `list<\PhpTui\Tui\Widget\Table\TableRow>` | Table rows. |
 | **highlightSpacing** | `PhpTui\Tui\Widget\ItemList\HighlightSpacing` | Highlight spacing strategy. |
 | **state** | `PhpTui\Tui\Widget\Table\TableState` | Hold the state of the table (i.e. selected row, current offset). |
-### Example
-The following code example:
-
-{{% codeInclude file="/data/example/docs/widget/table.php" language="php" %}}
-
-Should render as:
-
-{{% terminal file="/data/example/docs/widget/table.snapshot" %}}

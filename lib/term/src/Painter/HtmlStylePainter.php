@@ -69,11 +69,7 @@ class HtmlStylePainter implements Painter
             [
                 'font-family' => 'monospace',
                 'color' => 'black',
-                'padding' =>  '0px',
-                'font-kerning' => 'none',
-                'white-space' => 'pre',
-                'display' => 'block',
-                'float' => 'left',
+                'display' => 'table-cell',
                 'line-height' => '1em',
                 'font-size' => '1em',
             ]
@@ -138,7 +134,7 @@ class HtmlStylePainter implements Painter
                 );
             }, $row, $rowAttrs));
         }, $charChunks, $attrChunks));
-        $html .= '<div style="clear: both;"></div>';
+        $html .= '<div style="clear: both;overflow:hidden"></div>';
 
         return sprintf('%s', $html);
     }

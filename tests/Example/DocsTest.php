@@ -10,6 +10,9 @@ use RuntimeException;
 
 class DocsTest extends TestCase
 {
+    const WIDTH = 20;
+    const HEIGHT = 50;
+
     /**
      * @dataProvider provideExamples
      */
@@ -27,8 +30,8 @@ class DocsTest extends TestCase
             pipes: $pipes,
             cwd: __DIR__ . '/../../',
             env_vars: [
-                'LINES' => 20,
-                'COLUMNS' => 50,
+                'LINES' => self::WIDTH,
+                'COLUMNS' => self::HEIGHT,
             ],
         );
         if (!is_resource($process)) {
@@ -42,7 +45,7 @@ class DocsTest extends TestCase
 
         $actions = AnsiParser::parseString($output, throw: false);
 
-        $painter = HtmlStylePainter::default(50, 20);
+        $painter = HtmlStylePainter::default(self::HEIGHT, self::WIDTH);
         $painter->paint($actions);
         $output = $painter->toString();
 
