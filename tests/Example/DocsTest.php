@@ -5,7 +5,7 @@ namespace PhpTui\Tui\Tests\Example;
 use Generator;
 use PHPUnit\Framework\TestCase;
 use PhpTui\Term\AnsiParser;
-use PhpTui\Term\Painter\StringPainter;
+use PhpTui\Term\Painter\HtmlStylePainter;
 use RuntimeException;
 
 class DocsTest extends TestCase
@@ -42,7 +42,7 @@ class DocsTest extends TestCase
 
         $actions = AnsiParser::parseString($output, throw: false);
 
-        $painter = new StringPainter();
+        $painter = HtmlStylePainter::default(50, 20);
         $painter->paint($actions);
         $output = $painter->toString();
 
@@ -65,7 +65,7 @@ class DocsTest extends TestCase
             if (false === $example) {
                 continue;
             }
-            yield [
+            yield dirname($example) . ' ' . basename($example) => [
                 $example,
             ];
         }

@@ -25,7 +25,9 @@ $display->draw(function (Buffer $buffer): void {
                     [0, 0],
                     [2, 2],
                     [4, 4],
-                ], AnsiColor::Gray)
+                    [6, 6],
+                    [8, 8],
+                ], AnsiColor::Black)
             );
         })
         ->render($buffer->area(), $buffer);
