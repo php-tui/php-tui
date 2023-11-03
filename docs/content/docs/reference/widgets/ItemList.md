@@ -1,3 +1,7 @@
+---
+title: ItemList
+description: The ItemList widget allows you to list and highlight items.
+---
 ## ItemList
 
 The ItemList widget allows you to list and highlight items.

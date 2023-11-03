@@ -1,3 +1,7 @@
+---
+title: Line
+description: Draw a straight line from one point to another.
+---
 ## Line
 
 Draw a straight line from one point to another.

@@ -1,3 +1,7 @@
+---
+title: Table
+description: Shows tabular data arranged in columns. The column spacing is determined bythe "width" constraints.
+---
 ## Table
 
 Shows tabular data arranged in columns. The column spacing is determined bythe "width" constraints.

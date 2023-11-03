@@ -1,3 +1,7 @@
+---
+title: Canvas
+description: The canvas widget provides a surface, of arbitrary scale, upon which shapes can be drawn.
+---
 ## Canvas
 
 The canvas widget provides a surface, of arbitrary scale, upon which shapes can be drawn.

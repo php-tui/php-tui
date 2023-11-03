@@ -1,3 +1,7 @@
+---
+title: TextShape
+description: Renders text on the canvas.This widget requires a bitmap font in the BDF format.You can use the `PhpTui\Tui\Adapter\Bdf\FontRegistry` to load and manage fonts. It has a default font built in.
+---
 ## TextShape
 
 Renders text on the canvas.This widget requires a bitmap font in the BDF format.You can use the `PhpTui\Tui\Adapter\Bdf\FontRegistry` to load and manage fonts. It has a default font built in.

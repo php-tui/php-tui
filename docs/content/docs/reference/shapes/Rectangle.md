@@ -1,3 +1,7 @@
+---
+title: Rectangle
+description: Draw a rectangle at the given position with the given width and height
+---
 ## Rectangle
 
 Draw a rectangle at the given position with the given width and height

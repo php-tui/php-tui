@@ -1,3 +1,7 @@
+---
+title: Map
+description: Renders a map of the world!
+---
 ## Map
 
 Renders a map of the world!

@@ -175,8 +175,13 @@ final class Docgen
 
     private function renderShape(WidgetDoc $shapeDoc): string
     {
+        $title = ucfirst($shapeDoc->name);
         $doc = [
-            sprintf('## %s', ucfirst($shapeDoc->name)),
+            '---',
+            sprintf('title: %s', $title),
+            sprintf('description: %s', $shapeDoc->description),
+            '---',
+            sprintf('## %s', $title),
             '',
             $shapeDoc->description,
         ];
@@ -211,8 +216,13 @@ final class Docgen
     }
     private function renderWidget(WidgetDoc $widgetDoc): string
     {
+        $title = ucfirst($widgetDoc->name);
         $doc = [
-            sprintf('## %s', ucfirst($widgetDoc->name)),
+            '---',
+            sprintf('title: %s', $title),
+            sprintf('description: %s', $widgetDoc->description),
+            '---',
+            sprintf('## %s', $title),
             '',
             $widgetDoc->description,
         ];

@@ -1,3 +1,7 @@
+---
+title: Circle
+description: Draws a circle at with the specified radius and color
+---
 ## Circle
 
 Draws a circle at with the specified radius and color

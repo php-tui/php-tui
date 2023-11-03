@@ -1,3 +1,7 @@
+---
+title: Chart
+description: Renders a a composite of scatter or line graphs.
+---
 ## Chart
 
 Renders a a composite of scatter or line graphs.

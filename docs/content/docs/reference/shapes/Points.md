@@ -1,3 +1,7 @@
+---
+title: Points
+description: Render a set of points on the canvas.
+---
 ## Points
 
 Render a set of points on the canvas.

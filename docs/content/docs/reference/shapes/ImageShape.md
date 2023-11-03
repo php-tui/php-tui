@@ -1,3 +1,7 @@
+---
+title: ImageShape
+description: Renders an image on the canvas.
+---
 ## ImageShape
 
 Renders an image on the canvas.

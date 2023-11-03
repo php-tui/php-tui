@@ -1,3 +1,7 @@
+---
+title: Paragraph
+description: This widget has the ability to show and wrap text.
+---
 ## Paragraph
 
 This widget has the ability to show and wrap text.

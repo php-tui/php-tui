@@ -1,3 +1,7 @@
+---
+title: RawWidget
+description: This widget allows you to write directly to the buffer through a closure.
+---
 ## RawWidget
 
 This widget allows you to write directly to the buffer through a closure.

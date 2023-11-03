@@ -1,3 +1,7 @@
+---
+title: Block
+description: The block widget is a container for other widgets and can provide a border,title and padding.
+---
 ## Block
 
 The block widget is a container for other widgets and can provide a border,title and padding.

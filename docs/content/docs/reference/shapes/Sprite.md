@@ -1,3 +1,7 @@
+---
+title: Sprite
+description: Renders a "sprite" based on a given "ascii art"Each sprite can have a single color but they can be layered on the canvas.
+---
 ## Sprite
 
 Renders a "sprite" based on a given "ascii art"Each sprite can have a single color but they can be layered on the canvas.
