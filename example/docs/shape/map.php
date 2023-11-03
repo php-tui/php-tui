@@ -1,6 +1,7 @@
 <?php
 
 use PhpTui\Tui\Adapter\PhpTerm\PhpTermBackend;
+use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\AxisBounds;
 use PhpTui\Tui\Model\Buffer;
 use PhpTui\Tui\Model\Display;
@@ -17,10 +18,12 @@ $display->draw(function (Buffer $buffer): void {
     Canvas::default()
         ->xBounds(AxisBounds::new(-180, 180))
         ->yBounds(AxisBounds::new(-90, 90))
-        ->marker(Marker::Dot)
+        ->marker(Marker::Braille)
         ->paint(function (CanvasContext $context): void {
 
-            $context->draw(Map::default()->resolution(MapResolution::High));
+            $context->draw(
+                Map::default()->resolution(MapResolution::High)->color(AnsiColor::Green)
+            );
         })
         ->render($buffer->area(), $buffer);
 });

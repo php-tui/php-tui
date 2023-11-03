@@ -16,8 +16,8 @@ require 'vendor/autoload.php';
 $display = Display::fullscreen(PhpTermBackend::new());
 $display->draw(function (Buffer $buffer): void {
     Canvas::default()
-        ->xBounds(AxisBounds::new(0, 50))
-        ->yBounds(AxisBounds::new(0, 30))
+        ->xBounds(AxisBounds::new(0, 20))
+        ->yBounds(AxisBounds::new(0, 10))
         ->marker(Marker::Braille)
         ->paint(function (CanvasContext $context): void {
 
@@ -32,10 +32,10 @@ $display->draw(function (Buffer $buffer): void {
                         'XXXXX',
                         '  X       ', // rows do not need
                         '  X       ', // equals numbers of chars
-                        ' X  X     ',
-                        'X    X    ',
+                        ' X X     ',
+                        'X   X    ',
                     ],
-                    color: AnsiColor::Green,
+                    color: AnsiColor::Blue,
                     density: 4,
                     position: FloatPosition::at(0, 0),
                 )

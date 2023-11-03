@@ -64,6 +64,7 @@ class HtmlPainter implements Painter
             $height,
             [
                 'font-family' => 'monospace',
+                'color' => 'black',
                 'padding' =>  '0px',
                 'font-kerning' => 'none',
                 'white-space' => 'pre',
@@ -116,18 +117,9 @@ class HtmlPainter implements Painter
 
         $html = implode('<div style="clear: both;"></div>', array_map(function (array $row, array $rowAttrs) {
             return implode('', array_map(function (string $char, array $attrs) {
+                $attrs = array_merge($this->defaultCellAttrs, $attrs);
                 return sprintf(
-                    '<div style="%s;%s">%s</div>',
-                    implode(
-                        ';',
-                        array_map(
-                            function (string $key, string $value) {
-                                return $key . ':'. $value;
-                            },
-                            array_keys($this->defaultCellAttrs),
-                            array_values($this->defaultCellAttrs),
-                        )
-                    ),
+                    '<div style="%s">%s</div>',
                     implode(
                         ';',
                         array_map(
@@ -174,8 +166,6 @@ class HtmlPainter implements Painter
                 $this->fgColor->g,
                 $this->fgColor->b,
             );
-        } else {
-            $this->attributes[$offset]['color'] = 'white';
         }
     }
 }

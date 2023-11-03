@@ -22,7 +22,7 @@ $display = Display::fullscreen(PhpTermBackend::new());
 $display->draw(function (Buffer $buffer) use ($registry): void {
     Canvas::default()
         ->xBounds(AxisBounds::new(0, 50))
-        ->yBounds(AxisBounds::new(0, 30))
+        ->yBounds(AxisBounds::new(0, 20))
         ->marker(Marker::Block)
         ->paint(function (CanvasContext $context) use ($registry) : void {
 
@@ -31,7 +31,7 @@ $display->draw(function (Buffer $buffer) use ($registry): void {
                     font: $registry->get('default'),
                     text: 'Hello!',
                     color: AnsiColor::Green,
-                    position: FloatPosition::at(0, 0),
+                    position: FloatPosition::at(10, 7),
                 ),
             );
 
