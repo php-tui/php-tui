@@ -22,6 +22,11 @@ final class Line implements IteratorAggregate, Stringable
     ) {
     }
 
+    public function __toString(): string
+    {
+        return implode('', array_map(fn (Span $span) => $span->__toString(), $this->spans));
+    }
+
     public function width(): int
     {
         return array_sum(
@@ -75,10 +80,5 @@ final class Line implements IteratorAggregate, Stringable
     public static function fromSpan(Span $span): self
     {
         return new self([$span], HorizontalAlignment::Left);
-    }
-
-    public function __toString(): string
-    {
-        return implode('', array_map(fn (Span $span) => $span->__toString(), $this->spans));
     }
 }

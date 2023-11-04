@@ -115,7 +115,7 @@ class HtmlStylePainter implements Painter
         $charChunks = array_chunk($this->chars, $this->width);
         $attrChunks = array_chunk($this->attributes, $this->width);
 
-        $html = implode('<div style="clear: both;"></div>', array_map(function (array $row, array $rowAttrs) {
+        $html = implode("<div style=\"clear: both;\"></div>\n", array_map(function (array $row, array $rowAttrs) {
             return implode('', array_map(function (string $char, array $attrs) {
                 $attrs = array_merge($this->defaultCellAttrs, $attrs);
                 return sprintf(

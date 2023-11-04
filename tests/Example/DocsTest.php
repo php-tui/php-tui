@@ -54,7 +54,13 @@ class DocsTest extends TestCase
             file_put_contents($snapshot, $output);
             return;
         }
+
         $existing = file_get_contents($snapshot);
+        if (false === $existing) {
+            throw new RuntimeException('Could not read file');
+        }
+
+        self::assertEquals($this->sanitize($output), $this->sanitize($existing));
         self::assertEquals($output, $existing);
 
     }
@@ -72,5 +78,16 @@ class DocsTest extends TestCase
                 $example,
             ];
         }
+    }
+
+    private function sanitize(string $html): string
+    {
+        return trim(str_replace(
+            '&nbsp;',
+            ' ',
+            strip_tags(
+                str_replace('<div style="clear: both;"></div>', "\n", $html)
+            )
+        ));
     }
 }

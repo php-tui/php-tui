@@ -11,6 +11,11 @@ final class Span implements Stringable
     {
     }
 
+    public function __toString(): string
+    {
+        return sprintf('Span<"%s", %s>', $this->content, $this->style->__toString());
+    }
+
     public static function fromString(string $string): self
     {
         return new self($string, Style::default());
@@ -48,10 +53,5 @@ final class Span implements Stringable
     public static function styled(string $string, Style $style): self
     {
         return new self($string, $style);
-    }
-
-    public function __toString(): string
-    {
-        return sprintf('Span<"%s", %s>', $this->content, $this->style->__toString());
     }
 }

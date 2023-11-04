@@ -118,6 +118,14 @@ class Paragraph implements Widget
     }
 
     /**
+     * @param list<Line> $lines
+     */
+    public static function fromLines(array $lines): self
+    {
+        return self::new(Text::fromLines($lines));
+    }
+
+    /**
      * @param list<array{list<StyledGrapheme>,HorizontalAlignment}> $styled
      */
     private function createLineComposer(array $styled, Area $textArea, ?Wrap $wrap, int $horizontalOffset): LineComposer
@@ -132,13 +140,5 @@ class Paragraph implements Widget
             HorizontalAlignment::Right => $maxWidth - $width,
             HorizontalAlignment::Left => 0,
         };
-    }
-
-    /**
-     * @param list<Line> $lines
-     */
-    public static function fromLines(array $lines): self
-    {
-        return self::new(Text::fromLines($lines));
     }
 }
