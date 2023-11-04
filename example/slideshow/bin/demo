@@ -21,7 +21,8 @@ $app = new App(
         new AboutMe(
             ImageShape::fromFilename(
                 __DIR__ . '/../assets/me.small.JPG'
-            )
+            ),
+            $registry
         ),
     ]
 );
