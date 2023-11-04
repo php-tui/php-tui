@@ -44,4 +44,3 @@ $display->draw(function (Buffer $buffer): void {
             ]),
         )->render($buffer->area(), $buffer);
 });
-$display->flush();
