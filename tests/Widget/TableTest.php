@@ -35,10 +35,10 @@ class TableTest extends TestCase
                     TableCell::fromString('Ones'),
                     TableCell::fromString('Twos'),
                 ]))
-                ->widths([
+                ->widths(
                     Constraint::percentage(50),
                     Constraint::percentage(50),
-                ])
+                )
                 ->rows(
                     TableRow::fromCells([
                         TableCell::fromString('1'),
@@ -85,10 +85,10 @@ class TableTest extends TestCase
                     TableCell::fromString('Ones'),
                     TableCell::fromString('Twos'),
                 ]))
-                ->widths([
+                ->widths(
                     Constraint::percentage(50),
                     Constraint::percentage(50),
-                ])
+                )
                 ->rows(
                     TableRow::fromCells([
                         TableCell::fromString('1'),
@@ -115,10 +115,10 @@ class TableTest extends TestCase
                     TableCell::fromString('Ones'),
                     TableCell::fromString('Twos'),
                 ]))
-                ->widths([
+                ->widths(
                     Constraint::percentage(50),
                     Constraint::percentage(50),
-                ])
+                )
                 ->rows(
                     TableRow::fromCells([
                         TableCell::fromString('1'),

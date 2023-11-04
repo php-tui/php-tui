@@ -14,11 +14,11 @@ require 'vendor/autoload.php';
 $display = Display::fullscreen(PhpTermBackend::new());
 $display->draw(function (Buffer $buffer): void {
     Table::default()
-        ->widths([
+        ->widths(
             Constraint::percentage(25),
             Constraint::percentage(25),
             Constraint::percentage(50),
-        ])
+        )
         ->header(
             TableRow::fromCells([
                 TableCell::fromString('Name'),

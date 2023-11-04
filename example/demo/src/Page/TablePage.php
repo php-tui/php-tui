@@ -64,10 +64,10 @@ final class TablePage implements Component
                     ->select(rand(0, count(self::EVENTS)))
                     ->highlightSymbol('X')
                     ->highlightStyle(Style::default()->bg(AnsiColor::Cyan)->fg(AnsiColor::Black))
-                    ->widths([
+                    ->widths(
                         Constraint::percentage(10),
                         Constraint::min(10),
-                    ])
+                    )
                     ->rows(...array_map(function (array $event) {
                         return TableRow::fromCells([
                             TableCell::fromLine(Line::fromSpan(

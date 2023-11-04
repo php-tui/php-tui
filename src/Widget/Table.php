@@ -183,12 +183,9 @@ final class Table implements Widget
         return $this;
     }
 
-    /**
-     * @param Constraint[] $widths
-     */
-    public function widths(array $widths): self
+    public function widths(Constraint ...$widths): self
     {
-        $this->widths = $widths;
+        $this->widths = array_values($widths);
         return $this;
     }
 
