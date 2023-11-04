@@ -59,7 +59,7 @@ final class ItemListPage implements Component
             ->widget(
                 ItemList::default()
                     ->state($this->state)
-                    ->items(array_map(function (array $event) {
+                    ->items(...array_map(function (array $event) {
                         return ListItem::new(Text::fromLine(Line::fromSpans([
                             Span::styled($event[1], match ($event[1]) {
                                 'INFO' => Style::default()->fg(AnsiColor::Green),
