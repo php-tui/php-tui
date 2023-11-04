@@ -127,5 +127,20 @@ class ItemListTest extends TestCase
                 '>>4',
             ]
         ];
+        yield 'with out of range offset' => [
+            Area::fromDimensions(3, 2),
+            ItemList::default()
+                ->offset(-1)
+                ->items(
+                    ListItem::new(Text::fromString('1')),
+                    ListItem::new(Text::fromString('2')),
+                    ListItem::new(Text::fromString('3')),
+                    ListItem::new(Text::fromString('4')),
+                ),
+            [
+                '  3',
+                '>>4',
+            ]
+        ];
     }
 }
