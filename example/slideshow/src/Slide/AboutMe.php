@@ -2,10 +2,14 @@
 
 namespace PhpTui\Tui\Example\Slideshow\Slide;
 
+use PhpTui\Term\Event;
+use PhpTui\Term\Event\CodedKeyEvent;
+use PhpTui\Term\KeyCode;
 use PhpTui\Tui\Adapter\Bdf\FontRegistry;
 use PhpTui\Tui\Adapter\Bdf\Shape\TextShape;
 use PhpTui\Tui\Adapter\ImageMagick\Shape\ImageShape;
 use PhpTui\Tui\Example\Slideshow\Slide;
+use PhpTui\Tui\Example\Slideshow\Tick;
 use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Constraint;
 use PhpTui\Tui\Model\Direction;
@@ -19,12 +23,19 @@ use PhpTui\Tui\Widget\Block\Padding;
 use PhpTui\Tui\Widget\Canvas;
 use PhpTui\Tui\Widget\Grid;
 use PhpTui\Tui\Widget\ItemList;
+use PhpTui\Tui\Widget\ItemList\ItemListState;
 use PhpTui\Tui\Widget\ItemList\ListItem;
 
 final class AboutMe implements Slide
 {
+    /**
+     * @var ItemList\ItemListState
+     */
+    private ItemListState $state;
+
     public function __construct(private ImageShape $me, private FontRegistry $registry)
     {
+        $this->state = new ItemListState(selected: 0);
     }
     public function title(): string
     {
@@ -72,6 +83,7 @@ final class AboutMe implements Slide
             ->select(0)
             ->highlightSymbol('')
             ->highlightStyle(Style::default()->bg(AnsiColor::LightCyan)->fg(AnsiColor::Black))
+            ->state($this->state)
             ->items(
                 ListItem::new(Text::fromString('- PHP Developer')),
                 ListItem::new(Text::fromString('- PHPBench')),
@@ -88,5 +100,17 @@ final class AboutMe implements Slide
         return Canvas::fromIntBounds(0, $this->me->resolution()->width, 0, $this->me->resolution()->height)
             ->marker(Marker::HalfBlock)
             ->draw($this->me);
+    }
+
+    public function handle(Tick|Event $event): void
+    {
+        if ($event instanceof CodedKeyEvent) {
+            if ($event->code === KeyCode::Up) {
+                $this->state->selected--;
+            }
+            if ($event->code === KeyCode::Down) {
+                $this->state->selected++;
+            }
+        }
     }
 }

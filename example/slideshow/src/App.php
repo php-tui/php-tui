@@ -35,6 +35,7 @@ class App
 
         $draw = true;
         while (true) {
+            $this->currentSlide()->handle(new Tick());
             while (null !== $event = $this->terminal->events()->next()) {
                 $draw = true;
                 if ($event instanceof CodedKeyEvent) {
@@ -48,6 +49,7 @@ class App
                         break 2;
                     }
                 }
+                $this->currentSlide()->handle($event);
             }
             if ($draw) {
                 $this->display->drawWidget(

@@ -2,12 +2,13 @@
 
 namespace PhpTui\Tui\Example\Slideshow\Slide;
 
+use PhpTui\Term\Event;
 use PhpTui\Tui\Adapter\Bdf\FontRegistry;
 use PhpTui\Tui\Adapter\Bdf\Shape\TextShape;
 use PhpTui\Tui\Example\Slideshow\Slide;
+use PhpTui\Tui\Example\Slideshow\Tick;
 use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\AxisBounds;
-use PhpTui\Tui\Model\Color;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\Widget\FloatPosition;
 use PhpTui\Tui\Model\Widget\Line;
@@ -53,5 +54,9 @@ class Splash implements Slide
                 $context->draw(PhpTuiLine::fromPrimitives(0, 160, 320, 160, AnsiColor::Gray));
                 $context->print(12, 140, Line::fromString('Daniel Leech 2024'));
             });
+    }
+
+    public function handle(Tick|Event $event): void
+    {
     }
 }
