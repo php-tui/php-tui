@@ -2,11 +2,15 @@
 
 namespace PhpTui\Tui\Tests\Model;
 
+use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Backend\DummyBackend;
 use PhpTui\Tui\Model\Buffer;
+use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Model\Position;
 use PhpTui\Tui\Model\Display;
 use PHPUnit\Framework\TestCase;
+use PhpTui\Tui\Widget\Canvas;
+use PhpTui\Tui\Widget\Canvas\Shape\Points;
 
 class DisplayTest extends TestCase
 {
@@ -54,6 +58,25 @@ class DisplayTest extends TestCase
                  x  
                   x 
                    x
+                EOT,
+            $backend->flushed()
+        );
+    }
+
+    public function testRender(): void
+    {
+        $backend = DummyBackend::fromDimensions(4, 4);
+        $terminal = Display::fullscreen($backend);
+        $terminal->drawWidget(Canvas::fromIntBounds(0, 3, 0, 3)->marker(Marker::Dot)->draw(Points::new([
+            [3, 3], [2, 2], [1, 1], [0, 0]
+        ], AnsiColor::Green)));
+
+        self::assertEquals(
+            <<<'EOT'
+                   •
+                  • 
+                 •  
+                •   
                 EOT,
             $backend->flushed()
         );

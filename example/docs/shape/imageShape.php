@@ -2,7 +2,6 @@
 
 use PhpTui\Tui\Adapter\ImageMagick\Shape\ImageShape;
 use PhpTui\Tui\Adapter\PhpTerm\PhpTermBackend;
-use PhpTui\Tui\Model\Buffer;
 use PhpTui\Tui\Model\Display;
 use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Widget\Canvas;
@@ -10,7 +9,7 @@ use PhpTui\Tui\Widget\Canvas;
 require 'vendor/autoload.php';
 
 $display = Display::fullscreen(PhpTermBackend::new());
-$display->draw(function (Buffer $buffer): void {
+$display->drawWidget(
     Canvas::fromIntBounds(0, 320, 0, 240)
         ->marker(Marker::HalfBlock)
         ->draw(
@@ -18,6 +17,4 @@ $display->draw(function (Buffer $buffer): void {
             // animating!
             ImageShape::fromFilename(__DIR__ . '/example.jpg')
         )
-        ->render($buffer->area(), $buffer);
-});
-$display->flush();
+);

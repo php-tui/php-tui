@@ -4,7 +4,6 @@ use PhpTui\Tui\Adapter\Bdf\FontRegistry;
 use PhpTui\Tui\Adapter\Bdf\Shape\TextShape;
 use PhpTui\Tui\Adapter\PhpTerm\PhpTermBackend;
 use PhpTui\Tui\Model\AnsiColor;
-use PhpTui\Tui\Model\Buffer;
 use PhpTui\Tui\Model\Display;
 use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Model\Widget\FloatPosition;
@@ -17,7 +16,7 @@ require 'vendor/autoload.php';
 $registry = FontRegistry::default();
 
 $display = Display::fullscreen(PhpTermBackend::new());
-$display->draw(function (Buffer $buffer) use ($registry): void {
+$display->drawWidget(
     Canvas::fromIntBounds(0, 50, 0, 20)
         ->marker(Marker::Block)
         ->draw(
@@ -28,6 +27,4 @@ $display->draw(function (Buffer $buffer) use ($registry): void {
                 position: FloatPosition::at(10, 7),
             ),
         )
-        ->render($buffer->area(), $buffer);
-});
-$display->flush();
+);

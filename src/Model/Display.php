@@ -57,6 +57,9 @@ final class Display
     }
 
     /**
+     * Synchronizes terminal size, calls the rendering closure, flushes the current internal state
+     * and prepares for the next draw call.
+     *
      * @param Closure(Buffer): void $closure
      */
     public function draw(Closure $closure): void
@@ -67,6 +70,21 @@ final class Display
         $this->flush();
         $this->swapBuffers();
         $this->backend->flush();
+    }
+
+    /**
+     * Synchronizes terminal size, renders the given widget, flushes the current internal state
+     * and prepares for the next draw call.
+     *
+     * This is the same as Draw but instead of a closure you pass a single
+     * widget (usually a Grid widget).
+     */
+    public function drawWidget(Widget $widget): void
+    {
+        $buffer = $this->buffer();
+        $this->draw(function () use ($widget, $buffer): void {
+            $widget->render($buffer->area(), $buffer);
+        });
     }
 
     private function autoresize(): void

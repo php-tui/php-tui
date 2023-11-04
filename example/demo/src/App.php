@@ -16,11 +16,9 @@ use PhpTui\Tui\Example\Demo\Page\ItemListPage;
 use PhpTui\Tui\Example\Demo\Page\SpritePage;
 use PhpTui\Tui\Example\Demo\Page\TablePage;
 use PhpTui\Tui\Model\AnsiColor;
-use PhpTui\Tui\Model\Buffer;
 use PhpTui\Tui\Model\Constraint;
 use PhpTui\Tui\Model\Direction;
 use PhpTui\Tui\Model\Display;
-use PhpTui\Tui\Model\Layout;
 use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\Widget\Borders;
@@ -30,7 +28,9 @@ use PhpTui\Tui\Model\Widget\Span;
 use PhpTui\Tui\Model\Widget\Text;
 use PhpTui\Tui\Model\Widget\Title;
 use PhpTui\Tui\Widget\Block;
+use PhpTui\Tui\Widget\Grid;
 use PhpTui\Tui\Widget\Paragraph;
+use Throwable;
 
 /**
  * A simple, synchronous, application which aims to demo
@@ -91,8 +91,19 @@ final class App
 
     public function run(): int
     {
-        // enable "raw" mode to remove default terminal behavior (e.g. echoing key presses)
-        $this->terminal->enableRawMode();
+        try {
+            // enable "raw" mode to remove default terminal behavior (e.g.
+            // echoing key presses)
+            $this->terminal->enableRawMode();
+            return $this->doRun();
+        } catch (Throwable $err) {
+            $this->terminal->disableRawMode();
+            throw $err;
+        }
+    }
+
+    private function doRun(): int
+    {
         // hide the cursor
         $this->terminal->execute(Actions::cursorHide());
         // switch to the "alternate" screen so that we can return the user where they left off
@@ -137,9 +148,7 @@ final class App
                 $this->activePage()->handle($event);
             }
 
-            $this->display->draw(function (Buffer $buffer): void {
-                $this->render($buffer);
-            });
+            $this->display->drawWidget($this->layout());
             $this->incFramerate();
 
             // sleep for Xms - note that it's encouraged to implement apps
@@ -154,18 +163,18 @@ final class App
         return 0;
     }
 
-    private function render(Buffer $buffer): void
+    private function layout(): Widget
     {
-        $layout = Layout::default()
+        return Grid::default()
             ->direction(Direction::Vertical)
-            ->constraints([
+            ->constraints(
                 Constraint::max(3),
                 Constraint::min(1),
-            ])
-            ->split($buffer->area());
-
-        $this->header()->render($layout->get(0), $buffer);
-        $this->activePage()->build()->render($layout->get(1), $buffer);
+            )
+            ->widgets(
+                $this->header(),
+                $this->activePage()->build(),
+            );
     }
 
     private function activePage(): Component
