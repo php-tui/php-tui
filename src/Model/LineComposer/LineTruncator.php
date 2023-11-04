@@ -15,7 +15,8 @@ class LineTruncator implements LineComposer
     public function __construct(
         private array $lines,
         private int $maxLineWidth,
-        private int $horizontalOffset = 0
+        private int $horizontalOffset = 0,
+        private int $offset = 0,
     ) {
     }
 
@@ -29,38 +30,41 @@ class LineTruncator implements LineComposer
         $currentLine = [];
         $currentAlignment = HorizontalAlignment::Left;
 
-        foreach ($this->lines as $line) {
-            /** @var HorizontalAlignment $alignment */
-            [$line, $alignment] = $line;
+        $line = $this->lines[$this->offset++] ?? null;
+        if (null === $line) {
+            return;
+        }
 
-            $currentAlignment = $alignment;
+        /** @var HorizontalAlignment $alignment */
+        [$line, $alignment] = $line;
 
-            /** @var StyledGrapheme $styledGrapheme */
-            foreach ($line as $styledGrapheme) {
-                // ignore characters wider than the total max width
-                if ($styledGrapheme->symbolWidth() > $this->maxLineWidth) {
-                    continue;
-                }
+        $currentAlignment = $alignment;
 
-                if ($currentLineWidth + $styledGrapheme->symbolWidth() > $this->maxLineWidth) {
-                    yield [
-                        $currentLine,
-                        $currentLineWidth,
-                        $currentAlignment
-                    ];
-                    $currentLine = [];
-                    $currentLineWidth = 0;
-                }
-
-                $symbol = $this->resolveSymbol(
-                    $horizontalOffset,
-                    $alignment,
-                    $styledGrapheme,
-                );
-
-                $currentLine[] = new StyledGrapheme($symbol, $styledGrapheme->style);
-                $currentLineWidth += mb_strlen($symbol);
+        /** @var StyledGrapheme $styledGrapheme */
+        foreach ($line as $styledGrapheme) {
+            // ignore characters wider than the total max width
+            if ($styledGrapheme->symbolWidth() > $this->maxLineWidth) {
+                continue;
             }
+
+            if ($currentLineWidth + $styledGrapheme->symbolWidth() > $this->maxLineWidth) {
+                yield [
+                    $currentLine,
+                    $currentLineWidth,
+                    $currentAlignment
+                ];
+                $currentLine = [];
+                $currentLineWidth = 0;
+            }
+
+            $symbol = $this->resolveSymbol(
+                $horizontalOffset,
+                $alignment,
+                $styledGrapheme,
+            );
+
+            $currentLine[] = new StyledGrapheme($symbol, $styledGrapheme->style);
+            $currentLineWidth += mb_strlen($symbol);
         }
 
         yield [

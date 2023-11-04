@@ -3,8 +3,9 @@
 namespace PhpTui\Tui\Model\Widget;
 
 use PhpTui\Tui\Model\Style;
+use Stringable;
 
-final class Span
+final class Span implements Stringable
 {
     public function __construct(public readonly string $content, public Style $style)
     {
@@ -47,5 +48,10 @@ final class Span
     public static function styled(string $string, Style $style): self
     {
         return new self($string, $style);
+    }
+
+    public function __toString(): string
+    {
+        return sprintf('Span<"%s", %s>', $this->content, $this->style->__toString());
     }
 }

@@ -2,7 +2,9 @@
 
 namespace PhpTui\Tui\Model;
 
-final class Style
+use Stringable;
+
+final class Style implements Stringable
 {
     private function __construct(
         public ?Color $fg,
@@ -52,5 +54,17 @@ final class Style
     {
         $this->addModifiers->add($modifier);
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        return sprintf(
+            'Style(fg:%s,bg: %s,u:%s,+mod:%d,-mod:%d)',
+            $this->fg ? $this->fg->debugName() : '-',
+            $this->bg ? $this->bg->debugName() : '-',
+            $this->underline ? $this->underline->debugName() : '-',
+            $this->addModifiers->toInt(),
+            $this->subModifiers->toInt(),
+        );
     }
 }

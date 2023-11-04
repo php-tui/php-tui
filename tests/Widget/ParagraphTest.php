@@ -60,7 +60,8 @@ class ParagraphTest extends TestCase
                 Line::fromString('1/1')->alignment(HorizontalAlignment::Left),
                 Line::fromString('About')->alignment(HorizontalAlignment::Right),
             ]),
-            '1/1  About',
+            '1/1       ',
+            '     About',
         ];
     }
 }

@@ -5,12 +5,13 @@ namespace PhpTui\Tui\Model\Widget;
 use ArrayIterator;
 use PhpTui\Tui\Model\Style;
 use IteratorAggregate;
+use Stringable;
 use Traversable;
 
 /**
  * @implements IteratorAggregate<Span>
  */
-final class Line implements IteratorAggregate
+final class Line implements IteratorAggregate, Stringable
 {
     /**
      * @param Span[] $spans
@@ -74,5 +75,10 @@ final class Line implements IteratorAggregate
     public static function fromSpan(Span $span): self
     {
         return new self([$span], HorizontalAlignment::Left);
+    }
+
+    public function __toString(): string
+    {
+        return implode('', array_map(fn (Span $span) => $span->__toString(), $this->spans));
     }
 }
