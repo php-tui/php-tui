@@ -178,10 +178,14 @@ final class Canvas implements Widget
      *
      * If you need to do more complex things with the canvas use the painter
      * closure to operate directly on the CanvasContext.
+     *
+     * You can call this method times
      */
-    public function draw(Shape $shape): self
+    public function draw(Shape ...$shapes): self
     {
-        $this->shapes[] = $shape;
+        foreach ($shapes as $shape) {
+            $this->shapes[] = $shape;
+        }
         return $this;
     }
 }

@@ -52,6 +52,27 @@ class CanvasTest extends TestCase
         self::assertEquals($expected, $buffer->toLines());
     }
 
+    public function testDrawMultiple(): void
+    {
+        $area = Area::fromDimensions(5, 5);
+        $buffer = Buffer::filled($area, Cell::fromChar('x'));
+
+        $canvas = Canvas::fromIntBounds(0, 5, 0, 5);
+        $canvas->draw(
+            Circle::fromPrimitives(1, 1, 1, AnsiColor::Green),
+            Circle::fromPrimitives(4, 4, 1, AnsiColor::Green),
+        );
+        $canvas->render($area, $buffer);
+        $expected = [
+            'xx⢸⠉⣇',
+            'xx⠸⣄⡇',
+            '⣀⡀xxx',
+            '⡇⢹xxx',
+            '⢧⠼xxx',
+        ];
+        self::assertEquals($expected, $buffer->toLines());
+    }
+
     /**
      * @dataProvider provideRenderMarker
      * @param string[] $expected
