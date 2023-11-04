@@ -158,7 +158,7 @@ final class Buffer implements Countable
         return $this->area;
     }
 
-    public function putLine(Position $position, Line $line, int $width): Position
+    public function putLine(Position $position, Line $line, int $width = PHP_INT_MAX): Position
     {
         $remainingWidth = $width;
         $x = $position->x;

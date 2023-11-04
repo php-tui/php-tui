@@ -45,11 +45,11 @@ final class Line implements IteratorAggregate, Stringable
         return new self($spans);
     }
 
-    public static function fromString(string $string): self
+    public static function fromString(string $string, HorizontalAlignment $alignment = null): self
     {
         return new self([
             Span::fromString($string)
-        ], null);
+        ], $alignment);
     }
 
     public function getIterator(): Traversable

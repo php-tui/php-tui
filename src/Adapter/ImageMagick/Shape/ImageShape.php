@@ -2,9 +2,10 @@
 
 namespace PhpTui\Tui\Adapter\ImageMagick\Shape;
 
+use PhpTui\Tui\Model\Canvas\Resolution as PhpTuiResolution;
 use PhpTui\Tui\Model\Widget\FloatPosition;
 use PhpTui\Tui\Model\Canvas\Shape;
-use RuntimeException;
+use PhpTui\Tui\Widget\Canvas\Resolution;
 
 /**
  * Renders an image on the canvas.
@@ -30,14 +31,9 @@ final class ImageShape implements Shape
         return $this;
     }
 
-    public static function fromPath(string $imagePath): self
+    public function resolution(): PhpTuiResolution
     {
-        if (!file_exists($imagePath)) {
-            throw new RuntimeException(sprintf(
-                'Imagefile "%s" does not exist',
-                $imagePath
-            ));
-        }
-        return new self($imagePath, new FloatPosition(0, 0));
+        $geo = $this->image->getImageGeometry();
+        return new Resolution($geo['width'], $geo['height']);
     }
 }
