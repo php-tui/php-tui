@@ -19,10 +19,10 @@ final class EventsPage implements Component
 
     public function build(): Widget
     {
-        return Block::default()->title(Title::fromString('Event log'))->borders(Borders::ALL)
+        return Block::default()->titles(Title::fromString('Event log'))->borders(Borders::ALL)
             ->widget(
                 ItemList::default()
-                    ->items(array_map(fn (Event $event) => ListItem::new(Text::raw($event->__toString())), $this->events))
+                    ->items(...array_map(fn (Event $event) => ListItem::new(Text::raw($event->__toString())), $this->events))
             )
         ;
     }

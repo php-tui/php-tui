@@ -71,21 +71,15 @@ class Grid implements Widget
         return $this;
     }
 
-    /**
-     * @param Constraint[] $constraints
-     */
-    public function constraints(array $constraints): self
+    public function constraints(Constraint ...$constraints): self
     {
-        $this->constraints = $constraints;
+        $this->constraints = array_values($constraints);
         return $this;
     }
 
-    /**
-     * @param Widget[] $widgets
-     */
-    public function widgets(array $widgets): self
+    public function widgets(Widget ...$widgets): self
     {
-        $this->widgets = $widgets;
+        $this->widgets = array_values($widgets);
         return $this;
     }
 }

@@ -35,16 +35,16 @@ class TableTest extends TestCase
                     TableCell::fromString('Ones'),
                     TableCell::fromString('Twos'),
                 ]))
-                ->widths([
+                ->widths(
                     Constraint::percentage(50),
                     Constraint::percentage(50),
-                ])
-                ->rows([
+                )
+                ->rows(
                     TableRow::fromCells([
                         TableCell::fromString('1'),
                         TableCell::fromString('2'),
                     ]),
-                ]),
+                ),
             [
                 'Ones Twos ',
                 '1    2    ',
@@ -61,12 +61,12 @@ class TableTest extends TestCase
                     TableCell::fromString('Ones'),
                     TableCell::fromString('Twos'),
                 ]))
-                ->rows([
+                ->rows(
                     TableRow::fromCells([
                         TableCell::fromString('1'),
                         TableCell::fromString('2'),
                     ]),
-                ]),
+                ),
             [
                 '          ',
                 '          ',
@@ -85,11 +85,11 @@ class TableTest extends TestCase
                     TableCell::fromString('Ones'),
                     TableCell::fromString('Twos'),
                 ]))
-                ->widths([
+                ->widths(
                     Constraint::percentage(50),
                     Constraint::percentage(50),
-                ])
-                ->rows([
+                )
+                ->rows(
                     TableRow::fromCells([
                         TableCell::fromString('1'),
                         TableCell::fromString('2'),
@@ -98,7 +98,7 @@ class TableTest extends TestCase
                         TableCell::fromString('1-1'),
                         TableCell::fromString('2-2'),
                     ]),
-                ]),
+                ),
             [
                 '  Ones Two',
                 '>>1    2  ',
@@ -115,11 +115,11 @@ class TableTest extends TestCase
                     TableCell::fromString('Ones'),
                     TableCell::fromString('Twos'),
                 ]))
-                ->widths([
+                ->widths(
                     Constraint::percentage(50),
                     Constraint::percentage(50),
-                ])
-                ->rows([
+                )
+                ->rows(
                     TableRow::fromCells([
                         TableCell::fromString('1'),
                         TableCell::fromString('2'),
@@ -128,7 +128,7 @@ class TableTest extends TestCase
                         TableCell::fromString('1-1'),
                         TableCell::fromString('2-2'),
                     ]),
-                ]),
+                ),
             [
                 'Ones Twos ',
                 '1    2    ',
@@ -142,7 +142,7 @@ class TableTest extends TestCase
             Area::fromDimensions(10, 4),
             Table::default()
                 ->offset(5)
-                ->rows([
+                ->rows(
                     TableRow::fromCells([TableCell::fromString('1'), TableCell::fromString('2')]),
                     TableRow::fromCells([TableCell::fromString('1'), TableCell::fromString('2')]),
                     TableRow::fromCells([TableCell::fromString('1'), TableCell::fromString('2')]),
@@ -153,7 +153,7 @@ class TableTest extends TestCase
                     TableRow::fromCells([TableCell::fromString('1'), TableCell::fromString('2')]),
                     TableRow::fromCells([TableCell::fromString('1'), TableCell::fromString('2')]),
                     TableRow::fromCells([TableCell::fromString('1'), TableCell::fromString('2')]),
-                ]),
+                ),
             [
                 '          ',
                 '          ',

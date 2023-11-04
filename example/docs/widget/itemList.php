@@ -15,12 +15,12 @@ $display->draw(function (Buffer $buffer): void {
     ItemList::default()
         ->highlightSymbol('😼')
         ->state(new ItemListState(0, 2))
-        ->items([
+        ->items(
             ListItem::new(Text::raw('Item one')),
             ListItem::new(Text::raw('Item two')),
             ListItem::new(Text::raw('Item three')),
             ListItem::new(Text::raw('Item four')),
-        ])
+        )
         ->render($buffer->area(), $buffer);
 });
 $display->flush();

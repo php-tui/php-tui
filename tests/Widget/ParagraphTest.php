@@ -56,10 +56,10 @@ class ParagraphTest extends TestCase
         ];
         yield 'align left and right' => [
             Area::fromDimensions(10, 1),
-            Paragraph::fromLines([
+            Paragraph::fromLines(
                 Line::fromString('1/1')->alignment(HorizontalAlignment::Left),
                 Line::fromString('About')->alignment(HorizontalAlignment::Right),
-            ]),
+            ),
             '1/1       ',
             '     About',
         ];

@@ -111,12 +111,9 @@ class ItemList implements Widget
         );
     }
 
-    /**
-     * @param list<ListItem> $items
-     */
-    public function items(array $items): self
+    public function items(ListItem ...$items): self
     {
-        $this->items = $items;
+        $this->items = array_values($items);
 
         return $this;
     }

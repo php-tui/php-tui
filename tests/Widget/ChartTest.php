@@ -18,12 +18,12 @@ class ChartTest extends TestCase
 {
     public function testRender(): void
     {
-        $chart = Chart::new([
-                DataSet::new('data1')
+        $chart = Chart::new(
+            DataSet::new('data1')
                     ->marker(Marker::Dot)
                     ->style(Style::default()->fg(AnsiColor::Green))
                     ->data($this->series(0, 1, 2, 1, 0, -1, -2, -1))
-            ])
+        )
             ->xAxis(Axis::default()->bounds(AxisBounds::new(0, 7)))
             ->yAxis(
                 Axis::default()->bounds(AxisBounds::new(-2, 2))
@@ -44,12 +44,10 @@ class ChartTest extends TestCase
     public function testRenderAxisLines(): void
     {
         $chart = Chart::new(
-            [
-                DataSet::new('data1')
+            DataSet::new('data1')
                     ->marker(Marker::Dot)
                     ->style(Style::default()->fg(AnsiColor::Green))
                     ->data($this->series(0, 1, 2, 1, 0, -1, -2, -1))
-            ]
         )->xAxis(
             Axis::default()->bounds(AxisBounds::new(0, 7))->labels([])
         )->yAxis(
@@ -72,12 +70,10 @@ class ChartTest extends TestCase
     public function testRenderXAxisLabels(): void
     {
         $chart = Chart::new(
-            [
-                DataSet::new('data1')
+            DataSet::new('data1')
                     ->marker(Marker::Dot)
                     ->style(Style::default()->fg(AnsiColor::Green))
                     ->data($this->series(0, 1, 2, 1, 0, -1, -2, -1))
-            ]
         )->xAxis(
             Axis::default()->bounds(AxisBounds::new(0, 7))->labels([Span::fromString('1'), Span::fromString('2')])
         )->yAxis(
@@ -101,7 +97,7 @@ class ChartTest extends TestCase
     public function testRenderManyXLabels(): void
     {
         $chart = Chart::new()
-            ->addDataset(
+            ->datasets(
                 DataSet::new('data1')
                     ->marker(Marker::Dot)
                     ->style(Style::default()->fg(AnsiColor::Green))
@@ -133,8 +129,7 @@ class ChartTest extends TestCase
     public function testRenderYAxisLabels(): void
     {
         $chart = Chart::new(
-            [
-                DataSet::new('data1')
+            DataSet::new('data1')
                     ->marker(Marker::Dot)
                     ->style(Style::default()->fg(AnsiColor::Green))
                     ->data(
@@ -142,7 +137,6 @@ class ChartTest extends TestCase
                             return [$x, $y];
                         }, range(0, 7), [0, 1, 2, 1, 0, -1, -2, -1])
                     )
-            ]
         )->xAxis(
             Axis::default()->bounds(AxisBounds::new(0, 7))
         )->yAxis(
@@ -165,7 +159,7 @@ class ChartTest extends TestCase
     public function testRenderManyXAndYLabels(): void
     {
         $chart = Chart::new()
-            ->addDataset(
+            ->datasets(
                 DataSet::new('data1')
                     ->marker(Marker::Dot)
                     ->style(Style::default()->fg(AnsiColor::Green))

@@ -105,7 +105,7 @@ class Paragraph implements Widget
         return $this;
     }
 
-    public function alignment(HorizontalAlignment  $alignment): self
+    public function alignment(HorizontalAlignment $alignment): self
     {
         $this->alignment = $alignment;
         return $this;
@@ -117,12 +117,9 @@ class Paragraph implements Widget
         return $this;
     }
 
-    /**
-     * @param list<Line> $lines
-     */
-    public static function fromLines(array $lines): self
+    public static function fromLines(Line ...$lines): self
     {
-        return self::new(Text::fromLines($lines));
+        return self::new(Text::fromLines(...$lines));
     }
 
     /**

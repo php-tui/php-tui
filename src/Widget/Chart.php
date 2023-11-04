@@ -98,10 +98,7 @@ final class Chart implements Widget
 
     }
 
-    /**
-     * @param DataSet[] $dataSets
-     */
-    public static function new(array $dataSets = []): self
+    public static function new(DataSet ...$dataSets): self
     {
         return new self(
             xAxis: Axis::default(),
@@ -122,9 +119,9 @@ final class Chart implements Widget
         return $this;
     }
 
-    public function addDataset(DataSet $dataSet): self
+    public function datasets(DataSet ...$dataSets): self
     {
-        $this->dataSets[] = $dataSet;
+        $this->dataSets = $dataSets;
         return $this;
     }
 

@@ -90,9 +90,9 @@ final class Block implements Widget
         return $this;
     }
 
-    public function title(Title $title): self
+    public function titles(Title ...$titles): self
     {
-        $this->titles[] = $title;
+        $this->titles = $titles;
         return $this;
     }
 

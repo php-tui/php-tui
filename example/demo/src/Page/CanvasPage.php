@@ -30,7 +30,7 @@ class CanvasPage implements Component
     {
         return Block::default()
             ->borders(Borders::ALL)
-            ->title(Title::fromString('World'))
+            ->titles(Title::fromString('World'))
             ->widget(
                 PhpTuiCanvas::default()
                     ->marker(Marker::Braille)

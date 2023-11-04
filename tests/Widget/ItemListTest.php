@@ -31,10 +31,10 @@ class ItemListTest extends TestCase
         yield 'simple' => [
             Area::fromDimensions(5, 5),
             ItemList::default()
-                ->items([
+                ->items(
                     ListItem::new(Text::raw('Hello')),
                     ListItem::new(Text::raw('World')),
-                ]),
+                ),
             [
                 'Hello',
                 'World',
@@ -47,12 +47,12 @@ class ItemListTest extends TestCase
             Area::fromDimensions(5, 5),
             ItemList::default()
                 ->startCorner(Corner::BottomLeft)
-                ->items([
+                ->items(
                     ListItem::new(Text::raw('1')),
                     ListItem::new(Text::raw('2')),
                     ListItem::new(Text::raw('3')),
                     ListItem::new(Text::raw('4')),
-                ]),
+                ),
             [
                 '     ',
                 '4    ',
@@ -66,12 +66,12 @@ class ItemListTest extends TestCase
             ItemList::default()
                 ->startCorner(Corner::BottomLeft)
                 ->select(1)
-                ->items([
+                ->items(
                     ListItem::new(Text::raw('1')),
                     ListItem::new(Text::raw('2')),
                     ListItem::new(Text::raw('3')),
                     ListItem::new(Text::raw('4')),
-                ]),
+                ),
             [
                 '     ',
                 '  4  ',
@@ -84,12 +84,12 @@ class ItemListTest extends TestCase
             Area::fromDimensions(3, 2),
             ItemList::default()
                 ->offset(1)
-                ->items([
+                ->items(
                     ListItem::new(Text::raw('1')),
                     ListItem::new(Text::raw('2')),
                     ListItem::new(Text::raw('3')),
                     ListItem::new(Text::raw('4')),
-                ]),
+                ),
             [
                 '2  ',
                 '3  ',
@@ -100,12 +100,12 @@ class ItemListTest extends TestCase
             ItemList::default()
                 ->offset(1)
                 ->select(2)
-                ->items([
+                ->items(
                     ListItem::new(Text::raw('1')),
                     ListItem::new(Text::raw('2')),
                     ListItem::new(Text::raw('3')),
                     ListItem::new(Text::raw('4')),
-                ]),
+                ),
             [
                 '  2',
                 '>>3',
@@ -116,12 +116,12 @@ class ItemListTest extends TestCase
             ItemList::default()
                 ->offset(0)
                 ->select(3)
-                ->items([
+                ->items(
                     ListItem::new(Text::raw('1')),
                     ListItem::new(Text::raw('2')),
                     ListItem::new(Text::raw('3')),
                     ListItem::new(Text::raw('4')),
-                ]),
+                ),
             [
                 '  3',
                 '>>4',

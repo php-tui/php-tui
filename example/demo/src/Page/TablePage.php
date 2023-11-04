@@ -57,18 +57,18 @@ final class TablePage implements Component
 
     public function build(): Widget
     {
-        return Block::default()->title(Title::fromString('Table'))->borders(Borders::ALL)
+        return Block::default()->titles(Title::fromString('Table'))->borders(Borders::ALL)
             ->widget(
                 Table::default()
                     ->state($this->state)
                     ->select(rand(0, count(self::EVENTS)))
                     ->highlightSymbol('X')
                     ->highlightStyle(Style::default()->bg(AnsiColor::Cyan)->fg(AnsiColor::Black))
-                    ->widths([
+                    ->widths(
                         Constraint::percentage(10),
                         Constraint::min(10),
-                    ])
-                    ->rows(array_map(function (array $event) {
+                    )
+                    ->rows(...array_map(function (array $event) {
                         return TableRow::fromCells([
                             TableCell::fromLine(Line::fromSpan(
                                 Span::styled($event[1], match ($event[1]) {

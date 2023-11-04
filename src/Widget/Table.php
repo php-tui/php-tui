@@ -177,21 +177,15 @@ final class Table implements Widget
         $this->header = $tableRow;
         return $this;
     }
-    /**
-     * @param list<TableRow> $rows
-     */
-    public function rows(array $rows): self
+    public function rows(TableRow ...$rows): self
     {
-        $this->rows = $rows;
+        $this->rows = array_values($rows);
         return $this;
     }
 
-    /**
-     * @param Constraint[] $widths
-     */
-    public function widths(array $widths): self
+    public function widths(Constraint ...$widths): self
     {
-        $this->widths = $widths;
+        $this->widths = array_values($widths);
         return $this;
     }
 

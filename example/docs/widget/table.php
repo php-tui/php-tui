@@ -14,11 +14,11 @@ require 'vendor/autoload.php';
 $display = Display::fullscreen(PhpTermBackend::new());
 $display->draw(function (Buffer $buffer): void {
     Table::default()
-        ->widths([
+        ->widths(
             Constraint::percentage(25),
             Constraint::percentage(25),
             Constraint::percentage(50),
-        ])
+        )
         ->header(
             TableRow::fromCells([
                 TableCell::fromString('Name'),
@@ -26,7 +26,7 @@ $display->draw(function (Buffer $buffer): void {
                 TableCell::fromString('Approved?'),
             ])->height(2)->bottomMargin(2)
         )
-        ->rows([
+        ->rows(
             TableRow::fromCells([
                 TableCell::fromString('Cliff'),
                 TableCell::fromString('1'),
@@ -42,6 +42,6 @@ $display->draw(function (Buffer $buffer): void {
                 TableCell::fromString('519'),
                 TableCell::fromString('✅'),
             ]),
-        ])->render($buffer->area(), $buffer);
+        )->render($buffer->area(), $buffer);
 });
 $display->flush();
