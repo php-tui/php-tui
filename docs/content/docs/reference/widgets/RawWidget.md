@@ -5,7 +5,7 @@ description: This widget allows you to write directly to the buffer through a cl
 ## RawWidget
 
 This widget allows you to write directly to the buffer through a closure.
-{{% terminal file="/data/example/docs/widget/rawWidget.snapshot" %}}
+{{% terminal file="/data/example/docs/widget/rawWidget.html" %}}
 {{< details "Show code"  >}}
 {{% codeInclude file="/data/example/docs/widget/rawWidget.php" language="php" %}}
 

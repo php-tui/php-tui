@@ -5,7 +5,7 @@ description: This widget has the ability to show and wrap text.
 ## Paragraph
 
 This widget has the ability to show and wrap text.
-{{% terminal file="/data/example/docs/widget/paragraph.snapshot" %}}
+{{% terminal file="/data/example/docs/widget/paragraph.html" %}}
 {{< details "Show code"  >}}
 {{% codeInclude file="/data/example/docs/widget/paragraph.php" language="php" %}}
 

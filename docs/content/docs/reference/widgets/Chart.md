@@ -5,7 +5,7 @@ description: Renders a a composite of scatter or line graphs.
 ## Chart
 
 Renders a a composite of scatter or line graphs.
-{{% terminal file="/data/example/docs/widget/chart.snapshot" %}}
+{{% terminal file="/data/example/docs/widget/chart.html" %}}
 {{< details "Show code"  >}}
 {{% codeInclude file="/data/example/docs/widget/chart.php" language="php" %}}
 

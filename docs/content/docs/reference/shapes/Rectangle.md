@@ -5,7 +5,7 @@ description: Draw a rectangle at the given position with the given width and hei
 ## Rectangle
 
 Draw a rectangle at the given position with the given width and height
-{{% terminal file="/data/example/docs/shape/rectangle.snapshot" %}}
+{{% terminal file="/data/example/docs/shape/rectangle.html" %}}
 {{< details "Show code"  >}}
 {{% codeInclude file="/data/example/docs/shape/rectangle.php" language="php" %}}
 

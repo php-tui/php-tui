@@ -5,7 +5,7 @@ description: Renders an image on the canvas.
 ## ImageShape
 
 Renders an image on the canvas.
-{{% terminal file="/data/example/docs/shape/imageShape.snapshot" %}}
+{{% terminal file="/data/example/docs/shape/imageShape.html" %}}
 {{< details "Show code"  >}}
 {{% codeInclude file="/data/example/docs/shape/imageShape.php" language="php" %}}
 

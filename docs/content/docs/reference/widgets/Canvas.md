@@ -5,7 +5,7 @@ description: The canvas widget provides a surface, of arbitrary scale, upon whic
 ## Canvas
 
 The canvas widget provides a surface, of arbitrary scale, upon which shapes can be drawn.
-{{% terminal file="/data/example/docs/widget/canvas.snapshot" %}}
+{{% terminal file="/data/example/docs/widget/canvas.html" %}}
 {{< details "Show code"  >}}
 {{% codeInclude file="/data/example/docs/widget/canvas.php" language="php" %}}
 

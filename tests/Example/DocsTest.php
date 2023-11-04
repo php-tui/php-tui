@@ -74,17 +74,6 @@ class DocsTest extends TestCase
         }
     }
 
-    private function sanitize(string $html): string
-    {
-        return trim(str_replace(
-            '&nbsp;',
-            ' ',
-            strip_tags(
-                str_replace('<div style="clear: both;"></div>', "\n", $html)
-            )
-        ));
-    }
-
     private function assertSnapshot(string $path, string $output, string $extension): void
     {
         $snapshot = substr($path, 0, -3) . $extension;
@@ -98,7 +87,7 @@ class DocsTest extends TestCase
             throw new RuntimeException('Could not read file');
         }
 
-        self::assertEquals($this->sanitize($output), $this->sanitize($existing));
+        self::assertEquals($output, $existing);
         self::assertEquals($output, $existing);
 
     }

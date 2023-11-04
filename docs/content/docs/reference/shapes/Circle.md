@@ -5,7 +5,7 @@ description: Draws a circle at with the specified radius and color
 ## Circle
 
 Draws a circle at with the specified radius and color
-{{% terminal file="/data/example/docs/shape/circle.snapshot" %}}
+{{% terminal file="/data/example/docs/shape/circle.html" %}}
 {{< details "Show code"  >}}
 {{% codeInclude file="/data/example/docs/shape/circle.php" language="php" %}}
 

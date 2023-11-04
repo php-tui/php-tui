@@ -5,7 +5,7 @@ description: Render a set of points on the canvas.
 ## Points
 
 Render a set of points on the canvas.
-{{% terminal file="/data/example/docs/shape/points.snapshot" %}}
+{{% terminal file="/data/example/docs/shape/points.html" %}}
 {{< details "Show code"  >}}
 {{% codeInclude file="/data/example/docs/shape/points.php" language="php" %}}
 

@@ -186,7 +186,7 @@ final class Docgen
             $shapeDoc->description,
         ];
         $doc = array_merge($doc, [
-            sprintf('{{%% terminal file="/data/example/docs/shape/%s.snapshot" %%}}', $shapeDoc->name),
+            sprintf('{{%% terminal file="/data/example/docs/shape/%s.html" %%}}', $shapeDoc->name),
             '{{< details "Show code"  >}}',
             sprintf('{{%% codeInclude file="/data/example/docs/shape/%s.php" language="php" %%}}', $shapeDoc->name),
             '',
@@ -227,7 +227,7 @@ final class Docgen
             $widgetDoc->description,
         ];
         $doc = array_merge($doc, [
-            sprintf('{{%% terminal file="/data/example/docs/widget/%s.snapshot" %%}}', $widgetDoc->name),
+            sprintf('{{%% terminal file="/data/example/docs/widget/%s.html" %%}}', $widgetDoc->name),
             '{{< details "Show code"  >}}',
             sprintf('{{%% codeInclude file="/data/example/docs/widget/%s.php" language="php" %%}}', $widgetDoc->name),
             '',

@@ -5,7 +5,7 @@ description: Renders a map of the world!
 ## Map
 
 Renders a map of the world!
-{{% terminal file="/data/example/docs/shape/map.snapshot" %}}
+{{% terminal file="/data/example/docs/shape/map.html" %}}
 {{< details "Show code"  >}}
 {{% codeInclude file="/data/example/docs/shape/map.php" language="php" %}}
 

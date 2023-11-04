@@ -5,7 +5,7 @@ description: Shows tabular data arranged in columns. The column spacing is deter
 ## Table
 
 Shows tabular data arranged in columns. The column spacing is determined bythe "width" constraints.
-{{% terminal file="/data/example/docs/widget/table.snapshot" %}}
+{{% terminal file="/data/example/docs/widget/table.html" %}}
 {{< details "Show code"  >}}
 {{% codeInclude file="/data/example/docs/widget/table.php" language="php" %}}
 

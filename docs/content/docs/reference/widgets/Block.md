@@ -5,7 +5,7 @@ description: The block widget is a container for other widgets and can provide a
 ## Block
 
 The block widget is a container for other widgets and can provide a border,title and padding.
-{{% terminal file="/data/example/docs/widget/block.snapshot" %}}
+{{% terminal file="/data/example/docs/widget/block.html" %}}
 {{< details "Show code"  >}}
 {{% codeInclude file="/data/example/docs/widget/block.php" language="php" %}}
 

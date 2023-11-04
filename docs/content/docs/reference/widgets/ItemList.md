@@ -5,7 +5,7 @@ description: The ItemList widget allows you to list and highlight items.
 ## ItemList
 
 The ItemList widget allows you to list and highlight items.
-{{% terminal file="/data/example/docs/widget/itemList.snapshot" %}}
+{{% terminal file="/data/example/docs/widget/itemList.html" %}}
 {{< details "Show code"  >}}
 {{% codeInclude file="/data/example/docs/widget/itemList.php" language="php" %}}
 

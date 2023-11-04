@@ -5,7 +5,7 @@ description: Draw a straight line from one point to another.
 ## Line
 
 Draw a straight line from one point to another.
-{{% terminal file="/data/example/docs/shape/line.snapshot" %}}
+{{% terminal file="/data/example/docs/shape/line.html" %}}
 {{< details "Show code"  >}}
 {{% codeInclude file="/data/example/docs/shape/line.php" language="php" %}}
 

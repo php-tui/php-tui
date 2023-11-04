@@ -5,7 +5,7 @@ description: Renders a "sprite" based on a given "ascii art"Each sprite can have
 ## Sprite
 
 Renders a "sprite" based on a given "ascii art"Each sprite can have a single color but they can be layered on the canvas.
-{{% terminal file="/data/example/docs/shape/sprite.snapshot" %}}
+{{% terminal file="/data/example/docs/shape/sprite.html" %}}
 {{< details "Show code"  >}}
 {{% codeInclude file="/data/example/docs/shape/sprite.php" language="php" %}}
 
