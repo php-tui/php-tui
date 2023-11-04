@@ -31,7 +31,12 @@ class Paragraph implements Widget
     ) {
     }
 
-    public static function new(Text $text): self
+    public static function fromString(string $string): self
+    {
+        return self::fromText(Text::fromString($string));
+    }
+
+    public static function fromText(Text $text): self
     {
         return new self(
             style: Style::default(),
@@ -119,7 +124,7 @@ class Paragraph implements Widget
 
     public static function fromLines(Line ...$lines): self
     {
-        return self::new(Text::fromLines(...$lines));
+        return self::fromText(Text::fromLines(...$lines));
     }
 
     /**

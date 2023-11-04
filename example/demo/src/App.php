@@ -188,7 +188,7 @@ final class App
                 ->borders(Borders::ALL)->style(Style::default()->fg(AnsiColor::White))
                 ->titles(Title::fromString(sprintf('%d FPS', $this->frameRate()))->horizontalAlignmnet(HorizontalAlignment::Right))
                 ->widget(
-                    Paragraph::new(Text::fromLine(Line::fromSpans([
+                    Paragraph::fromText(Text::fromLine(Line::fromSpans([
                         Span::styled('[q]', Style::default()->fg(AnsiColor::Green)),
                         Span::fromString('quit '),
                         Span::styled('[1]', Style::default()->fg(AnsiColor::Green)),

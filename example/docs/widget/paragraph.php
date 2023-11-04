@@ -10,7 +10,7 @@ require 'vendor/autoload.php';
 
 $display = Display::fullscreen(PhpTermBackend::new());
 $display->draw(function (Buffer $buffer): void {
-    Paragraph::new(
+    Paragraph::fromText(
         Text::fromString(
             <<<'EOT'
                 Once upon a midnight weary,

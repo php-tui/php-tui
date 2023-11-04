@@ -13,6 +13,12 @@ use PHPUnit\Framework\TestCase;
 
 class ParagraphTest extends TestCase
 {
+
+    public function testFromString(): void
+    {
+        $paragraph = Paragraph::fromString('Hello');
+        self::assertEquals(Paragraph::fromText(Text::fromString('Hello')), $paragraph);
+    }
     /**
      * @dataProvider provideParagraph
      */
@@ -33,12 +39,12 @@ class ParagraphTest extends TestCase
     {
         yield 'simple' => [
             Area::fromDimensions(8, 1),
-            Paragraph::new(Text::fromString('Gday')),
+            Paragraph::fromText(Text::fromString('Gday')),
             'Gday    ',
         ];
         yield 'wrap' => [
             Area::fromDimensions(8, 3),
-            Paragraph::new(Text::fromString('Gday mate lets put another shrimp on the barby')),
+            Paragraph::fromText(Text::fromString('Gday mate lets put another shrimp on the barby')),
             implode("\n", [
                 'Gday mat',
                 'e lets p',
@@ -47,7 +53,7 @@ class ParagraphTest extends TestCase
         ];
         yield 'align right' => [
             Area::fromDimensions(8, 1),
-            Paragraph::new(
+            Paragraph::fromText(
                 Text::fromLine(
                     Line::fromString('Gday')->alignment(HorizontalAlignment::Right)
                 )

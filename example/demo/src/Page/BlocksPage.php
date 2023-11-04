@@ -76,7 +76,7 @@ class BlocksPage implements Component
     public function lorem(): Paragraph
     {
         $text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.';
-        return Paragraph::new(
+        return Paragraph::fromText(
             Text::styled(
                 $text,
                 Style::default()->fg(AnsiColor::DarkGray)
