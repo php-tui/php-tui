@@ -11,14 +11,12 @@ use PhpTui\Tui\Model\Direction;
 use PhpTui\Tui\Model\Display;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\Widget\HorizontalAlignment;
-use PhpTui\Tui\Model\Widget\Line;
-use PhpTui\Tui\Model\Widget\Text;
 use PhpTui\Tui\Widget\Grid;
 use PhpTui\Tui\Widget\Paragraph;
 
 class App
 {
-    private $selected = 0;
+    private int $selected = 0;
 
     /**
      * @param Slide[] $slides
@@ -87,23 +85,15 @@ class App
                 Constraint::percentage(50),
                 Constraint::percentage(50),
             )->widgets(
-                Paragraph::new(
-                    Text::fromLine(
-                        Line::fromString(sprintf(
-                            '%s/%s',
-                            $this->selected + 1,
-                            count($this->slides),
-                        ), HorizontalAlignment::Left),
-                    )
-                ),
-                Paragraph::new(
-                    Text::fromLine(
-                        Line::fromString(sprintf(
-                            '%s',
-                            $this->currentSlide()->title(),
-                        ), HorizontalAlignment::Right),
-                    )
-                )
+                Paragraph::fromString(sprintf(
+                    '%s/%s',
+                    $this->selected + 1,
+                    count($this->slides),
+                )),
+                Paragraph::fromString(sprintf(
+                    '%s',
+                    $this->currentSlide()->title(),
+                ))->alignment(HorizontalAlignment::Right),
             );
     }
 }
