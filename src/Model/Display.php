@@ -81,7 +81,7 @@ final class Display
      * This is the same as Draw but instead of a closure you pass a single
      * widget (usually a Grid widget).
      */
-    public function render(Widget $widget): void
+    public function drawWidget(Widget $widget): void
     {
         $buffer = $this->buffer();
         $this->draw(function () use ($widget, $buffer) {

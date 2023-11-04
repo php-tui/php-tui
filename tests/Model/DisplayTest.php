@@ -67,7 +67,7 @@ class DisplayTest extends TestCase
     {
         $backend = DummyBackend::fromDimensions(4, 4);
         $terminal = Display::fullscreen($backend);
-        $terminal->render(Canvas::fromIntBounds(0, 3, 0, 3)->marker(Marker::Dot)->draw(Points::new([
+        $terminal->drawWidget(Canvas::fromIntBounds(0, 3, 0, 3)->marker(Marker::Dot)->draw(Points::new([
             [3, 3], [2, 2], [1, 1], [0, 0]
         ], AnsiColor::Green)));
 
