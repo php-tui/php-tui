@@ -11,6 +11,7 @@ use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Model\Widget\Line as DTLLine;
 use PhpTui\Tui\Widget\Canvas;
 use PhpTui\Tui\Widget\Canvas\CanvasContext;
+use PhpTui\Tui\Widget\Canvas\Shape\Circle;
 use PhpTui\Tui\Widget\Canvas\Shape\Line;
 use Generator;
 use PHPUnit\Framework\TestCase;
@@ -23,6 +24,55 @@ class CanvasTest extends TestCase
         self::assertEquals(AxisBounds::new(1, 320), $canvas->xBounds);
         self::assertEquals(AxisBounds::new(2, 240), $canvas->yBounds);
     }
+
+    public function testDraw(): void
+    {
+        $area = Area::fromDimensions(10, 10);
+        $buffer = Buffer::filled($area, Cell::fromChar('x'));
+
+        $canvas = Canvas::fromIntBounds(0, 10, 0, 10);
+        $canvas->draw(Circle::fromPrimitives(5, 5, 5, AnsiColor::Green));
+        $canvas->render($area, $buffer);
+        $expected = [
+            'x⢀⡴⠋⠉⠉⠳⣄xx',
+            '⢀⡞xxxxx⠘⣆x',
+            '⡼xxxxxxx⠸⡄',
+            '⡇xxxxxxxx⡇',
+            '⡇xxxxxxxx⣇',
+            '⡇xxxxxxxx⡇',
+            '⡇xxxxxxxx⡇',
+            '⢹⡀xxxxxx⣸⠁',
+            'x⢳⡀xxxx⣰⠃x',
+            'xx⠙⠦⢤⠤⠞⠁xx',
+        ];
+        self::assertEquals($expected, $buffer->toLines());
+
+        $buffer = Buffer::filled($area, Cell::fromChar('x'));
+        $canvas->render($area, $buffer);
+        self::assertEquals($expected, $buffer->toLines());
+    }
+
+    public function testDrawMultiple(): void
+    {
+        $area = Area::fromDimensions(5, 5);
+        $buffer = Buffer::filled($area, Cell::fromChar('x'));
+
+        $canvas = Canvas::fromIntBounds(0, 5, 0, 5);
+        $canvas->draw(
+            Circle::fromPrimitives(1, 1, 1, AnsiColor::Green),
+            Circle::fromPrimitives(4, 4, 1, AnsiColor::Green),
+        );
+        $canvas->render($area, $buffer);
+        $expected = [
+            'xx⢸⠉⣇',
+            'xx⠸⣄⡇',
+            '⣀⡀xxx',
+            '⡇⢹xxx',
+            '⢧⠼xxx',
+        ];
+        self::assertEquals($expected, $buffer->toLines());
+    }
+
     /**
      * @dataProvider provideRenderMarker
      * @param string[] $expected

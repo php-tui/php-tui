@@ -13,12 +13,18 @@ use PhpTui\Tui\Model\Position;
 use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Widget\Canvas\CanvasContext;
+use PhpTui\Tui\Widget\Canvas\Shape;
 
 /**
  * The canvas widget provides a surface, of arbitrary scale, upon which shapes can be drawn.
  */
 final class Canvas implements Widget
 {
+    /**
+     * @var Shape[]
+     */
+    private array $shapes = [];
+
     private function __construct(
         /**
          * Bounds of the X Axis. Must be set if the canvas is to render.
@@ -58,9 +64,6 @@ final class Canvas implements Widget
     public function render(Area $area, Buffer $buffer): void
     {
         $painter = $this->painter;
-        if (null === $painter) {
-            return;
-        }
 
         $buffer->setStyle($area, Style::default()->bg($this->backgroundColor));
         $width = $area->width;
@@ -72,7 +75,23 @@ final class Canvas implements Widget
             $this->yBounds,
             $this->marker,
         );
-        $painter($context);
+
+        $saveLayer = false;
+        foreach ($this->shapes as $shape) {
+            $context->draw($shape);
+            $context->saveLayer();
+            $saveLayer = true;
+        }
+
+        if ($saveLayer) {
+            // if shapes were added then save the layer before
+            // calling the closure
+            $context->saveLayer();
+        }
+
+        if ($painter !== null) {
+            $painter($context);
+        }
         $context->finish();
 
         foreach ($context->layers as $layer) {
@@ -150,5 +169,23 @@ final class Canvas implements Widget
             backgroundColor: AnsiColor::Reset,
             marker: Marker::Braille,
         );
+    }
+
+    /**
+     * Shortcut for adding shapes to the canvas.
+     *
+     * Any shapes added here will be added in the first layer.
+     *
+     * If you need to do more complex things with the canvas use the painter
+     * closure to operate directly on the CanvasContext.
+     *
+     * You can call this method multiple times
+     */
+    public function draw(Shape ...$shapes): self
+    {
+        foreach ($shapes as $shape) {
+            $this->shapes[] = $shape;
+        }
+        return $this;
     }
 }
