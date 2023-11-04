@@ -72,13 +72,12 @@ class DisplayTest extends TestCase
         ], AnsiColor::Green)));
 
         self::assertEquals(
-
             <<<'EOT'
-               •
-              • 
-             •  
-            •   
-            EOT,
+                   •
+                  • 
+                 •  
+                •   
+                EOT,
             $backend->flushed()
         );
     }

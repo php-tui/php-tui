@@ -2,7 +2,6 @@
 
 namespace PhpTui\Tui\Example\Demo;
 
-use Error;
 use PhpTui\Term\Actions;
 use PhpTui\Term\Event\CharKeyEvent;
 use PhpTui\Term\Terminal;
@@ -17,7 +16,6 @@ use PhpTui\Tui\Example\Demo\Page\ItemListPage;
 use PhpTui\Tui\Example\Demo\Page\SpritePage;
 use PhpTui\Tui\Example\Demo\Page\TablePage;
 use PhpTui\Tui\Model\AnsiColor;
-use PhpTui\Tui\Model\Buffer;
 use PhpTui\Tui\Model\Constraint;
 use PhpTui\Tui\Model\Direction;
 use PhpTui\Tui\Model\Display;
