@@ -19,6 +19,22 @@ class ParagraphTest extends TestCase
         $paragraph = Paragraph::fromString('Hello');
         self::assertEquals(Paragraph::fromText(Text::fromString('Hello')), $paragraph);
     }
+
+    public function testFromMultilineString(): void
+    {
+        $paragraph = Paragraph::fromString("Hello\nGoodbye");
+        self::assertEquals(Paragraph::fromLines(
+            Line::fromString('Hello'),
+            Line::fromString('Goodbye'),
+        ), $paragraph);
+        $area = Area::fromPrimitives(0, 0, 10, 2);
+        $buffer = Buffer::empty($area);
+        $paragraph->render($buffer->area(), $buffer);
+        self::assertEquals([
+            'Hello     ',
+            'Goodbye   ',
+        ], $buffer->toLines());
+    }
     /**
      * @dataProvider provideParagraph
      */

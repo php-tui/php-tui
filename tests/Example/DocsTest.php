@@ -87,8 +87,7 @@ class DocsTest extends TestCase
             throw new RuntimeException('Could not read file');
         }
 
-        self::assertEquals($output, $existing);
-        self::assertEquals($output, $existing);
+        self::assertEquals($existing, $output);
 
     }
 }
