@@ -17,7 +17,7 @@ final class Line implements IteratorAggregate
      */
     public function __construct(
         public readonly array $spans,
-        public readonly ?HorizontalAlignment $alignment = null
+        public ?HorizontalAlignment $alignment = null
     ) {
     }
 
@@ -51,11 +51,23 @@ final class Line implements IteratorAggregate
         return new ArrayIterator($this->spans);
     }
 
+    /**
+     * Patches the style of each Span in an existing Line, adding modifiers from the given style.
+     */
     public function patchStyle(Style $style): self
     {
         foreach ($this->spans as $span) {
             $span->patchStyle($style);
         }
+        return $this;
+    }
+
+    /**
+     * Sets the target alignment for this line of text.
+     */
+    public function alignment(HorizontalAlignment $alignment): self
+    {
+        $this->alignment = $alignment;
         return $this;
     }
 

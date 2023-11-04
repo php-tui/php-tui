@@ -31,6 +31,7 @@ final class Text
         return $text->patchStyle($style);
     }
 
+
     public function patchStyle(Style $style): self
     {
         foreach ($this->lines as $line) {
@@ -43,5 +44,13 @@ final class Text
     public function height(): int
     {
         return count($this->lines);
+    }
+
+    /**
+     * @param array<int,Line> $lines
+     */
+    public static function fromLines(array $lines): self
+    {
+        return new self($lines);
     }
 }

@@ -133,4 +133,12 @@ class Paragraph implements Widget
             HorizontalAlignment::Left => 0,
         };
     }
+
+    /**
+     * @param list<Line> $lines
+     */
+    public static function fromLines(array $lines): self
+    {
+        return self::new(Text::fromLines($lines));
+    }
 }
