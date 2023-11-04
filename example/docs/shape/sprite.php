@@ -2,7 +2,6 @@
 
 use PhpTui\Tui\Adapter\PhpTerm\PhpTermBackend;
 use PhpTui\Tui\Model\AnsiColor;
-use PhpTui\Tui\Model\AxisBounds;
 use PhpTui\Tui\Model\Buffer;
 use PhpTui\Tui\Model\Display;
 use PhpTui\Tui\Model\Marker;
@@ -15,9 +14,7 @@ require 'vendor/autoload.php';
 
 $display = Display::fullscreen(PhpTermBackend::new());
 $display->draw(function (Buffer $buffer): void {
-    Canvas::default()
-        ->xBounds(AxisBounds::new(0, 20))
-        ->yBounds(AxisBounds::new(0, 10))
+    Canvas::fromIntBounds(0, 20, 0, 10)
         ->marker(Marker::Braille)
         ->paint(function (CanvasContext $context): void {
 

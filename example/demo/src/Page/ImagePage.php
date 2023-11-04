@@ -5,7 +5,6 @@ namespace PhpTui\Tui\Example\Demo\Page;
 use PhpTui\Term\Event;
 use PhpTui\Tui\Adapter\ImageMagick\Shape\ImageShape;
 use PhpTui\Tui\Example\Demo\Component;
-use PhpTui\Tui\Model\AxisBounds;
 use PhpTui\Tui\Model\Constraint;
 use PhpTui\Tui\Model\Direction;
 use PhpTui\Tui\Model\Marker;
@@ -35,10 +34,8 @@ final class ImagePage implements Component
                     ->borders(Borders::ALL)
                     ->borderType(BorderType::Rounded)
                     ->widget(
-                        Canvas::default()
+                        Canvas::fromIntBounds(0, 320, 0, 240)
                         ->marker(Marker::HalfBlock)
-                        ->xBounds(AxisBounds::new(0, 320))
-                        ->yBounds(AxisBounds::new(0, 240))
                         ->paint(function (CanvasContext $context) use ($shape): void {
                             $context->draw($shape);
                         })

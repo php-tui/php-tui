@@ -17,6 +17,12 @@ use PHPUnit\Framework\TestCase;
 
 class CanvasTest extends TestCase
 {
+    public function testFromIntBounds(): void
+    {
+        $canvas = Canvas::fromIntBounds(1, 320, 2, 240);
+        self::assertEquals(AxisBounds::new(1, 320), $canvas->xBounds);
+        self::assertEquals(AxisBounds::new(2, 240), $canvas->yBounds);
+    }
     /**
      * @dataProvider provideRenderMarker
      * @param string[] $expected

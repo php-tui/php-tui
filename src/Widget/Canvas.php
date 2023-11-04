@@ -23,11 +23,11 @@ final class Canvas implements Widget
         /**
          * Bounds of the X Axis. Must be set if the canvas is to render.
          */
-        private AxisBounds $xBounds,
+        public AxisBounds $xBounds,
         /**
          * Bounds of the Y Axis. Must be set if the canvas is to render.
          */
-        private AxisBounds $yBounds,
+        public AxisBounds $yBounds,
         /**
          * The painter closure can draw shapes onto the canvas.
          * @var Closure(CanvasContext): void
@@ -139,5 +139,16 @@ final class Canvas implements Widget
     {
         $this->backgroundColor = $color;
         return $this;
+    }
+
+    public static function fromIntBounds(int $x1, int $x2, int $y1, int $y2): self
+    {
+        return new self(
+            AxisBounds::new($x1, $x2),
+            AxisBounds::new($y1, $y2),
+            null,
+            backgroundColor: AnsiColor::Reset,
+            marker: Marker::Braille,
+        );
     }
 }
