@@ -18,8 +18,8 @@ $display->draw(function (Buffer $buffer): void {
         // the canvas and the "mark" that is made
         ->marker(Marker::Dot)
 
-        // note can use `$canvas->draw($shape)` without the closure for most
-        // cases
+        // note can use `$canvas->draw($shape, ...)` without the closure for
+        // most cases
         ->paint(function (CanvasContext $context): void {
 
             $context->draw(Circle::fromPrimitives(10, 10, 10, AnsiColor::Green));
