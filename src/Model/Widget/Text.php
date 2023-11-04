@@ -13,7 +13,7 @@ final class Text
     {
     }
 
-    public static function raw(string $string): self
+    public static function fromString(string $string): self
     {
         return new self(array_map(function (string $line) {
             return Line::fromString($line);
@@ -27,7 +27,7 @@ final class Text
 
     public static function styled(string $string, Style $style): self
     {
-        $text = self::raw($string);
+        $text = self::fromString($string);
         return $text->patchStyle($style);
     }
 

@@ -11,7 +11,7 @@ class TextTest extends TestCase
 {
     public function testRaw(): void
     {
-        $text = Text::raw("The first line\nThe second line");
+        $text = Text::fromString("The first line\nThe second line");
         self::assertCount(2, $text->lines);
     }
 

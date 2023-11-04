@@ -18,6 +18,6 @@ $display->draw(function (Buffer $buffer): void {
         ->borders(Borders::ALL)
         ->titles(Title::fromString('Hello World'))
         ->borderType(BorderType::Rounded)
-        ->widget(Paragraph::new(Text::raw('This is a block example')))
+        ->widget(Paragraph::new(Text::fromString('This is a block example')))
         ->render($buffer->area(), $buffer);
 });

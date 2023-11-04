@@ -25,7 +25,7 @@ class GridTest extends TestCase
         $buffer = Buffer::empty($area);
         $grid = Grid::default()
             ->widgets(
-                Paragraph::new(Text::raw('Hello World'))
+                Paragraph::new(Text::fromString('Hello World'))
             );
         $grid->render($area, $buffer);
 

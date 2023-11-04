@@ -32,8 +32,8 @@ class ItemListTest extends TestCase
             Area::fromDimensions(5, 5),
             ItemList::default()
                 ->items(
-                    ListItem::new(Text::raw('Hello')),
-                    ListItem::new(Text::raw('World')),
+                    ListItem::new(Text::fromString('Hello')),
+                    ListItem::new(Text::fromString('World')),
                 ),
             [
                 'Hello',
@@ -48,10 +48,10 @@ class ItemListTest extends TestCase
             ItemList::default()
                 ->startCorner(Corner::BottomLeft)
                 ->items(
-                    ListItem::new(Text::raw('1')),
-                    ListItem::new(Text::raw('2')),
-                    ListItem::new(Text::raw('3')),
-                    ListItem::new(Text::raw('4')),
+                    ListItem::new(Text::fromString('1')),
+                    ListItem::new(Text::fromString('2')),
+                    ListItem::new(Text::fromString('3')),
+                    ListItem::new(Text::fromString('4')),
                 ),
             [
                 '     ',
@@ -67,10 +67,10 @@ class ItemListTest extends TestCase
                 ->startCorner(Corner::BottomLeft)
                 ->select(1)
                 ->items(
-                    ListItem::new(Text::raw('1')),
-                    ListItem::new(Text::raw('2')),
-                    ListItem::new(Text::raw('3')),
-                    ListItem::new(Text::raw('4')),
+                    ListItem::new(Text::fromString('1')),
+                    ListItem::new(Text::fromString('2')),
+                    ListItem::new(Text::fromString('3')),
+                    ListItem::new(Text::fromString('4')),
                 ),
             [
                 '     ',
@@ -85,10 +85,10 @@ class ItemListTest extends TestCase
             ItemList::default()
                 ->offset(1)
                 ->items(
-                    ListItem::new(Text::raw('1')),
-                    ListItem::new(Text::raw('2')),
-                    ListItem::new(Text::raw('3')),
-                    ListItem::new(Text::raw('4')),
+                    ListItem::new(Text::fromString('1')),
+                    ListItem::new(Text::fromString('2')),
+                    ListItem::new(Text::fromString('3')),
+                    ListItem::new(Text::fromString('4')),
                 ),
             [
                 '2  ',
@@ -101,10 +101,10 @@ class ItemListTest extends TestCase
                 ->offset(1)
                 ->select(2)
                 ->items(
-                    ListItem::new(Text::raw('1')),
-                    ListItem::new(Text::raw('2')),
-                    ListItem::new(Text::raw('3')),
-                    ListItem::new(Text::raw('4')),
+                    ListItem::new(Text::fromString('1')),
+                    ListItem::new(Text::fromString('2')),
+                    ListItem::new(Text::fromString('3')),
+                    ListItem::new(Text::fromString('4')),
                 ),
             [
                 '  2',
@@ -117,10 +117,10 @@ class ItemListTest extends TestCase
                 ->offset(0)
                 ->select(3)
                 ->items(
-                    ListItem::new(Text::raw('1')),
-                    ListItem::new(Text::raw('2')),
-                    ListItem::new(Text::raw('3')),
-                    ListItem::new(Text::raw('4')),
+                    ListItem::new(Text::fromString('1')),
+                    ListItem::new(Text::fromString('2')),
+                    ListItem::new(Text::fromString('3')),
+                    ListItem::new(Text::fromString('4')),
                 ),
             [
                 '  3',

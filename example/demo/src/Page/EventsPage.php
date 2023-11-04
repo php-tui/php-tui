@@ -22,7 +22,7 @@ final class EventsPage implements Component
         return Block::default()->titles(Title::fromString('Event log'))->borders(Borders::ALL)
             ->widget(
                 ItemList::default()
-                    ->items(...array_map(fn (Event $event) => ListItem::new(Text::raw($event->__toString())), $this->events))
+                    ->items(...array_map(fn (Event $event) => ListItem::new(Text::fromString($event->__toString())), $this->events))
             )
         ;
     }

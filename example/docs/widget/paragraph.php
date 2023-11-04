@@ -11,7 +11,7 @@ require 'vendor/autoload.php';
 $display = Display::fullscreen(PhpTermBackend::new());
 $display->draw(function (Buffer $buffer): void {
     Paragraph::new(
-        Text::raw(
+        Text::fromString(
             <<<'EOT'
                 Once upon a midnight weary,
                 While I pondered weak and weary,

@@ -297,7 +297,7 @@ class BlockTest extends TestCase
             ->borders(Borders::ALL)
             ->padding(Padding::fromPrimitives(1, 1, 1, 1));
 
-        Paragraph::new(Text::raw('Foob'))->render($block->inner($buffer->area()), $buffer);
+        Paragraph::new(Text::fromString('Foob'))->render($block->inner($buffer->area()), $buffer);
         $block->render($buffer->area(), $buffer);
         self::assertEquals([
             '╭──────╮',
