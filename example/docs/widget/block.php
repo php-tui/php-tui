@@ -21,4 +21,3 @@ $display->draw(function (Buffer $buffer): void {
         ->widget(Paragraph::new(Text::raw('This is a block example')))
         ->render($buffer->area(), $buffer);
 });
-$display->flush();
