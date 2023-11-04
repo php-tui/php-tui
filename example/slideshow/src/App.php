@@ -10,6 +10,8 @@ use PhpTui\Tui\Model\Buffer;
 use PhpTui\Tui\Model\Constraint;
 use PhpTui\Tui\Model\Display;
 use PhpTui\Tui\Model\Widget;
+use PhpTui\Tui\Model\Widget\HorizontalAlignment;
+use PhpTui\Tui\Model\Widget\Line;
 use PhpTui\Tui\Model\Widget\Text;
 use PhpTui\Tui\Widget\Grid;
 use PhpTui\Tui\Widget\Paragraph;
@@ -34,8 +36,10 @@ class App
         $this->terminal->execute(Actions::cursorHide());
         $this->terminal->execute(Actions::alternateScreenEnable());
 
+        $draw = true;
         while (true) {
             while (null !== $event = $this->terminal->events()->next()) {
+                $draw = true;
                 if ($event instanceof CodedKeyEvent) {
                     if ($event->code === KeyCode::Left) {
                         $this->selected = max(0, $this->selected - 1);
@@ -48,20 +52,21 @@ class App
                     }
                 }
             }
-
-
-            $this->display->draw(function (Buffer $buffer) {
-                Grid::default()
-                    ->constraints([
-                        Constraint::min(10),
-                        Constraint::max(1),
-                    ])
-                    ->widgets([
-                        $this->currentSlide()->build(),
-                        $this->footer(),
-                    ])
-                    ->render($buffer->area(), $buffer);
-            });
+            if ($draw) {
+                $this->display->draw(function (Buffer $buffer) {
+                    Grid::default()
+                        ->constraints([
+                            Constraint::min(10),
+                            Constraint::max(1),
+                        ])
+                        ->widgets([
+                            $this->currentSlide()->build(),
+                            $this->footer(),
+                        ])
+                        ->render($buffer->area(), $buffer);
+                });
+                $draw = false;
+            }
 
             usleep(10_000);
         }
@@ -79,11 +84,13 @@ class App
     private function footer(): Widget
     {
        return Paragraph::new(
-           Text::raw(sprintf(
-               '%s/%s',
-               $this->selected + 1,
-               count($this->slides)
-           ))
+           new Text([
+               Line::fromString(sprintf(
+                   '%s/%s',
+                   $this->selected + 1,
+                   count($this->slides),
+               ), HorizontalAlignment::Left),
+           ])
        );
 
     }
