@@ -177,12 +177,9 @@ final class Table implements Widget
         $this->header = $tableRow;
         return $this;
     }
-    /**
-     * @param list<TableRow> $rows
-     */
-    public function rows(array $rows): self
+    public function rows(TableRow ...$rows): self
     {
-        $this->rows = $rows;
+        $this->rows = array_values($rows);
         return $this;
     }
 

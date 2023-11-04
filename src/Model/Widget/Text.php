@@ -46,11 +46,8 @@ final class Text
         return count($this->lines);
     }
 
-    /**
-     * @param array<int,Line> $lines
-     */
-    public static function fromLines(array $lines): self
+    public static function fromLines(Line ...$lines): self
     {
-        return new self($lines);
+        return new self(array_values($lines));
     }
 }

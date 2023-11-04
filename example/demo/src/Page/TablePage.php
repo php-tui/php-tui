@@ -68,7 +68,7 @@ final class TablePage implements Component
                         Constraint::percentage(10),
                         Constraint::min(10),
                     ])
-                    ->rows(array_map(function (array $event) {
+                    ->rows(...array_map(function (array $event) {
                         return TableRow::fromCells([
                             TableCell::fromLine(Line::fromSpan(
                                 Span::styled($event[1], match ($event[1]) {
