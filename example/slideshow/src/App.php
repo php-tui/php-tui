@@ -6,8 +6,8 @@ use PhpTui\Term\Actions;
 use PhpTui\Term\Event\CodedKeyEvent;
 use PhpTui\Term\KeyCode;
 use PhpTui\Term\Terminal;
-use PhpTui\Tui\Model\Buffer;
 use PhpTui\Tui\Model\Constraint;
+use PhpTui\Tui\Model\Direction;
 use PhpTui\Tui\Model\Display;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\Widget\HorizontalAlignment;
@@ -27,8 +27,7 @@ class App
         private Terminal $terminal,
         private Display $display,
         private array $slides
-    )
-    {
+    ) {
     }
     public function run(): void
     {
@@ -53,18 +52,17 @@ class App
                 }
             }
             if ($draw) {
-                $this->display->draw(function (Buffer $buffer) {
+                $this->display->drawWidget(
                     Grid::default()
-                        ->constraints([
+                        ->constraints(
                             Constraint::min(10),
                             Constraint::max(1),
-                        ])
-                        ->widgets([
+                        )
+                        ->widgets(
                             $this->currentSlide()->build(),
                             $this->footer(),
-                        ])
-                        ->render($buffer->area(), $buffer);
-                });
+                        )
+                );
                 $draw = false;
             }
 
@@ -83,15 +81,29 @@ class App
 
     private function footer(): Widget
     {
-       return Paragraph::new(
-           new Text([
-               Line::fromString(sprintf(
-                   '%s/%s',
-                   $this->selected + 1,
-                   count($this->slides),
-               ), HorizontalAlignment::Left),
-           ])
-       );
-
+        return Grid::default()
+            ->direction(Direction::Horizontal)
+            ->constraints(
+                Constraint::percentage(50),
+                Constraint::percentage(50),
+            )->widgets(
+                Paragraph::new(
+                    Text::fromLine(
+                        Line::fromString(sprintf(
+                            '%s/%s',
+                            $this->selected + 1,
+                            count($this->slides),
+                        ), HorizontalAlignment::Left),
+                    )
+                ),
+                Paragraph::new(
+                    Text::fromLine(
+                        Line::fromString(sprintf(
+                            '%s',
+                            $this->currentSlide()->title(),
+                        ), HorizontalAlignment::Right),
+                    )
+                )
+            );
     }
 }

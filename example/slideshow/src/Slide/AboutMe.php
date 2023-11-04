@@ -30,14 +30,14 @@ final class AboutMe implements Slide
     {
         return Grid::default()
             ->direction(Direction::Horizontal)
-            ->constraints([
+            ->constraints(
                 Constraint::percentage(50),
                 Constraint::percentage(50),
-            ])
-            ->widgets([
+            )
+            ->widgets(
                 $this->text(),
                 $this->me(),
-            ]);
+            );
     }
 
     private function text(): Widget
@@ -54,12 +54,8 @@ final class AboutMe implements Slide
 
     private function me(): Widget
     {
-        return Canvas::default()
+        return Canvas::fromIntBounds(0, $this->me->resolution()->width, 0, $this->me->resolution()->height)
             ->marker(Marker::HalfBlock)
-            ->xBounds(AxisBounds::new(0, $this->me->resolution()->width))
-            ->yBounds(AxisBounds::new(0, $this->me->resolution()->height))
-            ->paint(function (CanvasContext $context) {
-                $context->draw($this->me);
-            });
+            ->draw($this->me);
     }
 }
