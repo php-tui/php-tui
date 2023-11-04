@@ -194,7 +194,7 @@ class BlockTest extends TestCase
             }
         ];
         yield 'inner takes into account the title' => [
-            Block::default()->title(Title::fromString('Hello World')),
+            Block::default()->titles(Title::fromString('Hello World')),
             function (Block $block): void {
                 self::assertEquals(
                     Area::fromPrimitives(0, 1, 0, 0),
@@ -215,7 +215,7 @@ class BlockTest extends TestCase
     ): void {
         $buffer = Buffer::empty($area);
         Block::default()
-            ->title(Title::fromString($text)->horizontalAlignmnet($alignment))
+            ->titles(Title::fromString($text)->horizontalAlignmnet($alignment))
             ->render($buffer->area(), $buffer);
         self::assertEquals($expected, $buffer->toString());
 
@@ -278,7 +278,7 @@ class BlockTest extends TestCase
         Block::default()
             ->borderType(BorderType::Rounded)
             ->borders(Borders::ALL)
-            ->title(Title::fromString('G\'day')->horizontalAlignmnet(HorizontalAlignment::Left))
+            ->titles(Title::fromString('G\'day')->horizontalAlignmnet(HorizontalAlignment::Left))
             ->render($buffer->area(), $buffer);
         self::assertEquals([
             "╭G'day─╮",

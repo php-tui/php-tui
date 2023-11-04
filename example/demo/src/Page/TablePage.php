@@ -57,7 +57,7 @@ final class TablePage implements Component
 
     public function build(): Widget
     {
-        return Block::default()->title(Title::fromString('Table'))->borders(Borders::ALL)
+        return Block::default()->titles(Title::fromString('Table'))->borders(Borders::ALL)
             ->widget(
                 Table::default()
                     ->state($this->state)

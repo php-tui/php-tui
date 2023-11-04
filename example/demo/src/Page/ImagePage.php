@@ -31,7 +31,7 @@ final class ImagePage implements Component
             $this->images = array_map(function (string $name) {
                 $shape = ImageShape::fromFilename(__DIR__ . '/../../assets/' . $name);
                 return Block::default()
-                    ->title(Title::fromString(sprintf('Image: %s', $name)))
+                    ->titles(Title::fromString(sprintf('Image: %s', $name)))
                     ->borders(Borders::ALL)
                     ->borderType(BorderType::Rounded)
                     ->widget(

@@ -91,7 +91,7 @@ class BlocksPage implements Component
     {
         return Block::default()
             ->borders($borders)
-            ->title(Title::fromString(sprintf('Borders::%s', Borders::toString($borders))))
+            ->titles(Title::fromString(sprintf('Borders::%s', Borders::toString($borders))))
             ->widget($paragraph);
     }
 
@@ -100,7 +100,7 @@ class BlocksPage implements Component
         return Block::default()
             ->borders(Borders::ALL)
             ->borderType($borderType)
-            ->title(Title::fromString(sprintf('BordersType::%s', $borderType->name)))
+            ->titles(Title::fromString(sprintf('BordersType::%s', $borderType->name)))
             ->widget($paragraph);
     }
 
@@ -119,7 +119,7 @@ class BlocksPage implements Component
                     Modifier::Italic
                 )
             )
-            ->title(Title::fromString('Styled block'))
+            ->titles(Title::fromString('Styled block'))
             ->widget($paragraph);
     }
 
@@ -138,7 +138,7 @@ class BlocksPage implements Component
                     Modifier::Italic
                 )
             )
-            ->title(Title::fromString('Styled borders'))
+            ->titles(Title::fromString('Styled borders'))
             ->widget($paragraph);
     }
 
@@ -146,7 +146,7 @@ class BlocksPage implements Component
     {
         return Block::default()
             ->borders(Borders::ALL)
-            ->title(Title::fromString('Styled title'))
+            ->titles(Title::fromString('Styled title'))
             ->titleStyle(Style::default()->fg(AnsiColor::Blue)->bg(AnsiColor::White)->addModifier(Modifier::Bold)->addModifier(Modifier::Italic))
             ->widget($paragraph);
 
@@ -156,7 +156,7 @@ class BlocksPage implements Component
     {
         return Block::default()
             ->borders(Borders::ALL)
-            ->title(Title::fromLine(Line::fromSpans([
+            ->titles(Title::fromLine(Line::fromSpans([
                 Span::fromString('Styled ')->style(Style::default()->fg(AnsiColor::Blue)),
                 Span::fromString('title content')->style(Style::default()->fg(AnsiColor::Green)),
             ])))
@@ -167,10 +167,10 @@ class BlocksPage implements Component
     {
         return Block::default()
             ->borders(Borders::ALL)
-            ->title(Title::fromLine(Line::fromSpans([
+            ->titles(Title::fromLine(Line::fromSpans([
                 Span::fromString('Multiple')->style(Style::default()->fg(AnsiColor::Blue)),
             ])))
-            ->title(Title::fromLine(Line::fromSpans([
+            ->titles(Title::fromLine(Line::fromSpans([
                 Span::fromString('Titles')->style(Style::default()->fg(AnsiColor::Red)),
             ])))
             ->widget($paragraph);
@@ -180,12 +180,12 @@ class BlocksPage implements Component
     {
         return Block::default()
             ->borders(Borders::ALL)
-            ->title(Title::fromString('top left'))
-            ->title(Title::fromString('top center')->horizontalAlignmnet(HorizontalAlignment::Center))
-            ->title(Title::fromString('top right')->verticalAlignment(VerticalAlignment::Top)->horizontalAlignment(HorizontalAlignment::Right))
-            ->title(Title::fromString('bottom left')->verticalAlignment(VerticalAlignment::Bottom)->horizontalAlignment(HorizontalAlignment::Left))
-            ->title(Title::fromString('bottom center')->verticalAlignment(VerticalAlignment::Bottom)->horizontalAlignment(HorizontalAlignment::Center))
-            ->title(Title::fromString('bottom right')->verticalAlignment(VerticalAlignment::Bottom)->horizontalAlignment(HorizontalAlignment::Right))
+            ->titles(Title::fromString('top left'))
+            ->titles(Title::fromString('top center')->horizontalAlignmnet(HorizontalAlignment::Center))
+            ->titles(Title::fromString('top right')->verticalAlignment(VerticalAlignment::Top)->horizontalAlignment(HorizontalAlignment::Right))
+            ->titles(Title::fromString('bottom left')->verticalAlignment(VerticalAlignment::Bottom)->horizontalAlignment(HorizontalAlignment::Left))
+            ->titles(Title::fromString('bottom center')->verticalAlignment(VerticalAlignment::Bottom)->horizontalAlignment(HorizontalAlignment::Center))
+            ->titles(Title::fromString('bottom right')->verticalAlignment(VerticalAlignment::Bottom)->horizontalAlignment(HorizontalAlignment::Right))
             ->widget($paragraph);
     }
 
@@ -193,7 +193,7 @@ class BlocksPage implements Component
     {
         return Block::default()
             ->borders(Borders::ALL)
-            ->title(Title::fromString('padding'))
+            ->titles(Title::fromString('padding'))
             ->padding(Padding::fromPrimitives(5, 10, 1, 2))
             ->widget($paragraph);
     }
@@ -202,11 +202,11 @@ class BlocksPage implements Component
     {
         return Block::default()
             ->borders(Borders::ALL)
-            ->title(Title::fromString('Outer block'))
+            ->titles(Title::fromString('Outer block'))
             ->widget(
                 Block::default()
                     ->borders(Borders::ALL)
-                    ->title(Title::fromString('Inner block'))
+                    ->titles(Title::fromString('Inner block'))
                     ->widget($paragraph)
             )
         ;

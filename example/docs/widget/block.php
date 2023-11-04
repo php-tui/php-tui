@@ -16,7 +16,7 @@ $display = Display::fullscreen(PhpTermBackend::new());
 $display->draw(function (Buffer $buffer): void {
     Block::default()
         ->borders(Borders::ALL)
-        ->title(Title::fromString('Hello World'))
+        ->titles(Title::fromString('Hello World'))
         ->borderType(BorderType::Rounded)
         ->widget(Paragraph::new(Text::raw('This is a block example')))
         ->render($buffer->area(), $buffer);

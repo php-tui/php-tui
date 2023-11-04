@@ -42,7 +42,7 @@ class ChartPage implements Component
         ];
 
         return Block::default()
-            ->title(Title::fromLine(Line::fromString('Chart 1')))
+            ->titles(Title::fromLine(Line::fromString('Chart 1')))
             ->borders(Borders::ALL)
             ->widget(
                 Chart::new($dataSets)

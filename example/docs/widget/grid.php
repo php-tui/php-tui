@@ -21,7 +21,7 @@ $display->draw(function (Buffer $buffer): void {
             Constraint::percentage(50),
         )
         ->widgets(
-            Block::default()->borders(Borders::ALL)->title(Title::fromString('Left')),
+            Block::default()->borders(Borders::ALL)->titles(Title::fromString('Left')),
             Grid::default()
                 ->direction(Direction::Vertical)
                 ->constraints(
@@ -29,8 +29,8 @@ $display->draw(function (Buffer $buffer): void {
                     Constraint::percentage(50),
                 )
                 ->widgets(
-                    Block::default()->borders(Borders::ALL)->title(Title::fromString('Top Right')),
-                    Block::default()->borders(Borders::ALL)->title(Title::fromString('Bottom Right')),
+                    Block::default()->borders(Borders::ALL)->titles(Title::fromString('Top Right')),
+                    Block::default()->borders(Borders::ALL)->titles(Title::fromString('Bottom Right')),
                 )
         )
         ->render($buffer->area(), $buffer);
