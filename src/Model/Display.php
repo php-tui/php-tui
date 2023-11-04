@@ -5,8 +5,6 @@ namespace PhpTui\Tui\Model;
 use Closure;
 use PhpTui\Tui\Model\Viewport\Fullscreen;
 use PhpTui\Tui\Model\Viewport\Inline;
-use PhpTui\Tui\Widget\Canvas\Shape;
-use PhpTui\Tui\Widget\Canvas\Shape\Points;
 
 final class Display
 {
@@ -84,7 +82,7 @@ final class Display
     public function drawWidget(Widget $widget): void
     {
         $buffer = $this->buffer();
-        $this->draw(function () use ($widget, $buffer) {
+        $this->draw(function () use ($widget, $buffer): void {
             $widget->render($buffer->area(), $buffer);
         });
     }

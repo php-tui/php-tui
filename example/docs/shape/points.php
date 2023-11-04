@@ -2,7 +2,6 @@
 
 use PhpTui\Tui\Adapter\PhpTerm\PhpTermBackend;
 use PhpTui\Tui\Model\AnsiColor;
-use PhpTui\Tui\Model\Buffer;
 use PhpTui\Tui\Model\Display;
 use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Widget\Canvas;
