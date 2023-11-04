@@ -5,6 +5,8 @@ namespace PhpTui\Tui\Model;
 use Closure;
 use PhpTui\Tui\Model\Viewport\Fullscreen;
 use PhpTui\Tui\Model\Viewport\Inline;
+use PhpTui\Tui\Widget\Canvas\Shape;
+use PhpTui\Tui\Widget\Canvas\Shape\Points;
 
 final class Display
 {
@@ -57,6 +59,9 @@ final class Display
     }
 
     /**
+     * Synchronizes terminal size, calls the rendering closure, flushes the current internal state
+     * and prepares for the next draw call.
+     *
      * @param Closure(Buffer): void $closure
      */
     public function draw(Closure $closure): void
@@ -67,6 +72,21 @@ final class Display
         $this->flush();
         $this->swapBuffers();
         $this->backend->flush();
+    }
+
+    /**
+     * Synchronizes terminal size, renders the given widget, flushes the current internal state
+     * and prepares for the next draw call.
+     *
+     * This is the same as Draw but instead of a closure you pass a single
+     * widget (usually a Grid widget).
+     */
+    public function render(Widget $widget): void
+    {
+        $buffer = $this->buffer();
+        $this->draw(function () use ($widget, $buffer) {
+            $widget->render($buffer->area(), $buffer);
+        });
     }
 
     private function autoresize(): void
