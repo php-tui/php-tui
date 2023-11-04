@@ -3,18 +3,8 @@ PHP TUI
 
 [![CI](https://github.com/php-tui/php-tui/actions/workflows/ci.yml/badge.svg)](https://github.com/php-tui/php-tui/actions/workflows/ci.yml)
 
-```
-         █████ 
-     ████████████████████      
-   █████████████████████████   
-  █████ ███████████████████████   
-  █████████████████████████████████
-  █████████████████████████████   ██
-  ███  ████████████████████████
-  ███  ███████████████████████ 
-  ███  ███████████████████████ 
-  ███  ████ ████  ████  ██████ 
-```
+![image](https://github.com/php-tui/php-tui/assets/530801/d8ea0712-46c0-4bba-9dd2-727d2b7856d7)
+
 
 PHP TUI library heavily inspired by Rust TUI /
 [Ratatui](https://github.com/ratatui-org/ratatui).
