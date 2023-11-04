@@ -16,19 +16,17 @@ require 'vendor/autoload.php';
 $display = Display::fullscreen(PhpTermBackend::new());
 $display->draw(function (Buffer $buffer): void {
     Chart::new(
-        [
-            DataSet::new('Ships')
+        DataSet::new('Ships')
                 ->data(
                     [[0, -2], [1, -1], [2, 0], [3, 1], [4, 2], [5, 1], [6, 0], [7, -1]]
                 )
                 ->marker(Marker::Dot),
-            DataSet::new('Birds')
+        DataSet::new('Birds')
                 ->data(
                     [[0, 2], [1, 1], [2, 0], [3, -1], [4, -2], [5, -1], [6, 0], [7, 1]]
                 )
                 ->graphType(GraphType::Line)
                 ->marker(Marker::Braille),
-        ]
     )
         ->xAxis(
             Axis::default()

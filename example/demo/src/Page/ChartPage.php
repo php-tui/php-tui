@@ -45,7 +45,7 @@ class ChartPage implements Component
             ->titles(Title::fromLine(Line::fromString('Chart 1')))
             ->borders(Borders::ALL)
             ->widget(
-                Chart::new($dataSets)
+                Chart::new(...$dataSets)
                     ->xAxis(
                         Axis::default()
                             //->title('X Axis')
