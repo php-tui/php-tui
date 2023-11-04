@@ -30,8 +30,10 @@ class ParagraphTest extends TestCase
         $area = Area::fromPrimitives(0, 0, 10, 2);
         $buffer = Buffer::empty($area);
         $paragraph->render($buffer->area(), $buffer);
-        dd($buffer->toString());
-        self::assertEquals('', $buffer->toString());
+        self::assertEquals([
+            'Hello     ',
+            'Goodbye   ',
+        ], $buffer->toLines());
     }
     /**
      * @dataProvider provideParagraph
