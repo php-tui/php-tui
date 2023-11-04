@@ -14,8 +14,14 @@ require 'vendor/autoload.php';
 $display = Display::fullscreen(PhpTermBackend::new());
 $display->draw(function (Buffer $buffer): void {
     Canvas::fromIntBounds(-1, 21, -1, 21)
+        // the marker determines both the effective resolution of
+        // the canvas and the "mark" that is made
         ->marker(Marker::Dot)
+
+        // note can use `$canvas->draw($shape)` without the closure for most
+        // cases
         ->paint(function (CanvasContext $context): void {
+
             $context->draw(Circle::fromPrimitives(10, 10, 10, AnsiColor::Green));
         })
         ->render($buffer->area(), $buffer);
