@@ -7,7 +7,6 @@ use PhpTui\Tui\Adapter\Bdf\FontRegistry;
 use PhpTui\Tui\Adapter\Bdf\Shape\TextShape;
 use PhpTui\Tui\Example\Demo\Component;
 use PhpTui\Tui\Model\AnsiColor;
-use PhpTui\Tui\Model\AxisBounds;
 use PhpTui\Tui\Model\Constraint;
 use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Model\RgbColor;
@@ -112,10 +111,8 @@ class SpritePage implements Component
                     ->borderType(BorderType::Rounded)
                     ->borderStyle(Style::default()->fg(AnsiColor::DarkGray))
                     ->widget(
-                        Canvas::default()
+                        Canvas::fromIntBounds(0, self::WIDTH, 0, 7)
                             ->marker(Marker::HalfBlock)
-                            ->xBounds(AxisBounds::new(0, self::WIDTH))
-                            ->yBounds(AxisBounds::new(0, 7))
                             ->paint(function (CanvasContext $context): void {
                                 foreach ($this->scroller as $textShape) {
                                     $context->draw($textShape);
@@ -123,11 +120,9 @@ class SpritePage implements Component
                                 $context->saveLayer();
                             })
                     ),
-                Canvas::default()
+                Canvas::fromIntBounds(0, self::WIDTH, 0, self::HEIGHT)
                     ->backgroundColor(AnsiColor::Black)
                     ->marker(Marker::Braille)
-                    ->xBounds(AxisBounds::new(0, self::WIDTH))
-                    ->yBounds(AxisBounds::new(0, self::HEIGHT))
                     ->paint(function (CanvasContext $context): void {
                         $context->draw($this->points);
                         $context->saveLayer();

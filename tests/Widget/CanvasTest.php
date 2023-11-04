@@ -16,7 +16,6 @@ use Generator;
 use PHPUnit\Framework\TestCase;
 
 class CanvasTest extends TestCase
-
 {
     public function testFromIntBounds(): void
     {

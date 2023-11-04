@@ -6,7 +6,6 @@ use PhpTui\Term\Event;
 use PhpTui\Term\Event\CharKeyEvent;
 use PhpTui\Tui\Example\Demo\Component;
 use PhpTui\Tui\Model\AnsiColor;
-use PhpTui\Tui\Model\AxisBounds;
 use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Model\Modifier;
 use PhpTui\Tui\Model\Style;
@@ -32,14 +31,12 @@ class CanvasPage implements Component
             ->borders(Borders::ALL)
             ->titles(Title::fromString('World'))
             ->widget(
-                PhpTuiCanvas::default()
+                PhpTuiCanvas::fromIntBounds(-180, 180, -90, 90)
                     ->marker(Marker::Braille)
                     ->paint(function (CanvasContext $context): void {
                         $context->draw(Map::default()->resolution(MapResolution::High)->color(AnsiColor::Green));
                         $context->print($this->x, -$this->y, PhpTuiLine::fromString('You are here!')->patchStyle(Style::default()->fg(AnsiColor::Yellow)->addModifier(Modifier::Italic)));
                     })
-                    ->xBounds(AxisBounds::new(-180, 180))
-                    ->yBounds(AxisBounds::new(-90, 90))
             )
         ;
     }

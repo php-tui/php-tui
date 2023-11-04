@@ -4,7 +4,6 @@ use PhpTui\Tui\Adapter\Bdf\FontRegistry;
 use PhpTui\Tui\Adapter\Bdf\Shape\TextShape;
 use PhpTui\Tui\Adapter\PhpTerm\PhpTermBackend;
 use PhpTui\Tui\Model\AnsiColor;
-use PhpTui\Tui\Model\AxisBounds;
 use PhpTui\Tui\Model\Buffer;
 use PhpTui\Tui\Model\Display;
 use PhpTui\Tui\Model\Marker;
@@ -20,9 +19,7 @@ $registry = FontRegistry::default();
 
 $display = Display::fullscreen(PhpTermBackend::new());
 $display->draw(function (Buffer $buffer) use ($registry): void {
-    Canvas::default()
-        ->xBounds(AxisBounds::new(0, 50))
-        ->yBounds(AxisBounds::new(0, 20))
+    Canvas::fromIntBounds(0, 50, 0, 20)
         ->marker(Marker::Block)
         ->paint(function (CanvasContext $context) use ($registry) : void {
 

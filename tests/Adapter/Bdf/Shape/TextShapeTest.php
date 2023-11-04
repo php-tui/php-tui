@@ -6,7 +6,6 @@ use PhpTui\Tui\Adapter\Bdf\FontRegistry;
 use PhpTui\Tui\Adapter\Bdf\Shape\TextShape;
 use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Area;
-use PhpTui\Tui\Model\AxisBounds;
 use PhpTui\Tui\Model\Buffer;
 use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Model\Widget\FloatPosition;
@@ -23,10 +22,8 @@ class TextShapeTest extends TestCase
      */
     public function testTextShape(TextShape $text, array $expected): void
     {
-        $canvas = Canvas::default()
+        $canvas = Canvas::fromIntBounds(0, 65, 0, 6)
             ->marker(Marker::Block)
-            ->xBounds(AxisBounds::new(0, 65))
-            ->yBounds(AxisBounds::new(0, 6))
             ->paint(function (CanvasContext $context) use ($text): void {
                 $context->draw($text);
             });
