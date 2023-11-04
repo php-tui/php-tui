@@ -11,7 +11,7 @@ use PhpTui\Tui\Model\Widget\FloatPosition;
 use PhpTui\Tui\Widget\Canvas;
 use PhpTui\Tui\Widget\Canvas\CanvasContext;
 
-require 'vendor/autoload.php';
+require __DIR__ .'/../../../vendor/autoload.php';
 
 // create the font registry
 // this is EXPENSIVE to create, only do it once!

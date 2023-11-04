@@ -9,7 +9,7 @@ use PhpTui\Tui\Widget\Canvas;
 use PhpTui\Tui\Widget\Canvas\CanvasContext;
 use PhpTui\Tui\Widget\Canvas\Shape\Points;
 
-require 'vendor/autoload.php';
+require __DIR__ .'/../../../vendor/autoload.php';
 
 $display = Display::fullscreen(PhpTermBackend::new());
 $display->draw(function (Buffer $buffer): void {

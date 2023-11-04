@@ -9,7 +9,7 @@ use PhpTui\Tui\Widget\Table;
 use PhpTui\Tui\Widget\Table\TableCell;
 use PhpTui\Tui\Widget\Table\TableRow;
 
-require 'vendor/autoload.php';
+require __DIR__ .'/../../../vendor/autoload.php';
 
 $display = Display::fullscreen(PhpTermBackend::new());
 $display->draw(function (Buffer $buffer): void {

@@ -10,7 +10,7 @@ use PhpTui\Tui\Widget\Canvas;
 use PhpTui\Tui\Widget\Canvas\CanvasContext;
 use PhpTui\Tui\Widget\Canvas\Shape\Sprite;
 
-require 'vendor/autoload.php';
+require __DIR__ .'/../../../vendor/autoload.php';
 
 $display = Display::fullscreen(PhpTermBackend::new());
 $display->draw(function (Buffer $buffer): void {
@@ -33,8 +33,8 @@ $display->draw(function (Buffer $buffer): void {
                         'X   X    ',
                     ],
                     color: AnsiColor::Blue,
-                    density: 4,
                     position: FloatPosition::at(0, 0),
+                    density: 4,
                 )
             );
 

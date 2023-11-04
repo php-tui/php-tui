@@ -6,7 +6,7 @@ use PhpTui\Tui\Model\Display;
 use PhpTui\Tui\Model\Widget\Text;
 use PhpTui\Tui\Widget\Paragraph;
 
-require 'vendor/autoload.php';
+require __DIR__ .'/../../../vendor/autoload.php';
 
 $display = Display::fullscreen(PhpTermBackend::new());
 $display->draw(function (Buffer $buffer): void {

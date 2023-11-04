@@ -8,7 +8,7 @@ use PhpTui\Tui\Widget\ItemList;
 use PhpTui\Tui\Widget\ItemList\ItemListState;
 use PhpTui\Tui\Widget\ItemList\ListItem;
 
-require 'vendor/autoload.php';
+require __DIR__ .'/../../../vendor/autoload.php';
 
 $display = Display::fullscreen(PhpTermBackend::new());
 $display->draw(function (Buffer $buffer): void {

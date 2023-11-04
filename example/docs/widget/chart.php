@@ -11,7 +11,7 @@ use PhpTui\Tui\Widget\Chart\Axis;
 use PhpTui\Tui\Widget\Chart\DataSet;
 use PhpTui\Tui\Widget\Chart\GraphType;
 
-require 'vendor/autoload.php';
+require __DIR__ .'/../../../vendor/autoload.php';
 
 $display = Display::fullscreen(PhpTermBackend::new());
 $display->draw(function (Buffer $buffer): void {
