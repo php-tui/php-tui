@@ -24,9 +24,9 @@ class GridTest extends TestCase
         $area = Area::fromDimensions(10, 10);
         $buffer = Buffer::empty($area);
         $grid = Grid::default()
-            ->widgets([
+            ->widgets(
                 Paragraph::new(Text::raw('Hello World'))
-            ]);
+            );
         $grid->render($area, $buffer);
 
     }
@@ -50,23 +50,23 @@ class GridTest extends TestCase
             Area::fromDimensions(10, 10),
             Grid::default()
                 ->direction(Direction::Vertical)
-                ->constraints([
+                ->constraints(
                     Constraint::percentage(50),
                     Constraint::percentage(50),
-                ])
-                ->widgets([
+                )
+                ->widgets(
                     Block::default()->borders(Borders::ALL),
                     Grid::default()
                         ->direction(Direction::Horizontal)
-                        ->constraints([
+                        ->constraints(
                             Constraint::percentage(50),
                             Constraint::percentage(50),
-                        ])
-                        ->widgets([
+                        )
+                        ->widgets(
                             Block::default()->borders(Borders::ALL),
                             Block::default()->borders(Borders::ALL),
-                        ])
-                ]),
+                        )
+                ),
             [
                 '┌────────┐',
                 '│        │',

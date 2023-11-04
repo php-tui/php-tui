@@ -53,32 +53,32 @@ final class ImagePage implements Component
 
         return Grid::default()
             ->direction(Direction::Horizontal)
-            ->constraints([
+            ->constraints(
                 Constraint::percentage(50),
                 Constraint::percentage(50),
-            ])
-            ->widgets([
+            )
+            ->widgets(
                 Grid::default()
                     ->direction(Direction::Vertical)
-                    ->constraints([
+                    ->constraints(
                         Constraint::percentage(50),
                         Constraint::percentage(50),
-                    ])
-                    ->widgets([
+                    )
+                    ->widgets(
                         $this->images[0],
                         $this->images[2],
-                    ]),
+                    ),
                 Grid::default()
                     ->direction(Direction::Vertical)
-                    ->constraints([
+                    ->constraints(
                         Constraint::percentage(50),
                         Constraint::percentage(50),
-                    ])
-                    ->widgets([
+                    )
+                    ->widgets(
                         $this->images[1],
                         $this->images[3],
-                    ]),
-           ]);
+                    ),
+            );
     }
 
     public function handle(Event $event): void

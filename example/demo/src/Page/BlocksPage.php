@@ -30,15 +30,15 @@ class BlocksPage implements Component
     {
         $grid = Grid::default()
             ->direction(Direction::Horizontal)
-            ->constraints([
+            ->constraints(
                 Constraint::percentage(50),
                 Constraint::percentage(50),
-            ])
-            ->widgets([
+            )
+            ->widgets(
                 Grid::default()
                     ->direction(Direction::Vertical)
-                    ->constraints(array_map(fn () => Constraint::max(4), array_fill(0, 9, true)))
-                    ->widgets([
+                    ->constraints(...array_map(fn () => Constraint::max(4), array_fill(0, 9, true)))
+                    ->widgets(
                         $this->borders($this->lorem(), Borders::ALL),
                         $this->borders($this->lorem(), Borders::LEFT),
                         $this->borders($this->lorem(), Borders::TOP),
@@ -48,11 +48,11 @@ class BlocksPage implements Component
                         $this->styledTitle($this->lorem()),
                         $this->multipleTitles($this->lorem()),
                         $this->padding($this->lorem()),
-                    ]),
+                    ),
                 Grid::default()
                     ->direction(Direction::Vertical)
-                    ->constraints(array_map(fn () => Constraint::max(4), array_fill(0, 9, true)))
-                    ->widgets([
+                    ->constraints(...array_map(fn () => Constraint::max(4), array_fill(0, 9, true)))
+                    ->widgets(
                         $this->borders($this->lorem(), Borders::NONE),
                         $this->borders($this->lorem(), Borders::RIGHT),
                         $this->borders($this->lorem(), Borders::BOTTOM),
@@ -62,9 +62,8 @@ class BlocksPage implements Component
                         $this->styledTitleContent($this->lorem()),
                         $this->multipleTitlePositions($this->lorem()),
                         $this->nestedBlocks($this->lorem()),
-
-                    ]),
-            ])
+                    ),
+            )
         ;
 
         return $grid;

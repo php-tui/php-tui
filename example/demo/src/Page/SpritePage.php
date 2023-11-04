@@ -102,11 +102,11 @@ class SpritePage implements Component
         $this->tick();
 
         return Grid::default()
-            ->constraints([
+            ->constraints(
                 Constraint::length(6),
                 Constraint::percentage(70),
-            ])
-            ->widgets([
+            )
+            ->widgets(
                 Block::default()
                     ->borders(Borders::ALL)
                     ->borderType(BorderType::Rounded)
@@ -160,7 +160,7 @@ class SpritePage implements Component
                         $context->draw($elephant3);
                         $context->saveLayer();
                     })
-            ]);
+            );
     }
 
     public function handle(Event $event): void

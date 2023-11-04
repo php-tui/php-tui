@@ -16,23 +16,23 @@ $display = Display::fullscreen(PhpTermBackend::new());
 $display->draw(function (Buffer $buffer): void {
     Grid::default()
         ->direction(Direction::Horizontal)
-        ->constraints([
+        ->constraints(
             Constraint::percentage(50),
             Constraint::percentage(50),
-        ])
-        ->widgets([
+        )
+        ->widgets(
             Block::default()->borders(Borders::ALL)->title(Title::fromString('Left')),
             Grid::default()
                 ->direction(Direction::Vertical)
-                ->constraints([
+                ->constraints(
                     Constraint::percentage(50),
                     Constraint::percentage(50),
-                ])
-                ->widgets([
+                )
+                ->widgets(
                     Block::default()->borders(Borders::ALL)->title(Title::fromString('Top Right')),
                     Block::default()->borders(Borders::ALL)->title(Title::fromString('Bottom Right')),
-                ])
-        ])
+                )
+        )
         ->render($buffer->area(), $buffer);
 });
 $display->flush();
