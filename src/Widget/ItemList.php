@@ -148,6 +148,12 @@ class ItemList implements Widget
         return $this;
     }
 
+    public function highlightStyle(Style $highlightStyle): self
+    {
+        $this->highlightStyle = $highlightStyle;
+        return $this;
+    }
+
     /**
      * @return array{int,int}
      */
