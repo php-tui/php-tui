@@ -17,7 +17,7 @@ require 'vendor/autoload.php';
 $registry = FontRegistry::default();
 
 $display = Display::fullscreen(PhpTermBackend::new());
-$display->draw(function (Buffer $buffer) use ($registry): void {
+$display->drawWidget(
     Canvas::fromIntBounds(0, 50, 0, 20)
         ->marker(Marker::Block)
         ->draw(
@@ -28,6 +28,4 @@ $display->draw(function (Buffer $buffer) use ($registry): void {
                 position: FloatPosition::at(10, 7),
             ),
         )
-        ->render($buffer->area(), $buffer);
-});
-$display->flush();
+);
