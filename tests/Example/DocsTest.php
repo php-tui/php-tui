@@ -6,6 +6,7 @@ use Generator;
 use PHPUnit\Framework\TestCase;
 use PhpTui\Term\AnsiParser;
 use PhpTui\Term\Painter\HtmlStylePainter;
+use PhpTui\Term\Painter\StringPainter;
 use RuntimeException;
 
 class DocsTest extends TestCase
@@ -45,24 +46,17 @@ class DocsTest extends TestCase
 
         $actions = AnsiParser::parseString($output, throw: false);
 
+        $painter = new StringPainter();
+        $painter->paint($actions);
+        $output = $painter->toString();
+
+        $this->assertSnapshot($path, $output, 'snapshot');
+
         $painter = HtmlStylePainter::default(self::HEIGHT, self::WIDTH);
         $painter->paint($actions);
         $output = $painter->toString();
 
-        $snapshot = substr($path, 0, -3) . 'snapshot';
-        if (!file_exists($snapshot) || getenv('SNAPSHOT_APPROVE')) {
-            file_put_contents($snapshot, $output);
-            return;
-        }
-
-        $existing = file_get_contents($snapshot);
-        if (false === $existing) {
-            throw new RuntimeException('Could not read file');
-        }
-
-        self::assertEquals($this->sanitize($output), $this->sanitize($existing));
-        self::assertEquals($output, $existing);
-
+        $this->assertSnapshot($path, $output, 'html');
     }
 
     /**
@@ -89,5 +83,23 @@ class DocsTest extends TestCase
                 str_replace('<div style="clear: both;"></div>', "\n", $html)
             )
         ));
+    }
+
+    private function assertSnapshot(string $path, string $output, string $extension): void
+    {
+        $snapshot = substr($path, 0, -3) . $extension;
+        if (!file_exists($snapshot) || getenv('SNAPSHOT_APPROVE')) {
+            file_put_contents($snapshot, $output);
+            return;
+        }
+
+        $existing = file_get_contents($snapshot);
+        if (false === $existing) {
+            throw new RuntimeException('Could not read file');
+        }
+
+        self::assertEquals($this->sanitize($output), $this->sanitize($existing));
+        self::assertEquals($output, $existing);
+
     }
 }

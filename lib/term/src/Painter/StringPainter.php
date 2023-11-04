@@ -35,6 +35,7 @@ class StringPainter implements Painter
             return '';
         }
         $maxX = max(
+            0,
             ...array_map(
                 fn (array $cells) => max(
                     array_keys($cells)
