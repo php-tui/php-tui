@@ -15,6 +15,11 @@ use PhpTui\Tui\Widget\Canvas\Resolution;
 final class BrailleGrid extends CanvasGrid
 {
     /**
+     * @var array <int, ?string>
+     */
+    private array $brailleCharCache = [];
+
+    /**
      * @param int[] $codePoints
      * @param Color[] $colors
      */
@@ -24,6 +29,7 @@ final class BrailleGrid extends CanvasGrid
         private array $codePoints,
         private array $colors
     ) {
+        $this->cacheBrailleChars();
     }
 
     public static function new(int $width, int $height): self
@@ -44,16 +50,19 @@ final class BrailleGrid extends CanvasGrid
 
     public function save(): Layer
     {
-        return new Layer(
-            chars: array_map(fn (int $point) => IntlChar::chr($point), $this->codePoints),
-            colors: array_map(fn (Color $color) => new FgBgColor($color, AnsiColor::Reset), $this->colors),
-        );
+        $chars = array_map(function (int $point) {
+            return $this->brailleCharCache[$point] ?? ($this->brailleCharCache[$point] = IntlChar::chr($point));
+        }, $this->codePoints);
+
+        $colors = array_map(fn (Color $color) => new FgBgColor($color, AnsiColor::Reset), $this->colors);
+
+        return new Layer(chars: $chars, colors: $colors);
     }
 
     public function reset(): void
     {
-        $this->codePoints = array_map(fn ($_) => BrailleSet::BLANK, $this->codePoints);
-        $this->colors = array_map(fn ($_) => AnsiColor::Reset, $this->colors);
+        $this->codePoints = array_map(fn () => BrailleSet::BLANK, $this->codePoints);
+        $this->colors = array_map(fn () => AnsiColor::Reset, $this->colors);
     }
 
     public function paint(Position $position, Color $color): void
@@ -64,6 +73,15 @@ final class BrailleGrid extends CanvasGrid
         }
         if (isset($this->colors[$index])) {
             $this->colors[$index] = $color;
+        }
+    }
+
+    private function cacheBrailleChars(): void
+    {
+        [$from, $to] = BrailleSet::RANGE;
+
+        for ($i = $from; $i <= $to; $i++) {
+            $this->brailleCharCache[$i] = IntlChar::chr($i);
         }
     }
 }
