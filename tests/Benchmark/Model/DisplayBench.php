@@ -8,7 +8,6 @@ use PhpTui\Term\InformationProvider\AggregateInformationProvider;
 use PhpTui\Term\InformationProvider\ClosureInformationProvider;
 use PhpTui\Term\Painter\StringPainter;
 use PhpTui\Term\RawMode\NullRawMode;
-use PhpTui\Term\Painter\BufferPainter;
 use PhpTui\Term\Size;
 use PhpTui\Term\Terminal;
 use PhpTui\Tui\Adapter\PhpTerm\PhpTermBackend;
