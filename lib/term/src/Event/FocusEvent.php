@@ -11,6 +11,11 @@ final class FocusEvent implements Event
     {
     }
 
+    public function __toString(): string
+    {
+        return sprintf('Focus(%s)', $this->focus->name);
+    }
+
     public static function gained(): self
     {
         return new self(Focus::Gained);
@@ -19,10 +24,5 @@ final class FocusEvent implements Event
     public static function lost(): self
     {
         return new self(Focus::Lost);
-    }
-
-    public function __toString(): string
-    {
-        return sprintf('Focus(%s)', $this->focus->name);
     }
 }

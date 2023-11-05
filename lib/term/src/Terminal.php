@@ -2,7 +2,6 @@
 
 namespace PhpTui\Term;
 
-use PhpTui\Term\Action\AlternateScreenEnable;
 use PhpTui\Term\EventProvider\SyncEventProvider;
 use PhpTui\Term\InformationProvider\AggregateInformationProvider;
 use PhpTui\Term\InformationProvider\SizeFromEnvVarProvider;
@@ -23,8 +22,7 @@ class Terminal
         private InformationProvider $infoProvider,
         private RawMode $rawMode,
         private EventProvider $eventProvider
-    )
-    {
+    ) {
     }
 
     /**
@@ -36,8 +34,7 @@ class Terminal
         InformationProvider  $infoProvider = null,
         EventProvider $eventProvider = null,
         RawMode $rawMode = null,
-    ): self
-    {
+    ): self {
         return new self(
             $painter ?: AnsiPainter::new(StreamWriter::stdout()),
             $infoProvider ?: AggregateInformationProvider::new([

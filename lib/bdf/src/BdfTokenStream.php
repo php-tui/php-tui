@@ -59,6 +59,27 @@ final class BdfTokenStream
         return $taken;
     }
 
+    public function skipWhitespace(): void
+    {
+        $this->takeWhile(
+            fn (string $token) => trim($token) === ''
+        );
+    }
+
+    public function parseInt(): ?int
+    {
+        $this->skipWhitespace();
+        if (is_numeric($this->current())) {
+            $int = (int)$this->current();
+            $this->advance();
+            $this->skipWhitespace();
+            $this->skipComments();
+            return (int)$int;
+        }
+
+        return null;
+    }
+
     /**
      * @param Closure(string):bool $closure
      */
@@ -79,27 +100,6 @@ final class BdfTokenStream
         }
 
         return $taken;
-    }
-
-    public function skipWhitespace(): void
-    {
-        $this->takeWhile(
-            fn (string $token) => trim($token) === ''
-        );
-    }
-
-    public function parseInt(): ?int
-    {
-        $this->skipWhitespace();
-        if (is_numeric($this->current())) {
-            $int = (int)$this->current();
-            $this->advance();
-            $this->skipWhitespace();
-            $this->skipComments();
-            return (int)$int;
-        }
-
-        return null;
     }
 
     private function skipComments(): void

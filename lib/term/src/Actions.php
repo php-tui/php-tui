@@ -1,6 +1,7 @@
 <?php
 
 namespace PhpTui\Term;
+
 use PhpTui\Term\Action\AlternateScreenEnable;
 use PhpTui\Term\Action\Clear;
 use PhpTui\Term\Action\MoveCursor;

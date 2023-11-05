@@ -12,5 +12,6 @@ final class WidgetDoc
         public string $className,
         public ?string $description,
         public array $params
-    ) {}
+    ) {
+    }
 }

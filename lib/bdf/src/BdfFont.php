@@ -13,7 +13,8 @@ final class BdfFont
         public readonly BdfMetadata $metadata,
         public readonly BdfProperties $properties,
         private readonly array $glyphs,
-    ) {}
+    ) {
+    }
 
     public function codePoint(int $codePoint): BdfGlyph
     {

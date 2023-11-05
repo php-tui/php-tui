@@ -9,7 +9,7 @@ use PhpTui\Term\ProcessRunner;
 /**
  * Implementation to be used for test scenarios.
  */
-class ClosureRunner  implements ProcessRunner
+class ClosureRunner implements ProcessRunner
 {
     /**
      * @param Closure(string[]): ProcessResult $closure

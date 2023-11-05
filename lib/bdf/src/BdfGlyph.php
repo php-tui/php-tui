@@ -14,8 +14,7 @@ final class BdfGlyph
         public string $name,
         public BdfCoord $deviceWidth,
         public ?BdfCoord $scalableWidth
-    )
-    {
+    ) {
     }
 
 }

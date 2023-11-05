@@ -39,6 +39,6 @@ final class KeyModifiers
         if (($modifierMask & self::META) !== 0) {
             $modifiers[] = 'meta';
         }
-        return implode(',',$modifiers);
+        return implode(',', $modifiers);
     }
 }

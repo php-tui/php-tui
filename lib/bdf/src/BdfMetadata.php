@@ -10,8 +10,7 @@ class BdfMetadata
         public readonly ?int $pointSize,
         public readonly ?BdfSize $resolution,
         public readonly ?BdfBoundingBox $boundingBox
-    )
-    {
+    ) {
     }
 
 }

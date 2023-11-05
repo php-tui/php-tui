@@ -8,7 +8,6 @@ class WidgetParam
         public string $type,
         public string $name,
         public ?string $description
-    )
-    {
+    ) {
     }
 }

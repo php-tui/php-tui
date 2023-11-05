@@ -85,6 +85,16 @@ final class AnsiParser
     }
 
     /**
+     * @return Action[]
+     */
+    public static function parseString(string $output, bool $throw = false): array
+    {
+        $parser = new self($throw);
+        $parser->advance($output, true);
+        return $parser->drain();
+    }
+
+    /**
      * @param string[] $buffer
      */
     private function parseAction(array $buffer, bool $more): ?Action
@@ -242,15 +252,5 @@ final class AnsiParser
             throw new ParseError(sprintf('Could not parse cursor position from: "%s"', $string));
         }
         return Actions::moveCursor(intval($parts[0]), intval($parts[1]));
-    }
-
-    /**
-     * @return Action[]
-     */
-    public static function parseString(string $output, bool $throw = false): array
-    {
-        $parser = new self($throw);
-        $parser->advance($output, true);
-        return $parser->drain();
     }
 }
