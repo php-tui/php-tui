@@ -12,7 +12,7 @@ use PhpTui\Tui\Widget\Canvas\Shape\Circle;
 use Generator;
 use PHPUnit\Framework\TestCase;
 
-class CircleTest extends TestCase
+class CircleTest extends ShapeTestCase
 {
     /**
      * @dataProvider provideCircle
@@ -29,7 +29,7 @@ class CircleTest extends TestCase
             });
         $area = Area::fromDimensions(10, 5);
         $buffer = Buffer::empty($area);
-        $canvas->render($area, $buffer);
+        $this->render($buffer, $canvas);
         self::assertEquals($expected, $buffer->toLines());
     }
     /**

@@ -14,7 +14,7 @@ use Generator;
 use PHPUnit\Framework\TestCase;
 use PhpTui\Tui\Widget\Canvas\Shape\Sprite;
 
-class SpriteTest extends TestCase
+class SpriteTest extends ShapeTestCase
 {
     /**
      * @dataProvider provideSprite
@@ -31,7 +31,7 @@ class SpriteTest extends TestCase
             });
         $area = Area::fromDimensions(34, 10);
         $buffer = Buffer::empty($area);
-        $canvas->render($area, $buffer);
+        $this->render($buffer, $canvas);
         self::assertEquals(implode("\n", $expected), $buffer->toString());
     }
 
