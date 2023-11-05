@@ -29,16 +29,16 @@ final class BdfParser
         $size = null;
         $boundingBox = null;
 
-        if ($tokens->is('STARTFONT')) {
+        if ($tokens->is(BdfToken::STARTFONT)) {
             $tokens->advance();
             $version = (float)$tokens->parseLine();
         }
 
-        if ($tokens->is('FONT')) {
+        if ($tokens->is(BdfToken::FONT)) {
             $tokens->advance();
             $name = trim($tokens->parseLine());
         }
-        if ($tokens->is('SIZE')) {
+        if ($tokens->is(BdfToken::SIZE)) {
             $tokens->advance();
             $pointSize = $tokens->parseInt();
             $resX = $tokens->parseInt();
@@ -49,7 +49,7 @@ final class BdfParser
             }
         }
 
-        if ($tokens->is('FONTBOUNDINGBOX')) {
+        if ($tokens->is(BdfToken::FONTBOUNDINGBOX)) {
             $tokens->advance();
             $boundWidth = $tokens->parseInt();
             $boundHeight = $tokens->parseInt();
@@ -92,17 +92,17 @@ final class BdfParser
 
     private function parseProperties(BdfTokenStream $tokens): BdfProperties
     {
-        if (!$tokens->is('STARTPROPERTIES')) {
+        if ($tokens->isNot(BdfToken::STARTPROPERTIES)) {
             return new BdfProperties();
         }
 
         $tokens->advance();
         $tokens->parseLine();
         $properties = [];
-        while ($tokens->current() !== null && $tokens->current() !== 'ENDPROPERTIES') {
+        while ($tokens->current() !== null && $tokens->isNot(BdfToken::ENDPROPERTIES)) {
             $propertyName = $tokens->current();
             $tokens->advance();
-            if ($propertyName === 'COMMENT') {
+            if ($propertyName === BdfToken::COMMENT->name) {
                 $tokens->parseLine();
                 continue;
             }
@@ -111,7 +111,7 @@ final class BdfParser
                 $properties[$propertyName] = $values;
             }
         }
-        if ($tokens->current() !== 'ENDPROPERTIES') {
+        if ($tokens->isNot(BdfToken::ENDPROPERTIES)) {
             throw new RuntimeException('No ENDPROPERTIES token found after STARTPROPERTIES');
         }
         $tokens->advance();
@@ -150,7 +150,7 @@ final class BdfParser
     {
         $tokens->skipWhitespace();
         $glyphs = [];
-        while ($tokens->current() !== null && $tokens->current() !== 'ENDFONT') {
+        while ($tokens->isNot(BdfToken::ENDFONT)) {
             $glyph = $this->parseGlyph($tokens);
             if (null === $glyph) {
                 // TODO: exception here?
@@ -159,17 +159,16 @@ final class BdfParser
             $glyphs[(int)$glyph->encoding] = $glyph;
         }
 
-
         return $glyphs;
     }
 
     private function parseGlyph(BdfTokenStream $tokens): ?BdfGlyph
     {
         // ignore this
-        if ($tokens->current() === 'CHARS') {
+        if ($tokens->is(BdfToken::CHARS)) {
             $tokens->parseLine();
         }
-        if (!$tokens->is('STARTCHAR')) {
+        if ($tokens->isNot(BdfToken::STARTCHAR)) {
             return null;
         }
         $tokens->advance();
@@ -177,7 +176,7 @@ final class BdfParser
 
         $name = $tokens->parseLine();
 
-        if (!$tokens->is('ENCODING')) {
+        if ($tokens->isNot(BdfToken::ENCODING)) {
             return null;
         }
         $tokens->advance();
@@ -185,7 +184,7 @@ final class BdfParser
         $encoding = $tokens->parseInt();
 
         $sWidth = null;
-        if ($tokens->is('SWIDTH')) {
+        if ($tokens->is(BdfToken::SWIDTH)) {
             $tokens->advance();
             $tokens->skipWhitespace();
             $sWidthX = $tokens->parseInt();
@@ -197,7 +196,7 @@ final class BdfParser
             $sWidth = new BdfCoord($sWidthX, $sWidthY);
         }
 
-        if (!$tokens->is('DWIDTH')) {
+        if ($tokens->isNot(BdfToken::DWIDTH)) {
             return null;
         }
         $tokens->advance();
@@ -210,7 +209,7 @@ final class BdfParser
         /** @phpstan-ignore-next-line */
         $dWidth = new BdfCoord($dWidthX, $dWidthY);
 
-        if (!$tokens->is('BBX')) {
+        if ($tokens->isNot(BdfToken::BBX)) {
             return null;
         }
         $tokens->advance();
@@ -225,7 +224,7 @@ final class BdfParser
         /** @phpstan-ignore-next-line */
         $bbx = BdfBoundingBox::fromScalars($bbxWidth, $bbxHeight, $bbxX, $bbxY);
 
-        if (!$tokens->is('BITMAP')) {
+        if ($tokens->isNot(BdfToken::BITMAP)) {
             return null;
         }
         $tokens->parseLine();
@@ -235,7 +234,7 @@ final class BdfParser
             $bitmap[] = $dec;
         }
 
-        if ($tokens->current() !== 'ENDCHAR') {
+        if ($tokens->isNot(BdfToken::ENDCHAR)) {
             return null;
         }
         $tokens->parseLine();
