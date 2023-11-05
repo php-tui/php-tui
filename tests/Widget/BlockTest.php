@@ -295,7 +295,7 @@ class BlockTest extends TestCase
         $block = Block::default()
             ->borderType(BorderType::Rounded)
             ->borders(Borders::ALL)
-            ->padding(Padding::fromInts(1, 1, 1, 1));
+            ->padding(Padding::fromScalars(1, 1, 1, 1));
 
         Paragraph::fromText(Text::fromString('Foob'))->render($block->inner($buffer->area()), $buffer);
         $block->render($buffer->area(), $buffer);

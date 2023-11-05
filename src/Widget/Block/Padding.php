@@ -18,7 +18,7 @@ class Padding
         return new self($amount, $amount, $amount, $amount);
     }
 
-    public static function fromInts(int $left, int $right, int $top, int $bottom): self
+    public static function fromScalars(int $left, int $right, int $top, int $bottom): self
     {
         return new self($left, $right, $top, $bottom);
     }

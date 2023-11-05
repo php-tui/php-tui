@@ -13,7 +13,7 @@ use PhpTui\Tui\Widget\Canvas\Shape;
  */
 class Map implements Shape
 {
-    private function __construct(
+    public function __construct(
         /**
          * Resolution of the map (enum low or high)
          */
