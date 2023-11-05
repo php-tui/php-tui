@@ -14,11 +14,12 @@ $display->drawWidget(
     Canvas::fromIntBounds(0, 10, 0, 10)
         ->marker(Marker::Dot)
         ->draw(
-            Rectangle::fromPrimitives(
+            Rectangle::fromScalars(
                 0,
                 0,
                 10,
                 10,
+            )->color(
                 AnsiColor::Green
             )
         )

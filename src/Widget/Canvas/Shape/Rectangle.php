@@ -2,6 +2,7 @@
 
 namespace PhpTui\Tui\Widget\Canvas\Shape;
 
+use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Color;
 use PhpTui\Tui\Model\Widget\FloatPosition;
 use PhpTui\Tui\Widget\Canvas\Painter;
@@ -66,8 +67,14 @@ final class Rectangle implements Shape
         }
     }
 
-    public static function fromPrimitives(float $x, float $y, int $width, int $height, Color $color): self
+    public static function fromScalars(float $x, float $y, int $width, int $height): self
     {
-        return new self(FloatPosition::at($x, $y), $width, $height, $color);
+        return new self(FloatPosition::at($x, $y), $width, $height, AnsiColor::Reset);
+    }
+
+    public function color(Color $color): self
+    {
+        $this->color = $color;
+        return $this;
     }
 }
