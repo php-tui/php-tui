@@ -31,6 +31,4 @@ $ php map.php
 
 And you should see the following:
 
-{{% terminal file="/data/example/docs/getting-started/map.snapshot" %}}
-
-
+{{% terminal file="/data/example/docs/getting-started/map.html" %}}
