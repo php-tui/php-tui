@@ -35,34 +35,30 @@ final class Rectangle implements Shape
     public function draw(Painter $painter): void
     {
         $lines = [
-            Line::fromPrimitives(
+            Line::fromScalars(
                 $this->position->x,
                 $this->position->y,
                 $this->position->x,
                 $this->position->y + $this->height,
-                $this->color
-            ),
-            Line::fromPrimitives(
+            )->color($this->color),
+            Line::fromScalars(
                 $this->position->x,
                 $this->position->y + $this->height,
                 $this->position->x + $this->width,
                 $this->position->y + $this->height,
-                $this->color
-            ),
-            Line::fromPrimitives(
+            )->color($this->color),
+            Line::fromScalars(
                 $this->position->x + $this->width,
                 $this->position->y,
                 $this->position->x + $this->width,
                 $this->position->y + $this->height,
-                $this->color
-            ),
-            Line::fromPrimitives(
+            )->color($this->color),
+            Line::fromScalars(
                 $this->position->x,
                 $this->position->y,
                 $this->position->x + $this->width,
                 $this->position->y,
-                $this->color
-            ),
+            )->color($this->color),
         ];
 
         foreach ($lines as $line) {

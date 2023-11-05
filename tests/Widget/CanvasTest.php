@@ -79,18 +79,20 @@ class CanvasTest extends TestCase
      */
     public function testRenderMarker(Marker $marker, array $expected): void
     {
-        $horizontalLine = Line::fromPrimitives(
+        $horizontalLine = Line::fromScalars(
             0.0,
             0.0,
             10.0,
             0.0,
+        )->color(
             AnsiColor::Green
         );
-        $verticalLine = Line::fromPrimitives(
+        $verticalLine = Line::fromScalars(
             0.0,
             0.0,
             0.0,
             10.0,
+        )->color(
             AnsiColor::Green
         );
         $canvas = Canvas::default()->paint(

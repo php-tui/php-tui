@@ -2,6 +2,7 @@
 
 namespace PhpTui\Tui\Widget\Canvas\Shape;
 
+use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Color;
 use PhpTui\Tui\Model\Position;
 use PhpTui\Tui\Model\Widget\FloatPosition;
@@ -29,14 +30,19 @@ class Line implements Shape
     ) {
     }
 
-    public static function fromPrimitives(
+    public static function fromScalars(
         float $x1,
         float $y1,
         float $x2,
         float $y2,
-        Color $color
     ): self {
-        return new self(FloatPosition::at($x1, $y1), FloatPosition::at($x2, $y2), $color);
+        return new self(FloatPosition::at($x1, $y1), FloatPosition::at($x2, $y2), AnsiColor::Reset);
+    }
+
+    public function color(Color $color): self
+    {
+        $this->color = $color;
+        return $this;
     }
 
     public function draw(Painter $painter): void

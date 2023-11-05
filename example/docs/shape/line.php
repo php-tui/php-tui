@@ -13,11 +13,10 @@ $display = Display::fullscreen(PhpTermBackend::new());
 $display->drawWidget(
     Canvas::fromIntBounds(0, 20, 0, 20)
         ->marker(Marker::Dot)
-        ->draw(Line::fromPrimitives(
+        ->draw(Line::fromScalars(
             0,  // x1
             0,  // y1
             20, // x2
             20, // y2
-            AnsiColor::Green
-        ))
+        )->color(AnsiColor::Green))
 );
