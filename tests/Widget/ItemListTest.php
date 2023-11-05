@@ -9,7 +9,6 @@ use PhpTui\Tui\Model\Widget\Text;
 use PhpTui\Tui\Widget\ItemList;
 use PhpTui\Tui\Widget\ItemList\ListItem;
 use Generator;
-use PHPUnit\Framework\TestCase;
 
 class ItemListTest extends WidgetTestCase
 {

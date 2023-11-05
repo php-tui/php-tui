@@ -12,7 +12,6 @@ use PhpTui\Tui\Widget\Block;
 use PhpTui\Tui\Widget\Block\Padding;
 use PhpTui\Tui\Widget\RawWidget;
 use Generator;
-use PHPUnit\Framework\TestCase;
 
 class RawWidgetTest extends WidgetTestCase
 {

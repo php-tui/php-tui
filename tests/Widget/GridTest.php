@@ -11,7 +11,6 @@ use PhpTui\Tui\Model\Widget\Text;
 use PhpTui\Tui\Widget\Block;
 use PhpTui\Tui\Widget\Grid;
 use Generator;
-use PHPUnit\Framework\TestCase;
 use PhpTui\Tui\Widget\Paragraph;
 use RuntimeException;
 

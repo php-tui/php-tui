@@ -10,6 +10,10 @@ use PhpTui\Tui\Widget\ItemList\HighlightSpacing;
 use PhpTui\Tui\Widget\Table\TableRow;
 use PhpTui\Tui\Widget\Table\TableState;
 
+/**
+ * Shows tabular data arranged in columns. The column spacing is determined by
+ * the "width" constraints.
+ */
 final class Table implements Widget
 {
     public function __construct(
@@ -27,8 +31,8 @@ final class Table implements Widget
          */
         public int $columnSpacing,
         /**
-         * Style used when a row is highlighted.
-         */
+          * Style used when a row is highlighted.
+          */
         public Style $highlightStyle,
         /**
          * Symbol to show when the row is highlighted.

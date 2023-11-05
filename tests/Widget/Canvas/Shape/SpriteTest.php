@@ -11,7 +11,6 @@ use PhpTui\Tui\Model\Widget\FloatPosition;
 use PhpTui\Tui\Widget\Canvas;
 use PhpTui\Tui\Widget\Canvas\CanvasContext;
 use Generator;
-use PHPUnit\Framework\TestCase;
 use PhpTui\Tui\Widget\Canvas\Shape\Sprite;
 
 class SpriteTest extends ShapeTestCase

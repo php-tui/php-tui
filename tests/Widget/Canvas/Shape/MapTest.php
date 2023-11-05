@@ -11,7 +11,6 @@ use PhpTui\Tui\Widget\Canvas\CanvasContext;
 use PhpTui\Tui\Widget\Canvas\Shape\Map;
 use PhpTui\Tui\Widget\Canvas\Shape\MapResolution;
 use Generator;
-use PHPUnit\Framework\TestCase;
 
 class MapTest extends ShapeTestCase
 {

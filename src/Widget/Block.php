@@ -3,15 +3,11 @@
 namespace PhpTui\Tui\Widget;
 
 use PhpTui\Tui\Model\Area;
-use PhpTui\Tui\Model\Buffer;
-use PhpTui\Tui\Model\Position;
 use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\Widget\BorderType;
 use PhpTui\Tui\Model\Widget\Borders;
-use PhpTui\Tui\Model\Widget\HorizontalAlignment;
 use PhpTui\Tui\Model\Widget\Title;
-use PhpTui\Tui\Model\Widget\VerticalAlignment;
 use PhpTui\Tui\Widget\Block\Padding;
 
 /**

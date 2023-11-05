@@ -3,7 +3,6 @@
 namespace PhpTui\Tui\Widget;
 
 use Closure;
-use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Buffer;
 use PhpTui\Tui\Model\Widget;
 

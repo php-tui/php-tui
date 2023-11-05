@@ -9,16 +9,7 @@ use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\WidgetRenderer;
 use PhpTui\Tui\Model\WidgetRenderer\AggregateWidgetRenderer;
 use PhpTui\Tui\Model\WidgetRenderer\NullWidgetRenderer;
-use PhpTui\Tui\Widget\BlockRenderer;
-use PhpTui\Tui\Widget\CanvasRenderer;
-use PhpTui\Tui\Widget\ChartRenderer;
 use PhpTui\Tui\Widget\DefaultWidgetSet;
-use PhpTui\Tui\Widget\GridRenderer;
-use PhpTui\Tui\Widget\ItemListRenderer;
-use PhpTui\Tui\Widget\ParagraphRenderer;
-use PhpTui\Tui\Widget\RawWidget;
-use PhpTui\Tui\Widget\RawWidgetRenderer;
-use PhpTui\Tui\Widget\TableRenderer;
 
 class WidgetTestCase extends TestCase
 {

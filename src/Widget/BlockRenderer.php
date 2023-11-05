@@ -94,8 +94,8 @@ final class BlockRenderer implements WidgetRenderer
 
     private function renderTitles(Block $block, Area $area, Buffer $buffer): void
     {
-        $this->renderTitlePosition($block , VerticalAlignment::Top, $area, $buffer);
-        $this->renderTitlePosition($block , VerticalAlignment::Bottom, $area, $buffer);
+        $this->renderTitlePosition($block, VerticalAlignment::Top, $area, $buffer);
+        $this->renderTitlePosition($block, VerticalAlignment::Bottom, $area, $buffer);
     }
 
     private function renderTitlePosition(Block $block, VerticalAlignment $alignment, Area $area, Buffer $buffer): void

@@ -10,7 +10,6 @@ use PhpTui\Tui\Widget\Canvas;
 use PhpTui\Tui\Widget\Canvas\CanvasContext;
 use PhpTui\Tui\Widget\Canvas\Shape\Line;
 use Generator;
-use PHPUnit\Framework\TestCase;
 
 class LineTest extends ShapeTestCase
 {

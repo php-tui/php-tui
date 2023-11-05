@@ -9,7 +9,6 @@ use PhpTui\Tui\Model\Widget\Line;
 use PhpTui\Tui\Model\Widget\Text;
 use PhpTui\Tui\Widget\Paragraph;
 use Generator;
-use PHPUnit\Framework\TestCase;
 
 class ParagraphTest extends WidgetTestCase
 {

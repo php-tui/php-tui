@@ -10,7 +10,6 @@ use PhpTui\Tui\Widget\Canvas;
 use PhpTui\Tui\Widget\Canvas\CanvasContext;
 use PhpTui\Tui\Widget\Canvas\Shape\Circle;
 use Generator;
-use PHPUnit\Framework\TestCase;
 
 class CircleTest extends ShapeTestCase
 {

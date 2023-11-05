@@ -11,11 +11,9 @@ use PhpTui\Tui\Model\Widget\Text;
 use PhpTui\Tui\Model\Widget\Title;
 use PhpTui\Tui\Widget\Block;
 use PhpTui\Tui\Model\Area;
-use PhpTui\Tui\Widget\BlockRenderer;
 use PhpTui\Tui\Widget\Block\Padding;
 use PhpTui\Tui\Widget\Paragraph;
 use Generator;
-use PHPUnit\Framework\TestCase;
 
 class BlockTest extends WidgetTestCase
 {
@@ -277,7 +275,9 @@ class BlockTest extends WidgetTestCase
     public function testRendersWithTitle(): void
     {
         $buffer = Buffer::empty(Area::fromDimensions(8, 5));
-        $this->render($buffer, Block::default()
+        $this->render(
+            $buffer,
+            Block::default()
             ->borderType(BorderType::Rounded)
             ->borders(Borders::ALL)
             ->titles(Title::fromString('G\'day')->horizontalAlignmnet(HorizontalAlignment::Left))

@@ -11,7 +11,6 @@ use PhpTui\Tui\Widget\Canvas;
 use PhpTui\Tui\Widget\Canvas\CanvasContext;
 use PhpTui\Tui\Widget\Canvas\Shape\Rectangle;
 use Generator;
-use PHPUnit\Framework\TestCase;
 
 class RectangleTest extends ShapeTestCase
 {
