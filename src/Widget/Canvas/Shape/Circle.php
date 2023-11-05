@@ -45,4 +45,10 @@ final class Circle implements Shape
     {
         return new self(FloatPosition::at($x, $y), $radius, AnsiColor::Reset);
     }
+
+    public function color(Color $color): self
+    {
+        $this->color = $color;
+        return $this;
+    }
 }
