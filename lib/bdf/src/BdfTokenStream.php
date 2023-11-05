@@ -53,7 +53,9 @@ final class BdfTokenStream
      */
     public function parseLine(): string
     {
-        $taken = $this->takeWhile(fn (?string $token) => $token !== "\n");
+        $taken = $this->takeWhile(
+            static fn (string $token): bool => $token !== PHP_EOL
+        );
         $this->skipWhitespace();
         $this->skipComments();
         return $taken;
@@ -61,8 +63,8 @@ final class BdfTokenStream
 
     public function skipWhitespace(): void
     {
-        $this->takeWhile(
-            fn (string $token) => trim($token) === ''
+        $this->skipWhile(
+            static fn (string $token): bool => trim($token) === ''
         );
     }
 
@@ -74,7 +76,7 @@ final class BdfTokenStream
             $this->advance();
             $this->skipWhitespace();
             $this->skipComments();
-            return (int)$int;
+            return $int;
         }
 
         return null;
@@ -91,7 +93,7 @@ final class BdfTokenStream
             return $taken;
         }
         while ($closure($current)) {
-            $taken .= $this->current();
+            $taken .= $current;
             $this->advance();
             $current = $this->current();
             if ($current === null) {
@@ -100,6 +102,18 @@ final class BdfTokenStream
         }
 
         return $taken;
+    }
+
+    /**
+     * @param Closure(string):bool $closure
+     */
+    private function skipWhile(Closure $closure): void
+    {
+        $current = $this->current();
+        while ($current === null || $closure($current)) {
+            $this->advance();
+            $current = $this->current();
+        }
     }
 
     private function skipComments(): void
