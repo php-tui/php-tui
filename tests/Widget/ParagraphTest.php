@@ -11,7 +11,7 @@ use PhpTui\Tui\Widget\Paragraph;
 use Generator;
 use PHPUnit\Framework\TestCase;
 
-class ParagraphTest extends TestCase
+class ParagraphTest extends WidgetTestCase
 {
 
     public function testFromString(): void
@@ -29,7 +29,7 @@ class ParagraphTest extends TestCase
         ), $paragraph);
         $area = Area::fromScalars(0, 0, 10, 2);
         $buffer = Buffer::empty($area);
-        $paragraph->render($buffer->area(), $buffer);
+        $this->render($buffer, $paragraph);
         self::assertEquals([
             'Hello     ',
             'Goodbye   ',
@@ -44,7 +44,7 @@ class ParagraphTest extends TestCase
         string $expected
     ): void {
         $buffer = Buffer::empty($area);
-        $paragraph->render($buffer->area(), $buffer);
+        $this->render($buffer, $paragraph);
         self::assertEquals($expected, $buffer->toString());
 
     }
