@@ -225,7 +225,7 @@ final class BdfParser
             return null;
         }
         /** @phpstan-ignore-next-line */
-        $bbx = BdfBoundingBox::fromPrimitives($bbxWidth, $bbxHeight, $bbxX, $bbxY);
+        $bbx = BdfBoundingBox::fromScalars($bbxWidth, $bbxHeight, $bbxX, $bbxY);
 
         if (!$tokens->is('BITMAP')) {
             return null;

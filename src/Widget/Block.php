@@ -160,7 +160,7 @@ final class Block implements Widget
         $width = $width - ($this->padding->left + $this->padding->right);
         $height = $height - ($this->padding->top + $this->padding->bottom);
 
-        return Area::fromPrimitives($x, $y, $width, $height);
+        return Area::fromScalars($x, $y, $width, $height);
     }
 
     private function renderBorders(Area $area, Buffer $buffer): void

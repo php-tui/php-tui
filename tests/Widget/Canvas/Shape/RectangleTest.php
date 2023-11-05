@@ -39,7 +39,7 @@ class RectangleTest extends TestCase
     public static function provideRectangle(): Generator
     {
         yield 'circle' => [
-            Rectangle::fromPrimitives(0, 0, 10, 10, AnsiColor::Reset),
+            Rectangle::fromScalars(0, 0, 10, 10)->color(AnsiColor::Reset),
             [
             '██████████',
             '█        █',

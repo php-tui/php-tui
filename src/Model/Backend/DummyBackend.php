@@ -28,7 +28,7 @@ final class DummyBackend implements Backend
 
     public function size(): Area
     {
-        return Area::fromPrimitives(0, 0, $this->width, $this->height);
+        return Area::fromScalars(0, 0, $this->width, $this->height);
     }
 
     public function draw(BufferUpdates $updates): void

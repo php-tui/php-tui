@@ -16,6 +16,6 @@ class AreaTest extends TestCase
     public function testInner(): void
     {
         $a = Area::fromDimensions(10, 10);
-        self::assertEquals(Area::fromPrimitives(2, 2, 6, 6), $a->inner(new Margin(2, 2)));
+        self::assertEquals(Area::fromScalars(2, 2, 6, 6), $a->inner(new Margin(2, 2)));
     }
 }

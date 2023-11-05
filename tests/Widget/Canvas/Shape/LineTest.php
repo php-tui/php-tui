@@ -2,7 +2,6 @@
 
 namespace PhpTui\Tui\Tests\Widget\Canvas\Shape;
 
-use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\AxisBounds;
 use PhpTui\Tui\Model\Buffer;
@@ -39,7 +38,7 @@ class LineTest extends TestCase
     public static function provideLine(): Generator
     {
         yield 'out of bounds' => [
-            Line::fromPrimitives(-1.0, -1.0, 10.0, 10.0, AnsiColor::Red),
+            Line::fromScalars(-1.0, -1.0, 10.0, 10.0),
             [
                 '          ',
                 '          ',
@@ -55,7 +54,7 @@ class LineTest extends TestCase
         ];
 
         yield 'horizontal' => [
-            Line::fromPrimitives(0.0, 0.0, 10.0, 0.0, AnsiColor::Red),
+            Line::fromScalars(0.0, 0.0, 10.0, 0.0),
             [
                 '          ',
                 '          ',
@@ -70,7 +69,7 @@ class LineTest extends TestCase
             ]
         ];
         yield 'horizontal 2' => [
-            Line::fromPrimitives(10.0, 10.0, 0.0, 10.0, AnsiColor::Red),
+            Line::fromScalars(10.0, 10.0, 0.0, 10.0),
             [
                 '••••••••••',
                 '          ',
@@ -86,7 +85,7 @@ class LineTest extends TestCase
         ];
 
         yield 'vertical' => [
-            Line::fromPrimitives(0.0, 0.0, 0.0, 10.0, AnsiColor::Red),
+            Line::fromScalars(0.0, 0.0, 0.0, 10.0),
             [
                 '•         ',
                 '•         ',
@@ -101,7 +100,7 @@ class LineTest extends TestCase
             ]
         ];
         yield 'diagonal' => [
-            Line::fromPrimitives(0.0, 0.0, 10.0, 5.0, AnsiColor::Red),
+            Line::fromScalars(0.0, 0.0, 10.0, 5.0),
             [
                 '          ',
                 '          ',
@@ -116,7 +115,7 @@ class LineTest extends TestCase
             ]
         ];
         yield 'diagonal dy > dx, y1 < y2' => [
-            Line::fromPrimitives(0.0, 0.0, 5.0, 10.0, AnsiColor::Red),
+            Line::fromScalars(0.0, 0.0, 5.0, 10.0),
             [
                 '    •     ',
                 '    •     ',
@@ -131,7 +130,7 @@ class LineTest extends TestCase
             ]
         ];
         yield 'diagonal dy < dx, x1 < x2' => [
-            Line::fromPrimitives(10.0, 0.0, 0.0, 5.0, AnsiColor::Red),
+            Line::fromScalars(10.0, 0.0, 0.0, 5.0),
             [
                 '          ',
                 '          ',
@@ -146,7 +145,7 @@ class LineTest extends TestCase
             ]
         ];
         yield 'diagonal dy > dx, y1 > y2' => [
-            Line::fromPrimitives(0.0, 10.0, 5.0, 0.0, AnsiColor::Red),
+            Line::fromScalars(0.0, 10.0, 5.0, 0.0),
             [
                 '•         ',
                 '•         ',

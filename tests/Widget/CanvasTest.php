@@ -31,7 +31,7 @@ class CanvasTest extends TestCase
         $buffer = Buffer::filled($area, Cell::fromChar('x'));
 
         $canvas = Canvas::fromIntBounds(0, 10, 0, 10);
-        $canvas->draw(Circle::fromPrimitives(5, 5, 5, AnsiColor::Green));
+        $canvas->draw(Circle::fromScalars(5, 5, 5)->color(AnsiColor::Green));
         $canvas->render($area, $buffer);
         $expected = [
             'x⢀⡴⠋⠉⠉⠳⣄xx',
@@ -59,8 +59,8 @@ class CanvasTest extends TestCase
 
         $canvas = Canvas::fromIntBounds(0, 5, 0, 5);
         $canvas->draw(
-            Circle::fromPrimitives(1, 1, 1, AnsiColor::Green),
-            Circle::fromPrimitives(4, 4, 1, AnsiColor::Green),
+            Circle::fromScalars(1, 1, 1),
+            Circle::fromScalars(4, 4, 1),
         );
         $canvas->render($area, $buffer);
         $expected = [
@@ -79,18 +79,20 @@ class CanvasTest extends TestCase
      */
     public function testRenderMarker(Marker $marker, array $expected): void
     {
-        $horizontalLine = Line::fromPrimitives(
+        $horizontalLine = Line::fromScalars(
             0.0,
             0.0,
             10.0,
             0.0,
+        )->color(
             AnsiColor::Green
         );
-        $verticalLine = Line::fromPrimitives(
+        $verticalLine = Line::fromScalars(
             0.0,
             0.0,
             0.0,
             10.0,
+        )->color(
             AnsiColor::Green
         );
         $canvas = Canvas::default()->paint(
@@ -99,7 +101,7 @@ class CanvasTest extends TestCase
                 $context->draw($horizontalLine);
             }
         )->xBounds(AxisBounds::new(0.0, 10.0))->yBounds(AxisBounds::new(0.0, 10.0))->marker($marker);
-        $area = Area::fromPrimitives(0, 0, 5, 5);
+        $area = Area::fromScalars(0, 0, 5, 5);
         $buffer = Buffer::filled($area, Cell::fromChar('x'));
         $canvas->render($area, $buffer);
         self::assertEquals($expected, $buffer->toLines());
@@ -168,7 +170,7 @@ class CanvasTest extends TestCase
                 $context->print(0, 0, DTLLine::fromString('Hello'));
             }
         )->xBounds(AxisBounds::new(0.0, 10.0))->yBounds(AxisBounds::new(0.0, 5));
-        $area = Area::fromPrimitives(0, 0, 5, 5);
+        $area = Area::fromScalars(0, 0, 5, 5);
         $buffer = Buffer::empty($area);
         $canvas->render($area, $buffer);
         self::assertEquals([

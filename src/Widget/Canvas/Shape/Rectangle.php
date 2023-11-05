@@ -2,6 +2,7 @@
 
 namespace PhpTui\Tui\Widget\Canvas\Shape;
 
+use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Color;
 use PhpTui\Tui\Model\Widget\FloatPosition;
 use PhpTui\Tui\Widget\Canvas\Painter;
@@ -35,34 +36,30 @@ final class Rectangle implements Shape
     public function draw(Painter $painter): void
     {
         $lines = [
-            Line::fromPrimitives(
+            Line::fromScalars(
                 $this->position->x,
                 $this->position->y,
                 $this->position->x,
                 $this->position->y + $this->height,
-                $this->color
-            ),
-            Line::fromPrimitives(
+            )->color($this->color),
+            Line::fromScalars(
                 $this->position->x,
                 $this->position->y + $this->height,
                 $this->position->x + $this->width,
                 $this->position->y + $this->height,
-                $this->color
-            ),
-            Line::fromPrimitives(
+            )->color($this->color),
+            Line::fromScalars(
                 $this->position->x + $this->width,
                 $this->position->y,
                 $this->position->x + $this->width,
                 $this->position->y + $this->height,
-                $this->color
-            ),
-            Line::fromPrimitives(
+            )->color($this->color),
+            Line::fromScalars(
                 $this->position->x,
                 $this->position->y,
                 $this->position->x + $this->width,
                 $this->position->y,
-                $this->color
-            ),
+            )->color($this->color),
         ];
 
         foreach ($lines as $line) {
@@ -70,8 +67,14 @@ final class Rectangle implements Shape
         }
     }
 
-    public static function fromPrimitives(float $x, float $y, int $width, int $height, Color $color): self
+    public static function fromScalars(float $x, float $y, int $width, int $height): self
     {
-        return new self(FloatPosition::at($x, $y), $width, $height, $color);
+        return new self(FloatPosition::at($x, $y), $width, $height, AnsiColor::Reset);
+    }
+
+    public function color(Color $color): self
+    {
+        $this->color = $color;
+        return $this;
     }
 }

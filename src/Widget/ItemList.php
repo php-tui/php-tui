@@ -64,7 +64,7 @@ class ItemList implements Widget
                 return [$listArea->left(), $y, $currentHeight];
             })();
 
-            $area = Area::fromPrimitives($x, $y, $listArea->width, $item->height());
+            $area = Area::fromScalars($x, $y, $listArea->width, $item->height());
             $itemStyle = $this->style->patch($item->style);
             $buffer->setStyle($area, $itemStyle);
 

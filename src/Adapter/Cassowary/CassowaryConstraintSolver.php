@@ -81,13 +81,13 @@ final class CassowaryConstraintSolver implements ConstraintSolver
             $size = $end - $start;
 
             return match ($layout->direction) {
-                Direction::Horizontal => Area::fromPrimitives(
+                Direction::Horizontal => Area::fromScalars(
                     $start,
                     $inner->position->y,
                     $size,
                     $inner->height
                 ),
-                Direction::Vertical => Area::fromPrimitives(
+                Direction::Vertical => Area::fromScalars(
                     $inner->position->x,
                     $start,
                     $inner->width,
