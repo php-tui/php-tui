@@ -6,6 +6,7 @@ use PhpBench\Attributes\Iterations;
 use PhpBench\Attributes\Revs;
 use PhpTui\Term\InformationProvider\AggregateInformationProvider;
 use PhpTui\Term\InformationProvider\ClosureInformationProvider;
+use PhpTui\Term\Painter\StringPainter;
 use PhpTui\Term\RawMode\NullRawMode;
 use PhpTui\Term\Painter\BufferPainter;
 use PhpTui\Term\Size;
@@ -40,9 +41,11 @@ final class DisplayBench
 {
     private Display $display;
 
+    private StringPainter $painter;
+
     public function __construct()
     {
-        $painter = BufferPainter::new();
+        $this->painter = new StringPainter();
         $terminal = Terminal::new(
             infoProvider: new AggregateInformationProvider([
                 ClosureInformationProvider::new(function (string $info) {
@@ -53,7 +56,7 @@ final class DisplayBench
 
             ]),
             rawMode: new NullRawMode(),
-            painter: $painter,
+            painter: $this->painter,
         );
         $this->display = Display::fullscreen(PhpTermBackend::new($terminal));
     }
