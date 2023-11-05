@@ -14,9 +14,8 @@ use PhpTui\Tui\Widget\Canvas\CanvasContext;
 use PhpTui\Tui\Widget\Canvas\Shape\Circle;
 use PhpTui\Tui\Widget\Canvas\Shape\Line;
 use Generator;
-use PHPUnit\Framework\TestCase;
 
-class CanvasTest extends TestCase
+class CanvasTest extends WidgetTestCase
 {
     public function testFromIntBounds(): void
     {
@@ -32,7 +31,7 @@ class CanvasTest extends TestCase
 
         $canvas = Canvas::fromIntBounds(0, 10, 0, 10);
         $canvas->draw(Circle::fromScalars(5, 5, 5)->color(AnsiColor::Green));
-        $canvas->render($area, $buffer);
+        $this->render($buffer, $canvas);
         $expected = [
             'x⢀⡴⠋⠉⠉⠳⣄xx',
             '⢀⡞xxxxx⠘⣆x',
@@ -48,7 +47,7 @@ class CanvasTest extends TestCase
         self::assertEquals($expected, $buffer->toLines());
 
         $buffer = Buffer::filled($area, Cell::fromChar('x'));
-        $canvas->render($area, $buffer);
+        $this->render($buffer, $canvas);
         self::assertEquals($expected, $buffer->toLines());
     }
 
@@ -62,7 +61,7 @@ class CanvasTest extends TestCase
             Circle::fromScalars(1, 1, 1),
             Circle::fromScalars(4, 4, 1),
         );
-        $canvas->render($area, $buffer);
+        $this->render($buffer, $canvas);
         $expected = [
             'xx⢸⠉⣇',
             'xx⠸⣄⡇',
@@ -103,7 +102,7 @@ class CanvasTest extends TestCase
         )->xBounds(AxisBounds::new(0.0, 10.0))->yBounds(AxisBounds::new(0.0, 10.0))->marker($marker);
         $area = Area::fromScalars(0, 0, 5, 5);
         $buffer = Buffer::filled($area, Cell::fromChar('x'));
-        $canvas->render($area, $buffer);
+        $this->render($buffer, $canvas);
         self::assertEquals($expected, $buffer->toLines());
     }
     /**
@@ -172,7 +171,7 @@ class CanvasTest extends TestCase
         )->xBounds(AxisBounds::new(0.0, 10.0))->yBounds(AxisBounds::new(0.0, 5));
         $area = Area::fromScalars(0, 0, 5, 5);
         $buffer = Buffer::empty($area);
-        $canvas->render($area, $buffer);
+        $this->render($buffer, $canvas);
         self::assertEquals([
             '     ',
             '     ',

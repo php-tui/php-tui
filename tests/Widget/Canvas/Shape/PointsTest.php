@@ -11,9 +11,8 @@ use PhpTui\Tui\Widget\Canvas;
 use PhpTui\Tui\Widget\Canvas\CanvasContext;
 use PhpTui\Tui\Widget\Canvas\Shape\Points;
 use Generator;
-use PHPUnit\Framework\TestCase;
 
-class PointsTest extends TestCase
+class PointsTest extends ShapeTestCase
 {
     /**
      * @dataProvider providePoints
@@ -30,7 +29,7 @@ class PointsTest extends TestCase
             });
         $area = Area::fromDimensions(3, 3);
         $buffer = Buffer::empty($area);
-        $canvas->render($area, $buffer);
+        $this->render($buffer, $canvas);
         self::assertEquals($expected, $buffer->toLines());
     }
     /**

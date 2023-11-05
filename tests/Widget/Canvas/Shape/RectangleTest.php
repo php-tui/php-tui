@@ -11,9 +11,8 @@ use PhpTui\Tui\Widget\Canvas;
 use PhpTui\Tui\Widget\Canvas\CanvasContext;
 use PhpTui\Tui\Widget\Canvas\Shape\Rectangle;
 use Generator;
-use PHPUnit\Framework\TestCase;
 
-class RectangleTest extends TestCase
+class RectangleTest extends ShapeTestCase
 {
     /**
      * @param array<int,string> $expected
@@ -30,7 +29,7 @@ class RectangleTest extends TestCase
             });
         $area = Area::fromDimensions(10, 10);
         $buffer = Buffer::empty($area);
-        $canvas->render($area, $buffer);
+        $this->render($buffer, $canvas);
         self::assertEquals($expected, $buffer->toLines());
     }
     /**

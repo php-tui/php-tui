@@ -2,7 +2,9 @@
 
 namespace PhpTui\Tui\Model;
 
+/**
+ * Marker interface for widgets
+ */
 interface Widget
 {
-    public function render(Area $area, Buffer $buffer): void;
 }

@@ -11,9 +11,8 @@ use PhpTui\Tui\Widget\Canvas\CanvasContext;
 use PhpTui\Tui\Widget\Canvas\Shape\Map;
 use PhpTui\Tui\Widget\Canvas\Shape\MapResolution;
 use Generator;
-use PHPUnit\Framework\TestCase;
 
-class MapTest extends TestCase
+class MapTest extends ShapeTestCase
 {
     /**
      * @param array<int,string> $expected
@@ -30,7 +29,7 @@ class MapTest extends TestCase
             });
         $area = Area::fromDimensions(80, 40);
         $buffer = Buffer::empty($area);
-        $canvas->render($area, $buffer);
+        $this->render($buffer, $canvas);
         self::assertEquals($expected, $buffer->toLines());
     }
     /**

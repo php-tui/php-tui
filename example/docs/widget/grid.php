@@ -1,7 +1,6 @@
 <?php
 
 use PhpTui\Tui\Adapter\PhpTerm\PhpTermBackend;
-use PhpTui\Tui\Model\Buffer;
 use PhpTui\Tui\Model\Constraint;
 use PhpTui\Tui\Model\Direction;
 use PhpTui\Tui\Model\Display;
@@ -13,7 +12,7 @@ use PhpTui\Tui\Widget\Grid;
 require 'vendor/autoload.php';
 
 $display = Display::fullscreen(PhpTermBackend::new());
-$display->draw(function (Buffer $buffer): void {
+$display->drawWidget(
     Grid::default()
         ->direction(Direction::Horizontal)
         ->constraints(
@@ -33,5 +32,4 @@ $display->draw(function (Buffer $buffer): void {
                     Block::default()->borders(Borders::ALL)->titles(Title::fromString('Bottom Right')),
                 )
         )
-        ->render($buffer->area(), $buffer);
-});
+);

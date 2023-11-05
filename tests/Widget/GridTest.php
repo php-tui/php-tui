@@ -11,11 +11,10 @@ use PhpTui\Tui\Model\Widget\Text;
 use PhpTui\Tui\Widget\Block;
 use PhpTui\Tui\Widget\Grid;
 use Generator;
-use PHPUnit\Framework\TestCase;
 use PhpTui\Tui\Widget\Paragraph;
 use RuntimeException;
 
-class GridTest extends TestCase
+class GridTest extends WidgetTestCase
 {
     public function testNotEnoughConstraints(): void
     {
@@ -27,8 +26,7 @@ class GridTest extends TestCase
             ->widgets(
                 Paragraph::fromText(Text::fromString('Hello World'))
             );
-        $grid->render($area, $buffer);
-
+        $this->render($buffer, $grid);
     }
 
     /**
@@ -38,7 +36,7 @@ class GridTest extends TestCase
     public function testGridRender(Area $area, Grid $grids, array $expected): void
     {
         $buffer = Buffer::empty($area);
-        $grids->render($area, $buffer);
+        $this->render($buffer, $grids);
         self::assertEquals($expected, $buffer->toLines());
     }
     /**

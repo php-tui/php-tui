@@ -10,9 +10,8 @@ use PhpTui\Tui\Widget\Canvas;
 use PhpTui\Tui\Widget\Canvas\CanvasContext;
 use PhpTui\Tui\Widget\Canvas\Shape\Line;
 use Generator;
-use PHPUnit\Framework\TestCase;
 
-class LineTest extends TestCase
+class LineTest extends ShapeTestCase
 {
     /**
      * @dataProvider provideLine
@@ -29,7 +28,7 @@ class LineTest extends TestCase
             });
         $area = Area::fromDimensions(10, 10);
         $buffer = Buffer::empty($area);
-        $canvas->render($area, $buffer);
+        $this->render($buffer, $canvas);
         self::assertEquals($expected, $buffer->toLines());
     }
     /**
