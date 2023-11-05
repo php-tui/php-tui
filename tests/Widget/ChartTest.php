@@ -3,18 +3,15 @@
 namespace PhpTui\Tui\Tests\Widget;
 
 use PhpTui\Tui\Model\AnsiColor;
-use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\AxisBounds;
-use PhpTui\Tui\Model\Buffer;
 use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Widget\Span;
 use PhpTui\Tui\Widget\Chart;
 use PhpTui\Tui\Widget\Chart\Axis;
 use PhpTui\Tui\Widget\Chart\DataSet;
-use PHPUnit\Framework\TestCase;
 
-class ChartTest extends TestCase
+class ChartTest extends WidgetTestCase
 {
     public function testRender(): void
     {
@@ -37,7 +34,7 @@ class ChartTest extends TestCase
                 '     • •',
                 '      • ',
             ],
-            $this->render($chart)
+            $this->renderToLines($chart)
         );
     }
 
@@ -63,7 +60,7 @@ class ChartTest extends TestCase
                 '│     • ',
                 '└───────',
             ],
-            $this->render($chart, 8, 6)
+            $this->renderToLines($chart, 8, 6)
         );
     }
 
@@ -90,7 +87,7 @@ class ChartTest extends TestCase
                 '1    2  ',
 
             ],
-            $this->render($chart, 8, 6)
+            $this->renderToLines($chart, 8, 6)
         );
     }
 
@@ -122,7 +119,7 @@ class ChartTest extends TestCase
                 '────────────',
                 '1   2  3  4 ',
             ],
-            $this->render($chart, 12, 4)
+            $this->renderToLines($chart, 12, 4)
         );
     }
 
@@ -152,7 +149,7 @@ class ChartTest extends TestCase
                 ' │      ',
                 '1│    • ',
             ],
-            $this->render($chart, 8, 6)
+            $this->renderToLines($chart, 8, 6)
         );
     }
 
@@ -194,18 +191,8 @@ class ChartTest extends TestCase
                 '     1      2   3    4  ',
 
             ],
-            $this->render($chart, 24, 8)
+            $this->renderToLines($chart, 24, 8)
         );
-    }
-    /**
-     * @return string[]
-     */
-    private function render(Chart $chart, int $width = 8, int $height = 5): array
-    {
-        $area = Area::fromDimensions($width, $height);
-        $buffer = Buffer::empty($area);
-        $chart->render($area, $buffer);
-        return $buffer->toLines();
     }
 
     /**
