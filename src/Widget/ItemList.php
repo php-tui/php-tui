@@ -170,7 +170,12 @@ class ItemList implements Widget
             $end += 1;
         }
 
+
         if ($this->state->selected !== null) {
+            if ($this->state->selected < 0) {
+                $this->state->selected = 0;
+            }
+
             $selected = min(count($this->items) - 1, $this->state->selected ?? 0);
             while ($selected >= $end) {
                 $height = $height += $this->items[$end]->height();
