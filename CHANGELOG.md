@@ -14,4 +14,5 @@ The following are differences from Ratatui:
 - Added `ImageShape` widget to render images on the canvas #36.
 - Added `Canvas#draw(Widget)` to avoid using the closure for most cases. #51
 - Added `Display#drawWidget(Widget)` to avoid using the closure for most cases. #55
+- Rendering responsiblity split from the Widget (`Widget` has an associated  `WidgetRenderer`) #60
 
