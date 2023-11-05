@@ -194,7 +194,7 @@ class BlocksPage implements Component
         return Block::default()
             ->borders(Borders::ALL)
             ->titles(Title::fromString('padding'))
-            ->padding(Padding::fromPrimitives(5, 10, 1, 2))
+            ->padding(Padding::fromInts(5, 10, 1, 2))
             ->widget($paragraph);
     }
 

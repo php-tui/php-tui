@@ -13,7 +13,7 @@ class Padding
         return new self(0, 0, 0, 0);
     }
 
-    public static function fromPrimitives(int $left, int $right, int $top, int $bottom): self
+    public static function fromInts(int $left, int $right, int $top, int $bottom): self
     {
         return new self($left, $right, $top, $bottom);
     }

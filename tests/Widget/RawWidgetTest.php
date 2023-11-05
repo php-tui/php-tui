@@ -56,7 +56,7 @@ class RawWidgetTest extends TestCase
                 RawWidget::new(function (Buffer $buffer): void {
                     $buffer->putLine(Position::at(0, 0), Line::fromString('Hello'), 5);
                 })
-            )->padding(Padding::fromPrimitives(1, 1, 1, 1)),
+            )->padding(Padding::fromInts(1, 1, 1, 1)),
             [
                 '          ',
                 ' Hello    ',
@@ -77,7 +77,7 @@ class RawWidgetTest extends TestCase
                 RawWidget::new(function (Buffer $buffer): void {
                     $buffer->putSpan(Position::at(0, 0), Span::fromString(str_repeat('Hello', 10)), 10);
                 })
-            )->padding(Padding::fromPrimitives(1, 1, 1, 1)),
+            )->padding(Padding::fromInts(1, 1, 1, 1)),
             [
                 '          ',
                 ' HelloHel ',
