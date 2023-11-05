@@ -54,7 +54,7 @@ final class BdfTokenStream
     public function parseLine(): string
     {
         $taken = $this->takeWhile(
-            static fn (string $token): bool => $token !== PHP_EOL
+            static fn (string $token): bool => $token !== "\n"
         );
         $this->skipWhitespace();
         $this->skipComments();
