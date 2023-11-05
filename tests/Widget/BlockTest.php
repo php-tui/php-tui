@@ -297,9 +297,9 @@ class BlockTest extends WidgetTestCase
         $block = Block::default()
             ->borderType(BorderType::Rounded)
             ->borders(Borders::ALL)
+            ->widget(Paragraph::fromText(Text::fromString('Foob')))
             ->padding(Padding::fromScalars(1, 1, 1, 1));
 
-        $this->render($buffer, Paragraph::fromText(Text::fromString('Foob')));
         $this->render($buffer, $block);
         self::assertEquals([
             '╭──────╮',

@@ -6,7 +6,9 @@ use PHPUnit\Framework\TestCase;
 use PhpTui\Tui\Model\Buffer;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\WidgetRenderer\AggregateWidgetRenderer;
+use PhpTui\Tui\Model\WidgetRenderer\NullWidgetRenderer;
 use PhpTui\Tui\Widget\BlockRenderer;
+use PhpTui\Tui\Widget\ParagraphRenderer;
 
 class WidgetTestCase extends TestCase
 {
@@ -14,6 +16,12 @@ class WidgetTestCase extends TestCase
     {
         (new AggregateWidgetRenderer([
             new BlockRenderer(),
-        ]))->render($widget, $buffer->area(), $buffer);
+            new ParagraphRenderer(),
+        ]))->render(
+            new NullWidgetRenderer(),
+            $widget,
+            $buffer->area(),
+            $buffer
+        );
     }
 }

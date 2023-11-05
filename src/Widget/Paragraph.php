@@ -23,11 +23,11 @@ class Paragraph implements Widget
 {
     /** @param array{int,int} $scroll */
     private function __construct(
-        private Style $style,
-        private ?Wrap $wrap,
-        private Text $text,
-        private array $scroll,
-        private HorizontalAlignment $alignment
+        public Style $style,
+        public ?Wrap $wrap,
+        public Text $text,
+        public array $scroll,
+        public HorizontalAlignment $alignment
     ) {
     }
 
@@ -45,63 +45,6 @@ class Paragraph implements Widget
             scroll: [0,0],
             alignment: HorizontalAlignment::Left,
         );
-    }
-
-    public function render(Area $area, Buffer $buffer): void
-    {
-        $buffer->setStyle($area, $this->style);
-        $textArea = $area;
-
-        if ($textArea->height < 1) {
-            return;
-        }
-
-        $this->text->patchStyle($this->style);
-        $style = $this->style;
-        $styled = array_map(function (Line $line) use ($style) {
-            $graphemes = array_reduce($line->spans, function (array $ac, Span $span) use ($style) {
-                foreach ($span->toStyledGraphemes($style) as $grapheme) {
-                    $ac[] = $grapheme;
-                }
-                return $ac;
-            }, []);
-            return [ $graphemes, $line->alignment ?: $this->alignment ];
-        }, $this->text->lines);
-
-        $lineComposer = $this->createLineComposer(
-            $styled,
-            $textArea,
-            $this->wrap,
-            $this->scroll[1]
-        );
-
-        $y = 0;
-        foreach ($lineComposer->nextLine() as $line) {
-            [$currentLine, $currentLineWidth, $currentLineAlignment] = $line;
-
-            if ($y >= $this->scroll[0]) {
-
-                $x = $this->getLineOffset($currentLineWidth, $textArea->width, $currentLineAlignment);
-
-                foreach ($currentLine as $grapheme) {
-                    if ($grapheme->symbolWidth() === 0) {
-                        continue;
-                    }
-                    $cell = $buffer->get(Position::at(
-                        $textArea->left() + $x,
-                        $textArea->top() + $y - $this->scroll[0]
-                    ));
-                    $cell->setChar($grapheme->symbol === '' ? ' ' : $grapheme->symbol);
-                    $cell->setStyle($grapheme->style);
-                    $x += $grapheme->symbolWidth();
-                }
-            }
-
-            $y += 1;
-            if ($y >= $textArea->height + $this->scroll[0]) {
-                break;
-            }
-        }
     }
 
     public function style(Style $style): self
@@ -125,22 +68,5 @@ class Paragraph implements Widget
     public static function fromLines(Line ...$lines): self
     {
         return self::fromText(Text::fromLines(...$lines));
-    }
-
-    /**
-     * @param list<array{list<StyledGrapheme>,HorizontalAlignment}> $styled
-     */
-    private function createLineComposer(array $styled, Area $textArea, ?Wrap $wrap, int $horizontalOffset): LineComposer
-    {
-        return new LineTruncator($styled, $textArea->width, $horizontalOffset);
-    }
-
-    private function getLineOffset(int $width, int $maxWidth, HorizontalAlignment $alignment): int
-    {
-        return match ($alignment) {
-            HorizontalAlignment::Center => intval(($maxWidth / 2) - $width / 2),
-            HorizontalAlignment::Right => $maxWidth - $width,
-            HorizontalAlignment::Left => 0,
-        };
     }
 }

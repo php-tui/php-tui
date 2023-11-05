@@ -14,7 +14,7 @@ use PhpTui\Tui\Model\Widget\VerticalAlignment;
 
 final class BlockRenderer implements WidgetRenderer
 {
-    public function render(Widget $widget, Area $area, Buffer $buffer): void
+    public function render(WidgetRenderer $renderer, Widget $widget, Area $area, Buffer $buffer): void
     {
         if (!$widget instanceof Block) {
             return;
@@ -22,8 +22,18 @@ final class BlockRenderer implements WidgetRenderer
         if ($area->area() === 0) {
             return;
         }
+
         $this->renderBorders($widget, $area, $buffer);
         $this->renderTitles($widget, $area, $buffer);
+
+        if ($widget->widget) {
+            $renderer->render(
+                $renderer,
+                $widget->widget,
+                $widget->inner($area),
+                $buffer
+            );
+        }
     }
 
     private function renderBorders(Block $block, Area $area, Buffer $buffer): void
@@ -79,10 +89,6 @@ final class BlockRenderer implements WidgetRenderer
             $buffer->get(Position::at($area->left(), $area->bottom() - 1))
                 ->setChar($lineSet->bottomLeft)
                 ->setStyle($block->borderStyle);
-        }
-
-        if ($block->widget) {
-            $block->widget->render($block->inner($area), $buffer);
         }
     }
 
