@@ -11,7 +11,7 @@ use PhpTui\Tui\Widget\ItemList\ListItem;
 use Generator;
 use PHPUnit\Framework\TestCase;
 
-class ItemListTest extends TestCase
+class ItemListTest extends WidgetTestCase
 {
     /**
      * @dataProvider provideRenderItemList
@@ -20,7 +20,7 @@ class ItemListTest extends TestCase
     public function testRenderItemList(Area $area, ItemList $itemList, array $expected): void
     {
         $buffer = Buffer::empty($area);
-        $itemList->render($area, $buffer);
+        $this->render($buffer, $itemList);
         self::assertEquals($expected, $buffer->toLines());
     }
     /**

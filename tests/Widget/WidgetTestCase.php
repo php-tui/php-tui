@@ -13,6 +13,7 @@ use PhpTui\Tui\Widget\BlockRenderer;
 use PhpTui\Tui\Widget\CanvasRenderer;
 use PhpTui\Tui\Widget\ChartRenderer;
 use PhpTui\Tui\Widget\GridRenderer;
+use PhpTui\Tui\Widget\ItemListRenderer;
 use PhpTui\Tui\Widget\ParagraphRenderer;
 
 class WidgetTestCase extends TestCase
@@ -46,6 +47,7 @@ class WidgetTestCase extends TestCase
             new CanvasRenderer(),
             new ChartRenderer(),
             new GridRenderer(),
+            new ItemListRenderer(),
         ]);
     }
 }
