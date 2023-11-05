@@ -29,7 +29,6 @@ final class BrailleGrid extends CanvasGrid
         private array $codePoints,
         private array $colors
     ) {
-        $this->cacheBrailleChars();
     }
 
     public static function new(int $width, int $height): self
@@ -73,15 +72,6 @@ final class BrailleGrid extends CanvasGrid
         }
         if (isset($this->colors[$index])) {
             $this->colors[$index] = $color;
-        }
-    }
-
-    private function cacheBrailleChars(): void
-    {
-        [$from, $to] = BrailleSet::RANGE;
-
-        for ($i = $from; $i <= $to; $i++) {
-            $this->brailleCharCache[$i] = IntlChar::chr($i);
         }
     }
 }
