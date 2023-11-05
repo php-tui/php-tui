@@ -1,11 +1,11 @@
 <?php
 
-namespace PhpTui\Tui\Tests\Widget\Canvas;
+namespace PhpTui\Tui\Tests\Widget\Canvas\Grid;
 
 use PHPUnit\Framework\TestCase;
 use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Position;
-use PhpTui\Tui\Widget\Canvas\HalfBlockGrid;
+use PhpTui\Tui\Widget\Canvas\Grid\HalfBlockGrid;
 
 class HalfBlockGridTest extends TestCase
 {

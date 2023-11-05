@@ -9,6 +9,9 @@ use PhpTui\Tui\Model\Widget\BlockSet;
 use PhpTui\Tui\Model\Widget\FloatPosition;
 use PhpTui\Tui\Model\Widget\Line;
 use PhpTui\Tui\Model\Widget\Symbols;
+use PhpTui\Tui\Widget\Canvas\Grid\BrailleGrid;
+use PhpTui\Tui\Widget\Canvas\Grid\CharGrid;
+use PhpTui\Tui\Widget\Canvas\Grid\HalfBlockGrid;
 
 final class CanvasContext
 {
