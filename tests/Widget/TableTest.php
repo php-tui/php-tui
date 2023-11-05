@@ -9,9 +9,8 @@ use PhpTui\Tui\Widget\Table;
 use PhpTui\Tui\Widget\Table\TableCell;
 use PhpTui\Tui\Widget\Table\TableRow;
 use Generator;
-use PHPUnit\Framework\TestCase;
 
-class TableTest extends TestCase
+class TableTest extends WidgetTestCase
 {
     /**
      * @dataProvider provideTableRender
@@ -20,7 +19,7 @@ class TableTest extends TestCase
     public function testTableRender(Area $area, Table $table, array $expected): void
     {
         $buffer = Buffer::empty($area);
-        $table->render($area, $buffer);
+        $this->render($buffer, $table);
         self::assertEquals($expected, $buffer->toLines());
     }
     /**
