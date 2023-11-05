@@ -22,7 +22,7 @@ $display->draw(function (Buffer $buffer): void {
         // most cases
         ->paint(function (CanvasContext $context): void {
 
-            $context->draw(Circle::fromPrimitives(10, 10, 10, AnsiColor::Green));
+            $context->draw(Circle::fromScalars(10, 10, 10, AnsiColor::Green));
         })
         ->render($buffer->area(), $buffer);
 });

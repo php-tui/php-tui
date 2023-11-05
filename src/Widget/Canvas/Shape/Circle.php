@@ -2,6 +2,7 @@
 
 namespace PhpTui\Tui\Widget\Canvas\Shape;
 
+use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Color;
 use PhpTui\Tui\Model\Widget\FloatPosition;
 use PhpTui\Tui\Widget\Canvas\Painter;
@@ -40,8 +41,8 @@ final class Circle implements Shape
         }
     }
 
-    public static function fromPrimitives(float $x, float $y, float $radius, Color $color): self
+    public static function fromScalars(float $x, float $y, float $radius): self
     {
-        return new self(FloatPosition::at($x, $y), $radius, $color);
+        return new self(FloatPosition::at($x, $y), $radius, AnsiColor::Reset);
     }
 }

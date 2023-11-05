@@ -39,7 +39,7 @@ class CircleTest extends TestCase
     public static function provideCircle(): Generator
     {
         yield 'circle' => [
-            Circle::fromPrimitives(5, 2, 5, AnsiColor::Reset),
+            Circle::fromScalars(5, 2, 5, AnsiColor::Reset),
             [
             '     ⢀⣠⢤⣀ ',
             '    ⢰⠋  ⠈⣇',

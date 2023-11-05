@@ -31,7 +31,7 @@ class CanvasTest extends TestCase
         $buffer = Buffer::filled($area, Cell::fromChar('x'));
 
         $canvas = Canvas::fromIntBounds(0, 10, 0, 10);
-        $canvas->draw(Circle::fromPrimitives(5, 5, 5, AnsiColor::Green));
+        $canvas->draw(Circle::fromScalars(5, 5, 5, AnsiColor::Green));
         $canvas->render($area, $buffer);
         $expected = [
             'x⢀⡴⠋⠉⠉⠳⣄xx',
@@ -59,8 +59,8 @@ class CanvasTest extends TestCase
 
         $canvas = Canvas::fromIntBounds(0, 5, 0, 5);
         $canvas->draw(
-            Circle::fromPrimitives(1, 1, 1, AnsiColor::Green),
-            Circle::fromPrimitives(4, 4, 1, AnsiColor::Green),
+            Circle::fromScalars(1, 1, 1, AnsiColor::Green),
+            Circle::fromScalars(4, 4, 1, AnsiColor::Green),
         );
         $canvas->render($area, $buffer);
         $expected = [
