@@ -13,7 +13,7 @@ class BdfBoundingBox
         return new self(new BdfSize(0, 0), new BdfCoord(0,0));
     }
 
-    public static function fromPrimitives(int $width, int $height, int $x, int $y): self
+    public static function fromScalars(int $width, int $height, int $x, int $y): self
     {
         return new self(new BdfSize($width, $height), new BdfCoord($x, $y));
     }
