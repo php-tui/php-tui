@@ -12,7 +12,7 @@ class LayoutTest extends TestCase
 {
     public function testVerticalSplitByHeight(): void
     {
-        $target = Area::fromPrimitives(2, 2, 10, 10);
+        $target = Area::fromScalars(2, 2, 10, 10);
         $chunks = Layout::default()
             ->direction(Direction::Vertical)
             ->constraints([
@@ -35,7 +35,7 @@ class LayoutTest extends TestCase
 
     public function testSplitEquallyInUnderspecifiedCase(): void
     {
-        $target = Area::fromPrimitives(100, 100, 10, 10);
+        $target = Area::fromScalars(100, 100, 10, 10);
         $layout = Layout::default()
             ->direction(Direction::Horizontal)
             ->constraints([

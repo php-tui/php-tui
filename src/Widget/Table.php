@@ -83,7 +83,7 @@ final class Table implements Widget
         if ($header !== null) {
             $maxHeaderHight = min($tableArea->height, $header->totalHeight());
             $buffer->setStyle(
-                Area::fromPrimitives(
+                Area::fromScalars(
                     $tableArea->left(),
                     $tableArea->top(),
                     $tableArea->width,
@@ -100,7 +100,7 @@ final class Table implements Widget
                 $this->renderCell(
                     $buffer,
                     $cell,
-                    Area::fromPrimitives(
+                    Area::fromScalars(
                         $innerOffset + $width[0],
                         $tableArea->top(),
                         $width[1],
@@ -121,7 +121,7 @@ final class Table implements Widget
             [$rowY, $innerOffset] = [$tableArea->top() + $currentHeight, $tableArea->left()];
 
             $currentHeight += $tableRow->totalHeight();
-            $tableRowArea = Area::fromPrimitives($innerOffset, $rowY, $tableArea->width, $tableRow->height);
+            $tableRowArea = Area::fromScalars($innerOffset, $rowY, $tableArea->width, $tableRow->height);
             $buffer->setStyle($tableRowArea, $tableRow->style);
             $isSelected = $this->state->selected === $i + $start;
             if ($selectionWidth > 0 && $isSelected) {
@@ -143,7 +143,7 @@ final class Table implements Widget
                 $this->renderCell(
                     $buffer,
                     $cell,
-                    Area::fromPrimitives(
+                    Area::fromScalars(
                         $innerOffset + $width[0],
                         $rowY,
                         $width[1],

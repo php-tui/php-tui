@@ -101,7 +101,7 @@ class CanvasTest extends TestCase
                 $context->draw($horizontalLine);
             }
         )->xBounds(AxisBounds::new(0.0, 10.0))->yBounds(AxisBounds::new(0.0, 10.0))->marker($marker);
-        $area = Area::fromPrimitives(0, 0, 5, 5);
+        $area = Area::fromScalars(0, 0, 5, 5);
         $buffer = Buffer::filled($area, Cell::fromChar('x'));
         $canvas->render($area, $buffer);
         self::assertEquals($expected, $buffer->toLines());
@@ -170,7 +170,7 @@ class CanvasTest extends TestCase
                 $context->print(0, 0, DTLLine::fromString('Hello'));
             }
         )->xBounds(AxisBounds::new(0.0, 10.0))->yBounds(AxisBounds::new(0.0, 5));
-        $area = Area::fromPrimitives(0, 0, 5, 5);
+        $area = Area::fromScalars(0, 0, 5, 5);
         $buffer = Buffer::empty($area);
         $canvas->render($area, $buffer);
         self::assertEquals([

@@ -35,8 +35,8 @@ class BlockTest extends TestCase
             Block::default(),
             function (Block $block): void {
                 self::assertEquals(
-                    Area::fromPrimitives(0, 0, 0, 0),
-                    $block->inner(Area::fromPrimitives(0, 0, 0, 0))
+                    Area::fromScalars(0, 0, 0, 0),
+                    $block->inner(Area::fromScalars(0, 0, 0, 0))
                 );
             }
         ];
@@ -44,8 +44,8 @@ class BlockTest extends TestCase
             Block::default(),
             function (Block $block): void {
                 self::assertEquals(
-                    Area::fromPrimitives(0, 0, 1, 1),
-                    $block->inner(Area::fromPrimitives(0, 0, 1, 1))
+                    Area::fromScalars(0, 0, 1, 1),
+                    $block->inner(Area::fromScalars(0, 0, 1, 1))
                 );
             }
         ];
@@ -53,8 +53,8 @@ class BlockTest extends TestCase
             Block::default()->borders(Borders::LEFT),
             function (Block $block): void {
                 self::assertEquals(
-                    Area::fromPrimitives(0, 0, 0, 1),
-                    $block->inner(Area::fromPrimitives(0, 0, 0, 1))
+                    Area::fromScalars(0, 0, 0, 1),
+                    $block->inner(Area::fromScalars(0, 0, 0, 1))
                 );
             }
         ];
@@ -62,8 +62,8 @@ class BlockTest extends TestCase
             Block::default()->borders(Borders::LEFT),
             function (Block $block): void {
                 self::assertEquals(
-                    Area::fromPrimitives(1, 0, 0, 1),
-                    $block->inner(Area::fromPrimitives(0, 0, 1, 1))
+                    Area::fromScalars(1, 0, 0, 1),
+                    $block->inner(Area::fromScalars(0, 0, 1, 1))
                 );
             }
         ];
@@ -71,8 +71,8 @@ class BlockTest extends TestCase
             Block::default()->borders(Borders::LEFT),
             function (Block $block): void {
                 self::assertEquals(
-                    Area::fromPrimitives(1, 0, 1, 1),
-                    $block->inner(Area::fromPrimitives(0, 0, 2, 1))
+                    Area::fromScalars(1, 0, 1, 1),
+                    $block->inner(Area::fromScalars(0, 0, 2, 1))
                 );
             }
         ];
@@ -80,8 +80,8 @@ class BlockTest extends TestCase
             Block::default()->borders(Borders::TOP),
             function (Block $block): void {
                 self::assertEquals(
-                    Area::fromPrimitives(0, 0, 1, 0),
-                    $block->inner(Area::fromPrimitives(0, 0, 1, 0))
+                    Area::fromScalars(0, 0, 1, 0),
+                    $block->inner(Area::fromScalars(0, 0, 1, 0))
                 );
             }
         ];
@@ -89,8 +89,8 @@ class BlockTest extends TestCase
             Block::default()->borders(Borders::TOP),
             function (Block $block): void {
                 self::assertEquals(
-                    Area::fromPrimitives(0, 1, 1, 0),
-                    $block->inner(Area::fromPrimitives(0, 1, 1, 0))
+                    Area::fromScalars(0, 1, 1, 0),
+                    $block->inner(Area::fromScalars(0, 1, 1, 0))
                 );
             }
         ];
@@ -98,8 +98,8 @@ class BlockTest extends TestCase
             Block::default()->borders(Borders::TOP),
             function (Block $block): void {
                 self::assertEquals(
-                    Area::fromPrimitives(0, 1, 1, 1),
-                    $block->inner(Area::fromPrimitives(0, 0, 1, 2))
+                    Area::fromScalars(0, 1, 1, 1),
+                    $block->inner(Area::fromScalars(0, 0, 1, 2))
                 );
             }
         ];
@@ -107,8 +107,8 @@ class BlockTest extends TestCase
             Block::default()->borders(Borders::RIGHT),
             function (Block $block): void {
                 self::assertEquals(
-                    Area::fromPrimitives(0, 0, 0, 1),
-                    $block->inner(Area::fromPrimitives(0, 0, 0, 1))
+                    Area::fromScalars(0, 0, 0, 1),
+                    $block->inner(Area::fromScalars(0, 0, 0, 1))
                 );
             }
         ];
@@ -116,8 +116,8 @@ class BlockTest extends TestCase
             Block::default()->borders(Borders::RIGHT),
             function (Block $block): void {
                 self::assertEquals(
-                    Area::fromPrimitives(0, 0, 0, 1),
-                    $block->inner(Area::fromPrimitives(0, 0, 1, 1))
+                    Area::fromScalars(0, 0, 0, 1),
+                    $block->inner(Area::fromScalars(0, 0, 1, 1))
                 );
             }
         ];
@@ -125,8 +125,8 @@ class BlockTest extends TestCase
             Block::default()->borders(Borders::RIGHT),
             function (Block $block): void {
                 self::assertEquals(
-                    Area::fromPrimitives(0, 0, 1, 1),
-                    $block->inner(Area::fromPrimitives(0, 0, 2, 1))
+                    Area::fromScalars(0, 0, 1, 1),
+                    $block->inner(Area::fromScalars(0, 0, 2, 1))
                 );
             }
         ];
@@ -134,8 +134,8 @@ class BlockTest extends TestCase
             Block::default()->borders(Borders::BOTTOM),
             function (Block $block): void {
                 self::assertEquals(
-                    Area::fromPrimitives(0, 0, 1, 0),
-                    $block->inner(Area::fromPrimitives(0, 0, 1, 0))
+                    Area::fromScalars(0, 0, 1, 0),
+                    $block->inner(Area::fromScalars(0, 0, 1, 0))
                 );
             }
         ];
@@ -143,8 +143,8 @@ class BlockTest extends TestCase
             Block::default()->borders(Borders::BOTTOM),
             function (Block $block): void {
                 self::assertEquals(
-                    Area::fromPrimitives(0, 0, 1, 0),
-                    $block->inner(Area::fromPrimitives(0, 0, 1, 1))
+                    Area::fromScalars(0, 0, 1, 0),
+                    $block->inner(Area::fromScalars(0, 0, 1, 1))
                 );
             }
         ];
@@ -152,8 +152,8 @@ class BlockTest extends TestCase
             Block::default()->borders(Borders::BOTTOM),
             function (Block $block): void {
                 self::assertEquals(
-                    Area::fromPrimitives(0, 0, 1, 1),
-                    $block->inner(Area::fromPrimitives(0, 0, 1, 2))
+                    Area::fromScalars(0, 0, 1, 1),
+                    $block->inner(Area::fromScalars(0, 0, 1, 2))
                 );
             }
         ];
@@ -161,8 +161,8 @@ class BlockTest extends TestCase
             Block::default()->borders(Borders::ALL),
             function (Block $block): void {
                 self::assertEquals(
-                    Area::fromPrimitives(0, 0, 0, 0),
-                    $block->inner(Area::fromPrimitives(0, 0, 0, 0))
+                    Area::fromScalars(0, 0, 0, 0),
+                    $block->inner(Area::fromScalars(0, 0, 0, 0))
                 );
             }
         ];
@@ -170,8 +170,8 @@ class BlockTest extends TestCase
             Block::default()->borders(Borders::ALL),
             function (Block $block): void {
                 self::assertEquals(
-                    Area::fromPrimitives(1, 1, 0, 0),
-                    $block->inner(Area::fromPrimitives(0, 0, 1, 1))
+                    Area::fromScalars(1, 1, 0, 0),
+                    $block->inner(Area::fromScalars(0, 0, 1, 1))
                 );
             }
         ];
@@ -179,8 +179,8 @@ class BlockTest extends TestCase
             Block::default()->borders(Borders::ALL),
             function (Block $block): void {
                 self::assertEquals(
-                    Area::fromPrimitives(1, 1, 0, 0),
-                    $block->inner(Area::fromPrimitives(0, 0, 2, 2))
+                    Area::fromScalars(1, 1, 0, 0),
+                    $block->inner(Area::fromScalars(0, 0, 2, 2))
                 );
             }
         ];
@@ -188,8 +188,8 @@ class BlockTest extends TestCase
             Block::default()->borders(Borders::ALL),
             function (Block $block): void {
                 self::assertEquals(
-                    Area::fromPrimitives(1, 1, 1, 1),
-                    $block->inner(Area::fromPrimitives(0, 0, 3, 3))
+                    Area::fromScalars(1, 1, 1, 1),
+                    $block->inner(Area::fromScalars(0, 0, 3, 3))
                 );
             }
         ];
@@ -197,8 +197,8 @@ class BlockTest extends TestCase
             Block::default()->titles(Title::fromString('Hello World')),
             function (Block $block): void {
                 self::assertEquals(
-                    Area::fromPrimitives(0, 1, 0, 0),
-                    $block->inner(Area::fromPrimitives(0, 0, 0, 1))
+                    Area::fromScalars(0, 1, 0, 0),
+                    $block->inner(Area::fromScalars(0, 0, 0, 1))
                 );
             }
         ];

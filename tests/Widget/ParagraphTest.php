@@ -27,7 +27,7 @@ class ParagraphTest extends TestCase
             Line::fromString('Hello'),
             Line::fromString('Goodbye'),
         ), $paragraph);
-        $area = Area::fromPrimitives(0, 0, 10, 2);
+        $area = Area::fromScalars(0, 0, 10, 2);
         $buffer = Buffer::empty($area);
         $paragraph->render($buffer->area(), $buffer);
         self::assertEquals([

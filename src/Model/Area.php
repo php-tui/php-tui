@@ -18,7 +18,7 @@ final class Area implements Stringable
         return sprintf('@%s of %sx%s', $this->position->__toString(), $this->width, $this->height);
     }
 
-    public static function fromPrimitives(int $x, int $y, int $width, int $height): self
+    public static function fromScalars(int $x, int $y, int $width, int $height): self
     {
         return new self(new Position($x, $y), $width, $height);
     }
@@ -50,7 +50,7 @@ final class Area implements Stringable
 
     public static function fromDimensions(int $width, int $height): self
     {
-        return self::fromPrimitives(0, 0, $width, $height);
+        return self::fromScalars(0, 0, $width, $height);
     }
 
     public static function empty(): self
@@ -64,7 +64,7 @@ final class Area implements Stringable
             return self::empty();
         }
 
-        return self::fromPrimitives(
+        return self::fromScalars(
             $this->position->x + $margin->horizontal,
             $this->position->y + $margin->vertical,
             $this->width - 2 * $margin->horizontal,

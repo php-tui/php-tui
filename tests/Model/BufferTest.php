@@ -18,13 +18,13 @@ class BufferTest extends TestCase
 {
     public function testEmpty(): void
     {
-        $buffer = Buffer::empty(Area::fromPrimitives(0, 0, 100, 100));
+        $buffer = Buffer::empty(Area::fromScalars(0, 0, 100, 100));
         self::assertCount(10000, $buffer);
     }
 
     public function testFilled(): void
     {
-        $buffer = Buffer::filled(Area::fromPrimitives(0, 0, 10, 10), Cell::fromChar('X'));
+        $buffer = Buffer::filled(Area::fromScalars(0, 0, 10, 10), Cell::fromChar('X'));
         self::assertCount(100, $buffer);
         self::assertEquals(array_fill(0, 100, Cell::fromChar('X')), $buffer->content());
         self::assertNotSame($buffer->get(Position::at(0, 0))->modifier, $buffer->get(Position::at(1, 1))->modifier, 'cells are propertly cloned!');
@@ -51,7 +51,7 @@ class BufferTest extends TestCase
             '1234',
             '1234',
         ]);
-        $buffer->setStyle(Area::fromPrimitives(1, 1, 2, 2), Style::default()->fg(AnsiColor::Red));
+        $buffer->setStyle(Area::fromScalars(1, 1, 2, 2), Style::default()->fg(AnsiColor::Red));
 
         self::assertEquals(AnsiColor::Reset, $buffer->get(Position::at(0, 0))->fg);
         self::assertEquals(AnsiColor::Red, $buffer->get(Position::at(1, 1))->fg);
