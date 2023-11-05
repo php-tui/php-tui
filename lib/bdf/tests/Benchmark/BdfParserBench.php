@@ -11,16 +11,21 @@ use PhpBench\Attributes\Revs;
 #[Revs(25)]
 final class BdfParserBench
 {
-    public function benchParseRealFont(): void
+    private string $contents;
+
+    public function __construct()
     {
         $contents = file_get_contents(__DIR__ . '/../../fonts/6x10.bdf');
 
         if (false === $contents) {
-            throw new RuntimeException(
-                'Could not read file'
-            );
+            throw new RuntimeException('Could not read file');
         }
 
-        (new BdfParser())->parse($contents);
+        $this->contents = $contents;
+    }
+
+    public function benchParseRealFont(): void
+    {
+        (new BdfParser())->parse($this->contents);
     }
 }
