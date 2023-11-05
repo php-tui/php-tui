@@ -8,13 +8,12 @@ final class BdfGlyph
      * @param array<int,int> $bitmap
      */
     public function __construct(
-        public array $bitmap,
-        public BdfBoundingBox $boundingBox,
-        public ?int $encoding,
-        public string $name,
-        public BdfCoord $deviceWidth,
-        public ?BdfCoord $scalableWidth
+        public readonly array $bitmap,
+        public readonly BdfBoundingBox $boundingBox,
+        public readonly ?int $encoding,
+        public readonly string $name,
+        public readonly BdfCoord $deviceWidth,
+        public readonly ?BdfCoord $scalableWidth
     ) {
     }
-
 }

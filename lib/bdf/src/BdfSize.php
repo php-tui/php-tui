@@ -2,10 +2,11 @@
 
 namespace PhpTui\BDF;
 
-class BdfSize
+final class BdfSize
 {
-    public function __construct(public readonly int $width, public readonly int $height)
-    {
+    public function __construct(
+        public readonly int $width,
+        public readonly int $height
+    ) {
     }
-
 }

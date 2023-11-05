@@ -11,9 +11,9 @@ final class BdfResult
      * @param TValue $value
      */
     private function __construct(
-        public bool $ok,
-        public mixed $value,
-        public BdfTokenStream $rest
+        public readonly bool $ok,
+        public readonly mixed $value,
+        public readonly BdfTokenStream $rest
     ) {
     }
 
