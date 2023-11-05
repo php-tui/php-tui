@@ -2,17 +2,10 @@
 
 namespace PhpTui\Tui\Widget;
 
-use PhpTui\Tui\Model\Area;
-use PhpTui\Tui\Model\Buffer;
-use PhpTui\Tui\Model\LineComposer;
-use PhpTui\Tui\Model\LineComposer\LineTruncator;
-use PhpTui\Tui\Model\Position;
 use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\Widget\HorizontalAlignment;
 use PhpTui\Tui\Model\Widget\Line;
-use PhpTui\Tui\Model\Widget\Span;
-use PhpTui\Tui\Model\Widget\StyledGrapheme;
 use PhpTui\Tui\Model\Widget\Text;
 use PhpTui\Tui\Widget\Paragraph\Wrap;
 

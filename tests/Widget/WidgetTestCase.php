@@ -8,6 +8,7 @@ use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\WidgetRenderer\AggregateWidgetRenderer;
 use PhpTui\Tui\Model\WidgetRenderer\NullWidgetRenderer;
 use PhpTui\Tui\Widget\BlockRenderer;
+use PhpTui\Tui\Widget\CanvasRenderer;
 use PhpTui\Tui\Widget\ParagraphRenderer;
 
 class WidgetTestCase extends TestCase
@@ -17,6 +18,7 @@ class WidgetTestCase extends TestCase
         (new AggregateWidgetRenderer([
             new BlockRenderer(),
             new ParagraphRenderer(),
+            new CanvasRenderer(),
         ]))->render(
             new NullWidgetRenderer(),
             $widget,
