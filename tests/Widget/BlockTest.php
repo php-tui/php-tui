@@ -11,12 +11,13 @@ use PhpTui\Tui\Model\Widget\Text;
 use PhpTui\Tui\Model\Widget\Title;
 use PhpTui\Tui\Widget\Block;
 use PhpTui\Tui\Model\Area;
+use PhpTui\Tui\Widget\BlockRenderer;
 use PhpTui\Tui\Widget\Block\Padding;
 use PhpTui\Tui\Widget\Paragraph;
 use Generator;
 use PHPUnit\Framework\TestCase;
 
-class BlockTest extends TestCase
+class BlockTest extends WidgetTestCase
 {
     /**
      * @dataProvider provideBlock
@@ -214,9 +215,10 @@ class BlockTest extends TestCase
         string $expected
     ): void {
         $buffer = Buffer::empty($area);
-        Block::default()
-            ->titles(Title::fromString($text)->horizontalAlignmnet($alignment))
-            ->render($buffer->area(), $buffer);
+        $this->render(
+            $buffer,
+            Block::default()->titles(Title::fromString($text)->horizontalAlignmnet($alignment))
+        );
         self::assertEquals($expected, $buffer->toString());
 
     }
@@ -249,7 +251,7 @@ class BlockTest extends TestCase
     public function testRendersBorders(): void
     {
         $buffer = Buffer::empty(Area::fromDimensions(5, 5));
-        Block::default()->borders(Borders::ALL)->render($buffer->area(), $buffer);
+        $this->render($buffer, Block::default()->borders(Borders::ALL));
         self::assertEquals([
             '┌───┐',
             '│   │',
@@ -262,7 +264,7 @@ class BlockTest extends TestCase
     public function testRendersBordersRounded(): void
     {
         $buffer = Buffer::empty(Area::fromDimensions(5, 5));
-        Block::default()->borderType(BorderType::Rounded)->borders(Borders::ALL)->render($buffer->area(), $buffer);
+        $this->render($buffer, Block::default()->borderType(BorderType::Rounded)->borders(Borders::ALL));
         self::assertEquals([
             '╭───╮',
             '│   │',
@@ -275,11 +277,11 @@ class BlockTest extends TestCase
     public function testRendersWithTitle(): void
     {
         $buffer = Buffer::empty(Area::fromDimensions(8, 5));
-        Block::default()
+        $this->render($buffer, Block::default()
             ->borderType(BorderType::Rounded)
             ->borders(Borders::ALL)
             ->titles(Title::fromString('G\'day')->horizontalAlignmnet(HorizontalAlignment::Left))
-            ->render($buffer->area(), $buffer);
+        );
         self::assertEquals([
             "╭G'day─╮",
             '│      │',
@@ -297,8 +299,8 @@ class BlockTest extends TestCase
             ->borders(Borders::ALL)
             ->padding(Padding::fromScalars(1, 1, 1, 1));
 
-        Paragraph::fromText(Text::fromString('Foob'))->render($block->inner($buffer->area()), $buffer);
-        $block->render($buffer->area(), $buffer);
+        $this->render($buffer, Paragraph::fromText(Text::fromString('Foob')));
+        $this->render($buffer, $block);
         self::assertEquals([
             '╭──────╮',
             '│      │',
