@@ -6,6 +6,7 @@ use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Buffer;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\WidgetRenderer;
+use PhpTui\Tui\Model\WidgetSet;
 
 /**
  * Will iterate over all widget renderers to render the widget Each renderer
@@ -28,5 +29,17 @@ class AggregateWidgetRenderer implements WidgetRenderer
         foreach ($this->renderers as $renderer) {
             $renderer->render($this, $widget, $area, $buffer);
         }
+    }
+
+    public static function fromWidgetSets(WidgetSet ...$widgetSets): self
+    {
+        $renderers = [];
+        foreach ($widgetSets as $widgetSet) {
+            foreach ($widgetSet->renderers() as $renderer) {
+                $renderers[] = $renderer;
+            }
+        }
+
+        return new self($renderers);
     }
 }

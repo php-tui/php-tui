@@ -12,6 +12,7 @@ use PhpTui\Tui\Model\WidgetRenderer\NullWidgetRenderer;
 use PhpTui\Tui\Widget\BlockRenderer;
 use PhpTui\Tui\Widget\CanvasRenderer;
 use PhpTui\Tui\Widget\ChartRenderer;
+use PhpTui\Tui\Widget\DefaultWidgetSet;
 use PhpTui\Tui\Widget\GridRenderer;
 use PhpTui\Tui\Widget\ItemListRenderer;
 use PhpTui\Tui\Widget\ParagraphRenderer;
@@ -44,15 +45,8 @@ class WidgetTestCase extends TestCase
     }
     private function renderer(): WidgetRenderer
     {
-        return new AggregateWidgetRenderer([
-            new BlockRenderer(),
-            new ParagraphRenderer(),
-            new CanvasRenderer(),
-            new ChartRenderer(),
-            new GridRenderer(),
-            new ItemListRenderer(),
-            new RawWidgetRenderer(),
-            new TableRenderer(),
-        ]);
+        return AggregateWidgetRenderer::fromWidgetSets(
+            new DefaultWidgetSet()
+        );
     }
 }

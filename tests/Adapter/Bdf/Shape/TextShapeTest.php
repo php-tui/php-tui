@@ -8,8 +8,10 @@ use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Buffer;
 use PhpTui\Tui\Model\Marker;
+use PhpTui\Tui\Model\WidgetRenderer\NullWidgetRenderer;
 use PhpTui\Tui\Model\Widget\FloatPosition;
 use PhpTui\Tui\Widget\Canvas;
+use PhpTui\Tui\Widget\CanvasRenderer;
 use PhpTui\Tui\Widget\Canvas\CanvasContext;
 use Generator;
 use PHPUnit\Framework\TestCase;
@@ -29,7 +31,7 @@ class TextShapeTest extends TestCase
             });
         $area = Area::fromDimensions(65, 6);
         $buffer = Buffer::empty($area);
-        $canvas->render($area, $buffer);
+        (new CanvasRenderer())->render(new NullWidgetRenderer(), $canvas, $buffer->area(), $buffer);
         self::assertEquals($expected, $buffer->toLines());
     }
     /**
