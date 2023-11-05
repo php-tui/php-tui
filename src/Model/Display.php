@@ -5,6 +5,7 @@ namespace PhpTui\Tui\Model;
 use Closure;
 use PhpTui\Tui\Model\Viewport\Fullscreen;
 use PhpTui\Tui\Model\Viewport\Inline;
+use PhpTui\Tui\Model\WidgetRenderer\AggregateWidgetRenderer;
 
 final class Display
 {
@@ -21,6 +22,7 @@ final class Display
         private Area $viewportArea,
         private Area $lastKnownSize,
         private Position $lastKnownCursorPosition,
+        private WidgetRenderer $widgetRenderer,
     ) {
     }
 
@@ -36,6 +38,7 @@ final class Display
             $size,
             $size,
             new Position(0, 0),
+            new AggregateWidgetRenderer([]),
         );
     }
 
@@ -83,7 +86,7 @@ final class Display
     {
         $buffer = $this->buffer();
         $this->draw(function () use ($widget, $buffer): void {
-            $widget->render($buffer->area(), $buffer);
+            $this->widgetRenderer->render($widget, $buffer->area(), $buffer);
         });
     }
 
