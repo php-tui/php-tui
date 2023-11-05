@@ -15,6 +15,8 @@ use PhpTui\Tui\Widget\ChartRenderer;
 use PhpTui\Tui\Widget\GridRenderer;
 use PhpTui\Tui\Widget\ItemListRenderer;
 use PhpTui\Tui\Widget\ParagraphRenderer;
+use PhpTui\Tui\Widget\RawWidget;
+use PhpTui\Tui\Widget\RawWidgetRenderer;
 
 class WidgetTestCase extends TestCase
 {
@@ -48,6 +50,7 @@ class WidgetTestCase extends TestCase
             new ChartRenderer(),
             new GridRenderer(),
             new ItemListRenderer(),
+            new RawWidgetRenderer(),
         ]);
     }
 }

@@ -14,7 +14,7 @@ use PhpTui\Tui\Widget\RawWidget;
 use Generator;
 use PHPUnit\Framework\TestCase;
 
-class RawWidgetTest extends TestCase
+class RawWidgetTest extends WidgetTestCase
 {
     /**
      * @dataProvider provideRawWidgetRender
@@ -23,7 +23,7 @@ class RawWidgetTest extends TestCase
     public function testRawWidgetRender(Area $area, Widget $widget, array $expected): void
     {
         $buffer = Buffer::empty($area);
-        $widget->render($area, $buffer);
+        $this->render($buffer, $widget);
         self::assertEquals($expected, $buffer->toLines());
     }
     /**

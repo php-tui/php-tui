@@ -17,7 +17,7 @@ final class RawWidget implements Widget
          * The callback for writing to the buffer.
          * @var Closure(Buffer $buffer):void
          */
-        private Closure $widget
+        public Closure $widget
     ) {
     }
 
@@ -27,12 +27,5 @@ final class RawWidget implements Widget
     public static function new(Closure $closure): self
     {
         return new self($closure);
-    }
-
-    public function render(Area $area, Buffer $buffer): void
-    {
-        $subBuffer = Buffer::empty(Area::fromDimensions($area->width, $area->height));
-        ($this->widget)($subBuffer);
-        $buffer->putBuffer($area->position, $subBuffer);
     }
 }
