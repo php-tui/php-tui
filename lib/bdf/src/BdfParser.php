@@ -25,7 +25,6 @@ final class BdfParser
     {
         $version = null;
         $name = null;
-        $size = null;
         $pointSize = null;
         $size = null;
         $boundingBox = null;
@@ -137,12 +136,11 @@ final class BdfParser
         if (is_numeric($value)) {
             return (int)$value;
         }
-        if (substr($value, 0, 1) === '"' && substr($value, -1) === '"') {
+        if (str_starts_with($value, '"') && str_ends_with($value, '"')) {
             return substr($value, 1, -1);
         }
 
         return $value;
-
     }
 
     /**
