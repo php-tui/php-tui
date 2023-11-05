@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpTui\Tui\Tests\Benchmark\Macro;
+namespace PhpTui\Tui\Tests\Benchmark\Model;
 
 use PhpBench\Attributes\Iterations;
 use PhpBench\Attributes\Revs;
@@ -36,7 +36,7 @@ use PhpTui\Tui\Widget\Table;
 use PhpTui\Tui\Widget\Table\TableCell;
 use PhpTui\Tui\Widget\Table\TableRow;
 
-final class EverythingBench
+final class DisplayBench
 {
     private Display $display;
 
