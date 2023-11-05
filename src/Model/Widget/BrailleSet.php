@@ -4,6 +4,8 @@ namespace PhpTui\Tui\Model\Widget;
 
 final class BrailleSet
 {
+    // Braille patterns range from U+2800 to U+28FF
+    public const RANGE = [0x2800, 0x28FF];
     public const BLANK = 0x2800;
     public const DOTS = [
         [0x0001, 0x0008],
