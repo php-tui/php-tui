@@ -28,4 +28,9 @@ final class ListItem
     {
         return $this->content->height();
     }
+
+    public static function fromString(string $string): self
+    {
+        return new self(Text::fromString($string), Style::default());
+    }
 }

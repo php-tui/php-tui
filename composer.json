@@ -31,17 +31,20 @@
         "phpunit/phpunit": "^10.4",
         "symfony/var-dumper": "^6.3",
         "roave/better-reflection": "^6.15",
-        "phpstan/phpdoc-parser": "^1.24"
+        "phpstan/phpdoc-parser": "^1.24",
+        "phpbench/phpbench": "^1.2"
     },
     "scripts": {
         "phpstan": "./vendor/bin/phpstan --memory-limit=1G",
         "php-cs-fixer": "./vendor/bin/php-cs-fixer fix",
         "phpunit": "./vendor/bin/phpunit",
         "docs": "php ./scripts/docgen",
+        "phpbench": "php ./vendor/bin/phpbench run --revs=1 --iterations=1",
         "integrate": [
             "@php-cs-fixer",
             "@phpstan",
             "@phpunit",
+            "@phpbench",
             "@docs"
         ]
     }

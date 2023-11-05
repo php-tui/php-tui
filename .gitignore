@@ -1,3 +1,4 @@
+/.phpbench
 /vendor
 /composer.lock
 /.phpunit.cache
