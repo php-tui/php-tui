@@ -18,7 +18,7 @@ final class CanvasContext
     private function __construct(
         public AxisBounds $xBounds,
         public AxisBounds $yBounds,
-        public Grid $grid,
+        public CanvasGrid $grid,
         public bool $dirty,
         public Layers $layers,
         public Labels $labels

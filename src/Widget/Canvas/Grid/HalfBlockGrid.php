@@ -11,7 +11,7 @@ use PhpTui\Tui\Widget\Canvas\FgBgColor;
 use PhpTui\Tui\Widget\Canvas\Layer;
 use PhpTui\Tui\Widget\Canvas\Resolution;
 
-class HalfBlockGrid extends Grid
+class HalfBlockGrid extends CanvasGrid
 {
     public function __construct(
         private Resolution $resolution,

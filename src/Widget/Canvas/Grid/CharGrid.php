@@ -5,12 +5,12 @@ namespace PhpTui\Tui\Widget\Canvas\Grid;
 use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Color;
 use PhpTui\Tui\Model\Position;
+use PhpTui\Tui\Widget\Canvas\CanvasGrid;
 use PhpTui\Tui\Widget\Canvas\FgBgColor;
 use PhpTui\Tui\Widget\Canvas\Layer;
 use PhpTui\Tui\Widget\Canvas\Resolution;
-use PhpTui\Tui\Widget\Canvas\CanvasGrid;
 
-final class CharGrid extends Grid
+final class CharGrid extends CanvasGrid
 {
     /**
      * @param string[] $cells

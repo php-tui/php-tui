@@ -5,7 +5,7 @@ namespace PhpTui\Tui\Widget\Canvas;
 use PhpTui\Tui\Model\Color;
 use PhpTui\Tui\Model\Position;
 
-abstract class Grid
+abstract class CanvasGrid
 {
     abstract public function resolution(): Resolution;
 
