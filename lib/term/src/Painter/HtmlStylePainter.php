@@ -97,7 +97,7 @@ class HtmlStylePainter implements Painter
                 continue;
             }
             if ($action instanceof Reset) {
-                $this->fgColor = null;
+                $this->fgColor = new SetRgbForegroundColor(0, 0, 0);
                 $this->bgColor = null;
                 continue;
             }
