@@ -51,7 +51,8 @@ class SttyRawMode implements RawMode
         $result = $this->runner->run(['stty', $this->originalSettings]);
         if ($result->exitCode !== 0) {
             throw new RuntimeException(sprintf(
-                'Could not restore from raw mode: %s', $result->stderr
+                'Could not restore from raw mode: %s',
+                $result->stderr
             ));
         }
     }

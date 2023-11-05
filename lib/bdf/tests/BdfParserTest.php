@@ -31,8 +31,8 @@ class BdfParserTest extends TestCase
             pointSize: 10,
             resolution: new BdfSize(75, 75),
             boundingBox: new BdfBoundingBox(
-                size: new BdfSize(6,10),
-                offset: new BdfCoord(0,-2),
+                size: new BdfSize(6, 10),
+                offset: new BdfCoord(0, -2),
             ),
         ), $font->metadata);
         self::assertCount(1597, $font->glyphs());
@@ -41,15 +41,15 @@ class BdfParserTest extends TestCase
     public function testParseMinimalExample(): void
     {
         $font = (new BdfParser())->parse($this->font());
-        
+
         self::assertEquals(new BdfMetadata(
             version: 2.1,
             name: '"test font"',
             pointSize: 16,
             resolution: new BdfSize(75, 75),
             boundingBox: new BdfBoundingBox(
-                size: new BdfSize(16,24),
-                offset: new BdfCoord(0,0),
+                size: new BdfSize(16, 24),
+                offset: new BdfCoord(0, 0),
             ),
         ), $font->metadata);
 
@@ -58,7 +58,8 @@ class BdfParserTest extends TestCase
             $font->properties->get(BdfProperty::COPYRIGHT)
         );
 
-        self::assertEquals([
+        self::assertEquals(
+            [
                 new BdfGlyph(
                     bitmap: [ 0x1f, 0x01 ],
                     boundingBox: BdfBoundingBox::fromScalars(8, 8, 0, 0),

@@ -6,7 +6,6 @@ use Generator;
 use PHPUnit\Framework\TestCase;
 use PhpTui\Term\Action;
 use PhpTui\Term\Actions;
-use PhpTui\Term\Colors;
 use PhpTui\Term\AnsiParser;
 
 class AnsiParserTest extends TestCase
@@ -105,10 +104,9 @@ class AnsiParserTest extends TestCase
             [
                 Actions::reset(),
                 Actions::printString('Hello World'),
-                Actions::moveCursor(2,3),
+                Actions::moveCursor(2, 3),
                 Actions::printString('Good'),
             ],
         ];
     }
 }
-

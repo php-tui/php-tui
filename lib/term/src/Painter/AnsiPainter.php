@@ -19,9 +19,7 @@ use PhpTui\Term\Colors;
 use PhpTui\Term\Action;
 use PhpTui\Term\Attribute;
 use PhpTui\Term\Writer;
-use PhpTui\Term\Writer\BufferWriter;
 use RuntimeException;
-use function PHPUnit\Framework\throwException;
 
 final class AnsiPainter implements Painter
 {
@@ -73,7 +71,8 @@ final class AnsiPainter implements Painter
                 sprintf('%dm', $this->modifierOffIndex($action->modifier)),
 
             default => throw new RuntimeException(sprintf(
-                'Do not know how to handle action: %s', $action::class
+                'Do not know how to handle action: %s',
+                $action::class
             ))
         }));
     }

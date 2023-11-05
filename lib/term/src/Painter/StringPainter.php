@@ -14,6 +14,7 @@ class StringPainter implements Painter
     private array $grid = [];
 
     private int $cursorX = 0;
+
     private int $cursorY = 0;
 
     public function paint(array $actions): void

@@ -6,8 +6,8 @@ use PhpCsFixer\Finder;
 $finder = Finder::create()
     ->in('example')
     ->in('src')
-    ->in('tests')
-;
+    ->in('lib')
+    ->in('tests');
 
 return (new Config())
     ->setRiskyAllowed(true)
@@ -26,7 +26,6 @@ return (new Config())
                 'trait_import' => 'only_if_meta',
             ],
         ],
-        'ordered_class_elements' => true,
         'no_empty_phpdoc' => true,
         'phpdoc_trim' => true,
         'array_syntax' => ['syntax' => 'short'],
@@ -39,6 +38,4 @@ return (new Config())
         'no_trailing_whitespace' => true,
         'no_whitespace_in_blank_line' => true,
     ])
-    ->setFinder($finder)
-;
-
+    ->setFinder($finder);

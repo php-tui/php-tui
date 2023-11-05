@@ -15,14 +15,6 @@ class CodedKeyEvent implements KeyEvent
     {
     }
 
-    /**
-     * @param int-mask-of<KeyModifiers::*> $modifiers
-     */
-    public static function new(KeyCode $keyCode, int $modifiers = KeyModifiers::NONE, KeyEventKind $kind = KeyEventKind::Press): self
-    {
-        return new self($keyCode, $modifiers, $kind);
-    }
-
     public function __toString(): string
     {
         return sprintf(
@@ -31,5 +23,13 @@ class CodedKeyEvent implements KeyEvent
             KeyModifiers::toString($this->modifiers),
             $this->kind->name,
         );
+    }
+
+    /**
+     * @param int-mask-of<KeyModifiers::*> $modifiers
+     */
+    public static function new(KeyCode $keyCode, int $modifiers = KeyModifiers::NONE, KeyEventKind $kind = KeyEventKind::Press): self
+    {
+        return new self($keyCode, $modifiers, $kind);
     }
 }

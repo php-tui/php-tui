@@ -18,12 +18,12 @@ class HtmlStylePainterTest extends TestCase
         ]);
         self::assertEquals(
             <<<'EOT'
-            <div style="font-family:monospace;color:black;display:table-cell;line-height:1em;font-size:1em">H</div><div style="font-family:monospace;color:black;display:table-cell;line-height:1em;font-size:1em">e</div><div style="clear: both;"></div>
-            <div style="font-family:monospace;color:black;display:table-cell;line-height:1em;font-size:1em">l</div><div style="font-family:monospace;color:black;display:table-cell;line-height:1em;font-size:1em">l</div><div style="clear: both;"></div>
-            <div style="font-family:monospace;color:black;display:table-cell;line-height:1em;font-size:1em">&nbsp;</div><div style="font-family:monospace;color:black;display:table-cell;line-height:1em;font-size:1em">&nbsp;</div><div style="clear: both;"></div>
-            <div style="font-family:monospace;color:black;display:table-cell;line-height:1em;font-size:1em">W</div><div style="font-family:monospace;color:black;display:table-cell;line-height:1em;font-size:1em">o</div><div style="clear: both;"></div>
-            <div style="font-family:monospace;color:black;display:table-cell;line-height:1em;font-size:1em">r</div><div style="font-family:monospace;color:black;display:table-cell;line-height:1em;font-size:1em">l</div><div style="clear: both;overflow:hidden"></div>
-            EOT,
+                <div style="font-family:monospace;color:black;display:table-cell;line-height:1em;font-size:1em">H</div><div style="font-family:monospace;color:black;display:table-cell;line-height:1em;font-size:1em">e</div><div style="clear: both;"></div>
+                <div style="font-family:monospace;color:black;display:table-cell;line-height:1em;font-size:1em">l</div><div style="font-family:monospace;color:black;display:table-cell;line-height:1em;font-size:1em">l</div><div style="clear: both;"></div>
+                <div style="font-family:monospace;color:black;display:table-cell;line-height:1em;font-size:1em">&nbsp;</div><div style="font-family:monospace;color:black;display:table-cell;line-height:1em;font-size:1em">&nbsp;</div><div style="clear: both;"></div>
+                <div style="font-family:monospace;color:black;display:table-cell;line-height:1em;font-size:1em">W</div><div style="font-family:monospace;color:black;display:table-cell;line-height:1em;font-size:1em">o</div><div style="clear: both;"></div>
+                <div style="font-family:monospace;color:black;display:table-cell;line-height:1em;font-size:1em">r</div><div style="font-family:monospace;color:black;display:table-cell;line-height:1em;font-size:1em">l</div><div style="clear: both;overflow:hidden"></div>
+                EOT,
             $painter->toString()
         );
     }

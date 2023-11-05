@@ -3,7 +3,6 @@
 namespace PhpTui\Term\Reader;
 
 use PhpTui\Term\Reader;
-use RuntimeException;
 
 final class StreamReader implements Reader
 {

@@ -5,7 +5,6 @@ namespace PhpTui\Term\Tests\RawMode;
 use PHPUnit\Framework\TestCase;
 use PhpTui\Term\ProcessResult;
 use PhpTui\Term\ProcessRunner\ClosureRunner;
-use PhpTui\Term\RawMode;
 use PhpTui\Term\RawMode\SttyRawMode;
 use RuntimeException;
 

@@ -33,4 +33,3 @@ final class ClosureInformationProvider implements InformationProvider
         return new self($closure);
     }
 }
-

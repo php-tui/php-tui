@@ -14,8 +14,7 @@ final class BdfResult
         public bool $ok,
         public mixed $value,
         public BdfTokenStream $rest
-    )
-    {
+    ) {
     }
 
     /**

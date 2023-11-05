@@ -15,7 +15,6 @@ use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Widget\Canvas\Shape;
 use Roave\BetterReflection\BetterReflection;
 use Roave\BetterReflection\Reflection\ReflectionClass;
-use Roave\BetterReflection\Reflection\ReflectionParameter;
 use Roave\BetterReflection\Reflection\ReflectionProperty;
 use Roave\BetterReflection\Reflector\DefaultReflector;
 use Roave\BetterReflection\SourceLocator\SourceStubber\ReflectionSourceStubber;
@@ -43,6 +42,25 @@ final class Docgen
     {
         $this->generateWidgets();
         $this->generateShapes();
+    }
+
+    public static function new(string $cwd, string $docsDir): self
+    {
+        $astLocator = (new BetterReflection())->astLocator();
+        $reflector  = new DefaultReflector(new AggregateSourceLocator([
+            (new MakeLocatorForComposerJson)($cwd, $astLocator),
+            new PhpInternalSourceLocator($astLocator, new ReflectionSourceStubber())
+        ]));
+
+        return new self(
+            $docsDir,
+            $reflector->reflectAllClasses(),
+            new Lexer(),
+            (function () {
+                $constExpr = new ConstExprParser();
+                return new PhpDocParser(new TypeParser($constExpr), $constExpr);
+            })(),
+        );
     }
     private function generateShapes(): void
     {
@@ -119,25 +137,6 @@ final class Docgen
             )));
         }
     }
-
-    public static function new(string $cwd, string $docsDir): self
-    {
-        $astLocator = (new BetterReflection())->astLocator();
-        $reflector  = new DefaultReflector(new AggregateSourceLocator([
-            (new MakeLocatorForComposerJson)($cwd, $astLocator),
-            new PhpInternalSourceLocator($astLocator, new ReflectionSourceStubber())
-        ]));
-
-        return new self(
-            $docsDir,
-            $reflector->reflectAllClasses(),
-            new Lexer(),
-            (function () {
-                $constExpr = new ConstExprParser();
-                return new PhpDocParser(new TypeParser($constExpr), $constExpr);
-            })(),
-        );
-    }
     /**
      * @return Generator<ReflectionClass>
      */
@@ -170,7 +169,7 @@ final class Docgen
                 $text[] = $child->text;
             }
         }
-        return str_replace("\n", "", implode(" ", $text));
+        return str_replace("\n", '', implode(' ', $text));
     }
 
     private function renderShape(WidgetDoc $shapeDoc): string

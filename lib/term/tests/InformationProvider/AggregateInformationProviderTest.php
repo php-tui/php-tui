@@ -34,5 +34,6 @@ class AggregateInformationProviderTest extends TestCase
     }
 }
 
-class TestInfo implements TerminalInformation {
+class TestInfo implements TerminalInformation
+{
 }
