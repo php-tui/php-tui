@@ -2,7 +2,6 @@
 <?php
 
 use PhpTui\Tui\Adapter\PhpTerm\PhpTermBackend;
-use PhpTui\Tui\Model\Buffer;
 use PhpTui\Tui\Model\Constraint;
 use PhpTui\Tui\Model\Display;
 use PhpTui\Tui\Widget\Table;
@@ -12,7 +11,7 @@ use PhpTui\Tui\Widget\Table\TableRow;
 require 'vendor/autoload.php';
 
 $display = Display::fullscreen(PhpTermBackend::new());
-$display->draw(function (Buffer $buffer): void {
+$display->drawWidget(
     Table::default()
         ->widths(
             Constraint::percentage(25),
@@ -42,5 +41,5 @@ $display->draw(function (Buffer $buffer): void {
                 TableCell::fromString('519'),
                 TableCell::fromString('✅'),
             ]),
-        )->render($buffer->area(), $buffer);
-});
+        )
+);
