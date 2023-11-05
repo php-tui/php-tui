@@ -2,7 +2,6 @@
 
 namespace PhpTui\Tui\Tests\Widget\Canvas\Shape;
 
-use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\AxisBounds;
 use PhpTui\Tui\Model\Buffer;
@@ -39,7 +38,7 @@ class CircleTest extends TestCase
     public static function provideCircle(): Generator
     {
         yield 'circle' => [
-            Circle::fromScalars(5, 2, 5, AnsiColor::Reset),
+            Circle::fromScalars(5, 2, 5),
             [
             '     ⢀⣠⢤⣀ ',
             '    ⢰⠋  ⠈⣇',

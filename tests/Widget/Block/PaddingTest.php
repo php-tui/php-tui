@@ -16,4 +16,3 @@ class PaddingTest extends TestCase
         self::assertEquals(2, $all->right);
     }
 }
-

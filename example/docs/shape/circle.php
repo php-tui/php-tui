@@ -13,5 +13,5 @@ $display = Display::fullscreen(PhpTermBackend::new());
 $display->drawWidget(
     Canvas::fromIntBounds(-1, 21, -1, 21)
         ->marker(Marker::Dot)
-        ->draw(Circle::fromScalars(10, 10, 10, AnsiColor::Green))
+        ->draw(Circle::fromScalars(10, 10, 10)->color(AnsiColor::Green))
 );
