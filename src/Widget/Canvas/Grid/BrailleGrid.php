@@ -50,7 +50,7 @@ final class BrailleGrid extends CanvasGrid
     public function save(): Layer
     {
         $chars = array_map(function (int $point) {
-            return $this->brailleCharCache[$point] ?? ($this->brailleCharCache[$point] = IntlChar::chr($point));
+            return $this->brailleCharCache[$point] ??= IntlChar::chr($point);
         }, $this->codePoints);
 
         $colors = array_map(fn (Color $color) => new FgBgColor($color, AnsiColor::Reset), $this->colors);
