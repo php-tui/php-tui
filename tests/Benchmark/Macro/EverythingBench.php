@@ -1,0 +1,92 @@
+<?php
+
+namespace PhpTui\Tui\Tests\Benchmark\Macro;
+
+use PhpTui\Term\InformationProvider\AggregateInformationProvider;
+use PhpTui\Term\RawMode\NullRawMode;
+use PhpTui\Term\Painter\BufferPainter;
+use PhpTui\Term\Terminal;
+use PhpTui\Tui\Adapter\PhpTerm\PhpTermBackend;
+use PhpTui\Tui\Model\AxisBounds;
+use PhpTui\Tui\Model\Buffer;
+use PhpTui\Tui\Model\Constraint;
+use PhpTui\Tui\Model\Direction;
+use PhpTui\Tui\Model\Display;
+use PhpTui\Tui\Model\Position;
+use PhpTui\Tui\Model\Widget;
+use PhpTui\Tui\Model\Widget\Borders;
+use PhpTui\Tui\Model\Widget\Line;
+use PhpTui\Tui\Model\Widget\Title;
+use PhpTui\Tui\Widget\Block;
+use PhpTui\Tui\Widget\Canvas;
+use PhpTui\Tui\Widget\Canvas\Shape\Map;
+use PhpTui\Tui\Widget\Chart;
+use PhpTui\Tui\Widget\Chart\Axis;
+use PhpTui\Tui\Widget\Chart\DataSet;
+use PhpTui\Tui\Widget\Grid;
+use PhpTui\Tui\Widget\ItemList;
+use PhpTui\Tui\Widget\ItemList\ListItem;
+use PhpTui\Tui\Widget\Paragraph;
+use PhpTui\Tui\Widget\RawWidget;
+use PhpTui\Tui\Widget\Table;
+use PhpTui\Tui\Widget\Table\TableCell;
+use PhpTui\Tui\Widget\Table\TableRow;
+use SebastianBergmann\CodeCoverage\Util\Percentage;
+
+final class EverythingBench
+{
+    private Display $display;
+
+    public function __construct()
+    {
+        $painter = BufferPainter::new();
+        $terminal = Terminal::new(
+            infoProvider: new AggregateInformationProvider([]),
+            rawMode: new NullRawMode(),
+            painter: $painter,
+        );
+        $this->display = Display::fullscreen(PhpTermBackend::new($terminal));
+    }
+    public function benchRenderFrame(): void
+    {
+        $this->display->drawWidget(
+            Grid::default()
+                ->constraints(
+                    Constraint::percentage(10),
+                    Constraint::percentage(10),
+                    Constraint::percentage(10),
+                    Constraint::percentage(10),
+                )
+                ->widgets(
+                    $this->horizontalGrid(
+                        Block::default()->borders(Borders::ALL)->titles(Title::fromString('Hello')),
+                        Canvas::fromIntBounds(-180, 180, -90, 90)->draw(Map::default())
+                    ),
+                    $this->horizontalGrid(
+                        Chart::new(DataSet::new('foobar')->data([[0,0],[0,1]]))->xAxis(Axis::default()->bounds(AxisBounds::new(0, 2)))->yAxis(Axis::default()->bounds(AxisBounds::new(0,2))),
+                        ItemList::default()->items(ListItem::fromString('Foobar')),
+                    ),
+                    $this->horizontalGrid(
+                        Paragraph::fromString('Hello World'),
+                        RawWidget::new(function (Buffer $buffer) {
+                            $buffer->putLine(Position::at(0, 0), Line::fromString('Hello'), 5);
+                        })
+                    ),
+                    $this->horizontalGrid(
+                        Table::default()->rows(TableRow::fromCells([TableCell::fromString('Hello')]))
+                    ),
+                )
+        );
+    }
+
+    private function horizontalGrid(Widget ...$widgets): Widget
+    {
+        $width = 100 / count($widgets);
+        $grid = Grid::default()->direction(Direction::Horizontal);
+        $constraints = [];
+        foreach ($widgets as $widget) {
+            $constraints[] = Constraint::percentage(intval($width));
+        }
+        return $grid->constraints(...$constraints)->widgets(...$widgets);
+    }
+}
