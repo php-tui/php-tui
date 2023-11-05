@@ -11,21 +11,12 @@ use PhpTui\Tui\Model\WidgetRenderer\AggregateWidgetRenderer;
 use PhpTui\Tui\Model\WidgetRenderer\NullWidgetRenderer;
 use PhpTui\Tui\Widget\BlockRenderer;
 use PhpTui\Tui\Widget\CanvasRenderer;
-use PhpTui\Tui\Widget\Chart;
 use PhpTui\Tui\Widget\ChartRenderer;
+use PhpTui\Tui\Widget\GridRenderer;
 use PhpTui\Tui\Widget\ParagraphRenderer;
 
 class WidgetTestCase extends TestCase
 {
-    private function renderer(): WidgetRenderer
-    {
-        return new AggregateWidgetRenderer([
-            new BlockRenderer(),
-            new ParagraphRenderer(),
-            new CanvasRenderer(),
-            new ChartRenderer(),
-        ]);
-    }
 
     protected function render(Buffer $buffer, Widget $widget): void
     {
@@ -40,11 +31,21 @@ class WidgetTestCase extends TestCase
     /**
      * @return string[]
      */
-    protected  function renderToLines(Widget $widget, int $width = 8, int $height = 5): array
+    protected function renderToLines(Widget $widget, int $width = 8, int $height = 5): array
     {
         $area = Area::fromDimensions($width, $height);
         $buffer = Buffer::empty($area);
         $this->renderer()->render(new NullWidgetRenderer(), $widget, $area, $buffer);
         return $buffer->toLines();
+    }
+    private function renderer(): WidgetRenderer
+    {
+        return new AggregateWidgetRenderer([
+            new BlockRenderer(),
+            new ParagraphRenderer(),
+            new CanvasRenderer(),
+            new ChartRenderer(),
+            new GridRenderer(),
+        ]);
     }
 }
