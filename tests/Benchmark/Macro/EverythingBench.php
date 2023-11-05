@@ -2,9 +2,13 @@
 
 namespace PhpTui\Tui\Tests\Benchmark\Macro;
 
+use PhpBench\Attributes\Iterations;
+use PhpBench\Attributes\Revs;
 use PhpTui\Term\InformationProvider\AggregateInformationProvider;
+use PhpTui\Term\InformationProvider\ClosureInformationProvider;
 use PhpTui\Term\RawMode\NullRawMode;
 use PhpTui\Term\Painter\BufferPainter;
+use PhpTui\Term\Size;
 use PhpTui\Term\Terminal;
 use PhpTui\Tui\Adapter\PhpTerm\PhpTermBackend;
 use PhpTui\Tui\Model\AxisBounds;
@@ -31,7 +35,6 @@ use PhpTui\Tui\Widget\RawWidget;
 use PhpTui\Tui\Widget\Table;
 use PhpTui\Tui\Widget\Table\TableCell;
 use PhpTui\Tui\Widget\Table\TableRow;
-use SebastianBergmann\CodeCoverage\Util\Percentage;
 
 final class EverythingBench
 {
@@ -41,12 +44,25 @@ final class EverythingBench
     {
         $painter = BufferPainter::new();
         $terminal = Terminal::new(
-            infoProvider: new AggregateInformationProvider([]),
+            infoProvider: new AggregateInformationProvider([
+                ClosureInformationProvider::new(function (string $info) {
+                    if ($info === Size::class) {
+                        return new Size(100, 100);
+                    }
+                })
+
+            ]),
             rawMode: new NullRawMode(),
             painter: $painter,
         );
         $this->display = Display::fullscreen(PhpTermBackend::new($terminal));
     }
+
+    /**
+     * Render a frame using many widgets
+     */
+    #[Iterations(10)]
+    #[Revs(25)]
     public function benchRenderFrame(): void
     {
         $this->display->drawWidget(
@@ -63,12 +79,12 @@ final class EverythingBench
                         Canvas::fromIntBounds(-180, 180, -90, 90)->draw(Map::default())
                     ),
                     $this->horizontalGrid(
-                        Chart::new(DataSet::new('foobar')->data([[0,0],[0,1]]))->xAxis(Axis::default()->bounds(AxisBounds::new(0, 2)))->yAxis(Axis::default()->bounds(AxisBounds::new(0,2))),
+                        Chart::new(DataSet::new('foobar')->data([[0,0],[0,1]]))->xAxis(Axis::default()->bounds(AxisBounds::new(0, 2)))->yAxis(Axis::default()->bounds(AxisBounds::new(0, 2))),
                         ItemList::default()->items(ListItem::fromString('Foobar')),
                     ),
                     $this->horizontalGrid(
                         Paragraph::fromString('Hello World'),
-                        RawWidget::new(function (Buffer $buffer) {
+                        RawWidget::new(function (Buffer $buffer): void {
                             $buffer->putLine(Position::at(0, 0), Line::fromString('Hello'), 5);
                         })
                     ),
