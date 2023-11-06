@@ -6,6 +6,7 @@ enum ActivePage
 {
     case Events;
     case Canvas;
+    case CanvasScaling;
     case Chart;
     case List;
     case Table;
