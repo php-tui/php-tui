@@ -51,7 +51,7 @@ class Splash implements Slide
                 );
                 $context->draw($title);
                 $context->draw($subTitle);
-                $context->draw(PhpTuiLine::fromPrimitives(0, 160, 320, 160, AnsiColor::Gray));
+                $context->draw(PhpTuiLine::fromScalars(0, 160, 320, 160)->color(AnsiColor::Gray));
                 $context->print(12, 140, Line::fromString('Daniel Leech 2024'));
             });
     }

@@ -52,7 +52,7 @@ final class AboutMe implements Slide
             )
             ->widgets(
                 Block::default()
-                ->padding(Padding::fromPrimitives(1, 1, 1, 1))
+                ->padding(Padding::fromScalars(1, 1, 1, 1))
                 ->widget(
                     Grid::default()
                     ->direction(Direction::Vertical)
@@ -78,7 +78,7 @@ final class AboutMe implements Slide
 
     private function text(): Widget
     {
-        return Block::default()->padding(Padding::fromPrimitives(5, 5, 5, 5))->widget(
+        return Block::default()->padding(Padding::fromScalars(5, 5, 5, 5))->widget(
             ItemList::default()
             ->select(0)
             ->highlightSymbol('')
