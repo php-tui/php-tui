@@ -2,10 +2,12 @@
 
 namespace PhpTui\BDF;
 
-class BdfBoundingBox
+final class BdfBoundingBox
 {
-    public function __construct(public BdfSize $size, public BdfCoord $offset)
-    {
+    public function __construct(
+        public readonly BdfSize $size,
+        public readonly BdfCoord $offset
+    ) {
     }
 
     public static function empty(): self
@@ -17,5 +19,4 @@ class BdfBoundingBox
     {
         return new self(new BdfSize($width, $height), new BdfCoord($x, $y));
     }
-
 }

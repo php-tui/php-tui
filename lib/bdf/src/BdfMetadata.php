@@ -2,7 +2,7 @@
 
 namespace PhpTui\BDF;
 
-class BdfMetadata
+final class BdfMetadata
 {
     public function __construct(
         public readonly ?float $version,
@@ -12,5 +12,4 @@ class BdfMetadata
         public readonly ?BdfBoundingBox $boundingBox
     ) {
     }
-
 }

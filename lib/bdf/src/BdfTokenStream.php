@@ -33,9 +33,14 @@ final class BdfTokenStream
         return implode('', $this->tokens);
     }
 
-    public function is(string $string): bool
+    public function is(BdfToken $token): bool
     {
-        return $this->current() === $string;
+        return $this->current() === $token->name;
+    }
+
+    public function isNot(BdfToken $token): bool
+    {
+        return !$this->is($token);
     }
 
     public function current(): ?string

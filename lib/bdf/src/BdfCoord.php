@@ -2,12 +2,11 @@
 
 namespace PhpTui\BDF;
 
-class BdfCoord
+final class BdfCoord
 {
     public function __construct(
         public readonly int $x,
         public readonly int $y
     ) {
     }
-
 }
