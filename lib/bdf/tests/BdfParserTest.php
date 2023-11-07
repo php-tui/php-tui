@@ -14,7 +14,7 @@ use RuntimeException;
 
 class BdfParserTest extends TestCase
 {
-    public function testParseRealFont(): void
+    public function testParseFont6x10(): void
     {
         $contents = file_get_contents(__DIR__ . '/../fonts/6x10.bdf');
 
@@ -28,7 +28,7 @@ class BdfParserTest extends TestCase
         self::assertEquals(new BdfMetadata(
             version: 2.1,
             name: '-Misc-Fixed-Medium-R-Normal--10-100-75-75-C-60-ISO10646-1',
-            pointSize: 10,
+            pixelSize: 10,
             resolution: new BdfSize(75, 75),
             boundingBox: new BdfBoundingBox(
                 size: new BdfSize(6, 10),
@@ -38,6 +38,30 @@ class BdfParserTest extends TestCase
         self::assertCount(1597, $font->glyphs());
     }
 
+    public function testParseFont10x20(): void
+    {
+        $contents = file_get_contents(__DIR__ . '/../fonts/10x20.bdf');
+
+        if (false === $contents) {
+            throw new RuntimeException(
+                'Could not read file'
+            );
+        }
+
+        $font = (new BdfParser())->parse($contents);
+        self::assertEquals(new BdfMetadata(
+            version: 2.1,
+            name: '-Misc-Fixed-Medium-R-Normal--20-200-75-75-C-100-ISO10646-1',
+            pixelSize: 20,
+            resolution: new BdfSize(75, 75),
+            boundingBox: new BdfBoundingBox(
+                size: new BdfSize(10, 20),
+                offset: new BdfCoord(0, -4),
+            ),
+        ), $font->metadata);
+        self::assertCount(5205, $font->glyphs());
+    }
+
     public function testParseMinimalExample(): void
     {
         $font = (new BdfParser())->parse($this->font());
@@ -45,7 +69,7 @@ class BdfParserTest extends TestCase
         self::assertEquals(new BdfMetadata(
             version: 2.1,
             name: '"test font"',
-            pointSize: 16,
+            pixelSize: 16,
             resolution: new BdfSize(75, 75),
             boundingBox: new BdfBoundingBox(
                 size: new BdfSize(16, 24),
