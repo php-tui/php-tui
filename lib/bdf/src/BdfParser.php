@@ -25,7 +25,7 @@ final class BdfParser
     {
         $version = null;
         $name = null;
-        $pointSize = null;
+        $pixelSize = null;
         $size = null;
         $boundingBox = null;
 
@@ -40,7 +40,7 @@ final class BdfParser
         }
         if ($tokens->is(BdfToken::SIZE)) {
             $tokens->advance();
-            $pointSize = $tokens->parseInt();
+            $pixelSize = $tokens->parseInt();
             $resX = $tokens->parseInt();
             $resY = $tokens->parseInt();
             if ($this->notNull($resX, $resY)) {
@@ -68,11 +68,10 @@ final class BdfParser
         return new BdfMetadata(
             version: $version,
             name: $name,
-            pointSize: $pointSize,
+            pixelSize: $pixelSize,
             resolution: $size,
             boundingBox: $boundingBox,
         );
-
     }
 
     /**
@@ -229,14 +228,10 @@ final class BdfParser
         }
         $tokens->parseLine();
         $bitmap = [];
-        while ($tokens->current() !== null && strlen($tokens->current()) === 2) {
-            $dec = (int)hexdec($tokens->parseLine());
-            $bitmap[] = $dec;
+        while ($tokens->isNot(BdfToken::ENDCHAR)) {
+            $bitmap[] = (int) hexdec($tokens->parseLine());
         }
 
-        if ($tokens->isNot(BdfToken::ENDCHAR)) {
-            return null;
-        }
         $tokens->parseLine();
 
         return new BdfGlyph(
