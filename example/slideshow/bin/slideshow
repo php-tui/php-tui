@@ -7,6 +7,7 @@ use PhpTui\Tui\Adapter\ImageMagick\Shape\ImageShape;
 use PhpTui\Tui\Adapter\PhpTerm\PhpTermBackend;
 use PhpTui\Tui\Example\Slideshow\App;
 use PhpTui\Tui\Example\Slideshow\Slide\AboutMe;
+use PhpTui\Tui\Example\Slideshow\Slide\ListAndImageLR;
 use PhpTui\Tui\Example\Slideshow\Slide\Splash;
 use PhpTui\Tui\Model\Display;
 
@@ -18,11 +19,18 @@ $app = new App(
     Display::fullscreen(PhpTermBackend::new()),
     [
         new Splash($registry),
-        new AboutMe(
+        new ListAndImageLR(
             ImageShape::fromFilename(
                 __DIR__ . '/../assets/me.small.JPG'
             ),
-            $registry
+            $registry,
+            title: 'About Me',
+            items: [
+                '- PHP Developer for too many years',
+                '- Phpactor',
+                '- PHPBench',
+                '- Unemployed!',
+            ]
         ),
     ]
 );

@@ -33,11 +33,9 @@ class App
         $this->terminal->execute(Actions::cursorHide());
         $this->terminal->execute(Actions::alternateScreenEnable());
 
-        $draw = true;
         while (true) {
             $this->currentSlide()->handle(new Tick());
             while (null !== $event = $this->terminal->events()->next()) {
-                $draw = true;
                 if ($event instanceof CodedKeyEvent) {
                     if ($event->code === KeyCode::Left) {
                         $this->selected = max(0, $this->selected - 1);
@@ -51,20 +49,17 @@ class App
                 }
                 $this->currentSlide()->handle($event);
             }
-            if ($draw) {
-                $this->display->drawWidget(
-                    Grid::default()
-                        ->constraints(
-                            Constraint::min(10),
-                            Constraint::max(1),
-                        )
-                        ->widgets(
-                            $this->currentSlide()->build(),
-                            $this->footer(),
-                        )
-                );
-                $draw = false;
-            }
+            $this->display->drawWidget(
+                Grid::default()
+                    ->constraints(
+                        Constraint::min(10),
+                        Constraint::max(1),
+                    )
+                    ->widgets(
+                        $this->currentSlide()->build(),
+                        $this->footer(),
+                    )
+            );
 
             usleep(10_000);
         }
