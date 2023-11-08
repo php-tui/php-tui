@@ -40,6 +40,14 @@ $app = new App(
     Display::fullscreen(PhpTermBackend::new()),
     [
         new Splash($registry),
+        new PargagraphAndImageDT(
+            ImageShape::fromFilename(
+                __DIR__ . '/../assets/warning.jpg'
+            ),
+            $registry,
+            title: 'WARNING',
+            text: 'This presentation is made with janky cutting edge software',
+        ),
         new ListAndImageLR(
             ImageShape::fromFilename(
                 __DIR__ . '/../assets/me.small.JPG'
@@ -51,7 +59,7 @@ $app = new App(
                 '- PHP Developer for 17 years!',
                 '- Phpactor: Language Server',
                 '- PHPBench: Code profiling tool',
-                '- Unemployed!',
+                '- Unemployed! 🎉',
             ]
         ),
         new PargagraphAndImageDT(
@@ -81,7 +89,7 @@ $app = new App(
             ),
             $registry,
             title: 'Porting Ratatui from Rust',
-            text: 'I did what most people do in this situation and decided to port Ratatui to PHP.',
+            text: '... and I did what most people do in this situation and decided to port large Rust projects to PHP',
         ),
         new ListAndImageLR(
             ImageShape::fromFilename(
@@ -90,7 +98,7 @@ $app = new App(
             $registry,
             title: 'Ratatui',
             items: [
-                '- TUI framework for Rust',
+                '- TUI library for Rust',
                 '- Successor project of Rust TUI',
                 '- Layouts',
                 '- Charts',
@@ -98,6 +106,7 @@ $app = new App(
                 '- Lists',
                 '- Paragraphs',
                 '- ... easy!?',
+                '- Let\'s look at the ratatui demo!',
             ]
         ),
         new RustCodeSlide($registry),
@@ -105,25 +114,49 @@ $app = new App(
             $registry,
             'Cassowary',
             [
-                '- Constraint Solving Algorithm',
-                '- Organises user interfaces',
-                '- Unintelligible',
-            ]
+                '- Ported from Rust\'s cassowary-rs - line for line',
+                '- Which was ported from Java\'s Kiwi Cassowary library',
+                '- Which was based on the paper',
+                '- I spent days debugging it',
+                '- I still don\'t really know how it works! 😛',
+            ],
+            subTitle: 'A constraint solving algorithm for arranging user interfaces',
         ),
         new CassowarySlide(
             registry: $registry,
             title: 'Cassowary',
             items: []
         ),
+        new PargagraphAndImageDT(
+            ImageShape::fromFilename(
+                __DIR__ . '/../assets/crossterm.jpg'
+            ),
+            $registry,
+            title: 'Porting Crossterm!',
+            text: 'I also ported crossterm - which is an abstraction for writing and reading from the console',
+        ),
         new TitleAndList(
             $registry,
-            'Fonts!',
+            'PHP-Term',
             [
-                '- Can read BDF bitmap fonts',
-                '- Can scale them!',
-            ]
+                '- Sends ANSI escape codes to the terminal',
+                '- Uses STTY and potentially other executables to get term info',
+                '- Reads EVENTS from the terminal',
+            ],
+            'Abstracting the dirty work of reading and writing from TTY',
         ),
-        new FontSlide($registry, 'BDF Font', [
+        new TitleAndList(
+            $registry,
+            'Font Rendering!',
+            [
+                '- Started porting a BDF parser from the embedded Rust project',
+                '- It used parser combinators and I didn\'t want to add a new depdency',
+                '- Wasn\'t actually complicated',
+                '- Wrote my own parser!',
+            ],
+            'What if we could render fonts?!?',
+        ),
+        new FontSlide($registry, 'BDF Parser', [
 'STARTCHAR e',
 'ENCODING 101',
 'SWIDTH 576 0',
@@ -141,7 +174,7 @@ $app = new App(
 '00',
 '00',
 'ENDCHAR',
-        ]),
+        ], 'BDF fonts are in a plain text format and are easy to parse!'),
         new TitleAndList(
             $registry,
             'Widgets!',
@@ -159,7 +192,8 @@ $app = new App(
                 '❌ Scrollbar',
                 '❌ Sparkline',
                 '❌ Gauge',
-            ]
+            ],
+            'The aim is to port all the widgets from Ratatui',
         ),
         new TitlePargagraphAndImageDT(
             ImageShape::fromFilename(
@@ -175,6 +209,7 @@ $app = new App(
             [
                 '- This is a WIP!',
                 '- Fix all the bugs!',
+                '- Fix the performance!',
                 '- Improve design',
                 '- Fix performance issues',
                 '- Publish a package',
@@ -186,9 +221,10 @@ $app = new App(
             $registry,
             'More info',
             [
-                '- Github: https://github.com/php-tui/php-tui',
-                '- Documentation: https://php-tui.github.io/php-tui/',
-                '- @dantleech@fosstodon.org',
+                '- Github: github.com/php-tui/php-tui',
+                '- Documentation: php-tui.github.io/php-tui/',
+                '- Blog: www.dantleech.com',
+                '- Masotdon: @dantleech@fosstodon.org',
             ],
         ),
     ]

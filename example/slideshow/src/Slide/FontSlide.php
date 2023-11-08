@@ -27,6 +27,7 @@ use PhpTui\Tui\Widget\Grid;
 use PhpTui\Tui\Widget\ItemList;
 use PhpTui\Tui\Widget\ItemList\ItemListState;
 use PhpTui\Tui\Widget\ItemList\ListItem;
+use PhpTui\Tui\Widget\Paragraph;
 
 final class FontSlide implements Slide
 {
@@ -46,6 +47,7 @@ final class FontSlide implements Slide
          * @var string[]
          */
         private array $items,
+        private string $subTitle,
     ) {
         $this->state = new ItemListState();
     }
@@ -68,19 +70,24 @@ final class FontSlide implements Slide
                 ->widget(
                     Grid::default()
                     ->direction(Direction::Vertical)
-                    ->constraints(Constraint::percentage(10), Constraint::percentage(90))
+                    ->constraints(
+                        Constraint::percentage(10),
+                        Constraint::percentage(10),
+                        Constraint::percentage(80)
+                    )
                     ->widgets(
-                        Canvas::fromIntBounds(0, 56, 0, 6)
+                        Canvas::fromIntBounds(0, 56, 0, 7)
                             ->draw(
                                 new TextShape(
                                     $this->registry->get('default'),
                                     $this->title(),
                                     AnsiColor::Cyan,
-                                    FloatPosition::at(1, 0),
+                                    FloatPosition::at(0, 0),
                                     scaleX: 1,
                                     scaleY: 1,
                                 ),
                             ),
+                        Block::default()->padding(Padding::all(1))->widget(Paragraph::fromString($this->subTitle)),
                         $this->text(),
                     )
                 ),

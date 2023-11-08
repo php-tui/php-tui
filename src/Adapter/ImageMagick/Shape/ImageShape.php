@@ -2,10 +2,9 @@
 
 namespace PhpTui\Tui\Adapter\ImageMagick\Shape;
 
-use PhpTui\Tui\Model\Canvas\Resolution as PhpTuiResolution;
+use PhpTui\Tui\Model\Position;
 use PhpTui\Tui\Model\Widget\FloatPosition;
 use PhpTui\Tui\Model\Canvas\Shape;
-use PhpTui\Tui\Widget\Canvas\Resolution;
 
 /**
  * Renders an image on the canvas.
@@ -29,11 +28,5 @@ final class ImageShape implements Shape
     {
         $this->position = $position;
         return $this;
-    }
-
-    public function resolution(): PhpTuiResolution
-    {
-        $geo = $this->image->getImageGeometry();
-        return new Resolution($geo['width'], $geo['height']);
     }
 }

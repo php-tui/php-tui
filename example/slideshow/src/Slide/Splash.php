@@ -9,6 +9,7 @@ use PhpTui\Tui\Example\Slideshow\Slide;
 use PhpTui\Tui\Example\Slideshow\Tick;
 use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\AxisBounds;
+use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\Widget\FloatPosition;
 use PhpTui\Tui\Model\Widget\Line;
@@ -53,6 +54,8 @@ class Splash implements Slide
                 $context->draw($subTitle);
                 $context->draw(PhpTuiLine::fromScalars(0, 160, 320, 160)->color(AnsiColor::Gray));
                 $context->print(12, 140, Line::fromString('Daniel Leech 2024'));
+                $context->print(12, 130, Line::fromString('@dantleech@fosstodon.org')->patchStyle(Style::default()->fg(AnsiColor::LightMagenta)));
+                $context->print(12, 120, Line::fromString('https://www.dantleech.com')->patchStyle(Style::default()->fg(AnsiColor::LightYellow)));
             });
     }
 

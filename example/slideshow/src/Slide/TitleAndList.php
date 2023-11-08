@@ -16,13 +16,16 @@ use PhpTui\Tui\Model\RgbColor;
 use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\Widget\FloatPosition;
+use PhpTui\Tui\Model\Widget\Line;
 use PhpTui\Tui\Widget\Block;
 use PhpTui\Tui\Widget\Block\Padding;
 use PhpTui\Tui\Widget\Canvas;
+use PhpTui\Tui\Widget\Canvas\CanvasContext;
 use PhpTui\Tui\Widget\Grid;
 use PhpTui\Tui\Widget\ItemList;
 use PhpTui\Tui\Widget\ItemList\ItemListState;
 use PhpTui\Tui\Widget\ItemList\ListItem;
+use PhpTui\Tui\Widget\Paragraph;
 
 final class TitleAndList implements Slide
 {
@@ -38,6 +41,7 @@ final class TitleAndList implements Slide
          * @var string[]
          */
         private array $items,
+        private string $subTitle = '',
     ) {
         $this->state = new ItemListState();
     }
@@ -52,20 +56,22 @@ final class TitleAndList implements Slide
             ->direction(Direction::Vertical)
             ->constraints(
                 Constraint::length(6),
+                Constraint::length(3),
                 Constraint::min(10),
             )
             ->widgets(
                 Canvas::fromIntBounds(0, 80, 0, 10)
-                    ->draw(
-                        new TextShape(
+                    ->paint(function (CanvasContext $context) {
+                        $context->draw(new TextShape(
                             $this->registry->get('default'),
                             $this->title(),
                             AnsiColor::Cyan,
                             FloatPosition::at(0, 0),
                             scaleX: 1,
                             scaleY: 1,
-                        ),
-                    ),
+                        ));
+                    }),
+                Block::default()->padding(Padding::all(1))->widget(Paragraph::fromString($this->subTitle)),
                 $this->text(),
             );
     }

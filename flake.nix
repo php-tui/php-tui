@@ -30,6 +30,7 @@
             imagick
           ]));
           extraConfig = ''
+            memory_limit=1G
           '';
         });
       in {

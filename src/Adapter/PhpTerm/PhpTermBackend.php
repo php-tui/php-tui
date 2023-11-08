@@ -65,7 +65,7 @@ class PhpTermBackend implements Backend
 
             if (false === $update->cell->modifier->equals($modifier)) {
                 $this->queueModifiers($modifier, $update->cell->modifier);
-                $modifier = clone $update->cell->modifier;
+                $modifier = $update->cell->modifier;
             }
 
             if ($update->cell->fg != $fg) {

@@ -57,7 +57,7 @@ class PhpCodeRenderer implements WidgetRenderer
                     );
                     $width = mb_strlen($token[1]);
                 } else {
-                    $span = Span::fromString($token);
+                    $span = Span::fromString($token)->style(Style::default()->fg(AnsiColor::LightBlue));
                     $width = mb_strlen($token);
                 }
                 $position = $position->withX($area->left() + $x);
