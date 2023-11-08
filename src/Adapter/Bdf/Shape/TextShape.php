@@ -55,7 +55,6 @@ class TextShape implements Shape
             $grid = $this->buildGrid($glyph);
             $charOffset += $this->renderChar($painter, $charOffset, $grid, $glyph);
         }
-
     }
 
     /**
@@ -90,17 +89,19 @@ class TextShape implements Shape
         array $grid,
         BdfGlyph $glyph
     ): float {
+        $charWidth = $this->scaleX;
+        $charHeight = $this->scaleY;
 
         $xStep = $painter->context->xBounds->length() / $painter->resolution->width;
         $yStep = $painter->context->yBounds->length() / $painter->resolution->height;
 
-        $charWidth = 1 * $this->scaleX;
-        $charHeight = 1 * $this->scaleY;
-        $renderedWidth = 0;
-
         $yOffset = $glyph->boundingBox->offset->y * $this->scaleY;
+        if ($glyph->hasNegativeOffset()) {
+            $yOffset += abs($glyph->boundingBox->offset->y) * $this->scaleY;
+        }
+
         $points = [];
-        foreach ($grid as $y => $row) {
+        foreach ($grid as $row) {
             $y1 = $yOffset;
             $y2 = $yOffset + $charHeight;
             $yOffset += abs($y2 - $y1);
@@ -121,17 +122,16 @@ class TextShape implements Shape
                             $charOffset + $this->position->x + $xF,
                             $this->position->y + $yF,
                         ));
-                        $points[] = $point;
+
+                        if ($point !== null) {
+                            $points[] = $point;
+                        }
                     }
                 }
             }
         }
 
-        $maxX = null;
         foreach ($points as $point) {
-            if (null === $point) {
-                continue;
-            }
             $painter->paint($point, $this->color);
         }
 

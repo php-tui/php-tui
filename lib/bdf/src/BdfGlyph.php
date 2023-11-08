@@ -16,4 +16,20 @@ final class BdfGlyph
         public readonly ?BdfCoord $scalableWidth
     ) {
     }
+
+    public function hasNegativeOffset(): bool
+    {
+        $count = count($this->bitmap);
+        $offset = abs($this->boundingBox->offset->y);
+        $rowsToCheck = $count - $offset;
+
+        // check last bitmap rows
+        for ($i = $count - 1; $i >= $rowsToCheck; $i--) {
+            if ($this->bitmap[$i] > 0) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

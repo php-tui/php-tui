@@ -105,6 +105,25 @@ class BdfParserTest extends TestCase
         );
     }
 
+    public function testGlyphNegativeOffset(): void
+    {
+        $contents = file_get_contents(__DIR__ . '/../fonts/6x10.bdf');
+
+        if (false === $contents) {
+            throw new RuntimeException(
+                'Could not read file'
+            );
+        }
+
+        $font = (new BdfParser())->parse($contents);
+
+        self::assertTrue($font->codePoint(ord('y'))->hasNegativeOffset());
+        self::assertTrue($font->codePoint(ord('g'))->hasNegativeOffset());
+        self::assertFalse($font->codePoint(ord('k'))->hasNegativeOffset());
+        self::assertFalse($font->codePoint(ord('e'))->hasNegativeOffset());
+        self::assertFalse($font->codePoint(ord('n'))->hasNegativeOffset());
+    }
+
     private function font(): string
     {
         return <<<EOT
