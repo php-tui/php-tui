@@ -80,6 +80,9 @@ class DemoTest extends TestCase
 
     public function testSprite(): void
     {
+        if (!extension_loaded('imagick')) {
+            self::markTestSkipped('imagick not loaded');
+        }
         srand(0);
         $backend = $this->execute(
             CharKeyEvent::new('7'),

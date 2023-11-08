@@ -22,10 +22,9 @@ use PhpTui\Tui\Widget\Block;
 use PhpTui\Tui\Widget\Canvas;
 use PhpTui\Tui\Widget\Canvas\Painter;
 use PhpTui\Tui\Widget\Canvas\Shape;
+use PhpTui\Tui\Widget\Canvas\Shape\Circle;
 use PhpTui\Tui\Widget\Canvas\Shape\ClosureShape;
 use PhpTui\Tui\Widget\Canvas\Shape\Line;
-use PhpTui\Tui\Widget\Canvas\Shape\Map;
-use PhpTui\Tui\Widget\Canvas\Shape\MapResolution;
 use PhpTui\Tui\Widget\Grid;
 
 class CanvasScalingPage implements Component
@@ -34,7 +33,8 @@ class CanvasScalingPage implements Component
 
     private TextShape $text;
 
-    private ImageShape $image;
+    private Shape $image;
+
     private int $marker = 0;
 
 
@@ -48,7 +48,11 @@ class CanvasScalingPage implements Component
             scaleX: 8,
             scaleY: 8,
         );
-        $this->image = ImageShape::fromFilename(__DIR__ . '/../../assets/beach.jpg');
+        if (!extension_loaded('imagick')) {
+            $this->image = Circle::fromScalars(0, 0, 10);
+        } else {
+            $this->image = ImageShape::fromFilename(__DIR__ . '/../../assets/beach.jpg');
+        }
     }
 
     public function build(): Widget
@@ -100,11 +104,6 @@ class CanvasScalingPage implements Component
             );
     }
 
-    private function marker(): Marker
-    {
-        return Marker::cases()[abs($this->marker) % count(Marker::cases())];
-    }
-
     public function handle(Event $event): void
     {
         if ($event instanceof CodedKeyEvent) {
@@ -129,6 +128,11 @@ class CanvasScalingPage implements Component
         }
 
 
+    }
+
+    private function marker(): Marker
+    {
+        return Marker::cases()[abs($this->marker) % count(Marker::cases())];
     }
 
     private function canvas(Shape ...$shape): Widget
