@@ -3,6 +3,7 @@
 namespace PhpTui\Tui\Example\Slideshow;
 
 use PhpTui\Term\Actions;
+use PhpTui\Term\Event\CharKeyEvent;
 use PhpTui\Term\Event\CodedKeyEvent;
 use PhpTui\Term\KeyCode;
 use PhpTui\Term\Terminal;
@@ -52,13 +53,23 @@ class App
             while (null !== $event = $this->terminal->events()->next()) {
                 if ($event instanceof CodedKeyEvent) {
                     if ($event->code === KeyCode::Left) {
+                        $this->display->clear();
+                        $this->display->reset();
                         $this->selected = max(0, $this->selected - 1);
                     }
                     if ($event->code === KeyCode::Right) {
+                        $this->display->clear();
+                        $this->display->reset();
                         $this->selected = min(count($this->slides) - 1, $this->selected + 1);
                     }
                     if ($event->code === KeyCode::Esc) {
                         break 2;
+                    }
+                }
+                if ($event instanceof CharKeyEvent) {
+                    if ($event->char === 'r') {
+                        $this->display->clear();
+                        $this->display->reset();
                     }
                 }
                 $this->currentSlide()->handle($event);
