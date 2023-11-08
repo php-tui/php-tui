@@ -90,4 +90,70 @@ class TextShapeTest extends TestCase
             ]
         ];
     }
+
+    /**
+     * @dataProvider provideScale
+     * @param array<int,string> $expected
+     */
+    public function testScale(Area $area, int $boundsX, int $boundsY, TextShape $text, array $expected): void
+    {
+        $canvas = Canvas::fromIntBounds(0, $boundsX, 0, $boundsY)
+            ->marker(Marker::Block)
+            ->paint(function (CanvasContext $context) use ($text): void {
+                $context->draw($text);
+            });
+        $buffer = Buffer::empty($area);
+        (new CanvasRenderer())->render(new NullWidgetRenderer(), $canvas, $buffer->area(), $buffer);
+        self::assertEquals($expected, $buffer->toLines());
+    }
+    /**
+     * @return Generator<array{Area, int, int, TextShape,array<int,string>}>
+     */
+    public static function provideScale(): Generator
+    {
+        yield 'canvas more narrow than area' => [
+            Area::fromDimensions(12, 6),
+            6,
+            6,
+            new TextShape(
+                font: FontRegistry::default()->get('default'),
+                text: 'O',
+                color: AnsiColor::Green,
+                position: FloatPosition::at(0, 0),
+            ),
+            [
+                ' ██████████ ',
+                ' ██      ██ ',
+                ' ██      ██ ',
+                ' ██      ██ ',
+                ' ██      ██ ',
+                '   ██████   ',
+            ]
+        ];
+        yield 'canvas more short than area' => [
+            Area::fromDimensions(6, 12),
+            6,
+            6,
+            new TextShape(
+                font: FontRegistry::default()->get('default'),
+                text: 'O',
+                color: AnsiColor::Green,
+                position: FloatPosition::at(0, 0),
+            ),
+            [
+                '█████ ',
+                '█   █ ',
+                '█   █ ',
+                '█   █ ',
+                '█   █ ',
+                '█   █ ',
+                '█   █ ',
+                '█   █ ',
+                '█   █ ',
+                '█   █ ',
+                ' ███  ',
+                ' ███  ',
+            ]
+        ];
+    }
 }

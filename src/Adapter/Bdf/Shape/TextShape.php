@@ -5,7 +5,6 @@ namespace PhpTui\Tui\Adapter\Bdf\Shape;
 use PhpTui\BDF\BdfFont;
 use PhpTui\BDF\BdfGlyph;
 use PhpTui\Tui\Model\Color;
-use PhpTui\Tui\Model\Position;
 use PhpTui\Tui\Model\Widget\FloatPosition;
 use PhpTui\Tui\Widget\Canvas\Painter;
 use PhpTui\Tui\Widget\Canvas\Shape;
@@ -91,6 +90,10 @@ class TextShape implements Shape
         array $grid,
         BdfGlyph $glyph
     ): float {
+
+        $xStep = $painter->context->xBounds->length() / $painter->resolution->width;
+        $yStep = $painter->context->yBounds->length() / $painter->resolution->height;
+
         $charWidth = 1 * $this->scaleX;
         $charHeight = 1 * $this->scaleY;
         $renderedWidth = 0;
@@ -112,12 +115,13 @@ class TextShape implements Shape
                     continue;
                 }
 
-                for ($yF = $y1; $yF < $y2; $yF++) {
-                    for ($xF = $x1; $xF < $x2; $xF++) {
-                        $points[] = $painter->getPoint(FloatPosition::at(
+                for ($yF = $y1; $yF < $y2; $yF+=$yStep) {
+                    for ($xF = $x1; $xF < $x2; $xF+=$xStep) {
+                        $point = $painter->getPoint(FloatPosition::at(
                             $charOffset + $this->position->x + $xF,
                             $this->position->y + $yF,
                         ));
+                        $points[] = $point;
                     }
                 }
             }

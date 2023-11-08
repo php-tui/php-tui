@@ -8,6 +8,7 @@ use PhpTui\Term\Terminal;
 use PhpTui\Tui\Adapter\PhpTerm\PhpTermBackend;
 use PhpTui\Tui\Example\Demo\Page\BlocksPage;
 use PhpTui\Tui\Example\Demo\Page\CanvasPage;
+use PhpTui\Tui\Example\Demo\Page\CanvasScalingPage;
 use PhpTui\Tui\Example\Demo\Page\ChartPage;
 use PhpTui\Tui\Example\Demo\Page\ColorsPage;
 use PhpTui\Tui\Example\Demo\Page\EventsPage;
@@ -63,7 +64,9 @@ final class App
 
     public static function new(?Terminal $terminal = null, ?Display $display = null): self
     {
+        $terminal = $terminal ?: Terminal::new();
         $pages = [];
+
         // build up an exhaustive set of pages
         foreach (ActivePage::cases() as $case) {
             $pages[$case->name] = match ($case) {
@@ -76,10 +79,10 @@ final class App
                 ActivePage::Sprite => new SpritePage(),
                 ActivePage::Colors => new ColorsPage(),
                 ActivePage::Images => new ImagePage(),
+                ActivePage::CanvasScaling => new CanvasScalingPage($terminal),
             };
         }
 
-        $terminal = $terminal ?: Terminal::new();
         return new self(
             $terminal,
             $display ?: Display::fullscreen(PhpTermBackend::new($terminal)),
@@ -143,6 +146,9 @@ final class App
                     }
                     if ($event->char === '9') {
                         $this->activePage = ActivePage::Images;
+                    }
+                    if ($event->char === '0') {
+                        $this->activePage = ActivePage::CanvasScaling;
                     }
                 }
                 $this->activePage()->handle($event);
@@ -209,6 +215,8 @@ final class App
                         Span::fromString('colors '),
                         Span::styled('[9]', Style::default()->fg(AnsiColor::Green)),
                         Span::fromString('images '),
+                        Span::styled('[0]', Style::default()->fg(AnsiColor::Green)),
+                        Span::fromString('scaling '),
                     ])))
                 )
         ;
