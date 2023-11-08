@@ -4,13 +4,16 @@ namespace PhpTui\Tui\Example\Slideshow\Slide;
 
 use PhpTui\Term\Event;
 use PhpTui\Tui\Adapter\Bdf\FontRegistry;
+use PhpTui\Tui\Adapter\Bdf\Shape\TextShape;
 use PhpTui\Tui\Adapter\ImageMagick\Shape\ImageShape;
 use PhpTui\Tui\Example\Slideshow\Slide;
 use PhpTui\Tui\Example\Slideshow\Tick;
+use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Constraint;
 use PhpTui\Tui\Model\Direction;
 use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Model\Widget;
+use PhpTui\Tui\Model\Widget\FloatPosition;
 use PhpTui\Tui\Model\Widget\HorizontalAlignment;
 use PhpTui\Tui\Widget\Block;
 use PhpTui\Tui\Widget\Block\Padding;
@@ -18,7 +21,7 @@ use PhpTui\Tui\Widget\Canvas;
 use PhpTui\Tui\Widget\Grid;
 use PhpTui\Tui\Widget\Paragraph;
 
-final class PargagraphAndImageDT implements Slide
+final class TitlePargagraphAndImageDT implements Slide
 {
     public function __construct(
         private ImageShape $image,
@@ -37,16 +40,28 @@ final class PargagraphAndImageDT implements Slide
         return Grid::default()
             ->direction(Direction::Vertical)
             ->constraints(
+                Constraint::percentage(10),
                 Constraint::percentage(80),
-                Constraint::percentage(20),
+                Constraint::percentage(10),
             )
             ->widgets(
+                Canvas::fromIntBounds(0, 100, 0, 6)
+                    ->draw(
+                        new TextShape(
+                            $this->registry->get('default'),
+                            $this->title(),
+                            AnsiColor::Cyan,
+                            FloatPosition::at(0, 0),
+                            scaleX: 1,
+                            scaleY: 1,
+                        ),
+                    ),
                 $this->image(),
                 Block::default()
-                ->padding(Padding::fromScalars(1, 1, 1, 1))
-                ->widget(
-                    $this->text(),
-                ),
+                    ->padding(Padding::fromScalars(1, 1, 1, 1))
+                    ->widget(
+                        $this->text(),
+                    )
             );
     }
 

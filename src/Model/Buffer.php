@@ -32,6 +32,13 @@ final class Buffer implements Countable
         return self::filled($area, Cell::empty());
     }
 
+    public function reset(): void
+    {
+        foreach ($this->content as $i => $cell) {
+            $this->content[$i] = Cell::empty();
+        }
+    }
+
     public static function filled(Area $area, Cell $cell): self
     {
         $content = [];
@@ -196,6 +203,7 @@ final class Buffer implements Countable
 
         return $this->content[$index];
     }
+
 
     /**
      * Insert the contents of the given buffer at the given position.

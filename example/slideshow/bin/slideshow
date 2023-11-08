@@ -6,11 +6,12 @@ use PhpTui\Tui\Adapter\Bdf\FontRegistry;
 use PhpTui\Tui\Adapter\ImageMagick\Shape\ImageShape;
 use PhpTui\Tui\Adapter\PhpTerm\PhpTermBackend;
 use PhpTui\Tui\Example\Slideshow\App;
-use PhpTui\Tui\Example\Slideshow\Slide\AboutMe;
+use PhpTui\Tui\Example\Slideshow\Slide\CassowarySlide;
 use PhpTui\Tui\Example\Slideshow\Slide\DefinitionSlide;
 use PhpTui\Tui\Example\Slideshow\Slide\ListAndImageLR;
 use PhpTui\Tui\Example\Slideshow\Slide\PargagraphAndImageDT;
 use PhpTui\Tui\Example\Slideshow\Slide\Splash;
+use PhpTui\Tui\Example\Slideshow\Slide\TitlePargagraphAndImageDT;
 use PhpTui\Tui\Model\Display;
 
 require __DIR__ . '/../../../vendor/autoload.php';
@@ -47,6 +48,44 @@ $app = new App(
             $registry,
             'What is a TUI framework?',
             'TUI stands for Terminal User Interface. It’s generally for a full screen application that runs in the terminal and is controlled with the keyboard, although it’s also possible for TUIs to use the mouse!',
+        ),
+        new TitlePargagraphAndImageDT(
+            ImageShape::fromFilename(
+                __DIR__ . '/../assets/storm.jpg'
+            ),
+            $registry,
+            title: 'Redundancy',
+            text: 'It’s a horrible word, and it’s a word that grows heavier the longer I don’t have a job. But the good thing is that I now had plenty of spare time.',
+        ),
+        new PargagraphAndImageDT(
+            ImageShape::fromFilename(
+                __DIR__ . '/../assets/ratatui.png'
+            ),
+            $registry,
+            title: 'Porting Ratatui from Rust',
+            text: 'I did what most people do in this situation and decided to port Ratatui to PHP.',
+        ),
+        new ListAndImageLR(
+            ImageShape::fromFilename(
+                __DIR__ . '/../assets/ratatuiony.png'
+            ),
+            $registry,
+            title: 'Ratatui',
+            items: [
+                '- TUI framework for Rust',
+                '- Successor project of Rust TUI',
+                '- Layouts',
+                '- Charts',
+                '- Tables',
+                '- Lists',
+                '- Paragraphs',
+                '- ... easy!?',
+            ]
+        ),
+        new CassowarySlide(
+            registry: $registry,
+            title: 'Cassowary',
+            items: []
         ),
     ]
 );
