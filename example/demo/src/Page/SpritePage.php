@@ -112,7 +112,7 @@ class SpritePage implements Component
                     ->borderStyle(Style::default()->fg(AnsiColor::DarkGray))
                     ->widget(
                         Canvas::fromIntBounds(0, self::WIDTH, 0, 8)
-                            ->marker(Marker::Braille)
+                            ->marker(Marker::HalfBlock)
                             ->paint(function (CanvasContext $context): void {
                                 foreach ($this->scroller as $textShape) {
                                     $context->draw($textShape);

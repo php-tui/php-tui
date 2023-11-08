@@ -9,6 +9,7 @@ use PhpTui\Tui\Model\Buffer;
 use PhpTui\Tui\Model\BufferUpdates;
 use PhpTui\Tui\Model\Cell;
 use PhpTui\Tui\Model\Position;
+use PhpTui\Tui\Model\RgbColor;
 use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Widget\Line;
 use Generator;
@@ -82,6 +83,15 @@ class BufferTest extends TestCase
 
         $b2->get(Position::at(0, 0))->fg = AnsiColor::Red;
         self::assertCount(1, $b1->diff($b2));
+    }
+
+    public function testDiffColorValueObject(): void
+    {
+        $b1 = Buffer::fromLines(['a']);
+        $b1->get(Position::at(0, 0))->fg = RgbColor::fromRgb(0, 0, 0);
+        $b2 = Buffer::fromLines(['a']);
+        $b2->get(Position::at(0, 0))->fg = RgbColor::fromRgb(0, 0, 0);
+        self::assertCount(0, $b1->diff($b2));
     }
 
     /**
