@@ -29,6 +29,7 @@ use PhpTui\Tui\Widget\ItemList;
 use PhpTui\Tui\Widget\ItemList\ItemListState;
 use PhpTui\Tui\Widget\ItemList\ListItem;
 use PhpTui\Tui\Widget\Paragraph;
+use PhpTui\Tui\Widget\PhpCode;
 use SebastianBergmann\CodeCoverage\Util\Percentage;
 
 final class CassowarySlide implements Slide
@@ -116,7 +117,7 @@ final class CassowarySlide implements Slide
     private function text(): Widget
     {
         return Block::default()->padding(Padding::fromScalars(5, 5, 5, 5))->widget(
-            Paragraph::fromString(sprintf(
+            new PhpCode(sprintf(
             <<<'EOT'
                 Grid::default()
                     ->direction(Direction::Horizontal)

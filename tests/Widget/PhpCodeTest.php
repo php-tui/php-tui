@@ -53,6 +53,7 @@ class PhpCodeTest extends WidgetTestCase
             <?php
             if (true) {
                 echo "Hello World";
+
             }
             EOT
             ),
@@ -62,6 +63,7 @@ class PhpCodeTest extends WidgetTestCase
                 'if (true) {',
                 '        ',
                 '    echo "Hello Worl',
+                '                    ',
                 '}"                  '
             ]
            ,
