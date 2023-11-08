@@ -3,6 +3,8 @@
 namespace PhpTui\Tui\Example\Demo\Page;
 
 use PhpTui\Term\Event;
+use PhpTui\Term\Event\CodedKeyEvent;
+use PhpTui\Term\KeyCode;
 use PhpTui\Tui\Example\Demo\Component;
 use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Constraint;
@@ -20,6 +22,8 @@ use PhpTui\Tui\Widget\Table\TableState;
 
 final class TablePage implements Component
 {
+    private int $tick = 0;
+    private int $selected = 0;
     const EVENTS = [
         ['Event1', 'INFO'],
         ['Event2', 'INFO'],
@@ -61,12 +65,20 @@ final class TablePage implements Component
             ->widget(
                 Table::default()
                     ->state($this->state)
-                    ->select(rand(0, count(self::EVENTS)))
+                    ->select($this->selected)
                     ->highlightSymbol('X')
                     ->highlightStyle(Style::default()->bg(AnsiColor::Cyan)->fg(AnsiColor::Black))
                     ->widths(
                         Constraint::percentage(10),
                         Constraint::min(10),
+                        Constraint::min(50),
+                    )
+                    ->header(
+                        TableRow::fromCells([
+                            TableCell::fromString('Level'),
+                            TableCell::fromString('Event'),
+                            TableCell::fromString('Data'),
+                        ])
                     )
                     ->rows(...array_map(function (array $event) {
                         return TableRow::fromCells([
@@ -79,6 +91,7 @@ final class TablePage implements Component
                                 }),
                             )),
                             TableCell::fromLine(Line::fromString($event[0])),
+                            TableCell::fromString('...'),
                         ]);
                     }, array_merge(self::EVENTS, self::EVENTS)))
             )
@@ -87,5 +100,15 @@ final class TablePage implements Component
 
     public function handle(Event $event): void
     {
+        if ($event instanceof CodedKeyEvent) {
+            if ($event->code === KeyCode::Down) {
+                $this->selected++;
+            }
+            if ($event->code === KeyCode::Up) {
+                if ($this->selected > 0) {
+                    $this->selected--;
+                }
+            }
+        }
     }
 }
