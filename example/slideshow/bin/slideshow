@@ -173,6 +173,7 @@ $app = new App(
             $registry,
             'Next Steps',
             [
+                '- This is a WIP!',
                 '- Fix all the bugs!',
                 '- Improve design',
                 '- Fix performance issues',
@@ -180,6 +181,15 @@ $app = new App(
                 '- Profit 💰',
                 '- Questions ❓',
             ]
+        ),
+        new TitleAndList(
+            $registry,
+            'More info',
+            [
+                '- Github: https://github.com/php-tui/php-tui',
+                '- Documentation: https://php-tui.github.io/php-tui/',
+                '- @dantleech@fosstodon.org',
+            ],
         ),
     ]
 );

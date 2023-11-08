@@ -51,11 +51,11 @@ final class TitleAndList implements Slide
         return Grid::default()
             ->direction(Direction::Vertical)
             ->constraints(
-                Constraint::length(10),
+                Constraint::length(6),
                 Constraint::min(10),
             )
             ->widgets(
-                Canvas::fromIntBounds(0, 56, 0, 10)
+                Canvas::fromIntBounds(0, 80, 0, 10)
                     ->draw(
                         new TextShape(
                             $this->registry->get('default'),
@@ -96,7 +96,9 @@ final class TitleAndList implements Slide
             ->state($this->state)
             ->items(...array_map(
                 fn (string $item) => ListItem::fromString($item)->style(
-                    Style::default()->fg(RgbColor::fromRgb(100, 100, 100))
+                    $this->state->selected < count($this->items) ?
+                        Style::default()->fg(RgbColor::fromRgb(100, 100, 100)) :
+                        Style::default()->fg(AnsiColor::White)
                 ),
                 $this->items
             ))
