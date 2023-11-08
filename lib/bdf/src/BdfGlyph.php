@@ -17,19 +17,19 @@ final class BdfGlyph
     ) {
     }
 
-    public function hasNegativeOffset(): bool
+    public function countRowsBelowBaseline(): int
     {
         $count = count($this->bitmap);
         $offset = abs($this->boundingBox->offset->y);
         $rowsToCheck = $count - $offset;
 
-        // check last bitmap rows
+        $rows = 0;
         for ($i = $count - 1; $i >= $rowsToCheck; $i--) {
             if ($this->bitmap[$i] > 0) {
-                return true;
+                $rows++;
             }
         }
 
-        return false;
+        return $rows;
     }
 }

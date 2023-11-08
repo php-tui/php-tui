@@ -105,7 +105,7 @@ class BdfParserTest extends TestCase
         );
     }
 
-    public function testGlyphNegativeOffset(): void
+    public function testCountRowsBelowBaseline(): void
     {
         $contents = file_get_contents(__DIR__ . '/../fonts/6x10.bdf');
 
@@ -117,11 +117,10 @@ class BdfParserTest extends TestCase
 
         $font = (new BdfParser())->parse($contents);
 
-        self::assertTrue($font->codePoint(ord('y'))->hasNegativeOffset());
-        self::assertTrue($font->codePoint(ord('g'))->hasNegativeOffset());
-        self::assertFalse($font->codePoint(ord('k'))->hasNegativeOffset());
-        self::assertFalse($font->codePoint(ord('e'))->hasNegativeOffset());
-        self::assertFalse($font->codePoint(ord('n'))->hasNegativeOffset());
+        self::assertSame(2, $font->codePoint(ord('y'))->countRowsBelowBaseline());
+        self::assertSame(2, $font->codePoint(ord('g'))->countRowsBelowBaseline());
+        self::assertSame(0, $font->codePoint(ord('k'))->countRowsBelowBaseline());
+        self::assertSame(1, $font->codePoint(ord(';'))->countRowsBelowBaseline());
     }
 
     private function font(): string

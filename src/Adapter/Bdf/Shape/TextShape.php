@@ -96,8 +96,10 @@ class TextShape implements Shape
         $yStep = $painter->context->yBounds->length() / $painter->resolution->height;
 
         $yOffset = $glyph->boundingBox->offset->y * $this->scaleY;
-        if ($glyph->hasNegativeOffset()) {
-            $yOffset += abs($glyph->boundingBox->offset->y) * $this->scaleY;
+
+        $rowsBelowBaseline = $glyph->countRowsBelowBaseline();
+        if ($rowsBelowBaseline > 0) {
+            $yOffset += $rowsBelowBaseline * $this->scaleY;
         }
 
         $points = [];
