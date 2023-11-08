@@ -54,13 +54,15 @@ class CanvasScalingPage implements Component
     public function build(): Widget
     {
         return Block::default()
-            ->titles(Title::fromString(sprintf(
-                'Marker: %s, Canvas size: %dx%d, Terminal size: %s - use arrow keys to adjust and (back)tab to change the marker',
-                $this->marker()->name,
-                $this->xMax,
-                $this->yMax,
-                $this->terminal->info(Size::class)
-            )))
+            ->titles(
+                Title::fromString(sprintf(
+                    'Marker: %s, Canvas size: %dx%d, Terminal size: %s - use arrow keys to adjust and (back)tab to change the marker',
+                    $this->marker()->name,
+                    $this->xMax,
+                    $this->yMax,
+                    $this->terminal->info(Size::class),
+                ))
+            )
             ->widget(
                 Grid::default()
                 ->constraints(Constraint::percentage(50), Constraint::percentage(50))
