@@ -8,15 +8,11 @@ use PhpTui\Term\Event\CodedKeyEvent;
 use PhpTui\Term\KeyCode;
 use PhpTui\Tui\Adapter\Bdf\FontRegistry;
 use PhpTui\Tui\Adapter\Bdf\Shape\TextShape;
-use PhpTui\Tui\Adapter\ImageMagick\Shape\ImageShape;
 use PhpTui\Tui\Example\Slideshow\Slide;
 use PhpTui\Tui\Example\Slideshow\Tick;
 use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Constraint;
 use PhpTui\Tui\Model\Direction;
-use PhpTui\Tui\Model\Marker;
-use PhpTui\Tui\Model\RgbColor;
-use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\Widget\Borders;
 use PhpTui\Tui\Model\Widget\FloatPosition;
@@ -27,14 +23,14 @@ use PhpTui\Tui\Widget\Canvas;
 use PhpTui\Tui\Widget\Grid;
 use PhpTui\Tui\Widget\ItemList;
 use PhpTui\Tui\Widget\ItemList\ItemListState;
-use PhpTui\Tui\Widget\ItemList\ListItem;
 use PhpTui\Tui\Widget\Paragraph;
 use PhpTui\Tui\Widget\PhpCode;
-use SebastianBergmann\CodeCoverage\Util\Percentage;
 
 final class CassowarySlide implements Slide
 {
     private int $mainPercentage = 50;
+
+    private int $headerLength = 2;
 
     /**
      * @var ItemList\ItemListState
@@ -94,14 +90,10 @@ final class CassowarySlide implements Slide
     {
         if ($event instanceof CodedKeyEvent) {
             if ($event->code === KeyCode::Up) {
-                $this->state->selected--;
+                $this->headerLength++;
             }
             if ($event->code === KeyCode::Down) {
-                if (null === $this->state->selected) {
-                    $this->state->selected = 0;
-                    return;
-                }
-                $this->state->selected++;
+                $this->headerLength--;
             }
         }
         if ($event instanceof CharKeyEvent) {
@@ -118,32 +110,41 @@ final class CassowarySlide implements Slide
     {
         return Block::default()->padding(Padding::fromScalars(5, 5, 5, 5))->widget(
             new PhpCode(sprintf(
-            <<<'EOT'
-                Grid::default()
-                    ->direction(Direction::Horizontal)
-                    ->constraints(
-                        Constraint::percentage(%d),
-                        Constraint::min(1)
-                    )
-                    ->widgets(
-                        Block::default()
-                            ->borders(Borders::ALL)->titles(
-                                Title::fromString('Main Content')
-                            )->widget(
-                                Paragraph::fromString(
-                                    'use + and - to  adjust'
-                                ))
-                            )
-                        ,
-                        Block::default()
-                            ->borders(Borders::ALL)
-                            ->titles(
-                                Title::fromString('Sidebar')
-                            )
+                <<<'EOT'
+                    Grid::default()
+                        ->constraints(
+                            Constraint::length(%d),
+                            Constraint::min(2),
+                            Constraint::length(%d),
                         )
-                    ),
-            EOT
-            , $this->mainPercentage))
+                        ->widgets(
+                            Grid::default()
+                                ->direction(Direction::Horizontal)
+                                ->constraints(
+                                    Constraint::percentage(%d),
+                                    Constraint::min(1)
+                                )
+                                ->widgets(
+                                    Block::default()
+                                        ->borders(Borders::ALL)->titles(
+                                            Title::fromString('Main Content')
+                                        )->widget(
+                                            Paragraph::fromString(
+                                                'use + and - to  adjust'
+                                            ))
+                                        )
+                                    ,
+                                    Block::default()
+                                        ->borders(Borders::ALL)
+                                        ->titles(
+                                            Title::fromString('Sidebar')
+                                        )
+                                )
+                        )
+                    EOT
+                ,
+                $this->headerLength, $this->headerLength, $this->mainPercentage
+            ))
         );
     }
 
@@ -151,9 +152,9 @@ final class CassowarySlide implements Slide
     {
         return Grid::default()
             ->constraints(
-                Constraint::length(2),
+                Constraint::length($this->headerLength),
                 Constraint::min(2),
-                Constraint::length(2),
+                Constraint::length($this->headerLength),
             )
             ->widgets(
                 Block::default()->borders(Borders::ALL)->titles(Title::fromString('Header')),

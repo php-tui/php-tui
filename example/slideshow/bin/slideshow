@@ -8,9 +8,12 @@ use PhpTui\Tui\Adapter\PhpTerm\PhpTermBackend;
 use PhpTui\Tui\Example\Slideshow\App;
 use PhpTui\Tui\Example\Slideshow\Slide\CassowarySlide;
 use PhpTui\Tui\Example\Slideshow\Slide\DefinitionSlide;
+use PhpTui\Tui\Example\Slideshow\Slide\FontSlide;
 use PhpTui\Tui\Example\Slideshow\Slide\ListAndImageLR;
 use PhpTui\Tui\Example\Slideshow\Slide\PargagraphAndImageDT;
+use PhpTui\Tui\Example\Slideshow\Slide\RustCodeSlide;
 use PhpTui\Tui\Example\Slideshow\Slide\Splash;
+use PhpTui\Tui\Example\Slideshow\Slide\TitleAndList;
 use PhpTui\Tui\Example\Slideshow\Slide\TitlePargagraphAndImageDT;
 use PhpTui\Tui\Model\Display;
 use Symfony\Component\VarDumper\Cloner\VarCloner;
@@ -97,10 +100,86 @@ $app = new App(
                 '- ... easy!?',
             ]
         ),
+        new RustCodeSlide($registry),
+        new TitleAndList(
+            $registry,
+            'Cassowary',
+            [
+                '- Constraint Solving Algorithm',
+                '- Organises user interfaces',
+                '- Unintelligible',
+            ]
+        ),
         new CassowarySlide(
             registry: $registry,
             title: 'Cassowary',
             items: []
+        ),
+        new TitleAndList(
+            $registry,
+            'Fonts!',
+            [
+                '- Can read BDF bitmap fonts',
+                '- Can scale them!',
+            ]
+        ),
+        new FontSlide($registry, 'BDF Font', [
+'STARTCHAR e',
+'ENCODING 101',
+'SWIDTH 576 0',
+'DWIDTH 6 0',
+'BBX 6 10 0 -2',
+'BITMAP',
+'00',
+'00',
+'00',
+'70',
+'88',
+'F8',
+'80',
+'70',
+'00',
+'00',
+'ENDCHAR',
+        ]),
+        new TitleAndList(
+            $registry,
+            'Widgets!',
+            [
+                '✅ Canvas',
+                '✅ Chart',
+                '✅ Table',
+                '✅ Block',
+                '✅ Paragraph',
+                '✅ List',
+                '✅ Table',
+                '❌ Tabs',
+                '❌ Calendar',
+                '❌ Barchart',
+                '❌ Scrollbar',
+                '❌ Sparkline',
+                '❌ Gauge',
+            ]
+        ),
+        new TitlePargagraphAndImageDT(
+            ImageShape::fromFilename(
+                __DIR__ . '/../assets/me-demo.jpg'
+            ),
+            $registry,
+            title: 'Demo',
+            text: 'Let\'s have a look at the demo app!',
+        ),
+        new TitleAndList(
+            $registry,
+            'Next Steps',
+            [
+                '- Fix all the bugs!',
+                '- Improve design',
+                '- Fix performance issues',
+                '- Publish a package',
+                '- Profit 💰',
+                '- Questions ❓',
+            ]
         ),
     ]
 );
