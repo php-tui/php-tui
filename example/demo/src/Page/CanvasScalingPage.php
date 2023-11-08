@@ -30,6 +30,8 @@ use PhpTui\Tui\Widget\Grid;
 
 class CanvasScalingPage implements Component
 {
+    const DELTA = 5;
+
     private TextShape $text;
 
     private ImageShape $image;
@@ -80,7 +82,10 @@ class CanvasScalingPage implements Component
                                 }
                             })
                         ),
-                        $this->canvas(Line::fromScalars(0, 0, $this->xMax, $this->yMax))
+                        $this->canvas(
+                            Line::fromScalars(0, 0, $this->xMax, $this->yMax),
+                            Line::fromScalars(0, $this->yMax, $this->xMax, 0)
+                        )
                     ),
                     Grid::default()
                     ->direction(Direction::Horizontal)
@@ -102,16 +107,16 @@ class CanvasScalingPage implements Component
     {
         if ($event instanceof CodedKeyEvent) {
             if ($event->code === KeyCode::Right) {
-                $this->xMax+=10;
+                $this->xMax+=self::DELTA;
             }
             if ($event->code === KeyCode::Left) {
-                $this->xMax-=10;
+                $this->xMax-=self::DELTA;
             }
             if ($event->code === KeyCode::Up) {
-                $this->yMax+=10;
+                $this->yMax+=self::DELTA;
             }
             if ($event->code === KeyCode::Down) {
-                $this->yMax-=10;
+                $this->yMax-=self::DELTA;
             }
             if ($event->code === KeyCode::Tab) {
                 $this->marker++;
@@ -124,13 +129,13 @@ class CanvasScalingPage implements Component
 
     }
 
-    private function canvas(Shape $shape): Widget
+    private function canvas(Shape ...$shape): Widget
     {
         return Canvas::fromIntBounds(
             0,
             $this->xMax,
             0,
             $this->yMax
-        )->draw($shape)->marker($this->marker());
+        )->draw(...$shape)->marker($this->marker());
     }
 }
