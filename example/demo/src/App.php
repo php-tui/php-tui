@@ -215,6 +215,8 @@ final class App
                         Span::fromString('colors '),
                         Span::styled('[9]', Style::default()->fg(AnsiColor::Green)),
                         Span::fromString('images '),
+                        Span::styled('[0]', Style::default()->fg(AnsiColor::Green)),
+                        Span::fromString('scaling '),
                     ])))
                 )
         ;

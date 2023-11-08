@@ -45,8 +45,8 @@ class CanvasScalingPage implements Component
             'Hello World',
             AnsiColor::Green,
             FloatPosition::at(0, 0),
-            scaleX: 4,
-            scaleY: 4,
+            scaleX: 8,
+            scaleY: 8,
         );
         $this->image = ImageShape::fromFilename(__DIR__ . '/../../assets/beach.jpg');
     }
