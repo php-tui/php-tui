@@ -24,7 +24,7 @@ class StaticCachingConstraintSolver implements ConstraintSolver
 
     public function solve(Layout $layout, Area $area, array $constraints): Areas
     {
-        $hash = $area->__toString().implode('', array_reduce($constraints, function (array $ac, Constraint $c) {
+        $hash = $layout->direction->name.$area->__toString().implode('', array_reduce($constraints, function (array $ac, Constraint $c) {
             $ac[] = $c->__toString();
             return $ac;
         }, []));

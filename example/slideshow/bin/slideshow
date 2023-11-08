@@ -7,7 +7,9 @@ use PhpTui\Tui\Adapter\ImageMagick\Shape\ImageShape;
 use PhpTui\Tui\Adapter\PhpTerm\PhpTermBackend;
 use PhpTui\Tui\Example\Slideshow\App;
 use PhpTui\Tui\Example\Slideshow\Slide\AboutMe;
+use PhpTui\Tui\Example\Slideshow\Slide\DefinitionSlide;
 use PhpTui\Tui\Example\Slideshow\Slide\ListAndImageLR;
+use PhpTui\Tui\Example\Slideshow\Slide\PargagraphAndImageDT;
 use PhpTui\Tui\Example\Slideshow\Slide\Splash;
 use PhpTui\Tui\Model\Display;
 
@@ -26,11 +28,25 @@ $app = new App(
             $registry,
             title: 'About Me',
             items: [
-                '- PHP Developer for too many years',
-                '- Phpactor',
-                '- PHPBench',
+                '- Daniel Leech',
+                '- PHP Developer for 17 years!',
+                '- Phpactor: Language Server',
+                '- PHPBench: Code profiling tool',
                 '- Unemployed!',
             ]
+        ),
+        new PargagraphAndImageDT(
+            ImageShape::fromFilename(
+                __DIR__ . '/../assets/logo.png'
+            ),
+            $registry,
+            title: 'Redundancy',
+            text: 'Since being made redundant 3 weeks ago I have been using my unexpected free time to start a project that has been in my minds eye for some time: a TUI framework for PHP.',
+        ),
+        new DefinitionSlide(
+            $registry,
+            'What is a TUI framework?',
+            'TUI stands for Terminal User Interface. It’s generally for a full screen application that runs in the terminal and is controlled with the keyboard, although it’s also possible for TUIs to use the mouse!',
         ),
     ]
 );

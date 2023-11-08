@@ -13,6 +13,7 @@ use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\Widget\HorizontalAlignment;
 use PhpTui\Tui\Widget\Grid;
 use PhpTui\Tui\Widget\Paragraph;
+use Throwable;
 
 class App
 {
@@ -28,6 +29,19 @@ class App
     ) {
     }
     public function run(): void
+    {
+        try {
+            // enable "raw" mode to remove default terminal behavior (e.g.
+            // echoing key presses)
+            $this->terminal->enableRawMode();
+            $this->doRun();
+        } catch (Throwable $err) {
+            $this->terminal->disableRawMode();
+            $this->terminal->execute(Actions::alternateScreenDisable());
+            throw $err;
+        }
+    }
+    private function doRun(): void
     {
         $this->terminal->enableRawMode();
         $this->terminal->execute(Actions::cursorHide());
