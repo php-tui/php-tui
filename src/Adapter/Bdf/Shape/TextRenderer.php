@@ -30,7 +30,6 @@ class TextRenderer implements ShapePainter
             $grid = self::buildGrid($shape, $glyph);
             $charOffset += self::renderChar($shape, $painter, $charOffset, $grid, $glyph);
         }
-
     }
 
     /**
@@ -44,11 +43,7 @@ class TextRenderer implements ShapePainter
             $xbit = 1;
             for ($i = $glyph->boundingBox->size->width + 1; $i >= 0; $i--) {
                 $x = $i + $shape->position->x;
-                if (($row & $xbit) > 0) {
-                    $grid[$y][$x] = true;
-                } else {
-                    $grid[$y][$x] = false;
-                }
+                $grid[$y][$x] = ($row & $xbit) > 0;
                 $xbit = $xbit << 1;
             }
             $y++;
@@ -66,17 +61,16 @@ class TextRenderer implements ShapePainter
         array $grid,
         BdfGlyph $glyph
     ): float {
-
         $xStep = $painter->context->xBounds->length() / $painter->resolution->width;
         $yStep = $painter->context->yBounds->length() / $painter->resolution->height;
 
-        $charWidth = 1 * $shape->scaleX;
-        $charHeight = 1 * $shape->scaleY;
-        $renderedWidth = 0;
+        $charWidth = $shape->scaleX;
+        $charHeight = $shape->scaleY;
 
         $yOffset = $glyph->boundingBox->offset->y * $shape->scaleY;
+
         $points = [];
-        foreach ($grid as $y => $row) {
+        foreach ($grid as $row) {
             $y1 = $yOffset;
             $y2 = $yOffset + $charHeight;
             $yOffset += abs($y2 - $y1);
@@ -103,12 +97,10 @@ class TextRenderer implements ShapePainter
             }
         }
 
-        $maxX = null;
         foreach ($points as $point) {
-            if (null === $point) {
-                continue;
+            if (null !== $point) {
+                $painter->paint($point, $shape->color);
             }
-            $painter->paint($point, $shape->color);
         }
 
         return $glyph->boundingBox->size->width * $shape->scaleX;
