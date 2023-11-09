@@ -51,7 +51,7 @@ class CanvasScalingPage implements Component
         if (!extension_loaded('imagick')) {
             $this->image = Circle::fromScalars(0, 0, 10);
         } else {
-            $this->image = ImageShape::fromFilename(__DIR__ . '/../../assets/beach.jpg');
+            $this->image = ImageShape::fromPath(__DIR__ . '/../../assets/beach.jpg');
         }
     }
 

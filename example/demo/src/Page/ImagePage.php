@@ -28,7 +28,7 @@ final class ImagePage implements Component
     {
         if (!isset($this->images)) {
             $this->images = array_map(function (string $name) {
-                $shape = ImageShape::fromFilename(__DIR__ . '/../../assets/' . $name);
+                $shape = ImageShape::fromPath(__DIR__ . '/../../assets/' . $name);
                 return Block::default()
                     ->titles(Title::fromString(sprintf('Image: %s', $name)))
                     ->borders(Borders::ALL)

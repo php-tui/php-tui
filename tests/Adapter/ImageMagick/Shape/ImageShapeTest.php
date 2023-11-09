@@ -2,6 +2,8 @@
 
 namespace PhpTui\Tui\Tests\Adapter\ImageMagick\Shape;
 
+use PhpTui\Tui\Adapter\ImageMagick\Shape\ImagePainter;
+use PhpTui\Tui\Adapter\ImageMagick\Shape\ImageRenderer;
 use PhpTui\Tui\Adapter\ImageMagick\Shape\ImageShape;
 use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\AxisBounds;
@@ -35,7 +37,9 @@ class ImageShapeTest extends TestCase
             });
         $area = Area::fromDimensions(10, 4);
         $buffer = Buffer::empty($area);
-        (new CanvasRenderer())->render(new NullWidgetRenderer(), $canvas, $buffer->area(), $buffer);
+        (new CanvasRenderer(
+            new ImagePainter(),
+        ))->render(new NullWidgetRenderer(), $canvas, $buffer->area(), $buffer);
         self::assertEquals(implode("\n", $expected), $buffer->toString());
     }
 
@@ -53,7 +57,7 @@ class ImageShapeTest extends TestCase
             return;
         }
         yield 'renders image (no colors in this test!)' => [
-            ImageShape::fromFilename(__DIR__ . '/example.jpg'),
+            ImageShape::fromPath(__DIR__ . '/example.jpg'),
             Marker::Block,
             [
                     '██████████',
@@ -63,7 +67,7 @@ class ImageShapeTest extends TestCase
             ]
         ];
         yield 'position image' => [
-            ImageShape::fromFilename(__DIR__ . '/example.jpg')->position(FloatPosition::at(3, 2)),
+            ImageShape::fromPath(__DIR__ . '/example.jpg')->position(FloatPosition::at(3, 2)),
             Marker::Block,
             [
                     '  ████████',
