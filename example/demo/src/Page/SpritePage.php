@@ -18,8 +18,8 @@ use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Widget\Block;
 use PhpTui\Tui\Widget\Canvas;
 use PhpTui\Tui\Widget\Canvas\CanvasContext;
-use PhpTui\Tui\Widget\Canvas\Shape\Points;
-use PhpTui\Tui\Widget\Canvas\Shape\Sprite;
+use PhpTui\Tui\Shape\Points;
+use PhpTui\Tui\Shape\Sprite;
 use PhpTui\Tui\Widget\Grid;
 
 class SpritePage implements Component
@@ -36,9 +36,7 @@ class SpritePage implements Component
      */
     private array $stars = [];
 
-    /**
-     * @var Canvas\Shape\Points
-     */
+
     private Points $points;
 
     /**

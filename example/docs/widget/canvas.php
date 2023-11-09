@@ -6,7 +6,7 @@ use PhpTui\Tui\Model\Display;
 use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Widget\Canvas;
 use PhpTui\Tui\Widget\Canvas\CanvasContext;
-use PhpTui\Tui\Widget\Canvas\Shape\Circle;
+use PhpTui\Tui\Shape\Circle;
 
 require 'vendor/autoload.php';
 

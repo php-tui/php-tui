@@ -5,7 +5,7 @@ use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Display;
 use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Widget\Canvas;
-use PhpTui\Tui\Widget\Canvas\Shape\Points;
+use PhpTui\Tui\Shape\Points;
 
 require 'vendor/autoload.php';
 

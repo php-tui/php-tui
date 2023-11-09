@@ -10,7 +10,7 @@ use PhpTui\Tui\Model\Position;
 use PhpTui\Tui\Model\Display;
 use PHPUnit\Framework\TestCase;
 use PhpTui\Tui\Widget\Canvas;
-use PhpTui\Tui\Widget\Canvas\Shape\Points;
+use PhpTui\Tui\Shape\Points;
 
 class DisplayTest extends TestCase
 {

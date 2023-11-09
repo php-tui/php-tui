@@ -11,8 +11,8 @@ use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Model\Widget\Line as DTLLine;
 use PhpTui\Tui\Widget\Canvas;
 use PhpTui\Tui\Widget\Canvas\CanvasContext;
-use PhpTui\Tui\Widget\Canvas\Shape\Circle;
-use PhpTui\Tui\Widget\Canvas\Shape\Line;
+use PhpTui\Tui\Shape\Circle;
+use PhpTui\Tui\Shape\Line;
 use Generator;
 
 class CanvasTest extends WidgetTestCase

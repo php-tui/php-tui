@@ -1,8 +1,8 @@
 <?php
 
-namespace PhpTui\Tui\Widget\Canvas\Shape;
+namespace PhpTui\Tui\Shape;
 
-use PhpTui\Tui\Widget\Canvas\Shape\Data\MapData;
+use PhpTui\Tui\Shape\Data\MapData;
 
 enum MapResolution
 {

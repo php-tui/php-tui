@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpTui\Tui\Tests\Widget\Canvas\Shape;
+namespace PhpTui\Tui\Tests\Shape;
 
 use PhpTui\Tui\Tests\Widget\WidgetTestCase;
 

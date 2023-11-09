@@ -22,9 +22,9 @@ use PhpTui\Tui\Widget\Block;
 use PhpTui\Tui\Widget\Canvas;
 use PhpTui\Tui\Widget\Canvas\Painter;
 use PhpTui\Tui\Widget\Canvas\Shape;
-use PhpTui\Tui\Widget\Canvas\Shape\Circle;
-use PhpTui\Tui\Widget\Canvas\Shape\ClosureShape;
-use PhpTui\Tui\Widget\Canvas\Shape\Line;
+use PhpTui\Tui\Shape\Circle;
+use PhpTui\Tui\Shape\ClosureShape;
+use PhpTui\Tui\Shape\Line;
 use PhpTui\Tui\Widget\Grid;
 
 class CanvasScalingPage implements Component

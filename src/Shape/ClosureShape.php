@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpTui\Tui\Widget\Canvas\Shape;
+namespace PhpTui\Tui\Shape;
 
 use Closure;
 use PhpTui\Tui\Widget\Canvas\Painter;

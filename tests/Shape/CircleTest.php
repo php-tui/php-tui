@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpTui\Tui\Tests\Widget\Canvas\Shape;
+namespace PhpTui\Tui\Tests\Shape;
 
 use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\AxisBounds;
@@ -8,7 +8,7 @@ use PhpTui\Tui\Model\Buffer;
 use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Widget\Canvas;
 use PhpTui\Tui\Widget\Canvas\CanvasContext;
-use PhpTui\Tui\Widget\Canvas\Shape\Circle;
+use PhpTui\Tui\Shape\Circle;
 use Generator;
 
 class CircleTest extends ShapeTestCase

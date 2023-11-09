@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpTui\Tui\Tests\Widget\Canvas\Shape;
+namespace PhpTui\Tui\Tests\Shape;
 
 use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Area;
@@ -9,7 +9,7 @@ use PhpTui\Tui\Model\Buffer;
 use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Widget\Canvas;
 use PhpTui\Tui\Widget\Canvas\CanvasContext;
-use PhpTui\Tui\Widget\Canvas\Shape\Rectangle;
+use PhpTui\Tui\Shape\Rectangle;
 use Generator;
 
 class RectangleTest extends ShapeTestCase

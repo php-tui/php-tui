@@ -16,8 +16,8 @@ use PhpTui\Tui\Widget\Canvas as PhpTuiCanvas;
 use PhpTui\Tui\Widget\Canvas\CanvasContext;
 use PhpTui\Tui\Model\Widget\Borders;
 use PhpTui\Tui\Widget\Block;
-use PhpTui\Tui\Widget\Canvas\Shape\MapResolution;
-use PhpTui\Tui\Widget\Canvas\Shape\Map;
+use PhpTui\Tui\Shape\MapResolution;
+use PhpTui\Tui\Shape\Map;
 
 class CanvasPage implements Component
 {
