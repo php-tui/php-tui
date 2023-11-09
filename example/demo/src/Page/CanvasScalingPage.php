@@ -41,7 +41,7 @@ class CanvasScalingPage implements Component
     public function __construct(private Terminal $terminal, private int $xMax = 320, private int $yMax = 240)
     {
         $this->text = new TextShape(
-            FontRegistry::default()->get('default'),
+            'default',
             'Hello World',
             AnsiColor::Green,
             FloatPosition::at(0, 0),

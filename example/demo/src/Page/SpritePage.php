@@ -83,7 +83,7 @@ class SpritePage implements Component
                 'Only this and nothing more."',
             ]
         );
-        $font = FontRegistry::default()->get('default');
+        $font = 'default';
         $this->scroller = array_map(function (string $char, int $offset) use ($font) {
             return new TextShape(
                 font: $font,
