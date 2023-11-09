@@ -21,7 +21,7 @@ $display->drawWidget(
         ->marker(Marker::Block)
         ->draw(
             new TextShape(
-                font: $registry->get('default'),
+                font: 'default',
                 text: 'Hello!',
                 color: AnsiColor::Green,
                 position: FloatPosition::at(10, 7),
