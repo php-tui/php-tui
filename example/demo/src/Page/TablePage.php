@@ -22,8 +22,6 @@ use PhpTui\Tui\Widget\Table\TableState;
 
 final class TablePage implements Component
 {
-    private int $tick = 0;
-    private int $selected = 0;
     const EVENTS = [
         ['Event1', 'INFO'],
         ['Event2', 'INFO'],
@@ -52,6 +50,8 @@ final class TablePage implements Component
         ['Event25', 'INFO'],
         ['Event26', 'INFO'],
     ];
+
+    private int $selected = 0;
 
     private TableState $state;
     public function __construct()
