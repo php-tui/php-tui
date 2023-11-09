@@ -27,16 +27,6 @@ class Points implements Shape
     ) {
     }
 
-    public function draw(Painter $painter): void
-    {
-        foreach ($this->coords as [$x, $y]) {
-            if (!$point = $painter->getPoint(FloatPosition::at($x, $y))) {
-                continue;
-            }
-            $painter->paint($point, $this->color);
-        }
-    }
-
     /**
      * @param list<array{float,float}> $coords
      */
