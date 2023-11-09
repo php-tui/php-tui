@@ -17,21 +17,12 @@ class Map implements Shape
         /**
          * Resolution of the map (enum low or high)
          */
-        private MapResolution $mapResolution,
+        public MapResolution $mapResolution,
         /**
          * Color of the map
          */
-        private Color $color
+        public Color $color
     ) {
-    }
-
-    public function draw(Painter $painter): void
-    {
-        foreach ($this->mapResolution->data() as [$x, $y]) {
-            if ($point = $painter->getPoint(FloatPosition::at($x, $y))) {
-                $painter->paint($point, $this->color);
-            }
-        }
     }
 
     public function resolution(MapResolution $resolution): self

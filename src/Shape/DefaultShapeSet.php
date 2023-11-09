@@ -11,6 +11,7 @@ class DefaultShapeSet implements ShapeSet
         return [
             new CirclePainter(),
             new LinePainter(),
+            new MapPainter(),
         ];
     }
 }
