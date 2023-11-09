@@ -2,19 +2,19 @@
 │[q]quit [1]events [2]canvas [3]chart [4]list [5]table [6]blocks [7]sprites [8]│
 └──────────────────────────────────────────────────────────────────────────────┘
 ┌Table─────────────────────────────────────────────────────────────────────────┐
-│ INFO   Event1                                                                │
-│ INFO   Event2                                                                │
-│ CRITICAEvent3                                                                │
-│ ERROR  Event4                                                                │
-│ INFO   Event5                                                                │
-│ INFO   Event6                                                                │
-│ WARNINGEvent7                                                                │
-│ INFO   Event8                                                                │
-│ INFO   Event9                                                                │
-│ INFO   Event10                                                               │
-│XCRITICAEvent11                                                               │
-│ INFO   Event12                                                               │
-│ INFO   Event13                                                               │
-│ INFO   Event14                                                               │
-│ INFO   Event15                                                               │
+│ Level  Event     Data                                                        │
+│XINFO   Event1    ...                                                         │
+│ INFO   Event2    ...                                                         │
+│ CRITICAEvent3    ...                                                         │
+│ ERROR  Event4    ...                                                         │
+│ INFO   Event5    ...                                                         │
+│ INFO   Event6    ...                                                         │
+│ WARNINGEvent7    ...                                                         │
+│ INFO   Event8    ...                                                         │
+│ INFO   Event9    ...                                                         │
+│ INFO   Event10   ...                                                         │
+│ CRITICAEvent11   ...                                                         │
+│ INFO   Event12   ...                                                         │
+│ INFO   Event13   ...                                                         │
+│ INFO   Event14   ...                                                         │
 └──────────────────────────────────────────────────────────────────────────────┘
