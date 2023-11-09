@@ -1,16 +1,16 @@
 <?php
 
-namespace PhpTui\Tui\Widget\Canvas\Grid;
+namespace PhpTui\Tui\Model\Canvas\Grid;
 
 use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Color;
 use PhpTui\Tui\Model\Position;
 use PhpTui\Tui\Model\Widget\BrailleSet;
 use IntlChar;
-use PhpTui\Tui\Widget\Canvas\CanvasGrid;
-use PhpTui\Tui\Widget\Canvas\FgBgColor;
-use PhpTui\Tui\Widget\Canvas\Layer;
-use PhpTui\Tui\Widget\Canvas\Resolution;
+use PhpTui\Tui\Model\Canvas\CanvasGrid;
+use PhpTui\Tui\Model\Canvas\FgBgColor;
+use PhpTui\Tui\Model\Canvas\Layer;
+use PhpTui\Tui\Model\Canvas\Resolution;
 
 final class BrailleGrid extends CanvasGrid
 {

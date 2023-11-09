@@ -11,7 +11,7 @@ use PhpTui\Tui\Model\WidgetRenderer\NullWidgetRenderer;
 use PhpTui\Tui\Model\Widget\FloatPosition;
 use PhpTui\Tui\Widget\Canvas;
 use PhpTui\Tui\Widget\CanvasRenderer;
-use PhpTui\Tui\Widget\Canvas\CanvasContext;
+use PhpTui\Tui\Model\Canvas\CanvasContext;
 use Generator;
 use PHPUnit\Framework\TestCase;
 

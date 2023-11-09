@@ -12,7 +12,7 @@ use PHPStan\PhpDocParser\Parser\PhpDocParser;
 use PHPStan\PhpDocParser\Parser\TokenIterator;
 use PHPStan\PhpDocParser\Parser\TypeParser;
 use PhpTui\Tui\Model\Widget;
-use PhpTui\Tui\Widget\Canvas\Shape;
+use PhpTui\Tui\Model\Canvas\Shape;
 use Roave\BetterReflection\BetterReflection;
 use Roave\BetterReflection\Reflection\ReflectionClass;
 use Roave\BetterReflection\Reflection\ReflectionProperty;

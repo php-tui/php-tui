@@ -1,6 +1,8 @@
 <?php
 
-namespace PhpTui\Tui\Widget\Canvas;
+namespace PhpTui\Tui\Model\Canvas;
+
+use PhpTui\Tui\Model\Canvas\Painter;
 
 interface Shape
 {

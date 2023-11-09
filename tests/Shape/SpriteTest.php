@@ -9,7 +9,7 @@ use PhpTui\Tui\Model\Buffer;
 use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Model\Widget\FloatPosition;
 use PhpTui\Tui\Widget\Canvas;
-use PhpTui\Tui\Widget\Canvas\CanvasContext;
+use PhpTui\Tui\Model\Canvas\CanvasContext;
 use Generator;
 use PhpTui\Tui\Shape\Sprite;
 

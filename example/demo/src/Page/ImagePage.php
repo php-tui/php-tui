@@ -14,7 +14,7 @@ use PhpTui\Tui\Model\Widget\Borders;
 use PhpTui\Tui\Model\Widget\Title;
 use PhpTui\Tui\Widget\Block;
 use PhpTui\Tui\Widget\Canvas;
-use PhpTui\Tui\Widget\Canvas\CanvasContext;
+use PhpTui\Tui\Model\Canvas\CanvasContext;
 use PhpTui\Tui\Widget\Grid;
 
 final class ImagePage implements Component

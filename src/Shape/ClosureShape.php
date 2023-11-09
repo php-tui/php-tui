@@ -3,8 +3,8 @@
 namespace PhpTui\Tui\Shape;
 
 use Closure;
-use PhpTui\Tui\Widget\Canvas\Painter;
-use PhpTui\Tui\Widget\Canvas\Shape;
+use PhpTui\Tui\Model\Canvas\Painter;
+use PhpTui\Tui\Model\Canvas\Shape;
 
 class ClosureShape implements Shape
 {

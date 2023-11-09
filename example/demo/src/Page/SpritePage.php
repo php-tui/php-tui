@@ -17,7 +17,7 @@ use PhpTui\Tui\Model\Widget\FloatPosition;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Widget\Block;
 use PhpTui\Tui\Widget\Canvas;
-use PhpTui\Tui\Widget\Canvas\CanvasContext;
+use PhpTui\Tui\Model\Canvas\CanvasContext;
 use PhpTui\Tui\Shape\Points;
 use PhpTui\Tui\Shape\Sprite;
 use PhpTui\Tui\Widget\Grid;

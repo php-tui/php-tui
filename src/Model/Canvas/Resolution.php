@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpTui\Tui\Widget\Canvas;
+namespace PhpTui\Tui\Model\Canvas;
 
 final class Resolution
 {

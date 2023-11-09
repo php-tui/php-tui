@@ -10,7 +10,7 @@ use PhpTui\Tui\Model\Cell;
 use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Model\Widget\Line as DTLLine;
 use PhpTui\Tui\Widget\Canvas;
-use PhpTui\Tui\Widget\Canvas\CanvasContext;
+use PhpTui\Tui\Model\Canvas\CanvasContext;
 use PhpTui\Tui\Shape\Circle;
 use PhpTui\Tui\Shape\Line;
 use Generator;

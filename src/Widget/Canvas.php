@@ -8,8 +8,8 @@ use PhpTui\Tui\Model\AxisBounds;
 use PhpTui\Tui\Model\Color;
 use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Model\Widget;
-use PhpTui\Tui\Widget\Canvas\CanvasContext;
-use PhpTui\Tui\Widget\Canvas\Shape;
+use PhpTui\Tui\Model\Canvas\CanvasContext;
+use PhpTui\Tui\Model\Canvas\Shape;
 
 /**
  * The canvas widget provides a surface, of arbitrary scale, upon which shapes can be drawn.

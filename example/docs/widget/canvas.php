@@ -5,7 +5,7 @@ use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Display;
 use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Widget\Canvas;
-use PhpTui\Tui\Widget\Canvas\CanvasContext;
+use PhpTui\Tui\Model\Canvas\CanvasContext;
 use PhpTui\Tui\Shape\Circle;
 
 require 'vendor/autoload.php';

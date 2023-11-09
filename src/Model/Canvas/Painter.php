@@ -1,7 +1,8 @@
 <?php
 
-namespace PhpTui\Tui\Widget\Canvas;
+namespace PhpTui\Tui\Model\Canvas;
 
+use PhpTui\Tui\Model\Canvas\CanvasContext;
 use PhpTui\Tui\Model\Color;
 use PhpTui\Tui\Model\Position;
 use PhpTui\Tui\Model\Widget\FloatPosition;

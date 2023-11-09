@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpTui\Tui\Widget\Canvas;
+namespace PhpTui\Tui\Model\Canvas;
 
 use PhpTui\Tui\Model\Widget\FloatPosition;
 use PhpTui\Tui\Model\Widget\Line;

@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpTui\Tui\Widget\Canvas;
+namespace PhpTui\Tui\Model\Canvas;
 
 use PhpTui\Tui\Model\AxisBounds;
 use PhpTui\Tui\Model\Marker;
@@ -9,9 +9,9 @@ use PhpTui\Tui\Model\Widget\BlockSet;
 use PhpTui\Tui\Model\Widget\FloatPosition;
 use PhpTui\Tui\Model\Widget\Line;
 use PhpTui\Tui\Model\Widget\Symbols;
-use PhpTui\Tui\Widget\Canvas\Grid\BrailleGrid;
-use PhpTui\Tui\Widget\Canvas\Grid\CharGrid;
-use PhpTui\Tui\Widget\Canvas\Grid\HalfBlockGrid;
+use PhpTui\Tui\Model\Canvas\Grid\BrailleGrid;
+use PhpTui\Tui\Model\Canvas\Grid\CharGrid;
+use PhpTui\Tui\Model\Canvas\Grid\HalfBlockGrid;
 
 final class CanvasContext
 {
