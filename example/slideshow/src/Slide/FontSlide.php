@@ -5,7 +5,6 @@ namespace PhpTui\Tui\Example\Slideshow\Slide;
 use PhpTui\Term\Event;
 use PhpTui\Term\Event\CodedKeyEvent;
 use PhpTui\Term\KeyCode;
-use PhpTui\Tui\Adapter\Bdf\FontRegistry;
 use PhpTui\Tui\Adapter\Bdf\Shape\TextShape;
 use PhpTui\Tui\Example\Slideshow\Slide;
 use PhpTui\Tui\Example\Slideshow\Tick;
@@ -41,7 +40,6 @@ final class FontSlide implements Slide
     private ItemListState $state;
 
     public function __construct(
-        private FontRegistry $registry,
         private string $title,
         /**
          * @var string[]
@@ -79,7 +77,7 @@ final class FontSlide implements Slide
                         Canvas::fromIntBounds(0, 56, 0, 7)
                             ->draw(
                                 new TextShape(
-                                    $this->registry->get('default'),
+                                    'default',
                                     $this->title(),
                                     AnsiColor::Cyan,
                                     FloatPosition::at(0, 0),
@@ -141,7 +139,7 @@ final class FontSlide implements Slide
                 }
             }))
             ->draw(new TextShape(
-                $this->registry->get('default'),
+                'default',
                 'e',
                 AnsiColor::White,
                 FloatPosition::at(-1, 0),

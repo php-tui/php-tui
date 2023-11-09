@@ -5,7 +5,6 @@ namespace PhpTui\Tui\Example\Slideshow\Slide;
 use PhpTui\Term\Event;
 use PhpTui\Term\Event\CodedKeyEvent;
 use PhpTui\Term\KeyCode;
-use PhpTui\Tui\Adapter\Bdf\FontRegistry;
 use PhpTui\Tui\Adapter\Bdf\Shape\TextShape;
 use PhpTui\Tui\Adapter\ImageMagick\Shape\ImageShape;
 use PhpTui\Tui\Example\Slideshow\Slide;
@@ -35,7 +34,6 @@ final class ListAndImageLR implements Slide
 
     public function __construct(
         private ImageShape $image,
-        private FontRegistry $registry,
         private string $title,
         /**
          * @var string[]
@@ -68,7 +66,7 @@ final class ListAndImageLR implements Slide
                         Canvas::fromIntBounds(0, 56, 0, 6)
                             ->draw(
                                 new TextShape(
-                                    $this->registry->get('default'),
+                                    'default',
                                     $this->title(),
                                     AnsiColor::Cyan,
                                     FloatPosition::at(0, 0),

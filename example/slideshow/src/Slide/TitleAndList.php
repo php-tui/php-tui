@@ -5,7 +5,6 @@ namespace PhpTui\Tui\Example\Slideshow\Slide;
 use PhpTui\Term\Event;
 use PhpTui\Term\Event\CodedKeyEvent;
 use PhpTui\Term\KeyCode;
-use PhpTui\Tui\Adapter\Bdf\FontRegistry;
 use PhpTui\Tui\Adapter\Bdf\Shape\TextShape;
 use PhpTui\Tui\Example\Slideshow\Slide;
 use PhpTui\Tui\Example\Slideshow\Tick;
@@ -35,7 +34,6 @@ final class TitleAndList implements Slide
     private ItemListState $state;
 
     public function __construct(
-        private FontRegistry $registry,
         private string $title,
         /**
          * @var string[]
@@ -63,7 +61,7 @@ final class TitleAndList implements Slide
                 Canvas::fromIntBounds(0, 80, 0, 10)
                     ->paint(function (CanvasContext $context) {
                         $context->draw(new TextShape(
-                            $this->registry->get('default'),
+                            'default',
                             $this->title(),
                             AnsiColor::Cyan,
                             FloatPosition::at(0, 0),

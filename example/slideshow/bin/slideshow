@@ -34,25 +34,22 @@ $dumper = new ServerDumper('tcp://127.0.0.1:9912', new CliDumper(), [
 VarDumper::setHandler(function ($var) use ($cloner, $dumper): void {
     $dumper->dump($cloner->cloneVar($var));
 });
-$registry = FontRegistry::default();
 $app = new App(
     Terminal::new(),
     Display::fullscreen(PhpTermBackend::new()),
     [
-        new Splash($registry),
+        new Splash(),
         new PargagraphAndImageDT(
-            ImageShape::fromFilename(
+            ImageShape::fromPath(
                 __DIR__ . '/../assets/warning.jpg'
             ),
-            $registry,
             title: 'WARNING',
             text: 'This presentation is made with janky cutting edge software',
         ),
         new ListAndImageLR(
-            ImageShape::fromFilename(
+            ImageShape::fromPath(
                 __DIR__ . '/../assets/me.small.JPG'
             ),
-            $registry,
             title: 'About Me',
             items: [
                 '- Daniel Leech',
@@ -63,45 +60,40 @@ $app = new App(
             ]
         ),
         new PargagraphAndImageDT(
-            ImageShape::fromFilename(
+            ImageShape::fromPath(
                 __DIR__ . '/../assets/logo.png'
             ),
-            $registry,
             title: 'Redundancy',
-            text: 'Since being made redundant 3 weeks ago I have been using my unexpected free time to start a project that has been in my minds eye for some time: a TUI framework for PHP.',
+            text: 'Since being made redundant 3 weeks ago I have been using my unexpected free time to stat a project that has been in my minds eye for some time: a TUI framework for PHP.',
         ),
         new DefinitionSlide(
-            $registry,
             'What is a TUI framework?',
             'TUI stands for Terminal User Interface. It’s generally for a full screen application that runs in the terminal and is controlled with the keyboard, although it’s also possible for TUIs to use the mouse!',
         ),
         new TitlePargagraphAndImageDT(
-            ImageShape::fromFilename(
+            ImageShape::fromPath(
                 __DIR__ . '/../assets/storm.jpg'
             ),
-            $registry,
             title: 'Redundancy',
             text: 'It’s a horrible word, and it’s a word that grows heavier the longer I don’t have a job. But the good thing is that I now had plenty of spare time.',
         ),
         new PargagraphAndImageDT(
-            ImageShape::fromFilename(
+            ImageShape::fromPath(
                 __DIR__ . '/../assets/ratatui.png'
             ),
-            $registry,
             title: 'Porting Ratatui from Rust',
             text: '... and I did what most people do in this situation and decided to port large Rust projects to PHP',
         ),
         new ListAndImageLR(
-            ImageShape::fromFilename(
+            ImageShape::fromPath(
                 __DIR__ . '/../assets/ratatuiony.png'
             ),
-            $registry,
             title: 'Ratatui',
             items: [
                 '- TUI library for Rust',
                 '- Successor project of Rust TUI',
                 '- Layouts',
-                '- Charts',
+                '- Chats',
                 '- Tables',
                 '- Lists',
                 '- Paragraphs',
@@ -109,9 +101,8 @@ $app = new App(
                 '- Let\'s look at the ratatui demo!',
             ]
         ),
-        new RustCodeSlide($registry),
+        new RustCodeSlide(),
         new TitleAndList(
-            $registry,
             'Cassowary',
             [
                 '- Ported from Rust\'s cassowary-rs - line for line',
@@ -123,20 +114,17 @@ $app = new App(
             subTitle: 'A constraint solving algorithm for arranging user interfaces',
         ),
         new CassowarySlide(
-            registry: $registry,
             title: 'Cassowary',
             items: []
         ),
         new PargagraphAndImageDT(
-            ImageShape::fromFilename(
+            ImageShape::fromPath(
                 __DIR__ . '/../assets/crossterm.jpg'
             ),
-            $registry,
             title: 'Porting Crossterm!',
             text: 'I also ported crossterm - which is an abstraction for writing and reading from the console',
         ),
         new TitleAndList(
-            $registry,
             'PHP-Term',
             [
                 '- Sends ANSI escape codes to the terminal',
@@ -146,17 +134,16 @@ $app = new App(
             'Abstracting the dirty work of reading and writing from TTY',
         ),
         new TitleAndList(
-            $registry,
             'Font Rendering!',
             [
-                '- Started porting a BDF parser from the embedded Rust project',
+                '- Stated porting a BDF parser from the embedded Rust project',
                 '- It used parser combinators and I didn\'t want to add a new depdency',
                 '- Wasn\'t actually complicated',
                 '- Wrote my own parser!',
             ],
             'What if we could render fonts?!?',
         ),
-        new FontSlide($registry, 'BDF Parser', [
+        new FontSlide('BDF Parser', [
 'STARTCHAR e',
 'ENCODING 101',
 'SWIDTH 576 0',
@@ -176,11 +163,10 @@ $app = new App(
 'ENDCHAR',
         ], 'BDF fonts are in a plain text format and are easy to parse!'),
         new TitleAndList(
-            $registry,
             'Widgets!',
             [
                 '✅ Canvas',
-                '✅ Chart',
+                '✅ Chat',
                 '✅ Table',
                 '✅ Block',
                 '✅ Paragraph',
@@ -188,7 +174,7 @@ $app = new App(
                 '✅ Table',
                 '❌ Tabs',
                 '❌ Calendar',
-                '❌ Barchart',
+                '❌ Barchat',
                 '❌ Scrollbar',
                 '❌ Sparkline',
                 '❌ Gauge',
@@ -196,15 +182,13 @@ $app = new App(
             'The aim is to port all the widgets from Ratatui',
         ),
         new TitlePargagraphAndImageDT(
-            ImageShape::fromFilename(
+            ImageShape::fromPath(
                 __DIR__ . '/../assets/me-demo.jpg'
             ),
-            $registry,
             title: 'Demo',
             text: 'Let\'s have a look at the demo app!',
         ),
         new TitleAndList(
-            $registry,
             'Next Steps',
             [
                 '- This is a WIP!',
@@ -218,7 +202,6 @@ $app = new App(
             ]
         ),
         new TitleAndList(
-            $registry,
             'More info',
             [
                 '- Github: github.com/php-tui/php-tui',

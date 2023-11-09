@@ -38,7 +38,6 @@ final class CassowarySlide implements Slide
     private ItemListState $state;
 
     public function __construct(
-        private FontRegistry $registry,
         private string $title,
         /**
          * @var string[]
@@ -71,7 +70,7 @@ final class CassowarySlide implements Slide
                         Canvas::fromIntBounds(0, 56, 0, 6)
                             ->draw(
                                 new TextShape(
-                                    $this->registry->get('default'),
+                                    'default',
                                     $this->title(),
                                     AnsiColor::Cyan,
                                     FloatPosition::at(0, 0),

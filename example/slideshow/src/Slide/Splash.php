@@ -3,26 +3,21 @@
 namespace PhpTui\Tui\Example\Slideshow\Slide;
 
 use PhpTui\Term\Event;
-use PhpTui\Tui\Adapter\Bdf\FontRegistry;
 use PhpTui\Tui\Adapter\Bdf\Shape\TextShape;
 use PhpTui\Tui\Example\Slideshow\Slide;
 use PhpTui\Tui\Example\Slideshow\Tick;
 use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\AxisBounds;
+use PhpTui\Tui\Model\Canvas\CanvasContext;
 use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\Widget\FloatPosition;
 use PhpTui\Tui\Model\Widget\Line;
+use PhpTui\Tui\Shape\Line as PhpTuiLine;
 use PhpTui\Tui\Widget\Canvas;
-use PhpTui\Tui\Widget\Canvas\CanvasContext;
-use PhpTui\Tui\Widget\Canvas\Shape\Line as PhpTuiLine;
 
 class Splash implements Slide
 {
-    public function __construct(private FontRegistry $registry)
-    {
-    }
-
     public function title(): string
     {
         return 'Building a better world';
@@ -35,7 +30,7 @@ class Splash implements Slide
             ->yBounds(AxisBounds::new(0, 240))
             ->paint(function (CanvasContext $context): void {
                 $title = new TextShape(
-                    $this->registry->get('default'),
+                    'default',
                     'PHP-TUI',
                     AnsiColor::Cyan,
                     FloatPosition::at(10, 200),
@@ -43,7 +38,7 @@ class Splash implements Slide
                     scaleY: 4,
                 );
                 $subTitle = new TextShape(
-                    $this->registry->get('default'),
+                    'default',
                     'Building better TUIs!',
                     AnsiColor::White,
                     FloatPosition::at(10, 180),

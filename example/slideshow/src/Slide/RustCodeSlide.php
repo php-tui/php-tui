@@ -3,7 +3,6 @@
 namespace PhpTui\Tui\Example\Slideshow\Slide;
 
 use PhpTui\Term\Event;
-use PhpTui\Tui\Adapter\Bdf\FontRegistry;
 use PhpTui\Tui\Adapter\Bdf\Shape\TextShape;
 use PhpTui\Tui\Example\Demo\Page\CanvasPage;
 use PhpTui\Tui\Example\Slideshow\Slide;
@@ -22,9 +21,6 @@ use PhpTui\Tui\Widget\PhpCode;
 
 class RustCodeSlide implements Slide
 {
-    public function __construct(private FontRegistry $registry)
-    {
-    }
     public function title(): string
     {
         return 'Porting Rust';
@@ -37,7 +33,7 @@ class RustCodeSlide implements Slide
             ->widgets(
                 Canvas::fromIntBounds(0, 120, 0, 10)
                     ->draw(new TextShape(
-                        $this->registry->get('default'),
+                        'default',
                         'Porting Rust Code', AnsiColor::Cyan, FloatPosition::at(2,2)
 
                     )),

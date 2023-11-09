@@ -5,7 +5,6 @@ namespace PhpTui\Tui\Example\Slideshow\Slide;
 use PhpTui\Term\Event;
 use PhpTui\Term\Event\CodedKeyEvent;
 use PhpTui\Term\KeyCode;
-use PhpTui\Tui\Adapter\Bdf\FontRegistry;
 use PhpTui\Tui\Adapter\Bdf\Shape\TextShape;
 use PhpTui\Tui\Example\Slideshow\Slide;
 use PhpTui\Tui\Example\Slideshow\Tick;
@@ -29,7 +28,6 @@ final class DefinitionSlide implements Slide
     private bool $highlight = false;
 
     public function __construct(
-        private FontRegistry $registry,
         private string $title,
         private string $text,
     ) {
@@ -54,7 +52,7 @@ final class DefinitionSlide implements Slide
                     Canvas::fromIntBounds(0, 200, 0, 50)
                             ->draw(
                                 new TextShape(
-                                    $this->registry->get('default'),
+                                    'default',
                                     $this->title(),
                                     AnsiColor::White,
                                     FloatPosition::at(15, 0),

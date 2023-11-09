@@ -2,9 +2,9 @@
 
 namespace PhpTui\Tui\Adapter\ImageMagick\Shape;
 
-use PhpTui\Tui\Model\Position;
 use PhpTui\Tui\Model\Widget\FloatPosition;
 use PhpTui\Tui\Model\Canvas\Shape;
+use RuntimeException;
 
 /**
  * Renders an image on the canvas.
@@ -28,5 +28,16 @@ final class ImageShape implements Shape
     {
         $this->position = $position;
         return $this;
+    }
+
+    public static function fromPath(string $imagePath): self
+    {
+        if (!file_exists($imagePath)) {
+            throw new RuntimeException(sprintf(
+                'Imagefile "%s" does not exist',
+                $imagePath
+            ));
+        }
+        return new self($imagePath, new FloatPosition(0, 0));
     }
 }

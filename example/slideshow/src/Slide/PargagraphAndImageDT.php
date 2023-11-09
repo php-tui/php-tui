@@ -3,7 +3,6 @@
 namespace PhpTui\Tui\Example\Slideshow\Slide;
 
 use PhpTui\Term\Event;
-use PhpTui\Tui\Adapter\Bdf\FontRegistry;
 use PhpTui\Tui\Adapter\ImageMagick\Shape\ImageShape;
 use PhpTui\Tui\Example\Slideshow\Slide;
 use PhpTui\Tui\Example\Slideshow\Tick;
@@ -22,7 +21,6 @@ final class PargagraphAndImageDT implements Slide
 {
     public function __construct(
         private ImageShape $image,
-        private FontRegistry $registry,
         private string $title,
         private string $text,
     ) {
@@ -61,7 +59,7 @@ final class PargagraphAndImageDT implements Slide
 
     private function image(): Widget
     {
-        return Canvas::fromIntBounds(0, $this->image->resolution()->width, 0, $this->image->resolution()->height)
+        return Canvas::fromIntBounds(0, 320, 0, 200)
             ->marker(Marker::HalfBlock)
             ->draw($this->image);
     }
