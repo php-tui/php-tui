@@ -5,7 +5,6 @@ namespace PhpTui\Tui\Model\Canvas;
 use ArrayIterator;
 use PhpTui\Tui\Model\AxisBounds;
 use IteratorAggregate;
-use PhpTui\Tui\Model\Canvas\Label;
 use Traversable;
 
 /**

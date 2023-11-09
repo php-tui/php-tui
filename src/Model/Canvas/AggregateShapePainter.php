@@ -2,9 +2,6 @@
 
 namespace PhpTui\Tui\Model\Canvas;
 
-use PhpTui\Tui\Shape\DefaultShapeSet;
-
-
 /**
  * Will iterate over all shape painters to paint the shape.
  *

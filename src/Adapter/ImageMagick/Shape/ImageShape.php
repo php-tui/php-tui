@@ -2,11 +2,7 @@
 
 namespace PhpTui\Tui\Adapter\ImageMagick\Shape;
 
-use Imagick;
-use ImagickPixel;
-use PhpTui\Tui\Model\RgbColor;
 use PhpTui\Tui\Model\Widget\FloatPosition;
-use PhpTui\Tui\Model\Canvas\Painter;
 use PhpTui\Tui\Model\Canvas\Shape;
 use RuntimeException;
 

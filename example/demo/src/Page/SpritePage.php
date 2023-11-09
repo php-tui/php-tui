@@ -35,7 +35,6 @@ class SpritePage implements Component
      */
     private array $stars = [];
 
-
     private Points $points;
 
     /**

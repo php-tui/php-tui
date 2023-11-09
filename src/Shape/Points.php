@@ -3,8 +3,6 @@
 namespace PhpTui\Tui\Shape;
 
 use PhpTui\Tui\Model\Color;
-use PhpTui\Tui\Model\Widget\FloatPosition;
-use PhpTui\Tui\Model\Canvas\Painter;
 use PhpTui\Tui\Model\Canvas\Shape;
 
 /**

@@ -4,7 +4,6 @@ namespace PhpTui\Tui\Model\Canvas;
 
 use ArrayIterator;
 use IteratorAggregate;
-use PhpTui\Tui\Model\Canvas\Layer;
 use Traversable;
 
 /**

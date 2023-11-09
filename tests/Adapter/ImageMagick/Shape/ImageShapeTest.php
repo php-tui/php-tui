@@ -3,7 +3,6 @@
 namespace PhpTui\Tui\Tests\Adapter\ImageMagick\Shape;
 
 use PhpTui\Tui\Adapter\ImageMagick\Shape\ImagePainter;
-use PhpTui\Tui\Adapter\ImageMagick\Shape\ImageRenderer;
 use PhpTui\Tui\Adapter\ImageMagick\Shape\ImageShape;
 use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\AxisBounds;

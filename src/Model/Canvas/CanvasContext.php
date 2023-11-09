@@ -33,8 +33,7 @@ final class CanvasContext
         AxisBounds $xBounds,
         AxisBounds $yBounds,
         Marker $marker
-    ): self
-    {
+    ): self {
         $dot = Symbols::DOT;
         $block = BlockSet::FULL;
         $bar = BarSet::HALF;
