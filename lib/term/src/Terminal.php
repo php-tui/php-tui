@@ -36,13 +36,13 @@ class Terminal
         RawMode $rawMode = null,
     ): self {
         return new self(
-            $painter ?: AnsiPainter::new(StreamWriter::stdout()),
-            $infoProvider ?: AggregateInformationProvider::new([
+            $painter ?? AnsiPainter::new(StreamWriter::stdout()),
+            $infoProvider ?? AggregateInformationProvider::new([
                 SizeFromEnvVarProvider::new(),
                 SizeFromSttyProvider::new()
             ]),
-            $rawMode ?: SttyRawMode::new(),
-            $eventProvider ?: SyncEventProvider::new(),
+            $rawMode ?? SttyRawMode::new(),
+            $eventProvider ?? SyncEventProvider::new(),
         );
     }
 

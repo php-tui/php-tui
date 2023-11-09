@@ -31,7 +31,7 @@ class ItemListRenderer implements WidgetRenderer
         $listHeight = $listArea->height;
         [$start, $end] = $this->getItemsBounds($widget, $listHeight);
         $widget->state->offset = $start;
-        $highlightSymbol = $widget->highlightSymbol ?? '';
+        $highlightSymbol = $widget->highlightSymbol;
         $blankSymbol = str_repeat(' ', mb_strlen($highlightSymbol));
         $currentHeight = 0;
         $selectionSpacing = $widget->highlightSpacing->shouldAdd($widget->state->selected !== null);

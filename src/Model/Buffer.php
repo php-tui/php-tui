@@ -118,7 +118,7 @@ final class Buffer implements Countable
 
     public function putString(Position $position, string $line, ?Style $style = null, int $width = PHP_INT_MAX): Position
     {
-        $style = $style ?: Style::default();
+        $style = $style ?? Style::default();
         try {
             $index = $position->toIndex($this->area);
         } catch (OutOfBoundsException $e) {

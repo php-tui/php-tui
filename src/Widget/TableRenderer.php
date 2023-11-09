@@ -32,7 +32,7 @@ final class TableRenderer implements WidgetRenderer
         ) ? mb_strlen($widget->highlightSymbol) : 0;
 
         $columnWidths = $this->getColumnsWidths($widget, $tableArea->width, intval($selectionWidth));
-        $highlightSymbol = $widget->highlightSymbol ?: '';
+        $highlightSymbol = $widget->highlightSymbol;
         $currentHeight = 0;
         $rowsHeight = $tableArea->height;
 

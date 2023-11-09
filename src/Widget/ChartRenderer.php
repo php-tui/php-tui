@@ -63,12 +63,12 @@ final class ChartRenderer implements WidgetRenderer
 
         foreach ($widget->dataSets as $dataSet) {
             $renderer->render($renderer, Canvas::default()
-                ->backgroundColor($widget->style->bg ?: AnsiColor::Reset)
+                ->backgroundColor($widget->style->bg ?? AnsiColor::Reset)
                 ->xBounds($widget->xAxis->bounds)
                 ->yBounds($widget->yAxis->bounds)
                 ->marker($dataSet->marker)
                 ->paint(function (CanvasContext $context) use ($dataSet): void {
-                    $context->draw(Points::new($dataSet->data, $dataSet->style->fg ?: AnsiColor::Reset));
+                    $context->draw(Points::new($dataSet->data, $dataSet->style->fg ?? AnsiColor::Reset));
                 }), $layout->graphArea, $buffer);
 
         }
@@ -141,7 +141,7 @@ final class ChartRenderer implements WidgetRenderer
         if (null === $layout->labelX) {
             return;
         }
-        $labels = $chart->xAxis->labels ?: [];
+        $labels = $chart->xAxis->labels ?? [];
         if (count($labels) < 2) {
             return;
         }
