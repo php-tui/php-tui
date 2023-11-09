@@ -98,9 +98,11 @@ class TextRenderer implements ShapePainter
         }
 
         foreach ($points as $point) {
-            if (null !== $point) {
-                $painter->paint($point, $shape->color);
+            if (null === $point) {
+                continue;
             }
+
+            $painter->paint($point, $shape->color);
         }
 
         return $glyph->boundingBox->size->width * $shape->scaleX;
