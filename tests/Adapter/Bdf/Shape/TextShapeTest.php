@@ -3,6 +3,7 @@
 namespace PhpTui\Tui\Tests\Adapter\Bdf\Shape;
 
 use PhpTui\Tui\Adapter\Bdf\FontRegistry;
+use PhpTui\Tui\Adapter\Bdf\Shape\TextRenderer;
 use PhpTui\Tui\Adapter\Bdf\Shape\TextShape;
 use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Area;
@@ -31,7 +32,7 @@ class TextShapeTest extends TestCase
             });
         $area = Area::fromDimensions(65, 6);
         $buffer = Buffer::empty($area);
-        (new CanvasRenderer())->render(new NullWidgetRenderer(), $canvas, $buffer->area(), $buffer);
+        (new CanvasRenderer(new TextRenderer(FontRegistry::default())))->render(new NullWidgetRenderer(), $canvas, $buffer->area(), $buffer);
         self::assertEquals($expected, $buffer->toLines());
     }
     /**
@@ -41,7 +42,7 @@ class TextShapeTest extends TestCase
     {
         yield 'text' => [
             new TextShape(
-                font: FontRegistry::default()->get('default'),
+                font: 'default',
                 text: 'Hello World',
                 color: AnsiColor::Green,
                 position: FloatPosition::at(0, 0),
@@ -57,7 +58,7 @@ class TextShapeTest extends TestCase
         ];
         yield 'scale x' => [
             new TextShape(
-                font: FontRegistry::default()->get('default'),
+                font: 'default',
                 scaleX: 2,
                 text: 'Hello',
                 color: AnsiColor::Green,
@@ -74,7 +75,7 @@ class TextShapeTest extends TestCase
         ];
         yield 'scale y' => [
             new TextShape(
-                font: FontRegistry::default()->get('default'),
+                font: 'default',
                 scaleY: 2,
                 text: 'Hello World',
                 color: AnsiColor::Green,
@@ -103,7 +104,14 @@ class TextShapeTest extends TestCase
                 $context->draw($text);
             });
         $buffer = Buffer::empty($area);
-        (new CanvasRenderer())->render(new NullWidgetRenderer(), $canvas, $buffer->area(), $buffer);
+        (new CanvasRenderer(
+            new TextRenderer(FontRegistry::default())
+        ))->render(
+            new NullWidgetRenderer(),
+            $canvas,
+            $buffer->area(),
+            $buffer
+        );
         self::assertEquals($expected, $buffer->toLines());
     }
     /**
@@ -116,7 +124,7 @@ class TextShapeTest extends TestCase
             6,
             6,
             new TextShape(
-                font: FontRegistry::default()->get('default'),
+                font: 'default',
                 text: 'O',
                 color: AnsiColor::Green,
                 position: FloatPosition::at(0, 0),
@@ -135,7 +143,7 @@ class TextShapeTest extends TestCase
             6,
             6,
             new TextShape(
-                font: FontRegistry::default()->get('default'),
+                font: 'default',
                 text: 'O',
                 color: AnsiColor::Green,
                 position: FloatPosition::at(0, 0),
