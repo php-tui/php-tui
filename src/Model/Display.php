@@ -3,10 +3,15 @@
 namespace PhpTui\Tui\Model;
 
 use Closure;
+use PhpTui\Tui\Adapter\Bdf\BdfShapeSet;
+use PhpTui\Tui\Adapter\Bdf\FontRegistry;
+use PhpTui\Tui\Adapter\ImageMagick\ImageMagickShapeSet;
+use PhpTui\Tui\Model\Canvas\AggregateShapePainter;
 use PhpTui\Tui\Model\Viewport\Fullscreen;
 use PhpTui\Tui\Model\Viewport\Inline;
 use PhpTui\Tui\Model\WidgetRenderer\AggregateWidgetRenderer;
 use PhpTui\Tui\Model\WidgetRenderer\NullWidgetRenderer;
+use PhpTui\Tui\Shape\DefaultShapeSet;
 use PhpTui\Tui\Widget\DefaultWidgetSet;
 
 final class Display
@@ -40,7 +45,15 @@ final class Display
             $size,
             $size,
             new Position(0, 0),
-            AggregateWidgetRenderer::fromWidgetSets(new DefaultWidgetSet())
+            AggregateWidgetRenderer::fromWidgetSets(
+                new DefaultWidgetSet(
+                    AggregateShapePainter::fromShapeSets(
+                        new DefaultShapeSet(),
+                        new BdfShapeSet(FontRegistry::default()),
+                        new ImageMagickShapeSet(),
+                    )
+                )
+            )
         );
     }
 

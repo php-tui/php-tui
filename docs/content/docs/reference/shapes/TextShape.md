@@ -16,7 +16,7 @@ Configure the shape using the constructor arguments named as follows:
 
 | Name | Type | Description |
 | --- | --- | --- |
-| **font** | `PhpTui\BDF\BdfFont` | BDF font |
+| **font** | `string` | Font name as it is known in the font registry |
 | **text** | `string` | Text to render |
 | **color** | `PhpTui\Tui\Model\Color` | Color of the text |
 | **position** | `PhpTui\Tui\Model\Widget\FloatPosition` | Position of the text (bottom left corner) |

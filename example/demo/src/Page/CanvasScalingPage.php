@@ -7,7 +7,6 @@ use PhpTui\Term\Event\CodedKeyEvent;
 use PhpTui\Term\KeyCode;
 use PhpTui\Term\Size;
 use PhpTui\Term\Terminal;
-use PhpTui\Tui\Adapter\Bdf\FontRegistry;
 use PhpTui\Tui\Adapter\Bdf\Shape\TextShape;
 use PhpTui\Tui\Adapter\ImageMagick\Shape\ImageShape;
 use PhpTui\Tui\Example\Demo\Component;
@@ -20,11 +19,11 @@ use PhpTui\Tui\Model\Widget\FloatPosition;
 use PhpTui\Tui\Model\Widget\Title;
 use PhpTui\Tui\Widget\Block;
 use PhpTui\Tui\Widget\Canvas;
-use PhpTui\Tui\Widget\Canvas\Painter;
-use PhpTui\Tui\Widget\Canvas\Shape;
-use PhpTui\Tui\Widget\Canvas\Shape\Circle;
-use PhpTui\Tui\Widget\Canvas\Shape\ClosureShape;
-use PhpTui\Tui\Widget\Canvas\Shape\Line;
+use PhpTui\Tui\Model\Canvas\Painter;
+use PhpTui\Tui\Model\Canvas\Shape;
+use PhpTui\Tui\Shape\Circle;
+use PhpTui\Tui\Shape\ClosureShape;
+use PhpTui\Tui\Shape\Line;
 use PhpTui\Tui\Widget\Grid;
 
 class CanvasScalingPage implements Component
@@ -41,7 +40,7 @@ class CanvasScalingPage implements Component
     public function __construct(private Terminal $terminal, private int $xMax = 320, private int $yMax = 240)
     {
         $this->text = new TextShape(
-            FontRegistry::default()->get('default'),
+            'default',
             'Hello World',
             AnsiColor::Green,
             FloatPosition::at(0, 0),
@@ -51,7 +50,7 @@ class CanvasScalingPage implements Component
         if (!extension_loaded('imagick')) {
             $this->image = Circle::fromScalars(0, 0, 10);
         } else {
-            $this->image = ImageShape::fromFilename(__DIR__ . '/../../assets/beach.jpg');
+            $this->image = ImageShape::fromPath(__DIR__ . '/../../assets/beach.jpg');
         }
     }
 

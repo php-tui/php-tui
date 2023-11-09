@@ -6,7 +6,7 @@ use PhpTui\Tui\Model\Display;
 use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Model\Widget\FloatPosition;
 use PhpTui\Tui\Widget\Canvas;
-use PhpTui\Tui\Widget\Canvas\Shape\Sprite;
+use PhpTui\Tui\Shape\Sprite;
 
 require 'vendor/autoload.php';
 

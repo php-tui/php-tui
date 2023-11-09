@@ -5,8 +5,8 @@ use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Display;
 use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Widget\Canvas;
-use PhpTui\Tui\Widget\Canvas\Shape\Map;
-use PhpTui\Tui\Widget\Canvas\Shape\MapResolution;
+use PhpTui\Tui\Shape\Map;
+use PhpTui\Tui\Shape\MapResolution;
 
 require 'vendor/autoload.php';
 

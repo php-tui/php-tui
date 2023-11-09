@@ -4,14 +4,19 @@ namespace PhpTui\Tui\Widget;
 
 use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Buffer;
+use PhpTui\Tui\Model\Canvas\ShapePainter;
 use PhpTui\Tui\Model\Position;
 use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\WidgetRenderer;
-use PhpTui\Tui\Widget\Canvas\CanvasContext;
+use PhpTui\Tui\Model\Canvas\CanvasContext;
 
 final class CanvasRenderer implements WidgetRenderer
 {
+    public function __construct(private ShapePainter $painter)
+    {
+    }
+
     public function render(WidgetRenderer $renderer, Widget $widget, Area $area, Buffer $buffer): void
     {
         if (!$widget instanceof Canvas) {
@@ -23,6 +28,7 @@ final class CanvasRenderer implements WidgetRenderer
         $width = $area->width;
 
         $context = CanvasContext::new(
+            $this->painter,
             $area->width,
             $area->height,
             $widget->xBounds,

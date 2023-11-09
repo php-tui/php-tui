@@ -3,9 +3,9 @@
 use PhpTui\Tui\Adapter\PhpTerm\PhpTermBackend;
 use PhpTui\Tui\Model\Display;
 use PhpTui\Tui\Widget\Canvas;
-use PhpTui\Tui\Widget\Canvas\CanvasContext;
-use PhpTui\Tui\Widget\Canvas\Shape\Map;
-use PhpTui\Tui\Widget\Canvas\Shape\MapResolution;
+use PhpTui\Tui\Model\Canvas\CanvasContext;
+use PhpTui\Tui\Shape\Map;
+use PhpTui\Tui\Shape\MapResolution;
 
 require 'vendor/autoload.php';
 

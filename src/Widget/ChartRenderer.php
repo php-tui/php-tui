@@ -11,8 +11,8 @@ use PhpTui\Tui\Model\WidgetRenderer;
 use PhpTui\Tui\Model\Widget\HorizontalAlignment;
 use PhpTui\Tui\Model\Widget\LineSet;
 use PhpTui\Tui\Model\Widget\Span;
-use PhpTui\Tui\Widget\Canvas\CanvasContext;
-use PhpTui\Tui\Widget\Canvas\Shape\Points;
+use PhpTui\Tui\Model\Canvas\CanvasContext;
+use PhpTui\Tui\Shape\Points;
 use PhpTui\Tui\Widget\Chart\ChartLayout;
 use RuntimeException;
 

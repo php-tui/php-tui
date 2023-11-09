@@ -2,12 +2,8 @@
 
 namespace PhpTui\Tui\Adapter\ImageMagick\Shape;
 
-use Imagick;
-use ImagickPixel;
-use PhpTui\Tui\Model\RgbColor;
 use PhpTui\Tui\Model\Widget\FloatPosition;
-use PhpTui\Tui\Widget\Canvas\Painter;
-use PhpTui\Tui\Widget\Canvas\Shape;
+use PhpTui\Tui\Model\Canvas\Shape;
 use RuntimeException;
 
 /**
@@ -17,9 +13,9 @@ final class ImageShape implements Shape
 {
     private function __construct(
         /**
-         * Imagck to render (use `ImageShape::fromFilename` constructor)
+         * Absolute path to the image
          */
-        public readonly Imagick $image,
+        public readonly string $path,
 
         /**
          * Position to render at (bottom left)
@@ -34,48 +30,14 @@ final class ImageShape implements Shape
         return $this;
     }
 
-    public function draw(Painter $painter): void
+    public static function fromPath(string $imagePath): self
     {
-        $geo = $this->image->getImageGeometry();
-
-        /** @var ImagickPixel[] $pixels */
-        foreach ($this->image->getPixelIterator() as $y => $pixels) {
-            foreach ($pixels as $x => $pixel) {
-                $point = $painter->getPoint(
-                    FloatPosition::at(
-                        $this->position->x + $x,
-                        $this->position->y + $geo['height'] - intval($y) - 1
-                    )
-                );
-                if (null === $point) {
-                    continue;
-                }
-                $rgb = $pixel->getColor();
-                $painter->paint($point, RgbColor::fromRgb(
-                    $rgb['r'],
-                    $rgb['g'],
-                    $rgb['b']
-                ));
-            }
-        }
-
-    }
-
-    public static function fromFilename(string $filename): self
-    {
-        $image = new Imagick();
-        if (!file_exists($filename)) {
+        if (!file_exists($imagePath)) {
             throw new RuntimeException(sprintf(
                 'Imagefile "%s" does not exist',
-                $filename
+                $imagePath
             ));
         }
-        if (false === $image->readImage($filename)) {
-            throw new RuntimeException(sprintf(
-                'Could not read file "%s"',
-                $filename
-            ));
-        }
-        return new self($image, new FloatPosition(0, 0));
+        return new self($imagePath, new FloatPosition(0, 0));
     }
 }

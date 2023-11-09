@@ -5,7 +5,7 @@ namespace PhpTui\Tui\Tests\Widget\Canvas\Grid;
 use PHPUnit\Framework\TestCase;
 use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Position;
-use PhpTui\Tui\Widget\Canvas\Grid\CharGrid;
+use PhpTui\Tui\Model\Canvas\Grid\CharGrid;
 
 class CharGridTest extends TestCase
 {

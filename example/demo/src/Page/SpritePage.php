@@ -3,7 +3,6 @@
 namespace PhpTui\Tui\Example\Demo\Page;
 
 use PhpTui\Term\Event;
-use PhpTui\Tui\Adapter\Bdf\FontRegistry;
 use PhpTui\Tui\Adapter\Bdf\Shape\TextShape;
 use PhpTui\Tui\Example\Demo\Component;
 use PhpTui\Tui\Model\AnsiColor;
@@ -17,9 +16,9 @@ use PhpTui\Tui\Model\Widget\FloatPosition;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Widget\Block;
 use PhpTui\Tui\Widget\Canvas;
-use PhpTui\Tui\Widget\Canvas\CanvasContext;
-use PhpTui\Tui\Widget\Canvas\Shape\Points;
-use PhpTui\Tui\Widget\Canvas\Shape\Sprite;
+use PhpTui\Tui\Model\Canvas\CanvasContext;
+use PhpTui\Tui\Shape\Points;
+use PhpTui\Tui\Shape\Sprite;
 use PhpTui\Tui\Widget\Grid;
 
 class SpritePage implements Component
@@ -36,9 +35,6 @@ class SpritePage implements Component
      */
     private array $stars = [];
 
-    /**
-     * @var Canvas\Shape\Points
-     */
     private Points $points;
 
     /**
@@ -85,7 +81,7 @@ class SpritePage implements Component
                 'Only this and nothing more."',
             ]
         );
-        $font = FontRegistry::default()->get('default');
+        $font = 'default';
         $this->scroller = array_map(function (string $char, int $offset) use ($font) {
             return new TextShape(
                 font: $font,
