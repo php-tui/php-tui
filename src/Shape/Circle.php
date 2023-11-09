@@ -29,18 +29,6 @@ final class Circle implements Shape
     ) {
     }
 
-    public function draw(Painter $painter): void
-    {
-        foreach (range(0, 360) as $degree) {
-            $radians = deg2rad($degree);
-            $circleX = $this->radius * cos($radians) + $this->position->x;
-            $circleY = $this->radius * sin($radians) + $this->position->y;
-            if ($point = $painter->getPoint(FloatPosition::at($circleX, $circleY))) {
-                $painter->paint($point, $this->color);
-            }
-        }
-    }
-
     public static function fromScalars(float $x, float $y, float $radius): self
     {
         return new self(FloatPosition::at($x, $y), $radius, AnsiColor::Reset);

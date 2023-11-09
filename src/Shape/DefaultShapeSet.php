@@ -8,6 +8,8 @@ class DefaultShapeSet implements ShapeSet
 {
     public function shapes(): array
     {
-        return [];
+        return [
+            new CirclePainter(),
+        ];
     }
 }
