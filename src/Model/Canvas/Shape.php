@@ -2,9 +2,9 @@
 
 namespace PhpTui\Tui\Model\Canvas;
 
-use PhpTui\Tui\Model\Canvas\Painter;
-
+/**
+ * Marker interface for Shapes
+ */
 interface Shape
 {
-    public function draw(Painter $painter): void;
 }
