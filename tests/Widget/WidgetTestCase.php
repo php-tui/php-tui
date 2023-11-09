@@ -5,10 +5,12 @@ namespace PhpTui\Tui\Tests\Widget;
 use PHPUnit\Framework\TestCase;
 use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Buffer;
+use PhpTui\Tui\Model\Canvas\AggregateShapePainter;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\WidgetRenderer;
 use PhpTui\Tui\Model\WidgetRenderer\AggregateWidgetRenderer;
 use PhpTui\Tui\Model\WidgetRenderer\NullWidgetRenderer;
+use PhpTui\Tui\Shape\DefaultShapeSet;
 use PhpTui\Tui\Widget\DefaultWidgetSet;
 
 class WidgetTestCase extends TestCase
@@ -37,7 +39,7 @@ class WidgetTestCase extends TestCase
     private function renderer(): WidgetRenderer
     {
         return AggregateWidgetRenderer::fromWidgetSets(
-            new DefaultWidgetSet()
+            new DefaultWidgetSet(AggregateShapePainter::fromShapeSets(new DefaultShapeSet()))
         );
     }
 }

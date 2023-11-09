@@ -16,6 +16,7 @@ use PhpTui\Tui\Model\Canvas\Grid\HalfBlockGrid;
 final class CanvasContext
 {
     private function __construct(
+        private ShapePainter $painter,
         public AxisBounds $xBounds,
         public AxisBounds $yBounds,
         public CanvasGrid $grid,
@@ -25,7 +26,14 @@ final class CanvasContext
     ) {
     }
 
-    public static function new(int $width, int $height, AxisBounds $xBounds, AxisBounds $yBounds, Marker $marker): self
+    public static function new(
+        ShapePainter $painter,
+        int $width,
+        int $height,
+        AxisBounds $xBounds,
+        AxisBounds $yBounds,
+        Marker $marker
+    ): self
     {
         $dot = Symbols::DOT;
         $block = BlockSet::FULL;
@@ -39,6 +47,7 @@ final class CanvasContext
         };
 
         return new self(
+            $painter,
             $xBounds,
             $yBounds,
             $grid,
@@ -55,7 +64,7 @@ final class CanvasContext
     {
         $this->dirty = true;
         $painter = new Painter($this, $this->grid->resolution());
-        $shape->draw($painter);
+        $this->painter->draw($painter, $shape);
     }
 
     public function finish(): void

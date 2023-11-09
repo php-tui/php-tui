@@ -2,7 +2,8 @@
 
 namespace PhpTui\Tui\Model\Canvas;
 
-use PhpTui\Tui\Model\WidgetSet;
+use PhpTui\Tui\Shape\DefaultShapeSet;
+
 
 /**
  * Will iterate over all shape painters to paint the shape.
@@ -19,23 +20,20 @@ class AggregateShapePainter implements ShapePainter
     {
     }
 
-    public function draw(Shape $shape): void
+    public function draw(Painter $painter, Shape $shape): void
     {
-        foreach ($this->painters as $painter) {
-            $painter->draw($shape);
+        foreach ($this->painters as $shapePainter) {
+            $shapePainter->draw($painter, $shape);
         }
     }
 
-    public static function fromWidgetSets(WidgetSet ...$widgetSets): self
+    public static function fromShapeSets(ShapeSet ...$shapeSets): self
     {
         $painters = [];
-        foreach ($widgetSets as $widgetSet) {
-            foreach ($widgetSet->painters() as $painter) {
-                $painters[] = $painter;
-            }
+        foreach ($shapeSets as $shapeSet) {
+            $painters = array_merge($painters, $shapeSet->shapes());
         }
 
         return new self($painters);
     }
-
 }
