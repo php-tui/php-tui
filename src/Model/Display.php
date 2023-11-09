@@ -5,6 +5,7 @@ namespace PhpTui\Tui\Model;
 use Closure;
 use PhpTui\Tui\Adapter\Bdf\BdfShapeSet;
 use PhpTui\Tui\Adapter\Bdf\FontRegistry;
+use PhpTui\Tui\Adapter\ImageMagick\ImageMagickShapeSet;
 use PhpTui\Tui\Model\Canvas\AggregateShapePainter;
 use PhpTui\Tui\Model\Viewport\Fullscreen;
 use PhpTui\Tui\Model\Viewport\Inline;
@@ -49,6 +50,7 @@ final class Display
                     AggregateShapePainter::fromShapeSets(
                         new DefaultShapeSet(),
                         new BdfShapeSet(FontRegistry::default()),
+                        new ImageMagickShapeSet(),
                     )
                 )
             )
