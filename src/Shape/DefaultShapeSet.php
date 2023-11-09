@@ -14,6 +14,7 @@ class DefaultShapeSet implements ShapeSet
             new MapPainter(),
             new PointsPainter(),
             new RectanglePainter(),
+            new SpritePainter(),
         ];
     }
 }
