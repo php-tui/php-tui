@@ -24,6 +24,9 @@
             "name": "Daniel Leech"
         }
     ],
+    "require": {
+        "php": "^8.1"
+    },
     "require-dev": {
         "phptui/cassowary": "^0.1.0",
         "friendsofphp/php-cs-fixer": "^3.34",
