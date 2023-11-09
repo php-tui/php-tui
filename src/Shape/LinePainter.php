@@ -9,7 +9,7 @@ use PhpTui\Tui\Model\Position;
 
 class LinePainter implements ShapePainter
 {
-    public function draw(Painter $painter, Shape $shape): void
+    public function draw(ShapePainter $shapePainter, Painter $painter, Shape $shape): void
     {
         if (!$shape instanceof Line) {
             return;

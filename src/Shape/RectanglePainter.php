@@ -11,7 +11,7 @@ use PhpTui\Tui\Model\Canvas\Shape;
 
 final class RectanglePainter implements ShapePainter
 {
-    public function draw(Painter $painter, Shape $shape): void
+    public function draw(ShapePainter $shapePainter, Painter $painter, Shape $shape): void
     {
         if (!$shape instanceof Rectangle) {
             return;
@@ -45,18 +45,7 @@ final class RectanglePainter implements ShapePainter
         ];
 
         foreach ($lines as $line) {
-            $line->draw($painter);
+            $shapePainter->draw($shapePainter, $painter, $line);
         }
-    }
-
-    public static function fromScalars(float $x, float $y, int $width, int $height): self
-    {
-        return new self(FloatPosition::at($x, $y), $width, $height, AnsiColor::Reset);
-    }
-
-    public function color(Color $color): self
-    {
-        $this->color = $color;
-        return $this;
     }
 }

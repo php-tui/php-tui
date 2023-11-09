@@ -20,10 +20,10 @@ class AggregateShapePainter implements ShapePainter
     {
     }
 
-    public function draw(Painter $painter, Shape $shape): void
+    public function draw(ShapePainter $shapePainter, Painter $painter, Shape $shape): void
     {
         foreach ($this->painters as $shapePainter) {
-            $shapePainter->draw($painter, $shape);
+            $shapePainter->draw($this, $painter, $shape);
         }
     }
 

@@ -10,7 +10,7 @@ use PhpTui\Tui\Model\Canvas\Shape;
 
 class PointsPainter implements ShapePainter
 {
-    public function draw(Painter $painter, Shape $shape): void
+    public function draw(ShapePainter $shapePainter, Painter $painter, Shape $shape): void
     {
         if (!$shape instanceof Points) {
             return;

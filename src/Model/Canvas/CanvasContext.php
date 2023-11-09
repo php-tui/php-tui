@@ -64,7 +64,7 @@ final class CanvasContext
     {
         $this->dirty = true;
         $painter = new Painter($this, $this->grid->resolution());
-        $this->painter->draw($painter, $shape);
+        $this->painter->draw($this->painter, $painter, $shape);
     }
 
     public function finish(): void

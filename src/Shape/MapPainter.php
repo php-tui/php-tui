@@ -10,7 +10,7 @@ use PhpTui\Tui\Model\Canvas\Shape;
 
 class MapPainter implements ShapePainter
 {
-    public function draw(Painter $painter, Shape $shape): void
+    public function draw(ShapePainter $shapePainter, Painter $painter, Shape $shape): void
     {
         if (!$shape instanceof Map) {
             return;

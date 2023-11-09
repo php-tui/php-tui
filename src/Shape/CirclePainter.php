@@ -9,7 +9,7 @@ use PhpTui\Tui\Model\Widget\FloatPosition;
 
 class CirclePainter implements ShapePainter
 {
-    public function draw(Painter $painter, Shape $shape): void
+    public function draw(ShapePainter $shapePainter, Painter $painter, Shape $shape): void
     {
         if (!$shape instanceof Circle) {
             return;
