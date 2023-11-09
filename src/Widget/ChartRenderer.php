@@ -126,7 +126,7 @@ final class ChartRenderer implements WidgetRenderer
             $first = $chart->xAxis->labels[array_key_first($chart->xAxis->labels)];
             $firstLabelWidth = $first->width();
             $widthOfYAxis = match ($chart->xAxis->labelAlignment) {
-                HorizontalAlignment::Left => $firstLabelWidth - $hasYAxis ? 1 : 0,
+                HorizontalAlignment::Left => $firstLabelWidth - (int) $hasYAxis,
                 HorizontalAlignment::Center => $firstLabelWidth / 2,
                 HorizontalAlignment::Right => 0,
             };

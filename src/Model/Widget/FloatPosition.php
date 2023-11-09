@@ -41,6 +41,7 @@ final class FloatPosition implements Stringable
     public function change(Closure $closure): void
     {
         $new = $closure($this->x, $this->y);
+        /** @phpstan-ignore-next-line runtime check */
         if (!is_array($new)) {
             throw new RuntimeException(sprintf('Change closure must return an array, got: %s', gettype($new)));
         }

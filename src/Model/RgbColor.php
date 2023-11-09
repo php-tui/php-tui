@@ -67,7 +67,7 @@ class RgbColor implements Color
         } // php modulus does not work with float
         $dX = $dC*(1-abs($dT-1));     // as used in the Wikipedia link
 
-        switch(floor($dH)) {
+        switch((int) floor($dH)) {
             case 0:
                 $dR = $dC;
                 $dG = $dX;
