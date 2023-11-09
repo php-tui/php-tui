@@ -40,7 +40,7 @@ final class TerminalTest extends TestCase
             ->flush();
 
         self::assertCount(20, $dummy->actions());
-        $this->assertEquals(
+        self::assertEquals(
             [
                 'AlternateScreenEnable(false)',
                 'AlternateScreenEnable(true)',

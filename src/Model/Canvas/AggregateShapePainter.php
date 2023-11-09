@@ -19,8 +19,8 @@ class AggregateShapePainter implements ShapePainter
 
     public function draw(ShapePainter $shapePainter, Painter $painter, Shape $shape): void
     {
-        foreach ($this->painters as $shapePainter) {
-            $shapePainter->draw($this, $painter, $shape);
+        foreach ($this->painters as $aggregateShapePainter) {
+            $aggregateShapePainter->draw($this, $painter, $shape);
         }
     }
 

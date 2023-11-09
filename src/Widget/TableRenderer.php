@@ -74,13 +74,13 @@ final class TableRenderer implements WidgetRenderer
 
         [$start, $end] = self::getRowBounds($widget, $rowsHeight);
         $widget->state->offset = $start;
-        foreach (array_slice($widget->rows, $start, $end - $start) as $i => $tableRow) {
+        foreach (array_slice($widget->rows, $start, $end - $start) as $rowIndex => $tableRow) {
             [$rowY, $innerOffset] = [$tableArea->top() + $currentHeight, $tableArea->left()];
 
             $currentHeight += $tableRow->totalHeight();
             $tableRowArea = Area::fromScalars($innerOffset, $rowY, $tableArea->width, $tableRow->height);
             $buffer->setStyle($tableRowArea, $tableRow->style);
-            $isSelected = $widget->state->selected === $i + $start;
+            $isSelected = $widget->state->selected === $rowIndex + $start;
             if ($selectionWidth > 0 && $isSelected) {
                 $buffer->putString(
                     Position::at(
@@ -92,8 +92,8 @@ final class TableRenderer implements WidgetRenderer
                     $tableArea->width,
                 );
             }
-            foreach ($columnWidths as $i => $width) {
-                $cell = $tableRow->getCell($i);
+            foreach ($columnWidths as $cellIndex => $width) {
+                $cell = $tableRow->getCell($cellIndex);
                 if (null === $cell) {
                     continue;
                 }

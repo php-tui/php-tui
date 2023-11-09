@@ -32,7 +32,7 @@ class StringPainter implements Painter
 
     public function toString(): string
     {
-        if (empty($this->grid)) {
+        if ($this->grid === []) {
             return '';
         }
         $maxX = max(
