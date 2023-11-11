@@ -5,11 +5,15 @@ namespace PhpTui\Tui\Adapter\ImageMagick\Shape;
 use Imagick;
 use ImagickPixel;
 use PhpTui\Tui\Adapter\ImageMagick\ImageRegistry;
+use PhpTui\Tui\Model\AnsiColor;
+use PhpTui\Tui\Model\Canvas\Label;
 use PhpTui\Tui\Model\Canvas\ShapePainter;
 use PhpTui\Tui\Model\RgbColor;
 use PhpTui\Tui\Model\Widget\FloatPosition;
 use PhpTui\Tui\Model\Canvas\Painter;
 use PhpTui\Tui\Model\Canvas\Shape;
+use PhpTui\Tui\Model\Widget\Line as PhpTuiLine;
+use PhpTui\Tui\Shape\Line;
 use RuntimeException;
 
 final class ImagePainter implements ShapePainter
@@ -24,6 +28,33 @@ final class ImagePainter implements ShapePainter
     public function draw(ShapePainter $shapePainter, Painter $painter, Shape $shape): void
     {
         if (!$shape instanceof ImageShape) {
+            return;
+        }
+
+        if (!extension_loaded('imagick')) {
+            $shapePainter->draw(
+                $shapePainter,
+                $painter,
+                Line::fromScalars(
+                    $painter->context->xBounds->min + 1,
+                    $painter->context->yBounds->min + 1,
+                    $painter->context->xBounds->max - 1,
+                    $painter->context->yBounds->max - 1
+                )->color(AnsiColor::White)
+            );
+            $shapePainter->draw(
+                $shapePainter,
+                $painter,
+                Line::fromScalars(
+                    $painter->context->xBounds->min + 1,
+                    $painter->context->yBounds->max - 1,
+                    $painter->context->xBounds->max - 1,
+                    $painter->context->yBounds->min + 1,
+                )->color(AnsiColor::White)
+            );
+            $painter->context->labels->add(
+                new Label(FloatPosition::at(0, 0), PhpTuiLine::fromString('Imagick extension not loaded!'))
+            );
             return;
         }
 
