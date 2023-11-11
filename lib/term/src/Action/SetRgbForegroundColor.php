@@ -12,6 +12,6 @@ final class SetRgbForegroundColor implements Action
 
     public function __toString(): string
     {
-        return sprintf('SetRgbBackgroundColor(%d, %d, %d)', $this->r, $this->g, $this->b);
+        return sprintf('SetRgbForegroundColor(%d, %d, %d)', $this->r, $this->g, $this->b);
     }
 }
