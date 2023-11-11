@@ -8,8 +8,14 @@ use PhpTui\Tui\Model\Widget\FloatPosition;
 
 class Painter
 {
+    private float $widthFactor;
+
+    private float $heightFactor;
+
     public function __construct(public CanvasContext $context, public Resolution $resolution)
     {
+        $this->widthFactor = ($this->resolution->width - 1.0) / $this->context->xBounds->length();
+        $this->heightFactor = ($this->resolution->height - 1.0) / $this->context->yBounds->length();
     }
 
     /**
@@ -31,20 +37,15 @@ class Painter
         if ($floatPosition->outOfBounds($this->context->xBounds, $this->context->yBounds)) {
             return null;
         }
-        $width = $this->context->xBounds->length();
-        $height = $this->context->yBounds->length();
-        if ($width === 0.0 || $height === 0.0) {
-            return null;
-        }
-        $x = ($floatPosition->x - $this->context->xBounds->min) * ($this->resolution->width - 1.0) / $width;
-        $y = ($this->context->yBounds->max - $floatPosition->y) * ($this->resolution->height - 1.0) / $height;
 
-        return Position::at(intval($x), intval($y));
+        $x = ($floatPosition->x - $this->context->xBounds->min) * $this->widthFactor;
+        $y = ($this->context->yBounds->max - $floatPosition->y) * $this->heightFactor;
+
+        return Position::at((int) $x, (int) $y);
     }
 
     public function paint(Position $position, Color $color): void
     {
         $this->context->grid->paint($position, $color);
     }
-
 }
