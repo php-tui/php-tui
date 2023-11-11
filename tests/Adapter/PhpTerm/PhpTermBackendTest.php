@@ -9,6 +9,7 @@ use PhpTui\Tui\Adapter\PhpTerm\PhpTermBackend;
 use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\BufferUpdate;
 use PhpTui\Tui\Model\Modifier;
+use PhpTui\Tui\Model\RgbColor;
 use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Cell;
 use PhpTui\Tui\Model\Position;
@@ -78,6 +79,34 @@ class PhpTermBackendTest extends TestCase
             'Reset()',
         ], array_map(fn (Action $action) => $action->__toString(), $buffer->actions()));
     }
+
+    public function testDoesNotChangeColorUnnecessarily(): void
+    {
+        $buffer = BufferPainter::new();
+        $this->draw($buffer, new BufferUpdates([
+            new BufferUpdate(
+                Position::at(0, 0),
+                Cell::fromChar('X')->setStyle(Style::default()->fg(RgbColor::fromRgb(0, 0, 0))->bg(RgbColor::fromRgb(0,0,0))),
+            ),
+            new BufferUpdate(
+                Position::at(1, 0),
+                Cell::fromChar('X')->setStyle(Style::default()->fg(RgbColor::fromRgb(0, 0, 0))->bg(RgbColor::fromRgb(0,0,0))),
+            ),
+        ]));
+        self::assertEquals([
+            'MoveCursor(line=1,col=1)',
+            'SetRgbForegroundColor(0, 0, 0)',
+            'SetRgbBackgroundColor(0, 0, 0)',
+            'Print("X")',
+            'SetForegroundColor(Reset)',
+            'Print("X")',
+            'Print("X")',
+            'SetForegroundColor(Reset)',
+            'SetBackgroundColor(Reset)',
+            'Reset()',
+        ], array_map(fn (Action $action) => $action->__toString(), $buffer->actions()));
+    }
+
     public function testModifiersReset(): void
     {
         $buffer = BufferPainter::new();
