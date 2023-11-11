@@ -4,6 +4,8 @@ weight: 10
 
 # Getting Started
 
+> NOTE: This won't work until the package has been published!
+
 Let's render a map _of the world_.
 
 First create a new project:
@@ -16,7 +18,7 @@ cd tui-demo
 and require the `php-tui` package:
 
 ```
-composer require phptui/php-tui
+composer require php-tui/php-tui
 ```
 
 Now create the file `map.php` with the following content:

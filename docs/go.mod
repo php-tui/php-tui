@@ -1,4 +1,4 @@
-module github.com/phptui/php-tui
+module github.com/php-tui/php-tui
 
 go 1.20
 
