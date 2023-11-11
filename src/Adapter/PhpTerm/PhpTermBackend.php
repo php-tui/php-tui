@@ -53,6 +53,7 @@ class PhpTermBackend implements Backend
         $bg = AnsiColor::Reset;
         $fg = AnsiColor::Reset;
         $lastPos = null;
+        $c = 0;
 
         foreach ($updates as $update) {
             $attributes = [];
@@ -68,17 +69,18 @@ class PhpTermBackend implements Backend
                 $modifier = clone $update->cell->modifier;
             }
 
-            if ($update->cell->fg !== $fg) {
+            if ($update->cell->fg != $fg) {
                 $this->terminal->queue($this->setForegroundColor($update->cell->fg));
                 $fg = $update->cell->fg;
             }
 
-            if ($update->cell->bg !== $bg) {
+            if ($update->cell->bg != $bg) {
                 $this->terminal->queue($this->setBackgroundColor($update->cell->bg));
                 $bg = $update->cell->bg;
             }
             $this->terminal->queue(Actions::printString($update->cell->char));
         }
+        dump($c);
 
         $this->terminal->queue(Actions::setForegroundColor(Colors::Reset));
         $this->terminal->queue(Actions::setBackgroundColor(Colors::Reset));
