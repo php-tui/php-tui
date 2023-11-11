@@ -147,8 +147,10 @@ final class Display
         $this->current = 1 - $this->current;
     }
 
-    private function clear(): void
+    public function clear(): void
     {
+        // Reset the back buffer to make sure the next update will redraw everything.
+        $this->buffers[1 - $this->current] = Buffer::empty($this->viewportArea);
         $this->backend->clearRegion(ClearType::ALL);
     }
 }
