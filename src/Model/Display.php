@@ -86,8 +86,8 @@ final class Display
         $closure($this->buffer());
 
         $this->flush();
-        $this->swapBuffers();
         $this->backend->flush();
+        $this->swapBuffers();
     }
 
     /**
@@ -101,8 +101,20 @@ final class Display
     {
         $buffer = $this->buffer();
         $this->draw(function () use ($widget, $buffer): void {
-            $this->widgetRenderer->render(new NullWidgetRenderer(), $widget, $buffer->area(), $buffer);
+            $this->widgetRenderer->render(
+                new NullWidgetRenderer(),
+                $widget,
+                $buffer->area(),
+                $buffer
+            );
         });
+    }
+
+    public function clear(): void
+    {
+        // Reset the back buffer to make sure the next update will redraw everything.
+        $this->buffers[1 - $this->current] = Buffer::empty($this->viewportArea);
+        $this->backend->clearRegion(ClearType::ALL);
     }
 
     private function autoresize(): void
@@ -140,10 +152,5 @@ final class Display
     {
         $this->buffers[1 - $this->current] = Buffer::empty($this->viewportArea);
         $this->current = 1 - $this->current;
-    }
-
-    private function clear(): void
-    {
-        $this->backend->clearRegion(ClearType::ALL);
     }
 }

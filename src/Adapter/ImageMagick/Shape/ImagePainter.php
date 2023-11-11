@@ -4,6 +4,7 @@ namespace PhpTui\Tui\Adapter\ImageMagick\Shape;
 
 use Imagick;
 use ImagickPixel;
+use PhpTui\Tui\Adapter\ImageMagick\ImageRegistry;
 use PhpTui\Tui\Model\Canvas\ShapePainter;
 use PhpTui\Tui\Model\RgbColor;
 use PhpTui\Tui\Model\Widget\FloatPosition;
@@ -13,13 +14,23 @@ use RuntimeException;
 
 final class ImagePainter implements ShapePainter
 {
+    private ImageRegistry $registry;
+
+    public function __construct(ImageRegistry $registry = null)
+    {
+        $this->registry = $registry ?: new ImageRegistry();
+    }
+
     public function draw(ShapePainter $shapePainter, Painter $painter, Shape $shape): void
     {
         if (!$shape instanceof ImageShape) {
             return;
         }
 
-        $image = self::loadImage($shape->path);
+        $image = $this->registry->load(
+            $shape->path,
+            fn (string $path) => self::loadImage($path)
+        );
         $geo = $image->getImageGeometry();
 
         /** @var ImagickPixel[] $pixels */

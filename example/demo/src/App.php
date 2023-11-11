@@ -150,6 +150,9 @@ final class App
                     if ($event->char === '0') {
                         $this->activePage = ActivePage::CanvasScaling;
                     }
+                    if ($event->char === 'r') {
+                        $this->display->clear();
+                    }
                 }
                 $this->activePage()->handle($event);
             }

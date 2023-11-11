@@ -13,8 +13,6 @@ $display->drawWidget(
     Canvas::fromIntBounds(0, 320, 0, 240)
         ->marker(Marker::HalfBlock)
         ->draw(
-            // this is expensive, don't do this on each frame if you are
-            // animating!
             ImageShape::fromPath(__DIR__ . '/example.jpg')
         )
 );
