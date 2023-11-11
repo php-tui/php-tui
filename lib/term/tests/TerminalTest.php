@@ -47,7 +47,7 @@ final class TerminalTest extends TestCase
                 'Print("Hello World")',
                 'CursorShow(true)',
                 'CursorShow(false)',
-                'SetRgbBackgroundColor(0, 127, 255)',
+                'SetRgbForegroundColor(0, 127, 255)',
                 'SetRgbBackgroundColor(255, 0, 127)',
                 'SetForegroundColor(Red)',
                 'SetBackgroundColor(Blue)',

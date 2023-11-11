@@ -5,7 +5,7 @@ namespace PhpTui\Tui\Adapter\ImageMagick;
 use Closure;
 use Imagick;
 
-final class ImageRegistry 
+final class ImageRegistry
 {
     /**
      * @var array<string,Imagick>

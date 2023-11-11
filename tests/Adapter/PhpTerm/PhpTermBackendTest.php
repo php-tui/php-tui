@@ -86,11 +86,11 @@ class PhpTermBackendTest extends TestCase
         $this->draw($buffer, new BufferUpdates([
             new BufferUpdate(
                 Position::at(0, 0),
-                Cell::fromChar('X')->setStyle(Style::default()->fg(RgbColor::fromRgb(0, 0, 0))->bg(RgbColor::fromRgb(0,0,0))),
+                Cell::fromChar('X')->setStyle(Style::default()->fg(RgbColor::fromRgb(0, 0, 0))->bg(RgbColor::fromRgb(0, 0, 0))),
             ),
             new BufferUpdate(
                 Position::at(1, 0),
-                Cell::fromChar('X')->setStyle(Style::default()->fg(RgbColor::fromRgb(0, 0, 0))->bg(RgbColor::fromRgb(0,0,0))),
+                Cell::fromChar('X')->setStyle(Style::default()->fg(RgbColor::fromRgb(0, 0, 0))->bg(RgbColor::fromRgb(0, 0, 0))),
             ),
         ]));
         self::assertEquals([

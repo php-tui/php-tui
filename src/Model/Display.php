@@ -110,6 +110,13 @@ final class Display
         });
     }
 
+    public function clear(): void
+    {
+        // Reset the back buffer to make sure the next update will redraw everything.
+        $this->buffers[1 - $this->current] = Buffer::empty($this->viewportArea);
+        $this->backend->clearRegion(ClearType::ALL);
+    }
+
     private function autoresize(): void
     {
         if (!$this->viewport instanceof Fullscreen && !$this->viewport instanceof Inline) {
@@ -145,12 +152,5 @@ final class Display
     {
         $this->buffers[1 - $this->current] = Buffer::empty($this->viewportArea);
         $this->current = 1 - $this->current;
-    }
-
-    public function clear(): void
-    {
-        // Reset the back buffer to make sure the next update will redraw everything.
-        $this->buffers[1 - $this->current] = Buffer::empty($this->viewportArea);
-        $this->backend->clearRegion(ClearType::ALL);
     }
 }

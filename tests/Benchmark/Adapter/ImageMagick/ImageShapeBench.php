@@ -20,6 +20,7 @@ use PhpTui\Tui\Widget\Canvas;
 final class ImageShapeBench
 {
     private Display $display;
+
     private StringPainter $painter;
 
     public function __construct()
