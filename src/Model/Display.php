@@ -86,8 +86,8 @@ final class Display
         $closure($this->buffer());
 
         $this->flush();
-        $this->swapBuffers();
         $this->backend->flush();
+        $this->swapBuffers();
     }
 
     /**
@@ -101,7 +101,12 @@ final class Display
     {
         $buffer = $this->buffer();
         $this->draw(function () use ($widget, $buffer): void {
-            $this->widgetRenderer->render(new NullWidgetRenderer(), $widget, $buffer->area(), $buffer);
+            $this->widgetRenderer->render(
+                new NullWidgetRenderer(),
+                $widget,
+                $buffer->area(),
+                $buffer
+            );
         });
     }
 
