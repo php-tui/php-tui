@@ -15,7 +15,6 @@ class StreamWriter implements Writer
 
     public static function stdout(): self
     {
-
         return new self(STDOUT);
     }
 
