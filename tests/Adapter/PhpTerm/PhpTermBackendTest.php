@@ -98,8 +98,6 @@ class PhpTermBackendTest extends TestCase
             'SetRgbForegroundColor(0, 0, 0)',
             'SetRgbBackgroundColor(0, 0, 0)',
             'Print("X")',
-            'SetForegroundColor(Reset)',
-            'Print("X")',
             'Print("X")',
             'SetForegroundColor(Reset)',
             'SetBackgroundColor(Reset)',
