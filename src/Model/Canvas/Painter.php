@@ -12,10 +12,18 @@ class Painter
 
     private float $heightFactor;
 
+    private bool $hasValidDimensions;
+
     public function __construct(public CanvasContext $context, public Resolution $resolution)
     {
-        $this->widthFactor = ($this->resolution->width - 1.0) / $this->context->xBounds->length();
-        $this->heightFactor = ($this->resolution->height - 1.0) / $this->context->yBounds->length();
+        $width = $this->context->xBounds->length();
+        $height = $this->context->yBounds->length();
+        $this->hasValidDimensions = $width > 0 && $height > 0;
+
+        if ($this->hasValidDimensions) {
+            $this->widthFactor = ($this->resolution->width - 1.0) / $width;
+            $this->heightFactor = ($this->resolution->height - 1.0) / $height;
+        }
     }
 
     /**
@@ -34,7 +42,7 @@ class Painter
      */
     public function getPoint(FloatPosition $floatPosition): ?Position
     {
-        if ($floatPosition->outOfBounds($this->context->xBounds, $this->context->yBounds)) {
+        if (!$this->hasValidDimensions || $floatPosition->outOfBounds($this->context->xBounds, $this->context->yBounds)) {
             return null;
         }
 
