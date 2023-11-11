@@ -24,9 +24,4 @@ final class BufferWriter implements Writer
     {
         return $this->buffer;
     }
-
-    public function flush(): void
-    {
-    }
-
 }

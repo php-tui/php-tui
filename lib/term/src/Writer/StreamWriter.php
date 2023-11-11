@@ -32,10 +32,4 @@ class StreamWriter implements Writer
             return;
         }
     }
-
-
-    public function flush(): void
-    {
-        fflush($this->stream);
-    }
 }

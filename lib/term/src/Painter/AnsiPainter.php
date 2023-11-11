@@ -34,26 +34,27 @@ final class AnsiPainter implements Painter
 
     public function paint(array $actions): void
     {
-        $out = '';
         foreach ($actions as $action) {
-            $out.= $this->drawCommand($action);
+            $this->drawCommand($action);
         }
-        $this->writer->write($out);
     }
 
-    private function drawCommand(Action $action): string
+    private function drawCommand(Action $action): void
     {
         if ($action instanceof PrintString) {
-            return $action->string;
+            $this->writer->write($action->string);
+            return;
         }
         if ($action instanceof SetForegroundColor && $action->color === Colors::Reset) {
-            return $this->esc('39m');
+            $this->writer->write($this->esc('39m'));
+            return;
         }
         if ($action instanceof SetBackgroundColor && $action->color === Colors::Reset) {
-            return $this->esc('49m');
+            $this->writer->write($this->esc('49m'));
+            return;
         }
 
-        return $this->esc(match (true) {
+        $this->writer->write($this->esc(match (true) {
             $action instanceof SetForegroundColor => sprintf('38;5;%dm', $this->colorIndex($action->color)),
             $action instanceof SetBackgroundColor => sprintf('48;5;%dm', $this->colorIndex($action->color)),
             $action instanceof SetRgbBackgroundColor => sprintf('48;2;%d;%d;%dm', $action->r, $action->g, $action->b),
@@ -73,7 +74,7 @@ final class AnsiPainter implements Painter
                 'Do not know how to handle action: %s',
                 $action::class
             ))
-        });
+        }));
     }
 
     private function colorIndex(Colors $termColor): int
