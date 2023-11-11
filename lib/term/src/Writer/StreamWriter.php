@@ -21,9 +21,11 @@ class StreamWriter implements Writer
 
     public function write(string $bytes): void
     {
-        for ($written = 0; $written < strlen($bytes); $written += $fwrite) {
-            $fwrite = fwrite($this->stream, substr($bytes, $written));
-            if ($fwrite !== false) {
+        // fwrite does not always write the entire stream to STDOUT keep
+        // writing until it's done
+        for ($written = 0; $written < strlen($bytes); $written += $fwritten) {
+            $fwritten = fwrite($this->stream, substr($bytes, $written));
+            if ($fwritten !== false) {
                 continue;
             }
 
