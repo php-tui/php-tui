@@ -1,5 +1,5 @@
 {
-    "name": "dantleech/php-tui",
+    "name": "php-tui/php-tui",
     "description": "PHP TUI",
     "type": "library",
     "license": "MIT",
@@ -28,7 +28,7 @@
         "php": "^8.1"
     },
     "require-dev": {
-        "phptui/cassowary": "^0.1.0",
+        "php-tui/cassowary": "^0.1.0",
         "friendsofphp/php-cs-fixer": "^3.34",
         "phpstan/phpstan": "^1.10",
         "phpunit/phpunit": "^10.4",
