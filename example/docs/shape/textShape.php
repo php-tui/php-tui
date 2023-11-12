@@ -16,7 +16,7 @@ require 'vendor/autoload.php';
 // this is EXPENSIVE to create, only do it once!
 $registry = FontRegistry::default();
 
-$display = DisplayBuilder::new(PhpTermBackend::new())
+$display = DisplayBuilder::new()
     ->addShapeSet(new BdfShapeSet(FontRegistry::default()))
     ->build();
 

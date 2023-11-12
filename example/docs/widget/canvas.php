@@ -10,7 +10,7 @@ use PhpTui\Tui\Shape\Circle;
 
 require 'vendor/autoload.php';
 
-$display = DisplayBuilder::new(PhpTermBackend::new())->build();
+$display = DisplayBuilder::new()->build();
 $display->drawWidget(
     Canvas::fromIntBounds(-1, 21, -1, 21)
         // the marker determines both the effective resolution of

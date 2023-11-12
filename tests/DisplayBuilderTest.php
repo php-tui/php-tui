@@ -37,6 +37,7 @@ final class DisplayBuilderTest extends TestCase
         $display = DisplayBuilder::new($dummy)
             ->addShapeSet($shapeSet)
             ->addWidgetSet($widgetSet)
+            ->fullscreen()
             ->build();
         $display->drawWidget(Paragraph::fromString('hello'));
 

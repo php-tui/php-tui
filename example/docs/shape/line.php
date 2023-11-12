@@ -9,7 +9,7 @@ use PhpTui\Tui\Shape\Line;
 
 require 'vendor/autoload.php';
 
-$display = DisplayBuilder::new(PhpTermBackend::new())->build();
+$display = DisplayBuilder::new()->build();
 $display->drawWidget(
     Canvas::fromIntBounds(0, 20, 0, 20)
         ->marker(Marker::Dot)

@@ -7,7 +7,7 @@ use PhpTui\Tui\Widget\Paragraph;
 
 require 'vendor/autoload.php';
 
-$display = DisplayBuilder::new(PhpTermBackend::new())->build();
+$display = DisplayBuilder::new()->build();
 $display->drawWidget(
     Paragraph::fromText(
         Text::fromString(

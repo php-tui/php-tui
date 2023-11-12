@@ -9,7 +9,7 @@ use PhpTui\Tui\Widget\Canvas;
 
 require 'vendor/autoload.php';
 
-$display = DisplayBuilder::new(PhpTermBackend::new())
+$display = DisplayBuilder::new()
     ->addShapeSet(new ImageMagickShapeSet())
     ->build();
 $display->drawWidget(

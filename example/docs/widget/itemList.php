@@ -9,7 +9,7 @@ use PhpTui\Tui\Widget\ItemList\ListItem;
 
 require 'vendor/autoload.php';
 
-$display = DisplayBuilder::new(PhpTermBackend::new())->build();
+$display = DisplayBuilder::new()->build();
 $display->drawWidget(
     ItemList::default()
         ->highlightSymbol('😼')

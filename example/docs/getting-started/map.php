@@ -9,7 +9,7 @@ use PhpTui\Tui\Shape\MapResolution;
 
 require 'vendor/autoload.php';
 
-$display = DisplayBuilder::new(PhpTermBackend::new())->build();
+$display = DisplayBuilder::new()->build();
 $display->drawWidget(
     Canvas::fromIntBounds(-180, 180, -90, 90)
         ->paint(function (CanvasContext $ctx): void {

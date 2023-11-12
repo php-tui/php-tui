@@ -12,7 +12,7 @@ use PhpTui\Tui\Widget\Chart\GraphType;
 
 require 'vendor/autoload.php';
 
-$display = DisplayBuilder::new(PhpTermBackend::new())->build();
+$display = DisplayBuilder::new()->build();
 $display->drawWidget(
     Chart::new(
         DataSet::new('Ships')

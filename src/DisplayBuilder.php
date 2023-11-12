@@ -36,6 +36,16 @@ final class DisplayBuilder
         return self::doNew($backend, null);
     }
 
+
+    /**
+     * Explicitly require a fullscreen viewport
+     */
+    public function fullscreen(): self
+    {
+        $this->viewport = new Fullscreen();
+        return $this;
+    }
+
     /**
      * Build and return the Display.
      */
