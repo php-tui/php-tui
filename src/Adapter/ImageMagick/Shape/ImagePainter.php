@@ -3,7 +3,6 @@
 namespace PhpTui\Tui\Adapter\ImageMagick\Shape;
 
 use Imagick;
-use ImagickPixel;
 use PhpTui\Tui\Adapter\ImageMagick\ImageRegistry;
 use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Canvas\Label;
@@ -31,30 +30,7 @@ final class ImagePainter implements ShapePainter
             return;
         }
 
-        if (!extension_loaded('imagick')) {
-            $shapePainter->draw(
-                $shapePainter,
-                $painter,
-                Line::fromScalars(
-                    $painter->context->xBounds->min + 1,
-                    $painter->context->yBounds->min + 1,
-                    $painter->context->xBounds->max - 1,
-                    $painter->context->yBounds->max - 1
-                )->color(AnsiColor::White)
-            );
-            $shapePainter->draw(
-                $shapePainter,
-                $painter,
-                Line::fromScalars(
-                    $painter->context->xBounds->min + 1,
-                    $painter->context->yBounds->max - 1,
-                    $painter->context->xBounds->max - 1,
-                    $painter->context->yBounds->min + 1,
-                )->color(AnsiColor::White)
-            );
-            $painter->context->labels->add(
-                new Label(FloatPosition::at(0, 0), PhpTuiLine::fromString('Imagick extension not loaded!'))
-            );
+        if ($this->missingExtension($shapePainter, $painter)) {
             return;
         }
 
@@ -62,29 +38,32 @@ final class ImagePainter implements ShapePainter
             $shape->path,
             fn (string $path) => self::loadImage($path)
         );
-        $geo = $image->getImageGeometry();
 
-        /** @var ImagickPixel[] $pixels */
-        foreach ($image->getPixelIterator() as $y => $pixels) {
-            foreach ($pixels as $x => $pixel) {
+        [$width, $height] = array_values($image->getImageGeometry());
+        $pixels = $image->exportImagePixels(0, 0, $width, $height, 'RGB', Imagick::PIXEL_CHAR);
+
+        for ($y = 0; $y < $height; $y++) {
+            $rowOffset = $y * $width;
+            for ($x = 0; $x < $width; $x++) {
                 $point = $painter->getPoint(
                     FloatPosition::at(
                         $shape->position->x + $x,
-                        $shape->position->y + $geo['height'] - intval($y) - 1
+                        $shape->position->y + $height - $y - 1
                     )
                 );
+
                 if (null === $point) {
                     continue;
                 }
-                $rgb = $pixel->getColor();
+
+                $rgbIndex = ($rowOffset + $x) * 3;
                 $painter->paint($point, RgbColor::fromRgb(
-                    $rgb['r'],
-                    $rgb['g'],
-                    $rgb['b']
+                    $pixels[$rgbIndex],     // R
+                    $pixels[$rgbIndex + 1], // G
+                    $pixels[$rgbIndex + 2]  // B
                 ));
             }
         }
-
     }
 
     public static function loadImage(string $path): Imagick
@@ -103,5 +82,40 @@ final class ImagePainter implements ShapePainter
             ));
         }
         return $image;
+    }
+
+    private function missingExtension(ShapePainter $shapePainter, Painter $painter): bool
+    {
+        if (extension_loaded('imagick')) {
+            return false;
+        }
+
+        $shapePainter->draw(
+            $shapePainter,
+            $painter,
+            Line::fromScalars(
+                $painter->context->xBounds->min + 1,
+                $painter->context->yBounds->min + 1,
+                $painter->context->xBounds->max - 1,
+                $painter->context->yBounds->max - 1
+            )->color(AnsiColor::White)
+        );
+
+        $shapePainter->draw(
+            $shapePainter,
+            $painter,
+            Line::fromScalars(
+                $painter->context->xBounds->min + 1,
+                $painter->context->yBounds->max - 1,
+                $painter->context->xBounds->max - 1,
+                $painter->context->yBounds->min + 1,
+            )->color(AnsiColor::White)
+        );
+
+        $painter->context->labels->add(
+            new Label(FloatPosition::at(0, 0), PhpTuiLine::fromString('Imagick extension not loaded!'))
+        );
+
+        return true;
     }
 }
