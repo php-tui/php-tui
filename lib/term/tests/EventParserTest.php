@@ -35,7 +35,6 @@ class EventParserTest extends TestCase
             self::assertCount(0, $events);
             return;
         }
-        dump($events);
         self::assertCount(1, $events);
         self::assertEquals($expected, $events[0]);
     }
