@@ -407,7 +407,7 @@ final class EventParser
     private function parseCb(int $cb): array
     {
         $buttonNumber = ($cb & 0b0000_0011) | (($cb & 0b1100_0000) >> 4);
-        $dragging = (bool)(($cb & 0b0010_0000) === 0b0010_0000);
+        $dragging = ($cb & 0b0010_0000) === 0b0010_0000;
 
         [$kind, $button] = match ([$buttonNumber, $dragging]) {
             [0, false] => [MouseEventKind::Down, MouseButton::Left],

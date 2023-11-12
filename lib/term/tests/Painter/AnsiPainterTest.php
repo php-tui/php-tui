@@ -14,7 +14,6 @@ class AnsiPainterTest extends TestCase
 {
     public function testControlSequences(): void
     {
-        $this->assertAnsiCode('asd', Actions::enableMouseCapture(true));
         $this->assertAnsiCode('48;5;2m', Actions::setBackgroundColor(Colors::Green));
         $this->assertAnsiCode('38;5;4m', Actions::setForegroundColor(Colors::Blue));
         $this->assertAnsiCode('48;2;2;3;4m', Actions::setRgbBackgroundColor(2, 3, 4));
@@ -36,6 +35,8 @@ class AnsiPainterTest extends TestCase
         $this->assertAnsiCode('8m', Actions::hidden(true));
         $this->assertAnsiCode('9m', Actions::strike(true));
         $this->assertAnsiCode('2J', Actions::clear(ClearType::All));
+        $this->assertAnsiCode('?1000h?1002h?1003h?1015h?1006h', Actions::enableMouseCapture());
+        $this->assertAnsiCode('?1006h?1015h?1003h?1002h?1000h', Actions::disableMouseCapture());
     }
 
     private function assertAnsiCode(string $string, Action $command): void

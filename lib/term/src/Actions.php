@@ -121,8 +121,13 @@ final class Actions
         return new Clear($clearType);
     }
 
-    public static function enableMouseCapture(bool $enable): EnableMouseCapture
+    public static function enableMouseCapture(): EnableMouseCapture
     {
-        return new EnableMouseCapture($enable);
+        return new EnableMouseCapture(true);
+    }
+
+    public static function disableMouseCapture(): EnableMouseCapture
+    {
+        return new EnableMouseCapture(false);
     }
 }

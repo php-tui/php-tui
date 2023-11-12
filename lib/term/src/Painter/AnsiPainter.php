@@ -82,6 +82,12 @@ final class AnsiPainter implements Painter
                 // SGR mouse mode: Allows mouse coordinates of >223, preferred over RXVT mode
                 '?1006h',
             ]) : implode('', [
+                // same as above but reversed
+                '?1006h',
+                '?1015h',
+                '?1003h',
+                '?1002h',
+                '?1000h',
             ]),
             default => throw new RuntimeException(sprintf(
                 'Do not know how to handle action: %s',

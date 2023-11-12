@@ -98,7 +98,6 @@ final class App
             // enable "raw" mode to remove default terminal behavior (e.g.
             // echoing key presses)
             $this->terminal->enableRawMode();
-            $this->terminal->execute(Actions::enableMouseCapture(true));
             return $this->doRun();
         } catch (Throwable $err) {
             $this->terminal->disableRawMode();
@@ -112,6 +111,7 @@ final class App
         $this->terminal->execute(Actions::cursorHide());
         // switch to the "alternate" screen so that we can return the user where they left off
         $this->terminal->execute(Actions::alternateScreenEnable());
+        $this->terminal->execute(Actions::enableMouseCapture(true));
 
         // the main loop
         while (true) {
