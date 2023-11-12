@@ -4,6 +4,7 @@ namespace PhpTui\Tui\Tests\Model;
 
 use PHPUnit\Framework\TestCase;
 use PhpTui\Tui\Model\AnsiColor;
+use ValueError;
 
 class AnsiColorTest extends TestCase
 {
@@ -15,7 +16,7 @@ class AnsiColorTest extends TestCase
 
     public function testFromIndexOutOfBounds(): void
     {
-        $this->expectExceptionMessage('16 is not a valid backing value for enum PhpTui\Tui\Model\AnsiColor');
+        $this->expectException(ValueError::class);
         self::assertEquals(AnsiColor::White, AnsiColor::from(16));
     }
 }
