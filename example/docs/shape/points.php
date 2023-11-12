@@ -9,7 +9,7 @@ use PhpTui\Tui\Shape\Points;
 require 'vendor/autoload.php';
 
 $display = DisplayBuilder::default()->build();
-$display->drawWidget(
+$display->draw(
     Canvas::fromIntBounds(0, 10, 0, 10)
         ->marker(Marker::Dot)
         ->draw(

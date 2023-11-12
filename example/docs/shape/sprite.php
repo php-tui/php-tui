@@ -10,7 +10,7 @@ use PhpTui\Tui\Shape\Sprite;
 require 'vendor/autoload.php';
 
 $display = DisplayBuilder::default()->build();
-$display->drawWidget(
+$display->draw(
     Canvas::fromIntBounds(0, 20, 0, 10)
         ->marker(Marker::Braille)
         ->draw(

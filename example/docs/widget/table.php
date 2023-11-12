@@ -10,7 +10,7 @@ use PhpTui\Tui\Widget\Table\TableRow;
 require 'vendor/autoload.php';
 
 $display = DisplayBuilder::default()->build();
-$display->drawWidget(
+$display->draw(
     Table::default()
         ->widths(
             Constraint::percentage(25),

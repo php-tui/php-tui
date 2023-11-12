@@ -40,7 +40,7 @@ final class DisplayBuilderTest extends TestCase
             ->addWidgetSet($widgetSet)
             ->fullscreen()
             ->build();
-        $display->drawWidget(Paragraph::fromString('hello'));
+        $display->draw(Paragraph::fromString('hello'));
 
         self::assertTrue($captured);
     }

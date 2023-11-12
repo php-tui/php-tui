@@ -11,7 +11,7 @@ require 'vendor/autoload.php';
 $display = DisplayBuilder::default()
     ->addShapeSet(new ImageMagickShapeSet())
     ->build();
-$display->drawWidget(
+$display->draw(
     Canvas::fromIntBounds(0, 320, 0, 240)
         ->marker(Marker::HalfBlock)
         ->draw(

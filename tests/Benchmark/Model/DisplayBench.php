@@ -68,7 +68,7 @@ final class DisplayBench
     #[Revs(25)]
     public function benchRenderFrame(): void
     {
-        $this->display->drawWidget(
+        $this->display->draw(
             Grid::default()
                 ->constraints(
                     Constraint::percentage(10),

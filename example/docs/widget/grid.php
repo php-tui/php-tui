@@ -11,7 +11,7 @@ use PhpTui\Tui\Widget\Grid;
 require 'vendor/autoload.php';
 
 $display = DisplayBuilder::default()->build();
-$display->drawWidget(
+$display->draw(
     Grid::default()
         ->direction(Direction::Horizontal)
         ->constraints(

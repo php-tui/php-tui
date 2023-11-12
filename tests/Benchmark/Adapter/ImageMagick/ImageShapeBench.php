@@ -44,7 +44,7 @@ final class ImageShapeBench
 
     public function benchImageShape(): void
     {
-        $this->display->drawWidget(
+        $this->display->draw(
             Canvas::fromIntBounds(0, 320, 0, 200)->draw(
                 ImageShape::fromPath(
                     __DIR__ . '/../../../Adapter/ImageMagick/Shape/example.jpg',

@@ -7,7 +7,7 @@ use PhpTui\Tui\Widget\Paragraph;
 require 'vendor/autoload.php';
 
 $display = DisplayBuilder::default()->build();
-$display->drawWidget(
+$display->draw(
     Paragraph::fromText(
         Text::fromString(
             <<<'EOT'
