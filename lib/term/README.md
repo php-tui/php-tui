@@ -8,7 +8,7 @@ Features
 --------
 
 - Provides an API for outputing to the terminal
-- Events from parsed ANSI input from terminal
+- Keyboard and mouse events
 - Provide terminal information (e.g. size)
 - Can enable "raw" mode
 

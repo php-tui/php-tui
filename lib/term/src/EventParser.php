@@ -6,6 +6,7 @@ use PhpTui\Term\Event\CharKeyEvent;
 use PhpTui\Term\Event\FocusEvent;
 use PhpTui\Term\Event\FunctionKeyEvent;
 use PhpTui\Term\Event\CodedKeyEvent;
+use PhpTui\Term\Event\MouseEvent;
 
 final class EventParser
 {
@@ -132,6 +133,8 @@ final class EventParser
             'H' => CodedKeyEvent::new(KeyCode::Home),
             'F' => CodedKeyEvent::new(KeyCode::End),
             'Z' => CodedKeyEvent::new(KeyCode::BackTab, KeyModifiers::SHIFT, KeyEventKind::Press),
+            'M' => $this->parseCsiNormalMouse($buffer),
+            '<' => $this->parseCsiSgrMouse($buffer),
             'I' => FocusEvent::gained(),
             'O' => FocusEvent::lost(),
             // https://sw.kovidgoyal.net/kitty/keyboard-protocol/#legacy-functional-keys
@@ -163,6 +166,7 @@ final class EventParser
         }
 
         return match ($lastByte) {
+            'M' => $this->parseCsiRxvtMouse($buffer),
             '~' => $this->parseCsiSpecialKeyCode($buffer),
             default => $this->parseCsiModifierKeyCode($buffer),
         };
@@ -359,5 +363,140 @@ final class EventParser
             3 => KeyEventKind::Release,
             default => KeyEventKind::Press,
         };
+    }
+
+    /**
+     * @param string[] $buffer
+     */
+    private function parseCsiNormalMouse(array $buffer): ?Event
+    {
+        if (count($buffer) < 6) {
+            return null;
+        }
+
+        $cb = ord($buffer[3]) - 32;
+        if ($cb < 0) {
+            throw ParseError::couldNotParseOffset($buffer, 3, 'invalid button click value');
+        }
+        [$kind, $modifiers, $button] = $this->parseCb($cb);
+
+        // See http://www.xfree86.org/current/ctlseqs.html#Mouse%20Tracking
+        // The upper left character position on the terminal is denoted as 1,1.
+        // Subtract 1 to keep it synced with cursor
+        $cx = max(0, ord($buffer[4])- 32) - 1;
+        $cy = max(0, ord($buffer[5])- 32) - 1;
+
+        return MouseEvent::new($kind, $button, $cx, $cy, $modifiers);
+    }
+
+    /**
+     * Cb is the byte of a mouse input that contains the button being used, the key modifiers being
+     * held and whether the mouse is dragging or not.
+     *
+     * Bit layout of cb, from low to high:
+     *
+     * - button number
+     * - button number
+     * - shift
+     * - meta (alt)
+     * - control
+     * - mouse is dragging
+     * - button number
+     * - button number
+     *
+     * @return array{MouseEventKind,int-mask-of<KeyModifiers::*>,MouseButton}
+     */
+    private function parseCb(int $cb): array
+    {
+        $buttonNumber = ($cb & 0b0000_0011) | (($cb & 0b1100_0000) >> 4);
+        $dragging = ($cb & 0b0010_0000) === 0b0010_0000;
+
+        [$kind, $button] = match ([$buttonNumber, $dragging]) {
+            [0, false] => [MouseEventKind::Down, MouseButton::Left],
+            [1, false] => [MouseEventKind::Down, MouseButton::Middle],
+            [2, false] => [MouseEventKind::Down, MouseButton::Right],
+            [0, true] => [MouseEventKind::Drag, MouseButton::Left],
+            [1, true] => [MouseEventKind::Drag, MouseButton::Middle],
+            [2, true] => [MouseEventKind::Drag, MouseButton::Right],
+            [3, true], [4, true], [5, true] => [MouseEventKind::Moved, MouseButton::None],
+            [4, false] => [MouseEventKind::ScrollUp, MouseButton::None],
+            [5, false] => [MouseEventKind::ScrollDown, MouseButton::None],
+            [6, false] => [MouseEventKind::ScrollLeft, MouseButton::None],
+            [7, false] => [MouseEventKind::ScrollRight, MouseButton::None],
+            default => throw new ParseError(sprintf(
+                'Could not parse mouse event: button number: %d, dragging: %s',
+                $buttonNumber,
+                $dragging ? 'true' : 'false'
+            ))
+        };
+        $modifiers = KeyModifiers::NONE;
+
+        if (($cb & 0b0000_0100) === 0b0000_0100) {
+            $modifiers |= KeyModifiers::SHIFT;
+        }
+        if (($cb & 0b0000_1000) === 0b0000_1000) {
+            $modifiers |= KeyModifiers::ALT;
+        }
+        if (($cb & 0b0001_0000) === 0b0001_0000) {
+            $modifiers |= KeyModifiers::CONTROL;
+        }
+
+        return [$kind, $modifiers, $button];
+    }
+
+    /**
+     * @param string[] $buffer
+     */
+    private function parseCsiRxvtMouse(array $buffer): Event
+    {
+        $s = implode('', array_slice($buffer, 2, -1));
+        $split = explode(';', $s);
+        if (!array_key_exists(2, $split)) {
+            throw new ParseError(sprintf(
+                'Could not parse RXVT mouse seq: %s',
+                $s
+            ));
+        }
+        [$kind, $modifiers, $button] = $this->parseCb(intval($split[0]) - 32);
+        $cx = intval($split[1]) - 1;
+        $cy = intval($split[2]) - 1;
+
+        return MouseEvent::new(
+            $kind,
+            $button,
+            $cx,
+            $cy,
+            $modifiers
+        );
+    }
+
+    /**
+     * @param string[] $buffer
+     */
+    private function parseCsiSgrMouse(array $buffer): ?Event
+    {
+        $lastChar = $buffer[array_key_last($buffer)];
+        if (!in_array($lastChar, ['m', 'M'])) {
+            return null;
+        }
+        $s = implode('', array_slice($buffer, 3, -1));
+        $split = explode(';', $s);
+        [$kind, $modifiers, $button] = $this->parseCb(intval($split[0]));
+        $cx = intval($split[1]) - 1;
+        $cy = intval($split[2]) - 1;
+
+        if ($lastChar === 'm') {
+            $kind = match ($kind) {
+                MouseEventKind::Down => MouseEventKind::Up,
+                default => $kind,
+            };
+        }
+        return MouseEvent::new(
+            $kind,
+            $button,
+            $cx,
+            $cy,
+            $modifiers
+        );
     }
 }

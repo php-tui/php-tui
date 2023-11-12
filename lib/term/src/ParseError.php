@@ -9,13 +9,14 @@ class ParseError extends RuntimeException
     /**
      * @param string[] $buffer
      */
-    public static function couldNotParseOffset(array $buffer, int $offset): self
+    public static function couldNotParseOffset(array $buffer, int $offset, ?string $message = null): self
     {
         return new self(sprintf(
-            'Could not parse char "%s" (offset %d) in "%s"',
+            'Could not parse char "%s" (offset %d) in "%s"%s',
             $buffer[$offset],
             $offset,
-            json_encode(implode('', $buffer))
+            json_encode(implode('', $buffer)),
+            $message ? ': ' . $message : '',
         ));
     }
 

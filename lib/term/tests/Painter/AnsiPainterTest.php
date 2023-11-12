@@ -35,6 +35,8 @@ class AnsiPainterTest extends TestCase
         $this->assertAnsiCode('8m', Actions::hidden(true));
         $this->assertAnsiCode('9m', Actions::strike(true));
         $this->assertAnsiCode('2J', Actions::clear(ClearType::All));
+        $this->assertRawSeq("\x1B[?1000h\x1B[?1002h\x1B[?1003h\x1B[?1015h\x1B[?1006h", Actions::enableMouseCapture());
+        $this->assertRawSeq("\x1B[?1006h\x1B[?1015h\x1B[?1003h\x1B[?1002h\x1B[?1000h", Actions::disableMouseCapture());
     }
 
     private function assertAnsiCode(string $string, Action $command): void
@@ -43,5 +45,13 @@ class AnsiPainterTest extends TestCase
         $term = AnsiPainter::new($writer);
         $term->paint([$command]);
         self::assertEquals(json_encode(sprintf("\033[%s", $string)), json_encode($writer->toString()), $command::class);
+    }
+
+    private function assertRawSeq(string $string, Action $command): void
+    {
+        $writer = BufferWriter::new();
+        $term = AnsiPainter::new($writer);
+        $term->paint([$command]);
+        self::assertEquals(json_encode($string), json_encode($writer->toString()), $command::class);
     }
 }

@@ -5,6 +5,7 @@ namespace PhpTui\Term\Painter;
 use PhpTui\Term\Action\AlternateScreenEnable;
 use PhpTui\Term\Action\Clear;
 use PhpTui\Term\Action\CursorShow;
+use PhpTui\Term\Action\EnableMouseCapture;
 use PhpTui\Term\Action\MoveCursor;
 use PhpTui\Term\Action\PrintString;
 use PhpTui\Term\Action\Reset;
@@ -54,6 +55,29 @@ final class AnsiPainter implements Painter
             return;
         }
 
+        if ($action instanceof EnableMouseCapture) {
+            $this->writer->write(implode('', array_map(fn (string $code) => $this->esc($code), $action->enable ? [
+                // Normal tracking: Send mouse X & Y on button press and release
+                '?1000h',
+                // Button-event tracking: Report button motion events (dragging)
+                '?1002h',
+                // Any-event tracking: Report all motion events
+                '?1003h',
+                // RXVT mouse mode: Allows mouse coordinates of >223
+                '?1015h',
+                // SGR mouse mode: Allows mouse coordinates of >223, preferred over RXVT mode
+                '?1006h',
+            ] : [
+                // same as above but reversed
+                '?1006h',
+                '?1015h',
+                '?1003h',
+                '?1002h',
+                '?1000h',
+            ])));
+            return;
+        }
+
         $this->writer->write($this->esc(match (true) {
             $action instanceof SetForegroundColor => sprintf('38;5;%dm', $this->colorIndex($action->color)),
             $action instanceof SetBackgroundColor => sprintf('48;5;%dm', $this->colorIndex($action->color)),
@@ -69,7 +93,6 @@ final class AnsiPainter implements Painter
             $action instanceof SetModifier => $action->enable ?
                 sprintf('%dm', $this->modifierOnIndex($action->modifier)) :
                 sprintf('%dm', $this->modifierOffIndex($action->modifier)),
-
             default => throw new RuntimeException(sprintf(
                 'Do not know how to handle action: %s',
                 $action::class
@@ -134,6 +157,6 @@ final class AnsiPainter implements Painter
     }
     private function esc(string $action): string
     {
-        return sprintf("\033[%s", $action);
+        return sprintf("\x1B[%s", $action);
     }
 }

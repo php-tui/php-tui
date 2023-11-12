@@ -3,6 +3,7 @@
 namespace PhpTui\Tui\Example\Demo;
 
 use PhpTui\Term\Actions;
+use PhpTui\Term\ClearType;
 use PhpTui\Term\Event\CharKeyEvent;
 use PhpTui\Term\Terminal;
 use PhpTui\Tui\Adapter\PhpTerm\PhpTermBackend;
@@ -101,6 +102,7 @@ final class App
             return $this->doRun();
         } catch (Throwable $err) {
             $this->terminal->disableRawMode();
+            $this->terminal->queue(Actions::clear(ClearType::All));
             throw $err;
         }
     }
@@ -111,6 +113,7 @@ final class App
         $this->terminal->execute(Actions::cursorHide());
         // switch to the "alternate" screen so that we can return the user where they left off
         $this->terminal->execute(Actions::alternateScreenEnable());
+        $this->terminal->execute(Actions::enableMouseCapture());
 
         // the main loop
         while (true) {
@@ -168,6 +171,7 @@ final class App
         $this->terminal->disableRawMode();
         $this->terminal->execute(Actions::cursorShow());
         $this->terminal->execute(Actions::alternateScreenDisable());
+        $this->terminal->execute(Actions::disableMouseCapture());
 
         return 0;
     }

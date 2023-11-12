@@ -9,10 +9,13 @@ use PhpTui\Term\EventParser;
 use PhpTui\Term\Event\CharKeyEvent;
 use PhpTui\Term\Event\FocusEvent;
 use PhpTui\Term\Event\FunctionKeyEvent;
+use PhpTui\Term\Event\MouseEvent;
 use PhpTui\Term\KeyCode;
 use PhpTui\Term\Event\CodedKeyEvent;
 use PhpTui\Term\KeyEventKind;
 use PhpTui\Term\KeyModifiers;
+use PhpTui\Term\MouseButton;
+use PhpTui\Term\MouseEventKind;
 
 class EventParserTest extends TestCase
 {
@@ -20,6 +23,7 @@ class EventParserTest extends TestCase
      * @dataProvider provideParse
      * @dataProvider provideCsiSpecialKeyCode
      * @dataProvider provideCsiModifierKeyCode
+     * @dataProvider provideCsiMouse
      * dataProvider provideCsiUEncoded
      */
     public function testParse(string $line, ?Event $expected, bool $moreInput = false): void
@@ -271,6 +275,29 @@ class EventParserTest extends TestCase
         yield 'Meta F1' => [
             "\x1B[1;33P",
             FunctionKeyEvent::new(1, KeyModifiers::META),
+        ];
+    }
+
+    /**
+     * @return Generator<array{0:string,1:?Event,2?:bool}>
+     */
+    public static function provideCsiMouse(): Generator
+    {
+        yield 'CSI normal mouse' => [
+            "\x1B[M0\x60\x70",
+            MouseEvent::new(kind: MouseEventKind::Down, button: MouseButton::Left, column:63, row: 79, modifiers: KeyModifiers::CONTROL),
+        ];
+        yield 'CSI RXVT normal mouse' => [
+            "\x1B[32;30;40;M",
+            MouseEvent::new(kind: MouseEventKind::Down, button: MouseButton::Left, column:29, row: 39, modifiers: KeyModifiers::NONE),
+        ];
+        yield 'CSI SGR mouse' => [
+            "\x1B[<0;20;10;M",
+            MouseEvent::new(kind: MouseEventKind::Down, button: MouseButton::Left, column:19, row: 9, modifiers: KeyModifiers::NONE),
+        ];
+        yield 'CSI SGR mouse UP' => [
+            "\x1B[<0;20;10;m",
+            MouseEvent::new(kind: MouseEventKind::Up, button: MouseButton::Left, column:19, row: 9, modifiers: KeyModifiers::NONE),
         ];
     }
 }
