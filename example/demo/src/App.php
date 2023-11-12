@@ -98,6 +98,7 @@ final class App
             // enable "raw" mode to remove default terminal behavior (e.g.
             // echoing key presses)
             $this->terminal->enableRawMode();
+            $this->terminal->execute(Actions::enableMouseCapture(true));
             return $this->doRun();
         } catch (Throwable $err) {
             $this->terminal->disableRawMode();

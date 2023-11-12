@@ -407,7 +407,7 @@ final class EventParser
     private function parseCb(int $cb): array
     {
         $buttonNumber = ($cb & 0b0000_0011) | (($cb & 0b1100_0000) >> 4);
-        $dragging = (bool)($cb & 0b0010_0000 == 0b0010_0000);
+        $dragging = (bool)(($cb & 0b0010_0000) === 0b0010_0000);
 
         [$kind, $button] = match ([$buttonNumber, $dragging]) {
             [0, false] => [MouseEventKind::Down, MouseButton::Left],
@@ -417,10 +417,10 @@ final class EventParser
             [1, true] => [MouseEventKind::Drag, MouseButton::Middle],
             [2, true] => [MouseEventKind::Drag, MouseButton::Right],
             [3, true], [4, true], [5, true] => [MouseEventKind::Moved, MouseButton::None],
-            [4, false] => MouseEventKind::ScrollUp,
-            [5, false] => MouseEventKind::ScrollDown,
-            [6, false] => MouseEventKind::ScrollLeft,
-            [7, false] => MouseEventKind::ScrollRight,
+            [4, false] => [MouseEventKind::ScrollUp, MouseButton::None],
+            [5, false] => [MouseEventKind::ScrollDown, MouseButton::None],
+            [6, false] => [MouseEventKind::ScrollLeft, MouseButton::None],
+            [7, false] => [MouseEventKind::ScrollRight, MouseButton::None],
             default => throw new ParseError(sprintf(
                 'Could not parse mouse event: button number: %d, dragging: %s',
                 $buttonNumber,

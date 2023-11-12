@@ -5,6 +5,7 @@ namespace PhpTui\Term\Painter;
 use PhpTui\Term\Action\AlternateScreenEnable;
 use PhpTui\Term\Action\Clear;
 use PhpTui\Term\Action\CursorShow;
+use PhpTui\Term\Action\EnableMouseCapture;
 use PhpTui\Term\Action\MoveCursor;
 use PhpTui\Term\Action\PrintString;
 use PhpTui\Term\Action\Reset;
@@ -69,7 +70,19 @@ final class AnsiPainter implements Painter
             $action instanceof SetModifier => $action->enable ?
                 sprintf('%dm', $this->modifierOnIndex($action->modifier)) :
                 sprintf('%dm', $this->modifierOffIndex($action->modifier)),
-
+            $action instanceof EnableMouseCapture => $action->enable ? implode('', [
+                // Normal tracking: Send mouse X & Y on button press and release
+                '?1000h',
+                // Button-event tracking: Report button motion events (dragging)
+                '?1002h',
+                // Any-event tracking: Report all motion events
+                '?1003h',
+                // RXVT mouse mode: Allows mouse coordinates of >223
+                '?1015h',
+                // SGR mouse mode: Allows mouse coordinates of >223, preferred over RXVT mode
+                '?1006h',
+            ]) : implode('', [
+            ]),
             default => throw new RuntimeException(sprintf(
                 'Do not know how to handle action: %s',
                 $action::class
