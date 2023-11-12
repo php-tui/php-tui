@@ -287,5 +287,9 @@ class EventParserTest extends TestCase
             "\x1B[M0\x60\x70",
             MouseEvent::new(kind: MouseEventKind::Down, button: MouseButton::Left, column:63, row: 79, modifiers: KeyModifiers::CONTROL),
         ];
+        yield 'CSI RXVT normal mouse' => [
+            "\x1B[32;30;40;M",
+            MouseEvent::new(kind: MouseEventKind::Down, button: MouseButton::Left, column:29, row: 39, modifiers: KeyModifiers::NONE),
+        ];
     }
 }
