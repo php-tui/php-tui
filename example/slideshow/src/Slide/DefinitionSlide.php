@@ -86,11 +86,4 @@ final class DefinitionSlide implements Slide
             Style::default()->fg($this->highlight ? AnsiColor::White : RgbColor::fromRgb(100, 100, 100))
         );
     }
-
-    private function image(): Widget
-    {
-        return Canvas::fromIntBounds(0, $this->image->resolution()->width, 0, $this->image->resolution()->height)
-            ->marker(Marker::HalfBlock)
-            ->draw($this->image);
-    }
 }

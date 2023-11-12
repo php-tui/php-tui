@@ -74,7 +74,7 @@ final class TitlePargagraphAndImageDT implements Slide
 
     private function image(): Widget
     {
-        return Canvas::fromIntBounds(0, $this->image->resolution()->width, 0, $this->image->resolution()->height)
+        return Canvas::fromIntBounds(0, 320, 0, 240)
             ->marker(Marker::HalfBlock)
             ->draw($this->image);
     }

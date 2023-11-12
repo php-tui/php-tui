@@ -116,7 +116,7 @@ final class ListAndImageLR implements Slide
 
     private function me(): Widget
     {
-        return Canvas::fromIntBounds(0, $this->image->resolution()->width, 0, $this->image->resolution()->height)
+        return Canvas::fromIntBounds(0, 240, 0, 320)
             ->marker(Marker::HalfBlock)
             ->draw($this->image);
     }
