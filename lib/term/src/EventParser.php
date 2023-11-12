@@ -476,7 +476,7 @@ final class EventParser
     private function parseCsiSgrMouse(array $buffer): ?Event
     {
         $lastChar = $buffer[array_key_last($buffer)];
-        if (!in_array($lastChar, ['m', 'M'])) {
+        if (!in_array($lastChar, ['m', 'M'], true)) {
             return null;
         }
         $s = implode('', array_slice($buffer, 3, -1));

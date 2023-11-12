@@ -91,7 +91,7 @@ final class Docgen
                         );
                     }
                     return new WidgetParam(
-                        type: $type ?? $phpType,
+                        type: $type ? $type : $phpType,
                         name: $prop->getName(),
                         description: $this->description($phpDoc),
                     );
@@ -129,7 +129,7 @@ final class Docgen
                         );
                     }
                     return new WidgetParam(
-                        type: $type ?? $phpType,
+                        type: $type ? $type : $phpType,
                         name: $prop->getName(),
                         description: $this->description($phpDoc),
                     );

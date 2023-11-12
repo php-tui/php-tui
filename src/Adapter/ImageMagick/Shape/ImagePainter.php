@@ -22,7 +22,7 @@ final class ImagePainter implements ShapePainter
 
     public function __construct(ImageRegistry $registry = null)
     {
-        $this->registry = $registry ?: new ImageRegistry();
+        $this->registry = $registry ?? new ImageRegistry();
     }
 
     public function draw(ShapePainter $shapePainter, Painter $painter, Shape $shape): void
