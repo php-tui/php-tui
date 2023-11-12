@@ -11,6 +11,7 @@ use PhpTui\Term\RawMode\NullRawMode;
 use PhpTui\Term\Size;
 use PhpTui\Term\Terminal;
 use PhpTui\Tui\Adapter\PhpTerm\PhpTermBackend;
+use PhpTui\Tui\DisplayBuilder;
 use PhpTui\Tui\Model\AxisBounds;
 use PhpTui\Tui\Model\Buffer;
 use PhpTui\Tui\Model\Constraint;
@@ -57,7 +58,7 @@ final class DisplayBench
             rawMode: new NullRawMode(),
             painter: $this->painter,
         );
-        $this->display = Display::fullscreen(PhpTermBackend::new($terminal));
+        $this->display = DisplayBuilder::default(PhpTermBackend::new($terminal))->build();
     }
 
     /**

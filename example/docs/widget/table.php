@@ -1,16 +1,15 @@
 
 <?php
 
-use PhpTui\Tui\Adapter\PhpTerm\PhpTermBackend;
+use PhpTui\Tui\DisplayBuilder;
 use PhpTui\Tui\Model\Constraint;
-use PhpTui\Tui\Model\Display;
 use PhpTui\Tui\Widget\Table;
 use PhpTui\Tui\Widget\Table\TableCell;
 use PhpTui\Tui\Widget\Table\TableRow;
 
 require 'vendor/autoload.php';
 
-$display = Display::fullscreen(PhpTermBackend::new());
+$display = DisplayBuilder::default()->build();
 $display->drawWidget(
     Table::default()
         ->widths(

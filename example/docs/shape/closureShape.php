@@ -1,7 +1,6 @@
 <?php
 
-use PhpTui\Tui\Adapter\PhpTerm\PhpTermBackend;
-use PhpTui\Tui\Model\Display;
+use PhpTui\Tui\DisplayBuilder;
 use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Model\Widget\Line;
 use PhpTui\Tui\Widget\Canvas;
@@ -10,7 +9,7 @@ use PhpTui\Tui\Shape\ClosureShape;
 
 require 'vendor/autoload.php';
 
-$display = Display::fullscreen(PhpTermBackend::new());
+$display = DisplayBuilder::default()->build();
 $display->drawWidget(
     Canvas::fromIntBounds(-1, 21, -1, 21)
         ->marker(Marker::Dot)

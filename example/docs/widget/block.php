@@ -1,7 +1,6 @@
 <?php
 
-use PhpTui\Tui\Adapter\PhpTerm\PhpTermBackend;
-use PhpTui\Tui\Model\Display;
+use PhpTui\Tui\DisplayBuilder;
 use PhpTui\Tui\Model\Widget\BorderType;
 use PhpTui\Tui\Model\Widget\Borders;
 use PhpTui\Tui\Model\Widget\Text;
@@ -11,7 +10,7 @@ use PhpTui\Tui\Widget\Paragraph;
 
 require 'vendor/autoload.php';
 
-$display = Display::fullscreen(PhpTermBackend::new());
+$display = DisplayBuilder::default()->build();
 $display->drawWidget(
     Block::default()
         ->borders(Borders::ALL)

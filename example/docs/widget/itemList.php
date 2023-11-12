@@ -1,7 +1,6 @@
 <?php
 
-use PhpTui\Tui\Adapter\PhpTerm\PhpTermBackend;
-use PhpTui\Tui\Model\Display;
+use PhpTui\Tui\DisplayBuilder;
 use PhpTui\Tui\Model\Widget\Text;
 use PhpTui\Tui\Widget\ItemList;
 use PhpTui\Tui\Widget\ItemList\ItemListState;
@@ -9,7 +8,7 @@ use PhpTui\Tui\Widget\ItemList\ListItem;
 
 require 'vendor/autoload.php';
 
-$display = Display::fullscreen(PhpTermBackend::new());
+$display = DisplayBuilder::default()->build();
 $display->drawWidget(
     ItemList::default()
         ->highlightSymbol('😼')
