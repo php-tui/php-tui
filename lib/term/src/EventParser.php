@@ -165,6 +165,7 @@ final class EventParser
         }
 
         return match ($lastByte) {
+            'M' => $this->parseCsiRxvtMouse($buffer),
             '~' => $this->parseCsiSpecialKeyCode($buffer),
             default => $this->parseCsiModifierKeyCode($buffer),
         };
@@ -440,5 +441,31 @@ final class EventParser
         }
 
         return [$kind, $modifiers, $button];
+    }
+
+    /**
+     * @param string[] $buffer
+     */
+    private function parseCsiRxvtMouse(array $buffer): ?Event
+    {
+        $s = implode('', array_slice($buffer, 2, -1));
+        $split = explode(';', $s);
+        if (!array_key_exists(2, $split)) {
+            throw new ParseError(sprintf(
+                'Could not parse RXVT mouse seq: %s',
+                $s
+            ));
+        }
+        [$kind, $modifiers, $button] = $this->parseCb(intval($split[0]) - 32);
+        $cx = intval($split[1]) - 1;
+        $cy = intval($split[2]) - 1;
+
+        return MouseEvent::new(
+            $kind,
+            $button,
+            $cx,
+            $cy,
+            $modifiers
+        );
     }
 }
