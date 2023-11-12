@@ -54,12 +54,10 @@ class App
                 if ($event instanceof CodedKeyEvent) {
                     if ($event->code === KeyCode::Left) {
                         $this->display->clear();
-                        $this->display->reset();
                         $this->selected = max(0, $this->selected - 1);
                     }
                     if ($event->code === KeyCode::Right) {
                         $this->display->clear();
-                        $this->display->reset();
                         $this->selected = min(count($this->slides) - 1, $this->selected + 1);
                     }
                     if ($event->code === KeyCode::Esc) {
@@ -69,7 +67,6 @@ class App
                 if ($event instanceof CharKeyEvent) {
                     if ($event->char === 'r') {
                         $this->display->clear();
-                        $this->display->reset();
                     }
                 }
                 $this->currentSlide()->handle($event);
