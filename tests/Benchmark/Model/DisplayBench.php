@@ -58,7 +58,7 @@ final class DisplayBench
             rawMode: new NullRawMode(),
             painter: $this->painter,
         );
-        $this->display = DisplayBuilder::new(PhpTermBackend::new($terminal))->build();
+        $this->display = DisplayBuilder::default(PhpTermBackend::new($terminal))->build();
     }
 
     /**

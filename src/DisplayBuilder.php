@@ -14,6 +14,22 @@ use PhpTui\Tui\Model\WidgetRenderer\AggregateWidgetRenderer;
 use PhpTui\Tui\Shape\DefaultShapeSet;
 use PhpTui\Tui\Widget\DefaultWidgetSet;
 
+/**
+ * An entry point for PHP-TUI.
+ *
+ * You can use this class to get the Display object
+ * upon which you can start rendering widgets.
+ *
+ * ```
+ * $display = DisplayBuilder::default()->build();
+ * $display->drawWidget(
+ *    Paragraph::fromString("Hello World")
+ * );
+ * ```
+ * By default it will use the PhpTermBackend in fullscreen mode.
+ *
+ * You can add additional widgets and shapes with this builder.
+ */
 final class DisplayBuilder
 {
     /**
@@ -31,7 +47,7 @@ final class DisplayBuilder
     /**
      * Return a default display using the fullscreen
      */
-    public static function new(?Backend $backend = null): self
+    public static function default(?Backend $backend = null): self
     {
         return self::doNew($backend, null);
     }

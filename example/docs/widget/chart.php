@@ -1,6 +1,5 @@
 <?php
 
-use PhpTui\Tui\Adapter\PhpTerm\PhpTermBackend;
 use PhpTui\Tui\DisplayBuilder;
 use PhpTui\Tui\Model\AxisBounds;
 use PhpTui\Tui\Model\Marker;
@@ -12,7 +11,7 @@ use PhpTui\Tui\Widget\Chart\GraphType;
 
 require 'vendor/autoload.php';
 
-$display = DisplayBuilder::new()->build();
+$display = DisplayBuilder::default()->build();
 $display->drawWidget(
     Chart::new(
         DataSet::new('Ships')

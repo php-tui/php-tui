@@ -1,6 +1,5 @@
 <?php
 
-use PhpTui\Tui\Adapter\PhpTerm\PhpTermBackend;
 use PhpTui\Tui\DisplayBuilder;
 use PhpTui\Tui\Model\Constraint;
 use PhpTui\Tui\Model\Direction;
@@ -11,7 +10,7 @@ use PhpTui\Tui\Widget\Grid;
 
 require 'vendor/autoload.php';
 
-$display = DisplayBuilder::new()->build();
+$display = DisplayBuilder::default()->build();
 $display->drawWidget(
     Grid::default()
         ->direction(Direction::Horizontal)

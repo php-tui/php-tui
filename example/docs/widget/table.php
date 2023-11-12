@@ -1,7 +1,6 @@
 
 <?php
 
-use PhpTui\Tui\Adapter\PhpTerm\PhpTermBackend;
 use PhpTui\Tui\DisplayBuilder;
 use PhpTui\Tui\Model\Constraint;
 use PhpTui\Tui\Widget\Table;
@@ -10,7 +9,7 @@ use PhpTui\Tui\Widget\Table\TableRow;
 
 require 'vendor/autoload.php';
 
-$display = DisplayBuilder::new()->build();
+$display = DisplayBuilder::default()->build();
 $display->drawWidget(
     Table::default()
         ->widths(

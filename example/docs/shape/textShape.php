@@ -3,7 +3,6 @@
 use PhpTui\Tui\Adapter\Bdf\BdfShapeSet;
 use PhpTui\Tui\Adapter\Bdf\FontRegistry;
 use PhpTui\Tui\Adapter\Bdf\Shape\TextShape;
-use PhpTui\Tui\Adapter\PhpTerm\PhpTermBackend;
 use PhpTui\Tui\DisplayBuilder;
 use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Marker;
@@ -16,7 +15,7 @@ require 'vendor/autoload.php';
 // this is EXPENSIVE to create, only do it once!
 $registry = FontRegistry::default();
 
-$display = DisplayBuilder::new()
+$display = DisplayBuilder::default()
     ->addShapeSet(new BdfShapeSet(FontRegistry::default()))
     ->build();
 

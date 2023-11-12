@@ -18,7 +18,7 @@ final class DisplayBuilderTest extends TestCase
 {
     public function testBuildDefault(): void
     {
-        $display = DisplayBuilder::new()->build();
+        $display = DisplayBuilder::default()->build();
         $this->addToAssertionCount(1);
     }
 
@@ -34,7 +34,7 @@ final class DisplayBuilderTest extends TestCase
         )]);
 
         $dummy = new DummyBackend(10, 10);
-        $display = DisplayBuilder::new($dummy)
+        $display = DisplayBuilder::default($dummy)
             ->addShapeSet($shapeSet)
             ->addWidgetSet($widgetSet)
             ->fullscreen()

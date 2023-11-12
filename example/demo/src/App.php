@@ -89,7 +89,7 @@ final class App
             };
         }
 
-        $display = DisplayBuilder::new($backend ?? PhpTermBackend::new($terminal))
+        $display = DisplayBuilder::default($backend ?? PhpTermBackend::new($terminal))
             ->addShapeSet(new ImageMagickShapeSet())
             ->addShapeSet(new BdfShapeSet(FontRegistry::default()))
             ->build();
