@@ -18,7 +18,8 @@ final class DisplayBuilderTest extends TestCase
 {
     public function testBuildDefault(): void
     {
-        $display = DisplayBuilder::default()->build();
+        $dummy = new DummyBackend(10, 10);
+        $display = DisplayBuilder::default($dummy)->build();
         $this->addToAssertionCount(1);
     }
 
