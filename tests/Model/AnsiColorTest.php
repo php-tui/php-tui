@@ -9,13 +9,13 @@ class AnsiColorTest extends TestCase
 {
     public function testFromIndex(): void
     {
-        self::assertEquals(AnsiColor::Black, AnsiColor::fromIndex(0));
-        self::assertEquals(AnsiColor::White, AnsiColor::fromIndex(15));
+        self::assertEquals(AnsiColor::Black, AnsiColor::from(0));
+        self::assertEquals(AnsiColor::White, AnsiColor::from(15));
     }
 
     public function testFromIndexOutOfBounds(): void
     {
-        $this->expectExceptionMessage('ANSI color with index "16" does not exist, must be in range of 0-15');
-        self::assertEquals(AnsiColor::White, AnsiColor::fromIndex(16));
+        $this->expectExceptionMessage('16 is not a valid backing value for enum PhpTui\Tui\Model\AnsiColor');
+        self::assertEquals(AnsiColor::White, AnsiColor::from(16));
     }
 }

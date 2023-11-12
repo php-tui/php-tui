@@ -2,46 +2,28 @@
 
 namespace PhpTui\Tui\Model;
 
-use RuntimeException;
-
-enum AnsiColor implements Color
+enum AnsiColor: int implements Color
 {
-    case Reset;
-    case Black;
-    case Red;
-    case Green;
-    case Yellow;
-    case Blue;
-    case Magenta;
-    case Cyan;
-    case Gray;
-    case DarkGray;
-    case LightRed;
-    case LightGreen;
-    case LightYellow;
-    case LightBlue;
-    case LightMagenta;
-    case LightCyan;
-    case White;
+    case Reset = -1;
+    case Black = 0;
+    case Red = 1;
+    case Green = 2;
+    case Yellow = 3;
+    case Blue = 4;
+    case Magenta = 5;
+    case Cyan = 6;
+    case Gray = 7;
+    case DarkGray = 8;
+    case LightRed = 9;
+    case LightGreen = 10;
+    case LightYellow = 11;
+    case LightBlue = 12;
+    case LightMagenta = 13;
+    case LightCyan = 14;
+    case White = 15;
 
     public function debugName(): string
     {
         return $this->name;
-    }
-
-    /**
-     * Return ANSI color from 0 based index (0 = black, 15 = white)
-     */
-    public static function fromIndex(int $index): self
-    {
-        $cases = self::cases();
-        if (!isset($cases[$index + 1])) {
-            throw new RuntimeException(sprintf(
-                'ANSI color with index "%d" does not exist, must be in range of 0-15',
-                $index
-            ));
-        }
-
-        return $cases[$index + 1];
     }
 }

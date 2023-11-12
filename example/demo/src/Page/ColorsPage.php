@@ -34,7 +34,7 @@ class ColorsPage implements Component
         $x = 0;
         $y = 0;
         for ($i = 0; $i < 15; $i++) {
-            $color = AnsiColor::fromIndex($i);
+            $color = AnsiColor::from($i);
             $name = $color->name;
             $buffer->putSpan(
                 Position::at($x, $y),
