@@ -2,7 +2,6 @@
 
 namespace PhpTui\Term\Tests\Painter;
 
-use PhpTui\Term\Action\EnableMouseCapture;
 use PhpTui\Term\ClearType;
 use PhpTui\Term\Colors;
 use PhpTui\Term\Actions;

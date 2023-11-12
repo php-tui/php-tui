@@ -12,16 +12,6 @@ final class MouseEvent implements Event
     {
     }
 
-    public static function new(MouseEventKind $kind, MouseButton $button, int $column, int $row, int $modifiers): self {
-        return new self(
-            kind: $kind,
-            button: $button,
-            column: $column,
-            row: $row,
-            modifiers: $modifiers
-        );
-    }
-
     public function __toString(): string
     {
         return sprintf(
@@ -33,5 +23,16 @@ final class MouseEvent implements Event
             $this->modifiers
         );
     }
-    
+
+    public static function new(MouseEventKind $kind, MouseButton $button, int $column, int $row, int $modifiers): self
+    {
+        return new self(
+            kind: $kind,
+            button: $button,
+            column: $column,
+            row: $row,
+            modifiers: $modifiers
+        );
+    }
+
 }
