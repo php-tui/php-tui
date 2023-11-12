@@ -33,7 +33,11 @@ final class Display
     ) {
     }
 
-    public static function fullscreen(Backend $backend): self
+    public static function new(
+        Backend $backend,
+        Viewport $viewport,
+        WidgetRenderer $renderer,
+    ): self
     {
         $size = $backend->size();
         return new self(
@@ -41,19 +45,11 @@ final class Display
             [Buffer::empty($size), Buffer::empty($size)],
             0,
             false,
-            new Fullscreen(),
+            $viewport,
             $size,
             $size,
             new Position(0, 0),
-            AggregateWidgetRenderer::fromWidgetSets(
-                new DefaultWidgetSet(
-                    AggregateShapePainter::fromShapeSets(
-                        new DefaultShapeSet(),
-                        new BdfShapeSet(FontRegistry::default()),
-                        new ImageMagickShapeSet(),
-                    )
-                )
-            )
+            $renderer,
         );
     }
 
