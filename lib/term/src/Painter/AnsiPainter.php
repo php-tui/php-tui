@@ -63,6 +63,10 @@ final class AnsiPainter implements Painter
                 '?1002h',
                 // Any-event tracking: Report all motion events
                 '?1003h',
+                // RXVT mouse mode: Allows mouse coordinates of >223
+                '?1015h',
+                // SGR mouse mode: Allows mouse coordinates of >223, preferred over RXVT mode
+                '?1006h',
             ] : [
                 // same as above but reversed
                 '?1006h',
