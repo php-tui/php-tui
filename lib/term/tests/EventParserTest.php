@@ -291,5 +291,13 @@ class EventParserTest extends TestCase
             "\x1B[32;30;40;M",
             MouseEvent::new(kind: MouseEventKind::Down, button: MouseButton::Left, column:29, row: 39, modifiers: KeyModifiers::NONE),
         ];
+        yield 'CSI SGR mouse' => [
+            "\x1B[<0;20;10;M",
+            MouseEvent::new(kind: MouseEventKind::Down, button: MouseButton::Left, column:19, row: 9, modifiers: KeyModifiers::NONE),
+        ];
+        yield 'CSI SGR mouse UP' => [
+            "\x1B[<0;20;10;m",
+            MouseEvent::new(kind: MouseEventKind::Up, button: MouseButton::Left, column:19, row: 9, modifiers: KeyModifiers::NONE),
+        ];
     }
 }

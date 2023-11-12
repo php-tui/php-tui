@@ -134,6 +134,7 @@ final class EventParser
             'F' => CodedKeyEvent::new(KeyCode::End),
             'Z' => CodedKeyEvent::new(KeyCode::BackTab, KeyModifiers::SHIFT, KeyEventKind::Press),
             'M' => $this->parseCsiNormalMouse($buffer),
+            '<' => $this->parseCsiSgrMouse($buffer),
             'I' => FocusEvent::gained(),
             'O' => FocusEvent::lost(),
             // https://sw.kovidgoyal.net/kitty/keyboard-protocol/#legacy-functional-keys
@@ -446,7 +447,7 @@ final class EventParser
     /**
      * @param string[] $buffer
      */
-    private function parseCsiRxvtMouse(array $buffer): ?Event
+    private function parseCsiRxvtMouse(array $buffer): Event
     {
         $s = implode('', array_slice($buffer, 2, -1));
         $split = explode(';', $s);
@@ -460,6 +461,36 @@ final class EventParser
         $cx = intval($split[1]) - 1;
         $cy = intval($split[2]) - 1;
 
+        return MouseEvent::new(
+            $kind,
+            $button,
+            $cx,
+            $cy,
+            $modifiers
+        );
+    }
+
+    /**
+     * @param string[] $buffer
+     */
+    private function parseCsiSgrMouse(array $buffer): ?Event
+    {
+        $lastChar = $buffer[array_key_last($buffer)];
+        if (!in_array($lastChar, ['m', 'M'])) {
+            return null;
+        }
+        $s = implode('', array_slice($buffer, 3, -1));
+        $split = explode(';', $s);
+        [$kind, $modifiers, $button] = $this->parseCb(intval($split[0]));
+        $cx = intval($split[1]) - 1;
+        $cy = intval($split[2]) - 1;
+
+        if ($lastChar === 'm') {
+            $kind = match ($kind) {
+                MouseEventKind::Down => MouseEventKind::Up,
+                default => $kind,
+            };
+        }
         return MouseEvent::new(
             $kind,
             $button,
