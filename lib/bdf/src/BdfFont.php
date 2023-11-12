@@ -18,7 +18,11 @@ final class BdfFont
 
     public function codePoint(int $codePoint): BdfGlyph
     {
-        return $this->glyphs[$codePoint] ?? throw new RuntimeException('No glyph for codepoint %d', $codePoint);
+        if (!isset($this->glyphs[$codePoint])) {
+            throw new RuntimeException(sprintf('No glyph for codepoint %d', $codePoint));
+        }
+
+        return $this->glyphs[$codePoint];
     }
 
     /**
