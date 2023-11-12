@@ -4,6 +4,7 @@ namespace PhpTui\Term;
 
 use PhpTui\Term\Action\AlternateScreenEnable;
 use PhpTui\Term\Action\Clear;
+use PhpTui\Term\Action\EnableMouseCapture;
 use PhpTui\Term\Action\MoveCursor;
 use PhpTui\Term\Action\Reset;
 use PhpTui\Term\Action\SetModifier;
@@ -118,5 +119,10 @@ final class Actions
     public static function clear(ClearType $clearType): Clear
     {
         return new Clear($clearType);
+    }
+
+    public static function enableMouseCapture(bool $enable): EnableMouseCapture
+    {
+        return new EnableMouseCapture($enable);
     }
 }
