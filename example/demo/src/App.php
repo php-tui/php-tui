@@ -6,7 +6,11 @@ use PhpTui\Term\Actions;
 use PhpTui\Term\ClearType;
 use PhpTui\Term\Event\CharKeyEvent;
 use PhpTui\Term\Terminal;
+use PhpTui\Tui\Adapter\Bdf\BdfShapeSet;
+use PhpTui\Tui\Adapter\Bdf\FontRegistry;
+use PhpTui\Tui\Adapter\ImageMagick\ImageMagickShapeSet;
 use PhpTui\Tui\Adapter\PhpTerm\PhpTermBackend;
+use PhpTui\Tui\DisplayBuilder;
 use PhpTui\Tui\Example\Demo\Page\BlocksPage;
 use PhpTui\Tui\Example\Demo\Page\CanvasPage;
 use PhpTui\Tui\Example\Demo\Page\CanvasScalingPage;
@@ -18,6 +22,7 @@ use PhpTui\Tui\Example\Demo\Page\ItemListPage;
 use PhpTui\Tui\Example\Demo\Page\SpritePage;
 use PhpTui\Tui\Example\Demo\Page\TablePage;
 use PhpTui\Tui\Model\AnsiColor;
+use PhpTui\Tui\Model\Backend;
 use PhpTui\Tui\Model\Constraint;
 use PhpTui\Tui\Model\Direction;
 use PhpTui\Tui\Model\Display;
@@ -63,7 +68,7 @@ final class App
     ) {
     }
 
-    public static function new(?Terminal $terminal = null, ?Display $display = null): self
+    public static function new(?Terminal $terminal = null, ?Backend $backend = null): self
     {
         $terminal = $terminal ?? Terminal::new();
         $pages = [];
@@ -84,9 +89,13 @@ final class App
             };
         }
 
+        $display = DisplayBuilder::new($backend ?? PhpTermBackend::new($terminal))
+            ->addShapeSet(new ImageMagickShapeSet())
+            ->addShapeSet(new BdfShapeSet(FontRegistry::default()))
+            ->build();
         return new self(
             $terminal,
-            $display ?? Display::fullscreen(PhpTermBackend::new($terminal)),
+            $display,
             ActivePage::Events,
             $pages,
             [],

@@ -1,8 +1,8 @@
 <?php
 
 use PhpTui\Tui\Adapter\PhpTerm\PhpTermBackend;
+use PhpTui\Tui\DisplayBuilder;
 use PhpTui\Tui\Model\AnsiColor;
-use PhpTui\Tui\Model\Display;
 use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Model\Widget\FloatPosition;
 use PhpTui\Tui\Widget\Canvas;
@@ -10,7 +10,7 @@ use PhpTui\Tui\Shape\Sprite;
 
 require 'vendor/autoload.php';
 
-$display = Display::fullscreen(PhpTermBackend::new());
+$display = DisplayBuilder::new(PhpTermBackend::new())->build();
 $display->drawWidget(
     Canvas::fromIntBounds(0, 20, 0, 10)
         ->marker(Marker::Braille)

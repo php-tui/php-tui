@@ -12,6 +12,7 @@ use PhpTui\Term\Painter\StringPainter;
 use PhpTui\Term\Terminal;
 use PhpTui\Tui\Adapter\ImageMagick\Shape\ImageShape;
 use PhpTui\Tui\Adapter\PhpTerm\PhpTermBackend;
+use PhpTui\Tui\DisplayBuilder;
 use PhpTui\Tui\Model\Display;
 use PhpTui\Tui\Widget\Canvas;
 
@@ -38,7 +39,7 @@ final class ImageShapeBench
             rawMode: new NullRawMode(),
             painter: $this->painter,
         );
-        $this->display = Display::fullscreen(PhpTermBackend::new($terminal));
+        $this->display = DisplayBuilder::new(PhpTermBackend::new($terminal))->build();
     }
 
     public function benchImageShape(): void

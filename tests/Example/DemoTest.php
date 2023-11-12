@@ -12,7 +12,6 @@ use PhpTui\Term\RawMode\NullRawMode;
 use PhpTui\Term\Terminal;
 use PhpTui\Tui\Example\Demo\App;
 use PhpTui\Tui\Model\Backend\DummyBackend;
-use PhpTui\Tui\Model\Display;
 use RuntimeException;
 
 class DemoTest extends TestCase
@@ -115,7 +114,10 @@ class DemoTest extends TestCase
         );
 
         $backend = DummyBackend::fromDimensions(80, 20);
-        $app = App::new($terminal, Display::fullscreen($backend));
+        $app = App::new(
+            $terminal,
+            $backend,
+        );
         $app->run();
         return $backend;
     }

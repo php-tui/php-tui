@@ -1,8 +1,8 @@
 <?php
 
 use PhpTui\Tui\Adapter\PhpTerm\PhpTermBackend;
+use PhpTui\Tui\DisplayBuilder;
 use PhpTui\Tui\Model\AxisBounds;
-use PhpTui\Tui\Model\Display;
 use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Model\Widget\Span;
 use PhpTui\Tui\Widget\Chart;
@@ -12,7 +12,7 @@ use PhpTui\Tui\Widget\Chart\GraphType;
 
 require 'vendor/autoload.php';
 
-$display = Display::fullscreen(PhpTermBackend::new());
+$display = DisplayBuilder::new(PhpTermBackend::new())->build();
 $display->drawWidget(
     Chart::new(
         DataSet::new('Ships')

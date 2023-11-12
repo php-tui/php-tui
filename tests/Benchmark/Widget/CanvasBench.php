@@ -12,6 +12,7 @@ use PhpTui\Term\RawMode\NullRawMode;
 use PhpTui\Term\Size;
 use PhpTui\Term\Painter\StringPainter;
 
+use PhpTui\Tui\DisplayBuilder;
 use PhpTui\Tui\Model\Display;
 use PhpTui\Tui\Widget\Canvas;
 use PhpTui\Tui\Shape\Map;
@@ -40,7 +41,7 @@ final class CanvasBench
             rawMode: new NullRawMode(),
             painter: $this->painter,
         );
-        $this->display = Display::fullscreen(PhpTermBackend::new($terminal));
+        $this->display = DisplayBuilder::new(PhpTermBackend::new($terminal))->build();
     }
 
     public function benchLowResolutionMap(): void

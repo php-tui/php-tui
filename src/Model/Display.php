@@ -3,16 +3,9 @@
 namespace PhpTui\Tui\Model;
 
 use Closure;
-use PhpTui\Tui\Adapter\Bdf\BdfShapeSet;
-use PhpTui\Tui\Adapter\Bdf\FontRegistry;
-use PhpTui\Tui\Adapter\ImageMagick\ImageMagickShapeSet;
-use PhpTui\Tui\Model\Canvas\AggregateShapePainter;
 use PhpTui\Tui\Model\Viewport\Fullscreen;
 use PhpTui\Tui\Model\Viewport\Inline;
-use PhpTui\Tui\Model\WidgetRenderer\AggregateWidgetRenderer;
 use PhpTui\Tui\Model\WidgetRenderer\NullWidgetRenderer;
-use PhpTui\Tui\Shape\DefaultShapeSet;
-use PhpTui\Tui\Widget\DefaultWidgetSet;
 
 final class Display
 {
@@ -37,8 +30,7 @@ final class Display
         Backend $backend,
         Viewport $viewport,
         WidgetRenderer $renderer,
-    ): self
-    {
+    ): self {
         $size = $backend->size();
         return new self(
             $backend,
