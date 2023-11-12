@@ -25,7 +25,7 @@ jobs:
         steps:
             -
                 name: "Checkout code"
-                uses: "actions/checkout@v2"
+                uses: "actions/checkout@v4"
             -
                 name: "Install PHP"
                 uses: "shivammathur/setup-php@v2"
@@ -37,7 +37,7 @@ jobs:
 
             -
                 name: "Composer install"
-                uses: "ramsey/composer-install@v1"
+                uses: "ramsey/composer-install@v2"
                 with:
                     composer-options: "--no-scripts"
             -
@@ -56,7 +56,7 @@ jobs:
         steps:
             -
                 name: "Checkout code"
-                uses: "actions/checkout@v2"
+                uses: "actions/checkout@v4"
             -
                 name: "Install PHP"
                 uses: "shivammathur/setup-php@v2"
@@ -68,7 +68,7 @@ jobs:
 
             -
                 name: "Composer install"
-                uses: "ramsey/composer-install@v1"
+                uses: "ramsey/composer-install@v2"
                 with:
                     composer-options: "--no-scripts"
             -
@@ -86,7 +86,7 @@ jobs:
         steps:
             -
                 name: "Checkout code"
-                uses: "actions/checkout@v2"
+                uses: "actions/checkout@v4"
             -
                 name: "Install PHP"
                 uses: "shivammathur/setup-php@v2"
@@ -98,7 +98,7 @@ jobs:
 
             -
                 name: "Composer install"
-                uses: "ramsey/composer-install@v1"
+                uses: "ramsey/composer-install@v2"
                 with:
                     composer-options: "--no-scripts"
             -
@@ -116,7 +116,7 @@ jobs:
         steps:
             -
                 name: "Checkout code"
-                uses: "actions/checkout@v2"
+                uses: "actions/checkout@v4"
             -
                 name: "Install PHP"
                 uses: "shivammathur/setup-php@v2"
@@ -128,7 +128,7 @@ jobs:
 
             -
                 name: "Composer install"
-                uses: "ramsey/composer-install@v1"
+                uses: "ramsey/composer-install@v2"
                 with:
                     composer-options: "--no-scripts"
             -
