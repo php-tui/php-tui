@@ -214,7 +214,7 @@ final class BlockRenderer implements WidgetRenderer
         return [
             $leftBorderDx ? 1 : 0,
             $rightBorderDx ? 1 : 0,
-            $area->width - max(0, $leftBorderDx, $rightBorderDx),
+            $area->width - ($leftBorderDx || $rightBorderDx ? 1 : 0),
         ];
     }
 

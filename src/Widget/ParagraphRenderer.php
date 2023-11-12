@@ -38,7 +38,7 @@ class ParagraphRenderer implements WidgetRenderer
                 }
                 return $ac;
             }, []);
-            return [ $graphemes, $line->alignment ?: $widget->alignment ];
+            return [ $graphemes, $line->alignment ?? $widget->alignment ];
         }, $widget->text->lines);
 
         $lineComposer = $this->createLineComposer(

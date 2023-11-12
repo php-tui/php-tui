@@ -242,7 +242,7 @@ final class EventParser
     {
         $str = implode('', array_slice($buffer, 2, (int)array_key_last($buffer)));
         // split string into bytes
-        $parts = (array)explode(';', $str);
+        $parts = explode(';', $str);
 
         [$modifiers, $kind] = (function () use ($parts) {
             $modifierAndKindCode  = $this->modifierAndKindParsed($parts);

@@ -20,11 +20,19 @@ final class ProcRunner implements ProcessRunner
         }
 
         $stdout = stream_get_contents($pipes[1]);
+        if ($stdout === false) {
+            throw new RuntimeException('Could not read from stdout stream');
+        }
+
         $stderr = stream_get_contents($pipes[2]);
+        if ($stderr === false) {
+            throw new RuntimeException('Could not read from stderr stream');
+        }
+
         fclose($pipes[1]);
         fclose($pipes[2]);
         $exitCode = proc_close($process);
 
-        return new ProcessResult($exitCode, $stdout ?: '', $stderr ?: '');
+        return new ProcessResult($exitCode, $stdout, $stderr);
     }
 }

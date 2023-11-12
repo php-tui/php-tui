@@ -17,7 +17,7 @@ class SttyRawMode implements RawMode
 
     public static function new(?ProcessRunner $processRunner = null): self
     {
-        return new self($processRunner ?: new ProcRunner());
+        return new self($processRunner ?? new ProcRunner());
     }
 
     public function enable(): void

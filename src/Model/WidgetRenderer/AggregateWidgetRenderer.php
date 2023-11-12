@@ -26,8 +26,8 @@ class AggregateWidgetRenderer implements WidgetRenderer
 
     public function render(WidgetRenderer $renderer, Widget $widget, Area $area, Buffer $buffer): void
     {
-        foreach ($this->renderers as $renderer) {
-            $renderer->render($this, $widget, $area, $buffer);
+        foreach ($this->renderers as $aggregateRenderer) {
+            $aggregateRenderer->render($this, $widget, $area, $buffer);
         }
     }
 

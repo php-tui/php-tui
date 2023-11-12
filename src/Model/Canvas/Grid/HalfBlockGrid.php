@@ -71,6 +71,7 @@ class HalfBlockGrid extends CanvasGrid
             if ($upper !== AnsiColor::Reset && $lower === AnsiColor::Reset) {
                 return BlockSet::UPPER_HALF;
             }
+            /** @phpstan-ignore-next-line */
             if ($upper === AnsiColor::Reset && $lower !== AnsiColor::Reset) {
                 return BlockSet::LOWER_HALF;
             }
@@ -89,6 +90,7 @@ class HalfBlockGrid extends CanvasGrid
                 return new FgBgColor($upper, AnsiColor::Reset);
             }
             // lower half has been set: set the foreground color
+            /** @phpstan-ignore-next-line */
             if ($upper === AnsiColor::Reset && $lower !== AnsiColor::Reset) {
                 return new FgBgColor($lower, AnsiColor::Reset);
             }

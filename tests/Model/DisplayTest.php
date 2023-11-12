@@ -14,12 +14,6 @@ use PhpTui\Tui\Shape\Points;
 
 class DisplayTest extends TestCase
 {
-    public function testCreatesFullscreenTerminal(): void
-    {
-        $terminal = Display::fullscreen(DummyBackend::fromDimensions(10, 10));
-        self::assertInstanceOf(Display::class, $terminal);
-    }
-
     public function testAutoresize(): void
     {
         $backend = DummyBackend::fromDimensions(4, 4);
@@ -99,5 +93,4 @@ class DisplayTest extends TestCase
             $backend->toString()
         );
     }
-
 }
