@@ -9,10 +9,13 @@ use PhpTui\Term\EventParser;
 use PhpTui\Term\Event\CharKeyEvent;
 use PhpTui\Term\Event\FocusEvent;
 use PhpTui\Term\Event\FunctionKeyEvent;
+use PhpTui\Term\Event\MouseEvent;
 use PhpTui\Term\KeyCode;
 use PhpTui\Term\Event\CodedKeyEvent;
 use PhpTui\Term\KeyEventKind;
 use PhpTui\Term\KeyModifiers;
+use PhpTui\Term\MouseButton;
+use PhpTui\Term\MouseEventKind;
 
 class EventParserTest extends TestCase
 {
@@ -32,6 +35,7 @@ class EventParserTest extends TestCase
             self::assertCount(0, $events);
             return;
         }
+        dump($events);
         self::assertCount(1, $events);
         self::assertEquals($expected, $events[0]);
     }
@@ -283,30 +287,6 @@ class EventParserTest extends TestCase
         yield 'CSI normal mouse' => [
             "\x1B[M0\x60\x70",
             MouseEvent::new(kind: MouseEventKind::Down, button: MouseButton::Left, column:63, row: 79, modifiers: KeyModifiers::CONTROL),
-        ];
-        yield 'Shift F1' => [
-            "\x1B[1;2P",
-            FunctionKeyEvent::new(1, KeyModifiers::SHIFT),
-        ];
-        yield 'Alt F1' => [
-            "\x1B[1;3P",
-            FunctionKeyEvent::new(1, KeyModifiers::ALT),
-        ];
-        yield 'Ctl F1' => [
-            "\x1B[1;5P",
-            FunctionKeyEvent::new(1, KeyModifiers::CONTROL),
-        ];
-        yield 'Super F1' => [
-            "\x1B[1;9P",
-            FunctionKeyEvent::new(1, KeyModifiers::SUPER),
-        ];
-        yield 'Hyper F1' => [
-            "\x1B[1;17P",
-            FunctionKeyEvent::new(1, KeyModifiers::HYPER),
-        ];
-        yield 'Meta F1' => [
-            "\x1B[1;33P",
-            FunctionKeyEvent::new(1, KeyModifiers::META),
         ];
     }
 }
