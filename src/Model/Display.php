@@ -2,7 +2,6 @@
 
 namespace PhpTui\Tui\Model;
 
-use Closure;
 use PhpTui\Tui\Model\Viewport\Fullscreen;
 use PhpTui\Tui\Model\Viewport\Inline;
 use PhpTui\Tui\Model\WidgetRenderer\NullWidgetRenderer;
@@ -62,47 +61,31 @@ final class Display
         return $this->buffers[$this->current];
     }
 
-    /**
-     * Synchronizes terminal size, calls the rendering closure, flushes the current internal state
-     * and prepares for the next draw call.
-     *
-     * @param Closure(Buffer): void $closure
-     */
-    public function draw(Closure $closure): void
-    {
-        $this->autoresize();
-        $closure($this->buffer());
-
-        $this->flush();
-        $this->backend->flush();
-        $this->swapBuffers();
-    }
-
-    /**
-     * Synchronizes terminal size, renders the given widget, flushes the current internal state
-     * and prepares for the next draw call.
-     *
-     * This is the same as Draw but instead of a closure you pass a single
-     * widget (usually a Grid widget).
-     */
-    public function drawWidget(Widget $widget): void
-    {
-        $buffer = $this->buffer();
-        $this->draw(function () use ($widget, $buffer): void {
-            $this->widgetRenderer->render(
-                new NullWidgetRenderer(),
-                $widget,
-                $buffer->area(),
-                $buffer
-            );
-        });
-    }
-
     public function clear(): void
     {
         // Reset the back buffer to make sure the next update will redraw everything.
         $this->buffers[1 - $this->current] = Buffer::empty($this->viewportArea);
         $this->backend->clearRegion(ClearType::ALL);
+    }
+
+    /**
+     * Synchronizes terminal size, renders the given widget, flushes the
+     * current internal state and prepares for the next draw call.
+     */
+    public function draw(Widget $widget): void
+    {
+        $this->autoresize();
+        $buffer = $this->buffer();
+        $this->widgetRenderer->render(
+            new NullWidgetRenderer(),
+            $widget,
+            $buffer->area(),
+            $buffer
+        );
+
+        $this->flush();
+        $this->backend->flush();
+        $this->swapBuffers();
     }
 
     private function autoresize(): void

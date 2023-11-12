@@ -169,7 +169,7 @@ final class App
                 $this->activePage()->handle($event);
             }
 
-            $this->display->drawWidget($this->layout());
+            $this->display->draw($this->layout());
             $this->incFramerate();
 
             // sleep for Xms - note that it's encouraged to implement apps

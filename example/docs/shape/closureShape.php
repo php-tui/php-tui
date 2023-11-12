@@ -10,7 +10,7 @@ use PhpTui\Tui\Shape\ClosureShape;
 require 'vendor/autoload.php';
 
 $display = DisplayBuilder::default()->build();
-$display->drawWidget(
+$display->draw(
     Canvas::fromIntBounds(-1, 21, -1, 21)
         ->marker(Marker::Dot)
         ->draw(

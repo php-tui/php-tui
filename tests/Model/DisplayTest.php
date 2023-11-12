@@ -11,6 +11,7 @@ use PhpTui\Tui\Model\Position;
 use PHPUnit\Framework\TestCase;
 use PhpTui\Tui\Widget\Canvas;
 use PhpTui\Tui\Shape\Points;
+use PhpTui\Tui\Widget\RawWidget;
 
 class DisplayTest extends TestCase
 {
@@ -21,13 +22,13 @@ class DisplayTest extends TestCase
         $backend->setDimensions(2, 2);
 
         // intentionally go out of bounds
-        $terminal->draw(function (Buffer $buffer): void {
+        $terminal->draw(new RawWidget(function (Buffer $buffer): void {
             for ($y = 0; $y < 4; $y++) {
                 for ($x = 0; $x < 4; $x++) {
                     $buffer->putString(new Position($x, $y), 'h');
                 }
             }
-        });
+        }));
         self::assertEquals(<<<'EOT'
             hh  
             hh  
@@ -40,12 +41,12 @@ class DisplayTest extends TestCase
     {
         $backend = DummyBackend::fromDimensions(4, 4);
         $terminal = DisplayBuilder::default($backend)->build();
-        $terminal->draw(function (Buffer $buffer): void {
+        $terminal->draw(new RawWidget(function (Buffer $buffer): void {
             $x = 0;
             for ($y = 0; $y <= 4; $y++) {
                 $buffer->putString(new Position($x++, $y), 'x');
             }
-        });
+        }));
         self::assertEquals(
             <<<'EOT'
                 x   
@@ -61,7 +62,7 @@ class DisplayTest extends TestCase
     {
         $backend = DummyBackend::fromDimensions(4, 4);
         $terminal = DisplayBuilder::default($backend)->build();
-        $terminal->drawWidget(Canvas::fromIntBounds(0, 3, 0, 3)->marker(Marker::Dot)->draw(Points::new([
+        $terminal->draw(Canvas::fromIntBounds(0, 3, 0, 3)->marker(Marker::Dot)->draw(Points::new([
             [3, 3], [2, 2], [1, 1], [0, 0]
         ], AnsiColor::Green)));
 

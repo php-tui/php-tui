@@ -19,7 +19,7 @@ $display = DisplayBuilder::default()
     ->addShapeSet(new BdfShapeSet(FontRegistry::default()))
     ->build();
 
-$display->drawWidget(
+$display->draw(
     Canvas::fromIntBounds(0, 50, 0, 20)
         ->marker(Marker::Block)
         ->draw(

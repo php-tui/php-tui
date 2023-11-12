@@ -46,7 +46,7 @@ final class CanvasBench
 
     public function benchLowResolutionMap(): void
     {
-        $this->display->drawWidget(
+        $this->display->draw(
             Canvas::fromIntBounds(-180, 180, -90, 90)->draw(
                 Map::default()->resolution(MapResolution::Low)
             )
@@ -55,7 +55,7 @@ final class CanvasBench
 
     public function benchHighResolutionMap(): void
     {
-        $this->display->drawWidget(
+        $this->display->draw(
             Canvas::fromIntBounds(-180, 180, -90, 90)->draw(
                 Map::default()->resolution(MapResolution::High)
             )

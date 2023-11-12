@@ -10,7 +10,7 @@ use PhpTui\Tui\Shape\MapResolution;
 require 'vendor/autoload.php';
 
 $display = DisplayBuilder::default()->build();
-$display->drawWidget(
+$display->draw(
     Canvas::fromIntBounds(-180, 180, -90, 90)
         ->marker(Marker::Braille)
         ->draw(

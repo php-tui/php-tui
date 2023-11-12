@@ -11,7 +11,7 @@ use PhpTui\Tui\Widget\Paragraph;
 require 'vendor/autoload.php';
 
 $display = DisplayBuilder::default()->build();
-$display->drawWidget(
+$display->draw(
     Block::default()
         ->borders(Borders::ALL)
         ->titles(Title::fromString('Hello World'))
