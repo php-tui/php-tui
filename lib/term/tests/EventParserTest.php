@@ -20,6 +20,7 @@ class EventParserTest extends TestCase
      * @dataProvider provideParse
      * @dataProvider provideCsiSpecialKeyCode
      * @dataProvider provideCsiModifierKeyCode
+     * @dataProvider provideCsiMouse
      * dataProvider provideCsiUEncoded
      */
     public function testParse(string $line, ?Event $expected, bool $moreInput = false): void
@@ -247,6 +248,41 @@ class EventParserTest extends TestCase
         yield 'special key code with types' => [
             "\x1B[1;1:3B",
             CodedKeyEvent::new(KeyCode::Down, KeyModifiers::NONE, KeyEventKind::Release),
+        ];
+        yield 'Shift F1' => [
+            "\x1B[1;2P",
+            FunctionKeyEvent::new(1, KeyModifiers::SHIFT),
+        ];
+        yield 'Alt F1' => [
+            "\x1B[1;3P",
+            FunctionKeyEvent::new(1, KeyModifiers::ALT),
+        ];
+        yield 'Ctl F1' => [
+            "\x1B[1;5P",
+            FunctionKeyEvent::new(1, KeyModifiers::CONTROL),
+        ];
+        yield 'Super F1' => [
+            "\x1B[1;9P",
+            FunctionKeyEvent::new(1, KeyModifiers::SUPER),
+        ];
+        yield 'Hyper F1' => [
+            "\x1B[1;17P",
+            FunctionKeyEvent::new(1, KeyModifiers::HYPER),
+        ];
+        yield 'Meta F1' => [
+            "\x1B[1;33P",
+            FunctionKeyEvent::new(1, KeyModifiers::META),
+        ];
+    }
+
+    /**
+     * @return Generator<array{0:string,1:?Event,2?:bool}>
+     */
+    public static function provideCsiMouse(): Generator
+    {
+        yield 'CSI normal mouse' => [
+            "\x1B[M0\x60\x70",
+            MouseEvent::new(kind: MouseEventKind::Down, button: MouseButton::Left, column:63, row: 79, modifiers: KeyModifiers::CONTROL),
         ];
         yield 'Shift F1' => [
             "\x1B[1;2P",
