@@ -23,7 +23,7 @@ final class Fixed implements Viewport
         return new Position($this->area->left(), $this->area->right());
     }
 
-    public function area(Backend $backend, Position $cursorPos, int $offsetInPreviousViewport): Area
+    public function area(Backend $backend, int $offsetInPreviousViewport): Area
     {
         return $this->area;
     }

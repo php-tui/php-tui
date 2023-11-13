@@ -32,7 +32,7 @@ final class Display
     ): self {
         $size = $viewport->size($backend);
         $cursorPos = $viewport->cursorPos($backend);
-        $viewportArea = $viewport->area($backend, $cursorPos, 0);
+        $viewportArea = $viewport->area($backend, 0);
         return new self(
             $backend,
             [Buffer::empty($size), Buffer::empty($size)],
@@ -109,8 +109,7 @@ final class Display
         $offsetInPreviousViewport = max(0, $this->lastKnownCursorPosition->y - $this->viewportArea->top());
 
         $size = $this->viewport->size($this->backend);
-        $cursorPos = $this->viewport->cursorPos($this->backend);
-        $nextArea = $this->viewport->area($this->backend, $cursorPos, $offsetInPreviousViewport);
+        $nextArea = $this->viewport->area($this->backend, $offsetInPreviousViewport);
 
         $this->setViewportArea($nextArea);
         $this->clear();

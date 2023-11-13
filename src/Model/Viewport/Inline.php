@@ -24,7 +24,7 @@ final class Inline implements Viewport
         return $backend->cursorPosition();
     }
 
-    public function area(Backend $backend, Position $cursorPos, int $offsetInPreviousViewport): Area
+    public function area(Backend $backend, int $offsetInPreviousViewport): Area
     {
         throw new TodoException('THIS');
     }

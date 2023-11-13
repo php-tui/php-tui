@@ -19,7 +19,7 @@ final class Fullscreen implements Viewport
         return new Position(0, 0);
     }
 
-    public function area(Backend $backend, Position $cursorPos, int $offsetInPreviousViewport): Area
+    public function area(Backend $backend, int $offsetInPreviousViewport): Area
     {
         return $this->size($backend);
     }

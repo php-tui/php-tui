@@ -8,5 +8,5 @@ interface Viewport
 
     public function cursorPos(Backend $backend): Position;
 
-    public function area(Backend $backend, Position $cursorPos, int $offsetInPreviousViewport): Area;
+    public function area(Backend $backend, int $offsetInPreviousViewport): Area;
 }
