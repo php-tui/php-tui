@@ -5,6 +5,7 @@ namespace PhpTui\Tui\Model\Viewport;
 use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Backend;
 use PhpTui\Tui\Model\Exception\TodoException;
+use PhpTui\Tui\Model\Position;
 use PhpTui\Tui\Model\Viewport;
 
 final class Inline implements Viewport
@@ -13,8 +14,18 @@ final class Inline implements Viewport
     {
     }
 
-    public function computeArea(Backend $backend, Area $area, int $offsetInPreviousViewport): Area
+    public function size(Backend $backend): Area
     {
-        throw new TodoException('Inline views');
+        return $backend->size();
+    }
+
+    public function cursorPos(Backend $backend): Position
+    {
+        return $backend->cursorPosition();
+    }
+
+    public function area(Backend $backend, Position $cursorPos, int $offsetInPreviousViewport): Area
+    {
+        throw new TodoException('THIS');
     }
 }

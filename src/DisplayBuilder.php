@@ -9,6 +9,7 @@ use PhpTui\Tui\Model\Canvas\ShapeSet;
 use PhpTui\Tui\Model\Display;
 use PhpTui\Tui\Model\Viewport;
 use PhpTui\Tui\Model\Viewport\Fullscreen;
+use PhpTui\Tui\Model\Viewport\Inline;
 use PhpTui\Tui\Model\WidgetSet;
 use PhpTui\Tui\Model\WidgetRenderer\AggregateWidgetRenderer;
 use PhpTui\Tui\Shape\DefaultShapeSet;
@@ -107,5 +108,11 @@ final class DisplayBuilder
             [],
             [],
         );
+    }
+
+    public function inline(int $height): self
+    {
+        $this->viewport = new Inline($height);
+        return $this;
     }
 }

@@ -11,6 +11,7 @@ use PhpTui\Tui\Model\Position;
 use PHPUnit\Framework\TestCase;
 use PhpTui\Tui\Widget\Canvas;
 use PhpTui\Tui\Shape\Points;
+use PhpTui\Tui\Widget\Paragraph;
 use PhpTui\Tui\Widget\RawWidget;
 
 class DisplayTest extends TestCase
@@ -93,5 +94,12 @@ class DisplayTest extends TestCase
             ]),
             $backend->toString()
         );
+    }
+
+    public function testInlineViewport(): void
+    {
+        $backend = DummyBackend::fromDimensions(10, 10);
+        $terminal = DisplayBuilder::default($backend)->inline(10)->build();
+        $terminal->draw(Paragraph::fromString('Hello'));
     }
 }

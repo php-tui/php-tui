@@ -30,16 +30,18 @@ final class Display
         Viewport $viewport,
         WidgetRenderer $renderer,
     ): self {
-        $size = $backend->size();
+        $size = $viewport->size($backend);
+        $cursorPos = $viewport->cursorPos($backend);
+        $viewportArea = $viewport->area($backend, $cursorPos, 0);
         return new self(
             $backend,
             [Buffer::empty($size), Buffer::empty($size)],
             0,
             false,
             $viewport,
+            $viewportArea,
             $size,
-            $size,
-            new Position(0, 0),
+            $cursorPos,
             $renderer,
         );
     }
@@ -105,7 +107,10 @@ final class Display
     private function resize(Area $size): void
     {
         $offsetInPreviousViewport = max(0, $this->lastKnownCursorPosition->y - $this->viewportArea->top());
-        $nextArea = $this->viewport->computeArea($this->backend, $size, $offsetInPreviousViewport);
+
+        $size = $this->viewport->size($this->backend);
+        $cursorPos = $this->viewport->cursorPos($this->backend);
+        $nextArea = $this->viewport->area($this->backend, $cursorPos, $offsetInPreviousViewport);
 
         $this->setViewportArea($nextArea);
         $this->clear();

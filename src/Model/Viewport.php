@@ -4,5 +4,9 @@ namespace PhpTui\Tui\Model;
 
 interface Viewport
 {
-    public function computeArea(Backend $backend, Area $area, int $offsetInPreviousViewport): Area;
+    public function size(Backend $backend): Area;
+
+    public function cursorPos(Backend $backend): Position;
+
+    public function area(Backend $backend, Position $cursorPos, int $offsetInPreviousViewport): Area;
 }
