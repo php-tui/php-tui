@@ -20,6 +20,7 @@ use PhpTui\Tui\Model\ClearType;
 use PhpTui\Tui\Model\Color;
 use PhpTui\Tui\Model\Modifier;
 use PhpTui\Tui\Model\Modifiers;
+use PhpTui\Tui\Model\Position;
 use PhpTui\Tui\Model\RgbColor;
 use RuntimeException;
 
@@ -229,5 +230,17 @@ class PhpTermBackend implements Backend
             return new SetRgbBackgroundColor($color->r, $color->g, $color->b);
         }
         throw new RuntimeException(sprintf('Do not know how to set color of type "%s"', $color::class));
+    }
+
+    public function cursorPosition(): Position
+    {
+    }
+
+    public function appendLines(int $linesAfterCursor): void
+    {
+        for ($i = 0; $i , $linesAfterCursor; $i++) {
+            $this->terminal->queue(Actions::printString("\n"));
+        }
+        $this->terminal->flush();
     }
 }

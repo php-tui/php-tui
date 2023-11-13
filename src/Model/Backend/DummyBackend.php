@@ -6,6 +6,7 @@ use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Backend;
 use PhpTui\Tui\Model\BufferUpdates;
 use PhpTui\Tui\Model\ClearType;
+use PhpTui\Tui\Model\Position;
 
 final class DummyBackend implements Backend
 {
@@ -16,9 +17,12 @@ final class DummyBackend implements Backend
 
     private ?string $flushed = null;
 
-    public function __construct(private int $width, private int $height)
+    private ?Position $cursorPosition;
+
+    public function __construct(private int $width, private int $height, private ?Position $position = null)
     {
         $this->fillGrid($width, $height);
+        $this->cursorPosition = $position ?? new Position(0, 0);
     }
 
     public function flushed(): ?string
@@ -67,6 +71,11 @@ final class DummyBackend implements Backend
     {
     }
 
+    public function cursorPosition(): Position
+    {
+        return $this->cursorPosition;
+    }
+
     /**
      * @return array<int,array<int,string>>
      */
@@ -80,5 +89,9 @@ final class DummyBackend implements Backend
             }
         }
         return $this->grid;
+    }
+
+    public function appendLines(int $linesAfterCursor): void
+    {
     }
 }

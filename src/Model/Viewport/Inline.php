@@ -26,6 +26,19 @@ final class Inline implements Viewport
 
     public function area(Backend $backend, int $offsetInPreviousViewport): Area
     {
-        throw new TodoException('THIS');
+        $size = $backend->size();
+        $pos = $backend->cursorPosition();
+        $row = $pos->y;
+        $maxHeight = min($size->height, $this->height);
+        $linesAfterCursor = max(0, $this->height - $offsetInPreviousViewport - 1);
+        $backend->appendLines($linesAfterCursor);
+        $availableLines = max(0, $size->height - $row - 1);
+        $missingLines = max(0, $linesAfterCursor - $availableLines);
+        if ($missingLines > 0) {
+            $row = max(0, $row - $missingLines);
+        }
+        $row = max(0, $row - $offsetInPreviousViewport);
+
+        return Area::fromScalars(0, $row, $size->width, $maxHeight);
     }
 }
