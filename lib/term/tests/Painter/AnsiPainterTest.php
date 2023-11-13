@@ -14,6 +14,7 @@ class AnsiPainterTest extends TestCase
 {
     public function testControlSequences(): void
     {
+        $this->assertAnsiCode('6n', Actions::requestCursorPosition());
         $this->assertAnsiCode('48;5;2m', Actions::setBackgroundColor(Colors::Green));
         $this->assertAnsiCode('38;5;4m', Actions::setForegroundColor(Colors::Blue));
         $this->assertAnsiCode('48;2;2;3;4m', Actions::setRgbBackgroundColor(2, 3, 4));

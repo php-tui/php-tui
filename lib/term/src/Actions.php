@@ -6,6 +6,7 @@ use PhpTui\Term\Action\AlternateScreenEnable;
 use PhpTui\Term\Action\Clear;
 use PhpTui\Term\Action\EnableMouseCapture;
 use PhpTui\Term\Action\MoveCursor;
+use PhpTui\Term\Action\RequestCursorPosition;
 use PhpTui\Term\Action\Reset;
 use PhpTui\Term\Action\SetModifier;
 use PhpTui\Term\Action\CursorShow;
@@ -17,6 +18,11 @@ use PhpTui\Term\Action\PrintString;
 
 final class Actions
 {
+    public static function requestCursorPosition(): RequestCursorPosition
+    {
+        return new RequestCursorPosition();
+    }
+
     public static function alternateScreenEnable(): AlternateScreenEnable
     {
         return new AlternateScreenEnable(true);

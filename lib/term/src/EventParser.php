@@ -3,6 +3,7 @@
 namespace PhpTui\Term;
 
 use PhpTui\Term\Event\CharKeyEvent;
+use PhpTui\Term\Event\CursorPositionEvent;
 use PhpTui\Term\Event\FocusEvent;
 use PhpTui\Term\Event\FunctionKeyEvent;
 use PhpTui\Term\Event\CodedKeyEvent;
@@ -168,6 +169,7 @@ final class EventParser
         return match ($lastByte) {
             'M' => $this->parseCsiRxvtMouse($buffer),
             '~' => $this->parseCsiSpecialKeyCode($buffer),
+            'R' => $this->parseCsiCursorPosition($buffer),
             default => $this->parseCsiModifierKeyCode($buffer),
         };
     }
@@ -497,6 +499,22 @@ final class EventParser
             $cx,
             $cy,
             $modifiers
+        );
+    }
+
+    /**
+     * @param string[] $buffer
+     */
+    private function parseCsiCursorPosition(array $buffer): ?Event
+    {
+        $s = implode('', array_slice($buffer, 2, -1));
+        $split = explode(';', $s);
+        if (count($split) !== 2) {
+            return null;
+        }
+        return new CursorPositionEvent(
+            intval($split[1]) - 1,
+            intval($split[0]) - 1,
         );
     }
 }

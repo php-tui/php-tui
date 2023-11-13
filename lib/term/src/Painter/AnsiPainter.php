@@ -8,6 +8,7 @@ use PhpTui\Term\Action\CursorShow;
 use PhpTui\Term\Action\EnableMouseCapture;
 use PhpTui\Term\Action\MoveCursor;
 use PhpTui\Term\Action\PrintString;
+use PhpTui\Term\Action\RequestCursorPosition;
 use PhpTui\Term\Action\Reset;
 use PhpTui\Term\Action\SetBackgroundColor;
 use PhpTui\Term\Action\SetForegroundColor;
@@ -93,6 +94,7 @@ final class AnsiPainter implements Painter
             $action instanceof SetModifier => $action->enable ?
                 sprintf('%dm', $this->modifierOnIndex($action->modifier)) :
                 sprintf('%dm', $this->modifierOffIndex($action->modifier)),
+            $action instanceof RequestCursorPosition => '6n',
             default => throw new RuntimeException(sprintf(
                 'Do not know how to handle action: %s',
                 $action::class
