@@ -35,7 +35,7 @@ final class Display
         $viewportArea = $viewport->area($backend, 0);
         return new self(
             $backend,
-            [Buffer::empty($size), Buffer::empty($size)],
+            [Buffer::empty($viewportArea), Buffer::empty($viewportArea)],
             0,
             false,
             $viewport,

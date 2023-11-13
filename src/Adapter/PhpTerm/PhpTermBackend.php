@@ -10,6 +10,7 @@ use PhpTui\Term\Action\SetRgbForegroundColor;
 use PhpTui\Term\Actions;
 use PhpTui\Term\ClearType as PhpTuiClearType;
 use PhpTui\Term\Colors;
+use PhpTui\Term\Event\CursorPositionEvent;
 use PhpTui\Term\Size;
 use PhpTui\Term\Terminal as PhpTermTerminal;
 use PhpTui\Tui\Model\AnsiColor;
@@ -106,6 +107,44 @@ class PhpTermBackend implements Backend
         match ($type) {
             ClearType::ALL => $this->terminal->execute(Actions::clear(PhpTuiClearType::All))
         };
+    }
+
+    public function cursorPosition(): Position
+    {
+        $this->terminal->queue(Actions::requestCursorPosition());
+        $this->terminal->flush();
+        $start = microtime(true);
+        $this->enableRawMode();
+        $pos = null;
+        while(true) {
+            while (null !== $event = $this->terminal->events()->next()) {
+                if ($event instanceof CursorPositionEvent) {
+                    $pos = new Position($event->x, $event->y);
+                    return $pos;
+                }
+            }
+
+            // give up after 2 seconds
+            if ((microtime(true) - $start) >= 2) {
+                break;
+            }
+
+            // sleep for 10 milliseconds before trying again
+            usleep(10_000);
+        }
+        $this->disableRawMode();
+
+        throw new RuntimeException(
+            'Cursor position could not be read within 2 seconds'
+        );
+    }
+
+    public function appendLines(int $linesAfterCursor): void
+    {
+        for ($i = 0; $i < $linesAfterCursor; $i++) {
+            $this->terminal->queue(Actions::printString("\n"));
+        }
+        $this->terminal->flush();
     }
 
     private function resolveColor(Color $color): Colors
@@ -230,23 +269,5 @@ class PhpTermBackend implements Backend
             return new SetRgbBackgroundColor($color->r, $color->g, $color->b);
         }
         throw new RuntimeException(sprintf('Do not know how to set color of type "%s"', $color::class));
-    }
-
-    public function cursorPosition(): Position
-    {
-        $this->terminal->execute(Actions::requestCursorPosition());
-        $start = microtime();
-        while (null !== $event = $this->terminal->events()->next()) {
-            dump($event);
-            usleep(1000);
-        }
-    }
-
-    public function appendLines(int $linesAfterCursor): void
-    {
-        for ($i = 0; $i , $linesAfterCursor; $i++) {
-            $this->terminal->queue(Actions::printString("\n"));
-        }
-        $this->terminal->flush();
     }
 }
