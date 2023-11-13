@@ -10,6 +10,7 @@ use PhpTui\Term\Action\SetRgbForegroundColor;
 use PhpTui\Term\Actions;
 use PhpTui\Term\ClearType as PhpTuiClearType;
 use PhpTui\Term\Colors;
+use PhpTui\Term\Event\CursorPositionEvent;
 use PhpTui\Term\Size;
 use PhpTui\Term\Terminal as PhpTermTerminal;
 use PhpTui\Tui\Model\AnsiColor;
@@ -20,6 +21,7 @@ use PhpTui\Tui\Model\ClearType;
 use PhpTui\Tui\Model\Color;
 use PhpTui\Tui\Model\Modifier;
 use PhpTui\Tui\Model\Modifiers;
+use PhpTui\Tui\Model\Position;
 use PhpTui\Tui\Model\RgbColor;
 use RuntimeException;
 
@@ -105,6 +107,44 @@ class PhpTermBackend implements Backend
         match ($type) {
             ClearType::ALL => $this->terminal->execute(Actions::clear(PhpTuiClearType::All))
         };
+    }
+
+    public function cursorPosition(): Position
+    {
+        $this->terminal->queue(Actions::requestCursorPosition());
+        $this->terminal->flush();
+        $start = microtime(true);
+        $this->enableRawMode();
+        $pos = null;
+        while(true) {
+            while (null !== $event = $this->terminal->events()->next()) {
+                if ($event instanceof CursorPositionEvent) {
+                    $pos = new Position($event->x, $event->y);
+                    return $pos;
+                }
+            }
+
+            // give up after 2 seconds
+            if ((microtime(true) - $start) >= 2) {
+                break;
+            }
+
+            // sleep for 10 milliseconds before trying again
+            usleep(10_000);
+        }
+        $this->disableRawMode();
+
+        throw new RuntimeException(
+            'Cursor position could not be read within 2 seconds'
+        );
+    }
+
+    public function appendLines(int $linesAfterCursor): void
+    {
+        for ($i = 0; $i < $linesAfterCursor; $i++) {
+            $this->terminal->queue(Actions::printString("\n"));
+        }
+        $this->terminal->flush();
     }
 
     private function resolveColor(Color $color): Colors

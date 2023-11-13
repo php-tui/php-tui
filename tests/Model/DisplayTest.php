@@ -11,6 +11,7 @@ use PhpTui\Tui\Model\Position;
 use PHPUnit\Framework\TestCase;
 use PhpTui\Tui\Widget\Canvas;
 use PhpTui\Tui\Shape\Points;
+use PhpTui\Tui\Widget\Paragraph;
 use PhpTui\Tui\Widget\RawWidget;
 
 class DisplayTest extends TestCase
@@ -93,5 +94,27 @@ class DisplayTest extends TestCase
             ]),
             $backend->toString()
         );
+    }
+
+    public function testInlineViewport(): void
+    {
+        $backend = new DummyBackend(10, 10, Position::at(0, 15));
+        $terminal = DisplayBuilder::default($backend)->inline(10)->build();
+        $terminal->draw(Paragraph::fromString('Hello'));
+
+        self::assertEquals(6, $terminal->viewportArea()->top());
+        self::assertEquals(0, $terminal->viewportArea()->left());
+    }
+
+    public function testFixedViewport(): void
+    {
+        $backend = new DummyBackend(10, 10, Position::at(0, 15));
+        $terminal = DisplayBuilder::default($backend)->fixed(20, 15)->build();
+        $terminal->draw(Paragraph::fromString('Hello'));
+
+        self::assertEquals(0, $terminal->viewportArea()->top());
+        self::assertEquals(0, $terminal->viewportArea()->left());
+        self::assertEquals(20, $terminal->viewportArea()->right());
+        self::assertEquals(15, $terminal->viewportArea()->bottom());
     }
 }

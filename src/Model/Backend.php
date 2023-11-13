@@ -11,4 +11,8 @@ interface Backend
     public function flush(): void;
 
     public function clearRegion(ClearType $type): void;
+
+    public function cursorPosition(): Position;
+
+    public function appendLines(int $linesAfterCursor): void;
 }

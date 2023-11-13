@@ -30,16 +30,18 @@ final class Display
         Viewport $viewport,
         WidgetRenderer $renderer,
     ): self {
-        $size = $backend->size();
+        $size = $viewport->size($backend);
+        $cursorPos = $viewport->cursorPos($backend);
+        $viewportArea = $viewport->area($backend, 0);
         return new self(
             $backend,
-            [Buffer::empty($size), Buffer::empty($size)],
+            [Buffer::empty($viewportArea), Buffer::empty($viewportArea)],
             0,
             false,
             $viewport,
+            $viewportArea,
             $size,
-            $size,
-            new Position(0, 0),
+            $cursorPos,
             $renderer,
         );
     }
@@ -88,6 +90,11 @@ final class Display
         $this->swapBuffers();
     }
 
+    public function viewportArea(): Area
+    {
+        return $this->viewportArea;
+    }
+
     private function autoresize(): void
     {
         if (!$this->viewport instanceof Fullscreen && !$this->viewport instanceof Inline) {
@@ -105,7 +112,9 @@ final class Display
     private function resize(Area $size): void
     {
         $offsetInPreviousViewport = max(0, $this->lastKnownCursorPosition->y - $this->viewportArea->top());
-        $nextArea = $this->viewport->computeArea($this->backend, $size, $offsetInPreviousViewport);
+
+        $size = $this->viewport->size($this->backend);
+        $nextArea = $this->viewport->area($this->backend, $offsetInPreviousViewport);
 
         $this->setViewportArea($nextArea);
         $this->clear();

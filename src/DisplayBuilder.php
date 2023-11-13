@@ -3,12 +3,15 @@
 namespace PhpTui\Tui;
 
 use PhpTui\Tui\Adapter\PhpTerm\PhpTermBackend;
+use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Backend;
 use PhpTui\Tui\Model\Canvas\AggregateShapePainter;
 use PhpTui\Tui\Model\Canvas\ShapeSet;
 use PhpTui\Tui\Model\Display;
 use PhpTui\Tui\Model\Viewport;
+use PhpTui\Tui\Model\Viewport\Fixed;
 use PhpTui\Tui\Model\Viewport\Fullscreen;
+use PhpTui\Tui\Model\Viewport\Inline;
 use PhpTui\Tui\Model\WidgetSet;
 use PhpTui\Tui\Model\WidgetRenderer\AggregateWidgetRenderer;
 use PhpTui\Tui\Shape\DefaultShapeSet;
@@ -86,6 +89,18 @@ final class DisplayBuilder
     public function addWidgetSet(WidgetSet $widgetSet): self
     {
         $this->widgetSets[] = $widgetSet;
+        return $this;
+    }
+
+    public function inline(int $height): self
+    {
+        $this->viewport = new Inline($height);
+        return $this;
+    }
+
+    public function fixed(int $width, int $height): self
+    {
+        $this->viewport = new Fixed(Area::fromDimensions($width, $height));
         return $this;
     }
 
