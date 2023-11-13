@@ -98,8 +98,12 @@ class DisplayTest extends TestCase
 
     public function testInlineViewport(): void
     {
-        $backend = DummyBackend::fromDimensions(10, 10);
+        $backend = new DummyBackend(10, 10, Position::at(0, 15));
         $terminal = DisplayBuilder::default($backend)->inline(10)->build();
         $terminal->draw(Paragraph::fromString('Hello'));
+
+        self::assertEquals(6, $terminal->viewportArea()->top());
+        self::assertEquals(0, $terminal->viewportArea()->left());
+
     }
 }

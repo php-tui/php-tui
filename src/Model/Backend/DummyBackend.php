@@ -17,12 +17,12 @@ final class DummyBackend implements Backend
 
     private ?string $flushed = null;
 
-    private ?Position $cursorPosition;
+    private Position $cursorPosition;
 
-    public function __construct(private int $width, private int $height, private ?Position $position = null)
+    public function __construct(private int $width, private int $height, ?Position $cursorPosition = null)
     {
         $this->fillGrid($width, $height);
-        $this->cursorPosition = $position ?? new Position(0, 0);
+        $this->cursorPosition = $cursorPosition ?? new Position(0, 0);
     }
 
     public function flushed(): ?string
@@ -76,6 +76,10 @@ final class DummyBackend implements Backend
         return $this->cursorPosition;
     }
 
+    public function appendLines(int $linesAfterCursor): void
+    {
+    }
+
     /**
      * @return array<int,array<int,string>>
      */
@@ -89,9 +93,5 @@ final class DummyBackend implements Backend
             }
         }
         return $this->grid;
-    }
-
-    public function appendLines(int $linesAfterCursor): void
-    {
     }
 }

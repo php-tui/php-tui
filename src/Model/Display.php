@@ -90,6 +90,11 @@ final class Display
         $this->swapBuffers();
     }
 
+    public function viewportArea(): Area
+    {
+        return $this->viewportArea;
+    }
+
     private function autoresize(): void
     {
         if (!$this->viewport instanceof Fullscreen && !$this->viewport instanceof Inline) {

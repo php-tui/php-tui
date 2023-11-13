@@ -90,6 +90,12 @@ final class DisplayBuilder
         return $this;
     }
 
+    public function inline(int $height): self
+    {
+        $this->viewport = new Inline($height);
+        return $this;
+    }
+
     private function buildDefaultSet(): WidgetSet
     {
         return new DefaultWidgetSet(
@@ -108,11 +114,5 @@ final class DisplayBuilder
             [],
             [],
         );
-    }
-
-    public function inline(int $height): self
-    {
-        $this->viewport = new Inline($height);
-        return $this;
     }
 }
