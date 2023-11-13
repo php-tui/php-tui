@@ -44,6 +44,18 @@ final class Style implements Stringable
         return $this;
     }
 
+    public function bg(Color $color): self
+    {
+        $this->bg = $color;
+        return $this;
+    }
+
+    public function underline(Color $color): self
+    {
+        $this->underline = $color;
+        return $this;
+    }
+
     public function patch(Style $other): self
     {
         $this->fg = $other->fg ?? $this->fg;
@@ -52,19 +64,21 @@ final class Style implements Stringable
 
         $this->addModifiers->remove($other->subModifiers);
         $this->addModifiers->insert($other->addModifiers);
+        $this->subModifiers->remove($other->addModifiers);
+        $this->subModifiers->insert($other->subModifiers);
 
-        return $this;
-    }
-
-    public function bg(Color $color): self
-    {
-        $this->bg = $color;
         return $this;
     }
 
     public function addModifier(Modifier $modifier): self
     {
         $this->addModifiers->add($modifier);
+        return $this;
+    }
+
+    public function removeModifier(Modifier $modifier): self
+    {
+        $this->subModifiers->add($modifier);
         return $this;
     }
 }
