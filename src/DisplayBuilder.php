@@ -98,6 +98,12 @@ final class DisplayBuilder
         return $this;
     }
 
+    public function fixed(int $width, int $height): self
+    {
+        $this->viewport = new Fixed(Area::fromDimensions($width, $height));
+        return $this;
+    }
+
     private function buildDefaultSet(): WidgetSet
     {
         return new DefaultWidgetSet(
@@ -116,11 +122,5 @@ final class DisplayBuilder
             [],
             [],
         );
-    }
-
-    public function fixed(int $width, int $height): self
-    {
-        $this->viewport = new Fixed(Area::fromDimensions($width, $height));
-        return $this;
     }
 }
