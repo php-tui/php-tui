@@ -234,6 +234,12 @@ class PhpTermBackend implements Backend
 
     public function cursorPosition(): Position
     {
+        $this->terminal->execute(Actions::requestCursorPosition());
+        $start = microtime();
+        while (null !== $event = $this->terminal->events()->next()) {
+            dump($event);
+            usleep(1000);
+        }
     }
 
     public function appendLines(int $linesAfterCursor): void
