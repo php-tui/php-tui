@@ -7,6 +7,7 @@ use PHPUnit\Framework\TestCase;
 use PhpTui\Term\Event;
 use PhpTui\Term\EventParser;
 use PhpTui\Term\Event\CharKeyEvent;
+use PhpTui\Term\Event\CursorPositionEvent;
 use PhpTui\Term\Event\FocusEvent;
 use PhpTui\Term\Event\FunctionKeyEvent;
 use PhpTui\Term\Event\MouseEvent;
@@ -44,6 +45,10 @@ class EventParserTest extends TestCase
      */
     public static function provideParse(): Generator
     {
+        yield 'csi cursor position' => [
+            "\x1B[20;10R",
+            new CursorPositionEvent(9, 19),
+        ];
         yield 'esc' => [
             "\x1B",
             CodedKeyEvent::new(KeyCode::Esc),
