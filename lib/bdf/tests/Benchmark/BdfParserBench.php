@@ -15,7 +15,7 @@ final class BdfParserBench
 
     public function __construct()
     {
-        $contents = file_get_contents(__DIR__ . '/../../fonts/6x10.bdf');
+        $contents = file_get_contents(__DIR__ . '/../../fonts/6x10_ASCII.bdf');
 
         if (false === $contents) {
             throw new RuntimeException('Could not read file');

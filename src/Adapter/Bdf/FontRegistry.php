@@ -65,7 +65,7 @@ final class FontRegistry
     public static function default(): self
     {
         return new self(new BdfParser(), [
-            'default' => __DIR__ . '/../../../lib/bdf/fonts/6x10.bdf',
+            'default' => __DIR__ . '/../../../lib/bdf/fonts/6x10_ASCII.bdf',
         ]);
     }
 }
