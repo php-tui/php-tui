@@ -10,7 +10,7 @@ Usage
 -----
 
 ```
-$contents = file_get_contents(__DIR__ . '/../fonts/6x10.bdf');
+$contents = file_get_contents(__DIR__ . '/../fonts/6x10_ASCII.bdf');
 
 // ...
 
