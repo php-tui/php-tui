@@ -6,7 +6,6 @@ use Generator;
 use PHPUnit\Framework\TestCase;
 use PhpTui\Term\AnsiParser;
 use PhpTui\Term\Painter\HtmlCanvasPainter;
-use PhpTui\Term\Painter\HtmlStylePainter;
 use PhpTui\Term\Painter\StringPainter;
 use RuntimeException;
 
@@ -57,7 +56,7 @@ class DocsTest extends TestCase
         $painter->paint($actions);
         $output = $painter->toString();
 
-        $this->assertSnapshot($path, $output, 'html');
+        $this->assertSnapshot($path, $output, 'html', true);
     }
 
     /**
@@ -75,7 +74,7 @@ class DocsTest extends TestCase
         }
     }
 
-    private function assertSnapshot(string $path, string $output, string $extension): void
+    private function assertSnapshot(string $path, string $output, string $extension, bool $html = false): void
     {
         $snapshot = substr($path, 0, -3) . $extension;
         if (!file_exists($snapshot) || getenv('SNAPSHOT_APPROVE')) {
@@ -88,7 +87,24 @@ class DocsTest extends TestCase
             throw new RuntimeException('Could not read file');
         }
 
+        if ($html) {
+            self::assertNormalizedEquals($existing, $output);
+            return;
+        }
+
         self::assertEquals($existing, $output);
 
+    }
+
+    private static function assertNormalizedEquals(string $string, string $string2): void
+    {
+        self::assertEquals(self::normalize($string), self::normalize($string2));
+    }
+
+    private static function normalize(string $string): string
+    {
+        $normalized = preg_replace('{canvas id=".*?"}', 'canvas id=***', $string);
+        $normalized = preg_replace('{getElementById\(".*?"\)}', 'getElementById(***)', (string)$normalized);
+        return (string)$normalized;
     }
 }

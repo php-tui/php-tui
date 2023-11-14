@@ -5,7 +5,6 @@ namespace PhpTui\Term\Tests\Painter;
 use PHPUnit\Framework\TestCase;
 use PhpTui\Term\Actions;
 use PhpTui\Term\Painter\HtmlCanvasPainter;
-use PhpTui\Term\Painter\HtmlStylePainter;
 
 class HtmlCanvasPainterTest extends TestCase
 {
