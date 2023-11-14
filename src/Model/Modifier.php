@@ -2,16 +2,16 @@
 
 namespace PhpTui\Tui\Model;
 
-enum Modifier: int
+final class Modifier
 {
-    case None        = 0b000000000000;
-    case Bold        = 0b000000000001;
-    case Dim         = 0b000000000010;
-    case Italic      = 0b000000000100;
-    case Underlined  = 0b000000001000;
-    case SlowBlink   = 0b000000010000;
-    case RapidBlink  = 0b000000100000;
-    case Reversed    = 0b000001000000;
-    case Hidden      = 0b000010000000;
-    case CrossedOut  = 0b000100000000;
+    public const NONE        = 0b000000000000;
+    public const BOLD        = 0b000000000001;
+    public const DIM         = 0b000000000010;
+    public const ITALIC      = 0b000000000100;
+    public const UNDERLINED  = 0b000000001000;
+    public const SLOWBLINK   = 0b000000010000;
+    public const RAPIDBLINK  = 0b000000100000;
+    public const REVERSED    = 0b000001000000;
+    public const HIDDEN      = 0b000010000000;
+    public const CROSSEDOUT  = 0b000100000000;
 }

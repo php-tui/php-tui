@@ -113,15 +113,15 @@ class PhpTermBackendTest extends TestCase
                 Position::at(0, 0),
                 Cell::fromChar('X')->setStyle(
                     Style::default()
-                    ->addModifier(Modifier::Italic)
-                    ->addModifier(Modifier::Bold)
-                    ->addModifier(Modifier::Reversed)
-                    ->addModifier(Modifier::Dim)
-                    ->addModifier(Modifier::Hidden)
-                    ->addModifier(Modifier::SlowBlink)
-                    ->addModifier(Modifier::Underlined)
-                    ->addModifier(Modifier::RapidBlink)
-                    ->addModifier(Modifier::CrossedOut)
+                    ->addModifier(Modifier::ITALIC)
+                    ->addModifier(Modifier::BOLD)
+                    ->addModifier(Modifier::REVERSED)
+                    ->addModifier(Modifier::DIM)
+                    ->addModifier(Modifier::HIDDEN)
+                    ->addModifier(Modifier::SLOWBLINK)
+                    ->addModifier(Modifier::UNDERLINED)
+                    ->addModifier(Modifier::RAPIDBLINK)
+                    ->addModifier(Modifier::CROSSEDOUT)
                 ),
             ),
             new BufferUpdate(

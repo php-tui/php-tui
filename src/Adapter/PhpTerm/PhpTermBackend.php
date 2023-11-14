@@ -20,7 +20,6 @@ use PhpTui\Tui\Model\BufferUpdates;
 use PhpTui\Tui\Model\ClearType;
 use PhpTui\Tui\Model\Color;
 use PhpTui\Tui\Model\Modifier;
-use PhpTui\Tui\Model\Modifiers;
 use PhpTui\Tui\Model\Position;
 use PhpTui\Tui\Model\RgbColor;
 use RuntimeException;
@@ -51,7 +50,7 @@ class PhpTermBackend implements Backend
     public function draw(BufferUpdates $updates): void
     {
         $underline = AnsiColor::Reset;
-        $modifier = Modifiers::none();
+        $modifier = Modifier::NONE;
         $bg = AnsiColor::Reset;
         $fg = AnsiColor::Reset;
         $lastPos = null;
@@ -65,9 +64,9 @@ class PhpTermBackend implements Backend
             }
             $lastPos = $update->position;
 
-            if (false === $update->cell->modifier->equals($modifier)) {
-                $this->queueModifiers($modifier, $update->cell->modifier);
-                $modifier = clone $update->cell->modifier;
+            if ($update->cell->modifiers !== $modifier) {
+                $this->queueModifiers($modifier, $update->cell->modifiers);
+                $modifier = $update->cell->modifiers;
             }
 
             if ($update->cell->fg != $fg) {
@@ -182,68 +181,65 @@ class PhpTermBackend implements Backend
         };
     }
 
-    private function queueModifiers(Modifiers $from, Modifiers $to): void
+    private function queueModifiers(int $from, int $to): void
     {
-        // TODO: make this immutable!
-        $from = clone $from;
-        $to = clone $to;
-        $removed = $from->sub($to);
+        $removed = $from & ~$to;
 
-        if ($removed->contains(Modifier::Italic)) {
+        if ($removed & Modifier::ITALIC) {
             $this->terminal->queue(Actions::italic(false));
         }
-        if ($removed->contains(Modifier::Bold)) {
+        if ($removed & Modifier::BOLD) {
             $this->terminal->queue(Actions::bold(false));
         }
-        if ($removed->contains(Modifier::Reversed)) {
+        if ($removed & Modifier::REVERSED) {
             $this->terminal->queue(Actions::reverse(false));
         }
-        if ($removed->contains(Modifier::Dim)) {
+        if ($removed & Modifier::DIM) {
             $this->terminal->queue(Actions::dim(false));
         }
-        if ($removed->contains(Modifier::Hidden)) {
+        if ($removed & Modifier::HIDDEN) {
             $this->terminal->queue(Actions::hidden(false));
         }
-        if ($removed->contains(Modifier::SlowBlink)) {
+        if ($removed & Modifier::SLOWBLINK) {
             $this->terminal->queue(Actions::slowBlink(false));
         }
-        if ($removed->contains(Modifier::Underlined)) {
+        if ($removed & Modifier::UNDERLINED) {
             $this->terminal->queue(Actions::underline(false));
         }
-        if ($removed->contains(Modifier::RapidBlink)) {
+        if ($removed & Modifier::RAPIDBLINK) {
             $this->terminal->queue(Actions::rapidBlink(false));
         }
-        if ($removed->contains(Modifier::CrossedOut)) {
+        if ($removed & Modifier::CROSSEDOUT) {
             $this->terminal->queue(Actions::strike(false));
         }
 
-        $added = $to->sub($from);
+        $added = $to & ~$from;
 
-        if ($added->contains(Modifier::Italic)) {
+        if ($added & Modifier::ITALIC) {
             $this->terminal->queue(Actions::italic(true));
         }
-        if ($added->contains(Modifier::Bold)) {
+        if ($added & Modifier::BOLD) {
             $this->terminal->queue(Actions::bold(true));
         }
-        if ($added->contains(Modifier::Reversed)) {
+        if ($added & Modifier::REVERSED) {
             $this->terminal->queue(Actions::reverse(true));
         }
-        if ($added->contains(Modifier::Dim)) {
+        if ($added & Modifier::DIM) {
             $this->terminal->queue(Actions::dim(true));
         }
-        if ($added->contains(Modifier::Hidden)) {
+        if ($added & Modifier::HIDDEN) {
             $this->terminal->queue(Actions::hidden(true));
         }
-        if ($added->contains(Modifier::SlowBlink)) {
+        if ($added & Modifier::SLOWBLINK) {
             $this->terminal->queue(Actions::slowBlink(true));
         }
-        if ($added->contains(Modifier::Underlined)) {
+        if ($added & Modifier::UNDERLINED) {
             $this->terminal->queue(Actions::underline(true));
         }
-        if ($added->contains(Modifier::RapidBlink)) {
+        if ($added & Modifier::RAPIDBLINK) {
             $this->terminal->queue(Actions::rapidBlink(true));
         }
-        if ($added->contains(Modifier::CrossedOut)) {
+        if ($added & Modifier::CROSSEDOUT) {
             $this->terminal->queue(Actions::strike(true));
         }
     }

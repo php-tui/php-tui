@@ -25,10 +25,11 @@ class BufferTest extends TestCase
 
     public function testFilled(): void
     {
-        $buffer = Buffer::filled(Area::fromScalars(0, 0, 10, 10), Cell::fromChar('X'));
+        $cell = Cell::fromChar('X');
+        $buffer = Buffer::filled(Area::fromScalars(0, 0, 10, 10), $cell);
         self::assertCount(100, $buffer);
         self::assertEquals(array_fill(0, 100, Cell::fromChar('X')), $buffer->content());
-        self::assertNotSame($buffer->get(Position::at(0, 0))->modifier, $buffer->get(Position::at(1, 1))->modifier, 'cells are propertly cloned!');
+        self::assertNotSame($cell, $buffer->get(Position::at(1, 1)), 'cells are propertly cloned!');
     }
 
     public function testFromLines(): void

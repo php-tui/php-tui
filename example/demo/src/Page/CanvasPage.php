@@ -35,7 +35,7 @@ class CanvasPage implements Component
                     ->marker(Marker::Braille)
                     ->paint(function (CanvasContext $context): void {
                         $context->draw(Map::default()->resolution(MapResolution::High)->color(AnsiColor::Green));
-                        $context->print($this->x, -$this->y, PhpTuiLine::fromString('You are here!')->patchStyle(Style::default()->fg(AnsiColor::Yellow)->addModifier(Modifier::Italic)));
+                        $context->print($this->x, -$this->y, PhpTuiLine::fromString('You are here!')->patchStyle(Style::default()->fg(AnsiColor::Yellow)->addModifier(Modifier::ITALIC)));
                     })
             )
         ;

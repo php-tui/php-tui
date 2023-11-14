@@ -10,8 +10,8 @@ final class Style implements Stringable
         public ?Color $fg,
         public ?Color $bg,
         public ?Color $underline,
-        public Modifiers $addModifiers,
-        public Modifiers $subModifiers
+        public int $addModifiers,
+        public int $subModifiers
     ) {
     }
 
@@ -22,8 +22,8 @@ final class Style implements Stringable
             $this->fg ? $this->fg->debugName() : '-',
             $this->bg ? $this->bg->debugName() : '-',
             $this->underline ? $this->underline->debugName() : '-',
-            $this->addModifiers->toInt(),
-            $this->subModifiers->toInt(),
+            $this->addModifiers,
+            $this->subModifiers,
         );
     }
 
@@ -33,8 +33,8 @@ final class Style implements Stringable
             null,
             null,
             null,
-            Modifiers::none(),
-            Modifiers::none(),
+            Modifier::NONE,
+            Modifier::NONE,
         );
     }
 
@@ -62,23 +62,29 @@ final class Style implements Stringable
         $this->bg = $other->bg ?? $this->bg;
         $this->underline = $other->underline ?? $this->underline;
 
-        $this->addModifiers->remove($other->subModifiers);
-        $this->addModifiers->insert($other->addModifiers);
-        $this->subModifiers->remove($other->addModifiers);
-        $this->subModifiers->insert($other->subModifiers);
+        $this->addModifiers &= ~$other->subModifiers;
+        $this->addModifiers |= $other->addModifiers;
+        $this->subModifiers &= ~$other->addModifiers;
+        $this->subModifiers |= $other->subModifiers;
 
         return $this;
     }
 
-    public function addModifier(Modifier $modifier): self
+    /**
+     * @param int-mask-of<Modifier::*> $modifier
+     */
+    public function addModifier(int $modifier): self
     {
-        $this->addModifiers->add($modifier);
+        $this->addModifiers |= $modifier;
         return $this;
     }
 
-    public function removeModifier(Modifier $modifier): self
+    /**
+     * @param int-mask-of<Modifier::*> $modifier
+     */
+    public function removeModifier(int $modifier): self
     {
-        $this->subModifiers->add($modifier);
+        $this->subModifiers |= $modifier;
         return $this;
     }
 }

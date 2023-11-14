@@ -4,7 +4,6 @@ namespace PhpTui\Tui\Tests\Model;
 
 use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Modifier;
-use PhpTui\Tui\Model\Modifiers;
 use PhpTui\Tui\Model\Style;
 use PHPUnit\Framework\TestCase;
 
@@ -17,8 +16,8 @@ class StyleTest extends TestCase
         self::assertNull($style->fg);
         self::assertNull($style->bg);
         self::assertNull($style->underline);
-        self::assertEquals(Modifiers::none()->toInt(), $style->addModifiers->toInt());
-        self::assertEquals(Modifiers::none()->toInt(), $style->subModifiers->toInt());
+        self::assertEquals(Modifier::NONE, $style->addModifiers);
+        self::assertEquals(Modifier::NONE, $style->subModifiers);
     }
 
     public function testFg(): void
@@ -37,16 +36,16 @@ class StyleTest extends TestCase
 
     public function testAddModifier(): void
     {
-        $style = Style::default()->addModifier(Modifier::Bold);
+        $style = Style::default()->addModifier(Modifier::BOLD);
 
-        self::assertTrue($style->addModifiers->contains(Modifier::Bold));
+        self::assertTrue(($style->addModifiers & Modifier::BOLD) === Modifier::BOLD);
     }
 
     public function testSubModifier(): void
     {
-        $style = Style::default()->removeModifier(Modifier::Italic);
+        $style = Style::default()->removeModifier(Modifier::ITALIC);
 
-        self::assertTrue($style->subModifiers->contains(Modifier::Italic));
+        self::assertTrue(($style->subModifiers & Modifier::ITALIC) === Modifier::ITALIC);
     }
 
     public function testPatch(): void
@@ -54,19 +53,16 @@ class StyleTest extends TestCase
         $style1 = Style::default()->bg(AnsiColor::Red);
         $style2 = Style::default()
                     ->fg(AnsiColor::Blue)
-                    ->addModifier(Modifier::Bold)
-                    ->addModifier(Modifier::Underlined);
+                    ->addModifier(Modifier::BOLD)
+                    ->addModifier(Modifier::UNDERLINED);
 
         $combined = $style1->patch($style2);
 
-        self::assertEquals(
-            Modifiers::none()->toInt(),
-            $combined->subModifiers->toInt(),
-        );
+        self::assertEquals(Modifier::NONE, $combined->subModifiers);
 
         self::assertEquals(
-            Modifiers::fromInt(Modifier::Bold->value | Modifier::Underlined->value)->toInt(),
-            $combined->addModifiers->toInt(),
+            Modifier::BOLD | Modifier::UNDERLINED,
+            $combined->addModifiers,
         );
 
         self::assertSame(
@@ -79,18 +75,15 @@ class StyleTest extends TestCase
 
         $combined2 = Style::default()->patch($combined)->patch(
             Style::default()
-                ->removeModifier(Modifier::Bold)
-                ->addModifier(Modifier::Italic),
+                ->removeModifier(Modifier::BOLD)
+                ->addModifier(Modifier::ITALIC),
         );
 
-        self::assertEquals(
-            Modifiers::fromModifier(Modifier::Bold)->toInt(),
-            $combined2->subModifiers->toInt(),
-        );
+        self::assertEquals(Modifier::BOLD, $combined2->subModifiers);
 
         self::assertEquals(
-            Modifiers::fromInt(Modifier::Italic->value | Modifier::Underlined->value)->toInt(),
-            $combined2->addModifiers->toInt(),
+            Modifier::ITALIC | Modifier::UNDERLINED,
+            $combined2->addModifiers,
         );
 
         self::assertSame(AnsiColor::Blue, $combined->fg);
@@ -102,17 +95,17 @@ class StyleTest extends TestCase
         $style = Style::default()
                     ->bg(AnsiColor::Red)
                     ->underline(AnsiColor::Blue)
-                    ->addModifier(Modifier::Bold)
-                    ->removeModifier(Modifier::Italic)
-                    ->removeModifier(Modifier::Underlined);
+                    ->addModifier(Modifier::BOLD)
+                    ->removeModifier(Modifier::ITALIC)
+                    ->removeModifier(Modifier::UNDERLINED);
 
         $expectedString = sprintf(
             'Style(fg:%s,bg: %s,u:%s,+mod:%d,-mod:%d)',
             '-',
             AnsiColor::Red->debugName(),
             AnsiColor::Blue->debugName(),
-            Modifiers::fromModifier(Modifier::Bold)->toInt(),
-            Modifiers::fromInt(Modifier::Italic->value | Modifier::Underlined->value)->toInt()
+            Modifier::BOLD,
+            Modifier::ITALIC | Modifier::UNDERLINED,
         );
 
         self::assertEquals($expectedString, (string) $style);
