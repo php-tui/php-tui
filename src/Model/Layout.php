@@ -3,7 +3,6 @@
 namespace PhpTui\Tui\Model;
 
 use PhpTui\Tui\Adapter\Cassowary\CassowaryConstraintSolver;
-use PhpTui\Tui\Model\Layout\StaticCachingConstraintSolver;
 
 final class Layout
 {
