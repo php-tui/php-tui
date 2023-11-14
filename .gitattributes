@@ -1,5 +1,5 @@
 *.php diff=php
-/examples export-ignore
+/example export-ignore
 /tests export-ignore
 /lib/*/tests export-ignore
 /scripts export-ignore
