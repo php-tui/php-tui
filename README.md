@@ -19,6 +19,15 @@ Features
 - Font rendering
 - Layout control using the Cassowary algorithm via. [php-tui cassowary](https://github.com/php-tui/cassowary)
 
+Installation
+------------
+
+Require in your project with composer:
+
+```
+composer require php-tui/php-tui
+```
+
 Documentation
 -------------
 
