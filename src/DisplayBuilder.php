@@ -2,12 +2,15 @@
 
 namespace PhpTui\Tui;
 
+use PhpTui\Tui\Adapter\ImageMagick\ImageMagickExtension;
 use PhpTui\Tui\Adapter\PhpTerm\PhpTermBackend;
 use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Backend;
 use PhpTui\Tui\Model\Canvas\AggregateShapePainter;
+use PhpTui\Tui\Model\Canvas\ShapePainter;
 use PhpTui\Tui\Model\Canvas\ShapeSet;
 use PhpTui\Tui\Model\Display;
+use PhpTui\Tui\Model\DisplayExtension;
 use PhpTui\Tui\Model\Viewport;
 use PhpTui\Tui\Model\Viewport\Fixed;
 use PhpTui\Tui\Model\Viewport\Fullscreen;
@@ -35,6 +38,11 @@ use PhpTui\Tui\Widget\DefaultWidgetSet;
  */
 final class DisplayBuilder
 {
+    /**
+     * @var ShapePainter[]
+     */
+    private array $shapePainters = [];
+
     /**
      * @param list<WidgetSet> $widgetSets
      * @param list<ShapeSet> $shapeSets
@@ -104,11 +112,26 @@ final class DisplayBuilder
         return $this;
     }
 
+    public function addShapePainter(ShapePainter $shapePainter): self
+    {
+        $this->shapePainters[] = $shapePainter;
+
+        return $this;
+    }
+
     private function buildDefaultSet(): WidgetSet
     {
         return new DefaultWidgetSet(
             AggregateShapePainter::fromShapeSets(
                 new DefaultShapeSet(),
+                // TODO: temporary
+                (new class($this->shapePainters) implements ShapeSet {
+                    public function __construct(private array $shapePainters) {}
+                    public function shapes(): array
+                    {
+                        return $this->shapePainters;
+                    }
+                }),
                 ...$this->shapeSets,
             )
         );
@@ -122,5 +145,12 @@ final class DisplayBuilder
             [],
             [],
         );
+    }
+
+    public function addExtension(DisplayExtension $extension): self
+    {
+        $extension->build($this);
+
+        return $this;
     }
 }

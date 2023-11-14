@@ -8,6 +8,7 @@ use PhpTui\Term\Event\CharKeyEvent;
 use PhpTui\Term\Terminal;
 use PhpTui\Tui\Adapter\Bdf\BdfShapeSet;
 use PhpTui\Tui\Adapter\Bdf\FontRegistry;
+use PhpTui\Tui\Adapter\ImageMagick\ImageMagickExtension;
 use PhpTui\Tui\Adapter\ImageMagick\ImageMagickShapeSet;
 use PhpTui\Tui\Adapter\PhpTerm\PhpTermBackend;
 use PhpTui\Tui\DisplayBuilder;
@@ -90,7 +91,7 @@ final class App
         }
 
         $display = DisplayBuilder::default($backend ?? PhpTermBackend::new($terminal))
-            ->addShapeSet(new ImageMagickShapeSet())
+            ->addExtension(new ImageMagickExtension())
             ->addShapeSet(new BdfShapeSet(FontRegistry::default()))
             ->build();
         return new self(
