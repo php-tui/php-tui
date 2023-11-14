@@ -22,7 +22,7 @@ final class Layout
     public static function default(): self
     {
         return new self(
-            new StaticCachingConstraintSolver(new CassowaryConstraintSolver()),
+            new CassowaryConstraintSolver(),
             Direction::Vertical,
             new Margin(0, 0),
             [],
