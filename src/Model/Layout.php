@@ -3,7 +3,6 @@
 namespace PhpTui\Tui\Model;
 
 use PhpTui\Tui\Adapter\Cassowary\CassowaryConstraintSolver;
-use PhpTui\Tui\Model\Layout\StaticCachingConstraintSolver;
 
 final class Layout
 {
@@ -22,7 +21,7 @@ final class Layout
     public static function default(): self
     {
         return new self(
-            new StaticCachingConstraintSolver(new CassowaryConstraintSolver()),
+            new CassowaryConstraintSolver(),
             Direction::Vertical,
             new Margin(0, 0),
             [],
