@@ -4,7 +4,6 @@ namespace PhpTui\Tui\Tests\Model;
 
 use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Modifier;
-use PhpTui\Tui\Model\Modifiers;
 use PhpTui\Tui\Model\Style;
 use PHPUnit\Framework\TestCase;
 
@@ -17,8 +16,8 @@ class StyleTest extends TestCase
         self::assertNull($style->fg);
         self::assertNull($style->bg);
         self::assertNull($style->underline);
-        self::assertEquals(Modifiers::none()->toInt(), $style->addModifiers->toInt());
-        self::assertEquals(Modifiers::none()->toInt(), $style->subModifiers->toInt());
+        self::assertEquals(Modifier::None->value, $style->addModifiers);
+        self::assertEquals(Modifier::None->value, $style->subModifiers);
     }
 
     public function testFg(): void
@@ -39,14 +38,14 @@ class StyleTest extends TestCase
     {
         $style = Style::default()->addModifier(Modifier::Bold);
 
-        self::assertTrue($style->addModifiers->contains(Modifier::Bold));
+        self::assertTrue(($style->addModifiers & Modifier::Bold->value) === Modifier::Bold->value);
     }
 
     public function testSubModifier(): void
     {
         $style = Style::default()->removeModifier(Modifier::Italic);
 
-        self::assertTrue($style->subModifiers->contains(Modifier::Italic));
+        self::assertTrue(($style->subModifiers & Modifier::Italic->value) === Modifier::Italic->value);
     }
 
     public function testPatch(): void
@@ -59,14 +58,11 @@ class StyleTest extends TestCase
 
         $combined = $style1->patch($style2);
 
-        self::assertEquals(
-            Modifiers::none()->toInt(),
-            $combined->subModifiers->toInt(),
-        );
+        self::assertEquals(Modifier::None->value, $combined->subModifiers);
 
         self::assertEquals(
-            Modifiers::fromInt(Modifier::Bold->value | Modifier::Underlined->value)->toInt(),
-            $combined->addModifiers->toInt(),
+            Modifier::Bold->value | Modifier::Underlined->value,
+            $combined->addModifiers,
         );
 
         self::assertSame(
@@ -83,14 +79,11 @@ class StyleTest extends TestCase
                 ->addModifier(Modifier::Italic),
         );
 
-        self::assertEquals(
-            Modifiers::fromModifier(Modifier::Bold)->toInt(),
-            $combined2->subModifiers->toInt(),
-        );
+        self::assertEquals(Modifier::Bold->value, $combined2->subModifiers);
 
         self::assertEquals(
-            Modifiers::fromInt(Modifier::Italic->value | Modifier::Underlined->value)->toInt(),
-            $combined2->addModifiers->toInt(),
+            Modifier::Italic->value | Modifier::Underlined->value,
+            $combined2->addModifiers,
         );
 
         self::assertSame(AnsiColor::Blue, $combined->fg);
@@ -111,8 +104,8 @@ class StyleTest extends TestCase
             '-',
             AnsiColor::Red->debugName(),
             AnsiColor::Blue->debugName(),
-            Modifiers::fromModifier(Modifier::Bold)->toInt(),
-            Modifiers::fromInt(Modifier::Italic->value | Modifier::Underlined->value)->toInt()
+            Modifier::Bold->value,
+            Modifier::Italic->value | Modifier::Underlined->value,
         );
 
         self::assertEquals($expectedString, (string) $style);

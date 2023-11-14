@@ -9,7 +9,7 @@ final class Cell
         public Color $fg,
         public Color $bg,
         public Color $underline,
-        public Modifiers $modifier
+        public int $modifiers
     ) {
     }
 
@@ -21,18 +21,18 @@ final class Cell
             $this->char,
             $this->fg->debugName(),
             $this->bg->debugName(),
-            $this->modifier->toBin(),
+            decbin($this->modifiers),
         );
     }
 
     public static function empty(): self
     {
-        return new self(' ', AnsiColor::Reset, AnsiColor::Reset, AnsiColor::Reset, Modifiers::none());
+        return new self(' ', AnsiColor::Reset, AnsiColor::Reset, AnsiColor::Reset, Modifier::None->value);
     }
 
     public static function fromChar(string $char): self
     {
-        return new self($char, AnsiColor::Reset, AnsiColor::Reset, AnsiColor::Reset, Modifiers::none());
+        return new self($char, AnsiColor::Reset, AnsiColor::Reset, AnsiColor::Reset, Modifier::None->value);
     }
 
     public function setChar(string $char): self
@@ -52,8 +52,8 @@ final class Cell
         if ($style->underline) {
             $this->underline = $style->underline;
         }
-        $this->modifier->insert($style->addModifiers);
-        $this->modifier->remove($style->subModifiers);
+        $this->modifiers |= $style->addModifiers;
+        $this->modifiers &= ~$style->subModifiers;
         return $this;
     }
 
@@ -61,7 +61,7 @@ final class Cell
     {
         return
             $this->underline == $currentCell->underline &&
-            $this->modifier->toInt() === $currentCell->modifier->toInt() &&
+            $this->modifiers === $currentCell->modifiers &&
             $this->fg == $currentCell->fg &&
             $this->bg == $currentCell->bg &&
             $this->char === $currentCell->char
@@ -75,7 +75,7 @@ final class Cell
             fg: $this->fg,
             bg: $this->bg,
             underline: $this->underline,
-            modifier: clone $this->modifier,
+            modifiers: $this->modifiers,
         );
     }
 }
