@@ -19,6 +19,6 @@ $display->draw(
                 [4, 4],
                 [6, 6],
                 [8, 8],
-            ], AnsiColor::Black)
+            ], AnsiColor::Cyan)
         )
 );
