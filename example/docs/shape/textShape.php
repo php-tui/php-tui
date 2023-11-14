@@ -1,5 +1,6 @@
 <?php
 
+use PhpTui\Tui\Adapter\Bdf\BdfExtension;
 use PhpTui\Tui\Adapter\Bdf\BdfShapeSet;
 use PhpTui\Tui\Adapter\Bdf\FontRegistry;
 use PhpTui\Tui\Adapter\Bdf\Shape\TextShape;
@@ -16,7 +17,7 @@ require 'vendor/autoload.php';
 $registry = FontRegistry::default();
 
 $display = DisplayBuilder::default()
-    ->addShapeSet(new BdfShapeSet(FontRegistry::default()))
+    ->addExtension(new BdfExtension())
     ->build();
 
 $display->draw(

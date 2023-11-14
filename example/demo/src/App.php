@@ -6,6 +6,7 @@ use PhpTui\Term\Actions;
 use PhpTui\Term\ClearType;
 use PhpTui\Term\Event\CharKeyEvent;
 use PhpTui\Term\Terminal;
+use PhpTui\Tui\Adapter\Bdf\BdfExtension;
 use PhpTui\Tui\Adapter\Bdf\BdfShapeSet;
 use PhpTui\Tui\Adapter\Bdf\FontRegistry;
 use PhpTui\Tui\Adapter\ImageMagick\ImageMagickExtension;
@@ -92,7 +93,7 @@ final class App
 
         $display = DisplayBuilder::default($backend ?? PhpTermBackend::new($terminal))
             ->addExtension(new ImageMagickExtension())
-            ->addShapeSet(new BdfShapeSet(FontRegistry::default()))
+            ->addExtension(new BdfExtension())
             ->build();
         return new self(
             $terminal,
