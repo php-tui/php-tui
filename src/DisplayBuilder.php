@@ -88,18 +88,6 @@ final class DisplayBuilder
         );
     }
 
-    public function addShapeSet(ShapeSet $shapeSet): self
-    {
-        $this->shapeSets[] = $shapeSet;
-        return $this;
-    }
-
-    public function addWidgetSet(WidgetSet $widgetSet): self
-    {
-        $this->widgetSets[] = $widgetSet;
-        return $this;
-    }
-
     public function inline(int $height): self
     {
         $this->viewport = new Inline($height);
