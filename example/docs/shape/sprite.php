@@ -11,8 +11,8 @@ require 'vendor/autoload.php';
 
 $display = DisplayBuilder::default()->build();
 $display->draw(
-    Canvas::fromIntBounds(0, 20, 0, 10)
-        ->marker(Marker::Braille)
+    Canvas::fromIntBounds(0, 30, 0, 15)
+        ->marker(Marker::Block)
         ->draw(
             new Sprite(
                 rows: [
@@ -27,9 +27,9 @@ $display->draw(
                     ' X X     ',
                     'X   X    ',
                 ],
-                color: AnsiColor::Blue,
-                density: 4,
-                position: FloatPosition::at(0, 0),
+                color: AnsiColor::White,
+                density: 2,
+                position: FloatPosition::at(2, 2),
             )
         )
 );
