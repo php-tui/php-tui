@@ -16,31 +16,39 @@ class SpritePainter implements ShapePainter
         }
 
         $maxX = max(0, ...array_map(fn (string $row) => mb_strlen($row), $shape->rows));
+        $xStep = $painter->context->xBounds->length() / $painter->resolution->width;
+        $yStep = $painter->context->yBounds->length() / $painter->resolution->height;
         $pixelWidth = $shape->xScale;
         $pixelHeight = $shape->yScale;
+        $yOffset = 0;
         
         $densityRatio = 1;
         foreach (array_reverse($shape->rows) as $y => $row) {
             $chars = mb_str_split($row);
+            $y1 = $yOffset;
+            $y2 = $yOffset + $pixelHeight;
+            $yOffset += $pixelHeight;
+            $xOffset = 0;
 
-            // fill the cell from left to right
-            // if desity = 4 and 0,0 then 0,0, 0.25, 0.5, 0.75
             foreach ($chars as $x => $char) {
-                $cellX = intval(floor($x));
-                if (!isset($chars[$cellX])) {
-                    $chars[$cellX] = $shape->alphaChar;
-                }
-                if ($chars[$cellX] === $shape->alphaChar) {
+                $x1 = $xOffset;
+                $x2 = $xOffset + $pixelWidth;
+                $xOffset += $pixelWidth;
+                if ($char === $shape->alphaChar) {
                     continue;
                 }
-                $point = $painter->getPoint(FloatPosition::at(
-                    1 + $shape->position->x + $x * $shape->xScale,
-                    $shape->position->y + $y * $shape->yScale,
-                ));
-                if (null === $point) {
-                    continue;
+                for ($yF = $y1; $yF < $y2; $yF+=$yStep) {
+                    for ($xF = $x1; $xF < $x2; $xF+=$xStep) {
+                        $point = $painter->getPoint(FloatPosition::at(
+                            $shape->position->x + $xF,
+                            $shape->position->y + $yF,
+                        ));
+                        if ($point === null) {
+                            continue;
+                        }
+                        $painter->paint($point, $shape->color);
+                    }
                 }
-                $painter->paint($point, $shape->color);
             }
         }
     }
