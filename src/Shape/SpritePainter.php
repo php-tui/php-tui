@@ -21,7 +21,7 @@ class SpritePainter implements ShapePainter
         $pixelWidth = $shape->xScale;
         $pixelHeight = $shape->yScale;
         $yOffset = 0;
-        
+
         $densityRatio = 1;
         foreach (array_reverse($shape->rows) as $y => $row) {
             $chars = mb_str_split($row);
@@ -40,7 +40,7 @@ class SpritePainter implements ShapePainter
                 for ($yF = $y1; $yF < $y2; $yF+=$yStep) {
                     for ($xF = $x1; $xF < $x2; $xF+=$xStep) {
                         $point = $painter->getPoint(FloatPosition::at(
-                            $shape->position->x + $xF,
+                            1 + $shape->position->x + $xF,
                             $shape->position->y + $yF,
                         ));
                         if ($point === null) {
