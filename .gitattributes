@@ -1,0 +1,7 @@
+*.php diff=php
+/example export-ignore
+/tests export-ignore
+/lib/*/tests export-ignore
+/lib/docgen export-ignore
+/scripts export-ignore
+/docs export-ignore

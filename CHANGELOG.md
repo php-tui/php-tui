@@ -1,7 +1,7 @@
 CHANGELOG
 =========
 
-## main
+## 0.0.1
 
 The following are differences from Ratatui:
 
