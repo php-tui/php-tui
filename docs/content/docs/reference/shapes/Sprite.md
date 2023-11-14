@@ -21,5 +21,4 @@ Configure the shape using the constructor arguments named as follows:
 | **position** | `PhpTui\Tui\Model\Widget\FloatPosition` | Position to place the sprite at (bottom left) |
 | **alphaChar** | `string` | Character to use as the "alpha" (transparent) "channel".Defaults to empty space. |
 | **xScale** | `float` | X scale |
-| **density** | `int` | Density |
 | **yScale** | `float` | Y scale |

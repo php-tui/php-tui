@@ -16,7 +16,7 @@ class SpritePainter implements ShapePainter
         }
 
         $maxX = max(0, ...array_map(fn (string $row) => mb_strlen($row), $shape->rows));
-        $densityRatio = 1/$shape->density;
+        $densityRatio = 1;
         foreach (array_reverse($shape->rows) as $cellY => $row) {
             // fill the cell (step 1) from top to bottom.
             // if density = 4 and cell is 0,0 start at 0,75 then 0,5, 0.25, 0

@@ -28,7 +28,6 @@ $display->draw(
                     'X   X    ',
                 ],
                 color: AnsiColor::White,
-                density: 2,
                 position: FloatPosition::at(2, 2),
             )
         )
