@@ -33,8 +33,8 @@ final class Style implements Stringable
             null,
             null,
             null,
-            Modifier::None->value,
-            Modifier::None->value,
+            Modifier::NONE,
+            Modifier::NONE,
         );
     }
 
@@ -70,15 +70,21 @@ final class Style implements Stringable
         return $this;
     }
 
-    public function addModifier(Modifier $modifier): self
+    /**
+     * @param int-mask-of<Modifier::*> $modifier
+     */
+    public function addModifier(int $modifier): self
     {
-        $this->addModifiers |= $modifier->value;
+        $this->addModifiers |= $modifier;
         return $this;
     }
 
-    public function removeModifier(Modifier $modifier): self
+    /**
+     * @param int-mask-of<Modifier::*> $modifier
+     */
+    public function removeModifier(int $modifier): self
     {
-        $this->subModifiers |= $modifier->value;
+        $this->subModifiers |= $modifier;
         return $this;
     }
 }

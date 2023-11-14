@@ -50,7 +50,7 @@ class PhpTermBackend implements Backend
     public function draw(BufferUpdates $updates): void
     {
         $underline = AnsiColor::Reset;
-        $modifier = Modifier::None->value;
+        $modifier = Modifier::NONE;
         $bg = AnsiColor::Reset;
         $fg = AnsiColor::Reset;
         $lastPos = null;
@@ -185,61 +185,61 @@ class PhpTermBackend implements Backend
     {
         $removed = $from & ~$to;
 
-        if ($removed & Modifier::Italic->value) {
+        if ($removed & Modifier::ITALIC) {
             $this->terminal->queue(Actions::italic(false));
         }
-        if ($removed & Modifier::Bold->value) {
+        if ($removed & Modifier::BOLD) {
             $this->terminal->queue(Actions::bold(false));
         }
-        if ($removed & Modifier::Reversed->value) {
+        if ($removed & Modifier::REVERSED) {
             $this->terminal->queue(Actions::reverse(false));
         }
-        if ($removed & Modifier::Dim->value) {
+        if ($removed & Modifier::DIM) {
             $this->terminal->queue(Actions::dim(false));
         }
-        if ($removed & Modifier::Hidden->value) {
+        if ($removed & Modifier::HIDDEN) {
             $this->terminal->queue(Actions::hidden(false));
         }
-        if ($removed & Modifier::SlowBlink->value) {
+        if ($removed & Modifier::SLOWBLINK) {
             $this->terminal->queue(Actions::slowBlink(false));
         }
-        if ($removed & Modifier::Underlined->value) {
+        if ($removed & Modifier::UNDERLINED) {
             $this->terminal->queue(Actions::underline(false));
         }
-        if ($removed & Modifier::RapidBlink->value) {
+        if ($removed & Modifier::RAPIDBLINK) {
             $this->terminal->queue(Actions::rapidBlink(false));
         }
-        if ($removed & Modifier::CrossedOut->value) {
+        if ($removed & Modifier::CROSSEDOUT) {
             $this->terminal->queue(Actions::strike(false));
         }
 
         $added = $to & ~$from;
 
-        if ($added & Modifier::Italic->value) {
+        if ($added & Modifier::ITALIC) {
             $this->terminal->queue(Actions::italic(true));
         }
-        if ($added & Modifier::Bold->value) {
+        if ($added & Modifier::BOLD) {
             $this->terminal->queue(Actions::bold(true));
         }
-        if ($added & Modifier::Reversed->value) {
+        if ($added & Modifier::REVERSED) {
             $this->terminal->queue(Actions::reverse(true));
         }
-        if ($added & Modifier::Dim->value) {
+        if ($added & Modifier::DIM) {
             $this->terminal->queue(Actions::dim(true));
         }
-        if ($added & Modifier::Hidden->value) {
+        if ($added & Modifier::HIDDEN) {
             $this->terminal->queue(Actions::hidden(true));
         }
-        if ($added & Modifier::SlowBlink->value) {
+        if ($added & Modifier::SLOWBLINK) {
             $this->terminal->queue(Actions::slowBlink(true));
         }
-        if ($added & Modifier::Underlined->value) {
+        if ($added & Modifier::UNDERLINED) {
             $this->terminal->queue(Actions::underline(true));
         }
-        if ($added & Modifier::RapidBlink->value) {
+        if ($added & Modifier::RAPIDBLINK) {
             $this->terminal->queue(Actions::rapidBlink(true));
         }
-        if ($added & Modifier::CrossedOut->value) {
+        if ($added & Modifier::CROSSEDOUT) {
             $this->terminal->queue(Actions::strike(true));
         }
     }

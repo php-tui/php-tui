@@ -27,12 +27,12 @@ final class Cell
 
     public static function empty(): self
     {
-        return new self(' ', AnsiColor::Reset, AnsiColor::Reset, AnsiColor::Reset, Modifier::None->value);
+        return new self(' ', AnsiColor::Reset, AnsiColor::Reset, AnsiColor::Reset, Modifier::NONE);
     }
 
     public static function fromChar(string $char): self
     {
-        return new self($char, AnsiColor::Reset, AnsiColor::Reset, AnsiColor::Reset, Modifier::None->value);
+        return new self($char, AnsiColor::Reset, AnsiColor::Reset, AnsiColor::Reset, Modifier::NONE);
     }
 
     public function setChar(string $char): self

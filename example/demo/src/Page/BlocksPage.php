@@ -114,9 +114,9 @@ class BlocksPage implements Component
                 )->bg(
                     AnsiColor::White
                 )->addModifier(
-                    Modifier::Bold
+                    Modifier::BOLD
                 )->addModifier(
-                    Modifier::Italic
+                    Modifier::ITALIC
                 )
             )
             ->titles(Title::fromString('Styled block'))
@@ -133,9 +133,9 @@ class BlocksPage implements Component
                 )->bg(
                     AnsiColor::White
                 )->addModifier(
-                    Modifier::Bold
+                    Modifier::BOLD
                 )->addModifier(
-                    Modifier::Italic
+                    Modifier::ITALIC
                 )
             )
             ->titles(Title::fromString('Styled borders'))
@@ -147,7 +147,7 @@ class BlocksPage implements Component
         return Block::default()
             ->borders(Borders::ALL)
             ->titles(Title::fromString('Styled title'))
-            ->titleStyle(Style::default()->fg(AnsiColor::Blue)->bg(AnsiColor::White)->addModifier(Modifier::Bold)->addModifier(Modifier::Italic))
+            ->titleStyle(Style::default()->fg(AnsiColor::Blue)->bg(AnsiColor::White)->addModifier(Modifier::BOLD)->addModifier(Modifier::ITALIC))
             ->widget($paragraph);
 
     }
