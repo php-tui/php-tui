@@ -29,7 +29,7 @@ class BufferTest extends TestCase
         $buffer = Buffer::filled(Area::fromScalars(0, 0, 10, 10), $cell);
         self::assertCount(100, $buffer);
         self::assertEquals(array_fill(0, 100, Cell::fromChar('X')), $buffer->content());
-        self::assertNotSame(spl_object_id($cell), spl_object_id($buffer->get(Position::at(1, 1))), 'cells are propertly cloned!');
+        self::assertNotSame($cell, $buffer->get(Position::at(1, 1)), 'cells are propertly cloned!');
     }
 
     public function testFromLines(): void
