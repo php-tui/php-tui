@@ -58,7 +58,6 @@ class SpritePage implements Component
                 '███  ████ ████  ████  ██████ ',
             ],
             color: AnsiColor::Blue,
-            density: 4,
             alphaChar: ' ',
             xScale: 1,
             yScale: 1,

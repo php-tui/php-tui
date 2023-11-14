@@ -73,13 +73,13 @@ class TextRenderer implements ShapePainter
         foreach ($grid as $row) {
             $y1 = $yOffset;
             $y2 = $yOffset + $charHeight;
-            $yOffset += abs($y2 - $y1);
+            $yOffset += $charHeight;
 
             $xOffset = 1;
             foreach (array_reverse($row) as $render) {
                 $x1 = $xOffset;
                 $x2 = $xOffset + $charWidth;
-                $xOffset += abs($x2 - $x1);
+                $xOffset += $charWidth;
 
                 if ($render === false) {
                     continue;

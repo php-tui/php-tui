@@ -56,7 +56,7 @@ class DocsTest extends TestCase
         $painter->paint($actions);
         $output = $painter->toString();
 
-        $this->assertSnapshot($path, $output, 'html', true);
+        $this->assertSnapshot($path, $output, 'html', self::normalize(...));
     }
 
     /**
@@ -74,9 +74,12 @@ class DocsTest extends TestCase
         }
     }
 
-    private function assertSnapshot(string $path, string $output, string $extension, bool $html = false): void
+    private function assertSnapshot(string $path, string $output, string $extension, ?callable $normalizer = null): void
     {
         $snapshot = substr($path, 0, -3) . $extension;
+        if ($normalizer) {
+            $output = $normalizer($output);
+        }
         if (!file_exists($snapshot) || getenv('SNAPSHOT_APPROVE')) {
             file_put_contents($snapshot, $output);
             return;
@@ -87,18 +90,8 @@ class DocsTest extends TestCase
             throw new RuntimeException('Could not read file');
         }
 
-        if ($html) {
-            self::assertNormalizedEquals($existing, $output);
-            return;
-        }
-
         self::assertEquals($existing, $output);
 
-    }
-
-    private static function assertNormalizedEquals(string $string, string $string2): void
-    {
-        self::assertEquals(self::normalize($string), self::normalize($string2));
     }
 
     private static function normalize(string $string): string

@@ -39,10 +39,6 @@ class Sprite implements Shape
          */
         public float $xScale = 1.0,
         /**
-         * Density
-         */
-        public int $density = 1,
-        /**
          * Y scale
          */
         public float $yScale = 1.0,
