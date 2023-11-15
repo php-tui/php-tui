@@ -7,9 +7,11 @@ namespace PhpTui\Tui\Bridge\PhpTerm;
 use PhpTui\Term\Action;
 use PhpTui\Term\Action\SetBackgroundColor;
 use PhpTui\Term\Action\SetForegroundColor;
+use PhpTui\Term\Action\SetModifier;
 use PhpTui\Term\Action\SetRgbBackgroundColor;
 use PhpTui\Term\Action\SetRgbForegroundColor;
 use PhpTui\Term\Actions;
+use PhpTui\Term\Attribute;
 use PhpTui\Term\ClearType as PhpTuiClearType;
 use PhpTui\Term\Colors;
 use PhpTui\Term\Event\CursorPositionEvent;
@@ -186,64 +188,27 @@ class PhpTermBackend implements Backend
 
     private function queueModifiers(int $from, int $to): void
     {
-        $removed = $from & ~$to;
-
-        if ($removed & Modifier::ITALIC) {
-            $this->terminal->queue(Actions::italic(false));
-        }
-        if ($removed & Modifier::BOLD) {
-            $this->terminal->queue(Actions::bold(false));
-        }
-        if ($removed & Modifier::REVERSED) {
-            $this->terminal->queue(Actions::reverse(false));
-        }
-        if ($removed & Modifier::DIM) {
-            $this->terminal->queue(Actions::dim(false));
-        }
-        if ($removed & Modifier::HIDDEN) {
-            $this->terminal->queue(Actions::hidden(false));
-        }
-        if ($removed & Modifier::SLOWBLINK) {
-            $this->terminal->queue(Actions::slowBlink(false));
-        }
-        if ($removed & Modifier::UNDERLINED) {
-            $this->terminal->queue(Actions::underline(false));
-        }
-        if ($removed & Modifier::RAPIDBLINK) {
-            $this->terminal->queue(Actions::rapidBlink(false));
-        }
-        if ($removed & Modifier::CROSSEDOUT) {
-            $this->terminal->queue(Actions::strike(false));
-        }
+        $modifierAttributeMap = [
+            Modifier::ITALIC => Attribute::Italic,
+            Modifier::BOLD => Attribute::Bold,
+            Modifier::REVERSED => Attribute::Reverse,
+            Modifier::DIM => Attribute::Dim,
+            Modifier::HIDDEN => Attribute::Hidden,
+            Modifier::SLOWBLINK => Attribute::SlowBlink,
+            Modifier::UNDERLINED => Attribute::Underline,
+            Modifier::RAPIDBLINK => Attribute::RapidBlink,
+            Modifier::CROSSEDOUT => Attribute::Strike,
+        ];
 
         $added = $to & ~$from;
+        $removed = $from & ~$to;
 
-        if ($added & Modifier::ITALIC) {
-            $this->terminal->queue(Actions::italic(true));
-        }
-        if ($added & Modifier::BOLD) {
-            $this->terminal->queue(Actions::bold(true));
-        }
-        if ($added & Modifier::REVERSED) {
-            $this->terminal->queue(Actions::reverse(true));
-        }
-        if ($added & Modifier::DIM) {
-            $this->terminal->queue(Actions::dim(true));
-        }
-        if ($added & Modifier::HIDDEN) {
-            $this->terminal->queue(Actions::hidden(true));
-        }
-        if ($added & Modifier::SLOWBLINK) {
-            $this->terminal->queue(Actions::slowBlink(true));
-        }
-        if ($added & Modifier::UNDERLINED) {
-            $this->terminal->queue(Actions::underline(true));
-        }
-        if ($added & Modifier::RAPIDBLINK) {
-            $this->terminal->queue(Actions::rapidBlink(true));
-        }
-        if ($added & Modifier::CROSSEDOUT) {
-            $this->terminal->queue(Actions::strike(true));
+        foreach ($modifierAttributeMap as $modifier => $attribute) {
+            if ($added & $modifier) {
+                $this->terminal->queue(new SetModifier($attribute, true));
+            } elseif ($removed & $modifier) {
+                $this->terminal->queue(new SetModifier($attribute, false));
+            }
         }
     }
 
