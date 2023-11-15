@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Term\Painter;
 
 use PhpTui\Term\Action;
@@ -75,26 +77,32 @@ class HtmlCanvasPainter implements Painter
         foreach ($actions as $action) {
             if ($action instanceof PrintString) {
                 $this->printString($action);
+
                 continue;
             }
             if ($action instanceof MoveCursor) {
                 $this->cursorX = $action->col - 1;
                 $this->cursorY = $action->line - 1;
+
                 continue;
             }
             if ($action instanceof SetRgbBackgroundColor) {
                 $this->bgColor = $action;
+
                 continue;
             }
             if ($action instanceof SetRgbForegroundColor) {
                 $this->fgColor = $action;
+
                 continue;
             }
             if ($action instanceof Reset) {
                 $this->fgColor = null;
                 $this->bgColor = null;
+
                 continue;
             }
+
             throw new RuntimeException(sprintf(
                 'Do not know how to handle action: %s',
                 $action::class

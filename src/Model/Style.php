@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Model;
 
 use Stringable;
@@ -41,18 +43,21 @@ final class Style implements Stringable
     public function fg(Color $color): self
     {
         $this->fg = $color;
+
         return $this;
     }
 
     public function bg(Color $color): self
     {
         $this->bg = $color;
+
         return $this;
     }
 
     public function underline(Color $color): self
     {
         $this->underline = $color;
+
         return $this;
     }
 
@@ -76,6 +81,7 @@ final class Style implements Stringable
     public function addModifier(int $modifier): self
     {
         $this->addModifiers |= $modifier;
+
         return $this;
     }
 
@@ -85,6 +91,7 @@ final class Style implements Stringable
     public function removeModifier(int $modifier): self
     {
         $this->subModifiers |= $modifier;
+
         return $this;
     }
 }

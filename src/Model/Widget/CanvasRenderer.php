@@ -1,16 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Model\Widget;
 
 use PhpTui\Tui\Extension\Core\Widget\Canvas;
 use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Buffer;
+use PhpTui\Tui\Model\Canvas\CanvasContext;
 use PhpTui\Tui\Model\Canvas\ShapePainter;
 use PhpTui\Tui\Model\Position;
 use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\WidgetRenderer;
-use PhpTui\Tui\Model\Canvas\CanvasContext;
 
 final class CanvasRenderer implements WidgetRenderer
 {
@@ -63,22 +65,22 @@ final class CanvasRenderer implements WidgetRenderer
                 $color = $layer->colors[$index];
                 $x = ($index % $width) + $area->left();
                 $y = ($index / $width) + $area->top();
-                $cell = $buffer->get(Position::at(intval($x), intval($y)))->setChar($char);
+                $cell = $buffer->get(Position::at($x, (int) $y))->setChar($char);
                 $cell->fg = $color->fg;
                 $cell->bg = $color->bg;
             }
         }
 
         foreach ($context->labels->withinBounds($widget->xBounds, $widget->yBounds) as $label) {
-            $x = intval(
+            $x = (int) (
                 ((
                     $label->position->x - $widget->xBounds->min
-                ) * ($area->width -1) / $widget->xBounds->length()) + $area->left()
+                ) * ($area->width - 1) / $widget->xBounds->length()) + $area->left()
             );
-            $y = intval(
+            $y = (int) (
                 ((
                     $widget->yBounds->max - $label->position->y
-                ) * ($area->height -1) / $widget->yBounds->length()) + $area->top()
+                ) * ($area->height - 1) / $widget->yBounds->length()) + $area->top()
             );
             $buffer->putLine(
                 Position::at($x, $y),

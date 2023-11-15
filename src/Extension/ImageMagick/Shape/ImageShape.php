@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Extension\ImageMagick\Shape;
 
-use PhpTui\Tui\Model\Widget\FloatPosition;
 use PhpTui\Tui\Model\Canvas\Shape;
+use PhpTui\Tui\Model\Widget\FloatPosition;
 use RuntimeException;
 
 /**
@@ -27,6 +29,7 @@ final class ImageShape implements Shape
     public function position(FloatPosition $position): self
     {
         $this->position = $position;
+
         return $this;
     }
 
@@ -38,6 +41,7 @@ final class ImageShape implements Shape
                 $imagePath
             ));
         }
+
         return new self($imagePath, new FloatPosition(0, 0));
     }
 }

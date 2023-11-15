@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Term\Action;
 
-use PhpTui\Term\Colors;
 use PhpTui\Term\Action;
+use PhpTui\Term\Colors;
 
 final class SetForegroundColor implements Action
 {

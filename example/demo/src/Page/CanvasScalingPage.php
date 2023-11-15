@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Example\Demo\Page;
 
 use PhpTui\Term\Event;
@@ -9,26 +11,26 @@ use PhpTui\Term\Size;
 use PhpTui\Term\Terminal;
 use PhpTui\Tui\Example\Demo\Component;
 use PhpTui\Tui\Extension\Bdf\Shape\TextShape;
+use PhpTui\Tui\Extension\Core\Shape\Circle;
+use PhpTui\Tui\Extension\Core\Shape\ClosureShape;
+use PhpTui\Tui\Extension\Core\Shape\Line;
+use PhpTui\Tui\Extension\Core\Widget\Block;
+use PhpTui\Tui\Extension\Core\Widget\Canvas;
+use PhpTui\Tui\Extension\Core\Widget\Grid;
 use PhpTui\Tui\Extension\ImageMagick\Shape\ImageShape;
 use PhpTui\Tui\Model\AnsiColor;
+use PhpTui\Tui\Model\Canvas\Painter;
+use PhpTui\Tui\Model\Canvas\Shape;
 use PhpTui\Tui\Model\Constraint;
 use PhpTui\Tui\Model\Direction;
 use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\Widget\FloatPosition;
 use PhpTui\Tui\Model\Widget\Title;
-use PhpTui\Tui\Extension\Core\Widget\Block;
-use PhpTui\Tui\Extension\Core\Widget\Canvas;
-use PhpTui\Tui\Model\Canvas\Painter;
-use PhpTui\Tui\Model\Canvas\Shape;
-use PhpTui\Tui\Extension\Core\Shape\Circle;
-use PhpTui\Tui\Extension\Core\Shape\ClosureShape;
-use PhpTui\Tui\Extension\Core\Shape\Line;
-use PhpTui\Tui\Extension\Core\Widget\Grid;
 
 class CanvasScalingPage implements Component
 {
-    const DELTA = 5;
+    public const DELTA = 5;
 
     private TextShape $text;
 
@@ -107,16 +109,16 @@ class CanvasScalingPage implements Component
     {
         if ($event instanceof CodedKeyEvent) {
             if ($event->code === KeyCode::Right) {
-                $this->xMax+=self::DELTA;
+                $this->xMax += self::DELTA;
             }
             if ($event->code === KeyCode::Left) {
-                $this->xMax-=self::DELTA;
+                $this->xMax -= self::DELTA;
             }
             if ($event->code === KeyCode::Up) {
-                $this->yMax+=self::DELTA;
+                $this->yMax += self::DELTA;
             }
             if ($event->code === KeyCode::Down) {
-                $this->yMax-=self::DELTA;
+                $this->yMax -= self::DELTA;
             }
             if ($event->code === KeyCode::Tab) {
                 $this->marker++;

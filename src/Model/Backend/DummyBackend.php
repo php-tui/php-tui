@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Model\Backend;
 
 use PhpTui\Tui\Model\Area;
@@ -92,6 +94,7 @@ final class DummyBackend implements Backend
                 }
             }
         }
+
         return $this->grid;
     }
 }

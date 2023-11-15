@@ -1,8 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Bdf\Tests;
 
-use PHPUnit\Framework\TestCase;
 use PhpTui\BDF\BdfBoundingBox;
 use PhpTui\BDF\BdfCoord;
 use PhpTui\BDF\BdfGlyph;
@@ -10,6 +11,7 @@ use PhpTui\BDF\BdfMetadata;
 use PhpTui\BDF\BdfParser;
 use PhpTui\BDF\BdfProperty;
 use PhpTui\BDF\BdfSize;
+use PHPUnit\Framework\TestCase;
 use RuntimeException;
 
 class BdfParserTest extends TestCase

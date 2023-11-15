@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Bridge\Cassowary;
 
 use PhpTui\Cassowary\Constraint;
@@ -8,11 +10,11 @@ use PhpTui\Cassowary\Strength;
 use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Areas;
 use PhpTui\Tui\Model\Constraint as DTLConstraint;
-use PhpTui\Tui\Model\ConstraintSolver;
 use PhpTui\Tui\Model\Constraint\LengthConstraint;
 use PhpTui\Tui\Model\Constraint\MaxConstraint;
 use PhpTui\Tui\Model\Constraint\MinConstraint;
 use PhpTui\Tui\Model\Constraint\PercentageConstraint;
+use PhpTui\Tui\Model\ConstraintSolver;
 use PhpTui\Tui\Model\Direction;
 use PhpTui\Tui\Model\Layout;
 use RuntimeException;
@@ -47,6 +49,7 @@ final class CassowaryConstraintSolver implements ConstraintSolver
         foreach ($elements as $element) {
             if ($previousElement === null) {
                 $previousElement = $element;
+
                 continue;
             }
             $solver->addConstraint(
@@ -76,8 +79,8 @@ final class CassowaryConstraintSolver implements ConstraintSolver
 
         return new Areas(array_map(function (Element $element) use ($changes, $layout, $inner) {
             $values = $changes->getValues($element->start, $element->end);
-            $start = intval($values[0]);
-            $end = intval($values[1]);
+            $start = (int) ($values[0]);
+            $end = (int) ($values[1]);
             $size = $end - $start;
 
             return match ($layout->direction) {
@@ -107,6 +110,7 @@ final class CassowaryConstraintSolver implements ConstraintSolver
                 $areaSize * ($constraint->percentage / 100.0),
                 Strength::STRONG
             );
+
             return [
                 $constraint
             ];

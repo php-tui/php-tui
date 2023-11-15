@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Term\Painter;
 
-use PhpTui\Term\Painter;
 use PhpTui\Term\Action;
+use PhpTui\Term\Painter;
 
 class BufferPainter implements Painter
 {

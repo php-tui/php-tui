@@ -1,19 +1,21 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Extension\Core\Widget;
 
+use PhpTui\Tui\Extension\Core\Widget\Paragraph\Wrap;
 use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Buffer;
 use PhpTui\Tui\Model\LineComposer;
 use PhpTui\Tui\Model\LineComposer\LineTruncator;
 use PhpTui\Tui\Model\Position;
 use PhpTui\Tui\Model\Widget;
-use PhpTui\Tui\Model\WidgetRenderer;
 use PhpTui\Tui\Model\Widget\HorizontalAlignment;
 use PhpTui\Tui\Model\Widget\Line;
 use PhpTui\Tui\Model\Widget\Span;
 use PhpTui\Tui\Model\Widget\StyledGrapheme;
-use PhpTui\Tui\Extension\Core\Widget\Paragraph\Wrap;
+use PhpTui\Tui\Model\WidgetRenderer;
 
 class ParagraphRenderer implements WidgetRenderer
 {
@@ -36,8 +38,10 @@ class ParagraphRenderer implements WidgetRenderer
                 foreach ($span->toStyledGraphemes($style) as $grapheme) {
                     $ac[] = $grapheme;
                 }
+
                 return $ac;
             }, []);
+
             return [ $graphemes, $line->alignment ?? $widget->alignment ];
         }, $widget->text->lines);
 
@@ -88,7 +92,7 @@ class ParagraphRenderer implements WidgetRenderer
     private static function getLineOffset(int $width, int $maxWidth, HorizontalAlignment $alignment): int
     {
         return match ($alignment) {
-            HorizontalAlignment::Center => intval(($maxWidth / 2) - $width / 2),
+            HorizontalAlignment::Center => (int) (($maxWidth / 2) - $width / 2),
             HorizontalAlignment::Right => $maxWidth - $width,
             HorizontalAlignment::Left => 0,
         };

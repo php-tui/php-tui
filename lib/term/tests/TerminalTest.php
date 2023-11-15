@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Term\Tests;
 
+use PhpTui\Term\Action;
 use PhpTui\Term\Actions;
 use PhpTui\Term\Colors;
-use PhpTui\Term\Action;
-use PhpTui\Term\Terminal;
 use PhpTui\Term\Painter\BufferPainter;
+use PhpTui\Term\Terminal;
 use PHPUnit\Framework\TestCase;
 
 final class TerminalTest extends TestCase

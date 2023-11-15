@@ -1,20 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Tests\Unit\Extension\Bdf\Shape;
 
+use Generator;
 use PhpTui\Tui\Extension\Bdf\FontRegistry;
 use PhpTui\Tui\Extension\Bdf\Shape\TextRenderer;
 use PhpTui\Tui\Extension\Bdf\Shape\TextShape;
+use PhpTui\Tui\Extension\Core\Widget\Canvas;
 use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Buffer;
-use PhpTui\Tui\Model\Marker;
-use PhpTui\Tui\Model\WidgetRenderer\NullWidgetRenderer;
-use PhpTui\Tui\Model\Widget\FloatPosition;
-use PhpTui\Tui\Extension\Core\Widget\Canvas;
-use PhpTui\Tui\Model\Widget\CanvasRenderer;
 use PhpTui\Tui\Model\Canvas\CanvasContext;
-use Generator;
+use PhpTui\Tui\Model\Marker;
+use PhpTui\Tui\Model\Widget\CanvasRenderer;
+use PhpTui\Tui\Model\Widget\FloatPosition;
+use PhpTui\Tui\Model\WidgetRenderer\NullWidgetRenderer;
 use PHPUnit\Framework\TestCase;
 
 class TextShapeTest extends TestCase

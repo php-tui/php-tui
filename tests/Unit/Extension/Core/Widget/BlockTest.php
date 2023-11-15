@@ -1,19 +1,21 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Tests\Unit\Extension\Core\Widget;
 
 use Closure;
+use Generator;
+use PhpTui\Tui\Extension\Core\Widget\Block;
+use PhpTui\Tui\Extension\Core\Widget\Block\Padding;
+use PhpTui\Tui\Extension\Core\Widget\Paragraph;
+use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Buffer;
-use PhpTui\Tui\Model\Widget\BorderType;
 use PhpTui\Tui\Model\Widget\Borders;
+use PhpTui\Tui\Model\Widget\BorderType;
 use PhpTui\Tui\Model\Widget\HorizontalAlignment;
 use PhpTui\Tui\Model\Widget\Text;
 use PhpTui\Tui\Model\Widget\Title;
-use PhpTui\Tui\Extension\Core\Widget\Block;
-use PhpTui\Tui\Model\Area;
-use PhpTui\Tui\Extension\Core\Widget\Block\Padding;
-use PhpTui\Tui\Extension\Core\Widget\Paragraph;
-use Generator;
 
 class BlockTest extends WidgetTestCase
 {

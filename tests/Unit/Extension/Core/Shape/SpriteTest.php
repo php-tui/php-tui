@@ -1,17 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Tests\Unit\Extension\Core\Shape;
 
+use Generator;
+use PhpTui\Tui\Extension\Core\Shape\Sprite;
+use PhpTui\Tui\Extension\Core\Widget\Canvas;
 use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\AxisBounds;
 use PhpTui\Tui\Model\Buffer;
+use PhpTui\Tui\Model\Canvas\CanvasContext;
 use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Model\Widget\FloatPosition;
-use PhpTui\Tui\Extension\Core\Widget\Canvas;
-use PhpTui\Tui\Model\Canvas\CanvasContext;
-use Generator;
-use PhpTui\Tui\Extension\Core\Shape\Sprite;
 
 class SpriteTest extends ShapeTestCase
 {

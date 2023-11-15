@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Term\Tests\Painter;
 
+use PhpTui\Term\Action;
+use PhpTui\Term\Actions;
 use PhpTui\Term\ClearType;
 use PhpTui\Term\Colors;
-use PhpTui\Term\Actions;
-use PhpTui\Term\Action;
 use PhpTui\Term\Painter\AnsiPainter;
 use PhpTui\Term\Writer\BufferWriter;
 use PHPUnit\Framework\TestCase;

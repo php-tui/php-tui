@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui;
 
 use PhpTui\Tui\Bridge\PhpTerm\PhpTermBackend;
@@ -14,9 +16,9 @@ use PhpTui\Tui\Model\Viewport;
 use PhpTui\Tui\Model\Viewport\Fixed;
 use PhpTui\Tui\Model\Viewport\Fullscreen;
 use PhpTui\Tui\Model\Viewport\Inline;
+use PhpTui\Tui\Model\Widget\CanvasRenderer;
 use PhpTui\Tui\Model\WidgetRenderer;
 use PhpTui\Tui\Model\WidgetRenderer\AggregateWidgetRenderer;
-use PhpTui\Tui\Model\Widget\CanvasRenderer;
 
 /**
  * An entry point for PHP-TUI.
@@ -85,6 +87,7 @@ final class DisplayBuilder
     public function fullscreen(): self
     {
         $this->viewport = new Fullscreen();
+
         return $this;
     }
 
@@ -95,6 +98,7 @@ final class DisplayBuilder
     public function inline(int $height): self
     {
         $this->viewport = new Inline($height);
+
         return $this;
     }
 
@@ -105,6 +109,7 @@ final class DisplayBuilder
     public function fixed(int $x, int $y, int $width, int $height): self
     {
         $this->viewport = new Fixed(Area::fromScalars($x, $y, $width, $height));
+
         return $this;
     }
 
@@ -121,6 +126,7 @@ final class DisplayBuilder
                 $this->widgetRenderers[] = $widgetRenderers;
             }
         }
+
         return Display::new(
             $this->backend,
             $this->viewport ?? new Fullscreen(),

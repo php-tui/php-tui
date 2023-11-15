@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Extension\Core\Shape;
 
 use PhpTui\Tui\Model\Canvas\Painter;

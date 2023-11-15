@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Model;
 
 use Countable;
+use OutOfBoundsException;
 use PhpTui\Tui\Model\Widget\Line;
 use PhpTui\Tui\Model\Widget\Span;
-use OutOfBoundsException;
 
 final class Buffer implements Countable
 {
@@ -24,6 +26,7 @@ final class Buffer implements Countable
         foreach ($this->content as $cell) {
             $out[] = $cell->__toString();
         }
+
         return implode("\n", $out);
     }
 
@@ -38,6 +41,7 @@ final class Buffer implements Countable
         for ($i = 0; $i < $area->area(); $i++) {
             $content[] = $cell->clone();
         }
+
         return new self($area, $content);
     }
 
@@ -47,7 +51,7 @@ final class Buffer implements Countable
             return;
         }
         foreach (range($area->top(), $area->bottom() - 1) as $y) {
-            foreach (range($area->left(), $area->right() -1) as $x) {
+            foreach (range($area->left(), $area->right() - 1) as $x) {
                 $this->get(Position::at($x, $y))->setStyle($style);
             }
         }
@@ -113,12 +117,14 @@ final class Buffer implements Countable
             }
             $string .= $cell->char;
         }
+
         return $string;
     }
 
     public function putString(Position $position, string $line, ?Style $style = null, int $width = PHP_INT_MAX): Position
     {
         $style = $style ?? Style::default();
+
         try {
             $index = $position->toIndex($this->area);
         } catch (OutOfBoundsException $e) {
@@ -205,8 +211,8 @@ final class Buffer implements Countable
         $bArea = $buffer->area();
 
         foreach ($buffer->content as $bi => $cell) {
-            $y = $position->y + intval(floor($bi / $bArea->width));
-            $x = $position->x + intval($bi % $bArea->width);
+            $y = $position->y + (int) (floor($bi / $bArea->width));
+            $x = $position->x + ($bi % $bArea->width);
             if ($y > $this->area()->height) {
                 continue;
             }

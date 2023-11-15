@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Bridge\PhpTerm;
 
 use PhpTui\Term\Action;
@@ -44,6 +46,7 @@ class PhpTermBackend implements Backend
                 'Could not determine terminal size!'
             );
         }
+
         return Area::fromDimensions($size->cols, $size->lines);
     }
 
@@ -119,6 +122,7 @@ class PhpTermBackend implements Backend
             while (null !== $event = $this->terminal->events()->next()) {
                 if ($event instanceof CursorPositionEvent) {
                     $pos = new Position($event->x, $event->y);
+
                     return $pos;
                 }
             }
@@ -264,6 +268,7 @@ class PhpTermBackend implements Backend
         if ($color instanceof RgbColor) {
             return new SetRgbBackgroundColor($color->r, $color->g, $color->b);
         }
+
         throw new RuntimeException(sprintf('Do not know how to set color of type "%s"', $color::class));
     }
 }

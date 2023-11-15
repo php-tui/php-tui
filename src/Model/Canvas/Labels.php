@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Model\Canvas;
 
 use ArrayIterator;
-use PhpTui\Tui\Model\AxisBounds;
 use IteratorAggregate;
+use PhpTui\Tui\Model\AxisBounds;
 use Traversable;
 
 /**

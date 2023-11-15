@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Docgen;
 
 use Generator;
@@ -11,8 +13,8 @@ use PHPStan\PhpDocParser\Parser\ConstExprParser;
 use PHPStan\PhpDocParser\Parser\PhpDocParser;
 use PHPStan\PhpDocParser\Parser\TokenIterator;
 use PHPStan\PhpDocParser\Parser\TypeParser;
-use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\Canvas\Shape;
+use PhpTui\Tui\Model\Widget;
 use Roave\BetterReflection\BetterReflection;
 use Roave\BetterReflection\Reflection\ReflectionClass;
 use Roave\BetterReflection\Reflection\ReflectionProperty;
@@ -48,7 +50,7 @@ final class Docgen
     {
         $astLocator = (new BetterReflection())->astLocator();
         $reflector  = new DefaultReflector(new AggregateSourceLocator([
-            (new MakeLocatorForComposerJson)($cwd, $astLocator),
+            (new MakeLocatorForComposerJson())($cwd, $astLocator),
             new PhpInternalSourceLocator($astLocator, new ReflectionSourceStubber())
         ]));
 
@@ -58,6 +60,7 @@ final class Docgen
             new Lexer(),
             (function () {
                 $constExpr = new ConstExprParser();
+
                 return new PhpDocParser(new TypeParser($constExpr), $constExpr);
             })(),
         );
@@ -90,6 +93,7 @@ final class Docgen
                             )
                         );
                     }
+
                     return new WidgetParam(
                         type: $type ? $type : $phpType,
                         name: $prop->getName(),
@@ -128,6 +132,7 @@ final class Docgen
                             )
                         );
                     }
+
                     return new WidgetParam(
                         type: $type ? $type : $phpType,
                         name: $prop->getName(),
@@ -155,6 +160,7 @@ final class Docgen
             return null;
         }
         $node = $this->parser->parse(new TokenIterator($this->lexer->tokenize($docblock)));
+
         return $node;
     }
 
@@ -169,6 +175,7 @@ final class Docgen
                 $text[] = $child->text;
             }
         }
+
         return str_replace("\n", '', implode(' ', $text));
     }
 
@@ -250,6 +257,7 @@ final class Docgen
                 );
             }
         }
+
         return implode("\n", $doc);
 
     }

@@ -1,22 +1,24 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Term\Tests;
 
 use Generator;
-use PHPUnit\Framework\TestCase;
 use PhpTui\Term\Event;
-use PhpTui\Term\EventParser;
 use PhpTui\Term\Event\CharKeyEvent;
+use PhpTui\Term\Event\CodedKeyEvent;
 use PhpTui\Term\Event\CursorPositionEvent;
 use PhpTui\Term\Event\FocusEvent;
 use PhpTui\Term\Event\FunctionKeyEvent;
 use PhpTui\Term\Event\MouseEvent;
+use PhpTui\Term\EventParser;
 use PhpTui\Term\KeyCode;
-use PhpTui\Term\Event\CodedKeyEvent;
 use PhpTui\Term\KeyEventKind;
 use PhpTui\Term\KeyModifiers;
 use PhpTui\Term\MouseButton;
 use PhpTui\Term\MouseEventKind;
+use PHPUnit\Framework\TestCase;
 
 class EventParserTest extends TestCase
 {
@@ -34,6 +36,7 @@ class EventParserTest extends TestCase
         $events = $parser->drain();
         if (null === $expected) {
             self::assertCount(0, $events);
+
             return;
         }
         self::assertCount(1, $events);

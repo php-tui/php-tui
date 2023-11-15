@@ -1,14 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Tests\Unit\Extension\Core\Widget;
 
-use PhpTui\Tui\Model\Area;
-use PhpTui\Tui\Model\Buffer;
-use PhpTui\Tui\Model\Constraint;
+use Generator;
 use PhpTui\Tui\Extension\Core\Widget\Table;
 use PhpTui\Tui\Extension\Core\Widget\Table\TableCell;
 use PhpTui\Tui\Extension\Core\Widget\Table\TableRow;
-use Generator;
+use PhpTui\Tui\Model\Area;
+use PhpTui\Tui\Model\Buffer;
+use PhpTui\Tui\Model\Constraint;
 
 class TableTest extends WidgetTestCase
 {

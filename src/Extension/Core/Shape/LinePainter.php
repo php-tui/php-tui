@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Extension\Core\Shape;
 
 use PhpTui\Tui\Model\Canvas\Painter;
@@ -33,6 +35,7 @@ class LinePainter implements ShapePainter
             foreach ($yRange as $y) {
                 $painter->paint($point1->withY($y), $shape->color);
             }
+
             return;
         }
 
@@ -40,19 +43,23 @@ class LinePainter implements ShapePainter
             foreach ($xRange as $x) {
                 $painter->paint($point1->withX($x), $shape->color);
             }
+
             return;
         }
 
         if ($diffY < $diffX) {
             if ($point1->x > $point2->x) {
                 $this->drawLineLow($painter, $shape, $point2, $point1);
+
                 return;
             }
             $this->drawLineLow($painter, $shape, $point1, $point2);
+
             return;
         }
         if ($point1->y > $point2->y) {
             $this->drawLineHigh($painter, $shape, $point2, $point1);
+
             return;
         }
 
@@ -67,6 +74,7 @@ class LinePainter implements ShapePainter
         if ($end >= $start) {
             return [$end - $start, range($start, $end)];
         }
+
         return [$start - $end, range($end, $start)];
     }
 

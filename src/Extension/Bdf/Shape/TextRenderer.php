@@ -1,13 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Extension\Bdf\Shape;
 
 use PhpTui\BDF\BdfGlyph;
 use PhpTui\Tui\Extension\Bdf\FontRegistry;
+use PhpTui\Tui\Model\Canvas\Painter;
 use PhpTui\Tui\Model\Canvas\Shape;
 use PhpTui\Tui\Model\Canvas\ShapePainter;
 use PhpTui\Tui\Model\Widget\FloatPosition;
-use PhpTui\Tui\Model\Canvas\Painter;
 
 class TextRenderer implements ShapePainter
 {
@@ -48,6 +50,7 @@ class TextRenderer implements ShapePainter
             }
             $y++;
         }
+
         return $grid;
     }
 
@@ -85,8 +88,8 @@ class TextRenderer implements ShapePainter
                     continue;
                 }
 
-                for ($yF = $y1; $yF < $y2; $yF+=$yStep) {
-                    for ($xF = $x1; $xF < $x2; $xF+=$xStep) {
+                for ($yF = $y1; $yF < $y2; $yF += $yStep) {
+                    for ($xF = $x1; $xF < $x2; $xF += $xStep) {
                         $point = $painter->getPoint(FloatPosition::at(
                             $charOffset + $shape->position->x + $xF,
                             $shape->position->y + $yF,

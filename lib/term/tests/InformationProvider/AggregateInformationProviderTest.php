@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Term\Tests\InformationProvider;
 
 use PhpTui\Term\InformationProvider\AggregateInformationProvider;
@@ -20,6 +22,7 @@ class AggregateInformationProviderTest extends TestCase
                 if ($classFqn !== TestInfo::class) {
                     return null;
                 }
+
                 return $info;
             })
         ]);

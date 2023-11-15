@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Model;
 
 use OutOfBoundsException;
@@ -56,52 +58,59 @@ class RgbColor implements Color
             $lightness = 100;
         } //   0-100
 
-        $dS = $saturation/100.0; // Saturation: 0.0-1.0
-        $dV = $lightness/100.0; // Lightness:  0.0-1.0
-        $dC = $dV*$dS;   // Chroma:     0.0-1.0
-        $dH = $hue/60.0;  // H-Prime:    0.0-6.0
+        $dS = $saturation / 100.0; // Saturation: 0.0-1.0
+        $dV = $lightness / 100.0; // Lightness:  0.0-1.0
+        $dC = $dV * $dS;   // Chroma:     0.0-1.0
+        $dH = $hue / 60.0;  // H-Prime:    0.0-6.0
         $dT = $dH;       // Temp variable
 
         while($dT >= 2.0) {
             $dT -= 2.0;
         } // php modulus does not work with float
-        $dX = $dC*(1-abs($dT-1));     // as used in the Wikipedia link
+        $dX = $dC * (1 - abs($dT - 1));     // as used in the Wikipedia link
 
         switch((int) floor($dH)) {
             case 0:
                 $dR = $dC;
                 $dG = $dX;
                 $dB = 0.0;
+
                 break;
             case 1:
                 $dR = $dX;
                 $dG = $dC;
                 $dB = 0.0;
+
                 break;
             case 2:
                 $dR = 0.0;
                 $dG = $dC;
                 $dB = $dX;
+
                 break;
             case 3:
                 $dR = 0.0;
                 $dG = $dX;
                 $dB = $dC;
+
                 break;
             case 4:
                 $dR = $dX;
                 $dG = 0.0;
                 $dB = $dC;
+
                 break;
             case 5:
                 $dR = $dC;
                 $dG = 0.0;
                 $dB = $dX;
+
                 break;
             default:
                 $dR = 0.0;
                 $dG = 0.0;
                 $dB = 0.0;
+
                 break;
         }
 
@@ -114,9 +123,9 @@ class RgbColor implements Color
         $dB *= 255;
 
         return new self(
-            intval(round($dR)),
-            intval(round($dG)),
-            intval(round($dB))
+            (int) (round($dR)),
+            (int) (round($dG)),
+            (int) (round($dB))
         );
     }
 

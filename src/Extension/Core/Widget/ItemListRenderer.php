@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Extension\Core\Widget;
 
 use PhpTui\Tui\Model\Area;
@@ -35,15 +37,17 @@ class ItemListRenderer implements WidgetRenderer
         $blankSymbol = str_repeat(' ', mb_strlen($highlightSymbol));
         $currentHeight = 0;
         $selectionSpacing = $widget->highlightSpacing->shouldAdd($widget->state->selected !== null);
-        foreach (array_slice($widget->items, $start, $end-$start) as $i => $item) {
+        foreach (array_slice($widget->items, $start, $end - $start) as $i => $item) {
             [$x, $y, $currentHeight] = (function () use ($item, $listArea, $currentHeight, $widget) {
                 if ($widget->startCorner === Corner::BottomLeft) {
                     $currentHeight += $item->height();
+
                     return [$listArea->left(), $listArea->bottom() - $currentHeight, $currentHeight];
                 }
 
                 $y = $listArea->top() + $currentHeight;
                 $currentHeight += $item->height();
+
                 return [$listArea->left(), $y, $currentHeight];
             })();
 

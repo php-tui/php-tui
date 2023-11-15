@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Extension\Bdf;
 
 use PhpTui\BDF\BdfFont;
@@ -59,6 +61,7 @@ final class FontRegistry
 
         $map = $this->fontMap;
         $map[$name] = $path;
+
         return new self($this->parser, $map);
     }
 

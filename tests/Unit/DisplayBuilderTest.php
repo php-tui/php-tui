@@ -1,19 +1,21 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Tests\Unit;
 
-use PHPUnit\Framework\TestCase;
 use PhpTui\Tui\DisplayBuilder;
-use PhpTui\Tui\Model\Backend\DummyBackend;
-use PhpTui\Tui\Model\Buffer;
-use PhpTui\Tui\Model\Area;
-use PhpTui\Tui\Model\DisplayExtension;
-use PhpTui\Tui\Model\Widget;
-use PhpTui\Tui\Model\WidgetRenderer;
 use PhpTui\Tui\Extension\Core\Shape\ClosurePainter;
 use PhpTui\Tui\Extension\Core\Shape\ClosureShape;
 use PhpTui\Tui\Extension\Core\Widget\Canvas;
 use PhpTui\Tui\Extension\Core\Widget\ClosureRenderer;
+use PhpTui\Tui\Model\Area;
+use PhpTui\Tui\Model\Backend\DummyBackend;
+use PhpTui\Tui\Model\Buffer;
+use PhpTui\Tui\Model\DisplayExtension;
+use PhpTui\Tui\Model\Widget;
+use PhpTui\Tui\Model\WidgetRenderer;
+use PHPUnit\Framework\TestCase;
 
 final class DisplayBuilderTest extends TestCase
 {

@@ -1,28 +1,30 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Example\Demo\Page;
 
 use PhpTui\Term\Event;
 use PhpTui\Tui\Example\Demo\Component;
+use PhpTui\Tui\Extension\Core\Widget\Block;
+use PhpTui\Tui\Extension\Core\Widget\Block\Padding;
+use PhpTui\Tui\Extension\Core\Widget\Grid;
+use PhpTui\Tui\Extension\Core\Widget\Paragraph;
+use PhpTui\Tui\Extension\Core\Widget\Paragraph\Wrap;
 use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Constraint;
 use PhpTui\Tui\Model\Direction;
 use PhpTui\Tui\Model\Modifier;
-use PhpTui\Tui\Model\Widget\BorderType;
+use PhpTui\Tui\Model\Style;
+use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\Widget\Borders;
+use PhpTui\Tui\Model\Widget\BorderType;
 use PhpTui\Tui\Model\Widget\HorizontalAlignment;
 use PhpTui\Tui\Model\Widget\Line;
 use PhpTui\Tui\Model\Widget\Span;
+use PhpTui\Tui\Model\Widget\Text;
 use PhpTui\Tui\Model\Widget\Title;
 use PhpTui\Tui\Model\Widget\VerticalAlignment;
-use PhpTui\Tui\Extension\Core\Widget\Block;
-use PhpTui\Tui\Model\Style;
-use PhpTui\Tui\Extension\Core\Widget\Block\Padding;
-use PhpTui\Tui\Extension\Core\Widget\Grid;
-use PhpTui\Tui\Extension\Core\Widget\Paragraph\Wrap;
-use PhpTui\Tui\Model\Widget;
-use PhpTui\Tui\Model\Widget\Text;
-use PhpTui\Tui\Extension\Core\Widget\Paragraph;
 
 class BlocksPage implements Component
 {
@@ -76,6 +78,7 @@ class BlocksPage implements Component
     public function lorem(): Paragraph
     {
         $text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.';
+
         return Paragraph::fromText(
             Text::styled(
                 $text,

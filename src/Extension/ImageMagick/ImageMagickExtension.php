@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Extension\ImageMagick;
 
 use PhpTui\Tui\Extension\ImageMagick\Shape\ImagePainter;

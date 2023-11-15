@@ -1,15 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Model\Canvas\Grid;
 
 use PhpTui\Tui\Model\AnsiColor;
-use PhpTui\Tui\Model\Color;
-use PhpTui\Tui\Model\Position;
-use PhpTui\Tui\Model\Widget\BlockSet;
 use PhpTui\Tui\Model\Canvas\CanvasGrid;
 use PhpTui\Tui\Model\Canvas\FgBgColor;
 use PhpTui\Tui\Model\Canvas\Layer;
 use PhpTui\Tui\Model\Canvas\Resolution;
+use PhpTui\Tui\Model\Color;
+use PhpTui\Tui\Model\Position;
+use PhpTui\Tui\Model\Widget\BlockSet;
 
 class HalfBlockGrid extends CanvasGrid
 {
@@ -28,6 +30,7 @@ class HalfBlockGrid extends CanvasGrid
             return new self(new Resolution($width, $height), []);
         }
         $length = $width * $height;
+
         return new self(
             new Resolution($width, $height),
             array_map(
@@ -78,6 +81,7 @@ class HalfBlockGrid extends CanvasGrid
             if ($upper === $lower) {
                 return BlockSet::FULL;
             }
+
             return BlockSet::UPPER_HALF;
         }, $paired);
         $colors = array_map(function (array $pair) {
@@ -94,6 +98,7 @@ class HalfBlockGrid extends CanvasGrid
             if ($upper === AnsiColor::Reset && $lower !== AnsiColor::Reset) {
                 return new FgBgColor($lower, AnsiColor::Reset);
             }
+
             // both set, it will be a block with one color
             return new FgBgColor($upper, $lower);
         }, $paired);

@@ -1,11 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Example\Demo;
 
 use PhpTui\Term\Actions;
 use PhpTui\Term\ClearType;
 use PhpTui\Term\Event\CharKeyEvent;
 use PhpTui\Term\Terminal;
+use PhpTui\Tui\Bridge\PhpTerm\PhpTermBackend as PhpTuiPhpTermBackend;
 use PhpTui\Tui\DisplayBuilder;
 use PhpTui\Tui\Example\Demo\Page\BlocksPage;
 use PhpTui\Tui\Example\Demo\Page\CanvasPage;
@@ -18,8 +21,10 @@ use PhpTui\Tui\Example\Demo\Page\ItemListPage;
 use PhpTui\Tui\Example\Demo\Page\SpritePage;
 use PhpTui\Tui\Example\Demo\Page\TablePage;
 use PhpTui\Tui\Extension\Bdf\BdfExtension;
+use PhpTui\Tui\Extension\Core\Widget\Block;
+use PhpTui\Tui\Extension\Core\Widget\Grid;
+use PhpTui\Tui\Extension\Core\Widget\Paragraph;
 use PhpTui\Tui\Extension\ImageMagick\ImageMagickExtension;
-use PhpTui\Tui\Bridge\PhpTerm\PhpTermBackend as PhpTuiPhpTermBackend;
 use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Backend;
 use PhpTui\Tui\Model\Constraint;
@@ -33,9 +38,6 @@ use PhpTui\Tui\Model\Widget\Line;
 use PhpTui\Tui\Model\Widget\Span;
 use PhpTui\Tui\Model\Widget\Text;
 use PhpTui\Tui\Model\Widget\Title;
-use PhpTui\Tui\Extension\Core\Widget\Block;
-use PhpTui\Tui\Extension\Core\Widget\Grid;
-use PhpTui\Tui\Extension\Core\Widget\Paragraph;
 use Throwable;
 
 /**
@@ -92,6 +94,7 @@ final class App
             ->addExtension(new ImageMagickExtension())
             ->addExtension(new BdfExtension())
             ->build();
+
         return new self(
             $terminal,
             $display,
@@ -107,10 +110,12 @@ final class App
             // enable "raw" mode to remove default terminal behavior (e.g.
             // echoing key presses)
             $this->terminal->enableRawMode();
+
             return $this->doRun();
         } catch (Throwable $err) {
             $this->terminal->disableRawMode();
             $this->terminal->queue(Actions::clear(ClearType::All));
+
             throw $err;
         }
     }
@@ -260,6 +265,7 @@ final class App
                 $ac[$timestamp] = 0;
             }
             $ac[$timestamp]++;
+
             return $ac;
         }, []);
 

@@ -1,9 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Example\Demo\Page;
 
 use PhpTui\Term\Event;
 use PhpTui\Tui\Example\Demo\Component;
+use PhpTui\Tui\Extension\Core\Widget\RawWidget;
 use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Buffer;
 use PhpTui\Tui\Model\Position;
@@ -11,7 +14,6 @@ use PhpTui\Tui\Model\RgbColor;
 use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\Widget\Span;
-use PhpTui\Tui\Extension\Core\Widget\RawWidget;
 
 class ColorsPage implements Component
 {
@@ -19,6 +21,7 @@ class ColorsPage implements Component
     public function build(): Widget
     {
         $this->ticker++;
+
         return RawWidget::new(function (Buffer $buffer): void {
             $this->write16Colors($buffer);
             $this->writeRgbColors($buffer);
@@ -51,7 +54,7 @@ class ColorsPage implements Component
         $y = 3;
         $tick = $this->ticker;
         $saturation = (50 + $tick) % 100;
-        $lightness = (50 + intval($tick / 3))  % 100;
+        $lightness = (50 + (int) ($tick / 3))  % 100;
         $buffer->putString(Position::at(0, 2), sprintf('Saturation: %d, Lightness: %d', $saturation, $lightness));
         for ($i = 0; $i < 360; $i++) {
             $color = RgbColor::fromHsv($i, $saturation, $lightness);

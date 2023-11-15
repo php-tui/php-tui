@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Tests\Unit\Extension\Core\Widget\Block;
 
-use PHPUnit\Framework\TestCase;
 use PhpTui\Tui\Extension\Core\Widget\Block\Padding;
+use PHPUnit\Framework\TestCase;
 
 class PaddingTest extends TestCase
 {

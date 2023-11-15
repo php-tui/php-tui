@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Extension\Bdf\Shape;
 
+use PhpTui\Tui\Model\Canvas\Shape;
 use PhpTui\Tui\Model\Color;
 use PhpTui\Tui\Model\Widget\FloatPosition;
-use PhpTui\Tui\Model\Canvas\Shape;
 
 /**
  * Renders text on the canvas.

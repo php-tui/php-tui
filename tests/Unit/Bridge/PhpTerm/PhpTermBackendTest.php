@@ -1,19 +1,21 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Tests\Unit\Bridge\PhpTerm;
 
-use PhpTui\Term\Painter\BufferPainter;
 use PhpTui\Term\Action;
+use PhpTui\Term\Painter\BufferPainter;
 use PhpTui\Term\Terminal;
 use PhpTui\Tui\Bridge\PhpTerm\PhpTermBackend;
 use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\BufferUpdate;
+use PhpTui\Tui\Model\BufferUpdates;
+use PhpTui\Tui\Model\Cell;
 use PhpTui\Tui\Model\Modifier;
+use PhpTui\Tui\Model\Position;
 use PhpTui\Tui\Model\RgbColor;
 use PhpTui\Tui\Model\Style;
-use PhpTui\Tui\Model\Cell;
-use PhpTui\Tui\Model\Position;
-use PhpTui\Tui\Model\BufferUpdates;
 use PHPUnit\Framework\TestCase;
 
 class PhpTermBackendTest extends TestCase

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Tests\Unit\Bridge\Cassowary;
 
 use PhpTui\Tui\Model\Area;

@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace PhpTui\Tui\Model;
 
@@ -33,9 +35,10 @@ final class Position implements Stringable
                 $area->__toString()
             ));
         }
+
         return new Position(
             $area->position->x + ($i % $area->width),
-            $area->position->y + intval($i / $area->width),
+            $area->position->y + (int) ($i / $area->width),
         );
     }
 
@@ -55,6 +58,7 @@ final class Position implements Stringable
                 $area->__toString()
             ));
         }
+
         return ($this->y - $area->position->y) * $area->width + ($this->x - $area->position->x);
     }
 

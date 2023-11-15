@@ -1,15 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Extension\Core\Widget;
 
 use Closure;
 use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\AxisBounds;
+use PhpTui\Tui\Model\Canvas\CanvasContext;
+use PhpTui\Tui\Model\Canvas\Shape;
 use PhpTui\Tui\Model\Color;
 use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Model\Widget;
-use PhpTui\Tui\Model\Canvas\CanvasContext;
-use PhpTui\Tui\Model\Canvas\Shape;
 
 /**
  * The canvas widget provides a surface, of arbitrary scale, upon which shapes can be drawn.
@@ -63,30 +65,35 @@ final class Canvas implements Widget
     public function paint(Closure $closure): self
     {
         $this->painter = $closure;
+
         return $this;
     }
 
     public function xBounds(AxisBounds $axisBounds): self
     {
         $this->xBounds = $axisBounds;
+
         return $this;
     }
 
     public function yBounds(AxisBounds $axisBounds): self
     {
         $this->yBounds = $axisBounds;
+
         return $this;
     }
 
     public function marker(Marker $marker): self
     {
         $this->marker = $marker;
+
         return $this;
     }
 
     public function backgroundColor(Color $color): self
     {
         $this->backgroundColor = $color;
+
         return $this;
     }
 
@@ -116,6 +123,7 @@ final class Canvas implements Widget
         foreach ($shapes as $shape) {
             $this->shapes[] = $shape;
         }
+
         return $this;
     }
 }

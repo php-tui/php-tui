@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Term\Tests;
 
 use Generator;
-use PHPUnit\Framework\TestCase;
 use PhpTui\Term\Action;
 use PhpTui\Term\Actions;
 use PhpTui\Term\AnsiParser;
+use PHPUnit\Framework\TestCase;
 
 class AnsiParserTest extends TestCase
 {

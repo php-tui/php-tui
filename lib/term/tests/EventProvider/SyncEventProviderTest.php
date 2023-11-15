@@ -1,14 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Term\Tests\EventProvider;
 
-use PHPUnit\Framework\TestCase;
+use PhpTui\Term\Event\CodedKeyEvent;
 use PhpTui\Term\EventParser;
 use PhpTui\Term\EventProvider;
 use PhpTui\Term\EventProvider\SyncEventProvider;
-use PhpTui\Term\Event\CodedKeyEvent;
 use PhpTui\Term\KeyCode;
 use PhpTui\Term\Reader\InMemoryReader;
+use PHPUnit\Framework\TestCase;
 
 class SyncEventProviderTest extends TestCase
 {

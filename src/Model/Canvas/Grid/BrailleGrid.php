@@ -1,16 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Model\Canvas\Grid;
 
-use PhpTui\Tui\Model\AnsiColor;
-use PhpTui\Tui\Model\Color;
-use PhpTui\Tui\Model\Position;
-use PhpTui\Tui\Model\Widget\BrailleSet;
 use IntlChar;
+use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Canvas\CanvasGrid;
 use PhpTui\Tui\Model\Canvas\FgBgColor;
 use PhpTui\Tui\Model\Canvas\Layer;
 use PhpTui\Tui\Model\Canvas\Resolution;
+use PhpTui\Tui\Model\Color;
+use PhpTui\Tui\Model\Position;
+use PhpTui\Tui\Model\Widget\BrailleSet;
 
 final class BrailleGrid extends CanvasGrid
 {
@@ -34,6 +36,7 @@ final class BrailleGrid extends CanvasGrid
     public static function new(int $width, int $height): self
     {
         $length = $width * $height;
+
         return new self(
             $width,
             $height,
@@ -66,7 +69,7 @@ final class BrailleGrid extends CanvasGrid
 
     public function paint(Position $position, Color $color): void
     {
-        $index = (intval($position->y / 4)) * $this->width + intval($position->x / 2);
+        $index = ((int) ($position->y / 4)) * $this->width + (int) ($position->x / 2);
         if (isset($this->codePoints[$index])) {
             $this->codePoints[$index] |= BrailleSet::DOTS[$position->y % 4][$position->x % 2];
         }

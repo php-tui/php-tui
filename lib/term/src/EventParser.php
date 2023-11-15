@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Term;
 
 use PhpTui\Term\Event\CharKeyEvent;
+use PhpTui\Term\Event\CodedKeyEvent;
 use PhpTui\Term\Event\CursorPositionEvent;
 use PhpTui\Term\Event\FocusEvent;
 use PhpTui\Term\Event\FunctionKeyEvent;
-use PhpTui\Term\Event\CodedKeyEvent;
 use PhpTui\Term\Event\MouseEvent;
 
 final class EventParser
@@ -28,6 +30,7 @@ final class EventParser
     {
         $events = $this->events;
         $this->events = [];
+
         return $events;
     }
 
@@ -40,10 +43,12 @@ final class EventParser
             $more = $index + 1 < strlen($line) || $more;
 
             $this->buffer[] = $byte;
+
             try {
                 $event = $this->parseEvent($this->buffer, $more);
             } catch (ParseError $error) {
                 $this->buffer = [];
+
                 continue;
             }
             if ($event === null) {
@@ -199,6 +204,7 @@ final class EventParser
         if (null !== $keycode) {
             return CodedKeyEvent::new($keycode);
         }
+
         return match($first) {
             11,12,13,14,15 => FunctionKeyEvent::new($first - 10),
             17,18,19,20,21 => FunctionKeyEvent::new($first - 11),
@@ -224,6 +230,7 @@ final class EventParser
             throw new ParseError('Multibyte characters not supported');
         }
         $char = $buffer[0];
+
         return $this->charToEvent($char);
     }
 
@@ -306,8 +313,10 @@ final class EventParser
             if (null === $kindCode) {
                 return null;
             }
+
             return [$modifierMask, $kindCode];
         }
+
         return [$modifierMask, 1];
     }
 
@@ -319,6 +328,7 @@ final class EventParser
                 if (false === is_numeric($char)) {
                     return $ac;
                 }
+
                 return $ac . $char;
             },
             ''
@@ -326,7 +336,8 @@ final class EventParser
         if ($str === '') {
             return null;
         }
-        return intval($str);
+
+        return (int) $str;
     }
 
     /**
@@ -354,6 +365,7 @@ final class EventParser
         if (($modifierMask & 32) !== 0) {
             $modifiers |= KeyModifiers::META;
         }
+
         return $modifiers;
     }
 
@@ -385,8 +397,8 @@ final class EventParser
         // See http://www.xfree86.org/current/ctlseqs.html#Mouse%20Tracking
         // The upper left character position on the terminal is denoted as 1,1.
         // Subtract 1 to keep it synced with cursor
-        $cx = max(0, ord($buffer[4])- 32) - 1;
-        $cy = max(0, ord($buffer[5])- 32) - 1;
+        $cx = max(0, ord($buffer[4]) - 32) - 1;
+        $cy = max(0, ord($buffer[5]) - 32) - 1;
 
         return MouseEvent::new($kind, $button, $cx, $cy, $modifiers);
     }
@@ -459,9 +471,9 @@ final class EventParser
                 $s
             ));
         }
-        [$kind, $modifiers, $button] = $this->parseCb(intval($split[0]) - 32);
-        $cx = intval($split[1]) - 1;
-        $cy = intval($split[2]) - 1;
+        [$kind, $modifiers, $button] = $this->parseCb((int) ($split[0]) - 32);
+        $cx = (int) ($split[1]) - 1;
+        $cy = (int) ($split[2]) - 1;
 
         return MouseEvent::new(
             $kind,
@@ -483,9 +495,9 @@ final class EventParser
         }
         $s = implode('', array_slice($buffer, 3, -1));
         $split = explode(';', $s);
-        [$kind, $modifiers, $button] = $this->parseCb(intval($split[0]));
-        $cx = intval($split[1]) - 1;
-        $cy = intval($split[2]) - 1;
+        [$kind, $modifiers, $button] = $this->parseCb((int) ($split[0]));
+        $cx = (int) ($split[1]) - 1;
+        $cy = (int) ($split[2]) - 1;
 
         if ($lastChar === 'm') {
             $kind = match ($kind) {
@@ -493,6 +505,7 @@ final class EventParser
                 default => $kind,
             };
         }
+
         return MouseEvent::new(
             $kind,
             $button,
@@ -512,9 +525,10 @@ final class EventParser
         if (count($split) !== 2) {
             return null;
         }
+
         return new CursorPositionEvent(
-            intval($split[1]) - 1,
-            intval($split[0]) - 1,
+            (int) ($split[1]) - 1,
+            (int) ($split[0]) - 1,
         );
     }
 }
