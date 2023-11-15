@@ -17,14 +17,14 @@ use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\Widget\FloatPosition;
 use PhpTui\Tui\Model\Widget\Title;
-use PhpTui\Tui\Widget\Block;
-use PhpTui\Tui\Widget\Canvas;
+use PhpTui\Tui\Extension\Core\Widget\Block;
+use PhpTui\Tui\Extension\Core\Widget\Canvas;
 use PhpTui\Tui\Model\Canvas\Painter;
 use PhpTui\Tui\Model\Canvas\Shape;
-use PhpTui\Tui\Shape\Circle;
-use PhpTui\Tui\Shape\ClosureShape;
-use PhpTui\Tui\Shape\Line;
-use PhpTui\Tui\Widget\Grid;
+use PhpTui\Tui\Extension\Core\Shape\Circle;
+use PhpTui\Tui\Extension\Core\Shape\ClosureShape;
+use PhpTui\Tui\Extension\Core\Shape\Line;
+use PhpTui\Tui\Extension\Core\Widget\Grid;
 
 class CanvasScalingPage implements Component
 {

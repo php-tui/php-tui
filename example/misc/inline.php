@@ -4,8 +4,8 @@ use PhpTui\Tui\DisplayBuilder;
 use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Widget\Borders;
-use PhpTui\Tui\Widget\Block;
-use PhpTui\Tui\Widget\Paragraph;
+use PhpTui\Tui\Extension\Core\Widget\Block;
+use PhpTui\Tui\Extension\Core\Widget\Paragraph;
 
 require 'vendor/autoload.php';
 

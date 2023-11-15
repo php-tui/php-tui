@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpTui\Tui\Extension\Core\Widget;
+namespace PhpTui\Tui\Model\Widget;
 
 use PhpTui\Tui\Extension\Core\Widget\Canvas;
 use PhpTui\Tui\Model\Area;

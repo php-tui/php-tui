@@ -3,9 +3,9 @@
 
 use PhpTui\Tui\DisplayBuilder;
 use PhpTui\Tui\Model\Constraint;
-use PhpTui\Tui\Widget\Table;
-use PhpTui\Tui\Widget\Table\TableCell;
-use PhpTui\Tui\Widget\Table\TableRow;
+use PhpTui\Tui\Extension\Core\Widget\Table;
+use PhpTui\Tui\Extension\Core\Widget\Table\TableCell;
+use PhpTui\Tui\Extension\Core\Widget\Table\TableRow;
 
 require 'vendor/autoload.php';
 

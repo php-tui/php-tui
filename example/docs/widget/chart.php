@@ -4,10 +4,10 @@ use PhpTui\Tui\DisplayBuilder;
 use PhpTui\Tui\Model\AxisBounds;
 use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Model\Widget\Span;
-use PhpTui\Tui\Widget\Chart;
-use PhpTui\Tui\Widget\Chart\Axis;
-use PhpTui\Tui\Widget\Chart\DataSet;
-use PhpTui\Tui\Widget\Chart\GraphType;
+use PhpTui\Tui\Extension\Core\Widget\Chart;
+use PhpTui\Tui\Extension\Core\Widget\Chart\Axis;
+use PhpTui\Tui\Extension\Core\Widget\Chart\DataSet;
+use PhpTui\Tui\Extension\Core\Widget\Chart\GraphType;
 
 require 'vendor/autoload.php';
 

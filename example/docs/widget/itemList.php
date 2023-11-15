@@ -2,9 +2,9 @@
 
 use PhpTui\Tui\DisplayBuilder;
 use PhpTui\Tui\Model\Widget\Text;
-use PhpTui\Tui\Widget\ItemList;
-use PhpTui\Tui\Widget\ItemList\ItemListState;
-use PhpTui\Tui\Widget\ItemList\ListItem;
+use PhpTui\Tui\Extension\Core\Widget\ItemList;
+use PhpTui\Tui\Extension\Core\Widget\ItemList\ItemListState;
+use PhpTui\Tui\Extension\Core\Widget\ItemList\ListItem;
 
 require 'vendor/autoload.php';
 

@@ -7,7 +7,7 @@ use PhpTui\Tui\DisplayBuilder;
 use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Model\Widget\FloatPosition;
-use PhpTui\Tui\Widget\Canvas;
+use PhpTui\Tui\Extension\Core\Widget\Canvas;
 
 require 'vendor/autoload.php';
 

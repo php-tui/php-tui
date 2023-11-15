@@ -11,7 +11,7 @@ use PhpTui\Tui\Model\RgbColor;
 use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\Widget\Span;
-use PhpTui\Tui\Widget\RawWidget;
+use PhpTui\Tui\Extension\Core\Widget\RawWidget;
 
 class ColorsPage implements Component
 {

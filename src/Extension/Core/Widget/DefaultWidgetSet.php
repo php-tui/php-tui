@@ -3,7 +3,7 @@
 namespace PhpTui\Tui\Extension\Core\Widget;
 
 use PhpTui\Tui\Extension\Core\Widget\BlockRenderer;
-use PhpTui\Tui\Extension\Core\Widget\CanvasRenderer;
+use PhpTui\Tui\Model\Widget\CanvasRenderer;
 use PhpTui\Tui\Extension\Core\Widget\ChartRenderer;
 use PhpTui\Tui\Model\Canvas\ShapePainter;
 use PhpTui\Tui\Model\WidgetSet;

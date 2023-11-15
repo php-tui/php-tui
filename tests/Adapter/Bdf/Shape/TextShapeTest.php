@@ -12,7 +12,7 @@ use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Model\WidgetRenderer\NullWidgetRenderer;
 use PhpTui\Tui\Model\Widget\FloatPosition;
 use PhpTui\Tui\Extension\Core\Widget\Canvas;
-use PhpTui\Tui\Extension\Core\Widget\CanvasRenderer;
+use PhpTui\Tui\Model\Widget\CanvasRenderer;
 use PhpTui\Tui\Model\Canvas\CanvasContext;
 use Generator;
 use PHPUnit\Framework\TestCase;

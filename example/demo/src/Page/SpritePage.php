@@ -14,12 +14,12 @@ use PhpTui\Tui\Model\Widget\BorderType;
 use PhpTui\Tui\Model\Widget\Borders;
 use PhpTui\Tui\Model\Widget\FloatPosition;
 use PhpTui\Tui\Model\Widget;
-use PhpTui\Tui\Widget\Block;
-use PhpTui\Tui\Widget\Canvas;
+use PhpTui\Tui\Extension\Core\Widget\Block;
+use PhpTui\Tui\Extension\Core\Widget\Canvas;
 use PhpTui\Tui\Model\Canvas\CanvasContext;
-use PhpTui\Tui\Shape\Points;
-use PhpTui\Tui\Shape\Sprite;
-use PhpTui\Tui\Widget\Grid;
+use PhpTui\Tui\Extension\Core\Shape\Points;
+use PhpTui\Tui\Extension\Core\Shape\Sprite;
+use PhpTui\Tui\Extension\Core\Widget\Grid;
 
 class SpritePage implements Component
 {
