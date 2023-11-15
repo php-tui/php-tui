@@ -19,12 +19,9 @@ final class TableRow
     ) {
     }
 
-    /**
-     * @param list<TableCell> $cells
-     */
-    public static function fromCells(array $cells): self
+    public static function fromCells(TableCell ...$cells): self
     {
-        return new self($cells, 1, 0, Style::default());
+        return new self(array_values($cells), 1, 0, Style::default());
     }
 
     public static function fromStrings(string ...$strings): self

@@ -76,14 +76,14 @@ final class TablePage implements Component
                         Constraint::min(50),
                     )
                     ->header(
-                        TableRow::fromCells([
+                        TableRow::fromCells(
                             TableCell::fromString('Level'),
                             TableCell::fromString('Event'),
                             TableCell::fromString('Data'),
-                        ])
+                        )
                     )
                     ->rows(...array_map(function (array $event) {
-                        return TableRow::fromCells([
+                        return TableRow::fromCells(
                             TableCell::fromLine(Line::fromSpan(
                                 Span::styled($event[1], match ($event[1]) {
                                     'INFO' => Style::default()->fg(AnsiColor::Green),
@@ -94,7 +94,7 @@ final class TablePage implements Component
                             )),
                             TableCell::fromLine(Line::fromString($event[0])),
                             TableCell::fromString('...'),
-                        ]);
+                        );
                     }, array_merge(self::EVENTS, self::EVENTS)))
             )
         ;

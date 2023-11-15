@@ -25,11 +25,11 @@ $display->draw(
             )->height(2)->bottomMargin(2)
         )
         ->rows(
-            TableRow::fromCells([
+            TableRow::fromCells(
                 TableCell::fromString('Cliff'),
                 TableCell::fromString('1'),
                 TableCell::fromString('✅'),
-            ]),
+            ),
             TableRow::fromStrings(
                 'Tree',
                 '15',

@@ -32,19 +32,19 @@ class TableTest extends WidgetTestCase
         yield 'not enough rows' => [
             Area::fromDimensions(10, 4),
             Table::default()
-                ->header(TableRow::fromCells([
+                ->header(TableRow::fromCells(
                     TableCell::fromString('Ones'),
                     TableCell::fromString('Twos'),
-                ]))
+                ))
                 ->widths(
                     Constraint::percentage(50),
                     Constraint::percentage(50),
                 )
                 ->rows(
-                    TableRow::fromCells([
+                    TableRow::fromCells(
                         TableCell::fromString('1'),
                         TableCell::fromString('2'),
-                    ]),
+                    ),
                 ),
             [
                 'Ones Twos ',
@@ -58,15 +58,15 @@ class TableTest extends WidgetTestCase
         yield 'no widths' => [
             Area::fromDimensions(10, 4),
             Table::default()
-                ->header(TableRow::fromCells([
+                ->header(TableRow::fromCells(
                     TableCell::fromString('Ones'),
                     TableCell::fromString('Twos'),
-                ]))
+                ))
                 ->rows(
-                    TableRow::fromCells([
+                    TableRow::fromCells(
                         TableCell::fromString('1'),
                         TableCell::fromString('2'),
-                    ]),
+                    ),
                 ),
             [
                 '          ',
@@ -82,23 +82,23 @@ class TableTest extends WidgetTestCase
             Table::default()
                 ->select(0)
                 ->offset(0)
-                ->header(TableRow::fromCells([
+                ->header(TableRow::fromCells(
                     TableCell::fromString('Ones'),
                     TableCell::fromString('Twos'),
-                ]))
+                ))
                 ->widths(
                     Constraint::percentage(50),
                     Constraint::percentage(50),
                 )
                 ->rows(
-                    TableRow::fromCells([
+                    TableRow::fromCells(
                         TableCell::fromString('1'),
                         TableCell::fromString('2'),
-                    ]),
-                    TableRow::fromCells([
+                    ),
+                    TableRow::fromCells(
                         TableCell::fromString('1-1'),
                         TableCell::fromString('2-2'),
-                    ]),
+                    ),
                 ),
             [
                 '  Ones Two',
@@ -112,23 +112,23 @@ class TableTest extends WidgetTestCase
         yield [
             Area::fromDimensions(10, 4),
             Table::default()
-                ->header(TableRow::fromCells([
+                ->header(TableRow::fromCells(
                     TableCell::fromString('Ones'),
                     TableCell::fromString('Twos'),
-                ]))
+                ))
                 ->widths(
                     Constraint::percentage(50),
                     Constraint::percentage(50),
                 )
                 ->rows(
-                    TableRow::fromCells([
+                    TableRow::fromCells(
                         TableCell::fromString('1'),
                         TableCell::fromString('2'),
-                    ]),
-                    TableRow::fromCells([
+                    ),
+                    TableRow::fromCells(
                         TableCell::fromString('1-1'),
                         TableCell::fromString('2-2'),
-                    ]),
+                    ),
                 ),
             [
                 'Ones Twos ',
@@ -144,16 +144,16 @@ class TableTest extends WidgetTestCase
             Table::default()
                 ->offset(5)
                 ->rows(
-                    TableRow::fromCells([TableCell::fromString('1'), TableCell::fromString('2')]),
-                    TableRow::fromCells([TableCell::fromString('1'), TableCell::fromString('2')]),
-                    TableRow::fromCells([TableCell::fromString('1'), TableCell::fromString('2')]),
-                    TableRow::fromCells([TableCell::fromString('1'), TableCell::fromString('2')]),
-                    TableRow::fromCells([TableCell::fromString('1'), TableCell::fromString('2')]),
-                    TableRow::fromCells([TableCell::fromString('1'), TableCell::fromString('2')]),
-                    TableRow::fromCells([TableCell::fromString('1'), TableCell::fromString('2')]),
-                    TableRow::fromCells([TableCell::fromString('1'), TableCell::fromString('2')]),
-                    TableRow::fromCells([TableCell::fromString('1'), TableCell::fromString('2')]),
-                    TableRow::fromCells([TableCell::fromString('1'), TableCell::fromString('2')]),
+                    TableRow::fromCells(TableCell::fromString('1'), TableCell::fromString('2')),
+                    TableRow::fromCells(TableCell::fromString('1'), TableCell::fromString('2')),
+                    TableRow::fromCells(TableCell::fromString('1'), TableCell::fromString('2')),
+                    TableRow::fromCells(TableCell::fromString('1'), TableCell::fromString('2')),
+                    TableRow::fromCells(TableCell::fromString('1'), TableCell::fromString('2')),
+                    TableRow::fromCells(TableCell::fromString('1'), TableCell::fromString('2')),
+                    TableRow::fromCells(TableCell::fromString('1'), TableCell::fromString('2')),
+                    TableRow::fromCells(TableCell::fromString('1'), TableCell::fromString('2')),
+                    TableRow::fromCells(TableCell::fromString('1'), TableCell::fromString('2')),
+                    TableRow::fromCells(TableCell::fromString('1'), TableCell::fromString('2')),
                 ),
             [
                 '          ',

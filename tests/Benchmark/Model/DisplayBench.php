@@ -94,7 +94,7 @@ final class DisplayBench
                         })
                     ),
                     $this->horizontalGrid(
-                        Table::default()->rows(TableRow::fromCells([TableCell::fromString('Hello')]))
+                        Table::default()->rows(TableRow::fromCells(TableCell::fromString('Hello')))
                     ),
                 )
         );
