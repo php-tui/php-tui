@@ -28,6 +28,10 @@ return (new Config())
                 'trait_import' => 'only_if_meta',
             ],
         ],
+        'ordered_imports' => [
+            'imports_order' => ['class', 'function', 'const'],
+            'sort_algorithm' => 'alpha',
+        ],
         'no_empty_phpdoc' => true,
         'phpdoc_trim' => true,
         'array_syntax' => ['syntax' => 'short'],
