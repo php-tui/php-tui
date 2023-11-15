@@ -14,7 +14,6 @@ class GaugeWidget implements Widget
     private function __construct(
         public float $ratio,
         public ?Span $label,
-        public bool $useUnicode,
         public Style $style,
     ) {
     }
@@ -24,7 +23,6 @@ class GaugeWidget implements Widget
         return new self(
             ratio: 0.0,
             label: null,
-            useUnicode: false,
             style: Style::default(),
         );
     }
@@ -44,12 +42,6 @@ class GaugeWidget implements Widget
     public function label(Span $label): self
     {
         $this->label = $label;
-        return $this;
-    }
-
-    public function useUnicode(bool $useUnicode) : self
-    {
-        $this->useUnicode = $useUnicode;
         return $this;
     }
 

@@ -29,37 +29,38 @@ final class GaugeRenderer implements WidgetRenderer
         }
 
         $pct = round($widget->ratio * 100);
-        $label = $widget->label ?? Span::fromString(sprintf('%.2f', $pct));
+        $label = $widget->label ?? Span::fromString(sprintf('%.2f%%', $pct));
         $clampedLabelWidth = min($area->width, $label->width());
         $labelCol = (int)floor($area->left() + ($area->width - $clampedLabelWidth) / 2);
         $labelRow = (int)floor($area->top() + $area->height / 2);
 
         $filledWidth = $area->width * $widget->ratio;
-        $end = $widget->useUnicode ? 
-            $area->left() + floor($filledWidth) : 
-            floor($area->left() + $filledWidth);
-
+        $end = $area->left() + floor($filledWidth);
 
         foreach (range($area->top(), $area->bottom() - 1) as $y) {
             foreach (range($area->left(),(int)floor($end)) as $x) {
+
+                if ($x === $area->right()) {
+                    break;
+                }
                 $cell = $buffer->get(Position::at($x, $y));
-                if ($x < $labelCol || $x > $labelCol + $clampedLabelWidth || $y != $labelRow) {
+                if ($x < $labelCol || $x > $labelCol + $clampedLabelWidth - 1 || $y != $labelRow) {
                     $cell->setChar(BlockSet::FULL);
                 } else {
                     $cell->setChar(' ');
                 }
             }
 
-            if ($widget->useUnicode) {
+            if ($widget->ratio < 1) {
                 $buffer->get(
                     Position::at((int)floor($end), $y)
-                )->setChar($this->getUnicodeBlock($filledWidth % 1.0));
+                )->setChar($this->getUnicodeBlock(fmod($filledWidth, 1.0)));
             }
         }
         $buffer->putSpan(Position::at($labelCol, $labelRow), $label, $clampedLabelWidth);
     }
 
-    private function getUnicodeBlock(int $frac): string
+    private function getUnicodeBlock(float $frac): string
     {
         return match ((int)floor($frac * 8.0)) {
             1 => BlockSet::ONE_EIGHTH,
