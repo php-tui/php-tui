@@ -86,4 +86,9 @@ final class Area implements Stringable
             $this->height,
         ];
     }
+
+    public function isEmpty(): bool
+    {
+        return $this->width === 0 || $this->height === 0;
+    }
 }
