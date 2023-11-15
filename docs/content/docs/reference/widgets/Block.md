@@ -22,5 +22,5 @@ Configure the widget using the builder methods named as follows:
 | **borderStyle** | `PhpTui\Tui\Model\Style` | Style of the border. |
 | **style** | `PhpTui\Tui\Model\Style` | Style of the block's inner area. |
 | **titleStyle** | `PhpTui\Tui\Model\Style` | Style of the titles. |
-| **padding** | `PhpTui\Tui\Widget\Block\Padding` | Padding to apply to the inner widget. |
+| **padding** | `PhpTui\Tui\Extension\Core\Widget\Block\Padding` | Padding to apply to the inner widget. |
 | **widget** | `PhpTui\Tui\Model\Widget\|null` | The inner widget. |

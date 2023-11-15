@@ -2,7 +2,6 @@
 
 namespace PhpTui\Tui\Extension\ImageMagick\Shape;
 
-use Imagick;
 use ImagickPixel;
 use PhpTui\Tui\Extension\ImageMagick\ImageRegistry;
 use PhpTui\Tui\Model\AnsiColor;
@@ -14,7 +13,6 @@ use PhpTui\Tui\Model\Canvas\Painter;
 use PhpTui\Tui\Model\Canvas\Shape;
 use PhpTui\Tui\Model\Widget\Line as PhpTuiLine;
 use PhpTui\Tui\Extension\Core\Shape\Line;
-use RuntimeException;
 
 final class ImagePainter implements ShapePainter
 {
@@ -60,7 +58,6 @@ final class ImagePainter implements ShapePainter
 
         $image = $this->registry->load(
             $shape->path,
-            fn (string $path) => self::loadImage($path)
         );
         $geo = $image->getImageGeometry();
 
@@ -85,23 +82,5 @@ final class ImagePainter implements ShapePainter
             }
         }
 
-    }
-
-    public static function loadImage(string $path): Imagick
-    {
-        $image = new Imagick();
-        if (!file_exists($path)) {
-            throw new RuntimeException(sprintf(
-                'Imagefile "%s" does not exist',
-                $path
-            ));
-        }
-        if (false === $image->readImage($path)) {
-            throw new RuntimeException(sprintf(
-                'Could not read file "%s"',
-                $path
-            ));
-        }
-        return $image;
     }
 }
