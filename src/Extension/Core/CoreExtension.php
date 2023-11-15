@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpTui\Tui;
+namespace PhpTui\Tui\Extension\Core;
 
 use PhpTui\Tui\Model\DisplayExtension;
 use PhpTui\Tui\Shape\CirclePainter;

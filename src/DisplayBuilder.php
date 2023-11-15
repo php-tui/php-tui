@@ -3,6 +3,7 @@
 namespace PhpTui\Tui;
 
 use PhpTui\Tui\Adapter\PhpTerm\PhpTermBackend;
+use PhpTui\Tui\Extension\Core\CoreExtension;
 use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Backend;
 use PhpTui\Tui\Model\Canvas\AggregateShapePainter;
