@@ -25,13 +25,12 @@ use PhpTui\Tui\Widget\CanvasRenderer;
  *
  * ```
  * $display = DisplayBuilder::default()->build();
- * $display->drawWidget(
+ * $display->draw(
  *    Paragraph::fromString("Hello World")
  * );
  * ```
- * By default it will use the PhpTermBackend in fullscreen mode.
  *
- * You can add additional widgets and shapes with this builder.
+ * By default it will use the PhpTermBackend in fullscreen mode.
  */
 final class DisplayBuilder
 {
@@ -55,11 +54,25 @@ final class DisplayBuilder
     }
 
     /**
-     * Return a default display using the fullscreen
+     * Return a new display with no extensions.
+     *
+     * @param DisplayExtension[] $extensions
+     */
+    public static function new(?Backend $backend, array $extensions = []): self
+    {
+        return new self(
+            $backend ?? PhpTermBackend::new(),
+            null,
+            $extensions,
+        );
+    }
+
+    /**
+     * Return a default display with the core extension.
      */
     public static function default(?Backend $backend = null): self
     {
-        return self::new($backend, null, [
+        return self::new($backend, [
             new CoreExtension(),
         ]);
     }
@@ -71,6 +84,26 @@ final class DisplayBuilder
     public function fullscreen(): self
     {
         $this->viewport = new Fullscreen();
+        return $this;
+    }
+
+    /**
+     * When set the display will be of the specified height _after_ the row
+     * that the cursor is on.
+     */
+    public function inline(int $height): self
+    {
+        $this->viewport = new Inline($height);
+        return $this;
+    }
+
+    /**
+     * When set the display will be at the specified (x,y) position with the
+     * specified width and height.
+     */
+    public function fixed(int $x, int $y, int $width, int $height): self
+    {
+        $this->viewport = new Fixed(Area::fromScalars($x, $y, $width, $height));
         return $this;
     }
 
@@ -97,18 +130,12 @@ final class DisplayBuilder
         );
     }
 
-    public function inline(int $height): self
-    {
-        $this->viewport = new Inline($height);
-        return $this;
-    }
-
-    public function fixed(int $width, int $height): self
-    {
-        $this->viewport = new Fixed(Area::fromDimensions($width, $height));
-        return $this;
-    }
-
+    /**
+     * Add a shape painter.
+     *
+     * When at least one shape painter is added the Canvas widget will
+     * automatically be enabled.
+     */
     public function addShapePainter(ShapePainter $shapePainter): self
     {
         $this->shapePainters[] = $shapePainter;
@@ -117,17 +144,18 @@ final class DisplayBuilder
     }
 
     /**
-     * @param DisplayExtension[] $extensions
+     * Add a widget renderer
      */
-    public static function new(?Backend $backend, ?Viewport $viewport, array $extensions = []): self
+    public function addWidgetRenderer(WidgetRenderer $widgetRenderer): self
     {
-        return new self(
-            $backend ?? PhpTermBackend::new(),
-            $viewport,
-            $extensions,
-        );
+        $this->widgetRenderers[] = $widgetRenderer;
+
+        return $this;
     }
 
+    /**
+     * Add a display extension.
+     */
     public function addExtension(DisplayExtension $extension): self
     {
         $this->extensions[] = $extension;
