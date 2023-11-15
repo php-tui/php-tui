@@ -15,6 +15,7 @@ return (new Config())
         '@PSR12' => true,
         'no_unused_imports' => true,
         'phpdoc_to_property_type' => true,
+        'declare_strict_types' => true,
         'no_superfluous_phpdoc_tags' => [
             'remove_inheritdoc' => true,
             'allow_mixed' => true,
