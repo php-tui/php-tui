@@ -34,7 +34,6 @@ final class Text
         return $text->patchStyle($style);
     }
 
-
     public function patchStyle(Style $style): self
     {
         foreach ($this->lines as $line) {

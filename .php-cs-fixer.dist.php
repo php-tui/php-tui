@@ -44,5 +44,6 @@ return (new Config())
         'no_trailing_whitespace' => true,
         'no_whitespace_in_blank_line' => true,
         'blank_line_before_statement' => true,
+        'no_extra_blank_lines' => true,
     ])
     ->setFinder($finder);

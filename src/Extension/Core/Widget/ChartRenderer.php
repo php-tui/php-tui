@@ -62,7 +62,6 @@ final class ChartRenderer implements WidgetRenderer
                 ->setStyle($widget->yAxis->style);
         }
 
-
         foreach ($widget->dataSets as $dataSet) {
             $renderer->render($renderer, Canvas::default()
                 ->backgroundColor($widget->style->bg ?? AnsiColor::Reset)

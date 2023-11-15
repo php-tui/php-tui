@@ -21,7 +21,6 @@ final class LoadedEventProvider implements EventProvider
         return new self(array_values($events));
     }
 
-
     public function next(): ?Event
     {
         return array_shift($this->events);

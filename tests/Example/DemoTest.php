@@ -103,7 +103,6 @@ class DemoTest extends TestCase
         $this->assertSnapshot(__METHOD__, $backend);
     }
 
-
     private function execute(?Event ...$events): DummyBackend
     {
         $terminal = Terminal::new(

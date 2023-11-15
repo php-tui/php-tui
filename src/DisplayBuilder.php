@@ -80,7 +80,6 @@ final class DisplayBuilder
         ]);
     }
 
-
     /**
      * Explicitly require a fullscreen viewport
      */
