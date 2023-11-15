@@ -105,6 +105,7 @@ class DemoTest extends TestCase
 
     public function testGauge(): void
     {
+        srand(0);
         $backend = $this->execute(
             CharKeyEvent::new('!'),
             null,

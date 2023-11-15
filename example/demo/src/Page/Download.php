@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Example\Demo\Page;
 
 class Download
@@ -15,6 +17,7 @@ class Download
         if ($this->size === 0) {
             return 0;
         }
+
         return $this->downloaded / $this->size;
     }
 }
