@@ -1,14 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Extension\Core\Widget;
 
 use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Buffer;
 use PhpTui\Tui\Model\Position;
 use PhpTui\Tui\Model\Widget;
-use PhpTui\Tui\Model\WidgetRenderer;
 use PhpTui\Tui\Model\Widget\BlockSet;
 use PhpTui\Tui\Model\Widget\Span;
+use PhpTui\Tui\Model\WidgetRenderer;
 
 final class GaugeRenderer implements WidgetRenderer
 {
@@ -17,8 +19,7 @@ final class GaugeRenderer implements WidgetRenderer
         Widget $widget,
         Area $area,
         Buffer $buffer
-    ): void
-    {
+    ): void {
         if (!$widget instanceof GaugeWidget) {
             return;
         }
@@ -38,7 +39,7 @@ final class GaugeRenderer implements WidgetRenderer
         $end = $area->left() + floor($filledWidth);
 
         foreach (range($area->top(), $area->bottom() - 1) as $y) {
-            foreach (range($area->left(),(int)floor($end)) as $x) {
+            foreach (range($area->left(), (int)floor($end)) as $x) {
 
                 if ($x === $area->right()) {
                     break;
@@ -71,7 +72,7 @@ final class GaugeRenderer implements WidgetRenderer
             6 => BlockSet::THREE_QUARTERS,
             7 => BlockSet::SEVEN_EIGHTHS,
             8 => BlockSet::FULL,
-            default => " ",
+            default => ' ',
         };
     }
 }

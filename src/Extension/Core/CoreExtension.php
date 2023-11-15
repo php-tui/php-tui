@@ -13,6 +13,7 @@ use PhpTui\Tui\Extension\Core\Shape\RectanglePainter;
 use PhpTui\Tui\Extension\Core\Shape\SpritePainter;
 use PhpTui\Tui\Extension\Core\Widget\BlockRenderer;
 use PhpTui\Tui\Extension\Core\Widget\ChartRenderer;
+use PhpTui\Tui\Extension\Core\Widget\GaugeRenderer;
 use PhpTui\Tui\Extension\Core\Widget\GridRenderer;
 use PhpTui\Tui\Extension\Core\Widget\ItemListRenderer;
 use PhpTui\Tui\Extension\Core\Widget\ParagraphRenderer;
@@ -45,6 +46,7 @@ class CoreExtension implements DisplayExtension
             new ItemListRenderer(),
             new RawWidgetRenderer(),
             new TableRenderer(),
+            new GaugeRenderer(),
         ];
     }
 }

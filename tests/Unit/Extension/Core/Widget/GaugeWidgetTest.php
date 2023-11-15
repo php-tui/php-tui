@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Tests\Unit\Extension\Core\Widget;
 
-use PHPUnit\Framework\TestCase;
 use PhpTui\Tui\Extension\Core\Widget\GaugeWidget;
+use PHPUnit\Framework\TestCase;
 use RuntimeException;
 
 class GaugeWidgetTest extends TestCase

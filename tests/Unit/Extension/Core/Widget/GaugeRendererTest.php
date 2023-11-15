@@ -78,4 +78,3 @@ class GaugeRendererTest extends WidgetTestCase
         ];
     }
 }
-
