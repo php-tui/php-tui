@@ -11,15 +11,15 @@ class ModifierStylerTest extends TestCase
     /**
      * @dataProvider modifierProvider
      */
-    public function testModifiers(int $modifierConst, string $methodName): void
+    public function testModifiers(int $modifier, string $methodName): void
     {
         /** @phpstan-ignore-next-line */
         $style = Style::default()->$methodName();
-        self::assertTrue(($style->addModifiers & $modifierConst) === $modifierConst);
+        self::assertTrue(($style->addModifiers & $modifier) === $modifier);
 
         /** @phpstan-ignore-next-line */
         $style->$methodName(false);
-        self::assertTrue(($style->subModifiers & $modifierConst) === $modifierConst);
+        self::assertTrue(($style->subModifiers & $modifier) === $modifier);
     }
 
     /**
