@@ -9,7 +9,10 @@ final class CharKeyEvent implements KeyEvent
     /**
      * @param int-mask-of<KeyModifiers::*> $modifiers
      */
-    private function __construct(public string $char, public int $modifiers)
+    private function __construct(
+        public readonly string $char,
+        public readonly int $modifiers
+    )
     {
     }
 

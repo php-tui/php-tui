@@ -10,7 +10,11 @@ class FunctionKeyEvent implements KeyEvent
     /**
      * @param int-mask-of<KeyModifiers::*> $modifiers
      */
-    private function __construct(public int $number, public int $modifiers, public KeyEventKind $kind)
+    private function __construct(
+        public readonly int $number,
+        public readonly int $modifiers,
+        public readonly KeyEventKind $kind
+    )
     {
     }
 
