@@ -6,7 +6,6 @@ use PhpTui\Term\Actions;
 use PhpTui\Term\ClearType;
 use PhpTui\Term\Event\CharKeyEvent;
 use PhpTui\Term\Terminal;
-use PhpTui\Tui\Adapter\PhpTerm\PhpTermBackend;
 use PhpTui\Tui\DisplayBuilder;
 use PhpTui\Tui\Example\Demo\Page\BlocksPage;
 use PhpTui\Tui\Example\Demo\Page\CanvasPage;

@@ -3,8 +3,8 @@
 namespace PhpTui\Tui\Example\Demo\Page;
 
 use PhpTui\Term\Event;
-use PhpTui\Tui\Adapter\ImageMagick\Shape\ImageShape;
 use PhpTui\Tui\Example\Demo\Component;
+use PhpTui\Tui\Extension\ImageMagick\Shape\ImageShape;
 use PhpTui\Tui\Model\Constraint;
 use PhpTui\Tui\Model\Direction;
 use PhpTui\Tui\Model\Marker;

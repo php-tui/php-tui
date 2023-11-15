@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpTui\Tui\Tests\Benchmark\Adapter\ImageMagick;
+namespace PhpTui\Tui\Tests\Benchmark\Extension\ImageMagick;
 
 use PhpBench\Attributes\Iterations;
 use PhpBench\Attributes\Revs;
@@ -47,7 +47,7 @@ final class ImageShapeBench
         $this->display->draw(
             Canvas::fromIntBounds(0, 320, 0, 200)->draw(
                 ImageShape::fromPath(
-                    __DIR__ . '/../../../Adapter/ImageMagick/Shape/example.jpg',
+                    __DIR__ . '/../../../Unit/Extension/ImageMagick/Shape/example.jpg',
                 )
             )
         );

@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpTui\Tui\Tests\Benchmark\Widget;
+namespace PhpTui\Tui\Tests\Benchmark\Extension\Core\Widget;
 
 use PhpBench\Attributes\Iterations;
 use PhpBench\Attributes\Revs;
