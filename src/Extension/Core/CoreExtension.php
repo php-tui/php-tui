@@ -19,6 +19,7 @@ use PhpTui\Tui\Extension\Core\Widget\ItemListRenderer;
 use PhpTui\Tui\Extension\Core\Widget\ParagraphRenderer;
 use PhpTui\Tui\Extension\Core\Widget\RawWidgetRenderer;
 use PhpTui\Tui\Extension\Core\Widget\TableRenderer;
+use PhpTui\Tui\Extension\ImageMagick\Widget\ImageRenderer;
 use PhpTui\Tui\Model\DisplayExtension;
 
 class CoreExtension implements DisplayExtension
