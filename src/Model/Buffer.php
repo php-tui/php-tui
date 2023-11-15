@@ -39,7 +39,7 @@ final class Buffer implements Countable
     {
         $content = [];
         for ($i = 0; $i < $area->area(); $i++) {
-            $content[] = $cell->clone();
+            $content[] = clone $cell;
         }
 
         return new self($area, $content);
