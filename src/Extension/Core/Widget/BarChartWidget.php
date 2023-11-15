@@ -9,7 +9,7 @@ use PhpTui\Tui\Model\Direction;
 use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Widget;
 
-final class BarChart implements Widget
+final class BarChartWidget implements Widget
 {
     final public function __construct(
         /**

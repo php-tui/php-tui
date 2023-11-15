@@ -32,4 +32,15 @@ final class Bar
         public ?string $textValue,
     ) {
     }
+
+    public static function fromValue(int $value): self
+    {
+        return new self($value, null, Style::default(), Style::default(), null);
+    }
+
+    public function label(Line $label): self
+    {
+        $this->label = $label;
+        return $this;
+    }
 }
