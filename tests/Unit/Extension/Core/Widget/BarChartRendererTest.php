@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Tests\Unit\Extension\Core\Widget;
 
 use Generator;
+use PhpTui\Tui\Extension\Core\Widget\BarChart\BarGroup;
 use PhpTui\Tui\Extension\Core\Widget\BarChartWidget;
 use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Buffer;
 use PhpTui\Tui\Model\Widget;
-use PhpTui\Tui\Model\Widget\Span;
 
 class BarChartRendererTest extends WidgetTestCase
 {
@@ -29,10 +29,16 @@ class BarChartRendererTest extends WidgetTestCase
     public static function provideBarChartRender(): Generator
     {
         yield 'barchart' => [
-            Area::fromDimensions(10, 1),
-            BarChartWidget::default()->ratio(0),
+            Area::fromDimensions(10, 5),
+            BarChartWidget::default()->data(
+                BarGroup::fromArray(['B0' => 1, 'B1' => 2])
+            ),
             [
-                '  0.00%   ',
+                ' x        ',
+                ' x        ',
+                ' x x      ',
+                ' x x      ',
+                ' x x      ',
             ]
            ,
         ];

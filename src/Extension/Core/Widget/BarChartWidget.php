@@ -115,12 +115,9 @@ final class BarChartWidget implements Widget
         return $this;
     }
 
-    /**
-     * @param BarGroup[] $data
-     */
-    public function data(array $data): self
+    public function data(BarGroup ...$group): self
     {
-        $this->data = $data;
+        $this->data = $group;
         return $this;
     }
 
