@@ -10,7 +10,6 @@ use PhpTui\Tui\Model\Buffer;
 use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\WidgetRenderer;
-use PhpTui\Tui\Model\Widget\FloatPosition;
 
 class ImageRenderer implements WidgetRenderer
 {
@@ -33,8 +32,7 @@ class ImageRenderer implements WidgetRenderer
             0,
             $geo['height'],
         )->marker($widget->marker ?? Marker::HalfBlock)->draw(ImageShape::fromPath(
-            $widget->path,
-            FloatPosition::at(0, 0),
+            $widget->path
         )), $area, $buffer);
     }
 }

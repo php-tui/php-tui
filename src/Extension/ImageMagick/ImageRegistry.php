@@ -2,7 +2,6 @@
 
 namespace PhpTui\Tui\Extension\ImageMagick;
 
-use Closure;
 use Imagick;
 use RuntimeException;
 
@@ -13,9 +12,7 @@ final class ImageRegistry
      */
     private array $images = [];
 
-    /**
-     * @param Closure(string):Imagick $loader
-     */
+
     public function load(string $path): Imagick
     {
         if (isset($this->images[$path])) {
