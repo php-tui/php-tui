@@ -27,6 +27,13 @@ final class TableRow
         return new self($cells, 1, 0, Style::default());
     }
 
+    public static function fromStrings(string ...$strings): self
+    {
+        return new self(array_map(function (string $string) {
+            return TableCell::fromString($string);
+        }, array_values($strings)), 1, 0, Style::default());
+    }
+
     public function totalHeight(): int
     {
         return $this->height + $this->bottomMargin;

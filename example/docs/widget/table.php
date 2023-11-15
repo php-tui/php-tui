@@ -18,11 +18,11 @@ $display->draw(
             Constraint::percentage(50),
         )
         ->header(
-            TableRow::fromCells([
-                TableCell::fromString('Name'),
-                TableCell::fromString('Quantity'),
-                TableCell::fromString('Approved?'),
-            ])->height(2)->bottomMargin(2)
+            TableRow::fromStrings(
+                'Name',
+                'Quantity',
+                'Approved?',
+            )->height(2)->bottomMargin(2)
         )
         ->rows(
             TableRow::fromCells([
@@ -30,15 +30,15 @@ $display->draw(
                 TableCell::fromString('1'),
                 TableCell::fromString('✅'),
             ]),
-            TableRow::fromCells([
-                TableCell::fromString('Tree'),
-                TableCell::fromString('15'),
-                TableCell::fromString('✅'),
-            ]),
-            TableRow::fromCells([
-                TableCell::fromString('Slate'),
-                TableCell::fromString('519'),
-                TableCell::fromString('✅'),
-            ]),
+            TableRow::fromStrings(
+                'Tree',
+                '15',
+                '✅',
+            ),
+            TableRow::fromStrings(
+                'Slate',
+                '519',
+                '✅',
+            ),
         )
 );
