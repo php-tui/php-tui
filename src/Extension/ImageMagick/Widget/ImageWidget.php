@@ -7,6 +7,15 @@ use PhpTui\Tui\Model\Widget;
 
 class ImageWidget implements Widget
 {
-    public function __construct(public string $path, public ?Marker $marker = null) {
+    public function __construct(
+        /**
+         * Absolute path to the image
+         */
+        public string $path,
+        /**
+         * Canvas marker to use, defaults to Marker::HalfBlock
+         */
+        public ?Marker $marker = null
+    ) {
     }
 }
