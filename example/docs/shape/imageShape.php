@@ -1,7 +1,6 @@
 <?php
 
 use PhpTui\Tui\Adapter\ImageMagick\ImageMagickExtension;
-use PhpTui\Tui\Adapter\ImageMagick\ImageMagickShapeSet;
 use PhpTui\Tui\Adapter\ImageMagick\Shape\ImageShape;
 use PhpTui\Tui\DisplayBuilder;
 use PhpTui\Tui\Model\Marker;

@@ -4,7 +4,6 @@ namespace PhpTui\Tui\Adapter\ImageMagick;
 
 use PhpTui\Tui\Adapter\ImageMagick\Shape\ImagePainter;
 use PhpTui\Tui\Model\DisplayExtension;
-use function PhpTui\Tui\Adapter\ImageMagick\Shape\ImagePainter;
 
 final class ImageMagickExtension implements DisplayExtension
 {

@@ -2,13 +2,11 @@
 
 namespace PhpTui\Tui;
 
-use PhpTui\Tui\Adapter\ImageMagick\ImageMagickExtension;
 use PhpTui\Tui\Adapter\PhpTerm\PhpTermBackend;
 use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Backend;
 use PhpTui\Tui\Model\Canvas\AggregateShapePainter;
 use PhpTui\Tui\Model\Canvas\ShapePainter;
-use PhpTui\Tui\Model\Canvas\ShapeSet;
 use PhpTui\Tui\Model\Display;
 use PhpTui\Tui\Model\DisplayExtension;
 use PhpTui\Tui\Model\Viewport;
@@ -16,11 +14,8 @@ use PhpTui\Tui\Model\Viewport\Fixed;
 use PhpTui\Tui\Model\Viewport\Fullscreen;
 use PhpTui\Tui\Model\Viewport\Inline;
 use PhpTui\Tui\Model\WidgetRenderer;
-use PhpTui\Tui\Model\WidgetSet;
 use PhpTui\Tui\Model\WidgetRenderer\AggregateWidgetRenderer;
-use PhpTui\Tui\Shape\DefaultShapeSet;
 use PhpTui\Tui\Widget\CanvasRenderer;
-use PhpTui\Tui\Widget\DefaultWidgetSet;
 
 /**
  * An entry point for PHP-TUI.
@@ -44,6 +39,7 @@ final class DisplayBuilder
      * @var ShapePainter[]
      */
     private array $shapePainters = [];
+
     /**
      * @var WidgetRenderer[]
      */
@@ -120,11 +116,6 @@ final class DisplayBuilder
         return $this;
     }
 
-    private function buildCanvasRenderer(): CanvasRenderer
-    {
-        return new CanvasRenderer(new AggregateShapePainter($this->shapePainters));
-    }
-
     /**
      * @param DisplayExtension[] $extensions
      */
@@ -142,5 +133,10 @@ final class DisplayBuilder
         $this->extensions[] = $extension;
 
         return $this;
+    }
+
+    private function buildCanvasRenderer(): CanvasRenderer
+    {
+        return new CanvasRenderer(new AggregateShapePainter($this->shapePainters));
     }
 }

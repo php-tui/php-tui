@@ -25,6 +25,6 @@ class BdfExtension implements DisplayExtension
 
     private function fontRegistry(): FontRegistry
     {
-        return $this->fontRegistry ?? FontRegistry::default();
+        return $this->registry ?? FontRegistry::default();
     }
 }
