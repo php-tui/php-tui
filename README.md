@@ -69,7 +69,7 @@ Widgets
 - [ ] Barchart
 - [ ] Scrollbar
 - [ ] Sparkline
-- [ ] Gauge
+- [x] Gauge
 
 Limitations
 -----------
