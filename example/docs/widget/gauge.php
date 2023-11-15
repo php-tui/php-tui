@@ -11,4 +11,3 @@ $display = DisplayBuilder::default()->build();
 $display->draw(
     GaugeWidget::default()->ratio(0.5)
 );
-

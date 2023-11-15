@@ -6,6 +6,7 @@ namespace PhpTui\Tui\Example\Demo;
 
 enum ActivePage
 {
+    case Gauge;
     case Events;
     case Canvas;
     case CanvasScaling;

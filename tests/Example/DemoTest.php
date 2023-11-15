@@ -103,6 +103,16 @@ class DemoTest extends TestCase
         $this->assertSnapshot(__METHOD__, $backend);
     }
 
+    public function testGauge(): void
+    {
+        $backend = $this->execute(
+            CharKeyEvent::new('!'),
+            null,
+            CharKeyEvent::new('q'),
+        );
+        $this->assertSnapshot(__METHOD__, $backend);
+    }
+
     private function execute(?Event ...$events): DummyBackend
     {
         $terminal = Terminal::new(
