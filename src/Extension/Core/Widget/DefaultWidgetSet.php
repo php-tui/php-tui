@@ -25,6 +25,7 @@ class DefaultWidgetSet implements WidgetSet
             new ItemListRenderer(),
             new RawWidgetRenderer(),
             new TableRenderer(),
+            new GaugeRenderer(),
         ];
     }
 }

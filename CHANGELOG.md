@@ -1,6 +1,21 @@
 CHANGELOG
 =========
 
+## master
+
+Features:
+
+- Gauge widget
+- Image widget
+
+Bug fixes:
+
+- Make mouse event properties public
+
+Refactoring:
+
+- Re-organized namespaces
+
 ## 0.0.1
 
 The following are differences from Ratatui:

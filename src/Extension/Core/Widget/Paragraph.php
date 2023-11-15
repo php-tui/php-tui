@@ -9,6 +9,7 @@ use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\Widget\HorizontalAlignment;
 use PhpTui\Tui\Model\Widget\Line;
+use PhpTui\Tui\Model\Widget\Span;
 use PhpTui\Tui\Model\Widget\Text;
 
 /**
@@ -66,5 +67,10 @@ class Paragraph implements Widget
     public static function fromLines(Line ...$lines): self
     {
         return self::fromText(Text::fromLines(...$lines));
+    }
+
+    public static function fromSpans(Span ...$spans): self
+    {
+        return self::fromText(Text::fromLine(Line::fromSpans($spans)));
     }
 }

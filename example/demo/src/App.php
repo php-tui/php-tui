@@ -16,6 +16,7 @@ use PhpTui\Tui\Example\Demo\Page\CanvasScalingPage;
 use PhpTui\Tui\Example\Demo\Page\ChartPage;
 use PhpTui\Tui\Example\Demo\Page\ColorsPage;
 use PhpTui\Tui\Example\Demo\Page\EventsPage;
+use PhpTui\Tui\Example\Demo\Page\GaugePage;
 use PhpTui\Tui\Example\Demo\Page\ImagePage;
 use PhpTui\Tui\Example\Demo\Page\ItemListPage;
 use PhpTui\Tui\Example\Demo\Page\SpritePage;
@@ -87,6 +88,7 @@ final class App
                 ActivePage::Colors => new ColorsPage(),
                 ActivePage::Images => new ImagePage(),
                 ActivePage::CanvasScaling => new CanvasScalingPage($terminal),
+                ActivePage::Gauge => new GaugePage(),
             };
         }
 
@@ -166,8 +168,8 @@ final class App
                     if ($event->char === '0') {
                         $this->activePage = ActivePage::CanvasScaling;
                     }
-                    if ($event->char === 'r') {
-                        $this->display->clear();
+                    if ($event->char === '!') {
+                        $this->activePage = ActivePage::Gauge;
                     }
                 }
                 $this->activePage()->handle($event);
@@ -194,7 +196,7 @@ final class App
         return Grid::default()
             ->direction(Direction::Vertical)
             ->constraints(
-                Constraint::max(3),
+                Constraint::max(4),
                 Constraint::min(1),
             )
             ->widgets(
@@ -214,30 +216,34 @@ final class App
                 ->borders(Borders::ALL)->style(Style::default()->fg(AnsiColor::White))
                 ->titles(Title::fromString(sprintf('%d FPS', $this->frameRate()))->horizontalAlignmnet(HorizontalAlignment::Right))
                 ->widget(
-                    Paragraph::fromText(Text::fromLine(Line::fromSpans([
-                        Span::styled('[q]', Style::default()->fg(AnsiColor::Green)),
-                        Span::fromString('quit '),
-                        Span::styled('[1]', Style::default()->fg(AnsiColor::Green)),
-                        Span::fromString('events '),
-                        Span::styled('[2]', Style::default()->fg(AnsiColor::Green)),
-                        Span::fromString('canvas '),
-                        Span::styled('[3]', Style::default()->fg(AnsiColor::Green)),
-                        Span::fromString('chart '),
-                        Span::styled('[4]', Style::default()->fg(AnsiColor::Green)),
-                        Span::fromString('list '),
-                        Span::styled('[5]', Style::default()->fg(AnsiColor::Green)),
-                        Span::fromString('table '),
-                        Span::styled('[6]', Style::default()->fg(AnsiColor::Green)),
-                        Span::fromString('blocks '),
-                        Span::styled('[7]', Style::default()->fg(AnsiColor::Green)),
-                        Span::fromString('sprites '),
-                        Span::styled('[8]', Style::default()->fg(AnsiColor::Green)),
-                        Span::fromString('colors '),
-                        Span::styled('[9]', Style::default()->fg(AnsiColor::Green)),
-                        Span::fromString('images '),
-                        Span::styled('[0]', Style::default()->fg(AnsiColor::Green)),
-                        Span::fromString('scaling '),
-                    ])))
+                    Paragraph::fromText(Text::fromLines(
+                        Line::fromSpans([
+                            Span::styled('[q]', Style::default()->fg(AnsiColor::Green)),
+                            Span::fromString('quit '),
+                            Span::styled('[1]', Style::default()->fg(AnsiColor::Green)),
+                            Span::fromString('events '),
+                            Span::styled('[2]', Style::default()->fg(AnsiColor::Green)),
+                            Span::fromString('canvas '),
+                            Span::styled('[3]', Style::default()->fg(AnsiColor::Green)),
+                            Span::fromString('chart '),
+                            Span::styled('[4]', Style::default()->fg(AnsiColor::Green)),
+                            Span::fromString('list '),
+                            Span::styled('[5]', Style::default()->fg(AnsiColor::Green)),
+                            Span::fromString('table '),
+                            Span::styled('[6]', Style::default()->fg(AnsiColor::Green)),
+                            Span::fromString('blocks '),
+                            Span::styled('[7]', Style::default()->fg(AnsiColor::Green)),
+                            Span::fromString('sprites '),
+                            Span::styled('[8]', Style::default()->fg(AnsiColor::Green)),
+                            Span::fromString('colors '),
+                            Span::styled('[9]', Style::default()->fg(AnsiColor::Green)),
+                            Span::fromString('images '),
+                            Span::styled('[0]', Style::default()->fg(AnsiColor::Green)),
+                            Span::fromString('scaling '),
+                            Span::styled('[!]', Style::default()->fg(AnsiColor::Green)),
+                            Span::fromString('gauge '),
+                        ])
+                    ))
                 )
         ;
     }
