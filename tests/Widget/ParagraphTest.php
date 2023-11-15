@@ -7,7 +7,7 @@ use PhpTui\Tui\Model\Buffer;
 use PhpTui\Tui\Model\Widget\HorizontalAlignment;
 use PhpTui\Tui\Model\Widget\Line;
 use PhpTui\Tui\Model\Widget\Text;
-use PhpTui\Tui\Widget\Paragraph;
+use PhpTui\Tui\Extension\Core\Widget\Paragraph;
 use Generator;
 
 class ParagraphTest extends WidgetTestCase

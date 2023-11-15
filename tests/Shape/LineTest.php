@@ -6,7 +6,7 @@ use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\AxisBounds;
 use PhpTui\Tui\Model\Buffer;
 use PhpTui\Tui\Model\Marker;
-use PhpTui\Tui\Widget\Canvas;
+use PhpTui\Tui\Extension\Core\Widget\Canvas;
 use PhpTui\Tui\Model\Canvas\CanvasContext;
 use PhpTui\Tui\Extension\Core\Shape\Line;
 use Generator;

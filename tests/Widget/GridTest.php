@@ -8,10 +8,10 @@ use PhpTui\Tui\Model\Constraint;
 use PhpTui\Tui\Model\Direction;
 use PhpTui\Tui\Model\Widget\Borders;
 use PhpTui\Tui\Model\Widget\Text;
-use PhpTui\Tui\Widget\Block;
-use PhpTui\Tui\Widget\Grid;
+use PhpTui\Tui\Extension\Core\Widget\Block;
+use PhpTui\Tui\Extension\Core\Widget\Grid;
 use Generator;
-use PhpTui\Tui\Widget\Paragraph;
+use PhpTui\Tui\Extension\Core\Widget\Paragraph;
 use RuntimeException;
 
 class GridTest extends WidgetTestCase

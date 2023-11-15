@@ -7,9 +7,9 @@ use PhpTui\Tui\Model\AxisBounds;
 use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Widget\Span;
-use PhpTui\Tui\Widget\Chart;
-use PhpTui\Tui\Widget\Chart\Axis;
-use PhpTui\Tui\Widget\Chart\DataSet;
+use PhpTui\Tui\Extension\Core\Widget\Chart;
+use PhpTui\Tui\Extension\Core\Widget\Chart\Axis;
+use PhpTui\Tui\Extension\Core\Widget\Chart\DataSet;
 
 class ChartTest extends WidgetTestCase
 {

@@ -9,10 +9,10 @@ use PhpTui\Tui\Model\Buffer;
 use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Model\Position;
 use PHPUnit\Framework\TestCase;
-use PhpTui\Tui\Widget\Canvas;
+use PhpTui\Tui\Extension\Core\Widget\Canvas;
 use PhpTui\Tui\Extension\Core\Shape\Points;
-use PhpTui\Tui\Widget\Paragraph;
-use PhpTui\Tui\Widget\RawWidget;
+use PhpTui\Tui\Extension\Core\Widget\Paragraph;
+use PhpTui\Tui\Extension\Core\Widget\RawWidget;
 
 class DisplayTest extends TestCase
 {

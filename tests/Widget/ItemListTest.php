@@ -6,8 +6,8 @@ use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Buffer;
 use PhpTui\Tui\Model\Corner;
 use PhpTui\Tui\Model\Widget\Text;
-use PhpTui\Tui\Widget\ItemList;
-use PhpTui\Tui\Widget\ItemList\ListItem;
+use PhpTui\Tui\Extension\Core\Widget\ItemList;
+use PhpTui\Tui\Extension\Core\Widget\ItemList\ListItem;
 use Generator;
 
 class ItemListTest extends WidgetTestCase

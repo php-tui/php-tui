@@ -9,10 +9,10 @@ use PhpTui\Tui\Model\Widget\Borders;
 use PhpTui\Tui\Model\Widget\HorizontalAlignment;
 use PhpTui\Tui\Model\Widget\Text;
 use PhpTui\Tui\Model\Widget\Title;
-use PhpTui\Tui\Widget\Block;
+use PhpTui\Tui\Extension\Core\Widget\Block;
 use PhpTui\Tui\Model\Area;
-use PhpTui\Tui\Widget\Block\Padding;
-use PhpTui\Tui\Widget\Paragraph;
+use PhpTui\Tui\Extension\Core\Widget\Block\Padding;
+use PhpTui\Tui\Extension\Core\Widget\Paragraph;
 use Generator;
 
 class BlockTest extends WidgetTestCase

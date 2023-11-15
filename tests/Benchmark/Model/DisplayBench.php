@@ -22,20 +22,20 @@ use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\Widget\Borders;
 use PhpTui\Tui\Model\Widget\Line;
 use PhpTui\Tui\Model\Widget\Title;
-use PhpTui\Tui\Widget\Block;
-use PhpTui\Tui\Widget\Canvas;
+use PhpTui\Tui\Extension\Core\Widget\Block;
+use PhpTui\Tui\Extension\Core\Widget\Canvas;
 use PhpTui\Tui\Extension\Core\Shape\Map;
-use PhpTui\Tui\Widget\Chart;
-use PhpTui\Tui\Widget\Chart\Axis;
-use PhpTui\Tui\Widget\Chart\DataSet;
-use PhpTui\Tui\Widget\Grid;
-use PhpTui\Tui\Widget\ItemList;
-use PhpTui\Tui\Widget\ItemList\ListItem;
-use PhpTui\Tui\Widget\Paragraph;
-use PhpTui\Tui\Widget\RawWidget;
-use PhpTui\Tui\Widget\Table;
-use PhpTui\Tui\Widget\Table\TableCell;
-use PhpTui\Tui\Widget\Table\TableRow;
+use PhpTui\Tui\Extension\Core\Widget\Chart;
+use PhpTui\Tui\Extension\Core\Widget\Chart\Axis;
+use PhpTui\Tui\Extension\Core\Widget\Chart\DataSet;
+use PhpTui\Tui\Extension\Core\Widget\Grid;
+use PhpTui\Tui\Extension\Core\Widget\ItemList;
+use PhpTui\Tui\Extension\Core\Widget\ItemList\ListItem;
+use PhpTui\Tui\Extension\Core\Widget\Paragraph;
+use PhpTui\Tui\Extension\Core\Widget\RawWidget;
+use PhpTui\Tui\Extension\Core\Widget\Table;
+use PhpTui\Tui\Extension\Core\Widget\Table\TableCell;
+use PhpTui\Tui\Extension\Core\Widget\Table\TableRow;
 
 final class DisplayBench
 {
