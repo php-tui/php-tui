@@ -21,5 +21,5 @@ Configure the widget using the builder methods named as follows:
 | **startCorner** | `PhpTui\Tui\Model\Corner` |  |
 | **highlightStyle** | `PhpTui\Tui\Model\Style` |  |
 | **highlightSymbol** | `string` |  |
-| **state** | `PhpTui\Tui\Widget\ItemList\ItemListState` |  |
-| **highlightSpacing** | `PhpTui\Tui\Widget\ItemList\HighlightSpacing` |  |
+| **state** | `PhpTui\Tui\Extension\Core\Widget\ItemList\ItemListState` |  |
+| **highlightSpacing** | `PhpTui\Tui\Extension\Core\Widget\ItemList\HighlightSpacing` |  |

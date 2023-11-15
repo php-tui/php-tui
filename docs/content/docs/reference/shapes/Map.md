@@ -16,5 +16,5 @@ Configure the shape using the constructor arguments named as follows:
 
 | Name | Type | Description |
 | --- | --- | --- |
-| **mapResolution** | `PhpTui\Tui\Shape\MapResolution` | Resolution of the map (enum low or high) |
+| **mapResolution** | `PhpTui\Tui\Extension\Core\Shape\MapResolution` | Resolution of the map (enum low or high) |
 | **color** | `PhpTui\Tui\Model\Color` | Color of the map |
