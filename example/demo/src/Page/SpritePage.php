@@ -3,8 +3,8 @@
 namespace PhpTui\Tui\Example\Demo\Page;
 
 use PhpTui\Term\Event;
-use PhpTui\Tui\Adapter\Bdf\Shape\TextShape;
 use PhpTui\Tui\Example\Demo\Component;
+use PhpTui\Tui\Extension\Bdf\Shape\TextShape;
 use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Constraint;
 use PhpTui\Tui\Model\Marker;

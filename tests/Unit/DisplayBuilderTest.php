@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpTui\Tui\Tests;
+namespace PhpTui\Tui\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use PhpTui\Tui\DisplayBuilder;
@@ -15,7 +15,7 @@ use PhpTui\Tui\Extension\Core\Shape\ClosureShape;
 use PhpTui\Tui\Extension\Core\Widget\Canvas;
 use PhpTui\Tui\Extension\Core\Widget\ClosureRenderer;
 
-final class Unit extends TestCase
+final class DisplayBuilderTest extends TestCase
 {
     public function testBuildDefault(): void
     {

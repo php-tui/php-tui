@@ -1,8 +1,8 @@
 <?php
 
-use PhpTui\Tui\Adapter\ImageMagick\ImageMagickExtension;
-use PhpTui\Tui\Adapter\ImageMagick\Shape\ImageShape;
 use PhpTui\Tui\DisplayBuilder;
+use PhpTui\Tui\Extension\ImageMagick\ImageMagickExtension;
+use PhpTui\Tui\Extension\ImageMagick\Shape\ImageShape;
 use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Extension\Core\Widget\Canvas;
 

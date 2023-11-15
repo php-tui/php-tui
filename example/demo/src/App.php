@@ -6,8 +6,6 @@ use PhpTui\Term\Actions;
 use PhpTui\Term\ClearType;
 use PhpTui\Term\Event\CharKeyEvent;
 use PhpTui\Term\Terminal;
-use PhpTui\Tui\Adapter\Bdf\BdfExtension;
-use PhpTui\Tui\Adapter\ImageMagick\ImageMagickExtension;
 use PhpTui\Tui\Adapter\PhpTerm\PhpTermBackend;
 use PhpTui\Tui\DisplayBuilder;
 use PhpTui\Tui\Example\Demo\Page\BlocksPage;
@@ -20,6 +18,9 @@ use PhpTui\Tui\Example\Demo\Page\ImagePage;
 use PhpTui\Tui\Example\Demo\Page\ItemListPage;
 use PhpTui\Tui\Example\Demo\Page\SpritePage;
 use PhpTui\Tui\Example\Demo\Page\TablePage;
+use PhpTui\Tui\Extension\Bdf\BdfExtension;
+use PhpTui\Tui\Extension\ImageMagick\ImageMagickExtension;
+use PhpTui\Tui\Extension\PhpTerm\PhpTermBackend as PhpTuiPhpTermBackend;
 use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Backend;
 use PhpTui\Tui\Model\Constraint;
@@ -88,7 +89,7 @@ final class App
             };
         }
 
-        $display = DisplayBuilder::default($backend ?? PhpTermBackend::new($terminal))
+        $display = DisplayBuilder::default($backend ?? PhpTuiPhpTermBackend::new($terminal))
             ->addExtension(new ImageMagickExtension())
             ->addExtension(new BdfExtension())
             ->build();
