@@ -3,13 +3,13 @@
 namespace PhpTui\Tui\Extension\Core;
 
 use PhpTui\Tui\Model\DisplayExtension;
-use PhpTui\Tui\Shape\CirclePainter;
-use PhpTui\Tui\Shape\ClosurePainter;
-use PhpTui\Tui\Shape\SpritePainter;
-use PhpTui\Tui\Shape\RectanglePainter;
-use PhpTui\Tui\Shape\PointsPainter;
-use PhpTui\Tui\Shape\MapPainter;
-use PhpTui\Tui\Shape\LinePainter;
+use PhpTui\Tui\Extension\Core\Shape\CirclePainter;
+use PhpTui\Tui\Extension\Core\Shape\ClosurePainter;
+use PhpTui\Tui\Extension\Core\Shape\SpritePainter;
+use PhpTui\Tui\Extension\Core\Shape\RectanglePainter;
+use PhpTui\Tui\Extension\Core\Shape\PointsPainter;
+use PhpTui\Tui\Extension\Core\Shape\MapPainter;
+use PhpTui\Tui\Extension\Core\Shape\LinePainter;
 use PhpTui\Tui\Widget\BlockRenderer;
 use PhpTui\Tui\Widget\RawWidgetRenderer;
 use PhpTui\Tui\Widget\ItemListRenderer;

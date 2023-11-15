@@ -1,8 +1,8 @@
 <?php
 
-namespace PhpTui\Tui\Shape;
+namespace PhpTui\Tui\Extension\Core\Shape;
 
-use PhpTui\Tui\Shape\Data\MapData;
+use PhpTui\Tui\Extension\Core\Shape\Data\MapData;
 
 enum MapResolution
 {

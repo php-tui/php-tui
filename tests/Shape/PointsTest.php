@@ -9,7 +9,7 @@ use PhpTui\Tui\Model\Buffer;
 use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Widget\Canvas;
 use PhpTui\Tui\Model\Canvas\CanvasContext;
-use PhpTui\Tui\Shape\Points;
+use PhpTui\Tui\Extension\Core\Shape\Points;
 use Generator;
 
 class PointsTest extends ShapeTestCase

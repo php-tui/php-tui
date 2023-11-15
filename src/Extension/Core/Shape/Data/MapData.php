@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpTui\Tui\Shape\Data;
+namespace PhpTui\Tui\Extension\Core\Shape\Data;
 
 class MapData
 {

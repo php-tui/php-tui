@@ -10,7 +10,7 @@ use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\WidgetRenderer;
 use PhpTui\Tui\Model\WidgetRenderer\AggregateWidgetRenderer;
 use PhpTui\Tui\Model\WidgetRenderer\NullWidgetRenderer;
-use PhpTui\Tui\Shape\DefaultShapeSet;
+use PhpTui\Tui\Extension\Core\Shape\DefaultShapeSet;
 use PhpTui\Tui\Widget\DefaultWidgetSet;
 
 class WidgetTestCase extends TestCase

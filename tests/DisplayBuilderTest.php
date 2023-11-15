@@ -10,8 +10,8 @@ use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\DisplayExtension;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\WidgetRenderer;
-use PhpTui\Tui\Shape\ClosurePainter;
-use PhpTui\Tui\Shape\ClosureShape;
+use PhpTui\Tui\Extension\Core\Shape\ClosurePainter;
+use PhpTui\Tui\Extension\Core\Shape\ClosureShape;
 use PhpTui\Tui\Widget\Canvas;
 use PhpTui\Tui\Widget\ClosureRenderer;
 

@@ -8,8 +8,8 @@ use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Widget\Canvas;
 use PhpTui\Tui\Model\Canvas\CanvasContext;
-use PhpTui\Tui\Shape\Map;
-use PhpTui\Tui\Shape\MapResolution;
+use PhpTui\Tui\Extension\Core\Shape\Map;
+use PhpTui\Tui\Extension\Core\Shape\MapResolution;
 use Generator;
 
 class MapTest extends ShapeTestCase

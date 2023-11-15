@@ -15,8 +15,8 @@ use PhpTui\Term\Painter\StringPainter;
 use PhpTui\Tui\DisplayBuilder;
 use PhpTui\Tui\Model\Display;
 use PhpTui\Tui\Widget\Canvas;
-use PhpTui\Tui\Shape\Map;
-use PhpTui\Tui\Shape\MapResolution;
+use PhpTui\Tui\Extension\Core\Shape\Map;
+use PhpTui\Tui\Extension\Core\Shape\MapResolution;
 
 #[Iterations(10)]
 #[Revs(25)]

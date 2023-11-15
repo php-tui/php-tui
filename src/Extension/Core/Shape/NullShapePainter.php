@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpTui\Tui\Model\Canvas;
+namespace PhpTui\Tui\Extension\Core\Shape;
 
 class NullShapePainter implements ShapePainter
 {

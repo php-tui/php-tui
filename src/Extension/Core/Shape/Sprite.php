@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpTui\Tui\Shape;
+namespace PhpTui\Tui\Extension\Core\Shape;
 
 use PhpTui\Tui\Model\Color;
 use PhpTui\Tui\Model\Widget\FloatPosition;

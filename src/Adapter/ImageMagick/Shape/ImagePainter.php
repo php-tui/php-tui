@@ -13,7 +13,7 @@ use PhpTui\Tui\Model\Widget\FloatPosition;
 use PhpTui\Tui\Model\Canvas\Painter;
 use PhpTui\Tui\Model\Canvas\Shape;
 use PhpTui\Tui\Model\Widget\Line as PhpTuiLine;
-use PhpTui\Tui\Shape\Line;
+use PhpTui\Tui\Extension\Core\Shape\Line;
 use RuntimeException;
 
 final class ImagePainter implements ShapePainter

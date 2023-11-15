@@ -1,7 +1,8 @@
 <?php
 
-namespace PhpTui\Tui\Shape;
+namespace PhpTui\Tui\Extension\Core\Shape;
 
+use PhpTui\Tui\Extension\Core\Shape\Line;
 use PhpTui\Tui\Model\Canvas\Painter;
 use PhpTui\Tui\Model\Canvas\Shape;
 use PhpTui\Tui\Model\Canvas\ShapePainter;

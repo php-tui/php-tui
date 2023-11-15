@@ -9,7 +9,7 @@ use PhpTui\Tui\Model\Buffer;
 use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Widget\Canvas;
 use PhpTui\Tui\Model\Canvas\CanvasContext;
-use PhpTui\Tui\Shape\Rectangle;
+use PhpTui\Tui\Extension\Core\Shape\Rectangle;
 use Generator;
 
 class RectangleTest extends ShapeTestCase

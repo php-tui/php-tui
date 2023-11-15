@@ -24,7 +24,7 @@ use PhpTui\Tui\Model\Widget\Line;
 use PhpTui\Tui\Model\Widget\Title;
 use PhpTui\Tui\Widget\Block;
 use PhpTui\Tui\Widget\Canvas;
-use PhpTui\Tui\Shape\Map;
+use PhpTui\Tui\Extension\Core\Shape\Map;
 use PhpTui\Tui\Widget\Chart;
 use PhpTui\Tui\Widget\Chart\Axis;
 use PhpTui\Tui\Widget\Chart\DataSet;
