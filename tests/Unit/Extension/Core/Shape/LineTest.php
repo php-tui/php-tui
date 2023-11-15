@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpTui\Tui\Tests\Shape;
+namespace PhpTui\Tui\Tests\Unit\Extension\Core\Shape;
 
 use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\AxisBounds;

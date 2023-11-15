@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpTui\Tui\Adapter\ImageMagick;
+namespace PhpTui\Tui\Extension\ImageMagick;
 
 use Closure;
 use Imagick;

@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpTui\Tui\Adapter\ImageMagick\Shape;
+namespace PhpTui\Tui\Extension\ImageMagick\Shape;
 
 use PhpTui\Tui\Model\Widget\FloatPosition;
 use PhpTui\Tui\Model\Canvas\Shape;

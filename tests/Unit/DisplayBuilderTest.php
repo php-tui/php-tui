@@ -15,7 +15,7 @@ use PhpTui\Tui\Extension\Core\Shape\ClosureShape;
 use PhpTui\Tui\Extension\Core\Widget\Canvas;
 use PhpTui\Tui\Extension\Core\Widget\ClosureRenderer;
 
-final class DisplayBuilderTest extends TestCase
+final class Unit extends TestCase
 {
     public function testBuildDefault(): void
     {

@@ -1,10 +1,10 @@
 <?php
 
-namespace PhpTui\Tui\Adapter\ImageMagick\Shape;
+namespace PhpTui\Tui\Extension\ImageMagick\Shape;
 
 use Imagick;
 use ImagickPixel;
-use PhpTui\Tui\Adapter\ImageMagick\ImageRegistry;
+use PhpTui\Tui\Extension\ImageMagick\ImageRegistry;
 use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Canvas\Label;
 use PhpTui\Tui\Model\Canvas\ShapePainter;

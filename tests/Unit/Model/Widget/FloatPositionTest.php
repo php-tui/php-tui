@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpTui\Tui\Tests\Model\Widget;
+namespace PhpTui\Tui\Tests\Unit\Model\Widget;
 
 use PhpTui\Tui\Model\AxisBounds;
 use PhpTui\Tui\Model\Widget\FloatPosition;

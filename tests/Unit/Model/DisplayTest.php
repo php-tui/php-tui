@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpTui\Tui\Tests\Model;
+namespace PhpTui\Tui\Tests\Unit\Model;
 
 use PhpTui\Tui\DisplayBuilder;
 use PhpTui\Tui\Model\AnsiColor;

@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpTui\Tui\Tests\Model;
+namespace PhpTui\Tui\Tests\Unit\Model;
 
 use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Margin;

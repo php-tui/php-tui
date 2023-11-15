@@ -1,8 +1,8 @@
 <?php
 
-namespace PhpTui\Tui\Adapter\Bdf;
+namespace PhpTui\Tui\Extension\Bdf;
 
-use PhpTui\Tui\Adapter\Bdf\Shape\TextRenderer;
+use PhpTui\Tui\Extension\Bdf\Shape\TextRenderer;
 use PhpTui\Tui\Model\DisplayExtension;
 
 class BdfExtension implements DisplayExtension

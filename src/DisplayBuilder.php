@@ -2,7 +2,7 @@
 
 namespace PhpTui\Tui;
 
-use PhpTui\Tui\Adapter\PhpTerm\PhpTermBackend;
+use PhpTui\Tui\Extension\PhpTerm\PhpTermBackend;
 use PhpTui\Tui\Extension\Core\CoreExtension;
 use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Backend;

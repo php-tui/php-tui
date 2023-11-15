@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpTui\Tui\Adapter\Bdf\Shape;
+namespace PhpTui\Tui\Extension\Bdf\Shape;
 
 use PhpTui\Tui\Model\Color;
 use PhpTui\Tui\Model\Widget\FloatPosition;

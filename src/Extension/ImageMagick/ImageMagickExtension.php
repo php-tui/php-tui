@@ -1,8 +1,8 @@
 <?php
 
-namespace PhpTui\Tui\Adapter\ImageMagick;
+namespace PhpTui\Tui\Extension\ImageMagick;
 
-use PhpTui\Tui\Adapter\ImageMagick\Shape\ImagePainter;
+use PhpTui\Tui\Extension\ImageMagick\Shape\ImagePainter;
 use PhpTui\Tui\Model\DisplayExtension;
 
 final class ImageMagickExtension implements DisplayExtension

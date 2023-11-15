@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpTui\Tui\Adapter\Bdf;
+namespace PhpTui\Tui\Extension\Bdf;
 
 use PhpTui\BDF\BdfFont;
 use PhpTui\BDF\BdfParser;

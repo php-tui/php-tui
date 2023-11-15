@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpTui\Tui\Tests\Model;
+namespace PhpTui\Tui\Tests\Unit\Model;
 
 use PHPUnit\Framework\TestCase;
 use PhpTui\Tui\Model\AnsiColor;

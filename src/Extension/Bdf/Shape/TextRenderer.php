@@ -1,9 +1,9 @@
 <?php
 
-namespace PhpTui\Tui\Adapter\Bdf\Shape;
+namespace PhpTui\Tui\Extension\Bdf\Shape;
 
 use PhpTui\BDF\BdfGlyph;
-use PhpTui\Tui\Adapter\Bdf\FontRegistry;
+use PhpTui\Tui\Extension\Bdf\FontRegistry;
 use PhpTui\Tui\Model\Canvas\Shape;
 use PhpTui\Tui\Model\Canvas\ShapePainter;
 use PhpTui\Tui\Model\Widget\FloatPosition;

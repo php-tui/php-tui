@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpTui\Tui\Tests\Model\Widget;
+namespace PhpTui\Tui\Tests\Unit\Model\Widget;
 
 use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Style;
