@@ -101,7 +101,6 @@ class ItemListRenderer implements WidgetRenderer
             $end += 1;
         }
 
-
         if ($list->state->selected !== null) {
             if ($list->state->selected < 0) {
                 $list->state->selected = 0;

@@ -14,7 +14,6 @@ final class ImageRegistry
      */
     private array $images = [];
 
-
     public function load(string $path): Imagick
     {
         if (isset($this->images[$path])) {

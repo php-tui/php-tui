@@ -63,8 +63,6 @@ class BufferTest extends TestCase
         self::assertEquals(AnsiColor::Reset, $buffer->get(Position::at(3, 3))->fg);
     }
 
-
-
     public function testPutLine(): void
     {
         $buffer = Buffer::empty(Area::fromDimensions(4, 4));
@@ -76,7 +74,6 @@ class BufferTest extends TestCase
             '    ',
         ], $buffer->toLines());
     }
-
 
     public function testDiffStylesOnly(): void
     {

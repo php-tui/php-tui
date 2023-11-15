@@ -37,7 +37,6 @@ class PhpTermBackend implements Backend
         return new self($terminal ?? PhpTermTerminal::new());
     }
 
-
     public function size(): Area
     {
         $size = $this->terminal->info(Size::class);

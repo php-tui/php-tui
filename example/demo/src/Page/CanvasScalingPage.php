@@ -38,7 +38,6 @@ class CanvasScalingPage implements Component
 
     private int $marker = 0;
 
-
     public function __construct(private Terminal $terminal, private int $xMax = 320, private int $yMax = 240)
     {
         $this->text = new TextShape(
@@ -127,7 +126,6 @@ class CanvasScalingPage implements Component
                 $this->marker--;
             }
         }
-
 
     }
 

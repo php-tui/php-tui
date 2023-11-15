@@ -42,7 +42,6 @@ class HtmlCanvasPainter implements Painter
 
     private SetRgbForegroundColor $defaultFgColor;
 
-
     private function __construct(
         int $width,
         int $height,
