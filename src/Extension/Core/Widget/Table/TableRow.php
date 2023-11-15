@@ -19,12 +19,16 @@ final class TableRow
     ) {
     }
 
-    /**
-     * @param list<TableCell> $cells
-     */
-    public static function fromCells(array $cells): self
+    public static function fromCells(TableCell ...$cells): self
     {
-        return new self($cells, 1, 0, Style::default());
+        return new self(array_values($cells), 1, 0, Style::default());
+    }
+
+    public static function fromStrings(string ...$strings): self
+    {
+        return new self(array_map(function (string $string) {
+            return TableCell::fromString($string);
+        }, array_values($strings)), 1, 0, Style::default());
     }
 
     public function totalHeight(): int

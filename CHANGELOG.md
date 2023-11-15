@@ -12,9 +12,14 @@ Bug fixes:
 
 - Make mouse event properties public
 
+Improvements
+
+- Add `TableRow::fromStrings('one', 'two')`
+
 Refactoring:
 
 - Re-organized namespaces
+- Use variadic for `TableRow::fromTableCells`
 
 ## 0.0.1
 
