@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Model;
 
 final class Cell
@@ -38,6 +40,7 @@ final class Cell
     public function setChar(string $char): self
     {
         $this->char = $char;
+
         return $this;
     }
 
@@ -54,6 +57,7 @@ final class Cell
         }
         $this->modifiers |= $style->addModifiers;
         $this->modifiers &= ~$style->subModifiers;
+
         return $this;
     }
 

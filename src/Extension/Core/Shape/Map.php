@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Extension\Core\Shape;
 
 use PhpTui\Tui\Model\AnsiColor;
-use PhpTui\Tui\Model\Color;
 use PhpTui\Tui\Model\Canvas\Shape;
+use PhpTui\Tui\Model\Color;
 
 /**
  * Renders a map of the world!
@@ -26,6 +28,7 @@ class Map implements Shape
     public function resolution(MapResolution $resolution): self
     {
         $this->mapResolution = $resolution;
+
         return $this;
     }
 
@@ -37,6 +40,7 @@ class Map implements Shape
     public function color(Color $color): self
     {
         $this->color = $color;
+
         return $this;
     }
 }

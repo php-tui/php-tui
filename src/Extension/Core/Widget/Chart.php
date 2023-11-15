@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Extension\Core\Widget;
 
-use PhpTui\Tui\Model\Style;
-use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Extension\Core\Widget\Chart\Axis;
 use PhpTui\Tui\Extension\Core\Widget\Chart\DataSet;
+use PhpTui\Tui\Model\Style;
+use PhpTui\Tui\Model\Widget;
 
 /**
  * Renders a a composite of scatter or line graphs.
@@ -49,17 +51,20 @@ final class Chart implements Widget
     public function xAxis(Axis $axis): self
     {
         $this->xAxis = $axis;
+
         return $this;
     }
     public function yAxis(Axis $axis): self
     {
         $this->yAxis = $axis;
+
         return $this;
     }
 
     public function datasets(DataSet ...$dataSets): self
     {
         $this->dataSets = $dataSets;
+
         return $this;
     }
 }

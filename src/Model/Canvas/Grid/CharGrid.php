@@ -1,14 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Model\Canvas\Grid;
 
 use PhpTui\Tui\Model\AnsiColor;
-use PhpTui\Tui\Model\Color;
-use PhpTui\Tui\Model\Position;
 use PhpTui\Tui\Model\Canvas\CanvasGrid;
 use PhpTui\Tui\Model\Canvas\FgBgColor;
 use PhpTui\Tui\Model\Canvas\Layer;
 use PhpTui\Tui\Model\Canvas\Resolution;
+use PhpTui\Tui\Model\Color;
+use PhpTui\Tui\Model\Position;
 
 final class CharGrid extends CanvasGrid
 {
@@ -27,6 +29,7 @@ final class CharGrid extends CanvasGrid
     public static function new(int $width, int $height, string $cellChar): self
     {
         $length = $width * $height;
+
         return new self(
             new Resolution($width, $height),
             array_fill(0, $length, ' '),

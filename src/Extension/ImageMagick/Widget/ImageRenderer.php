@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Extension\ImageMagick\Widget;
 
 use PhpTui\Tui\Extension\Core\Widget\Canvas;

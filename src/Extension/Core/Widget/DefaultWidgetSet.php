@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Extension\Core\Widget;
 
-use PhpTui\Tui\Model\Widget\CanvasRenderer;
 use PhpTui\Tui\Model\Canvas\ShapePainter;
+use PhpTui\Tui\Model\Widget\CanvasRenderer;
 use PhpTui\Tui\Model\WidgetSet;
 
 class DefaultWidgetSet implements WidgetSet

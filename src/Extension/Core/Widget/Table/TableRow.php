@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Extension\Core\Widget\Table;
 
 use PhpTui\Tui\Model\Style;
@@ -35,18 +37,21 @@ final class TableRow
         if (!isset($this->cells[$index])) {
             return null;
         }
+
         return $this->cells[$index];
     }
 
     public function bottomMargin(int $bottomMargin): self
     {
         $this->bottomMargin = $bottomMargin;
+
         return $this;
     }
 
     public function height(int $height): self
     {
         $this->height = $height;
+
         return $this;
     }
 }

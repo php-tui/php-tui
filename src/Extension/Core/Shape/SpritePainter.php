@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Extension\Core\Shape;
 
+use PhpTui\Tui\Model\Canvas\Painter;
 use PhpTui\Tui\Model\Canvas\Shape;
 use PhpTui\Tui\Model\Canvas\ShapePainter;
 use PhpTui\Tui\Model\Widget\FloatPosition;
-use PhpTui\Tui\Model\Canvas\Painter;
 
 class SpritePainter implements ShapePainter
 {
@@ -37,8 +39,8 @@ class SpritePainter implements ShapePainter
                 if ($char === $shape->alphaChar) {
                     continue;
                 }
-                for ($yF = $y1; $yF < $y2; $yF+=$yStep) {
-                    for ($xF = $x1; $xF < $x2; $xF+=$xStep) {
+                for ($yF = $y1; $yF < $y2; $yF += $yStep) {
+                    for ($xF = $x1; $xF < $x2; $xF += $xStep) {
                         $point = $painter->getPoint(FloatPosition::at(
                             1 + $shape->position->x + $xF,
                             $shape->position->y + $yF,

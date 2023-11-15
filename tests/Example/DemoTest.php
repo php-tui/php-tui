@@ -1,17 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Tests\Example;
 
-use PHPUnit\Framework\TestCase;
 use PhpTui\Term\Event;
-use PhpTui\Term\EventProvider\LoadedEventProvider;
 use PhpTui\Term\Event\CharKeyEvent;
+use PhpTui\Term\EventProvider\LoadedEventProvider;
 use PhpTui\Term\InformationProvider\AggregateInformationProvider;
 use PhpTui\Term\Painter\BufferPainter;
 use PhpTui\Term\RawMode\NullRawMode;
 use PhpTui\Term\Terminal;
 use PhpTui\Tui\Example\Demo\App;
 use PhpTui\Tui\Model\Backend\DummyBackend;
+use PHPUnit\Framework\TestCase;
 use RuntimeException;
 
 class DemoTest extends TestCase
@@ -119,6 +121,7 @@ class DemoTest extends TestCase
             $backend,
         );
         $app->run();
+
         return $backend;
     }
 

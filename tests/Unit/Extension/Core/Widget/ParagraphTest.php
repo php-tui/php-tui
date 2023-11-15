@@ -1,18 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Tests\Unit\Extension\Core\Widget;
 
+use Generator;
+use PhpTui\Tui\Extension\Core\Widget\Paragraph;
 use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Buffer;
 use PhpTui\Tui\Model\Widget\HorizontalAlignment;
 use PhpTui\Tui\Model\Widget\Line;
 use PhpTui\Tui\Model\Widget\Text;
-use PhpTui\Tui\Extension\Core\Widget\Paragraph;
-use Generator;
 
 class ParagraphTest extends WidgetTestCase
 {
-
     public function testFromString(): void
     {
         $paragraph = Paragraph::fromString('Hello');

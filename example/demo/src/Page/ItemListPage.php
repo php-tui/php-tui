@@ -1,24 +1,26 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Example\Demo\Page;
 
 use PhpTui\Term\Event;
 use PhpTui\Tui\Example\Demo\Component;
+use PhpTui\Tui\Extension\Core\Widget\Block;
+use PhpTui\Tui\Extension\Core\Widget\ItemList;
+use PhpTui\Tui\Extension\Core\Widget\ItemList\ItemListState;
+use PhpTui\Tui\Extension\Core\Widget\ItemList\ListItem;
 use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\Widget\Borders;
-use PhpTui\Tui\Model\Widget\Span;
 use PhpTui\Tui\Model\Widget\Line;
+use PhpTui\Tui\Model\Widget\Span;
 use PhpTui\Tui\Model\Widget\Text;
-use PhpTui\Tui\Extension\Core\Widget\Block;
-use PhpTui\Tui\Extension\Core\Widget\ItemList\ItemListState;
-use PhpTui\Tui\Extension\Core\Widget\ItemList\ListItem;
-use PhpTui\Tui\Extension\Core\Widget\ItemList;
 
 final class ItemListPage implements Component
 {
-    const EVENTS = [
+    public const EVENTS = [
         ['Event1', 'INFO'],
         ['Event2', 'INFO'],
         ['Event3', 'CRITICAL'],

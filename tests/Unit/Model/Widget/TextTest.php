@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Tests\Unit\Model\Widget;
 
 use PhpTui\Tui\Model\AnsiColor;

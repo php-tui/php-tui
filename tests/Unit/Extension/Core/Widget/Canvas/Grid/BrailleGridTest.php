@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Tests\Unit\Extension\Core\Widget\Canvas\Grid;
 
-use PHPUnit\Framework\TestCase;
 use PhpTui\Tui\Model\AnsiColor;
-use PhpTui\Tui\Model\Position;
 use PhpTui\Tui\Model\Canvas\Grid\BrailleGrid;
+use PhpTui\Tui\Model\Position;
+use PHPUnit\Framework\TestCase;
 
 class BrailleGridTest extends TestCase
 {

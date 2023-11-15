@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Term\InformationProvider;
 
 use PhpTui\Term\InformationProvider;
@@ -22,7 +24,7 @@ class SizeFromEnvVarProvider implements InformationProvider
         }
 
         /** @phpstan-ignore-next-line */
-        return new Size(intval($lines), intval($cols));
+        return new Size((int) $lines, (int) $cols);
     }
 
     public static function new(): self

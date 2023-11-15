@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Term\InformationProvider;
 
 use PhpTui\Term\InformationProvider;
@@ -28,6 +30,7 @@ final class SizeFromSttyProvider implements InformationProvider
         if (null === $out) {
             return null;
         }
+
         /**
          * @phpstan-ignore-next-line */
         return $this->parse($out);
@@ -50,6 +53,6 @@ final class SizeFromSttyProvider implements InformationProvider
             return null;
         }
 
-        return new Size(intval($matches[1]), intval($matches[2]));
+        return new Size((int) ($matches[1]), (int) ($matches[2]));
     }
 }

@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Model\Widget;
 
 use ArrayIterator;
-use PhpTui\Tui\Model\Style;
 use IteratorAggregate;
+use PhpTui\Tui\Model\Style;
 use Stringable;
 use Traversable;
 
@@ -65,6 +67,7 @@ final class Line implements IteratorAggregate, Stringable
         foreach ($this->spans as $span) {
             $span->patchStyle($style);
         }
+
         return $this;
     }
 
@@ -74,6 +77,7 @@ final class Line implements IteratorAggregate, Stringable
     public function alignment(HorizontalAlignment $alignment): self
     {
         $this->alignment = $alignment;
+
         return $this;
     }
 

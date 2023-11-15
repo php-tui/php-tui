@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Bdf\Tests\Benchmark;
 
-use RuntimeException;
-use PhpTui\BDF\BdfParser;
 use PhpBench\Attributes\Iterations;
 use PhpBench\Attributes\Revs;
+use PhpTui\BDF\BdfParser;
+use RuntimeException;
 
 #[Iterations(10)]
 #[Revs(25)]

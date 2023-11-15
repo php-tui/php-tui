@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Tests\Benchmark\Model;
 
 use PhpBench\Attributes\Iterations;
@@ -12,19 +14,9 @@ use PhpTui\Term\Size;
 use PhpTui\Term\Terminal;
 use PhpTui\Tui\Bridge\PhpTerm\PhpTermBackend;
 use PhpTui\Tui\DisplayBuilder;
-use PhpTui\Tui\Model\AxisBounds;
-use PhpTui\Tui\Model\Buffer;
-use PhpTui\Tui\Model\Constraint;
-use PhpTui\Tui\Model\Direction;
-use PhpTui\Tui\Model\Display;
-use PhpTui\Tui\Model\Position;
-use PhpTui\Tui\Model\Widget;
-use PhpTui\Tui\Model\Widget\Borders;
-use PhpTui\Tui\Model\Widget\Line;
-use PhpTui\Tui\Model\Widget\Title;
+use PhpTui\Tui\Extension\Core\Shape\Map;
 use PhpTui\Tui\Extension\Core\Widget\Block;
 use PhpTui\Tui\Extension\Core\Widget\Canvas;
-use PhpTui\Tui\Extension\Core\Shape\Map;
 use PhpTui\Tui\Extension\Core\Widget\Chart;
 use PhpTui\Tui\Extension\Core\Widget\Chart\Axis;
 use PhpTui\Tui\Extension\Core\Widget\Chart\DataSet;
@@ -36,6 +28,16 @@ use PhpTui\Tui\Extension\Core\Widget\RawWidget;
 use PhpTui\Tui\Extension\Core\Widget\Table;
 use PhpTui\Tui\Extension\Core\Widget\Table\TableCell;
 use PhpTui\Tui\Extension\Core\Widget\Table\TableRow;
+use PhpTui\Tui\Model\AxisBounds;
+use PhpTui\Tui\Model\Buffer;
+use PhpTui\Tui\Model\Constraint;
+use PhpTui\Tui\Model\Direction;
+use PhpTui\Tui\Model\Display;
+use PhpTui\Tui\Model\Position;
+use PhpTui\Tui\Model\Widget;
+use PhpTui\Tui\Model\Widget\Borders;
+use PhpTui\Tui\Model\Widget\Line;
+use PhpTui\Tui\Model\Widget\Title;
 
 final class DisplayBench
 {
@@ -104,8 +106,9 @@ final class DisplayBench
         $grid = Grid::default()->direction(Direction::Horizontal);
         $constraints = [];
         foreach ($widgets as $widget) {
-            $constraints[] = Constraint::percentage(intval($width));
+            $constraints[] = Constraint::percentage((int) $width);
         }
+
         return $grid->constraints(...$constraints)->widgets(...$widgets);
     }
 }

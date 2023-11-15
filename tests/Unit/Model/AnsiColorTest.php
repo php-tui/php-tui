@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Tests\Unit\Model;
 
-use PHPUnit\Framework\TestCase;
 use PhpTui\Tui\Model\AnsiColor;
+use PHPUnit\Framework\TestCase;
 use ValueError;
 
 class AnsiColorTest extends TestCase

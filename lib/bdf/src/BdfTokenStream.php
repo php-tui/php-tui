@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\BDF;
 
 use Closure;
@@ -63,6 +65,7 @@ final class BdfTokenStream
         );
         $this->skipWhitespace();
         $this->skipComments();
+
         return $taken;
     }
 
@@ -81,6 +84,7 @@ final class BdfTokenStream
             $this->advance();
             $this->skipWhitespace();
             $this->skipComments();
+
             return $int;
         }
 

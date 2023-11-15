@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Model\Canvas;
 
 use PhpTui\Tui\Model\Color;
@@ -39,7 +41,7 @@ class Painter
         $x = ($floatPosition->x - $this->context->xBounds->min) * ($this->resolution->width - 1.0) / $width;
         $y = ($this->context->yBounds->max - $floatPosition->y) * ($this->resolution->height - 1.0) / $height;
 
-        return Position::at(intval($x), intval($y));
+        return Position::at((int) $x, (int) $y);
     }
 
     public function paint(Position $position, Color $color): void

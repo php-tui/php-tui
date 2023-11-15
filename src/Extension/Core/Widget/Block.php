@@ -1,14 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Extension\Core\Widget;
 
+use PhpTui\Tui\Extension\Core\Widget\Block\Padding;
 use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Widget;
-use PhpTui\Tui\Model\Widget\BorderType;
 use PhpTui\Tui\Model\Widget\Borders;
+use PhpTui\Tui\Model\Widget\BorderType;
 use PhpTui\Tui\Model\Widget\Title;
-use PhpTui\Tui\Extension\Core\Widget\Block\Padding;
 
 /**
  * The block widget is a container for other widgets and can provide a border,
@@ -74,6 +76,7 @@ final class Block implements Widget
     public function widget(Widget $widget): self
     {
         $this->widget = $widget;
+
         return $this;
     }
 
@@ -83,42 +86,49 @@ final class Block implements Widget
     public function borders(int $flag): self
     {
         $this->borders = $flag;
+
         return $this;
     }
 
     public function titles(Title ...$titles): self
     {
         $this->titles = $titles;
+
         return $this;
     }
 
     public function borderType(BorderType $borderType): self
     {
         $this->borderType = $borderType;
+
         return $this;
     }
 
     public function style(Style $style): self
     {
         $this->style = $style;
+
         return $this;
     }
 
     public function borderStyle(Style $style): self
     {
         $this->borderStyle = $style;
+
         return $this;
     }
 
     public function titleStyle(Style $style): self
     {
         $this->titleStyle = $style;
+
         return $this;
     }
 
     public function padding(Padding $padding): self
     {
         $this->padding = $padding;
+
         return $this;
     }
 
@@ -134,7 +144,7 @@ final class Block implements Widget
         }
         if ($this->borders & Borders::TOP || [] !== $this->titles) {
             $y = min($y + 1, $area->bottom());
-            $height = max(0, $height-1);
+            $height = max(0, $height - 1);
         }
         if ($this->borders & Borders::RIGHT) {
             $width = max(0, $width - 1);

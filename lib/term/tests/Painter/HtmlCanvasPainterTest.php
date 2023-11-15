@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Term\Tests\Painter;
 
-use PHPUnit\Framework\TestCase;
 use PhpTui\Term\Actions;
 use PhpTui\Term\Painter\HtmlCanvasPainter;
+use PHPUnit\Framework\TestCase;
 
 class HtmlCanvasPainterTest extends TestCase
 {
@@ -72,6 +74,7 @@ class HtmlCanvasPainterTest extends TestCase
     {
         $normalized = preg_replace('{canvas id=".*?"}', 'canvas id=***', $string);
         $normalized = preg_replace('{getElementById\(".*?"\)}', 'getElementById(***)', (string)$normalized);
+
         return (string)$normalized;
     }
 }

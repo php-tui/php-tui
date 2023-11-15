@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Extension\Core\Shape;
 
 use PhpTui\Tui\Model\AnsiColor;
+use PhpTui\Tui\Model\Canvas\Shape;
 use PhpTui\Tui\Model\Color;
 use PhpTui\Tui\Model\Widget\FloatPosition;
-use PhpTui\Tui\Model\Canvas\Shape;
 
 /**
  * Draw a straight line from one point to another.
@@ -40,6 +42,7 @@ class Line implements Shape
     public function color(Color $color): self
     {
         $this->color = $color;
+
         return $this;
     }
 

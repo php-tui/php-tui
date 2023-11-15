@@ -1,18 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Extension\ImageMagick\Shape;
 
 use ImagickPixel;
+use PhpTui\Tui\Extension\Core\Shape\Line;
 use PhpTui\Tui\Extension\ImageMagick\ImageRegistry;
 use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Canvas\Label;
+use PhpTui\Tui\Model\Canvas\Painter;
+use PhpTui\Tui\Model\Canvas\Shape;
 use PhpTui\Tui\Model\Canvas\ShapePainter;
 use PhpTui\Tui\Model\RgbColor;
 use PhpTui\Tui\Model\Widget\FloatPosition;
-use PhpTui\Tui\Model\Canvas\Painter;
-use PhpTui\Tui\Model\Canvas\Shape;
 use PhpTui\Tui\Model\Widget\Line as PhpTuiLine;
-use PhpTui\Tui\Extension\Core\Shape\Line;
 
 final class ImagePainter implements ShapePainter
 {
@@ -53,6 +55,7 @@ final class ImagePainter implements ShapePainter
             $painter->context->labels->add(
                 new Label(FloatPosition::at(0, 0), PhpTuiLine::fromString('Imagick extension not loaded!'))
             );
+
             return;
         }
 
@@ -67,7 +70,7 @@ final class ImagePainter implements ShapePainter
                 $point = $painter->getPoint(
                     FloatPosition::at(
                         $shape->position->x + $x,
-                        $shape->position->y + $geo['height'] - intval($y) - 1
+                        $shape->position->y + $geo['height'] - (int) $y - 1
                     )
                 );
                 if (null === $point) {

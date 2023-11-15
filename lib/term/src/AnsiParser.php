@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Term;
 
 use PhpTui\Term\Action\PrintString;
@@ -40,6 +42,7 @@ final class AnsiParser
         foreach ($actions as $action) {
             if ($action instanceof PrintString) {
                 $strings[] = $action;
+
                 continue;
             }
             if ($strings) {
@@ -55,6 +58,7 @@ final class AnsiParser
                 implode('', array_map(fn (PrintString $s) => $s->string, $strings))
             );
         }
+
         return $newActions;
     }
 
@@ -67,6 +71,7 @@ final class AnsiParser
             $more = $index + 1 < strlen($line) || $more;
 
             $this->buffer[] = $char;
+
             try {
                 $action = $this->parseAction($this->buffer, $more);
             } catch (ParseError $error) {
@@ -74,6 +79,7 @@ final class AnsiParser
                     throw $error;
                 }
                 $this->buffer = [];
+
                 continue;
             }
             if ($action === null) {
@@ -91,6 +97,7 @@ final class AnsiParser
     {
         $parser = new self($throw);
         $parser->advance($output, true);
+
         return $parser->drain();
     }
 
@@ -174,7 +181,8 @@ final class AnsiParser
 
         // true colors
         if (count($parts) === 5) {
-            $rgb = array_map(fn (string $index) => intval($index), array_slice($parts, -3));
+            $rgb = array_map(fn (string $index) => (int) $index, array_slice($parts, -3));
+
             return match ($parts[0]) {
                 '48' => Actions::setRgbBackgroundColor(...$rgb),
                 '38' => Actions::setRgbForegroundColor(...$rgb),
@@ -184,8 +192,8 @@ final class AnsiParser
 
         // 256 or ANSI colors
         return match ($parts[0]) {
-            '48' => Actions::setRgbBackgroundColor(...Colors256::indexToRgb(intval($parts[2]))),
-            '38' => Actions::setRgbForegroundColor(...Colors256::indexToRgb(intval($parts[2]))),
+            '48' => Actions::setRgbBackgroundColor(...Colors256::indexToRgb((int) ($parts[2]))),
+            '38' => Actions::setRgbForegroundColor(...Colors256::indexToRgb((int) ($parts[2]))),
             '0' => Actions::reset(),
             default => throw new ParseError(sprintf('Could not parse graphics mode: %s', json_encode(implode('', $buffer)))),
         };
@@ -200,6 +208,7 @@ final class AnsiParser
         if (count($buffer) === 3) {
             return null;
         }
+
         return match ($buffer[3]) {
             '2' => $this->parsePrivateModes2($buffer),
             '1' => $this->parsePrivateModes2($buffer),
@@ -218,6 +227,7 @@ final class AnsiParser
         if (count($buffer) === 5) {
             return null;
         }
+
         return match ($buffer[4]) {
             '5' => match ($buffer[5]) {
                 'l' => Actions::cursorHide(),
@@ -229,6 +239,7 @@ final class AnsiParser
                     if (count($buffer) === 6 || count($buffer) === 7) {
                         return null;
                     }
+
                     return match ($buffer[7]) {
                         'h' => Actions::alternateScreenEnable(),
                         'l' => Actions::alternateScreenDisable(),
@@ -251,6 +262,7 @@ final class AnsiParser
         if (count($parts) !== 2) {
             throw new ParseError(sprintf('Could not parse cursor position from: "%s"', $string));
         }
-        return Actions::moveCursor(intval($parts[0]), intval($parts[1]));
+
+        return Actions::moveCursor((int) ($parts[0]), (int) ($parts[1]));
     }
 }

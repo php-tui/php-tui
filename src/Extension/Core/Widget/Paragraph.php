@@ -1,13 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Extension\Core\Widget;
 
+use PhpTui\Tui\Extension\Core\Widget\Paragraph\Wrap;
 use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\Widget\HorizontalAlignment;
 use PhpTui\Tui\Model\Widget\Line;
 use PhpTui\Tui\Model\Widget\Text;
-use PhpTui\Tui\Extension\Core\Widget\Paragraph\Wrap;
 
 /**
  * This widget has the ability to show and wrap text.
@@ -42,19 +44,22 @@ class Paragraph implements Widget
 
     public function style(Style $style): self
     {
-        $this->style=  $style;
+        $this->style =  $style;
+
         return $this;
     }
 
     public function alignment(HorizontalAlignment $alignment): self
     {
         $this->alignment = $alignment;
+
         return $this;
     }
 
     public function wrap(Wrap $wrap): self
     {
         $this->wrap = $wrap;
+
         return $this;
     }
 

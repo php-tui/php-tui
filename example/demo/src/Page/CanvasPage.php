@@ -1,23 +1,25 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Example\Demo\Page;
 
 use PhpTui\Term\Event;
 use PhpTui\Term\Event\CharKeyEvent;
 use PhpTui\Tui\Example\Demo\Component;
+use PhpTui\Tui\Extension\Core\Shape\Map;
+use PhpTui\Tui\Extension\Core\Shape\MapResolution;
+use PhpTui\Tui\Extension\Core\Widget\Block;
+use PhpTui\Tui\Extension\Core\Widget\Canvas as PhpTuiCanvas;
 use PhpTui\Tui\Model\AnsiColor;
+use PhpTui\Tui\Model\Canvas\CanvasContext;
 use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Model\Modifier;
 use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Widget;
+use PhpTui\Tui\Model\Widget\Borders;
 use PhpTui\Tui\Model\Widget\Line as PhpTuiLine;
 use PhpTui\Tui\Model\Widget\Title;
-use PhpTui\Tui\Extension\Core\Widget\Canvas as PhpTuiCanvas;
-use PhpTui\Tui\Model\Canvas\CanvasContext;
-use PhpTui\Tui\Model\Widget\Borders;
-use PhpTui\Tui\Extension\Core\Widget\Block;
-use PhpTui\Tui\Extension\Core\Shape\MapResolution;
-use PhpTui\Tui\Extension\Core\Shape\Map;
 
 class CanvasPage implements Component
 {

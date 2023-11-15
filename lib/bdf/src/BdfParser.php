@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\BDF;
 
 use RuntimeException;
@@ -103,6 +105,7 @@ final class BdfParser
             $tokens->advance();
             if ($propertyName === BdfToken::COMMENT->name) {
                 $tokens->parseLine();
+
                 continue;
             }
             $values = $this->parseValue($tokens);

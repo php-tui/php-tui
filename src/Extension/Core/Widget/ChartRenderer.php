@@ -1,19 +1,21 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Extension\Core\Widget;
 
+use PhpTui\Tui\Extension\Core\Shape\Points;
+use PhpTui\Tui\Extension\Core\Widget\Chart\ChartLayout;
 use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Buffer;
+use PhpTui\Tui\Model\Canvas\CanvasContext;
 use PhpTui\Tui\Model\Position;
 use PhpTui\Tui\Model\Widget;
-use PhpTui\Tui\Model\WidgetRenderer;
 use PhpTui\Tui\Model\Widget\HorizontalAlignment;
 use PhpTui\Tui\Model\Widget\LineSet;
 use PhpTui\Tui\Model\Widget\Span;
-use PhpTui\Tui\Model\Canvas\CanvasContext;
-use PhpTui\Tui\Extension\Core\Shape\Points;
-use PhpTui\Tui\Extension\Core\Widget\Chart\ChartLayout;
+use PhpTui\Tui\Model\WidgetRenderer;
 use RuntimeException;
 
 /**
@@ -145,7 +147,7 @@ final class ChartRenderer implements WidgetRenderer
         if (count($labels) < 2) {
             return;
         }
-        $widthBetweenTicks = intval($layout->graphArea->width / count($labels));
+        $widthBetweenTicks = (int) ($layout->graphArea->width / count($labels));
         $labelAlignment = match ($chart->xAxis->labelAlignment) {
             HorizontalAlignment::Left => HorizontalAlignment::Right,
             HorizontalAlignment::Center => HorizontalAlignment::Center,
@@ -170,7 +172,7 @@ final class ChartRenderer implements WidgetRenderer
         }
         foreach ($labels as $i => $label) {
             $x = $layout->graphArea->left() + ($i + 1) * $widthBetweenTicks + 1;
-            $labelArea = Area::fromScalars($x, $layout->labelX, $widthBetweenTicks -1, 1);
+            $labelArea = Area::fromScalars($x, $layout->labelX, $widthBetweenTicks - 1, 1);
             self::renderLabel($buffer, $label, $labelArea, HorizontalAlignment::Center);
         }
         $x = $layout->graphArea->right() - $widthBetweenTicks;
@@ -202,7 +204,7 @@ final class ChartRenderer implements WidgetRenderer
             HorizontalAlignment::Right => $labelArea->right() - $boundedLabelWidth,
         };
 
-        $buffer->putSpan(Position::at(intval($x), $labelArea->top()), $label, $boundedLabelWidth);
+        $buffer->putSpan(Position::at((int) $x, $labelArea->top()), $label, $boundedLabelWidth);
     }
 
     private function renderYLabels(Chart $chart, Buffer $buffer, ChartLayout $layout, Area $chartArea): void
@@ -216,7 +218,7 @@ final class ChartRenderer implements WidgetRenderer
         }
         $labelsLen = count($labels);
         foreach ($labels as $i => $label) {
-            $dy = intval($i * ($layout->graphArea->height - 1) / ($labelsLen - 1));
+            $dy = (int) ($i * ($layout->graphArea->height - 1) / ($labelsLen - 1));
             if ($dy < $layout->graphArea->bottom()) {
                 $labelArea = Area::fromScalars(
                     $layout->labelY,

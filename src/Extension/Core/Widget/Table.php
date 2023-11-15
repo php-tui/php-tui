@@ -1,14 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Extension\Core\Widget;
 
+use PhpTui\Tui\Extension\Core\Widget\ItemList\HighlightSpacing;
+use PhpTui\Tui\Extension\Core\Widget\Table\TableRow;
+use PhpTui\Tui\Extension\Core\Widget\Table\TableState;
 use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Constraint;
 use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Widget;
-use PhpTui\Tui\Extension\Core\Widget\ItemList\HighlightSpacing;
-use PhpTui\Tui\Extension\Core\Widget\Table\TableRow;
-use PhpTui\Tui\Extension\Core\Widget\Table\TableState;
 
 /**
  * Shows tabular data arranged in columns. The column spacing is determined by
@@ -77,47 +79,55 @@ final class Table implements Widget
     public function header(TableRow $tableRow): self
     {
         $this->header = $tableRow;
+
         return $this;
     }
     public function rows(TableRow ...$rows): self
     {
         $this->rows = array_values($rows);
+
         return $this;
     }
 
     public function widths(Constraint ...$widths): self
     {
         $this->widths = array_values($widths);
+
         return $this;
     }
 
     public function select(int $selection): self
     {
         $this->state->selected = $selection;
+
         return $this;
     }
 
     public function offset(int $offset): self
     {
         $this->state->offset = $offset;
+
         return $this;
     }
 
     public function state(TableState $state): self
     {
         $this->state = $state;
+
         return $this;
     }
 
     public function highlightSymbol(string $symbol): self
     {
         $this->highlightSymbol = $symbol;
+
         return $this;
     }
 
     public function highlightStyle(Style $style): self
     {
         $this->highlightStyle = $style;
+
         return $this;
     }
 }

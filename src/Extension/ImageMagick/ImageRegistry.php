@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Extension\ImageMagick;
 
 use Imagick;
@@ -39,6 +41,7 @@ final class ImageRegistry
                 $path
             ));
         }
+
         return $image;
     }
 }

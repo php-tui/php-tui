@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Term\Reader;
 
 use PhpTui\Term\Reader;
@@ -18,6 +20,7 @@ final class StreamReader implements Reader
         // TODO: open `/dev/tty` is STDIN is not a TTY
         $resource = STDIN;
         stream_set_blocking($resource, false);
+
         return new self(STDIN);
     }
 

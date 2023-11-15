@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Extension\Core\Widget\ItemList;
 
 use PhpTui\Tui\Model\Style;
@@ -21,6 +23,7 @@ final class ListItem
     public function style(Style $style): self
     {
         $this->style = $style;
+
         return $this;
     }
 

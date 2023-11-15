@@ -1,8 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Tests\Unit\Model;
 
 use Closure;
+use Generator;
 use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Buffer;
@@ -12,7 +15,6 @@ use PhpTui\Tui\Model\Position;
 use PhpTui\Tui\Model\RgbColor;
 use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Widget\Line;
-use Generator;
 use PHPUnit\Framework\TestCase;
 
 class BufferTest extends TestCase

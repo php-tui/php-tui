@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Extension\Core\Widget;
 
 use PhpTui\Tui\Model\Constraint;
@@ -45,18 +47,21 @@ class Grid implements Widget
     public function direction(Direction $direction): self
     {
         $this->direction = $direction;
+
         return $this;
     }
 
     public function constraints(Constraint ...$constraints): self
     {
         $this->constraints = array_values($constraints);
+
         return $this;
     }
 
     public function widgets(Widget ...$widgets): self
     {
         $this->widgets = array_values($widgets);
+
         return $this;
     }
 }

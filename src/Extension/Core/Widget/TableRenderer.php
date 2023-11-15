@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Extension\Core\Widget;
 
+use PhpTui\Tui\Extension\Core\Widget\Table\TableCell;
 use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Buffer;
 use PhpTui\Tui\Model\Constraint;
@@ -9,9 +12,8 @@ use PhpTui\Tui\Model\Direction;
 use PhpTui\Tui\Model\Layout;
 use PhpTui\Tui\Model\Position;
 use PhpTui\Tui\Model\Widget;
-use PhpTui\Tui\Model\WidgetRenderer;
 use PhpTui\Tui\Model\Widget\HorizontalAlignment;
-use PhpTui\Tui\Extension\Core\Widget\Table\TableCell;
+use PhpTui\Tui\Model\WidgetRenderer;
 
 final class TableRenderer implements WidgetRenderer
 {
@@ -31,7 +33,7 @@ final class TableRenderer implements WidgetRenderer
             $widget->state->selected !== null
         ) ? mb_strlen($widget->highlightSymbol) : 0;
 
-        $columnWidths = $this->getColumnsWidths($widget, $tableArea->width, intval($selectionWidth));
+        $columnWidths = $this->getColumnsWidths($widget, $tableArea->width, $selectionWidth);
         $highlightSymbol = $widget->highlightSymbol;
         $currentHeight = 0;
         $rowsHeight = $tableArea->height;
@@ -141,6 +143,7 @@ final class TableRenderer implements WidgetRenderer
             $chunk = $chunks->get($i);
             $widths[] = [$chunk->position->x, $chunk->width];
         }
+
         return $widths;
     }
 

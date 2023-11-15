@@ -1,30 +1,32 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Example\Demo\Page;
 
 use PhpTui\Term\Event;
 use PhpTui\Tui\Example\Demo\Component;
 use PhpTui\Tui\Extension\Bdf\Shape\TextShape;
+use PhpTui\Tui\Extension\Core\Shape\Points;
+use PhpTui\Tui\Extension\Core\Shape\Sprite;
+use PhpTui\Tui\Extension\Core\Widget\Block;
+use PhpTui\Tui\Extension\Core\Widget\Canvas;
+use PhpTui\Tui\Extension\Core\Widget\Grid;
 use PhpTui\Tui\Model\AnsiColor;
+use PhpTui\Tui\Model\Canvas\CanvasContext;
 use PhpTui\Tui\Model\Constraint;
 use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Model\RgbColor;
 use PhpTui\Tui\Model\Style;
-use PhpTui\Tui\Model\Widget\BorderType;
-use PhpTui\Tui\Model\Widget\Borders;
-use PhpTui\Tui\Model\Widget\FloatPosition;
 use PhpTui\Tui\Model\Widget;
-use PhpTui\Tui\Extension\Core\Widget\Block;
-use PhpTui\Tui\Extension\Core\Widget\Canvas;
-use PhpTui\Tui\Model\Canvas\CanvasContext;
-use PhpTui\Tui\Extension\Core\Shape\Points;
-use PhpTui\Tui\Extension\Core\Shape\Sprite;
-use PhpTui\Tui\Extension\Core\Widget\Grid;
+use PhpTui\Tui\Model\Widget\Borders;
+use PhpTui\Tui\Model\Widget\BorderType;
+use PhpTui\Tui\Model\Widget\FloatPosition;
 
 class SpritePage implements Component
 {
-    const WIDTH = 100;
-    const HEIGHT = 30;
+    public const WIDTH = 100;
+    public const HEIGHT = 30;
 
     private Sprite $elephant;
 
@@ -190,6 +192,7 @@ class SpritePage implements Component
         foreach ($this->stars as $i => [$x, $y]) {
             if ($x > self::WIDTH) {
                 $this->stars[$i] = [0, $y];
+
                 continue;
             }
             $this->stars[$i] = [$x + 1, $y];
@@ -203,7 +206,8 @@ class SpritePage implements Component
                 if ($x < 0) {
                     $x = count($this->scroller) * 6 + 6;
                 }
-                return [$x -2, $y];
+
+                return [$x - 2, $y];
             });
         }
     }

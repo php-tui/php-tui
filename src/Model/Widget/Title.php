@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Model\Widget;
 
 final class Title
@@ -19,6 +21,7 @@ final class Title
     public function horizontalAlignmnet(HorizontalAlignment $alignment): self
     {
         $this->horizontalAlignment = $alignment;
+
         return $this;
     }
 
@@ -30,12 +33,14 @@ final class Title
     public function verticalAlignment(VerticalAlignment $alignment): self
     {
         $this->verticalAlignment = $alignment;
+
         return $this;
     }
 
     public function horizontalAlignment(HorizontalAlignment $alignment): self
     {
         $this->horizontalAlignment = $alignment;
+
         return $this;
     }
 }

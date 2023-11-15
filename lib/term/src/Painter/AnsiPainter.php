@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Term\Painter;
 
+use PhpTui\Term\Action;
 use PhpTui\Term\Action\AlternateScreenEnable;
 use PhpTui\Term\Action\Clear;
 use PhpTui\Term\Action\CursorShow;
@@ -15,11 +18,10 @@ use PhpTui\Term\Action\SetForegroundColor;
 use PhpTui\Term\Action\SetModifier;
 use PhpTui\Term\Action\SetRgbBackgroundColor;
 use PhpTui\Term\Action\SetRgbForegroundColor;
-use PhpTui\Term\ClearType;
-use PhpTui\Term\Painter;
-use PhpTui\Term\Colors;
-use PhpTui\Term\Action;
 use PhpTui\Term\Attribute;
+use PhpTui\Term\ClearType;
+use PhpTui\Term\Colors;
+use PhpTui\Term\Painter;
 use PhpTui\Term\Writer;
 use RuntimeException;
 
@@ -45,14 +47,17 @@ final class AnsiPainter implements Painter
     {
         if ($action instanceof PrintString) {
             $this->writer->write($action->string);
+
             return;
         }
         if ($action instanceof SetForegroundColor && $action->color === Colors::Reset) {
             $this->writer->write($this->esc('39m'));
+
             return;
         }
         if ($action instanceof SetBackgroundColor && $action->color === Colors::Reset) {
             $this->writer->write($this->esc('49m'));
+
             return;
         }
 
@@ -76,6 +81,7 @@ final class AnsiPainter implements Painter
                 '?1002h',
                 '?1000h',
             ])));
+
             return;
         }
 

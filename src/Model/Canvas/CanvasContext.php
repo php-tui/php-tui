@@ -1,17 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Model\Canvas;
 
 use PhpTui\Tui\Model\AxisBounds;
+use PhpTui\Tui\Model\Canvas\Grid\BrailleGrid;
+use PhpTui\Tui\Model\Canvas\Grid\CharGrid;
+use PhpTui\Tui\Model\Canvas\Grid\HalfBlockGrid;
 use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Model\Widget\BarSet;
 use PhpTui\Tui\Model\Widget\BlockSet;
 use PhpTui\Tui\Model\Widget\FloatPosition;
 use PhpTui\Tui\Model\Widget\Line;
 use PhpTui\Tui\Model\Widget\Symbols;
-use PhpTui\Tui\Model\Canvas\Grid\BrailleGrid;
-use PhpTui\Tui\Model\Canvas\Grid\CharGrid;
-use PhpTui\Tui\Model\Canvas\Grid\HalfBlockGrid;
 
 final class CanvasContext
 {

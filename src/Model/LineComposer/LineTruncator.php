@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Model\LineComposer;
 
+use Generator;
 use PhpTui\Tui\Model\LineComposer;
 use PhpTui\Tui\Model\Widget\HorizontalAlignment;
 use PhpTui\Tui\Model\Widget\StyledGrapheme;
-use Generator;
 
 class LineTruncator implements LineComposer
 {
@@ -81,6 +83,7 @@ class LineTruncator implements LineComposer
         if ($styledGrapheme->symbolWidth() > $horizontalOffset) {
             $symbol = self::trimOffset($styledGrapheme->symbol, $horizontalOffset);
             $horizontalOffset = 0;
+
             return $symbol;
         }
         $horizontalOffset -= $styledGrapheme->symbolWidth();

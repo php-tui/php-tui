@@ -1,16 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Extension\Core\Widget;
 
 use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Buffer;
 use PhpTui\Tui\Model\Position;
 use PhpTui\Tui\Model\Widget;
-use PhpTui\Tui\Model\WidgetRenderer;
 use PhpTui\Tui\Model\Widget\Borders;
 use PhpTui\Tui\Model\Widget\HorizontalAlignment;
 use PhpTui\Tui\Model\Widget\Title;
 use PhpTui\Tui\Model\Widget\VerticalAlignment;
+use PhpTui\Tui\Model\WidgetRenderer;
 
 final class BlockRenderer implements WidgetRenderer
 {
@@ -184,7 +186,7 @@ final class BlockRenderer implements WidgetRenderer
             fn (int $acc, Title $title) => $acc + $title->title->width(),
             0
         );
-        $offset = intval(max(0, $area->width - $sumWidth) / 2);
+        $offset = (int) (max(0, $area->width - $sumWidth) / 2);
         foreach ($titles as $title) {
             $titleX = $offset;
             $offset += $title->title->width() + 1;

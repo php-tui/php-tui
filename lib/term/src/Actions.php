@@ -1,20 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Term;
 
 use PhpTui\Term\Action\AlternateScreenEnable;
 use PhpTui\Term\Action\Clear;
+use PhpTui\Term\Action\CursorShow;
 use PhpTui\Term\Action\EnableMouseCapture;
 use PhpTui\Term\Action\MoveCursor;
+use PhpTui\Term\Action\PrintString;
 use PhpTui\Term\Action\RequestCursorPosition;
 use PhpTui\Term\Action\Reset;
-use PhpTui\Term\Action\SetModifier;
-use PhpTui\Term\Action\CursorShow;
 use PhpTui\Term\Action\SetBackgroundColor;
+use PhpTui\Term\Action\SetForegroundColor;
+use PhpTui\Term\Action\SetModifier;
 use PhpTui\Term\Action\SetRgbBackgroundColor;
 use PhpTui\Term\Action\SetRgbForegroundColor;
-use PhpTui\Term\Action\SetForegroundColor;
-use PhpTui\Term\Action\PrintString;
 
 final class Actions
 {

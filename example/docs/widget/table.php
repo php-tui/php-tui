@@ -2,10 +2,10 @@
 <?php
 
 use PhpTui\Tui\DisplayBuilder;
-use PhpTui\Tui\Model\Constraint;
 use PhpTui\Tui\Extension\Core\Widget\Table;
 use PhpTui\Tui\Extension\Core\Widget\Table\TableCell;
 use PhpTui\Tui\Extension\Core\Widget\Table\TableRow;
+use PhpTui\Tui\Model\Constraint;
 
 require 'vendor/autoload.php';
 

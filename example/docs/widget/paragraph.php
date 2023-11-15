@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 use PhpTui\Tui\DisplayBuilder;
-use PhpTui\Tui\Model\Widget\Text;
 use PhpTui\Tui\Extension\Core\Widget\Paragraph;
+use PhpTui\Tui\Model\Widget\Text;
 
 require 'vendor/autoload.php';
 
