@@ -11,7 +11,11 @@ class CodedKeyEvent implements KeyEvent
     /**
      * @param int-mask-of<KeyModifiers::*> $modifiers
      */
-    private function __construct(public KeyCode $code, public int $modifiers, public KeyEventKind $kind)
+    private function __construct(
+        public readonly KeyCode $code,
+        public readonly int $modifiers,
+        public readonly KeyEventKind $kind
+    )
     {
     }
 

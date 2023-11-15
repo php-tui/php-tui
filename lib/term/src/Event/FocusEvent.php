@@ -7,7 +7,7 @@ use PhpTui\Term\Focus;
 
 final class FocusEvent implements Event
 {
-    private function __construct(public Focus $focus)
+    private function __construct(public readonly Focus $focus)
     {
     }
 
