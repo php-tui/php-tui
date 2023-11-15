@@ -2,9 +2,17 @@
 
 namespace PhpTui\Tui\Model;
 
-use PhpTui\Tui\DisplayBuilder;
+use PhpTui\Tui\Model\Canvas\ShapePainter;
 
 interface DisplayExtension
 {
-    public function build(DisplayBuilder $builder): void;
+    /**
+     * @return ShapePainter[]
+     */
+    public function shapePainters(): array;
+
+    /**
+     * @return WidgetRenderer[]
+     */
+    public function widgetRenderers(): array;
 }

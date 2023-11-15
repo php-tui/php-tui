@@ -12,15 +12,19 @@ class BdfExtension implements DisplayExtension
     {
     }
 
-    public function build(DisplayBuilder $builder): void
-    {
-        $builder->addShapePainter(new TextRenderer(
-            $this->fontRegistry(),
-        ));
-    }
-
     private function fontRegistry(): FontRegistry
     {
         return $this->fontRegistry ?? FontRegistry::default();
+    }
+
+    public function shapePainters(): array
+    {
+        return [
+            new TextRenderer($this->fontRegistry()),
+        ];
+    }
+
+    public function widgetRenderers(): array
+    {
     }
 }

@@ -3,20 +3,29 @@
 namespace PhpTui\Tui\Adapter\ImageMagick;
 
 use PhpTui\Tui\Adapter\ImageMagick\Shape\ImagePainter;
-use PhpTui\Tui\DisplayBuilder;
 use PhpTui\Tui\Model\DisplayExtension;
+use function PhpTui\Tui\Adapter\ImageMagick\Shape\ImagePainter;
 
 final class ImageMagickExtension implements DisplayExtension
 {
-    public function build(DisplayBuilder $builder): void
+    public function __construct(private ?ImageRegistry $imageRegistry = null)
     {
-        $builder->addShapePainter(new ImagePainter(
-            $this->imageRegistry(),
-        ));
+    }
+
+    public function shapePainters(): array
+    {
+        return [
+            new ImagePainter($this->imageRegistry())
+        ];
+    }
+
+    public function widgetRenderers(): array
+    {
+        return [];
     }
 
     private function imageRegistry(): ImageRegistry
     {
-        return new ImageRegistry();
+        return $this->imageRegistry ?? new ImageRegistry();
     }
 }

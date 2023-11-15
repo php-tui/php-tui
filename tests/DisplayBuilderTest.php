@@ -5,8 +5,15 @@ namespace PhpTui\Tui\Tests;
 use PHPUnit\Framework\TestCase;
 use PhpTui\Tui\DisplayBuilder;
 use PhpTui\Tui\Model\Backend\DummyBackend;
+use PhpTui\Tui\Model\Buffer;
+use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\DisplayExtension;
-use PhpTui\Tui\Widget\Paragraph;
+use PhpTui\Tui\Model\Widget;
+use PhpTui\Tui\Model\WidgetRenderer;
+use PhpTui\Tui\Shape\ClosurePainter;
+use PhpTui\Tui\Shape\ClosureShape;
+use PhpTui\Tui\Widget\Canvas;
+use PhpTui\Tui\Widget\ClosureRenderer;
 
 final class DisplayBuilderTest extends TestCase
 {
@@ -19,20 +26,28 @@ final class DisplayBuilderTest extends TestCase
 
     public function testAddExtension(): void
     {
-        $captured = false;
+        $widgetRendered = false;
+        $shapePainted = false;
         $extension = $this->getMockBuilder(DisplayExtension::class)->getMock();
-        $extension->method('build')->willReturnCallback(function ($builder) use (&$captured) {
-            self::assertInstanceOf(DisplayBuilder::class, $builder);
-            $captured = true;
-        });
+        $extension->method('widgetRenderers')->willReturn([new ClosureRenderer(
+            function (WidgetRenderer $renderer, Widget $widget, Area $area, Buffer $buffer) use (&$widgetRendered): void {
+                $widgetRendered = true;
+            }
+        )]);
+        $extension->method('shapePainters')->willReturn([new ClosurePainter()]);
 
         $dummy = new DummyBackend(10, 10);
         $display = DisplayBuilder::default($dummy)
             ->addExtension($extension)
             ->fullscreen()
             ->build();
-        $display->draw(Paragraph::fromString('hello'));
+        $display->draw(
+            Canvas::default()->draw(new ClosureShape(function () use (&$shapePainted): void {
+                $shapePainted = true;
+            }))
+        );
 
-        self::assertTrue($captured);
+        self::assertTrue($widgetRendered, 'widget rendered');
+        self::assertTrue($shapePainted, 'shape painted');
     }
 }

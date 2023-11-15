@@ -15,9 +15,11 @@ use PhpTui\Tui\Model\Viewport;
 use PhpTui\Tui\Model\Viewport\Fixed;
 use PhpTui\Tui\Model\Viewport\Fullscreen;
 use PhpTui\Tui\Model\Viewport\Inline;
+use PhpTui\Tui\Model\WidgetRenderer;
 use PhpTui\Tui\Model\WidgetSet;
 use PhpTui\Tui\Model\WidgetRenderer\AggregateWidgetRenderer;
 use PhpTui\Tui\Shape\DefaultShapeSet;
+use PhpTui\Tui\Widget\CanvasRenderer;
 use PhpTui\Tui\Widget\DefaultWidgetSet;
 
 /**
@@ -42,16 +44,14 @@ final class DisplayBuilder
      * @var ShapePainter[]
      */
     private array $shapePainters = [];
-
     /**
-     * @param list<WidgetSet> $widgetSets
-     * @param list<ShapeSet> $shapeSets
+     * @var WidgetRenderer[]
      */
+    private array $widgetRenderers = [];
+
     private function __construct(
         private Backend $backend,
         private ?Viewport $viewport,
-        private array $widgetSets = [],
-        private array $shapeSets = [],
     ) {
     }
 
@@ -81,9 +81,9 @@ final class DisplayBuilder
         return Display::new(
             $this->backend,
             $this->viewport ?? new Fullscreen(),
-            AggregateWidgetRenderer::fromWidgetSets(...[
-                $this->buildDefaultSet(),
-                ...$this->widgetSets,
+            new AggregateWidgetRenderer([
+                ...$this->shapePainters ? [$this->buildCanvasRenderer()] : [],
+                ...$this->widgetRenderers,
             ])
         );
     }
@@ -107,22 +107,9 @@ final class DisplayBuilder
         return $this;
     }
 
-    private function buildDefaultSet(): WidgetSet
+    private function buildCanvasRenderer(): CanvasRenderer
     {
-        return new DefaultWidgetSet(
-            AggregateShapePainter::fromShapeSets(
-                new DefaultShapeSet(),
-                // TODO: temporary
-                (new class($this->shapePainters) implements ShapeSet {
-                    public function __construct(private array $shapePainters) {}
-                    public function shapes(): array
-                    {
-                        return $this->shapePainters;
-                    }
-                }),
-                ...$this->shapeSets,
-            )
-        );
+        return new CanvasRenderer(new AggregateShapePainter($this->shapePainters));
     }
 
     private static function doNew(?Backend $backend, ?Viewport $viewport): self
@@ -137,7 +124,12 @@ final class DisplayBuilder
 
     public function addExtension(DisplayExtension $extension): self
     {
-        $extension->build($this);
+        foreach ($extension->shapePainters() as $shapePainter) {
+            $this->shapePainters[] = $shapePainter;
+        }
+        foreach ($extension->widgetRenderers() as $widgetRenderers) {
+            $this->widgetRenderers[] = $widgetRenderers;
+        }
 
         return $this;
     }
