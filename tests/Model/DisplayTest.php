@@ -109,12 +109,14 @@ class DisplayTest extends TestCase
     public function testFixedViewport(): void
     {
         $backend = new DummyBackend(10, 10, Position::at(0, 15));
-        $terminal = DisplayBuilder::default($backend)->fixed(20, 15)->build();
+        $terminal = DisplayBuilder::default($backend)->fixed(1, 2, 20, 15)->build();
         $terminal->draw(Paragraph::fromString('Hello'));
 
-        self::assertEquals(0, $terminal->viewportArea()->top());
-        self::assertEquals(0, $terminal->viewportArea()->left());
-        self::assertEquals(20, $terminal->viewportArea()->right());
-        self::assertEquals(15, $terminal->viewportArea()->bottom());
+        self::assertEquals(1, $terminal->viewportArea()->position->x);
+        self::assertEquals(2, $terminal->viewportArea()->position->y);
+        self::assertEquals(2, $terminal->viewportArea()->top());
+        self::assertEquals(1, $terminal->viewportArea()->left());
+        self::assertEquals(21, $terminal->viewportArea()->right());
+        self::assertEquals(17, $terminal->viewportArea()->bottom());
     }
 }
