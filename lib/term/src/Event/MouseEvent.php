@@ -14,8 +14,7 @@ final class MouseEvent implements Event
         public readonly int $column,
         public readonly int $row,
         public readonly int $modifiers
-    )
-    {
+    ) {
     }
 
     public function __toString(): string

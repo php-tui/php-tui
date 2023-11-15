@@ -12,8 +12,7 @@ final class CharKeyEvent implements KeyEvent
     private function __construct(
         public readonly string $char,
         public readonly int $modifiers
-    )
-    {
+    ) {
     }
 
     public function __toString(): string

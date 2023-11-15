@@ -15,8 +15,7 @@ class CodedKeyEvent implements KeyEvent
         public readonly KeyCode $code,
         public readonly int $modifiers,
         public readonly KeyEventKind $kind
-    )
-    {
+    ) {
     }
 
     public function __toString(): string
