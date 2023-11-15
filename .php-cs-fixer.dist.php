@@ -12,7 +12,7 @@ $finder = Finder::create()
 return (new Config())
     ->setRiskyAllowed(true)
     ->setRules([
-        '@PSR2' => true,
+        '@PSR12' => true,
         'no_unused_imports' => true,
         'phpdoc_to_property_type' => true,
         'no_superfluous_phpdoc_tags' => [
@@ -37,5 +37,6 @@ return (new Config())
         'global_namespace_import' => true,
         'no_trailing_whitespace' => true,
         'no_whitespace_in_blank_line' => true,
+        'blank_line_before_statement' => true,
     ])
     ->setFinder($finder);
