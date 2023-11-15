@@ -26,6 +26,7 @@ class DefaultWidgetSet implements WidgetSet
             new RawWidgetRenderer(),
             new TableRenderer(),
             new GaugeRenderer(),
+            new BarChartRenderer(),
         ];
     }
 }
