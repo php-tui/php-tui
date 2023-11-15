@@ -5,7 +5,7 @@ namespace PhpTui\Tui\Tests\Unit\Extension\PhpTerm;
 use PhpTui\Term\Painter\BufferPainter;
 use PhpTui\Term\Action;
 use PhpTui\Term\Terminal;
-use PhpTui\Tui\Extension\PhpTerm\PhpTermBackend;
+use PhpTui\Tui\Bridge\PhpTerm\PhpTermBackend;
 use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\BufferUpdate;
 use PhpTui\Tui\Model\Modifier;

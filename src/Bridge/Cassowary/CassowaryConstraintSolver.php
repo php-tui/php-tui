@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpTui\Tui\Extension\Cassowary;
+namespace PhpTui\Tui\Bridge\Cassowary;
 
 use PhpTui\Cassowary\Constraint;
 use PhpTui\Cassowary\Solver;

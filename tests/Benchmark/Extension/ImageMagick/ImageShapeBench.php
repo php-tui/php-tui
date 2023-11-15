@@ -11,7 +11,7 @@ use PhpTui\Term\Size;
 use PhpTui\Term\Painter\StringPainter;
 use PhpTui\Term\Terminal;
 use PhpTui\Tui\Extension\ImageMagick\Shape\ImageShape;
-use PhpTui\Tui\Extension\PhpTerm\PhpTermBackend;
+use PhpTui\Tui\Bridge\PhpTerm\PhpTermBackend;
 use PhpTui\Tui\DisplayBuilder;
 use PhpTui\Tui\Model\Display;
 use PhpTui\Tui\Extension\Core\Widget\Canvas;

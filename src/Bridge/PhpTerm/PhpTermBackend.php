@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpTui\Tui\Extension\PhpTerm;
+namespace PhpTui\Tui\Bridge\PhpTerm;
 
 use PhpTui\Term\Action;
 use PhpTui\Term\Action\SetBackgroundColor;

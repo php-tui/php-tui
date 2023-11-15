@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpTui\Tui\Extension\Cassowary;
+namespace PhpTui\Tui\Bridge\Cassowary;
 
 use PhpTui\Cassowary\Expression;
 use PhpTui\Cassowary\Variable;

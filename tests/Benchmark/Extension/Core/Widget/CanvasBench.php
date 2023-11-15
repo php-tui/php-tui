@@ -7,7 +7,7 @@ use PhpBench\Attributes\Revs;
 use PhpTui\Term\InformationProvider\ClosureInformationProvider;
 use PhpTui\Term\InformationProvider\AggregateInformationProvider;
 use PhpTui\Term\Terminal;
-use PhpTui\Tui\Extension\PhpTerm\PhpTermBackend;
+use PhpTui\Tui\Bridge\PhpTerm\PhpTermBackend;
 use PhpTui\Term\RawMode\NullRawMode;
 use PhpTui\Term\Size;
 use PhpTui\Term\Painter\StringPainter;

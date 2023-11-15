@@ -19,7 +19,7 @@ use PhpTui\Tui\Example\Demo\Page\SpritePage;
 use PhpTui\Tui\Example\Demo\Page\TablePage;
 use PhpTui\Tui\Extension\Bdf\BdfExtension;
 use PhpTui\Tui\Extension\ImageMagick\ImageMagickExtension;
-use PhpTui\Tui\Extension\PhpTerm\PhpTermBackend as PhpTuiPhpTermBackend;
+use PhpTui\Tui\Bridge\PhpTerm\PhpTermBackend as PhpTuiPhpTermBackend;
 use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Backend;
 use PhpTui\Tui\Model\Constraint;

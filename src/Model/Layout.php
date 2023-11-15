@@ -2,7 +2,7 @@
 
 namespace PhpTui\Tui\Model;
 
-use PhpTui\Tui\Extension\Cassowary\CassowaryConstraintSolver;
+use PhpTui\Tui\Bridge\Cassowary\CassowaryConstraintSolver;
 
 final class Layout
 {
