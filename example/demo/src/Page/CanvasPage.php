@@ -12,12 +12,12 @@ use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\Widget\Line as PhpTuiLine;
 use PhpTui\Tui\Model\Widget\Title;
-use PhpTui\Tui\Widget\Canvas as PhpTuiCanvas;
+use PhpTui\Tui\Extension\Core\Widget\Canvas as PhpTuiCanvas;
 use PhpTui\Tui\Model\Canvas\CanvasContext;
 use PhpTui\Tui\Model\Widget\Borders;
-use PhpTui\Tui\Widget\Block;
-use PhpTui\Tui\Shape\MapResolution;
-use PhpTui\Tui\Shape\Map;
+use PhpTui\Tui\Extension\Core\Widget\Block;
+use PhpTui\Tui\Extension\Core\Shape\MapResolution;
+use PhpTui\Tui\Extension\Core\Shape\Map;
 
 class CanvasPage implements Component
 {

@@ -6,10 +6,6 @@ use PhpTui\Term\Actions;
 use PhpTui\Term\ClearType;
 use PhpTui\Term\Event\CharKeyEvent;
 use PhpTui\Term\Terminal;
-use PhpTui\Tui\Adapter\Bdf\BdfShapeSet;
-use PhpTui\Tui\Adapter\Bdf\FontRegistry;
-use PhpTui\Tui\Adapter\ImageMagick\ImageMagickShapeSet;
-use PhpTui\Tui\Adapter\PhpTerm\PhpTermBackend;
 use PhpTui\Tui\DisplayBuilder;
 use PhpTui\Tui\Example\Demo\Page\BlocksPage;
 use PhpTui\Tui\Example\Demo\Page\CanvasPage;
@@ -21,6 +17,9 @@ use PhpTui\Tui\Example\Demo\Page\ImagePage;
 use PhpTui\Tui\Example\Demo\Page\ItemListPage;
 use PhpTui\Tui\Example\Demo\Page\SpritePage;
 use PhpTui\Tui\Example\Demo\Page\TablePage;
+use PhpTui\Tui\Extension\Bdf\BdfExtension;
+use PhpTui\Tui\Extension\ImageMagick\ImageMagickExtension;
+use PhpTui\Tui\Extension\PhpTerm\PhpTermBackend as PhpTuiPhpTermBackend;
 use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Backend;
 use PhpTui\Tui\Model\Constraint;
@@ -34,9 +33,9 @@ use PhpTui\Tui\Model\Widget\Line;
 use PhpTui\Tui\Model\Widget\Span;
 use PhpTui\Tui\Model\Widget\Text;
 use PhpTui\Tui\Model\Widget\Title;
-use PhpTui\Tui\Widget\Block;
-use PhpTui\Tui\Widget\Grid;
-use PhpTui\Tui\Widget\Paragraph;
+use PhpTui\Tui\Extension\Core\Widget\Block;
+use PhpTui\Tui\Extension\Core\Widget\Grid;
+use PhpTui\Tui\Extension\Core\Widget\Paragraph;
 use Throwable;
 
 /**
@@ -89,9 +88,9 @@ final class App
             };
         }
 
-        $display = DisplayBuilder::default($backend ?? PhpTermBackend::new($terminal))
-            ->addShapeSet(new ImageMagickShapeSet())
-            ->addShapeSet(new BdfShapeSet(FontRegistry::default()))
+        $display = DisplayBuilder::default($backend ?? PhpTuiPhpTermBackend::new($terminal))
+            ->addExtension(new ImageMagickExtension())
+            ->addExtension(new BdfExtension())
             ->build();
         return new self(
             $terminal,

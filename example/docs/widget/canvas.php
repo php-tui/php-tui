@@ -3,9 +3,9 @@
 use PhpTui\Tui\DisplayBuilder;
 use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Marker;
-use PhpTui\Tui\Widget\Canvas;
+use PhpTui\Tui\Extension\Core\Widget\Canvas;
 use PhpTui\Tui\Model\Canvas\CanvasContext;
-use PhpTui\Tui\Shape\Circle;
+use PhpTui\Tui\Extension\Core\Shape\Circle;
 
 require 'vendor/autoload.php';
 

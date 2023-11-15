@@ -3,9 +3,9 @@
 use PhpTui\Tui\DisplayBuilder;
 use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Model\Widget\Line;
-use PhpTui\Tui\Widget\Canvas;
+use PhpTui\Tui\Extension\Core\Widget\Canvas;
 use PhpTui\Tui\Model\Canvas\Painter;
-use PhpTui\Tui\Shape\ClosureShape;
+use PhpTui\Tui\Extension\Core\Shape\ClosureShape;
 
 require 'vendor/autoload.php';
 

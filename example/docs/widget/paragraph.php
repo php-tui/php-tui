@@ -2,7 +2,7 @@
 
 use PhpTui\Tui\DisplayBuilder;
 use PhpTui\Tui\Model\Widget\Text;
-use PhpTui\Tui\Widget\Paragraph;
+use PhpTui\Tui\Extension\Core\Widget\Paragraph;
 
 require 'vendor/autoload.php';
 

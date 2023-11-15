@@ -3,8 +3,8 @@
 namespace PhpTui\Tui\Example\Demo\Page;
 
 use PhpTui\Term\Event;
-use PhpTui\Tui\Adapter\ImageMagick\Shape\ImageShape;
 use PhpTui\Tui\Example\Demo\Component;
+use PhpTui\Tui\Extension\ImageMagick\Shape\ImageShape;
 use PhpTui\Tui\Model\Constraint;
 use PhpTui\Tui\Model\Direction;
 use PhpTui\Tui\Model\Marker;
@@ -12,10 +12,10 @@ use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\Widget\BorderType;
 use PhpTui\Tui\Model\Widget\Borders;
 use PhpTui\Tui\Model\Widget\Title;
-use PhpTui\Tui\Widget\Block;
-use PhpTui\Tui\Widget\Canvas;
+use PhpTui\Tui\Extension\Core\Widget\Block;
+use PhpTui\Tui\Extension\Core\Widget\Canvas;
 use PhpTui\Tui\Model\Canvas\CanvasContext;
-use PhpTui\Tui\Widget\Grid;
+use PhpTui\Tui\Extension\Core\Widget\Grid;
 
 final class ImagePage implements Component
 {

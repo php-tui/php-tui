@@ -3,8 +3,8 @@
 use PhpTui\Tui\DisplayBuilder;
 use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Marker;
-use PhpTui\Tui\Widget\Canvas;
-use PhpTui\Tui\Shape\Line;
+use PhpTui\Tui\Extension\Core\Widget\Canvas;
+use PhpTui\Tui\Extension\Core\Shape\Line;
 
 require 'vendor/autoload.php';
 

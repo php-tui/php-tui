@@ -14,11 +14,11 @@ use PhpTui\Tui\Model\Widget\Borders;
 use PhpTui\Tui\Model\Widget\Span;
 use PhpTui\Tui\Model\Widget\Line;
 use PhpTui\Tui\Model\Widget\Title;
-use PhpTui\Tui\Widget\Block;
-use PhpTui\Tui\Widget\Table;
-use PhpTui\Tui\Widget\Table\TableCell;
-use PhpTui\Tui\Widget\Table\TableRow;
-use PhpTui\Tui\Widget\Table\TableState;
+use PhpTui\Tui\Extension\Core\Widget\Block;
+use PhpTui\Tui\Extension\Core\Widget\Table;
+use PhpTui\Tui\Extension\Core\Widget\Table\TableCell;
+use PhpTui\Tui\Extension\Core\Widget\Table\TableRow;
+use PhpTui\Tui\Extension\Core\Widget\Table\TableState;
 
 final class TablePage implements Component
 {

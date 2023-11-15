@@ -15,14 +15,14 @@ use PhpTui\Tui\Model\Widget\Line;
 use PhpTui\Tui\Model\Widget\Span;
 use PhpTui\Tui\Model\Widget\Title;
 use PhpTui\Tui\Model\Widget\VerticalAlignment;
-use PhpTui\Tui\Widget\Block;
+use PhpTui\Tui\Extension\Core\Widget\Block;
 use PhpTui\Tui\Model\Style;
-use PhpTui\Tui\Widget\Block\Padding;
-use PhpTui\Tui\Widget\Grid;
-use PhpTui\Tui\Widget\Paragraph\Wrap;
+use PhpTui\Tui\Extension\Core\Widget\Block\Padding;
+use PhpTui\Tui\Extension\Core\Widget\Grid;
+use PhpTui\Tui\Extension\Core\Widget\Paragraph\Wrap;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\Widget\Text;
-use PhpTui\Tui\Widget\Paragraph;
+use PhpTui\Tui\Extension\Core\Widget\Paragraph;
 
 class BlocksPage implements Component
 {
