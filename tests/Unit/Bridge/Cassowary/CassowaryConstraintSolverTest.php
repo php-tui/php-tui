@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpTui\Tui\Tests\Unit\Extension\Cassowary;
+namespace PhpTui\Tui\Tests\Unit\Bridge\Cassowary;
 
 use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Constraint;

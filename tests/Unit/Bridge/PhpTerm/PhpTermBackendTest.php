@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpTui\Tui\Tests\Unit\Extension\PhpTerm;
+namespace PhpTui\Tui\Tests\Unit\Bridge\PhpTerm;
 
 use PhpTui\Term\Painter\BufferPainter;
 use PhpTui\Term\Action;
