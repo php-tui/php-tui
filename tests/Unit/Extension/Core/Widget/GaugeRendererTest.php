@@ -10,7 +10,7 @@ use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Buffer;
 use PhpTui\Tui\Model\Widget;
 
-class GaugeWidgetRendererTest extends WidgetTestCase
+class GaugeRendererTest extends WidgetTestCase
 {
     /**
      * @dataProvider provideGaugeRender
@@ -28,11 +28,13 @@ class GaugeWidgetRendererTest extends WidgetTestCase
     public static function provideGaugeRender(): Generator
     {
         yield 'write to buffer' => [
-            Area::fromDimensions(10, 2),
+            Area::fromDimensions(10, 4),
             GaugeWidget::default()->ratio(0.5),
             [
-                'xxxxx     ',
-                '          ',
+                '██████    ',
+                '██████    ',
+                '██50.00   ',
+                '██████    ',
             ]
            ,
         ];

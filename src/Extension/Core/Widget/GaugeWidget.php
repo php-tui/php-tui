@@ -7,15 +7,15 @@ namespace PhpTui\Tui\Extension\Core\Widget;
 use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\Widget\Span;
+use RuntimeException;
 
 class GaugeWidget implements Widget
 {
-    public function __construct(
+    private function __construct(
         public float $ratio,
         public ?Span $label,
         public bool $useUnicode,
         public Style $style,
-        public Style $gaugeStyle,
     ) {
     }
 
@@ -26,12 +26,17 @@ class GaugeWidget implements Widget
             label: null,
             useUnicode: false,
             style: Style::default(),
-            gaugeStyle: Style::default()
         );
     }
 
     public function ratio(float $ratio): self
     {
+        if ($ratio < 0 || $ratio > 1) {
+            throw new RuntimeException(sprintf(
+                'Gauge ratio must be between 0 and 1 got %f',
+                $ratio
+            ));
+        }
         $this->ratio = $ratio;
         return $this;
     }
@@ -51,12 +56,6 @@ class GaugeWidget implements Widget
     public function style(Style $style): self
     {
         $this->style = $style;
-        return $this;
-    }
-
-    public function gaugeStyle(Style $gaugeStyle): self
-    {
-        $this->gaugeStyle = $gaugeStyle;
         return $this;
     }
 }
