@@ -12,7 +12,6 @@ use PhpTui\Tui\Extension\Core\Widget\Canvas;
 use PhpTui\Tui\Model\Canvas\CanvasContext;
 use Generator;
 use PhpTui\Tui\Extension\Core\Shape\Sprite;
-use PhpTui\Tui\Tests\Unit\Extension\Core\Shape\ShapeTestCase;
 
 class SpriteTest extends ShapeTestCase
 {

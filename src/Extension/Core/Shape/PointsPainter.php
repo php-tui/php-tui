@@ -2,7 +2,6 @@
 
 namespace PhpTui\Tui\Extension\Core\Shape;
 
-use PhpTui\Tui\Extension\Core\Shape\Points;
 use PhpTui\Tui\Model\Canvas\ShapePainter;
 use PhpTui\Tui\Model\Widget\FloatPosition;
 use PhpTui\Tui\Model\Canvas\Painter;

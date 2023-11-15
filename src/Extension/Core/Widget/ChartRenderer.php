@@ -2,8 +2,6 @@
 
 namespace PhpTui\Tui\Extension\Core\Widget;
 
-use PhpTui\Tui\Extension\Core\Widget\Canvas;
-use PhpTui\Tui\Extension\Core\Widget\Chart;
 use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Buffer;

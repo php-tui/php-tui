@@ -2,7 +2,6 @@
 
 namespace PhpTui\Tui\Extension\Core\Widget\Table;
 
-use PhpTui\Tui\Extension\Core\Widget\Table\TableCell;
 use PhpTui\Tui\Model\Style;
 
 final class TableRow

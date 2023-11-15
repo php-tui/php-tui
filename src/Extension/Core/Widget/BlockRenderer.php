@@ -2,7 +2,6 @@
 
 namespace PhpTui\Tui\Extension\Core\Widget;
 
-use PhpTui\Tui\Extension\Core\Widget\Block;
 use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Buffer;
 use PhpTui\Tui\Model\Position;

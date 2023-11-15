@@ -23,7 +23,7 @@ final class Table implements Widget
         public Style $style,
         /**
          * Constraints to use to determine the column widths.
-         * @var list<\PhpTui\Tui\Model\Constraint>
+         * @var list<Constraint>
          */
         public array $widths,
         /**
@@ -44,7 +44,7 @@ final class Table implements Widget
         public ?TableRow $header,
         /**
          * Table rows.
-         * @var list<\PhpTui\Tui\Widget\Table\TableRow>
+         * @var list<TableRow>
          */
         public array $rows,
         /**

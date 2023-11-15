@@ -2,8 +2,6 @@
 
 namespace PhpTui\Tui\Extension\Core\Shape;
 
-use PhpTui\Tui\Extension\Core\Shape\CirclePainter;
-use PhpTui\Tui\Extension\Core\Shape\ClosurePainter;
 use PhpTui\Tui\Model\Canvas\ShapeSet;
 
 class DefaultShapeSet implements ShapeSet
