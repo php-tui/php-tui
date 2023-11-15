@@ -48,10 +48,13 @@ final class DisplayBuilder
      * @var WidgetRenderer[]
      */
     private array $widgetRenderers = [];
-
+    /**
+     * @param DisplayExtension[] $extensions
+     */
     private function __construct(
         private Backend $backend,
         private ?Viewport $viewport,
+        private array $extensions
     ) {
     }
 
@@ -60,7 +63,9 @@ final class DisplayBuilder
      */
     public static function default(?Backend $backend = null): self
     {
-        return self::doNew($backend, null);
+        return self::new($backend, null, [
+            new CoreExtension(),
+        ]);
     }
 
 
@@ -78,6 +83,14 @@ final class DisplayBuilder
      */
     public function build(): Display
     {
+        foreach ($this->extensions as $extension) {
+            foreach ($extension->shapePainters() as $shapePainter) {
+                $this->shapePainters[] = $shapePainter;
+            }
+            foreach ($extension->widgetRenderers() as $widgetRenderers) {
+                $this->widgetRenderers[] = $widgetRenderers;
+            }
+        }
         return Display::new(
             $this->backend,
             $this->viewport ?? new Fullscreen(),
@@ -112,24 +125,21 @@ final class DisplayBuilder
         return new CanvasRenderer(new AggregateShapePainter($this->shapePainters));
     }
 
-    private static function doNew(?Backend $backend, ?Viewport $viewport): self
+    /**
+     * @param DisplayExtension[] $extensions
+     */
+    public static function new(?Backend $backend, ?Viewport $viewport, array $extensions = []): self
     {
         return new self(
             $backend ?? PhpTermBackend::new(),
             $viewport,
-            [],
-            [],
+            $extensions,
         );
     }
 
     public function addExtension(DisplayExtension $extension): self
     {
-        foreach ($extension->shapePainters() as $shapePainter) {
-            $this->shapePainters[] = $shapePainter;
-        }
-        foreach ($extension->widgetRenderers() as $widgetRenderers) {
-            $this->widgetRenderers[] = $widgetRenderers;
-        }
+        $this->extensions[] = $extension;
 
         return $this;
     }
