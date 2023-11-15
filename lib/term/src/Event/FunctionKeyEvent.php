@@ -14,8 +14,7 @@ class FunctionKeyEvent implements KeyEvent
         public readonly int $number,
         public readonly int $modifiers,
         public readonly KeyEventKind $kind
-    )
-    {
+    ) {
     }
 
     public function __toString(): string
