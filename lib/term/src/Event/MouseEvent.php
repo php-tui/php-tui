@@ -8,7 +8,7 @@ use PhpTui\Term\MouseEventKind;
 
 final class MouseEvent implements Event
 {
-    private function __construct(private MouseEventKind $kind, private MouseButton $button, private int $column, private int $row, private int $modifiers)
+    private function __construct(public MouseEventKind $kind, public MouseButton $button, public int $column, public int $row, public int $modifiers)
     {
     }
 
