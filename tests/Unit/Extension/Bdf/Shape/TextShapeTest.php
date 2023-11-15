@@ -1,10 +1,10 @@
 <?php
 
-namespace PhpTui\Tui\Tests\Adapter\Bdf\Shape;
+namespace PhpTui\Tui\Tests\Unit\Extension\Bdf\Shape;
 
-use PhpTui\Tui\Adapter\Bdf\FontRegistry;
-use PhpTui\Tui\Adapter\Bdf\Shape\TextRenderer;
-use PhpTui\Tui\Adapter\Bdf\Shape\TextShape;
+use PhpTui\Tui\Extension\Bdf\FontRegistry;
+use PhpTui\Tui\Extension\Bdf\Shape\TextRenderer;
+use PhpTui\Tui\Extension\Bdf\Shape\TextShape;
 use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Buffer;

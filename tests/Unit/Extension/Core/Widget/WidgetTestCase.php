@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpTui\Tui\Tests\Widget;
+namespace PhpTui\Tui\Tests\Unit\Extension\Core\Widget;
 
 use PHPUnit\Framework\TestCase;
 use PhpTui\Tui\Model\Area;

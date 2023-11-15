@@ -10,7 +10,7 @@ use PhpTui\Term\Painter\StringPainter;
 use PhpTui\Term\RawMode\NullRawMode;
 use PhpTui\Term\Size;
 use PhpTui\Term\Terminal;
-use PhpTui\Tui\Adapter\PhpTerm\PhpTermBackend;
+use PhpTui\Tui\Extension\PhpTerm\PhpTermBackend;
 use PhpTui\Tui\DisplayBuilder;
 use PhpTui\Tui\Model\AxisBounds;
 use PhpTui\Tui\Model\Buffer;

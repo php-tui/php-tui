@@ -1,9 +1,9 @@
 <?php
 
-namespace PhpTui\Tui\Tests\Adapter\ImageMagick\Shape;
+namespace PhpTui\Tui\Tests\Unit\Extension\ImageMagick\Shape;
 
-use PhpTui\Tui\Adapter\ImageMagick\Shape\ImagePainter;
-use PhpTui\Tui\Adapter\ImageMagick\Shape\ImageShape;
+use PhpTui\Tui\Extension\ImageMagick\Shape\ImagePainter;
+use PhpTui\Tui\Extension\ImageMagick\Shape\ImageShape;
 use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\AxisBounds;
 use PhpTui\Tui\Model\Buffer;

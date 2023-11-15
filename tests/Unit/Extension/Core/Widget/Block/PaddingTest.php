@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpTui\Tui\Tests\Widget\Block;
+namespace PhpTui\Tui\Tests\Unit\Extension\Core\Widget\Block;
 
 use PHPUnit\Framework\TestCase;
 use PhpTui\Tui\Extension\Core\Widget\Block\Padding;

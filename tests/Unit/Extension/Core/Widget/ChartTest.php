@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpTui\Tui\Tests\Widget;
+namespace PhpTui\Tui\Tests\Unit\Extension\Core\Widget;
 
 use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\AxisBounds;

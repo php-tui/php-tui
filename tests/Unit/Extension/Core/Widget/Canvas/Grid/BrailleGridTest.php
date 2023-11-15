@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpTui\Tui\Tests\Widget\Canvas\Grid;
+namespace PhpTui\Tui\Tests\Unit\Extension\Core\Widget\Canvas\Grid;
 
 use PHPUnit\Framework\TestCase;
 use PhpTui\Tui\Model\AnsiColor;

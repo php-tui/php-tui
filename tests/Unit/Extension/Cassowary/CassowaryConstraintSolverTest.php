@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpTui\Tui\Tests\Adapter\Cassowary;
+namespace PhpTui\Tui\Tests\Unit\Extension\Cassowary;
 
 use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Constraint;
