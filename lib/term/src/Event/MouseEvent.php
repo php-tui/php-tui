@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Term\Event;
 
 use PhpTui\Term\Event;
@@ -8,8 +10,13 @@ use PhpTui\Term\MouseEventKind;
 
 final class MouseEvent implements Event
 {
-    private function __construct(private MouseEventKind $kind, private MouseButton $button, private int $column, private int $row, private int $modifiers)
-    {
+    private function __construct(
+        public readonly MouseEventKind $kind,
+        public readonly MouseButton $button,
+        public readonly int $column,
+        public readonly int $row,
+        public readonly int $modifiers
+    ) {
     }
 
     public function __toString(): string

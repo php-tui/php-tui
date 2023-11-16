@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Docgen;
 
 use Generator;
@@ -11,8 +13,8 @@ use PHPStan\PhpDocParser\Parser\ConstExprParser;
 use PHPStan\PhpDocParser\Parser\PhpDocParser;
 use PHPStan\PhpDocParser\Parser\TokenIterator;
 use PHPStan\PhpDocParser\Parser\TypeParser;
-use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\Canvas\Shape;
+use PhpTui\Tui\Model\Widget;
 use Roave\BetterReflection\BetterReflection;
 use Roave\BetterReflection\Reflection\ReflectionClass;
 use Roave\BetterReflection\Reflection\ReflectionProperty;
@@ -48,7 +50,7 @@ final class Docgen
     {
         $astLocator = (new BetterReflection())->astLocator();
         $reflector  = new DefaultReflector(new AggregateSourceLocator([
-            (new MakeLocatorForComposerJson)($cwd, $astLocator),
+            (new MakeLocatorForComposerJson())($cwd, $astLocator),
             new PhpInternalSourceLocator($astLocator, new ReflectionSourceStubber())
         ]));
 
@@ -58,6 +60,7 @@ final class Docgen
             new Lexer(),
             (function () {
                 $constExpr = new ConstExprParser();
+
                 return new PhpDocParser(new TypeParser($constExpr), $constExpr);
             })(),
         );
@@ -72,6 +75,7 @@ final class Docgen
                 $shape->getShortName()
             ), $this->renderShape(new WidgetDoc(
                 name: lcfirst($shape->getShortName()),
+                humanName: $this->humanName($shape->getShortName(), 'Shape'),
                 className: $shape->getName(),
                 description: $this->description($node),
                 params: array_values(array_filter(array_map(function (ReflectionProperty $prop): false|WidgetParam {
@@ -90,6 +94,7 @@ final class Docgen
                             )
                         );
                     }
+
                     return new WidgetParam(
                         type: $type ? $type : $phpType,
                         name: $prop->getName(),
@@ -110,6 +115,7 @@ final class Docgen
                 $widget->getShortName()
             ), $this->renderWidget(new WidgetDoc(
                 name: lcfirst($widget->getShortName()),
+                humanName: $this->humanName($widget->getShortName(), 'Widget'),
                 className: $widget->getName(),
                 description: $this->description($node),
                 params: array_values(array_filter(array_map(function (ReflectionProperty $prop): false|WidgetParam {
@@ -128,6 +134,7 @@ final class Docgen
                             )
                         );
                     }
+
                     return new WidgetParam(
                         type: $type ? $type : $phpType,
                         name: $prop->getName(),
@@ -155,6 +162,7 @@ final class Docgen
             return null;
         }
         $node = $this->parser->parse(new TokenIterator($this->lexer->tokenize($docblock)));
+
         return $node;
     }
 
@@ -169,18 +177,21 @@ final class Docgen
                 $text[] = $child->text;
             }
         }
+
         return str_replace("\n", '', implode(' ', $text));
     }
 
     private function renderShape(WidgetDoc $shapeDoc): string
     {
-        $title = ucfirst($shapeDoc->name);
+        $title = $shapeDoc->humanName;
         $doc = [
             '---',
             sprintf('title: %s', $title),
             sprintf('description: %s', $shapeDoc->description),
             '---',
             sprintf('## %s', $title),
+            '',
+            sprintf('`%s`', $shapeDoc->className),
             '',
             $shapeDoc->description,
         ];
@@ -215,13 +226,15 @@ final class Docgen
     }
     private function renderWidget(WidgetDoc $widgetDoc): string
     {
-        $title = ucfirst($widgetDoc->name);
+        $title = $widgetDoc->humanName;
         $doc = [
             '---',
             sprintf('title: %s', $title),
             sprintf('description: %s', $widgetDoc->description),
             '---',
             sprintf('## %s', $title),
+            '',
+            sprintf('`%s`', $widgetDoc->className),
             '',
             $widgetDoc->description,
         ];
@@ -250,6 +263,7 @@ final class Docgen
                 );
             }
         }
+
         return implode("\n", $doc);
 
     }
@@ -264,5 +278,18 @@ final class Docgen
                 $path
             ));
         }
+    }
+
+    private function humanName(string $subject, string $suffix): string
+    {
+        $replaced = preg_replace('{([A-Z])}', ' \1', ucfirst($subject));
+        if (null === $replaced) {
+            throw new RuntimeException('Could not replace');
+        }
+        if ($pos = strrpos($replaced, $suffix)) {
+            $replaced = substr($replaced, 0, $pos);
+        }
+
+        return $replaced;
     }
 }

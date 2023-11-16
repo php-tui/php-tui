@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Term\EventProvider;
 
 use PhpTui\Term\Event;

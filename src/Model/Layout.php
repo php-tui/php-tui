@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Model;
 
-use PhpTui\Tui\Adapter\Cassowary\CassowaryConstraintSolver;
+use PhpTui\Tui\Bridge\Cassowary\CassowaryConstraintSolver;
 
 final class Layout
 {
@@ -32,6 +34,7 @@ final class Layout
     public function direction(Direction $direction): self
     {
         $this->direction = $direction;
+
         return $this;
     }
 
@@ -41,6 +44,7 @@ final class Layout
     public function constraints(array $constraints): self
     {
         $this->constraints = $constraints;
+
         return $this;
     }
 

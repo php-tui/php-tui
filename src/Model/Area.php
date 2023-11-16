@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Model;
 
+use RuntimeException;
 use Stringable;
 
 final class Area implements Stringable
@@ -11,6 +14,13 @@ final class Area implements Stringable
         public int $width,
         public int $height,
     ) {
+        if ($width < 0 || $height < 0) {
+            throw new RuntimeException(sprintf(
+                'Neither width nor height can be less than 0, got %dx%d',
+                $width,
+                $height
+            ));
+        }
     }
 
     public function __toString(): string
@@ -83,5 +93,28 @@ final class Area implements Stringable
             $this->width,
             $this->height,
         ];
+    }
+
+    public function isEmpty(): bool
+    {
+        return $this->width === 0 || $this->height === 0;
+    }
+
+    public function withY(int $y): self
+    {
+        return new self(
+            $this->position->withY($y),
+            $this->width,
+            $this->height,
+        );
+    }
+
+    public function withX(int $x): self
+    {
+        return new self(
+            $this->position->withX($x),
+            $this->width,
+            $this->height,
+        );
     }
 }

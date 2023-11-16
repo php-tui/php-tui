@@ -1,8 +1,10 @@
 ---
-title: ImageShape
+title:  Image 
 description: Renders an image on the canvas.
 ---
-## ImageShape
+##  Image 
+
+`PhpTui\Tui\Extension\ImageMagick\Shape\ImageShape`
 
 Renders an image on the canvas.
 {{% terminal file="/data/example/docs/shape/imageShape.html" %}}

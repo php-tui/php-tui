@@ -1,21 +1,23 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Example\Demo\Page;
 
 use PhpTui\Term\Event;
-use PhpTui\Tui\Adapter\ImageMagick\Shape\ImageShape;
 use PhpTui\Tui\Example\Demo\Component;
+use PhpTui\Tui\Extension\Core\Widget\BlockWidget;
+use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
+use PhpTui\Tui\Extension\Core\Widget\GridWidget;
+use PhpTui\Tui\Extension\ImageMagick\Shape\ImageShape;
+use PhpTui\Tui\Model\Canvas\CanvasContext;
 use PhpTui\Tui\Model\Constraint;
 use PhpTui\Tui\Model\Direction;
 use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Model\Widget;
-use PhpTui\Tui\Model\Widget\BorderType;
 use PhpTui\Tui\Model\Widget\Borders;
+use PhpTui\Tui\Model\Widget\BorderType;
 use PhpTui\Tui\Model\Widget\Title;
-use PhpTui\Tui\Widget\Block;
-use PhpTui\Tui\Widget\Canvas;
-use PhpTui\Tui\Model\Canvas\CanvasContext;
-use PhpTui\Tui\Widget\Grid;
 
 final class ImagePage implements Component
 {
@@ -29,12 +31,13 @@ final class ImagePage implements Component
         if (!isset($this->images)) {
             $this->images = array_map(function (string $name) {
                 $shape = ImageShape::fromPath(__DIR__ . '/../../assets/' . $name);
-                return Block::default()
+
+                return BlockWidget::default()
                     ->titles(Title::fromString(sprintf('Image: %s', $name)))
                     ->borders(Borders::ALL)
                     ->borderType(BorderType::Rounded)
                     ->widget(
-                        Canvas::fromIntBounds(0, 320, 0, 240)
+                        CanvasWidget::fromIntBounds(0, 320, 0, 240)
                         ->marker(Marker::HalfBlock)
                         ->paint(function (CanvasContext $context) use ($shape): void {
                             $context->draw($shape);
@@ -48,14 +51,14 @@ final class ImagePage implements Component
             ]);
         }
 
-        return Grid::default()
+        return GridWidget::default()
             ->direction(Direction::Horizontal)
             ->constraints(
                 Constraint::percentage(50),
                 Constraint::percentage(50),
             )
             ->widgets(
-                Grid::default()
+                GridWidget::default()
                     ->direction(Direction::Vertical)
                     ->constraints(
                         Constraint::percentage(50),
@@ -65,7 +68,7 @@ final class ImagePage implements Component
                         $this->images[0],
                         $this->images[2],
                     ),
-                Grid::default()
+                GridWidget::default()
                     ->direction(Direction::Vertical)
                     ->constraints(
                         Constraint::percentage(50),

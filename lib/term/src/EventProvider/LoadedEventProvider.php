@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Term\EventProvider;
 
 use PhpTui\Term\Event;
@@ -18,7 +20,6 @@ final class LoadedEventProvider implements EventProvider
     {
         return new self(array_values($events));
     }
-
 
     public function next(): ?Event
     {

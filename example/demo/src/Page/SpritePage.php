@@ -1,32 +1,34 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Example\Demo\Page;
 
 use PhpTui\Term\Event;
-use PhpTui\Tui\Adapter\Bdf\Shape\TextShape;
 use PhpTui\Tui\Example\Demo\Component;
+use PhpTui\Tui\Extension\Bdf\Shape\TextShape;
+use PhpTui\Tui\Extension\Core\Shape\PointsShape;
+use PhpTui\Tui\Extension\Core\Shape\SpriteShape;
+use PhpTui\Tui\Extension\Core\Widget\BlockWidget;
+use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
+use PhpTui\Tui\Extension\Core\Widget\GridWidget;
 use PhpTui\Tui\Model\AnsiColor;
+use PhpTui\Tui\Model\Canvas\CanvasContext;
 use PhpTui\Tui\Model\Constraint;
 use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Model\RgbColor;
 use PhpTui\Tui\Model\Style;
-use PhpTui\Tui\Model\Widget\BorderType;
-use PhpTui\Tui\Model\Widget\Borders;
-use PhpTui\Tui\Model\Widget\FloatPosition;
 use PhpTui\Tui\Model\Widget;
-use PhpTui\Tui\Widget\Block;
-use PhpTui\Tui\Widget\Canvas;
-use PhpTui\Tui\Model\Canvas\CanvasContext;
-use PhpTui\Tui\Shape\Points;
-use PhpTui\Tui\Shape\Sprite;
-use PhpTui\Tui\Widget\Grid;
+use PhpTui\Tui\Model\Widget\Borders;
+use PhpTui\Tui\Model\Widget\BorderType;
+use PhpTui\Tui\Model\Widget\FloatPosition;
 
 class SpritePage implements Component
 {
-    const WIDTH = 100;
-    const HEIGHT = 30;
+    public const WIDTH = 100;
+    public const HEIGHT = 30;
 
-    private Sprite $elephant;
+    private SpriteShape $elephant;
 
     private int $ticker = 0;
 
@@ -35,7 +37,7 @@ class SpritePage implements Component
      */
     private array $stars = [];
 
-    private Points $points;
+    private PointsShape $points;
 
     /**
      * @var list<TextShape>
@@ -44,7 +46,7 @@ class SpritePage implements Component
 
     public function __construct()
     {
-        $this->elephant = new Sprite(
+        $this->elephant = new SpriteShape(
             rows: [
                 '       █████',
                 '   ████████████████████',
@@ -63,7 +65,7 @@ class SpritePage implements Component
             yScale: 1,
             position: new FloatPosition(0, 0),
         );
-        $this->points = new Points(
+        $this->points = new PointsShape(
             $this->seedStars(),
             AnsiColor::DarkGray,
         );
@@ -95,18 +97,18 @@ class SpritePage implements Component
     {
         $this->tick();
 
-        return Grid::default()
+        return GridWidget::default()
             ->constraints(
                 Constraint::length(6),
                 Constraint::percentage(70),
             )
             ->widgets(
-                Block::default()
+                BlockWidget::default()
                     ->borders(Borders::ALL)
                     ->borderType(BorderType::Rounded)
                     ->borderStyle(Style::default()->fg(AnsiColor::DarkGray))
                     ->widget(
-                        Canvas::fromIntBounds(0, self::WIDTH, 0, 8)
+                        CanvasWidget::fromIntBounds(0, self::WIDTH, 0, 8)
                             ->marker(Marker::HalfBlock)
                             ->paint(function (CanvasContext $context): void {
                                 foreach ($this->scroller as $textShape) {
@@ -115,7 +117,7 @@ class SpritePage implements Component
                                 $context->saveLayer();
                             })
                     ),
-                Canvas::fromIntBounds(0, self::WIDTH, 0, self::HEIGHT)
+                CanvasWidget::fromIntBounds(0, self::WIDTH, 0, self::HEIGHT)
                     ->backgroundColor(AnsiColor::Black)
                     ->marker(Marker::Braille)
                     ->paint(function (CanvasContext $context): void {
@@ -190,6 +192,7 @@ class SpritePage implements Component
         foreach ($this->stars as $i => [$x, $y]) {
             if ($x > self::WIDTH) {
                 $this->stars[$i] = [0, $y];
+
                 continue;
             }
             $this->stars[$i] = [$x + 1, $y];
@@ -203,7 +206,8 @@ class SpritePage implements Component
                 if ($x < 0) {
                     $x = count($this->scroller) * 6 + 6;
                 }
-                return [$x -2, $y];
+
+                return [$x - 2, $y];
             });
         }
     }

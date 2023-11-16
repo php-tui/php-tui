@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Example\Demo\Page;
 
 use PhpTui\Term\Event;
@@ -7,35 +9,34 @@ use PhpTui\Term\Event\CodedKeyEvent;
 use PhpTui\Term\KeyCode;
 use PhpTui\Term\Size;
 use PhpTui\Term\Terminal;
-use PhpTui\Tui\Adapter\Bdf\Shape\TextShape;
-use PhpTui\Tui\Adapter\ImageMagick\Shape\ImageShape;
 use PhpTui\Tui\Example\Demo\Component;
+use PhpTui\Tui\Extension\Bdf\Shape\TextShape;
+use PhpTui\Tui\Extension\Core\Shape\CircleShape;
+use PhpTui\Tui\Extension\Core\Shape\ClosureShape;
+use PhpTui\Tui\Extension\Core\Shape\LineShape;
+use PhpTui\Tui\Extension\Core\Widget\BlockWidget;
+use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
+use PhpTui\Tui\Extension\Core\Widget\GridWidget;
+use PhpTui\Tui\Extension\ImageMagick\Shape\ImageShape;
 use PhpTui\Tui\Model\AnsiColor;
+use PhpTui\Tui\Model\Canvas\Painter;
+use PhpTui\Tui\Model\Canvas\Shape;
 use PhpTui\Tui\Model\Constraint;
 use PhpTui\Tui\Model\Direction;
 use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\Widget\FloatPosition;
 use PhpTui\Tui\Model\Widget\Title;
-use PhpTui\Tui\Widget\Block;
-use PhpTui\Tui\Widget\Canvas;
-use PhpTui\Tui\Model\Canvas\Painter;
-use PhpTui\Tui\Model\Canvas\Shape;
-use PhpTui\Tui\Shape\Circle;
-use PhpTui\Tui\Shape\ClosureShape;
-use PhpTui\Tui\Shape\Line;
-use PhpTui\Tui\Widget\Grid;
 
 class CanvasScalingPage implements Component
 {
-    const DELTA = 5;
+    public const DELTA = 5;
 
     private TextShape $text;
 
     private Shape $image;
 
     private int $marker = 0;
-
 
     public function __construct(private Terminal $terminal, private int $xMax = 320, private int $yMax = 240)
     {
@@ -48,7 +49,7 @@ class CanvasScalingPage implements Component
             scaleY: 8,
         );
         if (!extension_loaded('imagick')) {
-            $this->image = Circle::fromScalars(0, 0, 10);
+            $this->image = CircleShape::fromScalars(0, 0, 10);
         } else {
             $this->image = ImageShape::fromPath(__DIR__ . '/../../assets/beach.jpg');
         }
@@ -56,7 +57,7 @@ class CanvasScalingPage implements Component
 
     public function build(): Widget
     {
-        return Block::default()
+        return BlockWidget::default()
             ->titles(
                 Title::fromString(sprintf(
                     'Marker: %s, Canvas size: %dx%d, Terminal size: %s - use arrow keys to adjust and (back)tab to change the marker',
@@ -67,10 +68,10 @@ class CanvasScalingPage implements Component
                 ))
             )
             ->widget(
-                Grid::default()
+                GridWidget::default()
                 ->constraints(Constraint::percentage(50), Constraint::percentage(50))
                 ->widgets(
-                    Grid::default()
+                    GridWidget::default()
                     ->direction(Direction::Horizontal)
                     ->constraints(Constraint::percentage(50), Constraint::percentage(50))
                     ->widgets(
@@ -88,11 +89,11 @@ class CanvasScalingPage implements Component
                             })
                         ),
                         $this->canvas(
-                            Line::fromScalars(0, 0, $this->xMax, $this->yMax),
-                            Line::fromScalars(0, $this->yMax, $this->xMax, 0)
+                            LineShape::fromScalars(0, 0, $this->xMax, $this->yMax),
+                            LineShape::fromScalars(0, $this->yMax, $this->xMax, 0)
                         )
                     ),
-                    Grid::default()
+                    GridWidget::default()
                     ->direction(Direction::Horizontal)
                     ->constraints(Constraint::percentage(50), Constraint::percentage(50))
                     ->widgets(
@@ -107,16 +108,16 @@ class CanvasScalingPage implements Component
     {
         if ($event instanceof CodedKeyEvent) {
             if ($event->code === KeyCode::Right) {
-                $this->xMax+=self::DELTA;
+                $this->xMax += self::DELTA;
             }
             if ($event->code === KeyCode::Left) {
-                $this->xMax-=self::DELTA;
+                $this->xMax -= self::DELTA;
             }
             if ($event->code === KeyCode::Up) {
-                $this->yMax+=self::DELTA;
+                $this->yMax += self::DELTA;
             }
             if ($event->code === KeyCode::Down) {
-                $this->yMax-=self::DELTA;
+                $this->yMax -= self::DELTA;
             }
             if ($event->code === KeyCode::Tab) {
                 $this->marker++;
@@ -125,7 +126,6 @@ class CanvasScalingPage implements Component
                 $this->marker--;
             }
         }
-
 
     }
 
@@ -136,7 +136,7 @@ class CanvasScalingPage implements Component
 
     private function canvas(Shape ...$shape): Widget
     {
-        return Canvas::fromIntBounds(
+        return CanvasWidget::fromIntBounds(
             0,
             $this->xMax,
             0,

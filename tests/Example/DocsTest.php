@@ -1,18 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Tests\Example;
 
 use Generator;
-use PHPUnit\Framework\TestCase;
 use PhpTui\Term\AnsiParser;
 use PhpTui\Term\Painter\HtmlCanvasPainter;
 use PhpTui\Term\Painter\StringPainter;
+use PHPUnit\Framework\TestCase;
 use RuntimeException;
 
 class DocsTest extends TestCase
 {
-    const WIDTH = 20;
-    const HEIGHT = 50;
+    public const WIDTH = 20;
+    public const HEIGHT = 50;
 
     /**
      * @dataProvider provideExamples
@@ -82,6 +84,7 @@ class DocsTest extends TestCase
         }
         if (!file_exists($snapshot) || getenv('SNAPSHOT_APPROVE')) {
             file_put_contents($snapshot, $output);
+
             return;
         }
 
@@ -98,6 +101,7 @@ class DocsTest extends TestCase
     {
         $normalized = preg_replace('{canvas id=".*?"}', 'canvas id="***"', $string);
         $normalized = preg_replace('{getElementById\(".*?"\)}', 'getElementById("***")', (string)$normalized);
+
         return (string)$normalized;
     }
 }

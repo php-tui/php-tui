@@ -1,28 +1,30 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Example\Demo\Page;
 
 use PhpTui\Term\Event;
 use PhpTui\Term\Event\CodedKeyEvent;
 use PhpTui\Term\KeyCode;
 use PhpTui\Tui\Example\Demo\Component;
+use PhpTui\Tui\Extension\Core\Widget\BlockWidget;
+use PhpTui\Tui\Extension\Core\Widget\Table\TableCell;
+use PhpTui\Tui\Extension\Core\Widget\Table\TableRow;
+use PhpTui\Tui\Extension\Core\Widget\Table\TableState;
+use PhpTui\Tui\Extension\Core\Widget\TableWidget;
 use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Constraint;
 use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\Widget\Borders;
-use PhpTui\Tui\Model\Widget\Span;
 use PhpTui\Tui\Model\Widget\Line;
+use PhpTui\Tui\Model\Widget\Span;
 use PhpTui\Tui\Model\Widget\Title;
-use PhpTui\Tui\Widget\Block;
-use PhpTui\Tui\Widget\Table;
-use PhpTui\Tui\Widget\Table\TableCell;
-use PhpTui\Tui\Widget\Table\TableRow;
-use PhpTui\Tui\Widget\Table\TableState;
 
 final class TablePage implements Component
 {
-    const EVENTS = [
+    public const EVENTS = [
         ['Event1', 'INFO'],
         ['Event2', 'INFO'],
         ['Event3', 'CRITICAL'],
@@ -61,9 +63,9 @@ final class TablePage implements Component
 
     public function build(): Widget
     {
-        return Block::default()->titles(Title::fromString('Table'))->borders(Borders::ALL)
+        return BlockWidget::default()->titles(Title::fromString('Table'))->borders(Borders::ALL)
             ->widget(
-                Table::default()
+                TableWidget::default()
                     ->state($this->state)
                     ->select($this->selected)
                     ->highlightSymbol('X')
@@ -74,14 +76,14 @@ final class TablePage implements Component
                         Constraint::min(50),
                     )
                     ->header(
-                        TableRow::fromCells([
+                        TableRow::fromCells(
                             TableCell::fromString('Level'),
                             TableCell::fromString('Event'),
                             TableCell::fromString('Data'),
-                        ])
+                        )
                     )
                     ->rows(...array_map(function (array $event) {
-                        return TableRow::fromCells([
+                        return TableRow::fromCells(
                             TableCell::fromLine(Line::fromSpan(
                                 Span::styled($event[1], match ($event[1]) {
                                     'INFO' => Style::default()->fg(AnsiColor::Green),
@@ -92,7 +94,7 @@ final class TablePage implements Component
                             )),
                             TableCell::fromLine(Line::fromString($event[0])),
                             TableCell::fromString('...'),
-                        ]);
+                        );
                     }, array_merge(self::EVENTS, self::EVENTS)))
             )
         ;

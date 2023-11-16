@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Term\Action;
 
 use PhpTui\Term\Action;
@@ -12,6 +14,6 @@ final class CursorShow implements Action
 
     public function __toString(): string
     {
-        return sprintf('CursorShow(%s)', $this->show ? 'true':'false');
+        return sprintf('CursorShow(%s)', $this->show ? 'true' : 'false');
     }
 }

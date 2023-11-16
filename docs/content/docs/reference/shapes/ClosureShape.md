@@ -1,8 +1,10 @@
 ---
-title: ClosureShape
+title:  Closure 
 description: 
 ---
-## ClosureShape
+##  Closure 
+
+`PhpTui\Tui\Extension\Core\Shape\ClosureShape`
 
 
 {{% terminal file="/data/example/docs/shape/closureShape.html" %}}

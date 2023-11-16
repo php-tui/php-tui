@@ -66,10 +66,10 @@ Widgets
 - [x] Table
 - [ ] Tabs
 - [ ] Calendar
-- [ ] Barchart
+- [x] Barchart
 - [ ] Scrollbar
 - [ ] Sparkline
-- [ ] Gauge
+- [x] Gauge
 
 Limitations
 -----------

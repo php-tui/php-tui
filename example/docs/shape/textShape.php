@@ -1,13 +1,15 @@
 <?php
 
-use PhpTui\Tui\Adapter\Bdf\BdfShapeSet;
-use PhpTui\Tui\Adapter\Bdf\FontRegistry;
-use PhpTui\Tui\Adapter\Bdf\Shape\TextShape;
+declare(strict_types=1);
+
 use PhpTui\Tui\DisplayBuilder;
+use PhpTui\Tui\Extension\Bdf\BdfExtension;
+use PhpTui\Tui\Extension\Bdf\FontRegistry;
+use PhpTui\Tui\Extension\Bdf\Shape\TextShape;
+use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
 use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Model\Widget\FloatPosition;
-use PhpTui\Tui\Widget\Canvas;
 
 require 'vendor/autoload.php';
 
@@ -16,11 +18,11 @@ require 'vendor/autoload.php';
 $registry = FontRegistry::default();
 
 $display = DisplayBuilder::default()
-    ->addShapeSet(new BdfShapeSet(FontRegistry::default()))
+    ->addExtension(new BdfExtension())
     ->build();
 
 $display->draw(
-    Canvas::fromIntBounds(0, 50, 0, 20)
+    CanvasWidget::fromIntBounds(0, 50, 0, 20)
         ->marker(Marker::Block)
         ->draw(
             new TextShape(

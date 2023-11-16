@@ -1,17 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Tests\Example;
 
-use PHPUnit\Framework\TestCase;
 use PhpTui\Term\Event;
-use PhpTui\Term\EventProvider\LoadedEventProvider;
 use PhpTui\Term\Event\CharKeyEvent;
+use PhpTui\Term\EventProvider\LoadedEventProvider;
 use PhpTui\Term\InformationProvider\AggregateInformationProvider;
 use PhpTui\Term\Painter\BufferPainter;
 use PhpTui\Term\RawMode\NullRawMode;
 use PhpTui\Term\Terminal;
 use PhpTui\Tui\Example\Demo\App;
 use PhpTui\Tui\Model\Backend\DummyBackend;
+use PHPUnit\Framework\TestCase;
 use RuntimeException;
 
 class DemoTest extends TestCase
@@ -101,6 +103,27 @@ class DemoTest extends TestCase
         $this->assertSnapshot(__METHOD__, $backend);
     }
 
+    public function testGauge(): void
+    {
+        srand(0);
+        $backend = $this->execute(
+            CharKeyEvent::new('!'),
+            null,
+            CharKeyEvent::new('q'),
+        );
+        $this->assertSnapshot(__METHOD__, $backend);
+    }
+
+    public function testBarChart(): void
+    {
+        srand(0);
+        $backend = $this->execute(
+            CharKeyEvent::new('"'),
+            null,
+            CharKeyEvent::new('q'),
+        );
+        $this->assertSnapshot(__METHOD__, $backend);
+    }
 
     private function execute(?Event ...$events): DummyBackend
     {
@@ -119,6 +142,7 @@ class DemoTest extends TestCase
             $backend,
         );
         $app->run();
+
         return $backend;
     }
 

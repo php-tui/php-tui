@@ -1,16 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Term;
 
 final class KeyModifiers
 {
-    const SHIFT = 0b0000_0001;
-    const CONTROL = 0b0000_0010;
-    const ALT = 0b0000_0100;
-    const SUPER = 0b0000_1000;
-    const HYPER = 0b0001_0000;
-    const META = 0b0010_0000;
-    const NONE = 0b0000_0000;
+    public const SHIFT = 0b0000_0001;
+    public const CONTROL = 0b0000_0010;
+    public const ALT = 0b0000_0100;
+    public const SUPER = 0b0000_1000;
+    public const HYPER = 0b0001_0000;
+    public const META = 0b0010_0000;
+    public const NONE = 0b0000_0000;
 
     /**
      * @param int-mask-of<KeyModifiers::*> $modifierMask
@@ -39,6 +41,7 @@ final class KeyModifiers
         if (($modifierMask & self::META) !== 0) {
             $modifiers[] = 'meta';
         }
+
         return implode(',', $modifiers);
     }
 }

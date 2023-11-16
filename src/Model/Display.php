@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Model;
 
 use PhpTui\Tui\Model\Viewport\Fullscreen;
@@ -33,6 +35,7 @@ final class Display
         $size = $viewport->size($backend);
         $cursorPos = $viewport->cursorPos($backend);
         $viewportArea = $viewport->area($backend, 0);
+
         return new self(
             $backend,
             [Buffer::empty($viewportArea), Buffer::empty($viewportArea)],
@@ -81,7 +84,6 @@ final class Display
         $this->widgetRenderer->render(
             new NullWidgetRenderer(),
             $widget,
-            $buffer->area(),
             $buffer
         );
 

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Model\Widget;
 
 use PhpTui\Tui\Model\Style;
@@ -28,9 +30,9 @@ final class Text
     public static function styled(string $string, Style $style): self
     {
         $text = self::fromString($string);
+
         return $text->patchStyle($style);
     }
-
 
     public function patchStyle(Style $style): self
     {

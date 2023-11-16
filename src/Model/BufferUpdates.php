@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Model;
 
 use ArrayIterator;
@@ -34,6 +36,7 @@ final class BufferUpdates implements Countable, IteratorAggregate
                 count($this->updates)
             ));
         }
+
         return $this->updates[$index];
     }
 
@@ -44,6 +47,7 @@ final class BufferUpdates implements Countable, IteratorAggregate
                 'Cannot get last update because there are no updates'
             );
         }
+
         return $this->updates[count($this->updates) - 1];
     }
 

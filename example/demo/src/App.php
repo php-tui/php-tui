@@ -1,26 +1,32 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Example\Demo;
 
 use PhpTui\Term\Actions;
 use PhpTui\Term\ClearType;
 use PhpTui\Term\Event\CharKeyEvent;
 use PhpTui\Term\Terminal;
-use PhpTui\Tui\Adapter\Bdf\BdfShapeSet;
-use PhpTui\Tui\Adapter\Bdf\FontRegistry;
-use PhpTui\Tui\Adapter\ImageMagick\ImageMagickShapeSet;
-use PhpTui\Tui\Adapter\PhpTerm\PhpTermBackend;
+use PhpTui\Tui\Bridge\PhpTerm\PhpTermBackend as PhpTuiPhpTermBackend;
 use PhpTui\Tui\DisplayBuilder;
+use PhpTui\Tui\Example\Demo\Page\BarChartPage;
 use PhpTui\Tui\Example\Demo\Page\BlocksPage;
 use PhpTui\Tui\Example\Demo\Page\CanvasPage;
 use PhpTui\Tui\Example\Demo\Page\CanvasScalingPage;
 use PhpTui\Tui\Example\Demo\Page\ChartPage;
 use PhpTui\Tui\Example\Demo\Page\ColorsPage;
 use PhpTui\Tui\Example\Demo\Page\EventsPage;
+use PhpTui\Tui\Example\Demo\Page\GaugePage;
 use PhpTui\Tui\Example\Demo\Page\ImagePage;
 use PhpTui\Tui\Example\Demo\Page\ItemListPage;
 use PhpTui\Tui\Example\Demo\Page\SpritePage;
 use PhpTui\Tui\Example\Demo\Page\TablePage;
+use PhpTui\Tui\Extension\Bdf\BdfExtension;
+use PhpTui\Tui\Extension\Core\Widget\BlockWidget;
+use PhpTui\Tui\Extension\Core\Widget\GridWidget;
+use PhpTui\Tui\Extension\Core\Widget\ParagraphWidget;
+use PhpTui\Tui\Extension\ImageMagick\ImageMagickExtension;
 use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Backend;
 use PhpTui\Tui\Model\Constraint;
@@ -34,9 +40,6 @@ use PhpTui\Tui\Model\Widget\Line;
 use PhpTui\Tui\Model\Widget\Span;
 use PhpTui\Tui\Model\Widget\Text;
 use PhpTui\Tui\Model\Widget\Title;
-use PhpTui\Tui\Widget\Block;
-use PhpTui\Tui\Widget\Grid;
-use PhpTui\Tui\Widget\Paragraph;
 use Throwable;
 
 /**
@@ -86,13 +89,16 @@ final class App
                 ActivePage::Colors => new ColorsPage(),
                 ActivePage::Images => new ImagePage(),
                 ActivePage::CanvasScaling => new CanvasScalingPage($terminal),
+                ActivePage::Gauge => new GaugePage(),
+                ActivePage::BarChart => new BarChartPage(),
             };
         }
 
-        $display = DisplayBuilder::default($backend ?? PhpTermBackend::new($terminal))
-            ->addShapeSet(new ImageMagickShapeSet())
-            ->addShapeSet(new BdfShapeSet(FontRegistry::default()))
+        $display = DisplayBuilder::default($backend ?? PhpTuiPhpTermBackend::new($terminal))
+            ->addExtension(new ImageMagickExtension())
+            ->addExtension(new BdfExtension())
             ->build();
+
         return new self(
             $terminal,
             $display,
@@ -108,10 +114,13 @@ final class App
             // enable "raw" mode to remove default terminal behavior (e.g.
             // echoing key presses)
             $this->terminal->enableRawMode();
+
             return $this->doRun();
         } catch (Throwable $err) {
             $this->terminal->disableRawMode();
-            $this->terminal->queue(Actions::clear(ClearType::All));
+            $this->terminal->execute(Actions::alternateScreenDisable());
+            $this->terminal->execute(Actions::clear(ClearType::All));
+
             throw $err;
         }
     }
@@ -162,8 +171,11 @@ final class App
                     if ($event->char === '0') {
                         $this->activePage = ActivePage::CanvasScaling;
                     }
-                    if ($event->char === 'r') {
-                        $this->display->clear();
+                    if ($event->char === '!') {
+                        $this->activePage = ActivePage::Gauge;
+                    }
+                    if ($event->char === '"') {
+                        $this->activePage = ActivePage::BarChart;
                     }
                 }
                 $this->activePage()->handle($event);
@@ -187,10 +199,10 @@ final class App
 
     private function layout(): Widget
     {
-        return Grid::default()
+        return GridWidget::default()
             ->direction(Direction::Vertical)
             ->constraints(
-                Constraint::max(3),
+                Constraint::max(4),
                 Constraint::min(1),
             )
             ->widgets(
@@ -206,34 +218,40 @@ final class App
 
     private function header(): Widget
     {
-        return Block::default()
+        return BlockWidget::default()
                 ->borders(Borders::ALL)->style(Style::default()->fg(AnsiColor::White))
                 ->titles(Title::fromString(sprintf('%d FPS', $this->frameRate()))->horizontalAlignmnet(HorizontalAlignment::Right))
                 ->widget(
-                    Paragraph::fromText(Text::fromLine(Line::fromSpans([
-                        Span::styled('[q]', Style::default()->fg(AnsiColor::Green)),
-                        Span::fromString('quit '),
-                        Span::styled('[1]', Style::default()->fg(AnsiColor::Green)),
-                        Span::fromString('events '),
-                        Span::styled('[2]', Style::default()->fg(AnsiColor::Green)),
-                        Span::fromString('canvas '),
-                        Span::styled('[3]', Style::default()->fg(AnsiColor::Green)),
-                        Span::fromString('chart '),
-                        Span::styled('[4]', Style::default()->fg(AnsiColor::Green)),
-                        Span::fromString('list '),
-                        Span::styled('[5]', Style::default()->fg(AnsiColor::Green)),
-                        Span::fromString('table '),
-                        Span::styled('[6]', Style::default()->fg(AnsiColor::Green)),
-                        Span::fromString('blocks '),
-                        Span::styled('[7]', Style::default()->fg(AnsiColor::Green)),
-                        Span::fromString('sprites '),
-                        Span::styled('[8]', Style::default()->fg(AnsiColor::Green)),
-                        Span::fromString('colors '),
-                        Span::styled('[9]', Style::default()->fg(AnsiColor::Green)),
-                        Span::fromString('images '),
-                        Span::styled('[0]', Style::default()->fg(AnsiColor::Green)),
-                        Span::fromString('scaling '),
-                    ])))
+                    ParagraphWidget::fromText(Text::fromLines(
+                        Line::fromSpans([
+                            Span::styled('[q]', Style::default()->fg(AnsiColor::Green)),
+                            Span::fromString('quit '),
+                            Span::styled('[1]', Style::default()->fg(AnsiColor::Green)),
+                            Span::fromString('events '),
+                            Span::styled('[2]', Style::default()->fg(AnsiColor::Green)),
+                            Span::fromString('canvas '),
+                            Span::styled('[3]', Style::default()->fg(AnsiColor::Green)),
+                            Span::fromString('chart '),
+                            Span::styled('[4]', Style::default()->fg(AnsiColor::Green)),
+                            Span::fromString('list '),
+                            Span::styled('[5]', Style::default()->fg(AnsiColor::Green)),
+                            Span::fromString('table '),
+                            Span::styled('[6]', Style::default()->fg(AnsiColor::Green)),
+                            Span::fromString('blocks '),
+                            Span::styled('[7]', Style::default()->fg(AnsiColor::Green)),
+                            Span::fromString('sprites '),
+                            Span::styled('[8]', Style::default()->fg(AnsiColor::Green)),
+                            Span::fromString('colors '),
+                            Span::styled('[9]', Style::default()->fg(AnsiColor::Green)),
+                            Span::fromString('images '),
+                            Span::styled('[0]', Style::default()->fg(AnsiColor::Green)),
+                            Span::fromString('scaling '),
+                            Span::styled('[!]', Style::default()->fg(AnsiColor::Green)),
+                            Span::fromString('gauge '),
+                            Span::styled('["]', Style::default()->fg(AnsiColor::Green)),
+                            Span::fromString('barchart '),
+                        ])
+                    ))
                 )
         ;
     }
@@ -261,6 +279,7 @@ final class App
                 $ac[$timestamp] = 0;
             }
             $ac[$timestamp]++;
+
             return $ac;
         }, []);
 

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Model\Widget;
 
 use PhpTui\Tui\Model\Style;
@@ -47,6 +49,7 @@ final class Span implements Stringable
     public function style(Style $style): self
     {
         $this->style = $style;
+
         return $this;
     }
 

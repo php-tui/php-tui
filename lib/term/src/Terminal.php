@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Term;
 
 use PhpTui\Term\EventProvider\SyncEventProvider;
@@ -56,6 +58,7 @@ class Terminal
     public function info(string $classFqn): ?object
     {
         $info = $this->infoProvider->for($classFqn);
+
         return $info;
     }
 
@@ -65,6 +68,7 @@ class Terminal
     public function queue(Action $action): self
     {
         $this->queue[] = $action;
+
         return $this;
     }
 
@@ -87,6 +91,7 @@ class Terminal
     {
         $this->painter->paint($this->queue);
         $this->queue = [];
+
         return $this;
     }
 

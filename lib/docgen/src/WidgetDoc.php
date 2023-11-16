@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Docgen;
 
 final class WidgetDoc
@@ -9,6 +11,7 @@ final class WidgetDoc
      */
     public function __construct(
         public string $name,
+        public string $humanName,
         public string $className,
         public ?string $description,
         public array $params

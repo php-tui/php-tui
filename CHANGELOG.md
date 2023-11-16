@@ -1,6 +1,29 @@
 CHANGELOG
 =========
 
+## master
+
+Features:
+
+- Gauge widget #118
+- Image widget #113
+- BarChart widget #126
+
+Bug fixes:
+
+- Make mouse event properties public
+
+Improvements
+
+- Add `TableRow::fromStrings('one', 'two')`
+
+Refactoring:
+
+- Suffix widgets and shapes with `Widget` and `Shape` #130
+- Always render to _new_ buffers #128
+- Re-organized namespaces
+- Use variadic for `TableRow::fromTableCells`
+
 ## 0.0.1
 
 The following are differences from Ratatui:

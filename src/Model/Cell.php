@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Model;
 
 final class Cell
@@ -25,19 +27,20 @@ final class Cell
         );
     }
 
-    public static function empty(): self
-    {
-        return new self(' ', AnsiColor::Reset, AnsiColor::Reset, AnsiColor::Reset, Modifier::NONE);
-    }
-
     public static function fromChar(string $char): self
     {
         return new self($char, AnsiColor::Reset, AnsiColor::Reset, AnsiColor::Reset, Modifier::NONE);
     }
 
+    public static function empty(): self
+    {
+        return self::fromChar(' ');
+    }
+
     public function setChar(string $char): self
     {
         $this->char = $char;
+
         return $this;
     }
 
@@ -54,28 +57,17 @@ final class Cell
         }
         $this->modifiers |= $style->addModifiers;
         $this->modifiers &= ~$style->subModifiers;
+
         return $this;
     }
 
     public function equals(Cell $currentCell): bool
     {
         return
-            $this->underline == $currentCell->underline &&
-            $this->modifiers === $currentCell->modifiers &&
+            $this->char === $currentCell->char &&
             $this->fg == $currentCell->fg &&
             $this->bg == $currentCell->bg &&
-            $this->char === $currentCell->char
-        ;
-    }
-
-    public function clone(): self
-    {
-        return new self(
-            char: $this->char,
-            fg: $this->fg,
-            bg: $this->bg,
-            underline: $this->underline,
-            modifiers: $this->modifiers,
-        );
+            $this->modifiers === $currentCell->modifiers &&
+            $this->underline == $currentCell->underline;
     }
 }

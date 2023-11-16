@@ -1,8 +1,10 @@
 ---
-title: RawWidget
+title:  Raw 
 description: This widget allows you to write directly to the buffer through a closure.
 ---
-## RawWidget
+##  Raw 
+
+`PhpTui\Tui\Extension\Core\Widget\RawWidget`
 
 This widget allows you to write directly to the buffer through a closure.
 {{% terminal file="/data/example/docs/widget/rawWidget.html" %}}

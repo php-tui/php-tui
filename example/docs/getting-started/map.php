@@ -1,17 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 use PhpTui\Tui\DisplayBuilder;
-use PhpTui\Tui\Widget\Canvas;
+use PhpTui\Tui\Extension\Core\Shape\MapResolution;
+use PhpTui\Tui\Extension\Core\Shape\MapShape;
+use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
 use PhpTui\Tui\Model\Canvas\CanvasContext;
-use PhpTui\Tui\Shape\Map;
-use PhpTui\Tui\Shape\MapResolution;
 
 require 'vendor/autoload.php';
 
 $display = DisplayBuilder::default()->build();
 $display->draw(
-    Canvas::fromIntBounds(-180, 180, -90, 90)
+    CanvasWidget::fromIntBounds(-180, 180, -90, 90)
         ->paint(function (CanvasContext $ctx): void {
-            $ctx->draw(Map::default()->resolution(MapResolution::High));
+            $ctx->draw(MapShape::default()->resolution(MapResolution::High));
         })
 );
