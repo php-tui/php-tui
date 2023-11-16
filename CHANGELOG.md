@@ -7,6 +7,7 @@ Features:
 
 - Gauge widget
 - Image widget
+- BarChart widget
 
 Bug fixes:
 
