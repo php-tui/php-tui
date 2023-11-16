@@ -33,10 +33,7 @@ class BarGroup
         }, array_keys($array), array_values($array)));
     }
 
-    /**
-     * @param Bar[] $bars
-     */
-    public static function fromBars(array $bars): self
+    public static function fromBars(Bar ...$bars): self
     {
         return new self(null, $bars);
     }
