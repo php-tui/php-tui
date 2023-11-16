@@ -40,4 +40,15 @@ class BarGroup
     {
         return new self(null, $bars);
     }
+
+    public function max(): int
+    {
+        return array_reduce($this->bars, function (int $max, Bar $bar) {
+            $value = $bar->value;
+            if ($value > $max) {
+                return $value;
+            }
+            return $max;
+        }, 0);
+    }
 }
