@@ -4,12 +4,15 @@ namespace PhpTui\Tui\Extension\Core\Widget;
 
 use PhpTui\Tui\Extension\Core\Widget\BarChart\Bar;
 use PhpTui\Tui\Extension\Core\Widget\BarChart\BarGroup;
+use PhpTui\Tui\Extension\Core\Widget\BarChart\LabelInfo;
 use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Buffer;
 use PhpTui\Tui\Model\Direction;
 use PhpTui\Tui\Model\Exception\TodoException;
+use PhpTui\Tui\Model\Position;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\WidgetRenderer;
+use PhpTui\Tui\Model\Widget\BarSet;
 
 final class BarChartRenderer implements WidgetRenderer
 {
@@ -24,10 +27,8 @@ final class BarChartRenderer implements WidgetRenderer
             return;
         }
 
-        $groupTicks = $this->groupTicks($widget, $area->width, $area->height);
-        dd($groupTicks);
         match($widget->direction) {
-            Direction::Vertical => throw new TodoException('Not implemented yet!'),
+            Direction::Vertical => $this->renderVertical($widget, $buffer, $area),
             Direction::Horizontal => throw new TodoException('Not implemented yet!'),
         };
 
@@ -86,5 +87,75 @@ final class BarChartRenderer implements WidgetRenderer
             }
             return $max;
         }, 0);
+    }
+
+    private function renderVertical(BarChartWidget $widget, Buffer $buffer, Area $area): void
+    {
+        $labelInfo = $this->labelInfo($widget, $area->height - 1);
+        $barsArea = Area::fromScalars(
+            $area->position->x,
+            $area->position->y,
+            $area->width,
+            $area->height - $labelInfo->height
+        );
+
+        $groupTicks = $this->groupTicks($widget, $area->width, $area->height);
+        $this->renderVerticalBars($widget, $buffer, $barsArea, $groupTicks);
+
+    }
+
+    private function labelInfo(BarChartWidget $widget, int $availableHeight): LabelInfo
+    {
+        if ($availableHeight === 0) {
+            return new LabelInfo(groupLabelVisible: false, barLabelVisible: false, height: 0);
+        }
+
+        $barLabelVisible = $widget->isBarLabelVisible();
+
+        if ($availableHeight === 1 && $barLabelVisible) {
+            return new LabelInfo(
+                groupLabelVisible: false,
+                barLabelVisible: true,
+                height: 1
+            );
+        }
+
+        $groupLabelVisible = $widget->isGroupLabelVisible();
+
+        return new LabelInfo(
+            $groupLabelVisible,
+            $barLabelVisible,
+            ($groupLabelVisible ? 1 : 0) + ($barLabelVisible ? 1 : 0),
+        );
+
+    }
+
+    /**
+     * @param array<int,array<int,int>> $groupTicks
+     */
+    private function renderVerticalBars(BarChartWidget $widget, Buffer $buffer, Area $area, array $groupTicks): void
+    {
+        $barX = $area->left();
+        foreach ($widget->data as $i => $group) {
+            $ticksList = $groupTicks[$i];
+            foreach ($group->bars as $ii => $bar) {
+                $ticks = $ticksList[$ii];
+                for ($j = $area->height - 1; $j >= 0; $j--) {
+                    $symbol = BarSet::fromIndex($ticks);
+
+                    $barStyle = $widget->barStyle->patch($bar->style);
+
+                    for ($x = 0; $x < $widget->barWidth; $x++) {
+                        $cell = $buffer->get(Position::at($barX + $x, $area->top() + $j));
+                        $cell->setChar($symbol);
+                        $cell->setStyle($barStyle);
+                    }
+
+                    $ticks = max(0, $ticks - 8);
+                }
+                $barX += $widget->barGap + $widget->barWidth;
+            }
+            $barX += $widget->groupGap;
+        }
     }
 }

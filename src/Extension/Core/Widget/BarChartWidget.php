@@ -133,4 +133,25 @@ final class BarChartWidget implements Widget
         return $this;
     }
 
+    public function isBarLabelVisible(): bool
+    {
+        foreach  ($this->data as $group) {
+            foreach ($group->bars as $bar) {
+                if ($bar->label !== null) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public function isGroupLabelVisible(): bool
+    {
+        foreach  ($this->data as $group) {
+            if ($group->label !== null) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

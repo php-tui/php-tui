@@ -6,6 +6,7 @@ namespace PhpTui\Tui\Model\Widget;
 
 final class BarSet
 {
+    public const EMPTY = ' ';
     public const FULL = '█';
     public const SEVEN_EIGHTHS = '▇';
     public const THREE_QUARTERS = '▆';
@@ -14,4 +15,19 @@ final class BarSet
     public const THREE_EIGHTHS = '▃';
     public const ONE_QUARTER = '▂';
     public const ONE_EIGHTH = '▁';
+
+    public static function fromIndex(int $index): string
+    {
+        return match ($index) {
+            0 => self::EMPTY,
+            1 => self::ONE_EIGHTH,
+            2 => self::ONE_QUARTER,
+            3 => self::THREE_EIGHTHS,
+            4 => self::HALF,
+            5 => self::FIVE_EIGHTHS,
+            6 => self::THREE_QUARTERS,
+            7 => self::SEVEN_EIGHTHS,
+            default => self::FULL,
+        };
+    }
 }
