@@ -49,8 +49,8 @@ class BarChartRendererTest extends WidgetTestCase
                 BarGroup::fromArray(['B0' => 1, 'B1' => 2])
             )->direction(Direction::Horizontal),
             [
-                '  █       ',
-                '▄ █       ',
+                'B █       ',
+                'B █       ',
                 '█ █       ',
                 '1 2       ',
                 'B B       ',
