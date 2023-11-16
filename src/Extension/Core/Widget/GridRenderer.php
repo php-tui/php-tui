@@ -13,8 +13,9 @@ use RuntimeException;
 
 class GridRenderer implements WidgetRenderer
 {
-    public function render(WidgetRenderer $renderer, Widget $widget, Area $area, Buffer $buffer): void
+    public function render(WidgetRenderer $renderer, Widget $widget, Buffer $buffer): void
     {
+        $area = $buffer->area();
         if (!$widget instanceof Grid) {
             return;
         }
@@ -34,7 +35,7 @@ class GridRenderer implements WidgetRenderer
             }
             $cellArea = $layout->get($index);
             $subBuffer = Buffer::empty($cellArea);
-            $renderer->render($renderer, $gridWidget, $cellArea, $subBuffer);
+            $renderer->render($renderer, $gridWidget, $subBuffer);
             $buffer->putBuffer($cellArea->position, $subBuffer);
         }
     }

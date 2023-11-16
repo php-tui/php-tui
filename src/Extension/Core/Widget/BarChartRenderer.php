@@ -21,11 +21,12 @@ final class BarChartRenderer implements WidgetRenderer
 {
     private const TICKS_PER_LINE = 8;
 
-    public function render(WidgetRenderer $renderer, Widget $widget, Area $area, Buffer $buffer): void
+    public function render(WidgetRenderer $renderer, Widget $widget, Buffer $buffer): void
     {
         if (!$widget instanceof BarChartWidget) {
             return;
         }
+        $area = $buffer->area();
         $buffer->setStyle($area, $widget->style);
 
         if ($area->isEmpty() || $widget->data === [] || $widget->barWidth === 0) {

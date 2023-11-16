@@ -45,8 +45,11 @@ final class Buffer implements Countable
         return new self($area, $content);
     }
 
-    public function setStyle(Area $area, Style $style): void
+    public function setStyle(?Area $area, Style $style): void
     {
+        if ($area === null) {
+            $area = $this->area;
+        }
         if ($area->height === 0) {
             return;
         }

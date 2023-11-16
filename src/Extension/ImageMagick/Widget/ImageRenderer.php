@@ -19,8 +19,9 @@ class ImageRenderer implements WidgetRenderer
     {
     }
 
-    public function render(WidgetRenderer $renderer, Widget $widget, Area $area, Buffer $buffer): void
+    public function render(WidgetRenderer $renderer, Widget $widget, Buffer $buffer): void
     {
+        $area = $buffer->area();
         if (!$widget instanceof ImageWidget) {
             return;
         }
@@ -35,6 +36,6 @@ class ImageRenderer implements WidgetRenderer
             $geo['height'],
         )->marker($widget->marker ?? Marker::HalfBlock)->draw(ImageShape::fromPath(
             $widget->path
-        )), $area, $buffer);
+        )), $buffer);
     }
 }

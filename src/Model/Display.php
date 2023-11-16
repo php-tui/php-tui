@@ -84,7 +84,6 @@ final class Display
         $this->widgetRenderer->render(
             new NullWidgetRenderer(),
             $widget,
-            $buffer->area(),
             $buffer
         );
 

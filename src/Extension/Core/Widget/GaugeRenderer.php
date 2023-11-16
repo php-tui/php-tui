@@ -17,9 +17,9 @@ final class GaugeRenderer implements WidgetRenderer
     public function render(
         WidgetRenderer $renderer,
         Widget $widget,
-        Area $area,
         Buffer $buffer
     ): void {
+        $area = $buffer->area();
         if (!$widget instanceof GaugeWidget) {
             return;
         }
