@@ -308,14 +308,24 @@ final class BarChartRenderer implements WidgetRenderer
             }
             $tickList = $groupTicks[$i];
             foreach ($group->bars as $ii => $bar) {
+                if (!isset($tickList[$ii])) {
+                    break;
+                }
                 $ticks = $tickList[$ii];
                 $barLength = (int) ($ticks / 8);
                 $barStyle = $widget->barStyle->patch($bar->style);
 
                 for ($y = 0; $y < $widget->barWidth; $y++) {
                     $barY = $barY + $y;
+                    if ($barY >= $barsArea->bottom()) {
+                        continue;
+                    }
+
                     for ($x = 0; $x < $barsArea->width; $x++) {
                         $symbol = $x < $barLength ? BarSet::FULL : BarSet::EMPTY;
+                        if ($barsArea->left() + $x >= $buffer->area()->right()) {
+                            break;
+                        }
                         $buffer->get(
                             Position::at(
                                 $barsArea->left() + $x,

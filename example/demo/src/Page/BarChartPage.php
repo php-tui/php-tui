@@ -68,8 +68,9 @@ class BarChartPage implements Component
                         ),
                 ),
                 BarChartWidget::default()
-                    ->barWidth(10)
-                    ->groupGap(5)
+                    ->direction(Direction::Horizontal)
+                    ->barWidth(1)
+                    ->groupGap(4)
                     ->barStyle(Style::default()->fg(AnsiColor::Red))
                     ->data(
                         BarGroup::fromArray([
