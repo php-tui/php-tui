@@ -33,7 +33,9 @@ class GridRenderer implements WidgetRenderer
                 ));
             }
             $cellArea = $layout->get($index);
-            $renderer->render($renderer, $gridWidget, $cellArea, $buffer);
+            $subBuffer = Buffer::empty($cellArea);
+            $renderer->render($renderer, $gridWidget, $cellArea, $subBuffer);
+            $buffer->putBuffer($cellArea->position, $subBuffer);
         }
     }
 }
