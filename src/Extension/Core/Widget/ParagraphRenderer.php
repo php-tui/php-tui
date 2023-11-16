@@ -25,7 +25,7 @@ class ParagraphRenderer implements WidgetRenderer
         if (!$widget instanceof Paragraph) {
             return;
         }
-        $buffer->setStyle($area, $widget->style);
+        $buffer->setStyle(null, $widget->style);
         $textArea = $area;
 
         if ($textArea->height < 1) {

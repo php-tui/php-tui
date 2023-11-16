@@ -118,7 +118,8 @@ final class App
             return $this->doRun();
         } catch (Throwable $err) {
             $this->terminal->disableRawMode();
-            $this->terminal->queue(Actions::clear(ClearType::All));
+            $this->terminal->execute(Actions::alternateScreenDisable());
+            $this->terminal->execute(Actions::clear(ClearType::All));
 
             throw $err;
         }
