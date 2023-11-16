@@ -154,4 +154,21 @@ final class BarChartWidget implements Widget
         }
         return false;
     }
+
+    public function maxLabelSize(): int
+    {
+        $max = 0;
+        foreach ($this->data as $group) {
+            foreach ($group->bars as $bar) {
+                if ($bar->label === null) {
+                    continue;
+                }
+                $width = $bar->label->width();
+                if ($width > $max) {
+                    $max = $width;
+                }
+            }
+        }
+        return $max;
+    }
 }

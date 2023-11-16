@@ -33,7 +33,7 @@ final class BarChartRenderer implements WidgetRenderer
 
         match($widget->direction) {
             Direction::Vertical => $this->renderVertical($widget, $buffer, $area),
-            Direction::Horizontal => throw new TodoException('Not implemented yet!'),
+            Direction::Horizontal => $this->renderHorizontal($widget, $buffer, $area),
         };
 
     }
@@ -264,6 +264,107 @@ final class BarChartRenderer implements WidgetRenderer
                 ),
                 $valueLabel,
                 $defaultValueStyle->patch($bar->valueStyle),
+            );
+        }
+    }
+
+    private function renderHorizontal(BarChartWidget $widget, Buffer $buffer, Area $area)
+    {
+        $labelSize = $widget->maxLabelSize();
+        $labelX = $area->position->x;
+        $margin = $labelSize === 0 ? 0 : 1;
+        $barsArea = Area::fromScalars(
+            $area->position->x + $labelSize + $margin,
+            $area->position->y,
+            $area->width - $labelSize - $margin,
+            $area->height
+        );
+
+        $groupTicks = $this->groupTicks($widget, $barsArea->height, $barsArea->width);
+        $barY = $barsArea->top();
+
+        foreach ($widget->data as $i => $group) {
+            $tickList = $groupTicks[$i];
+            foreach ($group->bars as $ii => $bar) {
+                $ticks = $tickList[$ii];
+                $barLength = intval($ticks / 8);
+                $barStyle = $widget->barStyle->patch($bar->style);
+
+                for ($y = 0; $y < $widget->barWidth; $y++) {
+                    $barY = $barY + $y;
+                    for ($x =0; $x < $barsArea->width; $x++) {
+                        $symbol = $x < $barLength ? BarSet::FULL : BarSet::EMPTY;
+                        $buffer->get(
+                            Position::at(
+                                $barsArea->left() + $x,
+                                $barY,
+                            )
+                        )->setChar($symbol)->setStyle($barStyle);
+                    }
+                }
+                $barValueArea = Area::fromScalars(
+                    $barsArea->position->x,
+                    $barY + ($widget->barWidth >> 1),
+                    $barsArea->width,
+                    $barsArea->height
+                );
+
+                if ($bar->label !== null) {
+                    $buffer->putLine(
+                        Position::at($labelX,$barValueArea->top()),
+                        $bar->label,
+                        $labelSize,
+                    );
+                }
+                $this->renderBarValueWithDifferentStyles(
+                    $bar,
+                    $buffer,
+                    $barValueArea,
+                    $barLength,
+                    $widget->valueStyle,
+                    $widget->barStyle,
+                );
+                $barY += $widget->barGap + $widget->barWidth;
+            }
+            // if group_gap is zero, then there is no place to print the group label
+            // check also if the group label is still inside the visible area
+            $labelY = $barY - $widget->barGap;
+            if ($widget->groupGap > 0 && $labelY < $barsArea->bottom()) {
+                $labelRect = $barsArea->withY($labelY);
+                $this->renderGroupLabel($group, $buffer, $labelRect, $widget->labelStyle);
+                $barY += $widget->groupGap;
+            }
+        }
+    }
+
+    private function renderBarValueWithDifferentStyles(
+        Bar $bar,
+        Buffer $buffer,
+        Area $area,
+        int $barLength,
+        Style $defaultValueStyle,
+        Style $barStyle
+    ): void
+    {
+        $text = $bar->textValue ? $bar->textValue : (string)$bar->value;
+        if (!$text) {
+            return;
+        }
+
+        $style = $defaultValueStyle->patch($bar->valueStyle);
+        $buffer->putString($area->position, $text, $style, $barLength);
+        if (mb_strlen($text) > $barLength) {
+            $first = substr($text, 0, $barLength);
+            $second = substr($text, $barLength);
+            $style = $barStyle->patch($bar->style);
+            $buffer->putString(
+                Position::at(
+                    $area->position->x + mb_strlen($first),
+                    $area->position->y,
+                ),
+                $second,
+                $style,
+                $area->width - mb_strlen($first),
             );
         }
     }
