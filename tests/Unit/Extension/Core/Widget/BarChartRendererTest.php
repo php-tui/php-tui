@@ -9,6 +9,7 @@ use PhpTui\Tui\Extension\Core\Widget\BarChart\BarGroup;
 use PhpTui\Tui\Extension\Core\Widget\BarChartWidget;
 use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Buffer;
+use PhpTui\Tui\Model\Direction;
 use PhpTui\Tui\Model\Widget;
 
 class BarChartRendererTest extends WidgetTestCase
@@ -28,11 +29,25 @@ class BarChartRendererTest extends WidgetTestCase
      */
     public static function provideBarChartRender(): Generator
     {
-        yield 'barchart' => [
+        yield 'vertical barchart' => [
             Area::fromDimensions(10, 5),
             BarChartWidget::default()->data(
                 BarGroup::fromArray(['B0' => 1, 'B1' => 2])
             ),
+            [
+                '  █       ',
+                '▄ █       ',
+                '█ █       ',
+                '1 2       ',
+                'B B       ',
+            ]
+           ,
+        ];
+        yield 'horizontal barchart' => [
+            Area::fromDimensions(10, 5),
+            BarChartWidget::default()->data(
+                BarGroup::fromArray(['B0' => 1, 'B1' => 2])
+            )->direction(Direction::Horizontal),
             [
                 '  █       ',
                 '▄ █       ',
