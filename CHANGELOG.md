@@ -19,6 +19,7 @@ Improvements
 
 Refactoring:
 
+- Suffix widgets and shapes with `Widget` and `Shape` #130
 - Always render to _new_ buffers #128
 - Re-organized namespaces
 - Use variadic for `TableRow::fromTableCells`

@@ -22,7 +22,7 @@ class DefaultWidgetSet implements WidgetSet
             new CanvasRenderer($this->shapePainter),
             new ChartRenderer(),
             new GridRenderer(),
-            new ItemListRenderer(),
+            new ListRenderer(),
             new RawWidgetRenderer(),
             new TableRenderer(),
             new GaugeRenderer(),

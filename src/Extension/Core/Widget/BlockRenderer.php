@@ -19,7 +19,7 @@ final class BlockRenderer implements WidgetRenderer
     public function render(WidgetRenderer $renderer, Widget $widget, Buffer $buffer): void
     {
         $area = $buffer->area();
-        if (!$widget instanceof Block) {
+        if (!$widget instanceof BlockWidget) {
             return;
         }
         if ($area->area() === 0) {
@@ -41,7 +41,7 @@ final class BlockRenderer implements WidgetRenderer
         }
     }
 
-    private function renderBorders(Block $block, Area $area, Buffer $buffer): void
+    private function renderBorders(BlockWidget $block, Area $area, Buffer $buffer): void
     {
         $buffer->setStyle($area, $block->style);
         $lineSet = $block->borderType->lineSet();
@@ -97,20 +97,20 @@ final class BlockRenderer implements WidgetRenderer
         }
     }
 
-    private function renderTitles(Block $block, Area $area, Buffer $buffer): void
+    private function renderTitles(BlockWidget $block, Area $area, Buffer $buffer): void
     {
         $this->renderTitlePosition($block, VerticalAlignment::Top, $area, $buffer);
         $this->renderTitlePosition($block, VerticalAlignment::Bottom, $area, $buffer);
     }
 
-    private function renderTitlePosition(Block $block, VerticalAlignment $alignment, Area $area, Buffer $buffer): void
+    private function renderTitlePosition(BlockWidget $block, VerticalAlignment $alignment, Area $area, Buffer $buffer): void
     {
         $this->renderRightTitles($block, $alignment, $area, $buffer);
         $this->renderCenterTitles($block, $alignment, $area, $buffer);
         $this->renderLeftTitles($block, $alignment, $area, $buffer);
     }
 
-    private function renderRightTitles(Block $block, VerticalAlignment $alignment, Area $area, Buffer $buffer): void
+    private function renderRightTitles(BlockWidget $block, VerticalAlignment $alignment, Area $area, Buffer $buffer): void
     {
         [$_, $rightBorderDx, $titleAreaWidth] = $this->calculateTitleAreaOffsets($block, $area);
         $offset = $rightBorderDx;
@@ -139,7 +139,7 @@ final class BlockRenderer implements WidgetRenderer
         }
     }
 
-    private function renderLeftTitles(Block $block, VerticalAlignment $alignment, Area $area, Buffer $buffer): void
+    private function renderLeftTitles(BlockWidget $block, VerticalAlignment $alignment, Area $area, Buffer $buffer): void
     {
         [$leftBorderDx, $_, $titleAreaWidth] = $this->calculateTitleAreaOffsets($block, $area);
         $offset = $leftBorderDx;
@@ -173,7 +173,7 @@ final class BlockRenderer implements WidgetRenderer
         }
     }
 
-    private function renderCenterTitles(Block $block, VerticalAlignment $alignment, Area $area, Buffer $buffer): void
+    private function renderCenterTitles(BlockWidget $block, VerticalAlignment $alignment, Area $area, Buffer $buffer): void
     {
         [$_, $_, $titleAreaWidth] = $this->calculateTitleAreaOffsets($block, $area);
         $titles = array_filter(
@@ -211,7 +211,7 @@ final class BlockRenderer implements WidgetRenderer
     /**
      * @return array{int,int,int}
      */
-    private function calculateTitleAreaOffsets(Block $block, Area $area): array
+    private function calculateTitleAreaOffsets(BlockWidget $block, Area $area): array
     {
         $leftBorderDx = (bool)($block->borders & Borders::LEFT);
         $rightBorderDx = (bool)($block->borders & Borders::RIGHT);

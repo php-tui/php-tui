@@ -7,7 +7,7 @@ namespace PhpTui\Tui\Tests\Unit;
 use PhpTui\Tui\DisplayBuilder;
 use PhpTui\Tui\Extension\Core\Shape\ClosurePainter;
 use PhpTui\Tui\Extension\Core\Shape\ClosureShape;
-use PhpTui\Tui\Extension\Core\Widget\Canvas;
+use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
 use PhpTui\Tui\Extension\Core\Widget\ClosureRenderer;
 use PhpTui\Tui\Model\Backend\DummyBackend;
 use PhpTui\Tui\Model\Buffer;
@@ -43,7 +43,7 @@ final class DisplayBuilderTest extends TestCase
             ->fullscreen()
             ->build();
         $display->draw(
-            Canvas::default()->draw(new ClosureShape(function () use (&$shapePainted): void {
+            CanvasWidget::default()->draw(new ClosureShape(function () use (&$shapePainted): void {
                 $shapePainted = true;
             }))
         );

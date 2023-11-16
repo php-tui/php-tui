@@ -14,7 +14,7 @@ use PhpTui\Term\Size;
 use PhpTui\Term\Terminal;
 use PhpTui\Tui\Bridge\PhpTerm\PhpTermBackend;
 use PhpTui\Tui\DisplayBuilder;
-use PhpTui\Tui\Extension\Core\Widget\Canvas;
+use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
 use PhpTui\Tui\Extension\ImageMagick\Shape\ImageShape;
 use PhpTui\Tui\Model\Display;
 
@@ -47,7 +47,7 @@ final class ImageShapeBench
     public function benchImageShape(): void
     {
         $this->display->draw(
-            Canvas::fromIntBounds(0, 320, 0, 200)->draw(
+            CanvasWidget::fromIntBounds(0, 320, 0, 200)->draw(
                 ImageShape::fromPath(
                     __DIR__ . '/../../../Unit/Extension/ImageMagick/Shape/example.jpg',
                 )

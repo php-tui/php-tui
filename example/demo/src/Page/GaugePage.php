@@ -6,11 +6,11 @@ namespace PhpTui\Tui\Example\Demo\Page;
 
 use PhpTui\Term\Event;
 use PhpTui\Tui\Example\Demo\Component;
-use PhpTui\Tui\Extension\Core\Widget\Block;
 use PhpTui\Tui\Extension\Core\Widget\Block\Padding;
+use PhpTui\Tui\Extension\Core\Widget\BlockWidget;
 use PhpTui\Tui\Extension\Core\Widget\GaugeWidget;
-use PhpTui\Tui\Extension\Core\Widget\Grid;
-use PhpTui\Tui\Extension\Core\Widget\Paragraph;
+use PhpTui\Tui\Extension\Core\Widget\GridWidget;
+use PhpTui\Tui\Extension\Core\Widget\ParagraphWidget;
 use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Constraint;
 use PhpTui\Tui\Model\Direction;
@@ -43,12 +43,12 @@ class GaugePage implements Component
             }
         }
 
-        return Block::default()
+        return BlockWidget::default()
             ->borders(Borders::ALL)
             ->padding(Padding::all(2))
             ->titles(Title::fromString(sprintf('Downloading %s files', count($this->downloads))))
             ->widget(
-                Grid::default()
+                GridWidget::default()
                 ->constraints(
                     ...array_map(fn () => Constraint::length(1), $this->downloads),
                     ...[Constraint::min(0)],
@@ -56,14 +56,14 @@ class GaugePage implements Component
                 ->widgets(
                     ...array_map(
                         function (Download $download) {
-                            return Grid::default()
+                            return GridWidget::default()
                                 ->direction(Direction::Horizontal)
                                 ->constraints(
                                     Constraint::percentage(30),
                                     Constraint::percentage(70),
                                 )
                                 ->widgets(
-                                    Paragraph::fromSpans(
+                                    ParagraphWidget::fromSpans(
                                         Span::fromString('Downloaded')->style(
                                             Style::default()->fg(AnsiColor::Green)
                                         ),

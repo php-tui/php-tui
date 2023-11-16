@@ -13,7 +13,7 @@ class PointsPainter implements ShapePainter
 {
     public function draw(ShapePainter $shapePainter, Painter $painter, Shape $shape): void
     {
-        if (!$shape instanceof Points) {
+        if (!$shape instanceof PointsShape) {
             return;
         }
 

@@ -11,12 +11,12 @@ use PhpTui\Term\Size;
 use PhpTui\Term\Terminal;
 use PhpTui\Tui\Example\Demo\Component;
 use PhpTui\Tui\Extension\Bdf\Shape\TextShape;
-use PhpTui\Tui\Extension\Core\Shape\Circle;
+use PhpTui\Tui\Extension\Core\Shape\CircleShape;
 use PhpTui\Tui\Extension\Core\Shape\ClosureShape;
-use PhpTui\Tui\Extension\Core\Shape\Line;
-use PhpTui\Tui\Extension\Core\Widget\Block;
-use PhpTui\Tui\Extension\Core\Widget\Canvas;
-use PhpTui\Tui\Extension\Core\Widget\Grid;
+use PhpTui\Tui\Extension\Core\Shape\LineShape;
+use PhpTui\Tui\Extension\Core\Widget\BlockWidget;
+use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
+use PhpTui\Tui\Extension\Core\Widget\GridWidget;
 use PhpTui\Tui\Extension\ImageMagick\Shape\ImageShape;
 use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Canvas\Painter;
@@ -49,7 +49,7 @@ class CanvasScalingPage implements Component
             scaleY: 8,
         );
         if (!extension_loaded('imagick')) {
-            $this->image = Circle::fromScalars(0, 0, 10);
+            $this->image = CircleShape::fromScalars(0, 0, 10);
         } else {
             $this->image = ImageShape::fromPath(__DIR__ . '/../../assets/beach.jpg');
         }
@@ -57,7 +57,7 @@ class CanvasScalingPage implements Component
 
     public function build(): Widget
     {
-        return Block::default()
+        return BlockWidget::default()
             ->titles(
                 Title::fromString(sprintf(
                     'Marker: %s, Canvas size: %dx%d, Terminal size: %s - use arrow keys to adjust and (back)tab to change the marker',
@@ -68,10 +68,10 @@ class CanvasScalingPage implements Component
                 ))
             )
             ->widget(
-                Grid::default()
+                GridWidget::default()
                 ->constraints(Constraint::percentage(50), Constraint::percentage(50))
                 ->widgets(
-                    Grid::default()
+                    GridWidget::default()
                     ->direction(Direction::Horizontal)
                     ->constraints(Constraint::percentage(50), Constraint::percentage(50))
                     ->widgets(
@@ -89,11 +89,11 @@ class CanvasScalingPage implements Component
                             })
                         ),
                         $this->canvas(
-                            Line::fromScalars(0, 0, $this->xMax, $this->yMax),
-                            Line::fromScalars(0, $this->yMax, $this->xMax, 0)
+                            LineShape::fromScalars(0, 0, $this->xMax, $this->yMax),
+                            LineShape::fromScalars(0, $this->yMax, $this->xMax, 0)
                         )
                     ),
-                    Grid::default()
+                    GridWidget::default()
                     ->direction(Direction::Horizontal)
                     ->constraints(Constraint::percentage(50), Constraint::percentage(50))
                     ->widgets(
@@ -136,7 +136,7 @@ class CanvasScalingPage implements Component
 
     private function canvas(Shape ...$shape): Widget
     {
-        return Canvas::fromIntBounds(
+        return CanvasWidget::fromIntBounds(
             0,
             $this->xMax,
             0,

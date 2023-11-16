@@ -13,7 +13,7 @@ class SpritePainter implements ShapePainter
 {
     public function draw(ShapePainter $shapePainter, Painter $painter, Shape $shape): void
     {
-        if (!$shape instanceof Sprite) {
+        if (!$shape instanceof SpriteShape) {
             return;
         }
 

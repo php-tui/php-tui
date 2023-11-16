@@ -6,9 +6,9 @@ namespace PhpTui\Tui\Example\Demo\Page;
 
 use PhpTui\Term\Event;
 use PhpTui\Tui\Example\Demo\Component;
-use PhpTui\Tui\Extension\Core\Widget\Block;
-use PhpTui\Tui\Extension\Core\Widget\ItemList;
-use PhpTui\Tui\Extension\Core\Widget\ItemList\ListItem;
+use PhpTui\Tui\Extension\Core\Widget\BlockWidget;
+use PhpTui\Tui\Extension\Core\Widget\List\ListItem;
+use PhpTui\Tui\Extension\Core\Widget\ListWidget;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\Widget\Borders;
 use PhpTui\Tui\Model\Widget\Text;
@@ -21,9 +21,9 @@ final class EventsPage implements Component
 
     public function build(): Widget
     {
-        return Block::default()->titles(Title::fromString('Event log'))->borders(Borders::ALL)
+        return BlockWidget::default()->titles(Title::fromString('Event log'))->borders(Borders::ALL)
             ->widget(
-                ItemList::default()
+                ListWidget::default()
                     ->items(...array_map(fn (Event $event) => ListItem::new(Text::fromString($event->__toString())), $this->events))
             )
         ;

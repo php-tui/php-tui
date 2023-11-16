@@ -23,7 +23,7 @@ final class TableRenderer implements WidgetRenderer
         Buffer $buffer
     ): void {
         $area = $buffer->area();
-        if (!$widget instanceof Table) {
+        if (!$widget instanceof TableWidget) {
             return;
         }
         $buffer->setStyle($area, $widget->style);
@@ -119,7 +119,7 @@ final class TableRenderer implements WidgetRenderer
     /**
      * @return list<array{int,int}>
      */
-    private function getColumnsWidths(Table $table, int $maxWidth, int $selectionWidth): array
+    private function getColumnsWidths(TableWidget $table, int $maxWidth, int $selectionWidth): array
     {
         $constraints = [
             Constraint::length($selectionWidth)
@@ -174,7 +174,7 @@ final class TableRenderer implements WidgetRenderer
      *
      * @return array{int,int}
      */
-    private function getRowBounds(Table $table, int $maxHeight): array
+    private function getRowBounds(TableWidget $table, int $maxHeight): array
     {
         $offset = min($table->state->offset, max(count($table->rows) - 1, 0));
         $start = $end = $offset;

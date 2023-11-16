@@ -8,11 +8,11 @@ use PhpTui\Term\Event;
 use PhpTui\Term\Event\CodedKeyEvent;
 use PhpTui\Term\KeyCode;
 use PhpTui\Tui\Example\Demo\Component;
-use PhpTui\Tui\Extension\Core\Widget\Block;
-use PhpTui\Tui\Extension\Core\Widget\Table;
+use PhpTui\Tui\Extension\Core\Widget\BlockWidget;
 use PhpTui\Tui\Extension\Core\Widget\Table\TableCell;
 use PhpTui\Tui\Extension\Core\Widget\Table\TableRow;
 use PhpTui\Tui\Extension\Core\Widget\Table\TableState;
+use PhpTui\Tui\Extension\Core\Widget\TableWidget;
 use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Constraint;
 use PhpTui\Tui\Model\Style;
@@ -63,9 +63,9 @@ final class TablePage implements Component
 
     public function build(): Widget
     {
-        return Block::default()->titles(Title::fromString('Table'))->borders(Borders::ALL)
+        return BlockWidget::default()->titles(Title::fromString('Table'))->borders(Borders::ALL)
             ->widget(
-                Table::default()
+                TableWidget::default()
                     ->state($this->state)
                     ->select($this->selected)
                     ->highlightSymbol('X')

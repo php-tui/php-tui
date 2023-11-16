@@ -13,7 +13,7 @@ class CirclePainter implements ShapePainter
 {
     public function draw(ShapePainter $shapePainter, Painter $painter, Shape $shape): void
     {
-        if (!$shape instanceof Circle) {
+        if (!$shape instanceof CircleShape) {
             return;
         }
 

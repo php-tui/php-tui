@@ -15,9 +15,9 @@ use PhpTui\Term\Terminal;
 use PhpTui\Tui\Bridge\PhpTerm\PhpTermBackend;
 
 use PhpTui\Tui\DisplayBuilder;
-use PhpTui\Tui\Extension\Core\Shape\Map;
 use PhpTui\Tui\Extension\Core\Shape\MapResolution;
-use PhpTui\Tui\Extension\Core\Widget\Canvas;
+use PhpTui\Tui\Extension\Core\Shape\MapShape;
+use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
 use PhpTui\Tui\Model\Display;
 
 #[Iterations(10)]
@@ -49,8 +49,8 @@ final class CanvasBench
     public function benchLowResolutionMap(): void
     {
         $this->display->draw(
-            Canvas::fromIntBounds(-180, 180, -90, 90)->draw(
-                Map::default()->resolution(MapResolution::Low)
+            CanvasWidget::fromIntBounds(-180, 180, -90, 90)->draw(
+                MapShape::default()->resolution(MapResolution::Low)
             )
         );
     }
@@ -58,8 +58,8 @@ final class CanvasBench
     public function benchHighResolutionMap(): void
     {
         $this->display->draw(
-            Canvas::fromIntBounds(-180, 180, -90, 90)->draw(
-                Map::default()->resolution(MapResolution::High)
+            CanvasWidget::fromIntBounds(-180, 180, -90, 90)->draw(
+                MapShape::default()->resolution(MapResolution::High)
             )
         );
     }

@@ -6,7 +6,7 @@ use PhpTui\Tui\DisplayBuilder;
 use PhpTui\Tui\Extension\Bdf\BdfExtension;
 use PhpTui\Tui\Extension\Bdf\FontRegistry;
 use PhpTui\Tui\Extension\Bdf\Shape\TextShape;
-use PhpTui\Tui\Extension\Core\Widget\Canvas;
+use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
 use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Model\Widget\FloatPosition;
@@ -22,7 +22,7 @@ $display = DisplayBuilder::default()
     ->build();
 
 $display->draw(
-    Canvas::fromIntBounds(0, 50, 0, 20)
+    CanvasWidget::fromIntBounds(0, 50, 0, 20)
         ->marker(Marker::Block)
         ->draw(
             new TextShape(

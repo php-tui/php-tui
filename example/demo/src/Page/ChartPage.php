@@ -6,10 +6,10 @@ namespace PhpTui\Tui\Example\Demo\Page;
 
 use PhpTui\Term\Event;
 use PhpTui\Tui\Example\Demo\Component;
-use PhpTui\Tui\Extension\Core\Widget\Block;
-use PhpTui\Tui\Extension\Core\Widget\Chart;
+use PhpTui\Tui\Extension\Core\Widget\BlockWidget;
 use PhpTui\Tui\Extension\Core\Widget\Chart\Axis;
 use PhpTui\Tui\Extension\Core\Widget\Chart\DataSet;
+use PhpTui\Tui\Extension\Core\Widget\ChartWidget;
 use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\AxisBounds;
 use PhpTui\Tui\Model\Marker;
@@ -43,11 +43,11 @@ class ChartPage implements Component
                 ->data($this->sinData(90)),
         ];
 
-        return Block::default()
+        return BlockWidget::default()
             ->titles(Title::fromLine(Line::fromString('Chart 1')))
             ->borders(Borders::ALL)
             ->widget(
-                Chart::new(...$dataSets)
+                ChartWidget::new(...$dataSets)
                     ->xAxis(
                         Axis::default()
                             //->title('X Axis')

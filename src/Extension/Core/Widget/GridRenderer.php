@@ -15,7 +15,7 @@ class GridRenderer implements WidgetRenderer
     public function render(WidgetRenderer $renderer, Widget $widget, Buffer $buffer): void
     {
         $area = $buffer->area();
-        if (!$widget instanceof Grid) {
+        if (!$widget instanceof GridWidget) {
             return;
         }
 

@@ -8,7 +8,7 @@ use PhpTui\Term\Event;
 use PhpTui\Tui\Example\Demo\Component;
 use PhpTui\Tui\Extension\Core\Widget\BarChart\BarGroup;
 use PhpTui\Tui\Extension\Core\Widget\BarChartWidget;
-use PhpTui\Tui\Extension\Core\Widget\Grid;
+use PhpTui\Tui\Extension\Core\Widget\GridWidget;
 use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Constraint;
 use PhpTui\Tui\Model\Direction;
@@ -21,14 +21,14 @@ class BarChartPage implements Component
     public function build(): Widget
     {
         return
-            Grid::default()
+            GridWidget::default()
             ->direction(Direction::Horizontal)
             ->constraints(
                 Constraint::percentage(50),
                 Constraint::percentage(50),
             )
             ->widgets(
-                Grid::default()
+                GridWidget::default()
                 ->constraints(
                     Constraint::percentage(50),
                     Constraint::percentage(50),

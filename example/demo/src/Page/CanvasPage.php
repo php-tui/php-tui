@@ -7,10 +7,10 @@ namespace PhpTui\Tui\Example\Demo\Page;
 use PhpTui\Term\Event;
 use PhpTui\Term\Event\CharKeyEvent;
 use PhpTui\Tui\Example\Demo\Component;
-use PhpTui\Tui\Extension\Core\Shape\Map;
 use PhpTui\Tui\Extension\Core\Shape\MapResolution;
-use PhpTui\Tui\Extension\Core\Widget\Block;
-use PhpTui\Tui\Extension\Core\Widget\Canvas as PhpTuiCanvas;
+use PhpTui\Tui\Extension\Core\Shape\MapShape;
+use PhpTui\Tui\Extension\Core\Widget\BlockWidget;
+use PhpTui\Tui\Extension\Core\Widget\CanvasWidget as PhpTuiCanvas;
 use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Canvas\CanvasContext;
 use PhpTui\Tui\Model\Marker;
@@ -29,14 +29,14 @@ class CanvasPage implements Component
 
     public function build(): Widget
     {
-        return Block::default()
+        return BlockWidget::default()
             ->borders(Borders::ALL)
             ->titles(Title::fromString('World'))
             ->widget(
                 PhpTuiCanvas::fromIntBounds(-180, 180, -90, 90)
                     ->marker(Marker::Braille)
                     ->paint(function (CanvasContext $context): void {
-                        $context->draw(Map::default()->resolution(MapResolution::High)->color(AnsiColor::Green));
+                        $context->draw(MapShape::default()->resolution(MapResolution::High)->color(AnsiColor::Green));
                         $context->print($this->x, -$this->y, PhpTuiLine::fromString('You are here!')->patchStyle(Style::default()->fg(AnsiColor::Yellow)->addModifier(Modifier::ITALIC)));
                     })
             )

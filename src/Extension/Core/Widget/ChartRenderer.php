@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Extension\Core\Widget;
 
-use PhpTui\Tui\Extension\Core\Shape\Points;
+use PhpTui\Tui\Extension\Core\Shape\PointsShape;
 use PhpTui\Tui\Extension\Core\Widget\Chart\ChartLayout;
 use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Area;
@@ -26,7 +26,7 @@ final class ChartRenderer implements WidgetRenderer
     public function render(WidgetRenderer $renderer, Widget $widget, Buffer $buffer): void
     {
         $area = $buffer->area();
-        if (!$widget instanceof Chart) {
+        if (!$widget instanceof ChartWidget) {
             return;
         }
 
@@ -65,20 +65,20 @@ final class ChartRenderer implements WidgetRenderer
 
         foreach ($widget->dataSets as $dataSet) {
             $subBuffer = Buffer::empty($layout->graphArea);
-            $renderer->render($renderer, Canvas::default()
+            $renderer->render($renderer, CanvasWidget::default()
                 ->backgroundColor($widget->style->bg ?? AnsiColor::Reset)
                 ->xBounds($widget->xAxis->bounds)
                 ->yBounds($widget->yAxis->bounds)
                 ->marker($dataSet->marker)
                 ->paint(function (CanvasContext $context) use ($dataSet): void {
-                    $context->draw(Points::new($dataSet->data, $dataSet->style->fg ?? AnsiColor::Reset));
+                    $context->draw(PointsShape::new($dataSet->data, $dataSet->style->fg ?? AnsiColor::Reset));
                 }), $subBuffer);
             $buffer->putBuffer($layout->graphArea->position, $subBuffer);
 
         }
     }
 
-    private function resolveLayout(Chart $chart, Area $area): ?ChartLayout
+    private function resolveLayout(ChartWidget $chart, Area $area): ?ChartLayout
     {
         $x = $area->left();
         $y = $area->bottom() - 1;
@@ -118,7 +118,7 @@ final class ChartRenderer implements WidgetRenderer
         return new ChartLayout($graphArea, $xAxisY, $yAxisX, $xLabelY, $yLabelX);
     }
 
-    private function maxWidthOfLabelsLeftOfYAxis(Chart $chart, Area $area, bool $hasYAxis): int
+    private function maxWidthOfLabelsLeftOfYAxis(ChartWidget $chart, Area $area, bool $hasYAxis): int
     {
         $maxWidth = $chart->yAxis->labels ? max(
             ...array_map(function (Span $label) {
@@ -140,7 +140,7 @@ final class ChartRenderer implements WidgetRenderer
         return min($maxWidth, $area->width / 3);
     }
 
-    private function renderXLabels(Chart $chart, Buffer $buffer, ChartLayout $layout, Area $chartArea): void
+    private function renderXLabels(ChartWidget $chart, Buffer $buffer, ChartLayout $layout, Area $chartArea): void
     {
         if (null === $layout->labelX) {
             return;
@@ -183,7 +183,7 @@ final class ChartRenderer implements WidgetRenderer
 
     }
 
-    private function firstXLabelArea(Chart $chart, int $y, int $labelWidth, int $maxWithAfterYAxis, Area $chartArea, Area $graphArea): Area
+    private function firstXLabelArea(ChartWidget $chart, int $y, int $labelWidth, int $maxWithAfterYAxis, Area $chartArea, Area $graphArea): Area
     {
         [$minX, $maxX] =  match ($chart->xAxis->labelAlignment) {
             HorizontalAlignment::Left => [$chartArea->left(), $graphArea->left()],
@@ -209,7 +209,7 @@ final class ChartRenderer implements WidgetRenderer
         $buffer->putSpan(Position::at((int) $x, $labelArea->top()), $label, $boundedLabelWidth);
     }
 
-    private function renderYLabels(Chart $chart, Buffer $buffer, ChartLayout $layout, Area $chartArea): void
+    private function renderYLabels(ChartWidget $chart, Buffer $buffer, ChartLayout $layout, Area $chartArea): void
     {
         if ($layout->labelY === null) {
             return;

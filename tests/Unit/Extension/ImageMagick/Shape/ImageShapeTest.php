@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Tests\Unit\Extension\ImageMagick\Shape;
 
 use Generator;
-use PhpTui\Tui\Extension\Core\Widget\Canvas;
+use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
 use PhpTui\Tui\Extension\ImageMagick\Shape\ImagePainter;
 use PhpTui\Tui\Extension\ImageMagick\Shape\ImageShape;
 use PhpTui\Tui\Model\Area;
@@ -29,7 +29,7 @@ class ImageShapeTest extends TestCase
         if (null === $image) {
             self::markTestSkipped('Image Magick extension not installed');
         }
-        $canvas = Canvas::default()
+        $canvas = CanvasWidget::default()
             ->marker($marker)
             ->xBounds(AxisBounds::new(0, 10))
             ->yBounds(AxisBounds::new(0, 4))

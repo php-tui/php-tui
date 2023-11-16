@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Tests\Unit\Extension\Core\Widget;
 
 use Generator;
-use PhpTui\Tui\Extension\Core\Widget\Block;
 use PhpTui\Tui\Extension\Core\Widget\Block\Padding;
+use PhpTui\Tui\Extension\Core\Widget\BlockWidget;
 use PhpTui\Tui\Extension\Core\Widget\RawWidget;
 use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Buffer;
@@ -53,7 +53,7 @@ class RawWidgetTest extends WidgetTestCase
         ];
         yield 'write to buffer in block' => [
             Area::fromDimensions(10, 10),
-            Block::default()->widget(
+            BlockWidget::default()->widget(
                 RawWidget::new(function (Buffer $buffer): void {
                     $buffer->putLine(Position::at(0, 0), Line::fromString('Hello'), 5);
                 })
@@ -74,7 +74,7 @@ class RawWidgetTest extends WidgetTestCase
         ];
         yield 'overflow' => [
             Area::fromDimensions(10, 10),
-            Block::default()->widget(
+            BlockWidget::default()->widget(
                 RawWidget::new(function (Buffer $buffer): void {
                     $buffer->putSpan(Position::at(0, 0), Span::fromString(str_repeat('Hello', 10)), 10);
                 })

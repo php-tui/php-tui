@@ -169,7 +169,7 @@ final class DisplayBuilder
         return $this;
     }
 
-    private function buildCanvasRenderer(): CanvasRenderer
+    private function buildCanvasRenderer(): WidgetRenderer
     {
         return new CanvasRenderer(new AggregateShapePainter($this->shapePainters));
     }

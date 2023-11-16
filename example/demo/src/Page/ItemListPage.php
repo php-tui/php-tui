@@ -6,10 +6,10 @@ namespace PhpTui\Tui\Example\Demo\Page;
 
 use PhpTui\Term\Event;
 use PhpTui\Tui\Example\Demo\Component;
-use PhpTui\Tui\Extension\Core\Widget\Block;
-use PhpTui\Tui\Extension\Core\Widget\ItemList;
-use PhpTui\Tui\Extension\Core\Widget\ItemList\ItemListState;
-use PhpTui\Tui\Extension\Core\Widget\ItemList\ListItem;
+use PhpTui\Tui\Extension\Core\Widget\BlockWidget;
+use PhpTui\Tui\Extension\Core\Widget\List\ListItem;
+use PhpTui\Tui\Extension\Core\Widget\List\ListState;
+use PhpTui\Tui\Extension\Core\Widget\ListWidget;
 use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Widget;
@@ -49,17 +49,17 @@ final class ItemListPage implements Component
         ['Event26', 'INFO'],
     ];
 
-    private ItemListState $state;
+    private ListState $state;
     public function __construct()
     {
-        $this->state = new ItemListState();
+        $this->state = new ListState();
     }
 
     public function build(): Widget
     {
-        return Block::default()->borders(Borders::ALL)
+        return BlockWidget::default()->borders(Borders::ALL)
             ->widget(
-                ItemList::default()
+                ListWidget::default()
                     ->state($this->state)
                     ->items(...array_map(function (array $event) {
                         return ListItem::new(Text::fromLine(Line::fromSpans([
