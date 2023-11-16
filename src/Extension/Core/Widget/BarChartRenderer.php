@@ -149,6 +149,9 @@ final class BarChartRenderer implements WidgetRenderer
     {
         $barX = $area->left();
         foreach ($widget->data as $i => $group) {
+            if (!isset($groupTicks[$i])) {
+                continue;
+            }
             $ticksList = $groupTicks[$i];
             foreach ($group->bars as $ii => $bar) {
                 if (!isset($ticksList[$ii])) {
@@ -187,6 +190,9 @@ final class BarChartRenderer implements WidgetRenderer
 
         foreach ($widget->data as $i => $group) {
             if ([] === $group->bars) {
+                continue;
+            }
+            if (!isset($groupTicks[$i])) {
                 continue;
             }
             $tickList = $groupTicks[$i];

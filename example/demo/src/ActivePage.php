@@ -17,4 +17,6 @@ enum ActivePage
     case Sprite;
     case Colors;
     case Images;
+    case BarChart;
+
 }
