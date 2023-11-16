@@ -29,6 +29,44 @@ class BarChartRendererTest extends WidgetTestCase
      */
     public static function provideBarChartRender(): Generator
     {
+        yield 'zero dimension' => [
+            Area::fromDimensions(0, 0),
+            BarChartWidget::default()->data(
+                BarGroup::fromArray(['B0' => 1, 'B1' => 2])
+            ),
+            [
+                '',
+            ]
+           ,
+        ];
+        yield 'zero values' => [
+            Area::fromDimensions(10, 5),
+            BarChartWidget::default()->data(
+                BarGroup::fromArray(['B0' => 0, 'B1' => 0])
+            ),
+            [
+                '          ',
+                '          ',
+                '          ',
+                '0 0       ',
+                'B B       ',
+            ]
+           ,
+        ];
+        yield 'negative values' => [
+            Area::fromDimensions(10, 5),
+            BarChartWidget::default()->data(
+                BarGroup::fromArray(['B0' => -1, 'B1' => 2])
+            ),
+            [
+                '  █       ',
+                '  █       ',
+                '  █       ',
+                '█ 2       ',
+                'B B       ',
+            ]
+           ,
+        ];
         yield 'vertical barchart' => [
             Area::fromDimensions(10, 5),
             BarChartWidget::default()->data(
@@ -49,11 +87,11 @@ class BarChartRendererTest extends WidgetTestCase
                 BarGroup::fromArray(['B0' => 1, 'B1' => 2])
             )->direction(Direction::Horizontal),
             [
-                'B █       ',
-                'B █       ',
-                '█ █       ',
-                '1 2       ',
-                'B B       ',
+                'B0 1██    ',
+                '          ',
+                'B1 2██████',
+                '          ',
+                '          ',
             ]
            ,
         ];

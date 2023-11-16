@@ -72,6 +72,9 @@ final class BarChartRenderer implements WidgetRenderer
             }
 
             $ticks[] = array_map(function (Bar $bar) use ($barMaxLength, $max) {
+                    if ($max === 0) {
+                        return 0;
+                    }
                     return intval($bar->value * $barMaxLength * self::TICKS_PER_LINE / $max);
             }, array_slice($bars, 0, $nBars));
         }
@@ -250,12 +253,9 @@ final class BarChartRenderer implements WidgetRenderer
 
     private function renderBarValue(Bar $bar, Buffer $buffer, int $maxWidth, int $x, int $y, Style $defaultValueStyle, int $ticks): void
     {
-        if ($bar->value === 0) {
-            return;
-        }
         $valueLabel = $bar->textValue ? $bar->textValue : (string)$bar->value;
         $width = mb_strlen($valueLabel);
-        if ($width < $maxWidth || ($width === $maxWidth && $ticks >= self::TICKS_PER_LINE)) {
+        if ($width <= $maxWidth || ($width === $maxWidth && $ticks >= self::TICKS_PER_LINE)) {
             // why strlen? Ratatui does value_label.len() not sure why.
             $buffer->putString(
                 Position::at(
