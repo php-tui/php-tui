@@ -5,9 +5,17 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Model\Widget;
 
 use PhpTui\Tui\Model\Style;
+use PhpTui\Tui\Model\Style\InteractsWithBgColor;
+use PhpTui\Tui\Model\Style\InteractsWithFgColor;
+use PhpTui\Tui\Model\Style\InteractsWithModifier;
+use PhpTui\Tui\Model\Styleable;
 
-final class Text
+final class Text implements Styleable
 {
+    use InteractsWithFgColor;
+    use InteractsWithBgColor;
+    use InteractsWithModifier;
+
     /**
      * @param list<Line> $lines
      */

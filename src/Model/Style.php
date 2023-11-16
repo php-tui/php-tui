@@ -4,17 +4,10 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Model;
 
-use PhpTui\Tui\Model\Style\BgColorStyler;
-use PhpTui\Tui\Model\Style\FgColorStyler;
-use PhpTui\Tui\Model\Style\ModifierStyler;
 use Stringable;
 
 final class Style implements Stringable
 {
-    use FgColorStyler;
-    use BgColorStyler;
-    use ModifierStyler;
-
     private function __construct(
         public ?Color $fg,
         public ?Color $bg,
