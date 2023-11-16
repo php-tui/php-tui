@@ -30,6 +30,7 @@ class BarGroup
     {
         return new self(null, array_map(function (string|int $key, int $value) {
             $key = (string)$key;
+
             return new Bar($value, Line::fromString($key), Style::default(), Style::default(), null);
         }, array_keys($array), array_values($array)));
     }
@@ -42,6 +43,7 @@ class BarGroup
     public function label(Line $label): self
     {
         $this->label = $label;
+
         return $this;
     }
 

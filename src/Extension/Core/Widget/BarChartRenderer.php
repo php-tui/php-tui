@@ -303,6 +303,9 @@ final class BarChartRenderer implements WidgetRenderer
         $barY = $barsArea->top();
 
         foreach ($widget->data as $i => $group) {
+            if (!isset($groupTicks[$i])) {
+                continue;
+            }
             $tickList = $groupTicks[$i];
             foreach ($group->bars as $ii => $bar) {
                 $ticks = $tickList[$ii];

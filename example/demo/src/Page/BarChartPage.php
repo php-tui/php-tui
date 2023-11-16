@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Example\Demo\Page;
 
 use PhpTui\Term\Event;
 use PhpTui\Tui\Example\Demo\Component;
-use PhpTui\Tui\Extension\Core\Widget\BarChartWidget;
 use PhpTui\Tui\Extension\Core\Widget\BarChart\BarGroup;
+use PhpTui\Tui\Extension\Core\Widget\BarChartWidget;
 use PhpTui\Tui\Extension\Core\Widget\Grid;
 use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Constraint;
@@ -18,7 +20,7 @@ class BarChartPage implements Component
 {
     public function build(): Widget
     {
-        return 
+        return
             Grid::default()
             ->direction(Direction::Horizontal)
             ->constraints(
@@ -80,7 +82,7 @@ class BarChartPage implements Component
                             '2' => 15,
                             '3' => 23,
                         ])->label(Line::fromString('sha16')),
-                ),
+                    ),
             );
     }
 

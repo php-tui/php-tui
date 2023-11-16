@@ -119,7 +119,6 @@ final class App
         } catch (Throwable $err) {
             $this->terminal->disableRawMode();
             $this->terminal->queue(Actions::clear(ClearType::All));
-            die($err->getMessage());
 
             throw $err;
         }
