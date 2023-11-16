@@ -86,4 +86,27 @@ final class Area implements Stringable
             $this->height,
         ];
     }
+
+    public function isEmpty(): bool
+    {
+        return $this->width === 0 || $this->height === 0;
+    }
+
+    public function withY(int $y): self
+    {
+        return new self(
+            $this->position->withY($y),
+            $this->width,
+            $this->height,
+        );
+    }
+
+    public function withX(int $x): self
+    {
+        return new self(
+            $this->position->withX($x),
+            $this->width,
+            $this->height,
+        );
+    }
 }

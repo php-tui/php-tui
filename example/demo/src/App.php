@@ -10,6 +10,7 @@ use PhpTui\Term\Event\CharKeyEvent;
 use PhpTui\Term\Terminal;
 use PhpTui\Tui\Bridge\PhpTerm\PhpTermBackend as PhpTuiPhpTermBackend;
 use PhpTui\Tui\DisplayBuilder;
+use PhpTui\Tui\Example\Demo\Page\BarChartPage;
 use PhpTui\Tui\Example\Demo\Page\BlocksPage;
 use PhpTui\Tui\Example\Demo\Page\CanvasPage;
 use PhpTui\Tui\Example\Demo\Page\CanvasScalingPage;
@@ -89,6 +90,7 @@ final class App
                 ActivePage::Images => new ImagePage(),
                 ActivePage::CanvasScaling => new CanvasScalingPage($terminal),
                 ActivePage::Gauge => new GaugePage(),
+                ActivePage::BarChart => new BarChartPage(),
             };
         }
 
@@ -171,6 +173,9 @@ final class App
                     if ($event->char === '!') {
                         $this->activePage = ActivePage::Gauge;
                     }
+                    if ($event->char === '"') {
+                        $this->activePage = ActivePage::BarChart;
+                    }
                 }
                 $this->activePage()->handle($event);
             }
@@ -242,6 +247,8 @@ final class App
                             Span::fromString('scaling '),
                             Span::styled('[!]', Style::default()->fg(AnsiColor::Green)),
                             Span::fromString('gauge '),
+                            Span::styled('["]', Style::default()->fg(AnsiColor::Green)),
+                            Span::fromString('barchart '),
                         ])
                     ))
                 )

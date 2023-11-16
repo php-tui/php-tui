@@ -11,6 +11,7 @@ use PhpTui\Tui\Extension\Core\Shape\MapPainter;
 use PhpTui\Tui\Extension\Core\Shape\PointsPainter;
 use PhpTui\Tui\Extension\Core\Shape\RectanglePainter;
 use PhpTui\Tui\Extension\Core\Shape\SpritePainter;
+use PhpTui\Tui\Extension\Core\Widget\BarChartRenderer;
 use PhpTui\Tui\Extension\Core\Widget\BlockRenderer;
 use PhpTui\Tui\Extension\Core\Widget\ChartRenderer;
 use PhpTui\Tui\Extension\Core\Widget\GaugeRenderer;
@@ -47,6 +48,7 @@ class CoreExtension implements DisplayExtension
             new RawWidgetRenderer(),
             new TableRenderer(),
             new GaugeRenderer(),
+            new BarChartRenderer(),
         ];
     }
 }
