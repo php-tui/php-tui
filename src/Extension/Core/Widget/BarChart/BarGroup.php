@@ -14,12 +14,12 @@ class BarGroup
          * Label of the group. It will be printed centered under
          * this group of bars
          */
-        public ?Line $label,
+        public readonly ?Line $label,
         /**
          * List of bars to be shown
          * @var Bar[]
          */
-        public array $bars,
+        public readonly array $bars,
     ) {
     }
 

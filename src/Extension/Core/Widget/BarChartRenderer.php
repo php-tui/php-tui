@@ -10,9 +10,11 @@ use PhpTui\Tui\Model\Buffer;
 use PhpTui\Tui\Model\Direction;
 use PhpTui\Tui\Model\Exception\TodoException;
 use PhpTui\Tui\Model\Position;
+use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\WidgetRenderer;
 use PhpTui\Tui\Model\Widget\BarSet;
+use PhpTui\Tui\Model\Widget\HorizontalAlignment;
 
 final class BarChartRenderer implements WidgetRenderer
 {
@@ -101,6 +103,7 @@ final class BarChartRenderer implements WidgetRenderer
 
         $groupTicks = $this->groupTicks($widget, $area->width, $area->height);
         $this->renderVerticalBars($widget, $buffer, $barsArea, $groupTicks);
+        $this->renderLabelsAndVAlues($widget, $area, $buffer, $labelInfo, $groupTicks);
 
     }
 
@@ -156,6 +159,108 @@ final class BarChartRenderer implements WidgetRenderer
                 $barX += $widget->barGap + $widget->barWidth;
             }
             $barX += $widget->groupGap;
+        }
+    }
+
+    /**
+     * @param array<int,array<int,int>> $groupTicks
+     */
+    private function renderLabelsAndVAlues(BarChartWidget $widget, Area $area, Buffer $buffer, LabelInfo $labelInfo, array $groupTicks)
+    {
+        $barX = $area->left();
+        $barY = $area->bottom() - $labelInfo->height - 1;
+
+        foreach ($widget->data as $i => $group) {
+            if ([] === $group->bars) {
+                continue;
+            }
+            $tickList = $groupTicks[$i];
+            $bars = $group->bars;
+
+            // print group labels under the bars or the previous labels
+            if ($labelInfo->groupLabelVisible) {
+                $labelMaxWidth = count($tickList) * ($widget->barWidth + $widget->barGap) - $widget->barGap;
+                $groupArea = Area::fromScalars(
+                    $barX,
+                    $area->bottom() - 1,
+                    $labelMaxWidth,
+                    1,
+                );
+                $this->renderGroupLabel($group, $buffer, $groupArea, $widget->labelStyle);
+            }
+
+            foreach ($group->bars as $ii => $bar) {
+                $ticks = $tickList[$ii];
+                if ($labelInfo->barLabelVisible) {
+                    $this->renderBarLabel($bar, $buffer, $widget->barWidth, $barX, $barY + 1, $widget->labelStyle);
+                }
+                $this->renderBarValue($bar, $buffer, $widget->barWidth, $barX, $barY, $widget->valueStyle, $ticks);
+            }
+        }
+    }
+
+    private function renderGroupLabel(BarGroup $group, Buffer $buffer, Area $area, Style $style): void
+    {
+        $label = $group->label;
+        if ($label === null) {
+            return;
+        }
+
+        foreach ($label->spans as $span) {
+            $span->style = $style->patch($span->style);
+        }
+
+        $xOffset = match ($label->alignment) {
+            HorizontalAlignment::Center => max(0, $area->width - $label->width()) >> 1,
+            HorizontalAlignment::Right => max(0, $area->width - $label->width()),
+            default => 0,
+        };
+
+        $buffer->putLine(
+            $area->position->withX($area->position->x + $xOffset),
+            $label,
+            $area->width
+        );
+    }
+
+    private function renderBarLabel(Bar $bar, Buffer $buffer, int $maxWidth, int $x, int $y, Style $defaultStyleLabel): void
+    {
+        $label = $bar->label;
+        if (null === $label) {
+            return;
+        }
+
+        foreach ($label->spans as $span) {
+            $span->style = $defaultStyleLabel->patch($span->style);
+        }
+
+        $buffer->putLine(
+            Position::at(
+                $x + max(0, $maxWidth - $label->width()) >> 1,
+                $y,
+            ),
+            $label,
+            $maxWidth
+        );
+    }
+
+    private function renderBarValue(Bar $bar, Buffer $buffer, int $maxWidth, int $x, int $y, Style $defaultValueStyle, int $ticks): void
+    {
+        if ($bar->value === 0) {
+            return;
+        }
+        $valueLabel = $bar->textValue ? $bar->textValue : (string)$bar->value;
+        $width = mb_strlen($valueLabel);
+        if ($width < $maxWidth || ($width === $maxWidth && $ticks >= 8)) {
+            // why strlen? Ratatui does value_label.len() not sure why.
+            $buffer->putString(
+                Position::at(
+                    $x + (max(0, $maxWidth - strlen($valueLabel)) >> 1),
+                    $y,
+                ),
+                $valueLabel,
+                $defaultValueStyle->patch($bar->valueStyle),
+            );
         }
     }
 }
