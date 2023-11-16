@@ -132,5 +132,39 @@ class BarChartRendererTest extends WidgetTestCase
             ]
            ,
         ];
+        yield 'wider than dimensions' => [
+            Area::fromDimensions(10, 5),
+            BarChartWidget::default()->data(
+                BarGroup::fromBars(
+                    Bar::fromValue(1)->textValue('A')->label(Line::fromString('X0'))->style(Style::default()),
+                    Bar::fromValue(2)->textValue('B')->label(Line::fromString('X1')),
+                )
+            )->direction(Direction::Horizontal)->barGap(10),
+            [
+                'X0 A██    ',
+                '          ',
+                '          ',
+                '          ',
+                '          ',
+            ]
+           ,
+        ];
+        yield 'taller than dimensions' => [
+            Area::fromDimensions(10, 5),
+            BarChartWidget::default()->data(
+                BarGroup::fromBars(
+                    Bar::fromValue(1)->textValue('A')->label(Line::fromString('X0'))->style(Style::default()),
+                    Bar::fromValue(2)->textValue('B')->label(Line::fromString('X1')),
+                )
+            )->direction(Direction::Vertical)->barGap(10),
+            [
+                '          ',
+                '▄         ',
+                '█         ',
+                'A         ',
+                'X         ',
+            ]
+           ,
+        ];
     }
 }

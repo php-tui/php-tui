@@ -68,17 +68,13 @@ final class BarChartRenderer implements WidgetRenderer
             }
 
             $bars = $group->bars;
-            if ($nBars <= 0) {
-                return $ticks;
-            }
 
             $ticks[] = array_map(function (Bar $bar) use ($barMaxLength, $max) {
                 if ($max === 0) {
                     return 0;
                 }
-
                 return (int) ($bar->value * $barMaxLength * self::TICKS_PER_LINE / $max);
-            }, array_slice($bars, 0, $nBars));
+            }, $bars);
         }
 
         return $ticks;
@@ -149,14 +145,8 @@ final class BarChartRenderer implements WidgetRenderer
     {
         $barX = $area->left();
         foreach ($widget->data as $i => $group) {
-            if (!isset($groupTicks[$i])) {
-                continue;
-            }
             $ticksList = $groupTicks[$i];
             foreach ($group->bars as $ii => $bar) {
-                if (!isset($ticksList[$ii])) {
-                    break;
-                }
                 $ticks = $ticksList[$ii];
                 for ($j = $area->height - 1; $j >= 0; $j--) {
                     $symbol = BarSet::fromIndex($ticks);
@@ -192,9 +182,6 @@ final class BarChartRenderer implements WidgetRenderer
             if ([] === $group->bars) {
                 continue;
             }
-            if (!isset($groupTicks[$i])) {
-                continue;
-            }
             $tickList = $groupTicks[$i];
             $bars = $group->bars;
 
@@ -211,9 +198,6 @@ final class BarChartRenderer implements WidgetRenderer
             }
 
             foreach ($group->bars as $ii => $bar) {
-                if (!isset($tickList[$ii])) {
-                    break;
-                }
                 $ticks = $tickList[$ii];
                 if ($labelInfo->barLabelVisible) {
                     $this->renderBarLabel($bar, $buffer, $widget->barWidth, $barX, $barY + 1, $widget->labelStyle);
@@ -303,14 +287,8 @@ final class BarChartRenderer implements WidgetRenderer
         $barY = $barsArea->top();
 
         foreach ($widget->data as $i => $group) {
-            if (!isset($groupTicks[$i])) {
-                continue;
-            }
             $tickList = $groupTicks[$i];
             foreach ($group->bars as $ii => $bar) {
-                if (!isset($tickList[$ii])) {
-                    break;
-                }
                 $ticks = $tickList[$ii];
                 $barLength = (int) ($ticks / 8);
                 $barStyle = $widget->barStyle->patch($bar->style);
