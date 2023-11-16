@@ -151,6 +151,9 @@ final class BarChartRenderer implements WidgetRenderer
         foreach ($widget->data as $i => $group) {
             $ticksList = $groupTicks[$i];
             foreach ($group->bars as $ii => $bar) {
+                if (!isset($ticksList[$ii])) {
+                    break;
+                }
                 $ticks = $ticksList[$ii];
                 for ($j = $area->height - 1; $j >= 0; $j--) {
                     $symbol = BarSet::fromIndex($ticks);
@@ -158,6 +161,9 @@ final class BarChartRenderer implements WidgetRenderer
                     $barStyle = $widget->barStyle->patch($bar->style);
 
                     for ($x = 0; $x < $widget->barWidth; $x++) {
+                        if ($barX + $x >= $area->right()) {
+                            break;
+                        }
                         $cell = $buffer->get(Position::at($barX + $x, $area->top() + $j));
                         $cell->setChar($symbol);
                         $cell->setStyle($barStyle);
@@ -199,6 +205,9 @@ final class BarChartRenderer implements WidgetRenderer
             }
 
             foreach ($group->bars as $ii => $bar) {
+                if (!isset($ticksList[$ii])) {
+                    break;
+                }
                 $ticks = $tickList[$ii];
                 if ($labelInfo->barLabelVisible) {
                     $this->renderBarLabel($bar, $buffer, $widget->barWidth, $barX, $barY + 1, $widget->labelStyle);

@@ -14,7 +14,7 @@ class BarGroup
          * Label of the group. It will be printed centered under
          * this group of bars
          */
-        public readonly ?Line $label,
+        public ?Line $label,
         /**
          * List of bars to be shown
          * @var Bar[]
@@ -24,11 +24,12 @@ class BarGroup
     }
 
     /**
-     * @param array<string,int> $array
+     * @param array<int|string,int> $array
      */
     public static function fromArray(array $array): self
     {
-        return new self(null, array_map(function (string $key, int $value) {
+        return new self(null, array_map(function (string|int $key, int $value) {
+            $key = (string)$key;
             return new Bar($value, Line::fromString($key), Style::default(), Style::default(), null);
         }, array_keys($array), array_values($array)));
     }
@@ -36,6 +37,12 @@ class BarGroup
     public static function fromBars(Bar ...$bars): self
     {
         return new self(null, $bars);
+    }
+
+    public function label(Line $label): self
+    {
+        $this->label = $label;
+        return $this;
     }
 
     public function max(): int
