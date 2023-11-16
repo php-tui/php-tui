@@ -1,8 +1,10 @@
 ---
-title: ListWidget
+title:  List 
 description: The List widget allows you to list and highlight items.
 ---
-## ListWidget
+##  List 
+
+`PhpTui\Tui\Extension\Core\Widget\ListWidget`
 
 The List widget allows you to list and highlight items.
 {{% terminal file="/data/example/docs/widget/listWidget.html" %}}

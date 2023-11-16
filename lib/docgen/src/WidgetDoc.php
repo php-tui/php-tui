@@ -11,6 +11,7 @@ final class WidgetDoc
      */
     public function __construct(
         public string $name,
+        public string $humanName,
         public string $className,
         public ?string $description,
         public array $params

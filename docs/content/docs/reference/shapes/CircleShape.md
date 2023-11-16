@@ -1,8 +1,10 @@
 ---
-title: CircleShape
+title:  Circle 
 description: Draws a circle at with the specified radius and color
 ---
-## CircleShape
+##  Circle 
+
+`PhpTui\Tui\Extension\Core\Shape\CircleShape`
 
 Draws a circle at with the specified radius and color
 {{% terminal file="/data/example/docs/shape/circleShape.html" %}}

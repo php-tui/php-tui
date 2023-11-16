@@ -1,8 +1,10 @@
 ---
-title: PointsShape
+title:  Points 
 description: Render a set of points on the canvas.
 ---
-## PointsShape
+##  Points 
+
+`PhpTui\Tui\Extension\Core\Shape\PointsShape`
 
 Render a set of points on the canvas.
 {{% terminal file="/data/example/docs/shape/pointsShape.html" %}}

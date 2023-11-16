@@ -1,8 +1,10 @@
 ---
-title: ChartWidget
+title:  Chart 
 description: Renders a a composite of scatter or line graphs.
 ---
-## ChartWidget
+##  Chart 
+
+`PhpTui\Tui\Extension\Core\Widget\ChartWidget`
 
 Renders a a composite of scatter or line graphs.
 {{% terminal file="/data/example/docs/widget/chartWidget.html" %}}

@@ -1,8 +1,10 @@
 ---
-title: SpriteShape
+title:  Sprite 
 description: Renders a "sprite" based on a given "ascii art"Each sprite can have a single color but they can be layered on the canvas.
 ---
-## SpriteShape
+##  Sprite 
+
+`PhpTui\Tui\Extension\Core\Shape\SpriteShape`
 
 Renders a "sprite" based on a given "ascii art"Each sprite can have a single color but they can be layered on the canvas.
 {{% terminal file="/data/example/docs/shape/spriteShape.html" %}}

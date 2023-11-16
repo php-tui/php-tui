@@ -1,8 +1,10 @@
 ---
-title: LineShape
+title:  Line 
 description: Draw a straight line from one point to another.
 ---
-## LineShape
+##  Line 
+
+`PhpTui\Tui\Extension\Core\Shape\LineShape`
 
 Draw a straight line from one point to another.
 {{% terminal file="/data/example/docs/shape/lineShape.html" %}}

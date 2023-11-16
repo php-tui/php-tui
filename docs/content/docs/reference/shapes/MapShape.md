@@ -1,8 +1,10 @@
 ---
-title: MapShape
+title:  Map 
 description: Renders a map of the world!
 ---
-## MapShape
+##  Map 
+
+`PhpTui\Tui\Extension\Core\Shape\MapShape`
 
 Renders a map of the world!
 {{% terminal file="/data/example/docs/shape/mapShape.html" %}}

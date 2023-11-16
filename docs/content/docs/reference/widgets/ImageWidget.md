@@ -1,8 +1,10 @@
 ---
-title: ImageWidget
+title:  Image 
 description: Render an image on a canvas matching the dimensions of the image.
 ---
-## ImageWidget
+##  Image 
+
+`PhpTui\Tui\Extension\ImageMagick\Widget\ImageWidget`
 
 Render an image on a canvas matching the dimensions of the image.
 {{% terminal file="/data/example/docs/widget/imageWidget.html" %}}

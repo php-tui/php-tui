@@ -1,8 +1,10 @@
 ---
-title: BlockWidget
+title:  Block 
 description: The block widget is a container for other widgets and can provide a border,title and padding.
 ---
-## BlockWidget
+##  Block 
+
+`PhpTui\Tui\Extension\Core\Widget\BlockWidget`
 
 The block widget is a container for other widgets and can provide a border,title and padding.
 {{% terminal file="/data/example/docs/widget/blockWidget.html" %}}

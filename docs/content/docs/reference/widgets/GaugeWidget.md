@@ -1,8 +1,10 @@
 ---
-title: GaugeWidget
+title:  Gauge 
 description: A widget to display a progress bar.  A `GaugeWidget` renders a bar filled according to the value given to the specified ratio. The bar width and height are defined by the area it is in.  The associated label is always centered horizontally and vertically. If not set with  The label is the percentage of the bar filled by default but can be overridden.
 ---
-## GaugeWidget
+##  Gauge 
+
+`PhpTui\Tui\Extension\Core\Widget\GaugeWidget`
 
 A widget to display a progress bar.  A `GaugeWidget` renders a bar filled according to the value given to the specified ratio. The bar width and height are defined by the area it is in.  The associated label is always centered horizontally and vertically. If not set with  The label is the percentage of the bar filled by default but can be overridden.
 {{% terminal file="/data/example/docs/widget/gaugeWidget.html" %}}

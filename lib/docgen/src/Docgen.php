@@ -75,6 +75,7 @@ final class Docgen
                 $shape->getShortName()
             ), $this->renderShape(new WidgetDoc(
                 name: lcfirst($shape->getShortName()),
+                humanName: $this->humanName($shape->getShortName(), 'Shape'),
                 className: $shape->getName(),
                 description: $this->description($node),
                 params: array_values(array_filter(array_map(function (ReflectionProperty $prop): false|WidgetParam {
@@ -114,6 +115,7 @@ final class Docgen
                 $widget->getShortName()
             ), $this->renderWidget(new WidgetDoc(
                 name: lcfirst($widget->getShortName()),
+                humanName: $this->humanName($widget->getShortName(), 'Widget'),
                 className: $widget->getName(),
                 description: $this->description($node),
                 params: array_values(array_filter(array_map(function (ReflectionProperty $prop): false|WidgetParam {
@@ -181,13 +183,15 @@ final class Docgen
 
     private function renderShape(WidgetDoc $shapeDoc): string
     {
-        $title = ucfirst($shapeDoc->name);
+        $title = $shapeDoc->humanName;
         $doc = [
             '---',
             sprintf('title: %s', $title),
             sprintf('description: %s', $shapeDoc->description),
             '---',
             sprintf('## %s', $title),
+            '',
+            sprintf('`%s`', $shapeDoc->className),
             '',
             $shapeDoc->description,
         ];
@@ -222,13 +226,15 @@ final class Docgen
     }
     private function renderWidget(WidgetDoc $widgetDoc): string
     {
-        $title = ucfirst($widgetDoc->name);
+        $title = $widgetDoc->humanName;
         $doc = [
             '---',
             sprintf('title: %s', $title),
             sprintf('description: %s', $widgetDoc->description),
             '---',
             sprintf('## %s', $title),
+            '',
+            sprintf('`%s`', $widgetDoc->className),
             '',
             $widgetDoc->description,
         ];
@@ -272,5 +278,18 @@ final class Docgen
                 $path
             ));
         }
+    }
+
+    private function humanName(string $subject, string $suffix): string
+    {
+        $replaced = preg_replace('{([A-Z])}', ' \1', ucfirst($subject));
+        if (null === $replaced) {
+            throw new RuntimeException('Could not replace');
+        }
+        if ($pos = strrpos($replaced, $suffix)) {
+            $replaced = substr($replaced, 0, $pos);
+        }
+
+        return $replaced;
     }
 }

@@ -1,8 +1,10 @@
 ---
-title: BarChartWidget
+title:  Bar Chart 
 description: 
 ---
-## BarChartWidget
+##  Bar Chart 
+
+`PhpTui\Tui\Extension\Core\Widget\BarChartWidget`
 
 
 {{% terminal file="/data/example/docs/widget/barChartWidget.html" %}}
