@@ -5,9 +5,9 @@ CHANGELOG
 
 Features:
 
-- Gauge widget
-- Image widget
-- BarChart widget
+- Gauge widget #118
+- Image widget #113
+- BarChart widget #126
 
 Bug fixes:
 
@@ -19,6 +19,7 @@ Improvements
 
 Refactoring:
 
+- Always render to _new_ buffers #128
 - Re-organized namespaces
 - Use variadic for `TableRow::fromTableCells`
 
