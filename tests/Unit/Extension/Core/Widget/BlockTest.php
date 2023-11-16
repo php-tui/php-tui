@@ -50,6 +50,15 @@ class BlockTest extends WidgetTestCase
                 );
             }
         ];
+        yield 'no borders, width=1, height=1, padding out of bounds' => [
+            Block::default(),
+            function (Block $block): void {
+                self::assertEquals(
+                    Area::fromScalars(10, 10, 0, 0),
+                    $block->padding(Padding::all(10))->inner(Area::fromScalars(0, 0, 1, 1))
+                );
+            }
+        ];
         yield 'left, width=0' => [
             Block::default()->borders(Borders::LEFT),
             function (Block $block): void {

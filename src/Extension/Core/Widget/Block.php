@@ -154,8 +154,8 @@ final class Block implements Widget
         }
         $x += $this->padding->left;
         $y += $this->padding->top;
-        $width = $width - ($this->padding->left + $this->padding->right);
-        $height = $height - ($this->padding->top + $this->padding->bottom);
+        $width = max(0, $width - ($this->padding->left + $this->padding->right));
+        $height = max(0, $height - ($this->padding->top + $this->padding->bottom));
 
         return Area::fromScalars($x, $y, $width, $height);
     }
