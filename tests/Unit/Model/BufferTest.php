@@ -19,7 +19,6 @@ use PHPUnit\Framework\TestCase;
 
 class BufferTest extends TestCase
 {
-
     public function testEmpty(): void
     {
         $buffer = Buffer::empty(Area::fromScalars(0, 0, 100, 100));

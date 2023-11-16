@@ -18,19 +18,6 @@ use RuntimeException;
 
 class GridTest extends WidgetTestCase
 {
-    public function testNotEnoughConstraints(): void
-    {
-        $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage('Widget at offset 0 has no corresponding constraint. Ensure that the number of constraints match or exceed the number of widgets');
-        $area = Area::fromDimensions(10, 10);
-        $buffer = Buffer::empty($area);
-        $grid = Grid::default()
-            ->widgets(
-                Paragraph::fromText(Text::fromString('Hello World'))
-            );
-        $this->render($buffer, $grid);
-    }
-
     /**
      * @dataProvider provideGridRender
      * @param array<int,string> $expected
@@ -81,5 +68,18 @@ class GridTest extends WidgetTestCase
             ]
            ,
         ];
+    }
+
+    public function testNotEnoughConstraints(): void
+    {
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('Widget at offset 0 has no corresponding constraint. Ensure that the number of constraints match or exceed the number of widgets');
+        $area = Area::fromDimensions(10, 10);
+        $buffer = Buffer::empty($area);
+        $grid = Grid::default()
+            ->widgets(
+                Paragraph::fromText(Text::fromString('Hello World'))
+            );
+        $this->render($buffer, $grid);
     }
 }

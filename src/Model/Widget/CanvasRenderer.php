@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Model\Widget;
 
 use PhpTui\Tui\Extension\Core\Widget\Canvas;
-use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Buffer;
 use PhpTui\Tui\Model\Canvas\CanvasContext;
 use PhpTui\Tui\Model\Canvas\ShapePainter;

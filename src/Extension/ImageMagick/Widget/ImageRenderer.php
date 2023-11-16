@@ -7,7 +7,6 @@ namespace PhpTui\Tui\Extension\ImageMagick\Widget;
 use PhpTui\Tui\Extension\Core\Widget\Canvas;
 use PhpTui\Tui\Extension\ImageMagick\ImageRegistry;
 use PhpTui\Tui\Extension\ImageMagick\Shape\ImageShape;
-use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Buffer;
 use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Model\Widget;
