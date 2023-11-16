@@ -41,18 +41,21 @@ final class Bar
     public function label(Line $label): self
     {
         $this->label = $label;
+
         return $this;
     }
 
     public function textValue(string $textValue): self
     {
         $this->textValue = $textValue;
+
         return $this;
     }
 
     public function style(Style $style): self
     {
         $this->style = $style;
+
         return $this;
     }
 }

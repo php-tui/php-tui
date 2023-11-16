@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Extension\Core\Widget\BarChart;
 
 class LabelInfo
@@ -8,8 +10,7 @@ class LabelInfo
         public readonly bool $groupLabelVisible,
         public readonly bool $barLabelVisible,
         public readonly int $height
-    )
-    {
+    ) {
     }
 
 }

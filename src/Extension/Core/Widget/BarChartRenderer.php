@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Extension\Core\Widget;
 
 use PhpTui\Tui\Extension\Core\Widget\BarChart\Bar;
@@ -8,13 +10,12 @@ use PhpTui\Tui\Extension\Core\Widget\BarChart\LabelInfo;
 use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Buffer;
 use PhpTui\Tui\Model\Direction;
-use PhpTui\Tui\Model\Exception\TodoException;
 use PhpTui\Tui\Model\Position;
 use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Widget;
-use PhpTui\Tui\Model\WidgetRenderer;
 use PhpTui\Tui\Model\Widget\BarSet;
 use PhpTui\Tui\Model\Widget\HorizontalAlignment;
+use PhpTui\Tui\Model\WidgetRenderer;
 
 final class BarChartRenderer implements WidgetRenderer
 {
@@ -60,7 +61,7 @@ final class BarChartRenderer implements WidgetRenderer
                 $maxBars = ($space + $widget->barGap) / ($widget->barWidth + $widget->barGap);
                 if ($maxBars > 0) {
                     $space = 0;
-                    $nBars = intval($maxBars);
+                    $nBars = (int) $maxBars;
                 } else {
                     return $ticks;
                 }
@@ -72,12 +73,14 @@ final class BarChartRenderer implements WidgetRenderer
             }
 
             $ticks[] = array_map(function (Bar $bar) use ($barMaxLength, $max) {
-                    if ($max === 0) {
-                        return 0;
-                    }
-                    return intval($bar->value * $barMaxLength * self::TICKS_PER_LINE / $max);
+                if ($max === 0) {
+                    return 0;
+                }
+
+                return (int) ($bar->value * $barMaxLength * self::TICKS_PER_LINE / $max);
             }, array_slice($bars, 0, $nBars));
         }
+
         return $ticks;
     }
 
@@ -89,9 +92,10 @@ final class BarChartRenderer implements WidgetRenderer
 
         return array_reduce($widget->data, function (int $max, BarGroup $barGroup) {
             $barGroupMax = $barGroup->max();
-            if ($barGroupMax> $max) {
+            if ($barGroupMax > $max) {
                 return $barGroupMax;
             }
+
             return $max;
         }, 0);
     }
@@ -268,7 +272,7 @@ final class BarChartRenderer implements WidgetRenderer
         }
     }
 
-    private function renderHorizontal(BarChartWidget $widget, Buffer $buffer, Area $area)
+    private function renderHorizontal(BarChartWidget $widget, Buffer $buffer, Area $area): void
     {
         $labelSize = $widget->maxLabelSize();
         $labelX = $area->position->x;
@@ -287,12 +291,12 @@ final class BarChartRenderer implements WidgetRenderer
             $tickList = $groupTicks[$i];
             foreach ($group->bars as $ii => $bar) {
                 $ticks = $tickList[$ii];
-                $barLength = intval($ticks / 8);
+                $barLength = (int) ($ticks / 8);
                 $barStyle = $widget->barStyle->patch($bar->style);
 
                 for ($y = 0; $y < $widget->barWidth; $y++) {
                     $barY = $barY + $y;
-                    for ($x =0; $x < $barsArea->width; $x++) {
+                    for ($x = 0; $x < $barsArea->width; $x++) {
                         $symbol = $x < $barLength ? BarSet::FULL : BarSet::EMPTY;
                         $buffer->get(
                             Position::at(
@@ -311,7 +315,7 @@ final class BarChartRenderer implements WidgetRenderer
 
                 if ($bar->label !== null) {
                     $buffer->putLine(
-                        Position::at($labelX,$barValueArea->top()),
+                        Position::at($labelX, $barValueArea->top()),
                         $bar->label,
                         $labelSize,
                     );
@@ -344,8 +348,7 @@ final class BarChartRenderer implements WidgetRenderer
         int $barLength,
         Style $defaultValueStyle,
         Style $barStyle
-    ): void
-    {
+    ): void {
         $text = $bar->textValue ? $bar->textValue : (string)$bar->value;
         if (!$text) {
             return;

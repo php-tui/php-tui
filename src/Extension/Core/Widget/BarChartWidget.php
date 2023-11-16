@@ -76,60 +76,70 @@ final class BarChartWidget implements Widget
     public function barWidth(int $barWidth): self
     {
         $this->barWidth = $barWidth;
+
         return $this;
     }
 
     public function barGap(int $barGap): self
     {
         $this->barGap = $barGap;
+
         return $this;
     }
 
     public function groupGap(int $groupGap): self
     {
         $this->groupGap = $groupGap;
+
         return $this;
     }
 
     public function barStyle(Style $barStyle): self
     {
         $this->barStyle = $barStyle;
+
         return $this;
     }
 
     public function valueStyle(Style $valueStyle): self
     {
         $this->valueStyle = $valueStyle;
+
         return $this;
     }
 
     public function labelStyle(Style $labelStyle): self
     {
         $this->labelStyle = $labelStyle;
+
         return $this;
     }
 
     public function style(Style $style): self
     {
         $this->style = $style;
+
         return $this;
     }
 
     public function data(BarGroup ...$group): self
     {
         $this->data = $group;
+
         return $this;
     }
 
     public function max(int $max): self
     {
         $this->max = $max;
+
         return $this;
     }
 
     public function direction(Direction $direction): self
     {
         $this->direction = $direction;
+
         return $this;
     }
 
@@ -142,6 +152,7 @@ final class BarChartWidget implements Widget
                 }
             }
         }
+
         return false;
     }
 
@@ -152,6 +163,7 @@ final class BarChartWidget implements Widget
                 return true;
             }
         }
+
         return false;
     }
 
@@ -169,6 +181,7 @@ final class BarChartWidget implements Widget
                 }
             }
         }
+
         return $max;
     }
 }

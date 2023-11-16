@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Tests\Unit\Extension\Core\Widget\BarChart;
 
-use PHPUnit\Framework\TestCase;
 use PhpTui\Tui\Extension\Core\Widget\BarChart\Bar;
 use PhpTui\Tui\Extension\Core\Widget\BarChart\BarGroup;
 use PhpTui\Tui\Model\Widget\Line;
+use PHPUnit\Framework\TestCase;
 
 class BarGroupTest extends TestCase
 {

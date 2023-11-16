@@ -45,6 +45,7 @@ class BarGroup
             if ($value > $max) {
                 return $value;
             }
+
             return $max;
         }, 0);
     }
