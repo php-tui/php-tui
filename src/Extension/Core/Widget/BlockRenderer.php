@@ -16,8 +16,9 @@ use PhpTui\Tui\Model\WidgetRenderer;
 
 final class BlockRenderer implements WidgetRenderer
 {
-    public function render(WidgetRenderer $renderer, Widget $widget, Area $area, Buffer $buffer): void
+    public function render(WidgetRenderer $renderer, Widget $widget, Buffer $buffer): void
     {
+        $area = $buffer->area();
         if (!$widget instanceof Block) {
             return;
         }
@@ -29,12 +30,13 @@ final class BlockRenderer implements WidgetRenderer
         $this->renderTitles($widget, $area, $buffer);
 
         if ($widget->widget) {
+            $subBuffer = Buffer::empty($widget->inner($area));
             $renderer->render(
                 $renderer,
                 $widget->widget,
-                $widget->inner($area),
-                $buffer
+                $subBuffer
             );
+            $buffer->putBuffer($widget->inner($area)->position, $subBuffer);
         }
     }
 

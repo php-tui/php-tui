@@ -13,8 +13,9 @@ use PhpTui\Tui\Model\WidgetRenderer;
 
 class ItemListRenderer implements WidgetRenderer
 {
-    public function render(WidgetRenderer $renderer, Widget $widget, Area $area, Buffer $buffer): void
+    public function render(WidgetRenderer $renderer, Widget $widget, Buffer $buffer): void
     {
+        $area = $buffer->area();
         if (!$widget instanceof ItemList) {
             return;
         }

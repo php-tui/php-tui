@@ -45,8 +45,11 @@ final class Buffer implements Countable
         return new self($area, $content);
     }
 
-    public function setStyle(Area $area, Style $style): void
+    public function setStyle(?Area $area, Style $style): void
     {
+        if ($area === null) {
+            $area = $this->area;
+        }
         if ($area->height === 0) {
             return;
         }
@@ -209,14 +212,18 @@ final class Buffer implements Countable
     public function putBuffer(Position $position, Buffer $buffer): void
     {
         $bArea = $buffer->area();
+        $area = $this->area();
 
         foreach ($buffer->content as $bi => $cell) {
-            $y = $position->y + (int) (floor($bi / $bArea->width));
-            $x = $position->x + ($bi % $bArea->width);
-            if ($y > $this->area()->height) {
+            if ($cell->char === ' ') {
                 continue;
             }
-            if ($x > $this->area()->width) {
+            $y = $position->y + (int) (floor($bi / $bArea->width));
+            $x = $position->x + ($bi % $bArea->width);
+            if ($y > $area->bottom()) {
+                continue;
+            }
+            if ($x > $area->right()) {
                 continue;
             }
             $this->content[Position::at($x, $y)->toIndex($this->area())] = $cell;

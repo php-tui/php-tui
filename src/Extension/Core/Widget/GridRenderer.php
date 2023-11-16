@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Extension\Core\Widget;
 
-use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Buffer;
 use PhpTui\Tui\Model\Layout;
 use PhpTui\Tui\Model\Widget;
@@ -13,8 +12,9 @@ use RuntimeException;
 
 class GridRenderer implements WidgetRenderer
 {
-    public function render(WidgetRenderer $renderer, Widget $widget, Area $area, Buffer $buffer): void
+    public function render(WidgetRenderer $renderer, Widget $widget, Buffer $buffer): void
     {
+        $area = $buffer->area();
         if (!$widget instanceof Grid) {
             return;
         }
@@ -33,7 +33,9 @@ class GridRenderer implements WidgetRenderer
                 ));
             }
             $cellArea = $layout->get($index);
-            $renderer->render($renderer, $gridWidget, $cellArea, $buffer);
+            $subBuffer = Buffer::empty($cellArea);
+            $renderer->render($renderer, $gridWidget, $subBuffer);
+            $buffer->putBuffer($cellArea->position, $subBuffer);
         }
     }
 }

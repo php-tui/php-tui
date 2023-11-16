@@ -11,8 +11,9 @@ use PhpTui\Tui\Model\WidgetRenderer;
 
 final class RawWidgetRenderer implements WidgetRenderer
 {
-    public function render(WidgetRenderer $renderer, Widget $widget, Area $area, Buffer $buffer): void
+    public function render(WidgetRenderer $renderer, Widget $widget, Buffer $buffer): void
     {
+        $area = $buffer->area();
         if (!$widget instanceof RawWidget) {
             return;
         }

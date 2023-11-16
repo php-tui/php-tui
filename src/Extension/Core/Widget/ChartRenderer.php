@@ -23,8 +23,9 @@ use RuntimeException;
  */
 final class ChartRenderer implements WidgetRenderer
 {
-    public function render(WidgetRenderer $renderer, Widget $widget, Area $area, Buffer $buffer): void
+    public function render(WidgetRenderer $renderer, Widget $widget, Buffer $buffer): void
     {
+        $area = $buffer->area();
         if (!$widget instanceof Chart) {
             return;
         }
@@ -63,6 +64,7 @@ final class ChartRenderer implements WidgetRenderer
         }
 
         foreach ($widget->dataSets as $dataSet) {
+            $subBuffer = Buffer::empty($layout->graphArea);
             $renderer->render($renderer, Canvas::default()
                 ->backgroundColor($widget->style->bg ?? AnsiColor::Reset)
                 ->xBounds($widget->xAxis->bounds)
@@ -70,7 +72,8 @@ final class ChartRenderer implements WidgetRenderer
                 ->marker($dataSet->marker)
                 ->paint(function (CanvasContext $context) use ($dataSet): void {
                     $context->draw(Points::new($dataSet->data, $dataSet->style->fg ?? AnsiColor::Reset));
-                }), $layout->graphArea, $buffer);
+                }), $subBuffer);
+            $buffer->putBuffer($layout->graphArea->position, $subBuffer);
 
         }
     }

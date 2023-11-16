@@ -9,7 +9,6 @@ use PhpTui\Tui\Extension\Core\Shape\ClosurePainter;
 use PhpTui\Tui\Extension\Core\Shape\ClosureShape;
 use PhpTui\Tui\Extension\Core\Widget\Canvas;
 use PhpTui\Tui\Extension\Core\Widget\ClosureRenderer;
-use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Backend\DummyBackend;
 use PhpTui\Tui\Model\Buffer;
 use PhpTui\Tui\Model\DisplayExtension;
@@ -32,7 +31,7 @@ final class DisplayBuilderTest extends TestCase
         $shapePainted = false;
         $extension = $this->getMockBuilder(DisplayExtension::class)->getMock();
         $extension->method('widgetRenderers')->willReturn([new ClosureRenderer(
-            function (WidgetRenderer $renderer, Widget $widget, Area $area, Buffer $buffer) use (&$widgetRendered): void {
+            function (WidgetRenderer $renderer, Widget $widget, Buffer $buffer) use (&$widgetRendered): void {
                 $widgetRendered = true;
             }
         )]);

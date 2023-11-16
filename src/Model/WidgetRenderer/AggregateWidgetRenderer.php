@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Model\WidgetRenderer;
 
-use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Buffer;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\WidgetRenderer;
@@ -26,10 +25,11 @@ class AggregateWidgetRenderer implements WidgetRenderer
     {
     }
 
-    public function render(WidgetRenderer $renderer, Widget $widget, Area $area, Buffer $buffer): void
+    public function render(WidgetRenderer $renderer, Widget $widget, Buffer $buffer): void
     {
+        $area = $buffer->area();
         foreach ($this->renderers as $aggregateRenderer) {
-            $aggregateRenderer->render($this, $widget, $area, $buffer);
+            $aggregateRenderer->render($this, $widget, $buffer);
         }
     }
 
