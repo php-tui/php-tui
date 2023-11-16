@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Tests\Unit\Model;
 
 use PhpTui\Tui\DisplayBuilder;
-use PhpTui\Tui\Extension\Core\Shape\Points;
-use PhpTui\Tui\Extension\Core\Widget\Canvas;
-use PhpTui\Tui\Extension\Core\Widget\Paragraph;
+use PhpTui\Tui\Extension\Core\Shape\PointsShape;
+use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
+use PhpTui\Tui\Extension\Core\Widget\ParagraphWidget;
 use PhpTui\Tui\Extension\Core\Widget\RawWidget;
 use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Backend\DummyBackend;
@@ -65,7 +65,7 @@ class DisplayTest extends TestCase
     {
         $backend = DummyBackend::fromDimensions(4, 4);
         $terminal = DisplayBuilder::default($backend)->build();
-        $terminal->draw(Canvas::fromIntBounds(0, 3, 0, 3)->marker(Marker::Dot)->draw(Points::new([
+        $terminal->draw(CanvasWidget::fromIntBounds(0, 3, 0, 3)->marker(Marker::Dot)->draw(PointsShape::new([
             [3, 3], [2, 2], [1, 1], [0, 0]
         ], AnsiColor::Green)));
 
@@ -102,7 +102,7 @@ class DisplayTest extends TestCase
     {
         $backend = new DummyBackend(10, 10, Position::at(0, 15));
         $terminal = DisplayBuilder::default($backend)->inline(10)->build();
-        $terminal->draw(Paragraph::fromString('Hello'));
+        $terminal->draw(ParagraphWidget::fromString('Hello'));
 
         self::assertEquals(6, $terminal->viewportArea()->top());
         self::assertEquals(0, $terminal->viewportArea()->left());
@@ -112,7 +112,7 @@ class DisplayTest extends TestCase
     {
         $backend = new DummyBackend(10, 10, Position::at(0, 15));
         $terminal = DisplayBuilder::default($backend)->fixed(1, 2, 20, 15)->build();
-        $terminal->draw(Paragraph::fromString('Hello'));
+        $terminal->draw(ParagraphWidget::fromString('Hello'));
 
         self::assertEquals(1, $terminal->viewportArea()->position->x);
         self::assertEquals(2, $terminal->viewportArea()->position->y);

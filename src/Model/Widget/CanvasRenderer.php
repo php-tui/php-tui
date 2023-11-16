@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Model\Widget;
 
-use PhpTui\Tui\Extension\Core\Widget\Canvas;
+use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
 use PhpTui\Tui\Model\Buffer;
 use PhpTui\Tui\Model\Canvas\CanvasContext;
 use PhpTui\Tui\Model\Canvas\ShapePainter;
@@ -22,7 +22,7 @@ final class CanvasRenderer implements WidgetRenderer
     public function render(WidgetRenderer $renderer, Widget $widget, Buffer $buffer): void
     {
         $area = $buffer->area();
-        if (!$widget instanceof Canvas) {
+        if (!$widget instanceof CanvasWidget) {
             return;
         }
         $painter = $widget->painter;

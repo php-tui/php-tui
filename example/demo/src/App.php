@@ -23,9 +23,9 @@ use PhpTui\Tui\Example\Demo\Page\ItemListPage;
 use PhpTui\Tui\Example\Demo\Page\SpritePage;
 use PhpTui\Tui\Example\Demo\Page\TablePage;
 use PhpTui\Tui\Extension\Bdf\BdfExtension;
-use PhpTui\Tui\Extension\Core\Widget\Block;
-use PhpTui\Tui\Extension\Core\Widget\Grid;
-use PhpTui\Tui\Extension\Core\Widget\Paragraph;
+use PhpTui\Tui\Extension\Core\Widget\BlockWidget;
+use PhpTui\Tui\Extension\Core\Widget\GridWidget;
+use PhpTui\Tui\Extension\Core\Widget\ParagraphWidget;
 use PhpTui\Tui\Extension\ImageMagick\ImageMagickExtension;
 use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Backend;
@@ -199,7 +199,7 @@ final class App
 
     private function layout(): Widget
     {
-        return Grid::default()
+        return GridWidget::default()
             ->direction(Direction::Vertical)
             ->constraints(
                 Constraint::max(4),
@@ -218,11 +218,11 @@ final class App
 
     private function header(): Widget
     {
-        return Block::default()
+        return BlockWidget::default()
                 ->borders(Borders::ALL)->style(Style::default()->fg(AnsiColor::White))
                 ->titles(Title::fromString(sprintf('%d FPS', $this->frameRate()))->horizontalAlignmnet(HorizontalAlignment::Right))
                 ->widget(
-                    Paragraph::fromText(Text::fromLines(
+                    ParagraphWidget::fromText(Text::fromLines(
                         Line::fromSpans([
                             Span::styled('[q]', Style::default()->fg(AnsiColor::Green)),
                             Span::fromString('quit '),

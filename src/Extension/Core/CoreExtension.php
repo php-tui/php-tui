@@ -16,7 +16,7 @@ use PhpTui\Tui\Extension\Core\Widget\BlockRenderer;
 use PhpTui\Tui\Extension\Core\Widget\ChartRenderer;
 use PhpTui\Tui\Extension\Core\Widget\GaugeRenderer;
 use PhpTui\Tui\Extension\Core\Widget\GridRenderer;
-use PhpTui\Tui\Extension\Core\Widget\ItemListRenderer;
+use PhpTui\Tui\Extension\Core\Widget\ListRenderer;
 use PhpTui\Tui\Extension\Core\Widget\ParagraphRenderer;
 use PhpTui\Tui\Extension\Core\Widget\RawWidgetRenderer;
 use PhpTui\Tui\Extension\Core\Widget\TableRenderer;
@@ -44,7 +44,7 @@ class CoreExtension implements DisplayExtension
             new ParagraphRenderer(),
             new ChartRenderer(),
             new GridRenderer(),
-            new ItemListRenderer(),
+            new ListRenderer(),
             new RawWidgetRenderer(),
             new TableRenderer(),
             new GaugeRenderer(),

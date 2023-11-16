@@ -1,0 +1,23 @@
+---
+title: ParagraphWidget
+description: This widget has the ability to show and wrap text.
+---
+## ParagraphWidget
+
+This widget has the ability to show and wrap text.
+{{% terminal file="/data/example/docs/widget/paragraphWidget.html" %}}
+{{< details "Show code"  >}}
+{{% codeInclude file="/data/example/docs/widget/paragraphWidget.php" language="php" %}}
+
+{{< /details >}}
+### Parameters
+
+Configure the widget using the builder methods named as follows:
+
+| Name | Type | Description |
+| --- | --- | --- |
+| **style** | `PhpTui\Tui\Model\Style` |  |
+| **wrap** | `PhpTui\Tui\Extension\Core\Widget\Paragraph\Wrap\|null` |  |
+| **text** | `PhpTui\Tui\Model\Widget\Text` |  |
+| **scroll** | `array` |  |
+| **alignment** | `PhpTui\Tui\Model\Widget\HorizontalAlignment` |  |

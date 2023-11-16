@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Extension\ImageMagick\Widget;
 
-use PhpTui\Tui\Extension\Core\Widget\Canvas;
+use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
 use PhpTui\Tui\Extension\ImageMagick\ImageRegistry;
 use PhpTui\Tui\Extension\ImageMagick\Shape\ImageShape;
 use PhpTui\Tui\Model\Buffer;
@@ -28,7 +28,7 @@ class ImageRenderer implements WidgetRenderer
         $image = $this->registry->load($widget->path);
         $geo = $image->getImageGeometry();
 
-        $renderer->render($renderer, Canvas::fromIntBounds(
+        $renderer->render($renderer, CanvasWidget::fromIntBounds(
             0,
             $geo['width'],
             0,

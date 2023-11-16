@@ -1,0 +1,21 @@
+---
+title: CircleShape
+description: Draws a circle at with the specified radius and color
+---
+## CircleShape
+
+Draws a circle at with the specified radius and color
+{{% terminal file="/data/example/docs/shape/circleShape.html" %}}
+{{< details "Show code"  >}}
+{{% codeInclude file="/data/example/docs/shape/circleShape.php" language="php" %}}
+
+{{< /details >}}
+### Parameters
+
+Configure the shape using the constructor arguments named as follows:
+
+| Name | Type | Description |
+| --- | --- | --- |
+| **position** | `PhpTui\Tui\Model\Widget\FloatPosition` | Position of the circle |
+| **radius** | `float` | Radius of the circle |
+| **color** | `PhpTui\Tui\Model\Color` | Color of the circle |

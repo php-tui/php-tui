@@ -22,7 +22,7 @@ class ParagraphRenderer implements WidgetRenderer
     public function render(WidgetRenderer $renderer, Widget $widget, Buffer $buffer): void
     {
         $area = $buffer->area();
-        if (!$widget instanceof Paragraph) {
+        if (!$widget instanceof ParagraphWidget) {
             return;
         }
         $buffer->setStyle(null, $widget->style);

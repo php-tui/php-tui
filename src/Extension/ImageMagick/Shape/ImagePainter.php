@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Extension\ImageMagick\Shape;
 
 use ImagickPixel;
-use PhpTui\Tui\Extension\Core\Shape\Line;
+use PhpTui\Tui\Extension\Core\Shape\LineShape;
 use PhpTui\Tui\Extension\ImageMagick\ImageRegistry;
 use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Canvas\Label;
@@ -35,7 +35,7 @@ final class ImagePainter implements ShapePainter
             $shapePainter->draw(
                 $shapePainter,
                 $painter,
-                Line::fromScalars(
+                LineShape::fromScalars(
                     $painter->context->xBounds->min + 1,
                     $painter->context->yBounds->min + 1,
                     $painter->context->xBounds->max - 1,
@@ -45,7 +45,7 @@ final class ImagePainter implements ShapePainter
             $shapePainter->draw(
                 $shapePainter,
                 $painter,
-                Line::fromScalars(
+                LineShape::fromScalars(
                     $painter->context->xBounds->min + 1,
                     $painter->context->yBounds->max - 1,
                     $painter->context->xBounds->max - 1,

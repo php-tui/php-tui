@@ -8,7 +8,7 @@ use Generator;
 use PhpTui\Tui\Extension\Bdf\FontRegistry;
 use PhpTui\Tui\Extension\Bdf\Shape\TextRenderer;
 use PhpTui\Tui\Extension\Bdf\Shape\TextShape;
-use PhpTui\Tui\Extension\Core\Widget\Canvas;
+use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
 use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Buffer;
@@ -27,7 +27,7 @@ class TextShapeTest extends TestCase
      */
     public function testTextShape(TextShape $text, array $expected): void
     {
-        $canvas = Canvas::fromIntBounds(0, 65, 0, 6)
+        $canvas = CanvasWidget::fromIntBounds(0, 65, 0, 6)
             ->marker(Marker::Block)
             ->paint(function (CanvasContext $context) use ($text): void {
                 $context->draw($text);
@@ -100,7 +100,7 @@ class TextShapeTest extends TestCase
      */
     public function testScale(Area $area, int $boundsX, int $boundsY, TextShape $text, array $expected): void
     {
-        $canvas = Canvas::fromIntBounds(0, $boundsX, 0, $boundsY)
+        $canvas = CanvasWidget::fromIntBounds(0, $boundsX, 0, $boundsY)
             ->marker(Marker::Block)
             ->paint(function (CanvasContext $context) use ($text): void {
                 $context->draw($text);

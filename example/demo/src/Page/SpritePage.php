@@ -7,11 +7,11 @@ namespace PhpTui\Tui\Example\Demo\Page;
 use PhpTui\Term\Event;
 use PhpTui\Tui\Example\Demo\Component;
 use PhpTui\Tui\Extension\Bdf\Shape\TextShape;
-use PhpTui\Tui\Extension\Core\Shape\Points;
-use PhpTui\Tui\Extension\Core\Shape\Sprite;
-use PhpTui\Tui\Extension\Core\Widget\Block;
-use PhpTui\Tui\Extension\Core\Widget\Canvas;
-use PhpTui\Tui\Extension\Core\Widget\Grid;
+use PhpTui\Tui\Extension\Core\Shape\PointsShape;
+use PhpTui\Tui\Extension\Core\Shape\SpriteShape;
+use PhpTui\Tui\Extension\Core\Widget\BlockWidget;
+use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
+use PhpTui\Tui\Extension\Core\Widget\GridWidget;
 use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Canvas\CanvasContext;
 use PhpTui\Tui\Model\Constraint;
@@ -28,7 +28,7 @@ class SpritePage implements Component
     public const WIDTH = 100;
     public const HEIGHT = 30;
 
-    private Sprite $elephant;
+    private SpriteShape $elephant;
 
     private int $ticker = 0;
 
@@ -37,7 +37,7 @@ class SpritePage implements Component
      */
     private array $stars = [];
 
-    private Points $points;
+    private PointsShape $points;
 
     /**
      * @var list<TextShape>
@@ -46,7 +46,7 @@ class SpritePage implements Component
 
     public function __construct()
     {
-        $this->elephant = new Sprite(
+        $this->elephant = new SpriteShape(
             rows: [
                 '       █████',
                 '   ████████████████████',
@@ -65,7 +65,7 @@ class SpritePage implements Component
             yScale: 1,
             position: new FloatPosition(0, 0),
         );
-        $this->points = new Points(
+        $this->points = new PointsShape(
             $this->seedStars(),
             AnsiColor::DarkGray,
         );
@@ -97,18 +97,18 @@ class SpritePage implements Component
     {
         $this->tick();
 
-        return Grid::default()
+        return GridWidget::default()
             ->constraints(
                 Constraint::length(6),
                 Constraint::percentage(70),
             )
             ->widgets(
-                Block::default()
+                BlockWidget::default()
                     ->borders(Borders::ALL)
                     ->borderType(BorderType::Rounded)
                     ->borderStyle(Style::default()->fg(AnsiColor::DarkGray))
                     ->widget(
-                        Canvas::fromIntBounds(0, self::WIDTH, 0, 8)
+                        CanvasWidget::fromIntBounds(0, self::WIDTH, 0, 8)
                             ->marker(Marker::HalfBlock)
                             ->paint(function (CanvasContext $context): void {
                                 foreach ($this->scroller as $textShape) {
@@ -117,7 +117,7 @@ class SpritePage implements Component
                                 $context->saveLayer();
                             })
                     ),
-                Canvas::fromIntBounds(0, self::WIDTH, 0, self::HEIGHT)
+                CanvasWidget::fromIntBounds(0, self::WIDTH, 0, self::HEIGHT)
                     ->backgroundColor(AnsiColor::Black)
                     ->marker(Marker::Braille)
                     ->paint(function (CanvasContext $context): void {

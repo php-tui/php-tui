@@ -13,7 +13,7 @@ class MapPainter implements ShapePainter
 {
     public function draw(ShapePainter $shapePainter, Painter $painter, Shape $shape): void
     {
-        if (!$shape instanceof Map) {
+        if (!$shape instanceof MapShape) {
             return;
         }
 

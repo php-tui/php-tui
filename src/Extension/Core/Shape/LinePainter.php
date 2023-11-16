@@ -13,7 +13,7 @@ class LinePainter implements ShapePainter
 {
     public function draw(ShapePainter $shapePainter, Painter $painter, Shape $shape): void
     {
-        if (!$shape instanceof Line) {
+        if (!$shape instanceof LineShape) {
             return;
         }
 
@@ -78,7 +78,7 @@ class LinePainter implements ShapePainter
         return [$start - $end, range($end, $start)];
     }
 
-    private function drawLineLow(Painter $painter, Line $line, Position $point1, Position $point2): void
+    private function drawLineLow(Painter $painter, LineShape $line, Position $point1, Position $point2): void
     {
         $diffX = $point2->x - $point1->x;
         $diffY = abs($point2->y - $point1->y);
@@ -98,7 +98,7 @@ class LinePainter implements ShapePainter
         }
     }
 
-    private function drawLineHigh(Painter $painter, Line $line, Position $point1, Position $point2): void
+    private function drawLineHigh(Painter $painter, LineShape $line, Position $point1, Position $point2): void
     {
         $diffX = abs($point2->x - $point1->x);
         $diffY = $point2->y - $point1->y;

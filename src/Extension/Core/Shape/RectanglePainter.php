@@ -12,30 +12,30 @@ final class RectanglePainter implements ShapePainter
 {
     public function draw(ShapePainter $shapePainter, Painter $painter, Shape $shape): void
     {
-        if (!$shape instanceof Rectangle) {
+        if (!$shape instanceof RectangleShape) {
             return;
         }
 
         $lines = [
-            Line::fromScalars(
+            LineShape::fromScalars(
                 $shape->position->x,
                 $shape->position->y,
                 $shape->position->x,
                 $shape->position->y + $shape->height,
             )->color($shape->color),
-            Line::fromScalars(
+            LineShape::fromScalars(
                 $shape->position->x,
                 $shape->position->y + $shape->height,
                 $shape->position->x + $shape->width,
                 $shape->position->y + $shape->height,
             )->color($shape->color),
-            Line::fromScalars(
+            LineShape::fromScalars(
                 $shape->position->x + $shape->width,
                 $shape->position->y,
                 $shape->position->x + $shape->width,
                 $shape->position->y + $shape->height,
             )->color($shape->color),
-            Line::fromScalars(
+            LineShape::fromScalars(
                 $shape->position->x,
                 $shape->position->y,
                 $shape->position->x + $shape->width,
