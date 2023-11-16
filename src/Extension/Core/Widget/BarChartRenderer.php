@@ -205,7 +205,7 @@ final class BarChartRenderer implements WidgetRenderer
             }
 
             foreach ($group->bars as $ii => $bar) {
-                if (!isset($ticksList[$ii])) {
+                if (!isset($tickList[$ii])) {
                     break;
                 }
                 $ticks = $tickList[$ii];
