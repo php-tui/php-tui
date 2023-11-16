@@ -34,11 +34,11 @@ class BarChartRendererTest extends WidgetTestCase
                 BarGroup::fromArray(['B0' => 1, 'B1' => 2])
             ),
             [
-                ' x        ',
-                ' x        ',
-                ' x x      ',
-                ' x x      ',
-                ' x x      ',
+                '  █       ',
+                '▄ █       ',
+                '█ █       ',
+                '1 2       ',
+                'B B       ',
             ]
            ,
         ];

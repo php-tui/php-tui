@@ -18,6 +18,8 @@ use PhpTui\Tui\Model\Widget\HorizontalAlignment;
 
 final class BarChartRenderer implements WidgetRenderer
 {
+    private const TICKS_PER_LINE = 8;
+
     public function render(WidgetRenderer $renderer, Widget $widget, Area $area, Buffer $buffer): void
     {
         if (!$widget instanceof BarChartWidget) {
@@ -70,7 +72,7 @@ final class BarChartRenderer implements WidgetRenderer
             }
 
             $ticks[] = array_map(function (Bar $bar) use ($barMaxLength, $max) {
-                    return intval($bar->value * $barMaxLength * 8 / $max);
+                    return intval($bar->value * $barMaxLength * self::TICKS_PER_LINE / $max);
             }, array_slice($bars, 0, $nBars));
         }
         return $ticks;
@@ -154,7 +156,7 @@ final class BarChartRenderer implements WidgetRenderer
                         $cell->setStyle($barStyle);
                     }
 
-                    $ticks = max(0, $ticks - 8);
+                    $ticks = max(0, $ticks - self::TICKS_PER_LINE);
                 }
                 $barX += $widget->barGap + $widget->barWidth;
             }
@@ -165,7 +167,7 @@ final class BarChartRenderer implements WidgetRenderer
     /**
      * @param array<int,array<int,int>> $groupTicks
      */
-    private function renderLabelsAndVAlues(BarChartWidget $widget, Area $area, Buffer $buffer, LabelInfo $labelInfo, array $groupTicks)
+    private function renderLabelsAndVAlues(BarChartWidget $widget, Area $area, Buffer $buffer, LabelInfo $labelInfo, array $groupTicks): void
     {
         $barX = $area->left();
         $barY = $area->bottom() - $labelInfo->height - 1;
@@ -195,7 +197,9 @@ final class BarChartRenderer implements WidgetRenderer
                     $this->renderBarLabel($bar, $buffer, $widget->barWidth, $barX, $barY + 1, $widget->labelStyle);
                 }
                 $this->renderBarValue($bar, $buffer, $widget->barWidth, $barX, $barY, $widget->valueStyle, $ticks);
+                $barX += $widget->barGap + $widget->barWidth;
             }
+            $barX += $widget->groupGap;
         }
     }
 
@@ -236,7 +240,7 @@ final class BarChartRenderer implements WidgetRenderer
 
         $buffer->putLine(
             Position::at(
-                $x + max(0, $maxWidth - $label->width()) >> 1,
+                $x + (max(0, $maxWidth - $label->width()) >> 1),
                 $y,
             ),
             $label,
@@ -251,7 +255,7 @@ final class BarChartRenderer implements WidgetRenderer
         }
         $valueLabel = $bar->textValue ? $bar->textValue : (string)$bar->value;
         $width = mb_strlen($valueLabel);
-        if ($width < $maxWidth || ($width === $maxWidth && $ticks >= 8)) {
+        if ($width < $maxWidth || ($width === $maxWidth && $ticks >= self::TICKS_PER_LINE)) {
             // why strlen? Ratatui does value_label.len() not sure why.
             $buffer->putString(
                 Position::at(
