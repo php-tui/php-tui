@@ -68,13 +68,17 @@ final class BarChartRenderer implements WidgetRenderer
             }
 
             $bars = $group->bars;
+            if ($nBars <= 0) {
+                return $ticks;
+            }
 
             $ticks[] = array_map(function (Bar $bar) use ($barMaxLength, $max) {
                 if ($max === 0) {
                     return 0;
                 }
+
                 return (int) ($bar->value * $barMaxLength * self::TICKS_PER_LINE / $max);
-            }, $bars);
+            }, array_slice($bars, 0, $nBars));
         }
 
         return $ticks;
@@ -144,10 +148,10 @@ final class BarChartRenderer implements WidgetRenderer
     private function renderVerticalBars(BarChartWidget $widget, Buffer $buffer, Area $area, array $groupTicks): void
     {
         $barX = $area->left();
-        foreach ($widget->data as $i => $group) {
-            $ticksList = $groupTicks[$i];
-            foreach ($group->bars as $ii => $bar) {
-                $ticks = $ticksList[$ii];
+        foreach ($groupTicks as $i => $ticksList) {
+            $group = $widget->data[$i];
+            foreach ($ticksList as $ii => $ticks) {
+                $bar = $group->bars[$ii];
                 for ($j = $area->height - 1; $j >= 0; $j--) {
                     $symbol = BarSet::fromIndex($ticks);
 
@@ -178,11 +182,11 @@ final class BarChartRenderer implements WidgetRenderer
         $barX = $area->left();
         $barY = $area->bottom() - $labelInfo->height - 1;
 
-        foreach ($widget->data as $i => $group) {
+        foreach ($groupTicks as $i => $tickList) {
+            $group = $widget->data[$i];
             if ([] === $group->bars) {
                 continue;
             }
-            $tickList = $groupTicks[$i];
             $bars = $group->bars;
 
             // print group labels under the bars or the previous labels
@@ -197,8 +201,8 @@ final class BarChartRenderer implements WidgetRenderer
                 $this->renderGroupLabel($group, $buffer, $groupArea, $widget->labelStyle);
             }
 
-            foreach ($group->bars as $ii => $bar) {
-                $ticks = $tickList[$ii];
+            foreach ($tickList as $ii => $ticks) {
+                $bar = $group->bars[$ii];
                 if ($labelInfo->barLabelVisible) {
                     $this->renderBarLabel($bar, $buffer, $widget->barWidth, $barX, $barY + 1, $widget->labelStyle);
                 }
@@ -286,10 +290,10 @@ final class BarChartRenderer implements WidgetRenderer
         $groupTicks = $this->groupTicks($widget, $barsArea->height, $barsArea->width);
         $barY = $barsArea->top();
 
-        foreach ($widget->data as $i => $group) {
-            $tickList = $groupTicks[$i];
-            foreach ($group->bars as $ii => $bar) {
-                $ticks = $tickList[$ii];
+        foreach ($groupTicks as $i => $tickList) {
+            $group = $widget->data[$i];
+            foreach ($tickList as $ii => $ticks) {
+                $bar = $group->bars[$ii];
                 $barLength = (int) ($ticks / 8);
                 $barStyle = $widget->barStyle->patch($bar->style);
 
