@@ -157,6 +157,9 @@ final class BarChartRenderer implements WidgetRenderer
                     $symbol = BarSet::fromIndex($ticks);
 
                     $barStyle = $widget->barStyle->patch($bar->style);
+                    $barStyle->fg = $barStyle->fg ?
+                        $barStyle->fg->at(1 - ($j / $area->height)) :
+                        null;
 
                     for ($x = 0; $x < $widget->barWidth; $x++) {
                         if ($barX + $x >= $area->right()) {
@@ -164,6 +167,7 @@ final class BarChartRenderer implements WidgetRenderer
                         }
                         $cell = $buffer->get(Position::at($barX + $x, $area->top() + $j));
                         $cell->setChar($symbol);
+
                         $cell->setStyle($barStyle);
                     }
 
@@ -305,16 +309,21 @@ final class BarChartRenderer implements WidgetRenderer
                     }
 
                     for ($x = 0; $x < $barsArea->width; $x++) {
+
                         $symbol = $x < $barLength ? BarSet::FULL : BarSet::EMPTY;
                         if ($barsArea->left() + $x >= $buffer->area()->right()) {
                             break;
                         }
+                        $gradStyle = clone $barStyle;
+                        $gradStyle->fg = $barStyle->fg ?
+                            $barStyle->fg->at($x / $barsArea->width) :
+                            null;
                         $buffer->get(
                             Position::at(
                                 $barsArea->left() + $x,
                                 $barY,
                             )
-                        )->setChar($symbol)->setStyle($barStyle);
+                        )->setChar($symbol)->setStyle($gradStyle);
                     }
                 }
                 $barValueArea = Area::fromScalars(

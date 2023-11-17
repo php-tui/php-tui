@@ -146,7 +146,7 @@ class RgbColor implements Color, Stringable
         return sprintf('#%02x%02x%02x', $this->r, $this->g, $this->b);
     }
 
-    public function at(int $fraction): RgbColor
+    public function at(float $fraction): RgbColor
     {
         return $this;
     }

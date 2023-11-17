@@ -28,7 +28,7 @@ final class LinearGradient implements Color
 
     public function addStop(float $position, RgbColor $color): self
     {
-        if ($position >= 1 || $position < 0) {
+        if ($position > 1 || $position < 0) {
             throw new RuntimeException(sprintf(
                 'Stop must be a float between 0 and 1, got %f',
                 $position
@@ -43,7 +43,7 @@ final class LinearGradient implements Color
 
     public function at(float $target): RgbColor
     {
-        if ($target >= 1 || $target < 0) {
+        if ($target > 1 || $target < 0) {
             throw new RuntimeException(sprintf(
                 'Target position must be a float between 0 and 1, got %f',
                 $target
@@ -64,7 +64,7 @@ final class LinearGradient implements Color
                 break;
             }
             $lastStop = $stop;
-            $lastPosition = $lastPosition;
+            $lastPosition = $position;
         }
 
         if ($nextStop === null || $nextPosition === null) {
@@ -72,23 +72,31 @@ final class LinearGradient implements Color
         }
 
         $diff = abs($lastPosition - $nextPosition);
-        $target = $target * (1 / $diff);
+
+        // calculate WTF this is when your brain is entirely whole
 
         return RgbColor::fromRgb(
-            $this->calculate($lastStop->r, $nextStop->r, $target),
-            $this->calculate($lastStop->g, $nextStop->g, $target),
-            $this->calculate($lastStop->b, $nextStop->b, $target),
+            $this->calculate($lastStop->r, $nextStop->r, $target, $diff),
+            $this->calculate($lastStop->g, $nextStop->g, $target, $diff),
+            $this->calculate($lastStop->b, $nextStop->b, $target, $diff),
         );
     }
 
-    private function calculate(float $last, float $next, float $target): int
+    private function calculate(float $last, float $next, float $ratio, float $diff): int
     {
         if ($last < $next) {
-            return (int) ($last + (abs($next - $last) * $target));
+            $ratio = $ratio * (1 / $diff);
+            return (int) ($last + (abs($next - $last) * $ratio));
         }
 
-        return (int) ($next + (abs($last - $next) * $target));
+        $ratio = ($ratio * $diff);
+        dump($ratio);
 
-        return 0;
+        return (int) ($last + (abs($next - $last) * $ratio));
+    }
+
+    public function __toString(): string
+    {
+        return 'Gradient';
     }
 }
