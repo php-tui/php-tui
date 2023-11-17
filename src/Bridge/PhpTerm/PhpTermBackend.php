@@ -238,5 +238,6 @@ class PhpTermBackend implements Backend
 
     public function moveCursor(Position $position): void
     {
+        $this->terminal->execute(Actions::moveCursor($position->y, $position->x));
     }
 }

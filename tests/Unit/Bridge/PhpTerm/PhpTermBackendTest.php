@@ -27,7 +27,7 @@ class PhpTermBackendTest extends TestCase
         $backend = new PhpTermBackend(Terminal::new($buffer));
         $backend->moveCursor(Position::at(1, 2));
         self::assertEquals([
-            Actions::moveCursor(1, 2)
+            Actions::moveCursor(2, 1)
         ], $buffer->actions());
 
     }
