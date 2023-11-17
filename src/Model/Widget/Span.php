@@ -13,8 +13,11 @@ final class Span implements Stringable, Styleable
 {
     use StyleableTrait;
 
-    public function __construct(public readonly string $content, public Style $style)
-    {
+    public function __construct(
+        public readonly string $content,
+        public Style $style,
+        public bool $retainStyle,
+    ) {
     }
 
     public function __toString(): string
@@ -24,7 +27,7 @@ final class Span implements Stringable, Styleable
 
     public static function fromString(string $string): self
     {
-        return new self($string, Style::default());
+        return new self($string, Style::default(), false);
     }
 
     public function width(): int
@@ -59,8 +62,15 @@ final class Span implements Stringable, Styleable
         return $this;
     }
 
+    public function retainStyle(): self
+    {
+        $this->retainStyle = true;
+
+        return $this;
+    }
+
     public static function styled(string $string, Style $style): self
     {
-        return new self($string, $style);
+        return new self($string, $style, false);
     }
 }

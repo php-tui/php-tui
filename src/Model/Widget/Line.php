@@ -69,6 +69,10 @@ final class Line implements IteratorAggregate, Stringable, Styleable
     public function patchStyle(Style $style): self
     {
         foreach ($this->spans as $span) {
+            if ($span->retainStyle) {
+                continue;
+            }
+
             $span->patchStyle($style);
         }
 
