@@ -13,13 +13,15 @@ class SpanTest extends TestCase
 {
     public function testToStyledGraphemes(): void
     {
-        $baseStyle = Style::default()->fg(AnsiColor::Red);
         $span = Span::styled('Hello', Style::default()->fg(AnsiColor::Blue));
 
+        $baseStyle = Style::default()->fg(AnsiColor::Red);
         $styledGraphemes = $span->toStyledGraphemes($baseStyle);
-        for ($i = 0; $i < count($styledGraphemes); $i++) {
-            $grapheme = $styledGraphemes[$i];
-            self::assertEquals(AnsiColor::Red, $grapheme->style->fg);
+
+        self::assertCount(5, $styledGraphemes);
+
+        foreach ($styledGraphemes as $i => $grapheme) {
+            self::assertEquals(AnsiColor::Blue, $grapheme->style->fg, );
             self::assertEquals($span->content[$i], $grapheme->symbol);
         }
 
