@@ -96,6 +96,11 @@ final class AnsiPainter implements Painter
             $action instanceof Reset => '0m',
             $action instanceof Clear => match ($action->clearType) {
                 ClearType::All => '2J',
+                ClearType::Purge => '3J',
+                ClearType::FromCursorDown => 'J',
+                ClearType::FromCursorUp => '1J',
+                ClearType::CurrentLine => '2K',
+                ClearType::UntilNewLine => 'K',
             },
             $action instanceof SetModifier => $action->enable ?
                 sprintf('%dm', $this->modifierOnIndex($action->modifier)) :

@@ -49,7 +49,7 @@ class PhpTermBackendTest extends TestCase
         $backend = new PhpTermBackend(Terminal::new($buffer));
         $backend->clearRegion(ClearType::AfterCursor);
         self::assertEquals([
-            Actions::clear(PhpTuiClearType::AfterCursor)
+            Actions::clear(PhpTuiClearType::FromCursorDown)
         ], $buffer->actions());
     }
 

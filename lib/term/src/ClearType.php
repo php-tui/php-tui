@@ -7,6 +7,9 @@ namespace PhpTui\Term;
 enum ClearType
 {
     case All;
-    case AfterCursor;
-
+    case FromCursorDown;
+    case Purge;
+    case CurrentLine;
+    case FromCursorUp;
+    case UntilNewLine;
 }

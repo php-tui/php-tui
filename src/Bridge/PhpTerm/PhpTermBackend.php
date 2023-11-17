@@ -109,7 +109,7 @@ class PhpTermBackend implements Backend
     {
         $clearType = match ($type) {
             ClearType::ALL => PhpTuiClearType::All,
-            ClearType::AfterCursor => PhpTuiClearType::AfterCursor,
+            ClearType::AfterCursor => PhpTuiClearType::FromCursorDown,
         };
         $this->terminal->execute(Actions::clear($clearType));
     }
