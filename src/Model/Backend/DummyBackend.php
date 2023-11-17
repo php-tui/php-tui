@@ -8,7 +8,9 @@ use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Backend;
 use PhpTui\Tui\Model\BufferUpdates;
 use PhpTui\Tui\Model\ClearType;
+use PhpTui\Tui\Model\Exception\TodoException;
 use PhpTui\Tui\Model\Position;
+use function PHPUnit\Framework\matches;
 
 final class DummyBackend implements Backend
 {
@@ -71,6 +73,10 @@ final class DummyBackend implements Backend
 
     public function clearRegion(ClearType $type): void
     {
+        match ($type) {
+            ClearType::ALL => $this->fillGrid($this->width, $this->height),
+            ClearType::AfterCursor => throw new TodoException('this'),
+        };
     }
 
     public function cursorPosition(): Position

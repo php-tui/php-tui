@@ -144,7 +144,7 @@ final class Display
      */
     public function insertBefore(Widget $widget): void
     {
-        if ($this->viewport instanceof Inline) {
+        if (!$this->viewport instanceof Inline) {
             return;
         }
 

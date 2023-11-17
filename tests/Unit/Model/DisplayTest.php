@@ -132,6 +132,5 @@ class DisplayTest extends TestCase
                 World
                 EOT
         ));
-        $terminal->draw(ParagraphWidget::fromString('Hello'));
     }
 }
