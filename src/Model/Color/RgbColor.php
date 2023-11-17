@@ -6,8 +6,9 @@ namespace PhpTui\Tui\Model\Color;
 
 use OutOfBoundsException;
 use PhpTui\Tui\Model\Color;
+use Stringable;
 
-class RgbColor implements Color
+class RgbColor implements Color, Stringable
 {
     private function __construct(public int $r, public int $g, public int $b)
     {
@@ -153,5 +154,10 @@ class RgbColor implements Color
             $max,
             $value
         ));
+    }
+
+    public function __toString(): string
+    {
+        return $this->debugName();
     }
 }
