@@ -138,9 +138,34 @@ final class Display
     }
 
     /**
-     * Render a widget _BEFORE_ the current viewport.
+     * Render a widget before the current inline viewport. This has no effect when the
+     * viewport is fullscreen.
      *
-     * Note this is only implemented for the inline viewport.
+     * This function scrolls down the current viewport by the given height. The
+     * newly freed space is then made available to the draw call.
+     *
+     * Before:
+     *
+     * ```
+     * +-------------------+
+     * |                   |
+     * |      viewport     |
+     * |                   |
+     * +-------------------+
+     * ```
+    
+     * After:
+     *
+     * ```
+     * +-------------------+
+     * |      buffer       |
+     * +-------------------+
+     * +-------------------+
+     * |                   |
+     * |      viewport     |
+     * |                   |
+     * +-------------------+
+     * ```
      */
     public function insertBefore(int $height, Widget $widget): void
     {
