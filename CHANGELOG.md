@@ -8,10 +8,13 @@ Features:
 - Gauge widget #118
 - Image widget #113
 - BarChart widget #126
+- Allow content to be inserted before the Inline viewport #134
 
 Bug fixes:
 
 - Make mouse event properties public
+- Fixed margin in image widget rendering #132
+- Fix incorrect style patching for Spans #131 @KennedyTedesco
 
 Improvements
 
