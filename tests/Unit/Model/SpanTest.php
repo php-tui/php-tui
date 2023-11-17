@@ -21,7 +21,7 @@ class SpanTest extends TestCase
         self::assertCount(5, $styledGraphemes);
 
         foreach ($styledGraphemes as $i => $grapheme) {
-            self::assertEquals(AnsiColor::Blue, $grapheme->style->fg, );
+            self::assertEquals(AnsiColor::Blue, $grapheme->style->fg);
             self::assertEquals($span->content[$i], $grapheme->symbol);
         }
 
