@@ -31,9 +31,6 @@ final class Fixed implements Viewport
         return $this->area;
     }
 
-    /**
-     * TODO: Test
-     */
     public function clear(Backend $backend, Area $area): void
     {
         for ($row = $area->top(); $row > $area->bottom(); $row--) {
