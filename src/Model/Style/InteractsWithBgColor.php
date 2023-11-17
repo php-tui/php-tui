@@ -5,10 +5,16 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Model\Style;
 
 use PhpTui\Tui\Model\AnsiColor;
+use PhpTui\Tui\Model\Color;
 use PhpTui\Tui\Model\Style;
 
 trait InteractsWithBgColor
 {
+    public function bg(Color $color): self
+    {
+        return $this->patchStyle(Style::default()->bg($color));
+    }
+
     public function onBlack(): self
     {
         return $this->patchStyle(Style::default()->bg(AnsiColor::Black));
