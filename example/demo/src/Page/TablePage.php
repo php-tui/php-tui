@@ -85,11 +85,11 @@ final class TablePage implements Component
                     ->rows(...array_map(function (array $event) {
                         return TableRow::fromCells(
                             TableCell::fromLine(Line::fromSpan(
-                                Span::styled($event[1], match ($event[1]) {
-                                    'INFO' => Style::default()->fg(AnsiColor::Green),
-                                    'WARNING' => Style::default()->fg(AnsiColor::Yellow),
-                                    'CRITICAL' => Style::default()->fg(AnsiColor::Red),
-                                    default => Style::default()->fg(AnsiColor::Cyan),
+                                Span::fromString($event[1])->fg(match ($event[1]) {
+                                    'INFO' => AnsiColor::Green,
+                                    'WARNING' => AnsiColor::Yellow,
+                                    'CRITICAL' => AnsiColor::Red,
+                                    default => AnsiColor::Cyan,
                                 }),
                             )),
                             TableCell::fromLine(Line::fromString($event[0])),
