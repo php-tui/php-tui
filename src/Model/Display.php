@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Model;
 
-use PhpTui\Tui\Extension\Core\Widget\ParagraphWidget;
 use PhpTui\Tui\Model\Viewport\Fullscreen;
 use PhpTui\Tui\Model\Viewport\Inline;
 use PhpTui\Tui\Model\WidgetRenderer\NullWidgetRenderer;
@@ -98,45 +97,6 @@ final class Display
         return $this->viewportArea;
     }
 
-    private function autoresize(): void
-    {
-        if (!$this->viewport instanceof Fullscreen && !$this->viewport instanceof Inline) {
-            return;
-        }
-
-        $size = $this->backend->size();
-        if ($size == $this->lastKnownSize) {
-            return;
-        }
-
-        $this->resize($size);
-    }
-
-    private function resize(Area $size): void
-    {
-        $offsetInPreviousViewport = max(0, $this->lastKnownCursorPosition->y - $this->viewportArea->top());
-
-        $size = $this->viewport->size($this->backend);
-        $nextArea = $this->viewport->area($this->backend, $offsetInPreviousViewport);
-
-        $this->setViewportArea($nextArea);
-        $this->clear();
-        $this->lastKnownSize = $size;
-    }
-
-    private function setViewportArea(Area $area): void
-    {
-        $this->buffers[$this->current] = Buffer::empty($area);
-        $this->buffers[1 - $this->current] = Buffer::empty($area);
-        $this->viewportArea = $area;
-    }
-
-    private function swapBuffers(): void
-    {
-        $this->buffers[1 - $this->current] = Buffer::empty($this->viewportArea);
-        $this->current = 1 - $this->current;
-    }
-
     /**
      * Render a widget before the current inline viewport. This has no effect when the
      * viewport is fullscreen.
@@ -153,7 +113,7 @@ final class Display
      * |                   |
      * +-------------------+
      * ```
-    
+
      * After:
      *
      * ```
@@ -201,5 +161,44 @@ final class Display
             $area->width,
             $this->viewportArea->height
         ));
+    }
+
+    private function autoresize(): void
+    {
+        if (!$this->viewport instanceof Fullscreen && !$this->viewport instanceof Inline) {
+            return;
+        }
+
+        $size = $this->backend->size();
+        if ($size == $this->lastKnownSize) {
+            return;
+        }
+
+        $this->resize($size);
+    }
+
+    private function resize(Area $size): void
+    {
+        $offsetInPreviousViewport = max(0, $this->lastKnownCursorPosition->y - $this->viewportArea->top());
+
+        $size = $this->viewport->size($this->backend);
+        $nextArea = $this->viewport->area($this->backend, $offsetInPreviousViewport);
+
+        $this->setViewportArea($nextArea);
+        $this->clear();
+        $this->lastKnownSize = $size;
+    }
+
+    private function setViewportArea(Area $area): void
+    {
+        $this->buffers[$this->current] = Buffer::empty($area);
+        $this->buffers[1 - $this->current] = Buffer::empty($area);
+        $this->viewportArea = $area;
+    }
+
+    private function swapBuffers(): void
+    {
+        $this->buffers[1 - $this->current] = Buffer::empty($this->viewportArea);
+        $this->current = 1 - $this->current;
     }
 }

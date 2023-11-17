@@ -20,7 +20,8 @@ final class Position implements Stringable
         if ($x < 0 || $y < 0) {
             throw new RuntimeException(sprintf(
                 'Neither X nor Y values can be less than zero, got [%d, %d]',
-                $x, $y
+                $x,
+                $y
             ));
         }
     }
@@ -100,6 +101,7 @@ final class Position implements Stringable
                 var_export($new, true)
             ));
         }
+
         return new self($new[0], $new[1]);
     }
 }

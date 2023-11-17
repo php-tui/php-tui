@@ -153,6 +153,11 @@ class PhpTermBackend implements Backend
         $this->terminal->flush();
     }
 
+    public function moveCursor(Position $position): void
+    {
+        $this->terminal->execute(Actions::moveCursor($position->y, $position->x));
+    }
+
     private function resolveColor(Color $color): Colors
     {
         if ($color instanceof AnsiColor) {
@@ -236,10 +241,5 @@ class PhpTermBackend implements Backend
         }
 
         throw new RuntimeException(sprintf('Do not know how to set color of type "%s"', $color::class));
-    }
-
-    public function moveCursor(Position $position): void
-    {
-        $this->terminal->execute(Actions::moveCursor($position->y, $position->x));
     }
 }

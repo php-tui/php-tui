@@ -8,9 +8,7 @@ use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Backend;
 use PhpTui\Tui\Model\BufferUpdates;
 use PhpTui\Tui\Model\ClearType;
-use PhpTui\Tui\Model\Exception\TodoException;
 use PhpTui\Tui\Model\Position;
-use function PHPUnit\Framework\matches;
 
 final class DummyBackend implements Backend
 {
@@ -89,6 +87,11 @@ final class DummyBackend implements Backend
         $this->cursorPosition = $this->cursorPosition->change(fn (int $x, int $y) => [0, $y + $linesAfterCursor]);
     }
 
+    public function moveCursor(Position $position): void
+    {
+        $this->cursorPosition = $position;
+    }
+
     /**
      * @return array<int,array<int,string>>
      */
@@ -103,11 +106,6 @@ final class DummyBackend implements Backend
         }
 
         return $this->grid;
-    }
-
-    public function moveCursor(Position $position): void
-    {
-        $this->cursorPosition = $position;
     }
 
     private function clearLine(int $line): void

@@ -133,18 +133,19 @@ class DisplayTest extends TestCase
                 EOT
         ));
         $terminal->draw(ParagraphWidget::fromString('Hello World'));
-        self::assertEquals(<<<'EOT'
-            Before         
-            World          
-            Hello World    
-                           
-                           
-                           
-                           
-                           
-                           
-                           
-            EOT, 
+        self::assertEquals(
+            <<<'EOT'
+                Before         
+                World          
+                Hello World    
+                               
+                               
+                               
+                               
+                               
+                               
+                               
+                EOT,
             $backend->toString()
         );
 
