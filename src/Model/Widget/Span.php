@@ -30,7 +30,7 @@ final class Span implements Stringable
 
     public function patchStyle(Style $style): void
     {
-        $this->style->patch($style);
+        $this->style = $this->style->patch($style);
     }
 
     /**

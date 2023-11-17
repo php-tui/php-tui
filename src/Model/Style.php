@@ -63,16 +63,21 @@ final class Style implements Stringable
 
     public function patch(Style $other): self
     {
-        $this->fg = $other->fg ?? $this->fg;
-        $this->bg = $other->bg ?? $this->bg;
-        $this->underline = $other->underline ?? $this->underline;
+        $addModifiers = $this->addModifiers;
+        $addModifiers &= ~$other->subModifiers;
+        $addModifiers |= $other->addModifiers;
 
-        $this->addModifiers &= ~$other->subModifiers;
-        $this->addModifiers |= $other->addModifiers;
-        $this->subModifiers &= ~$other->addModifiers;
-        $this->subModifiers |= $other->subModifiers;
+        $subModifiers = $this->subModifiers;
+        $subModifiers &= ~$other->addModifiers;
+        $subModifiers |= $other->subModifiers;
 
-        return $this;
+        return new self(
+            fg: $other->fg ?? $this->fg,
+            bg: $other->bg ?? $this->bg,
+            underline: $other->underline ?? $this->underline,
+            addModifiers:$addModifiers,
+            subModifiers: $subModifiers,
+        );
     }
 
     /**
