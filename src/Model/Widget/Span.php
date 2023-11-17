@@ -5,18 +5,10 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Model\Widget;
 
 use PhpTui\Tui\Model\Style;
-use PhpTui\Tui\Model\Style\InteractsWithBgColor;
-use PhpTui\Tui\Model\Style\InteractsWithFgColor;
-use PhpTui\Tui\Model\Style\InteractsWithModifier;
-use PhpTui\Tui\Model\Styleable;
 use Stringable;
 
-final class Span implements Stringable, Styleable
+final class Span implements Stringable
 {
-    use InteractsWithFgColor;
-    use InteractsWithBgColor;
-    use InteractsWithModifier;
-
     public function __construct(public readonly string $content, public Style $style)
     {
     }
@@ -36,11 +28,9 @@ final class Span implements Stringable, Styleable
         return mb_strlen($this->content);
     }
 
-    public function patchStyle(Style $style): self
+    public function patchStyle(Style $style): void
     {
-        $this->style->patch($style);
-
-        return $this;
+        $this->style = $this->style->patch($style);
     }
 
     /**

@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Tests\Unit\Bridge\PhpTerm;
 
 use PhpTui\Term\Action;
+use PhpTui\Term\Actions;
+use PhpTui\Term\ClearType as PhpTuiClearType;
 use PhpTui\Term\Painter\BufferPainter;
 use PhpTui\Term\Terminal;
 use PhpTui\Tui\Bridge\PhpTerm\PhpTermBackend;
@@ -12,6 +14,7 @@ use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\BufferUpdate;
 use PhpTui\Tui\Model\BufferUpdates;
 use PhpTui\Tui\Model\Cell;
+use PhpTui\Tui\Model\ClearType;
 use PhpTui\Tui\Model\Modifier;
 use PhpTui\Tui\Model\Position;
 use PhpTui\Tui\Model\RgbColor;
@@ -20,6 +23,36 @@ use PHPUnit\Framework\TestCase;
 
 class PhpTermBackendTest extends TestCase
 {
+    public function testMoveCursor(): void
+    {
+        $buffer = BufferPainter::new();
+        $backend = new PhpTermBackend(Terminal::new($buffer));
+        $backend->moveCursor(Position::at(1, 2));
+        self::assertEquals([
+            Actions::moveCursor(2, 1)
+        ], $buffer->actions());
+    }
+
+    public function testClearAll(): void
+    {
+        $buffer = BufferPainter::new();
+        $backend = new PhpTermBackend(Terminal::new($buffer));
+        $backend->clearRegion(ClearType::ALL);
+        self::assertEquals([
+            Actions::clear(PhpTuiClearType::All)
+        ], $buffer->actions());
+    }
+
+    public function testClearAfterCursor(): void
+    {
+        $buffer = BufferPainter::new();
+        $backend = new PhpTermBackend(Terminal::new($buffer));
+        $backend->clearRegion(ClearType::AfterCursor);
+        self::assertEquals([
+            Actions::clear(PhpTuiClearType::FromCursorDown)
+        ], $buffer->actions());
+    }
+
     public function testDiagnonalLine(): void
     {
         $buffer = BufferPainter::new();

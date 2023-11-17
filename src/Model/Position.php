@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Model;
 
+use Closure;
 use OutOfBoundsException;
+use RuntimeException;
 use Stringable;
 
 /**
@@ -15,6 +17,13 @@ final class Position implements Stringable
 {
     public function __construct(public int $x, public int $y)
     {
+        if ($x < 0 || $y < 0) {
+            throw new RuntimeException(sprintf(
+                'Neither X nor Y values can be less than zero, got [%d, %d]',
+                $x,
+                $y
+            ));
+        }
     }
 
     public function __toString(): string
@@ -75,5 +84,24 @@ final class Position implements Stringable
     public function withY(int $y): self
     {
         return new self($this->x, $y);
+    }
+
+    /**
+     * @param Closure(int,int): array{int,int} $closure
+     */
+    public function change(Closure $closure): self
+    {
+        $new = $closure($this->x, $this->y);
+        /**
+         * @phpstan-ignore-next-line Shouldn't happen but can.
+         */
+        if (!is_array($new) || count($new) !== 2) {
+            throw new RuntimeException(sprintf(
+                'Invalid return value from Position#change closure, expected [int,int] got %s',
+                var_export($new, true)
+            ));
+        }
+
+        return new self($new[0], $new[1]);
     }
 }

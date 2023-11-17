@@ -39,4 +39,16 @@ class PositionTest extends TestCase
         $this->expectExceptionMessage('outside of area');
         Position::fromIndex(100, Area::fromScalars(0, 0, 10, 10));
     }
+
+    public function testThrowsExceptionIfNegativeX(): void
+    {
+        $this->expectExceptionMessage('Neither X nor Y values can be less than zero, got [-1, 2]');
+        Position::at(-1, 2);
+    }
+
+    public function testThrowsExceptionIfNegativeY(): void
+    {
+        $this->expectExceptionMessage('Neither X nor Y values can be less than zero, got [1, -2]');
+        Position::at(1, -2);
+    }
 }

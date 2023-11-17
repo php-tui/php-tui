@@ -6,6 +6,7 @@ namespace PhpTui\Tui\Extension\ImageMagick\Widget;
 
 use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Model\Widget;
+use RuntimeException;
 
 /**
  * Render an image on a canvas matching the dimensions of the image.
@@ -22,5 +23,17 @@ class ImageWidget implements Widget
          */
         public ?Marker $marker = null
     ) {
+    }
+
+    public static function fromPath(string $imagePath): self
+    {
+        if (!file_exists($imagePath)) {
+            throw new RuntimeException(sprintf(
+                'Imagefile "%s" does not exist',
+                $imagePath
+            ));
+        }
+
+        return new self($imagePath);
     }
 }
