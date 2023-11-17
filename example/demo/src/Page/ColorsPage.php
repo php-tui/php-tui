@@ -11,7 +11,6 @@ use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Buffer;
 use PhpTui\Tui\Model\Position;
 use PhpTui\Tui\Model\RgbColor;
-use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\Widget\Span;
 
@@ -41,7 +40,7 @@ class ColorsPage implements Component
             $name = $color->name;
             $buffer->putSpan(
                 Position::at($x, $y),
-                Span::styled($name, Style::default()->bg($color)),
+                Span::fromString($name)->bg($color),
                 strlen($name)
             );
             $x += strlen($name);
@@ -61,7 +60,7 @@ class ColorsPage implements Component
             $name = sprintf(' %s ', $color->toHex());
             $buffer->putSpan(
                 Position::at($x, $y),
-                Span::styled($name, Style::default()->bg($color)),
+                Span::fromString($name)->bg($color),
                 strlen($name)
             );
             $x += strlen($name);
