@@ -107,9 +107,11 @@ class PhpTermBackend implements Backend
 
     public function clearRegion(ClearType $type): void
     {
-        match ($type) {
-            ClearType::ALL => $this->terminal->execute(Actions::clear(PhpTuiClearType::All))
+        $clearType = match ($type) {
+            ClearType::ALL => PhpTuiClearType::All,
+            ClearType::AfterCursor => PhpTuiClearType::AfterCursor,
         };
+        $this->terminal->execute(Actions::clear($clearType));
     }
 
     public function cursorPosition(): Position
