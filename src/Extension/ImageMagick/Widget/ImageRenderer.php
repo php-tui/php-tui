@@ -30,7 +30,7 @@ class ImageRenderer implements WidgetRenderer
 
         $renderer->render($renderer, CanvasWidget::fromIntBounds(
             0,
-            $geo['width'],
+            $geo['width'] - 1,
             0,
             $geo['height'],
         )->marker($widget->marker ?? Marker::HalfBlock)->draw(ImageShape::fromPath(
