@@ -75,7 +75,7 @@ final class DummyBackend implements Backend
     {
         match ($type) {
             ClearType::ALL => $this->fillGrid($this->width, $this->height),
-            ClearType::AfterCursor => throw new TodoException('this'),
+            ClearType::AfterCursor => $this->clearLine($this->cursorPosition->y),
         };
     }
 
@@ -107,5 +107,15 @@ final class DummyBackend implements Backend
     public function moveCursor(Position $position): void
     {
         $this->cursorPosition = $position;
+    }
+
+    private function clearLine(int $line): void
+    {
+        if (!isset($this->grid[$line])) {
+            return;
+        }
+        foreach ($this->grid[$line] as $i => $cell) {
+            $this->grid[$line][$i] = ' ';
+        }
     }
 }
