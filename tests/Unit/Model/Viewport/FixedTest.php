@@ -1,14 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Tests\Unit\Model\Viewport;
 
-use PHPUnit\Framework\TestCase;
 use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Backend\DummyBackend;
 use PhpTui\Tui\Model\Buffer;
 use PhpTui\Tui\Model\Cell;
 use PhpTui\Tui\Model\ClearType;
 use PhpTui\Tui\Model\Position;
+use PHPUnit\Framework\TestCase;
 
 class FixedTest extends TestCase
 {
