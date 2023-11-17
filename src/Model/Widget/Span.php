@@ -30,7 +30,7 @@ final class Span implements Stringable
 
     public function patchStyle(Style $style): void
     {
-        $this->style->patch($style);
+        $this->style = $this->style->patch($style);
     }
 
     /**
@@ -41,7 +41,7 @@ final class Span implements Stringable
         return array_map(function (string $grapheme) use ($baseStyle) {
             return new StyledGrapheme(
                 symbol: $grapheme,
-                style: $this->style->patch($baseStyle),
+                style: $baseStyle->patch($this->style),
             );
         }, mb_str_split($this->content));
     }
