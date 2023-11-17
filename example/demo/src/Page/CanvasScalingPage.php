@@ -18,7 +18,7 @@ use PhpTui\Tui\Extension\Core\Widget\BlockWidget;
 use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
 use PhpTui\Tui\Extension\Core\Widget\GridWidget;
 use PhpTui\Tui\Extension\ImageMagick\Shape\ImageShape;
-use PhpTui\Tui\Model\AnsiColor;
+use PhpTui\Tui\Model\Color\AnsiColor;
 use PhpTui\Tui\Model\Canvas\Painter;
 use PhpTui\Tui\Model\Canvas\Shape;
 use PhpTui\Tui\Model\Constraint;

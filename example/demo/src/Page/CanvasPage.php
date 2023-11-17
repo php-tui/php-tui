@@ -11,7 +11,7 @@ use PhpTui\Tui\Extension\Core\Shape\MapResolution;
 use PhpTui\Tui\Extension\Core\Shape\MapShape;
 use PhpTui\Tui\Extension\Core\Widget\BlockWidget;
 use PhpTui\Tui\Extension\Core\Widget\CanvasWidget as PhpTuiCanvas;
-use PhpTui\Tui\Model\AnsiColor;
+use PhpTui\Tui\Model\Color\AnsiColor;
 use PhpTui\Tui\Model\Canvas\CanvasContext;
 use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Model\Modifier;
