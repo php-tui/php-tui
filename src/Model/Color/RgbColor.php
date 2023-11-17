@@ -17,6 +17,11 @@ class RgbColor implements Color, Stringable
         self::assertRange('blue', 0, 255, $r);
     }
 
+    public function __toString(): string
+    {
+        return $this->debugName();
+    }
+
     public static function fromRgb(int $r, int $g, int $b): self
     {
         return new self($r, $g, $b);
@@ -141,6 +146,11 @@ class RgbColor implements Color, Stringable
         return sprintf('#%02x%02x%02x', $this->r, $this->g, $this->b);
     }
 
+    public function at(int $fraction): RgbColor
+    {
+        return $this;
+    }
+
     private static function assertRange(string $context, int $min, int $max, int $value): void
     {
         if ($value >= $min && $value <= $max) {
@@ -154,10 +164,5 @@ class RgbColor implements Color, Stringable
             $max,
             $value
         ));
-    }
-
-    public function __toString(): string
-    {
-        return $this->debugName();
     }
 }

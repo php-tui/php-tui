@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Model\Canvas\Grid;
 
-use PhpTui\Tui\Model\Color\AnsiColor;
 use PhpTui\Tui\Model\Canvas\CanvasGrid;
 use PhpTui\Tui\Model\Canvas\FgBgColor;
 use PhpTui\Tui\Model\Canvas\Layer;
 use PhpTui\Tui\Model\Canvas\Resolution;
 use PhpTui\Tui\Model\Color;
+use PhpTui\Tui\Model\Color\AnsiColor;
 use PhpTui\Tui\Model\Position;
 use PhpTui\Tui\Model\Widget\BlockSet;
 

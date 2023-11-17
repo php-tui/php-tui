@@ -30,4 +30,9 @@ enum AnsiColor: int implements Color
     {
         return $this->name;
     }
+
+    public function at(float $fraction): Color
+    {
+        return $this;
+    }
 }

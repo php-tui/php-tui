@@ -17,9 +17,8 @@ class LinearGradientTest extends TestCase
      *   0  0.25  0.5    0.75   1
      *   +----------------------+
      *   | 2 4 6 8 | 10.0
-     *        | 
+     *        |
      *     position
-     *
      */
     public function testLinearGradientUp(): void
     {
@@ -53,4 +52,3 @@ class LinearGradientTest extends TestCase
         LinearGradient::from(RgbColor::fromRgb(0, 0, 0))->addStop(-1, RgbColor::fromRgb(10, 0, 0));
     }
 }
-

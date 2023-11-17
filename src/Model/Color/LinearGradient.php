@@ -14,7 +14,7 @@ final class LinearGradient implements Color
      */
     private function __construct(private array $stops)
     {
-    } 
+    }
 
     public static function from(RgbColor $color): self
     {
@@ -60,6 +60,7 @@ final class LinearGradient implements Color
             if ($position > $target) {
                 $nextStop = $stop;
                 $nextPosition = $position;
+
                 break;
             }
             $lastStop = $stop;
@@ -83,10 +84,11 @@ final class LinearGradient implements Color
     private function calculate(float $last, float $next, float $target): int
     {
         if ($last < $next) {
-            return intval($last + (abs($next - $last) * $target));
+            return (int) ($last + (abs($next - $last) * $target));
         }
 
-        return intval($next + (abs($last - $next) * $target));
+        return (int) ($next + (abs($last - $next) * $target));
+
         return 0;
     }
 }
