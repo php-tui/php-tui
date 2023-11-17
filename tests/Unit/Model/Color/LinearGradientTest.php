@@ -11,13 +11,33 @@ use RuntimeException;
 
 class LinearGradientTest extends TestCase
 {
-    public function testLinearGradient(): void
+    /**
+     * Get the gradient at 0.25 where R at 0 is 0 and at 0.5 it is 10
+     *
+     *   0  0.25  0.5    0.75   1
+     *   +----------------------+
+     *   | 2 4 6 8 | 10.0
+     *        | 
+     *     position
+     *
+     */
+    public function testLinearGradientUp(): void
     {
         $color = LinearGradient::from(RgbColor::fromRgb(0, 0, 0));
         $color = $color->addStop(0.5, RgbColor::fromRgb(10, 0, 0));
         self::assertEquals('RGB(10, 0, 0)', $color->at(0.5)->__toString());
         self::assertEquals('RGB(5, 0, 0)', $color->at(0.25)->__toString());
-        self::assertEquals('RGB(1, 0, 0)', $color->at(0.2)->__toString());
+        self::assertEquals('RGB(2, 0, 0)', $color->at(0.1)->__toString());
+        self::assertEquals('RGB(0, 0, 0)', $color->at(0.0)->__toString());
+        self::assertEquals('RGB(10, 0, 0)', $color->at(0.75)->__toString());
+    }
+
+    public function testLinearGradientDown(): void
+    {
+        $color = LinearGradient::from(RgbColor::fromRgb(50, 10, 100));
+        $color = $color->addStop(0.5, RgbColor::fromRgb(0, 90, 110));
+        self::assertEquals('RGB(25, 50, 105)', $color->at(0.25)->__toString());
+        self::assertEquals('RGB(0, 90, 110)', $color->at(0.5)->__toString());
     }
 
     public function testAddStopAbove1(): void

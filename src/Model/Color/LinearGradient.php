@@ -55,23 +55,38 @@ final class LinearGradient implements Color
         usort($stops, fn (array $s1, array $s2) => $s1[0] <=> $s2[0]);
         [$lastPosition, $lastStop] = array_shift($stops);
         $nextStop = null;
+        $nextPosition = null;
         foreach ($stops as [$position, $stop]) {
             if ($position > $target) {
                 $nextStop = $stop;
+                $nextPosition = $position;
                 break;
             }
             $lastStop = $stop;
             $lastPosition = $lastPosition;
         }
 
-        if ($nextStop === null) {
+        if ($nextStop === null || $nextPosition === null) {
             return $lastStop;
         }
 
+        $diff = abs($lastPosition - $nextPosition);
+        $target = $target * (1 / $diff);
+
         return RgbColor::fromRgb(
-            intval($lastStop->r + (abs($nextStop->r - $lastStop->r) * $target)),
-            intval($lastStop->g + (abs($nextStop->g - $lastStop->g) * $target)),
-            intval($lastStop->b + (abs($nextStop->b - $lastStop->b) * $target)),
+            $this->calculate($lastStop->r, $nextStop->r, $target),
+            $this->calculate($lastStop->g, $nextStop->g, $target),
+            $this->calculate($lastStop->b, $nextStop->b, $target),
         );
+    }
+
+    private function calculate(float $last, float $next, float $target): int
+    {
+        if ($last < $next) {
+            return intval($last + (abs($next - $last) * $target));
+        }
+
+        return intval($next + (abs($last - $next) * $target));
+        return 0;
     }
 }
