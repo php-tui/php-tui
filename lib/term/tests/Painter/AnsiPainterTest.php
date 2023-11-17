@@ -38,6 +38,11 @@ class AnsiPainterTest extends TestCase
         $this->assertAnsiCode('8m', Actions::hidden(true));
         $this->assertAnsiCode('9m', Actions::strike(true));
         $this->assertAnsiCode('2J', Actions::clear(ClearType::All));
+        $this->assertAnsiCode('3J', Actions::clear(ClearType::Purge));
+        $this->assertAnsiCode('J', Actions::clear(ClearType::FromCursorDown));
+        $this->assertAnsiCode('1J', Actions::clear(ClearType::FromCursorUp));
+        $this->assertAnsiCode('2K', Actions::clear(ClearType::CurrentLine));
+        $this->assertAnsiCode('K', Actions::clear(ClearType::UntilNewLine));
         $this->assertRawSeq("\x1B[?1000h\x1B[?1002h\x1B[?1003h\x1B[?1015h\x1B[?1006h", Actions::enableMouseCapture());
         $this->assertRawSeq("\x1B[?1006h\x1B[?1015h\x1B[?1003h\x1B[?1002h\x1B[?1000h", Actions::disableMouseCapture());
     }

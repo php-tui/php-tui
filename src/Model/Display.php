@@ -68,9 +68,9 @@ final class Display
 
     public function clear(): void
     {
+        $this->viewport->clear($this->backend, $this->viewportArea);
         // Reset the back buffer to make sure the next update will redraw everything.
         $this->buffers[1 - $this->current] = Buffer::empty($this->viewportArea);
-        $this->backend->clearRegion(ClearType::ALL);
     }
 
     /**
@@ -95,6 +95,72 @@ final class Display
     public function viewportArea(): Area
     {
         return $this->viewportArea;
+    }
+
+    /**
+     * Render a widget before the current inline viewport. This has no effect when the
+     * viewport is fullscreen.
+     *
+     * This function scrolls down the current viewport by the given height. The
+     * newly freed space is then made available to the draw call.
+     *
+     * Before:
+     *
+     * ```
+     * +-------------------+
+     * |                   |
+     * |      viewport     |
+     * |                   |
+     * +-------------------+
+     * ```
+
+     * After:
+     *
+     * ```
+     * +-------------------+
+     * |      buffer       |
+     * +-------------------+
+     * +-------------------+
+     * |                   |
+     * |      viewport     |
+     * |                   |
+     * +-------------------+
+     * ```
+     */
+    public function insertBefore(int $height, Widget $widget): void
+    {
+        if (!$this->viewport instanceof Inline) {
+            return;
+        }
+
+        $this->clear();
+        $height = min($height, $this->lastKnownSize->height);
+        $this->backend->appendLines($height);
+        $missingLines = max(0, $height, $this->lastKnownSize->bottom() - $this->viewportArea->top());
+        $area = Area::fromScalars(
+            $this->viewportArea->left(),
+            max(0, $this->viewportArea->top() - $missingLines),
+            $this->viewportArea->width,
+            $height
+        );
+        $buffer = Buffer::empty($area);
+        $this->widgetRenderer->render(
+            new NullWidgetRenderer(),
+            $widget,
+            $buffer
+        );
+
+        $this->backend->draw($buffer->toUpdates());
+        $this->backend->flush();
+        $remainingLines = $this->lastKnownSize->height - $area->bottom();
+        $missingLines = max(0, $this->viewportArea->height - $remainingLines);
+        $this->backend->appendLines($this->viewportArea->height);
+        $this->setViewportArea(Area::fromScalars(
+            $area->left(),
+            max(0, $area->bottom() - $missingLines),
+            $area->width,
+            $this->viewportArea->height
+        ));
     }
 
     private function autoresize(): void

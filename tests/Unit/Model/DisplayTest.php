@@ -121,4 +121,33 @@ class DisplayTest extends TestCase
         self::assertEquals(21, $terminal->viewportArea()->right());
         self::assertEquals(17, $terminal->viewportArea()->bottom());
     }
+
+    public function testInsertBefore(): void
+    {
+        $backend = new DummyBackend(15, 10, Position::at(0, 0));
+        $terminal = DisplayBuilder::default($backend)->inline(2)->build();
+        $terminal->insertBefore(2, ParagraphWidget::fromString(
+            <<<'EOT'
+                Before
+                World
+                EOT
+        ));
+        $terminal->draw(ParagraphWidget::fromString('Hello World'));
+        self::assertEquals(
+            <<<'EOT'
+                Before         
+                World          
+                Hello World    
+                               
+                               
+                               
+                               
+                               
+                               
+                               
+                EOT,
+            $backend->toString()
+        );
+
+    }
 }

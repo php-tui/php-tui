@@ -107,9 +107,11 @@ class PhpTermBackend implements Backend
 
     public function clearRegion(ClearType $type): void
     {
-        match ($type) {
-            ClearType::ALL => $this->terminal->execute(Actions::clear(PhpTuiClearType::All))
+        $clearType = match ($type) {
+            ClearType::ALL => PhpTuiClearType::All,
+            ClearType::AfterCursor => PhpTuiClearType::FromCursorDown,
         };
+        $this->terminal->execute(Actions::clear($clearType));
     }
 
     public function cursorPosition(): Position
@@ -149,6 +151,11 @@ class PhpTermBackend implements Backend
             $this->terminal->queue(Actions::printString("\n"));
         }
         $this->terminal->flush();
+    }
+
+    public function moveCursor(Position $position): void
+    {
+        $this->terminal->execute(Actions::moveCursor($position->y, $position->x));
     }
 
     private function resolveColor(Color $color): Colors
