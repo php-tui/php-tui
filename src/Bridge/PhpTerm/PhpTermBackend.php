@@ -235,4 +235,8 @@ class PhpTermBackend implements Backend
 
         throw new RuntimeException(sprintf('Do not know how to set color of type "%s"', $color::class));
     }
+
+    public function moveCursor(Position $position): void
+    {
+    }
 }

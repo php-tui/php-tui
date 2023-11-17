@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Tests\Unit\Bridge\PhpTerm;
 
 use PhpTui\Term\Action;
+use PhpTui\Term\Actions;
 use PhpTui\Term\Painter\BufferPainter;
 use PhpTui\Term\Terminal;
 use PhpTui\Tui\Bridge\PhpTerm\PhpTermBackend;
@@ -20,6 +21,17 @@ use PHPUnit\Framework\TestCase;
 
 class PhpTermBackendTest extends TestCase
 {
+    public function testMoveCursor(): void
+    {
+        $buffer = BufferPainter::new();
+        $backend = new PhpTermBackend(Terminal::new($buffer));
+        $backend->moveCursor(Position::at(1, 2));
+        self::assertEquals([
+            Actions::moveCursor(1, 2)
+        ], $buffer->actions());
+
+    }
+
     public function testDiagnonalLine(): void
     {
         $buffer = BufferPainter::new();
