@@ -124,13 +124,22 @@ class DisplayTest extends TestCase
 
     public function testInsertBefore(): void
     {
-        $backend = new DummyBackend(10, 10, Position::at(0, 15));
+        $backend = new DummyBackend(15, 10, Position::at(0, 0));
         $terminal = DisplayBuilder::default($backend)->inline(2)->build();
+        $terminal->draw(ParagraphWidget::fromString('Hello World'));
         $terminal->insertBefore(ParagraphWidget::fromString(
             <<<'EOT'
-                Hello
+                Before
                 World
                 EOT
         ));
+        self::assertEquals(<<<'EOT'
+            Before
+            World
+            Hello World
+            EOT, 
+            $backend->toString()
+        );
+
     }
 }
