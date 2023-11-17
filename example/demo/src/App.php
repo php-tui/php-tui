@@ -224,36 +224,35 @@ final class App
                 ->widget(
                     ParagraphWidget::fromText(Text::fromLines(
                         Line::fromSpans([
-                            Span::styled('[q]', Style::default()->fg(AnsiColor::Red)),
+                            Span::fromString('[q]')->red(),
                             Span::fromString('quit '),
-                            Span::styled('[1]', Style::default()->fg(AnsiColor::Green)),
+                            Span::fromString('[1]')->green(),
                             Span::fromString('events '),
-                            Span::styled('[2]', Style::default()->fg(AnsiColor::Green)),
+                            Span::fromString('[2]')->green(),
                             Span::fromString('canvas '),
-                            Span::styled('[3]', Style::default()->fg(AnsiColor::Green)),
+                            Span::fromString('[3]')->green(),
                             Span::fromString('chart '),
-                            Span::styled('[4]', Style::default()->fg(AnsiColor::Green)),
+                            Span::fromString('[4]')->green(),
                             Span::fromString('list '),
-                            Span::styled('[5]', Style::default()->fg(AnsiColor::Green)),
+                            Span::fromString('[5]')->green(),
                             Span::fromString('table '),
-                            Span::styled('[6]', Style::default()->fg(AnsiColor::Green)),
+                            Span::fromString('[6]')->green(),
                             Span::fromString('blocks '),
-                            Span::styled('[7]', Style::default()->fg(AnsiColor::Green)),
+                            Span::fromString('[7]')->green(),
                             Span::fromString('sprites '),
-                            Span::styled('[8]', Style::default()->fg(AnsiColor::Green)),
+                            Span::fromString('[8]')->green(),
                             Span::fromString('colors '),
-                            Span::styled('[9]', Style::default()->fg(AnsiColor::Green)),
+                            Span::fromString('[9]')->green(),
                             Span::fromString('images '),
-                            Span::styled('[0]', Style::default()->fg(AnsiColor::Green)),
+                            Span::fromString('[0]')->green(),
                             Span::fromString('scaling '),
-                            Span::styled('[!]', Style::default()->fg(AnsiColor::Green)),
+                            Span::fromString('[!]')->green(),
                             Span::fromString('gauge '),
-                            Span::styled('["]', Style::default()->fg(AnsiColor::Green)),
+                            Span::fromString('["]')->green(),
                             Span::fromString('barchart '),
                         ]),
                     ))
-                )
-        ;
+                );
     }
 
     private function incFramerate(): void
