@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Model;
 
+use PhpTui\Tui\Model\Color\AnsiColor;
+
 final class Cell
 {
     public function __construct(

@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Model;
+namespace PhpTui\Tui\Model\Color;
 
 use OutOfBoundsException;
+use PhpTui\Tui\Model\Color;
 
 class RgbColor implements Color
 {

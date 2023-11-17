@@ -7,12 +7,12 @@ namespace PhpTui\Tui\Extension\ImageMagick\Shape;
 use ImagickPixel;
 use PhpTui\Tui\Extension\Core\Shape\LineShape;
 use PhpTui\Tui\Extension\ImageMagick\ImageRegistry;
-use PhpTui\Tui\Model\AnsiColor;
+use PhpTui\Tui\Model\Color\AnsiColor;
 use PhpTui\Tui\Model\Canvas\Label;
 use PhpTui\Tui\Model\Canvas\Painter;
 use PhpTui\Tui\Model\Canvas\Shape;
 use PhpTui\Tui\Model\Canvas\ShapePainter;
-use PhpTui\Tui\Model\RgbColor;
+use PhpTui\Tui\Model\Color\RgbColor;
 use PhpTui\Tui\Model\Widget\FloatPosition;
 use PhpTui\Tui\Model\Widget\Line as PhpTuiLine;
 
