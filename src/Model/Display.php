@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Model;
 
+use PhpTui\Tui\Extension\Core\Widget\ParagraphWidget;
 use PhpTui\Tui\Model\Viewport\Fullscreen;
 use PhpTui\Tui\Model\Viewport\Inline;
 use PhpTui\Tui\Model\WidgetRenderer\NullWidgetRenderer;
@@ -68,9 +69,9 @@ final class Display
 
     public function clear(): void
     {
+        $this->viewport->clear($this->backend, $this->viewportArea);
         // Reset the back buffer to make sure the next update will redraw everything.
         $this->buffers[1 - $this->current] = Buffer::empty($this->viewportArea);
-        $this->backend->clearRegion(ClearType::ALL);
     }
 
     /**
@@ -134,5 +135,20 @@ final class Display
     {
         $this->buffers[1 - $this->current] = Buffer::empty($this->viewportArea);
         $this->current = 1 - $this->current;
+    }
+
+    /**
+     * Render a widget _BEFORE_ the current viewport.
+     *
+     * Note this is only implemented for the inline viewport.
+     */
+    public function insertBefore(Widget $widget): void
+    {
+        if ($this->viewport instanceof Inline) {
+            return;
+        }
+
+        $this->clear();
+
     }
 }

@@ -11,4 +11,6 @@ interface Viewport
     public function cursorPos(Backend $backend): Position;
 
     public function area(Backend $backend, int $offsetInPreviousViewport): Area;
+
+    public function clear(Backend $backend, Area $area): void;
 }

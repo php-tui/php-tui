@@ -17,4 +17,6 @@ interface Backend
     public function cursorPosition(): Position;
 
     public function appendLines(int $linesAfterCursor): void;
+
+    public function moveCursor(Position $position): void;
 }

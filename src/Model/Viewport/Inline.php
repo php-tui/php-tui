@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Model\Viewport;
 
+use PhpTui\Term\ClearType as PhpTuiClearType;
 use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Backend;
+use PhpTui\Tui\Model\ClearType;
 use PhpTui\Tui\Model\Position;
 use PhpTui\Tui\Model\Viewport;
 
@@ -41,5 +43,11 @@ final class Inline implements Viewport
         $row = max(0, $row - $offsetInPreviousViewport);
 
         return Area::fromScalars(0, $row, $size->width, $maxHeight);
+    }
+
+    public function clear(Backend $backend, Area $area): void
+    {
+        $backend->moveCursor(Position::at($area->left(), $area->top()));
+        $backend->clearRegion(ClearType::AfterCursor);
     }
 }

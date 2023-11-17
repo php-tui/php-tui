@@ -6,6 +6,7 @@ namespace PhpTui\Tui\Model\Viewport;
 
 use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Backend;
+use PhpTui\Tui\Model\ClearType;
 use PhpTui\Tui\Model\Position;
 use PhpTui\Tui\Model\Viewport;
 
@@ -24,5 +25,10 @@ final class Fullscreen implements Viewport
     public function area(Backend $backend, int $offsetInPreviousViewport): Area
     {
         return $this->size($backend);
+    }
+
+    public function clear(Backend $backend, Area $area): void
+    {
+        $backend->clearRegion(ClearType::ALL);
     }
 }

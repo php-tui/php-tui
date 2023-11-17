@@ -97,4 +97,9 @@ final class DummyBackend implements Backend
 
         return $this->grid;
     }
+
+    public function moveCursor(Position $position): void
+    {
+        $this->cursorPosition = $position;
+    }
 }
