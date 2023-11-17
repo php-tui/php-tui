@@ -11,7 +11,6 @@ use PhpTui\Tui\Extension\Core\Widget\List\ListItem;
 use PhpTui\Tui\Extension\Core\Widget\List\ListState;
 use PhpTui\Tui\Extension\Core\Widget\ListWidget;
 use PhpTui\Tui\Model\AnsiColor;
-use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\Widget\Borders;
 use PhpTui\Tui\Model\Widget\Line;
@@ -63,11 +62,11 @@ final class ItemListPage implements Component
                     ->state($this->state)
                     ->items(...array_map(function (array $event) {
                         return ListItem::new(Text::fromLine(Line::fromSpans([
-                            Span::styled($event[1], match ($event[1]) {
-                                'INFO' => Style::default()->fg(AnsiColor::Green),
-                                'WARNING' => Style::default()->fg(AnsiColor::Yellow),
-                                'CRITICAL' => Style::default()->fg(AnsiColor::Red),
-                                default => Style::default()->fg(AnsiColor::Cyan),
+                            Span::fromString($event[1])->fg(match ($event[1]) {
+                                'INFO' => AnsiColor::Green,
+                                'WARNING' => AnsiColor::Yellow,
+                                'CRITICAL' => AnsiColor::Red,
+                                default => AnsiColor::Cyan,
                             }),
                             Span::fromString(' '),
                             Span::fromString($event[0]),

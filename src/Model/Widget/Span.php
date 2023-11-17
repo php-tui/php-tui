@@ -5,10 +5,14 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Model\Widget;
 
 use PhpTui\Tui\Model\Style;
+use PhpTui\Tui\Model\Style\StyleableTrait;
+use PhpTui\Tui\Model\Styleable;
 use Stringable;
 
-final class Span implements Stringable
+final class Span implements Stringable, Styleable
 {
+    use StyleableTrait;
+
     public function __construct(public readonly string $content, public Style $style)
     {
     }
@@ -28,9 +32,11 @@ final class Span implements Stringable
         return mb_strlen($this->content);
     }
 
-    public function patchStyle(Style $style): void
+    public function patchStyle(Style $style): self
     {
         $this->style = $this->style->patch($style);
+
+        return $this;
     }
 
     /**

@@ -160,8 +160,8 @@ class BlocksPage implements Component
         return BlockWidget::default()
             ->borders(Borders::ALL)
             ->titles(Title::fromLine(Line::fromSpans([
-                Span::fromString('Styled ')->style(Style::default()->fg(AnsiColor::Blue)),
-                Span::fromString('title content')->style(Style::default()->fg(AnsiColor::Green)),
+                Span::fromString('Styled ')->blue(),
+                Span::fromString('title content')->green(),
             ])))
             ->widget($paragraph);
     }
@@ -171,10 +171,10 @@ class BlocksPage implements Component
         return BlockWidget::default()
             ->borders(Borders::ALL)
             ->titles(Title::fromLine(Line::fromSpans([
-                Span::fromString('Multiple')->style(Style::default()->fg(AnsiColor::Blue)),
+                Span::fromString('Multiple')->blue(),
             ])))
             ->titles(Title::fromLine(Line::fromSpans([
-                Span::fromString('Titles')->style(Style::default()->fg(AnsiColor::Red)),
+                Span::fromString('Titles')->red()->onWhite(),
             ])))
             ->widget($paragraph);
     }

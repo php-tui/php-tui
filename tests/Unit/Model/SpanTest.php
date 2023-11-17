@@ -13,7 +13,7 @@ class SpanTest extends TestCase
 {
     public function testToStyledGraphemes(): void
     {
-        $span = Span::styled('Hello', Style::default()->fg(AnsiColor::Blue));
+        $span = Span::fromString('Hello')->blue();
 
         $baseStyle = Style::default()->fg(AnsiColor::Red);
         $styledGraphemes = $span->toStyledGraphemes($baseStyle);

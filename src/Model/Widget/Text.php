@@ -5,9 +5,13 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Model\Widget;
 
 use PhpTui\Tui\Model\Style;
+use PhpTui\Tui\Model\Style\StyleableTrait;
+use PhpTui\Tui\Model\Styleable;
 
-final class Text
+final class Text implements Styleable
 {
+    use StyleableTrait;
+
     /**
      * @param list<Line> $lines
      */
