@@ -86,6 +86,7 @@ final class DummyBackend implements Backend
 
     public function appendLines(int $linesAfterCursor): void
     {
+        $this->cursorPosition = $this->cursorPosition->change(fn (int $x, int $y) => [0, $y + $linesAfterCursor]);
     }
 
     /**

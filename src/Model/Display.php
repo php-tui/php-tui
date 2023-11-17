@@ -142,13 +142,39 @@ final class Display
      *
      * Note this is only implemented for the inline viewport.
      */
-    public function insertBefore(Widget $widget): void
+    public function insertBefore(int $height, Widget $widget): void
     {
         if (!$this->viewport instanceof Inline) {
             return;
         }
 
         $this->clear();
+        $height = min($height, $this->lastKnownSize->height);
+        $this->backend->appendLines($height);
+        $missingLines = max(0, $height, $this->lastKnownSize->bottom() - $this->viewportArea->top());
+        $area = Area::fromScalars(
+            $this->viewportArea->left(),
+            max(0, $this->viewportArea->top() - $missingLines),
+            $this->viewportArea->width,
+            $height
+        );
+        $buffer = Buffer::empty($area);
+        $this->widgetRenderer->render(
+            new NullWidgetRenderer(),
+            $widget,
+            $buffer
+        );
 
+        $this->backend->draw($buffer->toUpdates());
+        $this->backend->flush();
+        $remainingLines = $this->lastKnownSize->height - $area->bottom();
+        $missingLines = max(0, $this->viewportArea->height - $remainingLines);
+        $this->backend->appendLines($this->viewportArea->height);
+        $this->setViewportArea(Area::fromScalars(
+            $area->left(),
+            max(0, $area->bottom() - $missingLines),
+            $area->width,
+            $this->viewportArea->height
+        ));
     }
 }

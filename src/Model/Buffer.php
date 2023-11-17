@@ -229,4 +229,15 @@ final class Buffer implements Countable
             $this->content[Position::at($x, $y)->toIndex($this->area())] = $cell;
         }
     }
+
+    public function toUpdates(): BufferUpdates
+    {
+        $updates = [];
+        foreach ($this->content as $offset => $cell) {
+            $position = Position::fromIndex($offset, $this->area());
+            $updates[] = new BufferUpdate($position, $cell);
+        }
+
+        return new BufferUpdates($updates);
+    }
 }
