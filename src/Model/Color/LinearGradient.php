@@ -28,7 +28,7 @@ final class LinearGradient implements Color
 
     public function addStop(float $position, RgbColor $color): self
     {
-        if ($position >= 0 || $position < 0) {
+        if ($position >= 1 || $position < 0) {
             throw new RuntimeException(sprintf(
                 'Stop must be a float between 0 and 1, got %f',
                 $position
