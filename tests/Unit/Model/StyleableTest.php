@@ -11,6 +11,14 @@ use PHPUnit\Framework\TestCase;
 
 class StyleableTest extends TestCase
 {
+    public function testFgBg(): void
+    {
+        $span = Span::fromString('Hello')->fg(AnsiColor::Blue)->bg(AnsiColor::Red);
+
+        self::assertSame(AnsiColor::Blue, $span->style->fg);
+        self::assertSame(AnsiColor::Red, $span->style->bg);
+    }
+
     /**
      * @dataProvider modifierProvider
      */
