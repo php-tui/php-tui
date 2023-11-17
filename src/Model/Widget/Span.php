@@ -5,17 +5,13 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Model\Widget;
 
 use PhpTui\Tui\Model\Style;
-use PhpTui\Tui\Model\Style\InteractsWithBgColor;
-use PhpTui\Tui\Model\Style\InteractsWithFgColor;
-use PhpTui\Tui\Model\Style\InteractsWithModifier;
+use PhpTui\Tui\Model\Style\StyleableTrait;
 use PhpTui\Tui\Model\Styleable;
 use Stringable;
 
 final class Span implements Stringable, Styleable
 {
-    use InteractsWithFgColor;
-    use InteractsWithBgColor;
-    use InteractsWithModifier;
+    use StyleableTrait;
 
     public function __construct(public readonly string $content, public Style $style)
     {
