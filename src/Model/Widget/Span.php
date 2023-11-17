@@ -41,7 +41,7 @@ final class Span implements Stringable
         return array_map(function (string $grapheme) use ($baseStyle) {
             return new StyledGrapheme(
                 symbol: $grapheme,
-                style: $baseStyle->patch($this->style),
+                style: $this->style->patch($baseStyle),
             );
         }, mb_str_split($this->content));
     }

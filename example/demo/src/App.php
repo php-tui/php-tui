@@ -224,7 +224,7 @@ final class App
                 ->widget(
                     ParagraphWidget::fromText(Text::fromLines(
                         Line::fromSpans([
-                            Span::styled('[q]', Style::default()->fg(AnsiColor::Green)),
+                            Span::styled('[q]', Style::default()->fg(AnsiColor::Red)),
                             Span::fromString('quit '),
                             Span::styled('[1]', Style::default()->fg(AnsiColor::Green)),
                             Span::fromString('events '),
@@ -250,7 +250,7 @@ final class App
                             Span::fromString('gauge '),
                             Span::styled('["]', Style::default()->fg(AnsiColor::Green)),
                             Span::fromString('barchart '),
-                        ])
+                        ]),
                     ))
                 )
         ;
