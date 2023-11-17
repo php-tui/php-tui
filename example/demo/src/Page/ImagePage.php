@@ -7,13 +7,10 @@ namespace PhpTui\Tui\Example\Demo\Page;
 use PhpTui\Term\Event;
 use PhpTui\Tui\Example\Demo\Component;
 use PhpTui\Tui\Extension\Core\Widget\BlockWidget;
-use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
 use PhpTui\Tui\Extension\Core\Widget\GridWidget;
-use PhpTui\Tui\Extension\ImageMagick\Shape\ImageShape;
-use PhpTui\Tui\Model\Canvas\CanvasContext;
+use PhpTui\Tui\Extension\ImageMagick\Widget\ImageWidget;
 use PhpTui\Tui\Model\Constraint;
 use PhpTui\Tui\Model\Direction;
-use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\Widget\Borders;
 use PhpTui\Tui\Model\Widget\BorderType;
@@ -30,18 +27,12 @@ final class ImagePage implements Component
     {
         if (!isset($this->images)) {
             $this->images = array_map(function (string $name) {
-                $shape = ImageShape::fromPath(__DIR__ . '/../../assets/' . $name);
-
                 return BlockWidget::default()
                     ->titles(Title::fromString(sprintf('Image: %s', $name)))
                     ->borders(Borders::ALL)
                     ->borderType(BorderType::Rounded)
                     ->widget(
-                        CanvasWidget::fromIntBounds(0, 320, 0, 240)
-                        ->marker(Marker::HalfBlock)
-                        ->paint(function (CanvasContext $context) use ($shape): void {
-                            $context->draw($shape);
-                        })
+                        ImageWidget::fromPath(__DIR__ . '/../../assets/' . $name)
                     );
             }, [
                 'beach.jpg',

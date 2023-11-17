@@ -24,11 +24,9 @@ class ImageRendererTest extends TestCase
             new ImageWidget(__DIR__ . '/../Shape/example.jpg', marker: Marker::Block),
         );
 
-        // TODO: this should be equal to 40 and there should be no empty spaces
-        // https://github.com/php-tui/php-tui/issues/112
         self::assertEquals(
-            str_repeat('█', 36),
-            str_replace("\n", '', str_replace(' ', '', $backend->toString()))
+            str_repeat('█', 40),
+            str_replace("\n", '', $backend->toString())
         );
     }
 }
