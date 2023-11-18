@@ -112,10 +112,10 @@ class LineParser implements Parser
 
     private function createSpan(string $text): Span
     {
-        $currentStyle = $this->styleStack === [] ? Style::default() : end($this->styleStack);
-
         $text = strtr($text, ["\0" => '\\', '\\<' => '<', '\\>' => '>']);
 
-        return Span::styled($text, $currentStyle);
+        $style = $this->styleStack === [] ? Style::default() : end($this->styleStack);
+
+        return Span::styled($text, $style);
     }
 }
