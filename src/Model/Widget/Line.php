@@ -6,6 +6,8 @@ namespace PhpTui\Tui\Model\Widget;
 
 use ArrayIterator;
 use IteratorAggregate;
+use PhpTui\Tui\Model\Parseable;
+use PhpTui\Tui\Model\Parser\LineParser;
 use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Style\StyleableTrait;
 use PhpTui\Tui\Model\Styleable;
@@ -15,7 +17,7 @@ use Traversable;
 /**
  * @implements IteratorAggregate<Span>
  */
-final class Line implements IteratorAggregate, Stringable, Styleable
+final class Line implements IteratorAggregate, Stringable, Styleable, Parseable
 {
     use StyleableTrait;
 
@@ -88,5 +90,10 @@ final class Line implements IteratorAggregate, Stringable, Styleable
     public static function fromSpan(Span $span): self
     {
         return new self([$span], HorizontalAlignment::Left);
+    }
+
+    public static function parse(string $input): self
+    {
+        return self::fromSpans(LineParser::new()->parse($input));
     }
 }

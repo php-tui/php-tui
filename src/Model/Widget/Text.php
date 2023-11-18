@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Model\Widget;
 
+use PhpTui\Tui\Model\Parseable;
 use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Style\StyleableTrait;
 use PhpTui\Tui\Model\Styleable;
 
-final class Text implements Styleable
+final class Text implements Styleable, Parseable
 {
     use StyleableTrait;
 
@@ -55,5 +56,10 @@ final class Text implements Styleable
     public static function fromLines(Line ...$lines): self
     {
         return new self(array_values($lines));
+    }
+
+    public static function parse(string $input): self
+    {
+        // TODO: Implement parse() method.
     }
 }

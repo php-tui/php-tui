@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Model;
 
+use InvalidArgumentException;
+
 final class Modifier
 {
     public const NONE        = 0b000000000000;
@@ -16,4 +18,23 @@ final class Modifier
     public const REVERSED    = 0b000001000000;
     public const HIDDEN      = 0b000010000000;
     public const CROSSEDOUT  = 0b000100000000;
+
+    /**
+     * @return int-mask-of<Modifier::*>
+     */
+    public static function fromName(string $name): int
+    {
+        return match ($name) {
+            'bold' => self::BOLD,
+            'dim' => self::DIM,
+            'italic' => self::ITALIC,
+            'underlined' => self::UNDERLINED,
+            'slowblink' => self::SLOWBLINK,
+            'rapidblink' => self::RAPIDBLINK,
+            'reversed' => self::REVERSED,
+            'hidden' => self::HIDDEN,
+            'crossedout' => self::CROSSEDOUT,
+            default => throw new InvalidArgumentException(sprintf('Unknown modifier "%s"', $name)),
+        };
+    }
 }
