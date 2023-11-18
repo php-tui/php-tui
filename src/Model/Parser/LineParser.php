@@ -36,6 +36,7 @@ class LineParser implements Parser
             $tag = $match[0];
             $pos = $match[1];
 
+            // Skip processing for escaped tags (preceded by a backslash).
             if (0 !== $pos && '\\' == $input[$pos - 1]) {
                 continue;
             }
@@ -71,8 +72,8 @@ class LineParser implements Parser
         foreach ($attributes as $attribute) {
             $attribute = explode('=', $attribute);
             [$key, $value] = [
-                trim($attribute[0] ?? ''),
-                trim($attribute[1] ?? ''),
+                $attribute[0] ?? '',
+                $attribute[1] ?? '',
             ];
             if ($key === '' || $value === '') {
                 continue;
@@ -80,7 +81,7 @@ class LineParser implements Parser
             $style = $this->patchAttributeToStyle($style, $key, $value);
         }
 
-        // If there is a style on the stack, patch the new style with it
+        // Apply the style of the outermost tag incorporating modifications from the current tag.
         if ($this->styleStack !== []) {
             $outerStyle = end($this->styleStack);
             $style = $outerStyle->patch($style);

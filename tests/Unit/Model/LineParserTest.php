@@ -151,4 +151,20 @@ class LineParserTest extends TestCase
         self::assertSame('Hello <strong class="foo">some info</strong> World', $firstSpan->content);
         self::assertSame(AnsiColor::Green, $firstSpan->style->fg);
     }
+
+    public function testParseWithEmptyParameters(): void
+    {
+        $spans = LineParser::new()->parse('<fg = >Hello <options>World</></>');
+        self::assertCount(2, $spans);
+
+        $firstSpan = $spans[0];
+        self::assertSame('Hello ', $firstSpan->content);
+        self::assertNull($firstSpan->style->fg);
+        self::assertNull($firstSpan->style->bg);
+
+        $secondSpan = $spans[1];
+        self::assertSame('World', $secondSpan->content);
+        self::assertNull($secondSpan->style->fg);
+        self::assertNull($secondSpan->style->bg);
+    }
 }
