@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Model\Parser;
 
 use PhpTui\Tui\Model\AnsiColor;
+use PhpTui\Tui\Model\Color;
 use PhpTui\Tui\Model\Modifier;
 use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Widget\Span;
@@ -93,11 +94,11 @@ class LineParser implements Parser
     private function patchAttributeToStyle(Style $style, string $key, string $value): Style
     {
         if ($key === 'fg') {
-            return $style->fg(AnsiColor::fromName($value));
+            return $style->fg($this->parseColor($value));
         }
 
         if ($key === 'bg') {
-            return $style->bg(AnsiColor::fromName($value));
+            return $style->bg($this->parseColor($value));
         }
 
         if ($key === 'options') {
@@ -108,6 +109,16 @@ class LineParser implements Parser
         }
 
         return $style;
+    }
+
+    private function parseColor(string $color): Color
+    {
+        if (str_starts_with($color, '#')) {
+            // From Hex to RGB
+            // TODO
+        }
+
+        return AnsiColor::fromName($color);
     }
 
     private function createSpan(string $text): Span
