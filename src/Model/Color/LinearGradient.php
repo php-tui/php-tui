@@ -71,28 +71,21 @@ final class LinearGradient implements Color
             return $lastStop;
         }
 
-        $diff = abs($lastPosition - $nextPosition);
-
-        // calculate WTF this is when your brain is entirely whole
+        $d = $target - $lastPosition;
+        $l = $nextPosition - $lastPosition;
+        $r = $d / $l;
 
         return RgbColor::fromRgb(
-            $this->calculate($lastStop->r, $nextStop->r, $target, $diff),
-            $this->calculate($lastStop->g, $nextStop->g, $target, $diff),
-            $this->calculate($lastStop->b, $nextStop->b, $target, $diff),
+            $this->calculate($lastStop->r, $nextStop->r, $r),
+            $this->calculate($lastStop->g, $nextStop->g, $r),
+            $this->calculate($lastStop->b, $nextStop->b, $r),
         );
     }
 
-    private function calculate(float $last, float $next, float $ratio, float $diff): int
+    private function calculate(float $c1, float $c2, float $r): int
     {
-        if ($last < $next) {
-            $ratio = $ratio * (1 / $diff);
-            return (int) ($last + (abs($next - $last) * $ratio));
-        }
-
-        $ratio = ($ratio * $diff);
-        dump($ratio);
-
-        return (int) ($last + (abs($next - $last) * $ratio));
+        $d = $c2 - $c1;
+        return intval($d * $r + $c1);
     }
 
     public function __toString(): string
