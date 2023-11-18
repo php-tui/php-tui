@@ -113,6 +113,8 @@ class LineParser implements Parser
     {
         $currentStyle = $this->styleStack === [] ? Style::default() : end($this->styleStack);
 
+        $text = strtr($text, ["\0" => '\\', '\\<' => '<', '\\>' => '>']);
+
         return Span::styled($text, $currentStyle);
     }
 }

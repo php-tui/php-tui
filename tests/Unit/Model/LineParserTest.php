@@ -68,7 +68,7 @@ class LineParserTest extends TestCase
 
     public function testParseAngleBrackets(): void
     {
-        $spans = LineParser::new()->parse('<bg=white><fg=blue>PHP</> <fg=red><></> <fg=yellow>Rust</></> 1 > 2 && 2 < 3 "<\>"');
+        $spans = LineParser::new()->parse('<bg=white><fg=blue>PHP</> <fg=red><></> <fg=yellow>Rust</></> 1 > 2 && 2 < 3');
         self::assertCount(6, $spans);
 
         $firstSpan = $spans[0];
@@ -97,7 +97,7 @@ class LineParserTest extends TestCase
         self::assertSame(AnsiColor::White, $fifthSpan->style->bg);
 
         $sixthSpan = $spans[5];
-        self::assertSame(' 1 > 2 && 2 < 3 "<\>"', $sixthSpan->content);
+        self::assertSame(' 1 > 2 && 2 < 3', $sixthSpan->content);
         self::assertNull($sixthSpan->style->fg);
         self::assertNull($sixthSpan->style->bg);
     }
@@ -125,7 +125,7 @@ class LineParserTest extends TestCase
 
     public function testParseWithDuplicateClosingTags(): void
     {
-        $spans = LineParser::new()->parse('<fg=green>Hello</>World</>');
+        $spans = LineParser::new()->parse('<fg=green>Hello</>World</></>');
         self::assertCount(2, $spans);
 
         $firstSpan = $spans[0];
@@ -135,5 +135,20 @@ class LineParserTest extends TestCase
         $secondSpan = $spans[1];
         self::assertSame('World', $secondSpan->content);
         self::assertNull($secondSpan->style->fg);
+    }
+
+    public function testParseHandlingOfEscapedTags(): void
+    {
+        $spans = LineParser::new()->parse('<fg=green>Hello \<strong class="foo">some info\</strong> World</>');
+        self::assertCount(1, $spans);
+        $firstSpan = $spans[0];
+        self::assertSame('Hello <strong class="foo">some info</strong> World', $firstSpan->content);
+        self::assertSame(AnsiColor::Green, $firstSpan->style->fg);
+
+        $spans = LineParser::new()->parse('<fg=green>Hello \<strong class="foo"\>some info\</strong\> World</>');
+        self::assertCount(1, $spans);
+        $firstSpan = $spans[0];
+        self::assertSame('Hello <strong class="foo">some info</strong> World', $firstSpan->content);
+        self::assertSame(AnsiColor::Green, $firstSpan->style->fg);
     }
 }
