@@ -6,6 +6,7 @@ namespace PhpTui\Tui\Model\Color;
 
 use OutOfBoundsException;
 use PhpTui\Tui\Model\Color;
+use PhpTui\Tui\Model\Widget\FractionalPosition;
 use Stringable;
 
 class RgbColor implements Color, Stringable
@@ -146,7 +147,7 @@ class RgbColor implements Color, Stringable
         return sprintf('#%02x%02x%02x', $this->r, $this->g, $this->b);
     }
 
-    public function at(float $fraction): RgbColor
+    public function at(FractionalPosition $position): RgbColor
     {
         return $this;
     }

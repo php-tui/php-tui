@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Model\Color;
 
 use PhpTui\Tui\Model\Color;
+use PhpTui\Tui\Model\Widget\FractionalPosition;
 
 enum AnsiColor: int implements Color
 {
@@ -31,7 +32,7 @@ enum AnsiColor: int implements Color
         return $this->name;
     }
 
-    public function at(float $fraction): Color
+    public function at(FractionalPosition $position): Color
     {
         return $this;
     }

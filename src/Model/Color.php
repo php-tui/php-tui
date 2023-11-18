@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Model;
 
-use Stringable;
+use PhpTui\Tui\Model\Widget\FractionalPosition;
 
 interface Color
 {
     public function debugName(): string;
 
     /**
-     * Return a gradiation at the given fraction (0..1)
+     * Return a gradiation at the given fractional position.
      *
      * If this is a simple color (AnsiColor or RgbColor) the simple value will
      * be returned regardless of the fraction given.
      */
-    public function at(float $fraction): Color;
+    public function at(FractionalPosition $position): Color;
 }

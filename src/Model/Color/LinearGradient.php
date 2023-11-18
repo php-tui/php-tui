@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Model\Color;
 
 use PhpTui\Tui\Model\Color;
+use PhpTui\Tui\Model\Widget\FractionalPosition;
 use RuntimeException;
 
 final class LinearGradient implements Color
@@ -14,6 +15,11 @@ final class LinearGradient implements Color
      */
     private function __construct(private array $stops)
     {
+    }
+
+    public function __toString(): string
+    {
+        return 'Gradient';
     }
 
     public static function from(RgbColor $color): self
@@ -41,30 +47,24 @@ final class LinearGradient implements Color
         return new self($stops);
     }
 
-    public function at(float $target): RgbColor
+    public function at(FractionalPosition $position): RgbColor
     {
-        if ($target > 1 || $target < 0) {
-            throw new RuntimeException(sprintf(
-                'Target position must be a float between 0 and 1, got %f',
-                $target
-            ));
-        }
-
+        $target = $position->x;
         // determine last stop
         $stops = $this->stops;
         usort($stops, fn (array $s1, array $s2) => $s1[0] <=> $s2[0]);
         [$lastPosition, $lastStop] = array_shift($stops);
         $nextStop = null;
         $nextPosition = null;
-        foreach ($stops as [$position, $stop]) {
-            if ($position > $target) {
+        foreach ($stops as [$stopPos, $stop]) {
+            if ($stopPos > $target) {
                 $nextStop = $stop;
-                $nextPosition = $position;
+                $nextPosition = $stopPos;
 
                 break;
             }
             $lastStop = $stop;
-            $lastPosition = $position;
+            $lastPosition = $stopPos;
         }
 
         if ($nextStop === null || $nextPosition === null) {
@@ -85,11 +85,7 @@ final class LinearGradient implements Color
     private function calculate(float $c1, float $c2, float $r): int
     {
         $d = $c2 - $c1;
-        return intval($d * $r + $c1);
-    }
 
-    public function __toString(): string
-    {
-        return 'Gradient';
+        return (int) ($d * $r + $c1);
     }
 }
