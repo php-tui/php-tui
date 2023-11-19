@@ -6,7 +6,6 @@ namespace PhpTui\Tui\Model\Widget;
 
 use ArrayIterator;
 use IteratorAggregate;
-use PhpTui\Tui\Model\Parseable;
 use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Style\StyleableTrait;
 use PhpTui\Tui\Model\Styleable;
@@ -16,7 +15,7 @@ use Traversable;
 /**
  * @implements IteratorAggregate<Span>
  */
-final class Line implements IteratorAggregate, Stringable, Styleable, Parseable
+final class Line implements IteratorAggregate, Stringable, Styleable
 {
     use StyleableTrait;
 

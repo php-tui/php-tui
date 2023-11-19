@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Model\Widget;
 
-use PhpTui\Tui\Model\Parseable;
-
-final class Title implements Parseable
+final class Title
 {
     private function __construct(
         public Line $title,
