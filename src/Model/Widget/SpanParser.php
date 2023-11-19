@@ -95,17 +95,17 @@ final class SpanParser
         return $style;
     }
 
-    private function patchAttributeToStyle(Style $style, string $key, string $value): Style
+    private function patchAttributeToStyle(Style $style, string $attribute, string $value): Style
     {
-        if ($key === 'fg') {
+        if ($attribute === 'fg') {
             return $style->fg($this->parseColor($value));
         }
 
-        if ($key === 'bg') {
+        if ($attribute === 'bg') {
             return $style->bg($this->parseColor($value));
         }
 
-        if ($key === 'options') {
+        if ($attribute === 'options') {
             $options = explode(',', $value);
             foreach ($options as $option) {
                 $style->addModifier(Modifier::fromName($option));
