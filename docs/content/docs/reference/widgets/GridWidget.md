@@ -19,5 +19,5 @@ Configure the widget using the builder methods named as follows:
 | Name | Type | Description |
 | --- | --- | --- |
 | **direction** | `PhpTui\Tui\Model\Direction` | The direction of the grid |
-| **widgets** | `list<\PhpTui\Tui\Model\Widget>` | The widgets. There should be at least as many constraints as widgets. |
-| **constraints** | `list<\PhpTui\Tui\Model\Constraint>` | The constraints define the widget (Direction::Horizontal) or height(Direction::Vertical) of the cells. |
+| **widgets** | `list<Widget>` | The widgets. There should be at least as many constraints as widgets. |
+| **constraints** | `list<Constraint>` | The constraints define the widget (Direction::Horizontal) or height(Direction::Vertical) of the cells. |

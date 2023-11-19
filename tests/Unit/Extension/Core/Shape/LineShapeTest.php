@@ -9,8 +9,8 @@ use PhpTui\Tui\Extension\Core\Shape\LineShape;
 use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
 use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\AxisBounds;
-use PhpTui\Tui\Model\Display\Buffer;
 use PhpTui\Tui\Model\Canvas\CanvasContext;
+use PhpTui\Tui\Model\Display\Buffer;
 use PhpTui\Tui\Model\Marker;
 
 class LineShapeTest extends ShapeTestCase

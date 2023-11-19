@@ -5,13 +5,11 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Model\Display;
 
 use PhpTui\Tui\Model\Area;
-use PhpTui\Tui\Model\Display\Backend;
 use PhpTui\Tui\Model\Position\Position;
-use PhpTui\Tui\Model\Display\Buffer;
-use PhpTui\Tui\Model\Widget;
-use PhpTui\Tui\Model\WidgetRenderer;
 use PhpTui\Tui\Model\Viewport\Fullscreen;
 use PhpTui\Tui\Model\Viewport\Inline;
+use PhpTui\Tui\Model\Widget;
+use PhpTui\Tui\Model\WidgetRenderer;
 use PhpTui\Tui\Model\WidgetRenderer\NullWidgetRenderer;
 
 final class Display

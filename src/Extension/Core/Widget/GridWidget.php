@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Extension\Core\Widget;
 
-use PhpTui\Tui\Model\Layout\Constraint;
 use PhpTui\Tui\Model\Direction;
-use PhpTui\Tui\Model\Layout\Layout;
+use PhpTui\Tui\Model\Layout\Constraint;
 use PhpTui\Tui\Model\Widget;
 
 /**
@@ -23,13 +22,13 @@ class GridWidget implements Widget
         public Direction $direction,
         /**
          * The widgets. There should be at least as many constraints as widgets.
-         * @var list<\PhpTui\Tui\Model\Widget>
+         * @var list<Widget>
          */
         public array $widgets,
         /**
          * The constraints define the widget (Direction::Horizontal) or height
          * (Direction::Vertical) of the cells.
-         * @var list<\PhpTui\Tui\Model\Constraint>
+         * @var list<Constraint>
          */
         public array $constraints,
     ) {

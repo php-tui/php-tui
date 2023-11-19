@@ -6,7 +6,6 @@ namespace PhpTui\Tui\Model\Display;
 
 use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Position\Position;
-use PhpTui\Tui\Model\Display\Backend;
 
 interface Viewport
 {

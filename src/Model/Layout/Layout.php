@@ -5,11 +5,10 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Model\Layout;
 
 use PhpTui\Tui\Bridge\Cassowary\CassowaryConstraintSolver;
-use PhpTui\Tui\Model\Areas;
 use PhpTui\Tui\Model\Area;
+use PhpTui\Tui\Model\Areas;
 use PhpTui\Tui\Model\Direction;
 use PhpTui\Tui\Model\Margin;
-use PhpTui\Tui\Model\Layout\ConstraintSolver;
 
 final class Layout
 {

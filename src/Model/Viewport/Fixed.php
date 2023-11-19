@@ -7,8 +7,8 @@ namespace PhpTui\Tui\Model\Viewport;
 use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Display\Backend;
 use PhpTui\Tui\Model\Display\ClearType;
-use PhpTui\Tui\Model\Position\Position;
 use PhpTui\Tui\Model\Display\Viewport;
+use PhpTui\Tui\Model\Position\Position;
 
 final class Fixed implements Viewport
 {

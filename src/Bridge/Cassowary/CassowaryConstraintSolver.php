@@ -9,13 +9,13 @@ use PhpTui\Cassowary\Solver;
 use PhpTui\Cassowary\Strength;
 use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Areas;
-use PhpTui\Tui\Model\Layout\Constraint as DTLConstraint;
 use PhpTui\Tui\Model\Constraint\LengthConstraint;
 use PhpTui\Tui\Model\Constraint\MaxConstraint;
 use PhpTui\Tui\Model\Constraint\MinConstraint;
 use PhpTui\Tui\Model\Constraint\PercentageConstraint;
-use PhpTui\Tui\Model\Layout\ConstraintSolver;
 use PhpTui\Tui\Model\Direction;
+use PhpTui\Tui\Model\Layout\Constraint as DTLConstraint;
+use PhpTui\Tui\Model\Layout\ConstraintSolver;
 use PhpTui\Tui\Model\Layout\Layout;
 use RuntimeException;
 
