@@ -197,4 +197,20 @@ class SpanParserTest extends TestCase
         self::assertSame(AnsiColor::Green, $firstSpan->style->fg);
         self::assertNull($firstSpan->style->bg);
     }
+
+    public function testOverlappingTags(): void
+    {
+        $spans = SpanParser::new()->parse('<fg=green><bg=blue>Hello</fg=green> World</bg=blue>');
+        self::assertCount(2, $spans);
+
+        $firstSpan = $spans[0];
+        self::assertSame('Hello', $firstSpan->content);
+        self::assertSame(AnsiColor::Green, $firstSpan->style->fg);
+        self::assertSame(AnsiColor::Blue, $firstSpan->style->bg);
+
+        $secondSpan = $spans[1];
+        self::assertSame(' World', $secondSpan->content);
+        self::assertSame(AnsiColor::Green, $secondSpan->style->fg);
+        self::assertNull($secondSpan->style->bg);
+    }
 }
