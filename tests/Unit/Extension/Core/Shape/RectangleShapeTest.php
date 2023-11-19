@@ -7,11 +7,11 @@ namespace PhpTui\Tui\Tests\Unit\Extension\Core\Shape;
 use Generator;
 use PhpTui\Tui\Extension\Core\Shape\RectangleShape;
 use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
-use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\AxisBounds;
 use PhpTui\Tui\Model\Buffer;
 use PhpTui\Tui\Model\Canvas\CanvasContext;
+use PhpTui\Tui\Model\Color\AnsiColor;
 use PhpTui\Tui\Model\Marker;
 
 class RectangleShapeTest extends ShapeTestCase

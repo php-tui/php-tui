@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Tests\Unit\Extension\Core\Widget\Canvas\Grid;
 
-use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Canvas\Grid\HalfBlockGrid;
+use PhpTui\Tui\Model\Color\AnsiColor;
 use PhpTui\Tui\Model\Position;
 use PHPUnit\Framework\TestCase;
 

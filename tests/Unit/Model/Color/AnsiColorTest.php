@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Tests\Unit\Model;
+namespace PhpTui\Tui\Tests\Unit\Model\Color;
 
-use PhpTui\Tui\Model\AnsiColor;
+use PhpTui\Tui\Model\Color\AnsiColor;
 use PHPUnit\Framework\TestCase;
 use ValueError;
 

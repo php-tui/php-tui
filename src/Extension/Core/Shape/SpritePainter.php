@@ -8,6 +8,7 @@ use PhpTui\Tui\Model\Canvas\Painter;
 use PhpTui\Tui\Model\Canvas\Shape;
 use PhpTui\Tui\Model\Canvas\ShapePainter;
 use PhpTui\Tui\Model\Widget\FloatPosition;
+use PhpTui\Tui\Model\Widget\FractionalPosition;
 
 class SpritePainter implements ShapePainter
 {
@@ -48,7 +49,10 @@ class SpritePainter implements ShapePainter
                         if ($point === null) {
                             continue;
                         }
-                        $painter->paint($point, $shape->color);
+                        $painter->paint($point, $shape->color->at(FractionalPosition::at(
+                            $x / count($chars),
+                            $y / count($shape->rows),
+                        )));
                     }
                 }
             }

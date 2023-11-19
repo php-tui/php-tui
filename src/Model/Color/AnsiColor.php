@@ -2,7 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Model;
+namespace PhpTui\Tui\Model\Color;
+
+use PhpTui\Tui\Model\Color;
+use PhpTui\Tui\Model\Widget\FractionalPosition;
 
 use InvalidArgumentException;
 
@@ -53,5 +56,10 @@ enum AnsiColor: int implements Color
     public function debugName(): string
     {
         return $this->name;
+    }
+
+    public function at(FractionalPosition $position): Color
+    {
+        return $this;
     }
 }
