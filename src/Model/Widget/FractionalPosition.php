@@ -3,8 +3,9 @@
 namespace PhpTui\Tui\Model\Widget;
 
 use RuntimeException;
+use Stringable;
 
-final class FractionalPosition 
+final class FractionalPosition implements Stringable
 {
     private function __construct(
         public readonly float $x,
@@ -40,5 +41,10 @@ final class FractionalPosition
     public function invert(): self
     {
         return new self(-$this->x, -$this->y);
+    }
+
+    public function __toString(): string
+    {
+        return sprintf('[%.2f, %.2f]', $this->x, $this->y);
     }
 }

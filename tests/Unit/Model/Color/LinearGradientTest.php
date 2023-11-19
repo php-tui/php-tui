@@ -6,10 +6,9 @@ namespace PhpTui\Tui\Tests\Unit\Model\Color;
 
 use PhpTui\Tui\Model\Color\LinearGradient;
 use PhpTui\Tui\Model\Color\RgbColor;
-use PHPUnit\Framework\TestCase;
 use PhpTui\Tui\Model\Widget\FractionalPosition;
+use PHPUnit\Framework\TestCase;
 use RuntimeException;
-use function PhpTui\Tui\Model\Widget\FractionalPosition;
 
 class LinearGradientTest extends TestCase
 {
@@ -89,9 +88,9 @@ class LinearGradientTest extends TestCase
 
     public function testBounds(): void
     {
-        for ($at = 0; $at <= 1; $at+=0.1) {
-            for ($origin = 0; $origin <= 1; $origin+=0.1) {
-                for ($d = 0; $d < 360; $d+=45) {
+        for ($at = 0; $at <= 1; $at += 0.1) {
+            for ($origin = 0; $origin <= 1; $origin += 0.1) {
+                for ($d = 0; $d < 360; $d += 45) {
                     $color = LinearGradient::from(
                         RgbColor::fromRgb(0, 0, 0)
                     )->addStop(
@@ -103,6 +102,19 @@ class LinearGradientTest extends TestCase
             }
         }
         $this->addToAssertionCount(1);
+    }
+
+    public function testToString(): void
+    {
+        $color = LinearGradient::from(
+            RgbColor::fromRgb(0, 0, 0)
+        )->addStop(
+            1,
+            RgbColor::fromRgb(255, 255, 255)
+        )->withDegrees(90)->withOrigin(FractionalPosition::at(0.5, 0.5));
+
+        self::assertEquals('LinearGradient(deg: 90, origin: [0.50, 0.50], stops: [RGB(0, 0, 0)@0.00, RGB(255, 255, 255)@1.00])', $color->debugName());
+
     }
 
     public function testAddStopAbove1(): void

@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Model\Color;
 
 use PhpTui\Tui\Model\Color;
-use PhpTui\Tui\Model\Widget\FloatPosition;
 use PhpTui\Tui\Model\Widget\FractionalPosition;
 use RuntimeException;
 
+/**
+ * Multi-stop linear gradient with optional angle and point of origin.
+ */
 final class LinearGradient implements Color
 {
     /**
@@ -16,11 +18,6 @@ final class LinearGradient implements Color
      */
     private function __construct(private array $stops, private float $angle, private FractionalPosition $origin)
     {
-    }
-
-    public function __toString(): string
-    {
-        return 'Gradient';
     }
 
     public function withDegrees(float $degrees): self
@@ -44,7 +41,13 @@ final class LinearGradient implements Color
 
     public function debugName(): string
     {
-        return sprintf('Gradient()');
+        return sprintf('LinearGradient(deg: %d, origin: %s, stops: [%s])', 
+            rad2deg($this->angle),
+            $this->origin->__toString(),
+            implode(', ', array_map(function (array $stop) {
+                return sprintf('%s@%.2f', $stop[1]->debugName(), $stop[0]);
+            }, $this->stops))
+        );
     }
 
     public function addStop(float $position, RgbColor $color): self
@@ -68,6 +71,7 @@ final class LinearGradient implements Color
         $position = $position->rotate($this->angle);
         $position = $position->translate($this->origin);
         $fraction = max(0, $position->x);
+
         return $this->atFraction($fraction);
     }
 
