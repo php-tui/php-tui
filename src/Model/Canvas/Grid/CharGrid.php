@@ -10,7 +10,7 @@ use PhpTui\Tui\Model\Canvas\Layer;
 use PhpTui\Tui\Model\Canvas\Resolution;
 use PhpTui\Tui\Model\Color;
 use PhpTui\Tui\Model\Color\AnsiColor;
-use PhpTui\Tui\Model\Position;
+use PhpTui\Tui\Model\Position\Position;
 
 final class CharGrid extends CanvasGrid
 {

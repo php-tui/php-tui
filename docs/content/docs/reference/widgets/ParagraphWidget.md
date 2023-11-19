@@ -20,6 +20,6 @@ Configure the widget using the builder methods named as follows:
 | --- | --- | --- |
 | **style** | `PhpTui\Tui\Model\Style` |  |
 | **wrap** | `PhpTui\Tui\Extension\Core\Widget\Paragraph\Wrap\|null` |  |
-| **text** | `PhpTui\Tui\Model\Widget\Text` |  |
+| **text** | `PhpTui\Tui\Model\Text\Text` |  |
 | **scroll** | `array` |  |
-| **alignment** | `PhpTui\Tui\Model\Widget\HorizontalAlignment` |  |
+| **alignment** | `PhpTui\Tui\Model\HorizontalAlignment` |  |

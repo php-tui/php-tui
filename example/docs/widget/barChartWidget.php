@@ -5,7 +5,7 @@ declare(strict_types=1);
 use PhpTui\Tui\DisplayBuilder;
 use PhpTui\Tui\Extension\Core\Widget\BarChart\BarGroup;
 use PhpTui\Tui\Extension\Core\Widget\BarChartWidget;
-use PhpTui\Tui\Model\Widget\Line;
+use PhpTui\Tui\Model\Text\Line;
 
 require 'vendor/autoload.php';
 

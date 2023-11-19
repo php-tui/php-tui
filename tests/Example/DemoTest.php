@@ -12,7 +12,7 @@ use PhpTui\Term\Painter\BufferPainter;
 use PhpTui\Term\RawMode\NullRawMode;
 use PhpTui\Term\Terminal;
 use PhpTui\Tui\Example\Demo\App;
-use PhpTui\Tui\Model\Backend\DummyBackend;
+use PhpTui\Tui\Model\Display\Backend\DummyBackend;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 

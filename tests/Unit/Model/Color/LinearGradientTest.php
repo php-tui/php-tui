@@ -6,7 +6,7 @@ namespace PhpTui\Tui\Tests\Unit\Model\Color;
 
 use PhpTui\Tui\Model\Color\LinearGradient;
 use PhpTui\Tui\Model\Color\RgbColor;
-use PhpTui\Tui\Model\Widget\FractionalPosition;
+use PhpTui\Tui\Model\Position\FractionalPosition;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 

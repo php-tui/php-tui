@@ -9,11 +9,11 @@ use PhpTui\Tui\Model\Canvas\Grid\BrailleGrid;
 use PhpTui\Tui\Model\Canvas\Grid\CharGrid;
 use PhpTui\Tui\Model\Canvas\Grid\HalfBlockGrid;
 use PhpTui\Tui\Model\Marker;
-use PhpTui\Tui\Model\Widget\BarSet;
-use PhpTui\Tui\Model\Widget\BlockSet;
-use PhpTui\Tui\Model\Widget\FloatPosition;
-use PhpTui\Tui\Model\Widget\Line;
-use PhpTui\Tui\Model\Widget\Symbols;
+use PhpTui\Tui\Model\Position\FloatPosition;
+use PhpTui\Tui\Model\Symbol\BarSet;
+use PhpTui\Tui\Model\Symbol\BlockSet;
+use PhpTui\Tui\Model\Symbol\Symbols;
+use PhpTui\Tui\Model\Text\Line;
 
 final class CanvasContext
 {

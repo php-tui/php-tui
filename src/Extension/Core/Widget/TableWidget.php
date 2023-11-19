@@ -8,7 +8,7 @@ use PhpTui\Tui\Extension\Core\Widget\List\HighlightSpacing;
 use PhpTui\Tui\Extension\Core\Widget\Table\TableRow;
 use PhpTui\Tui\Extension\Core\Widget\Table\TableState;
 use PhpTui\Tui\Model\Area;
-use PhpTui\Tui\Model\Constraint;
+use PhpTui\Tui\Model\Layout\Constraint;
 use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Widget;
 

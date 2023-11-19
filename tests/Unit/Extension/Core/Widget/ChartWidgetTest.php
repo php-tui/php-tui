@@ -11,7 +11,7 @@ use PhpTui\Tui\Model\AxisBounds;
 use PhpTui\Tui\Model\Color\AnsiColor;
 use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Model\Style;
-use PhpTui\Tui\Model\Widget\Span;
+use PhpTui\Tui\Model\Text\Span;
 
 class ChartWidgetTest extends WidgetTestCase
 {

@@ -20,7 +20,7 @@ Configure the shape using the constructor arguments named as follows:
 | --- | --- | --- |
 | **rows** | `array` | Set of lines/rows which make up the Sprite. e.g. `['    ', '  x  ']`. The lines do not have to be of equal length. |
 | **color** | `PhpTui\Tui\Model\Color` | Color of the sprite |
-| **position** | `PhpTui\Tui\Model\Widget\FloatPosition` | Position to place the sprite at (bottom left) |
+| **position** | `PhpTui\Tui\Model\Position\FloatPosition` | Position to place the sprite at (bottom left) |
 | **alphaChar** | `string` | Character to use as the "alpha" (transparent) "channel".Defaults to empty space. |
 | **xScale** | `float` | X scale |
 | **yScale** | `float` | Y scale |

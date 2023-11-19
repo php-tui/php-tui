@@ -18,6 +18,6 @@ Configure the shape using the constructor arguments named as follows:
 
 | Name | Type | Description |
 | --- | --- | --- |
-| **position** | `PhpTui\Tui\Model\Widget\FloatPosition` | Position of the circle |
+| **position** | `PhpTui\Tui\Model\Position\FloatPosition` | Position of the circle |
 | **radius** | `float` | Radius of the circle |
 | **color** | `PhpTui\Tui\Model\Color` | Color of the circle |

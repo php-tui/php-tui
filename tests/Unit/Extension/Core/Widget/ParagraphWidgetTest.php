@@ -7,10 +7,10 @@ namespace PhpTui\Tui\Tests\Unit\Extension\Core\Widget;
 use Generator;
 use PhpTui\Tui\Extension\Core\Widget\ParagraphWidget;
 use PhpTui\Tui\Model\Area;
-use PhpTui\Tui\Model\Buffer;
-use PhpTui\Tui\Model\Widget\HorizontalAlignment;
-use PhpTui\Tui\Model\Widget\Line;
-use PhpTui\Tui\Model\Widget\Text;
+use PhpTui\Tui\Model\Display\Buffer;
+use PhpTui\Tui\Model\HorizontalAlignment;
+use PhpTui\Tui\Model\Text\Line;
+use PhpTui\Tui\Model\Text\Text;
 
 class ParagraphWidgetTest extends WidgetTestCase
 {

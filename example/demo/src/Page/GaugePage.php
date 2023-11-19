@@ -14,14 +14,14 @@ use PhpTui\Tui\Extension\Core\Widget\ParagraphWidget;
 use PhpTui\Tui\Model\Color\AnsiColor;
 use PhpTui\Tui\Model\Color\LinearGradient;
 use PhpTui\Tui\Model\Color\RgbColor;
-use PhpTui\Tui\Model\Constraint;
 use PhpTui\Tui\Model\Direction;
+use PhpTui\Tui\Model\Layout\Constraint;
+use PhpTui\Tui\Model\Position\FractionalPosition;
 use PhpTui\Tui\Model\Style;
+use PhpTui\Tui\Model\Text\Span;
+use PhpTui\Tui\Model\Text\Title;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\Widget\Borders;
-use PhpTui\Tui\Model\Widget\FractionalPosition;
-use PhpTui\Tui\Model\Widget\Span;
-use PhpTui\Tui\Model\Widget\Title;
 
 class GaugePage implements Component
 {

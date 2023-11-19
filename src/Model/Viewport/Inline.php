@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Model\Viewport;
 
 use PhpTui\Tui\Model\Area;
-use PhpTui\Tui\Model\Backend;
-use PhpTui\Tui\Model\ClearType;
-use PhpTui\Tui\Model\Position;
-use PhpTui\Tui\Model\Viewport;
+use PhpTui\Tui\Model\Display\Backend;
+use PhpTui\Tui\Model\Display\ClearType;
+use PhpTui\Tui\Model\Display\Viewport;
+use PhpTui\Tui\Model\Position\Position;
 
 final class Inline implements Viewport
 {

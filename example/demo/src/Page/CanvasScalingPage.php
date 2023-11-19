@@ -21,12 +21,12 @@ use PhpTui\Tui\Extension\ImageMagick\Shape\ImageShape;
 use PhpTui\Tui\Model\Canvas\Painter;
 use PhpTui\Tui\Model\Canvas\Shape;
 use PhpTui\Tui\Model\Color\AnsiColor;
-use PhpTui\Tui\Model\Constraint;
 use PhpTui\Tui\Model\Direction;
+use PhpTui\Tui\Model\Layout\Constraint;
 use PhpTui\Tui\Model\Marker;
+use PhpTui\Tui\Model\Position\FloatPosition;
+use PhpTui\Tui\Model\Text\Title;
 use PhpTui\Tui\Model\Widget;
-use PhpTui\Tui\Model\Widget\FloatPosition;
-use PhpTui\Tui\Model\Widget\Title;
 
 class CanvasScalingPage implements Component
 {

@@ -11,11 +11,11 @@ use PhpTui\Tui\Extension\Core\Widget\List\ListItem;
 use PhpTui\Tui\Extension\Core\Widget\List\ListState;
 use PhpTui\Tui\Extension\Core\Widget\ListWidget;
 use PhpTui\Tui\Model\Color\AnsiColor;
+use PhpTui\Tui\Model\Text\Line;
+use PhpTui\Tui\Model\Text\Span;
+use PhpTui\Tui\Model\Text\Text;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\Widget\Borders;
-use PhpTui\Tui\Model\Widget\Line;
-use PhpTui\Tui\Model\Widget\Span;
-use PhpTui\Tui\Model\Widget\Text;
 
 final class ItemListPage implements Component
 {

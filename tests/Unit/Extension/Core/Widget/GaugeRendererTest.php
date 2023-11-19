@@ -7,9 +7,9 @@ namespace PhpTui\Tui\Tests\Unit\Extension\Core\Widget;
 use Generator;
 use PhpTui\Tui\Extension\Core\Widget\GaugeWidget;
 use PhpTui\Tui\Model\Area;
-use PhpTui\Tui\Model\Buffer;
+use PhpTui\Tui\Model\Display\Buffer;
+use PhpTui\Tui\Model\Text\Span;
 use PhpTui\Tui\Model\Widget;
-use PhpTui\Tui\Model\Widget\Span;
 
 class GaugeRendererTest extends WidgetTestCase
 {

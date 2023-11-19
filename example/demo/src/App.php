@@ -27,19 +27,19 @@ use PhpTui\Tui\Extension\Core\Widget\BlockWidget;
 use PhpTui\Tui\Extension\Core\Widget\GridWidget;
 use PhpTui\Tui\Extension\Core\Widget\ParagraphWidget;
 use PhpTui\Tui\Extension\ImageMagick\ImageMagickExtension;
-use PhpTui\Tui\Model\Backend;
 use PhpTui\Tui\Model\Color\AnsiColor;
-use PhpTui\Tui\Model\Constraint;
 use PhpTui\Tui\Model\Direction;
-use PhpTui\Tui\Model\Display;
+use PhpTui\Tui\Model\Display\Backend;
+use PhpTui\Tui\Model\Display\Display;
+use PhpTui\Tui\Model\HorizontalAlignment;
+use PhpTui\Tui\Model\Layout\Constraint;
 use PhpTui\Tui\Model\Style;
+use PhpTui\Tui\Model\Text\Line;
+use PhpTui\Tui\Model\Text\Span;
+use PhpTui\Tui\Model\Text\Text;
+use PhpTui\Tui\Model\Text\Title;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\Widget\Borders;
-use PhpTui\Tui\Model\Widget\HorizontalAlignment;
-use PhpTui\Tui\Model\Widget\Line;
-use PhpTui\Tui\Model\Widget\Span;
-use PhpTui\Tui\Model\Widget\Text;
-use PhpTui\Tui\Model\Widget\Title;
 use Throwable;
 
 /**

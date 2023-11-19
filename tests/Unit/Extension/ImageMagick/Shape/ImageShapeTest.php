@@ -10,11 +10,11 @@ use PhpTui\Tui\Extension\ImageMagick\Shape\ImagePainter;
 use PhpTui\Tui\Extension\ImageMagick\Shape\ImageShape;
 use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\AxisBounds;
-use PhpTui\Tui\Model\Buffer;
 use PhpTui\Tui\Model\Canvas\CanvasContext;
+use PhpTui\Tui\Model\Display\Buffer;
 use PhpTui\Tui\Model\Marker;
+use PhpTui\Tui\Model\Position\FloatPosition;
 use PhpTui\Tui\Model\Widget\CanvasRenderer;
-use PhpTui\Tui\Model\Widget\FloatPosition;
 use PhpTui\Tui\Model\WidgetRenderer\NullWidgetRenderer;
 use PHPUnit\Framework\TestCase;
 

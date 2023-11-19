@@ -9,10 +9,10 @@ use PhpTui\Tui\Example\Demo\Component;
 use PhpTui\Tui\Extension\Core\Widget\BlockWidget;
 use PhpTui\Tui\Extension\Core\Widget\List\ListItem;
 use PhpTui\Tui\Extension\Core\Widget\ListWidget;
+use PhpTui\Tui\Model\Text\Text;
+use PhpTui\Tui\Model\Text\Title;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\Widget\Borders;
-use PhpTui\Tui\Model\Widget\Text;
-use PhpTui\Tui\Model\Widget\Title;
 
 final class EventsPage implements Component
 {

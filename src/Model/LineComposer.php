@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Model;
 
 use Generator;
-use PhpTui\Tui\Model\Widget\HorizontalAlignment;
-use PhpTui\Tui\Model\Widget\StyledGrapheme;
+use PhpTui\Tui\Model\Text\StyledGrapheme;
 
 interface LineComposer
 {

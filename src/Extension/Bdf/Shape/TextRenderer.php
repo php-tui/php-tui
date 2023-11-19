@@ -9,7 +9,7 @@ use PhpTui\Tui\Extension\Bdf\FontRegistry;
 use PhpTui\Tui\Model\Canvas\Painter;
 use PhpTui\Tui\Model\Canvas\Shape;
 use PhpTui\Tui\Model\Canvas\ShapePainter;
-use PhpTui\Tui\Model\Widget\FloatPosition;
+use PhpTui\Tui\Model\Position\FloatPosition;
 
 class TextRenderer implements ShapePainter
 {
