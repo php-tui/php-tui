@@ -262,4 +262,17 @@ class SpanParserTest extends TestCase
         self::assertSame(RgbColor::fromHex('#ff0000')->debugName(), $firstSpan->style->fg?->debugName());
         self::assertSame(RgbColor::fromHex('#ccc')->debugName(), $firstSpan->style->bg?->debugName());
     }
+
+    public function testParseBreakLines(): void
+    {
+        $text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.';
+
+        $spans = SpanParser::new()->parse("<fg=green>{$text}</>");
+        self::assertCount(1, $spans);
+
+        $firstSpan = $spans[0];
+        self::assertSame($text, $firstSpan->content);
+        self::assertSame(AnsiColor::Green, $firstSpan->style->fg);
+    }
 }
