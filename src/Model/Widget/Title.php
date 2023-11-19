@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Model\Widget;
 
-final class Title
+use PhpTui\Tui\Model\Parseable;
+
+final class Title implements Parseable
 {
     private function __construct(
         public Line $title,
@@ -16,6 +18,11 @@ final class Title
     public static function fromString(string $string): self
     {
         return new self(Line::fromString($string), HorizontalAlignment::Left, VerticalAlignment::Top);
+    }
+
+    public static function parse(string $string): self
+    {
+        return new self(Line::parse($string), HorizontalAlignment::Left, VerticalAlignment::Top);
     }
 
     public function horizontalAlignmnet(HorizontalAlignment $alignment): self

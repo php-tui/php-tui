@@ -27,6 +27,13 @@ final class Text implements Styleable, Parseable
         }, explode("\n", $string)));
     }
 
+    public static function parse(string $string): self
+    {
+        return new self(array_map(function (string $line) {
+            return Line::parse($line);
+        }, explode("\n", $string)));
+    }
+
     public static function fromLine(Line $line): self
     {
         return new self([$line]);
@@ -56,12 +63,5 @@ final class Text implements Styleable, Parseable
     public static function fromLines(Line ...$lines): self
     {
         return new self(array_values($lines));
-    }
-
-    public static function parse(string $string): self
-    {
-        return new self(array_map(function (string $line) {
-            return Line::parse($line);
-        }, explode("\n", $string)));
     }
 }
