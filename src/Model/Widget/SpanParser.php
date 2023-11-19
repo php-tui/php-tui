@@ -83,10 +83,10 @@ final class SpanParser
             if ($key === '' || $value === '') {
                 continue;
             }
-            $style = $this->patchAttributeToStyle($style, $key, $value);
+            $style = $this->updateStyleWithAttribute($style, $key, $value);
         }
 
-        // Apply the style of the outermost tag incorporating modifications from the current tag.
+        // Apply the style of the outermost tag with modifications from the current tag.
         if ($this->styleStack !== []) {
             $outerStyle = end($this->styleStack);
             $style = $outerStyle->patch($style);
@@ -95,7 +95,7 @@ final class SpanParser
         return $style;
     }
 
-    private function patchAttributeToStyle(Style $style, string $attribute, string $value): Style
+    private function updateStyleWithAttribute(Style $style, string $attribute, string $value): Style
     {
         if ($attribute === 'fg') {
             return $style->fg($this->parseColor($value));
