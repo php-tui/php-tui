@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Tests\Unit\Model\Widget;
 
+use InvalidArgumentException;
 use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Modifier;
 use PhpTui\Tui\Model\Widget\SpanParser;
@@ -172,5 +173,12 @@ class SpanParserTest extends TestCase
     {
         $spans = SpanParser::new()->parse('');
         self::assertCount(0, $spans);
+    }
+
+    public function testParseWithInvalidColorName(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Unknown color name "foo"');
+        SpanParser::new()->parse('<fg=foo>Hello</>');
     }
 }
