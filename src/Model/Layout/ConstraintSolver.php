@@ -2,7 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Model;
+namespace PhpTui\Tui\Model\Layout;
+
+use PhpTui\Tui\Model\Areas;
+
+use PhpTui\Tui\Model\Area;
 
 interface ConstraintSolver
 {

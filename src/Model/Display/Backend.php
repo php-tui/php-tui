@@ -2,7 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Model;
+namespace PhpTui\Tui\Model\Display;
+
+use PhpTui\Tui\Model\Area;
+use PhpTui\Tui\Model\Position\Position;
 
 interface Backend
 {

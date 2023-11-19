@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Model\Constraint;
 
-use PhpTui\Tui\Model\Constraint;
+use PhpTui\Tui\Model\Layout\Constraint;
 
 final class MaxConstraint extends Constraint
 {

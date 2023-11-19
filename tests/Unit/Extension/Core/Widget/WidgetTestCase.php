@@ -7,7 +7,7 @@ namespace PhpTui\Tui\Tests\Unit\Extension\Core\Widget;
 use PhpTui\Tui\Extension\Core\Shape\DefaultShapeSet;
 use PhpTui\Tui\Extension\Core\Widget\DefaultWidgetSet;
 use PhpTui\Tui\Model\Area;
-use PhpTui\Tui\Model\Buffer;
+use PhpTui\Tui\Model\Display\Buffer;
 use PhpTui\Tui\Model\Canvas\AggregateShapePainter;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\WidgetRenderer;

@@ -8,7 +8,7 @@ use Generator;
 use PhpTui\Tui\Extension\Core\Widget\List\ListItem;
 use PhpTui\Tui\Extension\Core\Widget\ListWidget;
 use PhpTui\Tui\Model\Area;
-use PhpTui\Tui\Model\Buffer;
+use PhpTui\Tui\Model\Display\Buffer;
 use PhpTui\Tui\Model\Corner;
 use PhpTui\Tui\Model\Text\Text;
 

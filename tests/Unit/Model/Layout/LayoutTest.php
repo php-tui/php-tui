@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Tests\Unit\Model;
+namespace PhpTui\Tui\Tests\Unit\Model\Layout;
 
 use PhpTui\Tui\Model\Area;
-use PhpTui\Tui\Model\Constraint;
+use PhpTui\Tui\Model\Layout\Constraint;
 use PhpTui\Tui\Model\Direction;
-use PhpTui\Tui\Model\Layout;
+use PhpTui\Tui\Model\Layout\Layout;
 use PHPUnit\Framework\TestCase;
 
 class LayoutTest extends TestCase

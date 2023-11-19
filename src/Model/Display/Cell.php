@@ -2,9 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Model;
+namespace PhpTui\Tui\Model\Display;
 
+use PhpTui\Tui\Model\Color;
 use PhpTui\Tui\Model\Color\AnsiColor;
+use PhpTui\Tui\Model\Display\Cell;
+use PhpTui\Tui\Model\Modifier;
+use PhpTui\Tui\Model\Style;
 
 final class Cell
 {

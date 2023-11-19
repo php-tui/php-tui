@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Extension\Bdf;
 
 use PhpTui\Tui\Extension\Bdf\Shape\TextRenderer;
-use PhpTui\Tui\Model\DisplayExtension;
+use PhpTui\Tui\Model\Display\DisplayExtension;
 
 class BdfExtension implements DisplayExtension
 {

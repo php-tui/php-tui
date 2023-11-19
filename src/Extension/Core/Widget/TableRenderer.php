@@ -6,12 +6,12 @@ namespace PhpTui\Tui\Extension\Core\Widget;
 
 use PhpTui\Tui\Extension\Core\Widget\Table\TableCell;
 use PhpTui\Tui\Model\Area;
-use PhpTui\Tui\Model\Buffer;
-use PhpTui\Tui\Model\Constraint;
+use PhpTui\Tui\Model\Display\Buffer;
+use PhpTui\Tui\Model\Layout\Constraint;
 use PhpTui\Tui\Model\Direction;
 use PhpTui\Tui\Model\HorizontalAlignment;
-use PhpTui\Tui\Model\Layout;
-use PhpTui\Tui\Model\Position;
+use PhpTui\Tui\Model\Layout\Layout;
+use PhpTui\Tui\Model\Position\Position;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\WidgetRenderer;
 

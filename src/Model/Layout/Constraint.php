@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Model;
+namespace PhpTui\Tui\Model\Layout;
 
 use PhpTui\Tui\Model\Constraint\LengthConstraint;
 use PhpTui\Tui\Model\Constraint\MaxConstraint;

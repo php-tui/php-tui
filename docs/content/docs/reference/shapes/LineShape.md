@@ -18,6 +18,6 @@ Configure the shape using the constructor arguments named as follows:
 
 | Name | Type | Description |
 | --- | --- | --- |
-| **point1** | `PhpTui\Tui\Model\Widget\FloatPosition` | Draw from this point |
-| **point2** | `PhpTui\Tui\Model\Widget\FloatPosition` | Draw to this point |
+| **point1** | `PhpTui\Tui\Model\Position\FloatPosition` | Draw from this point |
+| **point2** | `PhpTui\Tui\Model\Position\FloatPosition` | Draw to this point |
 | **color** | `PhpTui\Tui\Model\Color` | Color of the line |

@@ -2,11 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Model;
+namespace PhpTui\Tui\Model\Display;
 
 use ArrayIterator;
 use Countable;
 use IteratorAggregate;
+use PhpTui\Tui\Model\Display\BufferUpdate;
 use RuntimeException;
 use Traversable;
 

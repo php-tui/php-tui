@@ -12,7 +12,7 @@ use PhpTui\Tui\Extension\Core\Widget\GridWidget;
 use PhpTui\Tui\Model\Color\AnsiColor;
 use PhpTui\Tui\Model\Color\LinearGradient;
 use PhpTui\Tui\Model\Color\RgbColor;
-use PhpTui\Tui\Model\Constraint;
+use PhpTui\Tui\Model\Layout\Constraint;
 use PhpTui\Tui\Model\Direction;
 use PhpTui\Tui\Model\Position\FractionalPosition;
 use PhpTui\Tui\Model\Style;

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Model\Backend;
+namespace PhpTui\Tui\Model\Display\Backend;
 
 use PhpTui\Tui\Model\Area;
-use PhpTui\Tui\Model\Backend;
-use PhpTui\Tui\Model\BufferUpdates;
-use PhpTui\Tui\Model\ClearType;
-use PhpTui\Tui\Model\Position;
+use PhpTui\Tui\Model\Display\Backend;
+use PhpTui\Tui\Model\Display\BufferUpdates;
+use PhpTui\Tui\Model\Display\ClearType;
+use PhpTui\Tui\Model\Position\Position;
 
 final class DummyBackend implements Backend
 {

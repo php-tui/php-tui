@@ -6,11 +6,11 @@ namespace PhpTui\Tui\Extension\Core\Widget;
 
 use PhpTui\Tui\Extension\Core\Widget\Paragraph\Wrap;
 use PhpTui\Tui\Model\Area;
-use PhpTui\Tui\Model\Buffer;
+use PhpTui\Tui\Model\Display\Buffer;
 use PhpTui\Tui\Model\HorizontalAlignment;
 use PhpTui\Tui\Model\LineComposer;
 use PhpTui\Tui\Model\LineComposer\LineTruncator;
-use PhpTui\Tui\Model\Position;
+use PhpTui\Tui\Model\Position\Position;
 use PhpTui\Tui\Model\Text\Line;
 use PhpTui\Tui\Model\Text\Span;
 use PhpTui\Tui\Model\Text\StyledGrapheme;

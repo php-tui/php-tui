@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Model\Canvas;
 
 use PhpTui\Tui\Model\Color;
-use PhpTui\Tui\Model\Position;
+use PhpTui\Tui\Model\Position\Position;
 use PhpTui\Tui\Model\Position\FloatPosition;
 
 class Painter

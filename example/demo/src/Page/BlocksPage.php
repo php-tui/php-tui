@@ -12,7 +12,7 @@ use PhpTui\Tui\Extension\Core\Widget\GridWidget;
 use PhpTui\Tui\Extension\Core\Widget\Paragraph\Wrap;
 use PhpTui\Tui\Extension\Core\Widget\ParagraphWidget;
 use PhpTui\Tui\Model\Color\AnsiColor;
-use PhpTui\Tui\Model\Constraint;
+use PhpTui\Tui\Model\Layout\Constraint;
 use PhpTui\Tui\Model\Direction;
 use PhpTui\Tui\Model\HorizontalAlignment;
 use PhpTui\Tui\Model\Modifier;

@@ -16,7 +16,7 @@ use PhpTui\Tui\Model\Canvas\CanvasContext;
 use PhpTui\Tui\Model\Color\AnsiColor;
 use PhpTui\Tui\Model\Color\LinearGradient;
 use PhpTui\Tui\Model\Color\RgbColor;
-use PhpTui\Tui\Model\Constraint;
+use PhpTui\Tui\Model\Layout\Constraint;
 use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Model\Position\FloatPosition;
 use PhpTui\Tui\Model\Style;

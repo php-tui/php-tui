@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Tests\Unit\Model\Viewport;
 
 use PhpTui\Tui\Model\Area;
-use PhpTui\Tui\Model\Backend\DummyBackend;
-use PhpTui\Tui\Model\Buffer;
-use PhpTui\Tui\Model\Cell;
-use PhpTui\Tui\Model\ClearType;
-use PhpTui\Tui\Model\Position;
+use PhpTui\Tui\Model\Display\Backend\DummyBackend;
+use PhpTui\Tui\Model\Display\Buffer;
+use PhpTui\Tui\Model\Display\Cell;
+use PhpTui\Tui\Model\Display\ClearType;
+use PhpTui\Tui\Model\Position\Position;
 use PHPUnit\Framework\TestCase;
 
 class FixedTest extends TestCase

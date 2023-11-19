@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Extension\Core\Widget;
 
-use PhpTui\Tui\Model\Constraint;
+use PhpTui\Tui\Model\Layout\Constraint;
 use PhpTui\Tui\Model\Direction;
-use PhpTui\Tui\Model\Layout;
+use PhpTui\Tui\Model\Layout\Layout;
 use PhpTui\Tui\Model\Widget;
 
 /**

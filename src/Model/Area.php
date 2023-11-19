@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Model;
 
+use PhpTui\Tui\Model\Position\Position;
 use RuntimeException;
 use Stringable;
 

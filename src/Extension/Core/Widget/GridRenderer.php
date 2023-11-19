@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Extension\Core\Widget;
 
-use PhpTui\Tui\Model\Buffer;
-use PhpTui\Tui\Model\Layout;
+use PhpTui\Tui\Model\Display\Buffer;
+use PhpTui\Tui\Model\Layout\Layout;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\WidgetRenderer;
 use RuntimeException;
