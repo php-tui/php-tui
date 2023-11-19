@@ -151,6 +151,11 @@ class SpanParserTest extends TestCase
         $firstSpan = $spans[0];
         self::assertSame('Hello <strong class="foo">some info</strong> World', $firstSpan->content);
         self::assertSame(AnsiColor::Green, $firstSpan->style->fg);
+
+        $spans = SpanParser::new()->parse('Hello \<fg=blue\>World\</fg\>');
+        self::assertCount(1, $spans);
+        $firstSpan = $spans[0];
+        self::assertSame('Hello <fg=blue>World</fg>', $firstSpan->content);
     }
 
     public function testParseWithEmptyParameters(): void
@@ -180,5 +185,16 @@ class SpanParserTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Unknown color name "foo"');
         SpanParser::new()->parse('<fg=foo>Hello</>');
+    }
+
+    public function testMalformedTags(): void
+    {
+        $spans = SpanParser::new()->parse('<fg=green>Hello <bg=blue World</fg=green>');
+        self::assertCount(1, $spans);
+
+        $firstSpan = $spans[0];
+        self::assertSame('Hello <bg=blue World', $firstSpan->content);
+        self::assertSame(AnsiColor::Green, $firstSpan->style->fg);
+        self::assertNull($firstSpan->style->bg);
     }
 }
