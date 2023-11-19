@@ -52,7 +52,6 @@ class TextTest extends TestCase
     {
         // This test is to ensure that the text is parsed correctly when it contains line breaks inside and outside the tags.
         $text = Text::parse("<fg=blue bg=white options=bold,italic>Hel\nlo</>\n<fg=white bg=green options=italic>Wor\nld</>");
-
         // Should be parsed into two new lines.
         self::assertCount(2, $text->lines);
 

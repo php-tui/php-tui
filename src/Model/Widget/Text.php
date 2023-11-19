@@ -29,7 +29,7 @@ final class Text implements Styleable, Parseable
 
     public static function parse(string $string): self
     {
-        $placeholder = sprintf('[new_line_%s]', uniqid());
+        $placeholder = sprintf('{{new_line_%s}}', microtime(true));
 
         $string = preg_replace_callback('/<[^>]+>.*?<\/>/s', function ($matches) use ($placeholder) {
             return str_replace("\n", $placeholder, $matches[0]);
