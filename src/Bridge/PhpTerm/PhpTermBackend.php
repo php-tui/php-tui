@@ -27,6 +27,8 @@ use PhpTui\Tui\Model\Color\LinearGradient;
 use PhpTui\Tui\Model\Color\RgbColor;
 use PhpTui\Tui\Model\Modifier;
 use PhpTui\Tui\Model\Position;
+use PhpTui\Tui\Model\Widget\FloatPosition;
+use PhpTui\Tui\Model\Widget\FractionalPosition;
 use RuntimeException;
 
 class PhpTermBackend implements Backend
@@ -229,7 +231,7 @@ class PhpTermBackend implements Backend
             return new SetRgbForegroundColor($color->r, $color->g, $color->b);
         }
         if ($color instanceof LinearGradient) {
-            return $this->setForegroundColor($color->at(0));
+            return $this->setForegroundColor($color->at(FractionalPosition::at(0, 0)));
         }
 
         throw new RuntimeException(sprintf('Do not know how to set color of type "%s"', $color::class));

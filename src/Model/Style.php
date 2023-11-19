@@ -103,9 +103,9 @@ final class Style implements Stringable
     public function atPosition(FractionalPosition $position): self
     {
         return new self(
-            $this->fg ? clone $this->fg->at($position) : null,
-            $this->bg ? clone  $this->bg->at($position) : null,
-            $this->underline ? clone  $this->underline->at($position) : null,
+            $this->fg ? $this->fg->at($position) : null,
+            $this->bg ? $this->bg->at($position) : null,
+            $this->underline ? $this->underline->at($position) : null,
             $this->addModifiers,
             $this->subModifiers
         );
