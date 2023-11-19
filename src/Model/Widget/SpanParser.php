@@ -2,15 +2,14 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Model\Parser;
+namespace PhpTui\Tui\Model\Widget;
 
 use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Color;
 use PhpTui\Tui\Model\Modifier;
 use PhpTui\Tui\Model\Style;
-use PhpTui\Tui\Model\Widget\Span;
 
-class LineParser implements Parser
+final class SpanParser
 {
     private const OPEN_TAG_REGEX = '[a-z](?:[^\\\\<>]*+ | \\\\.)*';
     private const CLOSE_TAG_REGEX = '[a-z][^<>]*+';

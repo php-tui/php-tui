@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Tests\Unit\Model;
+namespace PhpTui\Tui\Tests\Unit\Model\Widget;
 
 use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Modifier;
-use PhpTui\Tui\Model\Parser\LineParser;
+use PhpTui\Tui\Model\Widget\SpanParser;
 use PHPUnit\Framework\TestCase;
 
-class LineParserTest extends TestCase
+class SpanParserTest extends TestCase
 {
     public function testParseOneTag(): void
     {
-        $spans = LineParser::new()->parse('<fg=green bg=blue options=bold,italic>Hello</> World');
+        $spans = SpanParser::new()->parse('<fg=green bg=blue options=bold,italic>Hello</> World');
         self::assertCount(2, $spans);
 
         $firstSpan = $spans[0];
@@ -33,7 +33,7 @@ class LineParserTest extends TestCase
 
     public function testParseNestedTags(): void
     {
-        $spans = LineParser::new()->parse('<fg=green bg=blue options=bold,italic>Hello <fg=white bg=red>Wor</>ld</> PHP');
+        $spans = SpanParser::new()->parse('<fg=green bg=blue options=bold,italic>Hello <fg=white bg=red>Wor</>ld</> PHP');
 
         self::assertCount(4, $spans);
 
@@ -68,7 +68,7 @@ class LineParserTest extends TestCase
 
     public function testParseAngleBrackets(): void
     {
-        $spans = LineParser::new()->parse('<bg=white><fg=blue>PHP</> <fg=red><></> <fg=yellow>Rust</></> 1 > 2 && 2 < 3');
+        $spans = SpanParser::new()->parse('<bg=white><fg=blue>PHP</> <fg=red><></> <fg=yellow>Rust</></> 1 > 2 && 2 < 3');
         self::assertCount(6, $spans);
 
         $firstSpan = $spans[0];
@@ -104,7 +104,7 @@ class LineParserTest extends TestCase
 
     public function testParseWithBreakLine(): void
     {
-        $spans = LineParser::new()->parse("<fg=blue>PHP</>\n<fg=yellow>Rust</>");
+        $spans = SpanParser::new()->parse("<fg=blue>PHP</>\n<fg=yellow>Rust</>");
         self::assertCount(3, $spans);
 
         $firstSpan = $spans[0];
@@ -125,7 +125,7 @@ class LineParserTest extends TestCase
 
     public function testParseWithDuplicateClosingTags(): void
     {
-        $spans = LineParser::new()->parse('<fg=green>Hello</>World</></>');
+        $spans = SpanParser::new()->parse('<fg=green>Hello</>World</></>');
         self::assertCount(2, $spans);
 
         $firstSpan = $spans[0];
@@ -139,13 +139,13 @@ class LineParserTest extends TestCase
 
     public function testParseHandlingOfEscapedTags(): void
     {
-        $spans = LineParser::new()->parse('<fg=green>Hello \<strong class="foo">some info\</strong> World</>');
+        $spans = SpanParser::new()->parse('<fg=green>Hello \<strong class="foo">some info\</strong> World</>');
         self::assertCount(1, $spans);
         $firstSpan = $spans[0];
         self::assertSame('Hello <strong class="foo">some info</strong> World', $firstSpan->content);
         self::assertSame(AnsiColor::Green, $firstSpan->style->fg);
 
-        $spans = LineParser::new()->parse('<fg=green>Hello \<strong class="foo"\>some info\</strong\> World</>');
+        $spans = SpanParser::new()->parse('<fg=green>Hello \<strong class="foo"\>some info\</strong\> World</>');
         self::assertCount(1, $spans);
         $firstSpan = $spans[0];
         self::assertSame('Hello <strong class="foo">some info</strong> World', $firstSpan->content);
@@ -154,7 +154,7 @@ class LineParserTest extends TestCase
 
     public function testParseWithEmptyParameters(): void
     {
-        $spans = LineParser::new()->parse('<fg = >Hello <options>World</></>');
+        $spans = SpanParser::new()->parse('<fg = >Hello <options>World</></>');
         self::assertCount(2, $spans);
 
         $firstSpan = $spans[0];
@@ -166,5 +166,11 @@ class LineParserTest extends TestCase
         self::assertSame('World', $secondSpan->content);
         self::assertNull($secondSpan->style->fg);
         self::assertNull($secondSpan->style->bg);
+    }
+
+    public function testParseEmptyString(): void
+    {
+        $spans = SpanParser::new()->parse('');
+        self::assertCount(0, $spans);
     }
 }
