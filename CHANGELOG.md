@@ -25,6 +25,7 @@ Improvements
 
 Refactoring:
 
+- Various class namespace organization #141
 - Moved `AnsiColor` and `RgbColor` to the `Color` sub-namespace #138
 - Suffix widgets and shapes with `Widget` and `Shape` #130
 - Always render to _new_ buffers #128
