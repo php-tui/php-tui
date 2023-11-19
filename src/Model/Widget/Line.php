@@ -59,10 +59,10 @@ final class Line implements IteratorAggregate, Stringable, Styleable, Parseable
         ], null);
     }
 
-    public static function parse(string $input): self
+    public static function parse(string $string): self
     {
         return self::fromSpans(
-            SpanParser::new()->parse($input)
+            SpanParser::new()->parse($string)
         );
     }
 

@@ -6,5 +6,5 @@ namespace PhpTui\Tui\Model;
 
 interface Parseable
 {
-    public static function parse(string $input): self;
+    public static function parse(string $string): self;
 }

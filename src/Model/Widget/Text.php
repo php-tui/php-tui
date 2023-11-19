@@ -58,8 +58,10 @@ final class Text implements Styleable, Parseable
         return new self(array_values($lines));
     }
 
-    public static function parse(string $input): self
+    public static function parse(string $string): self
     {
-        // TODO: Implement parse() method.
+        return new self(array_map(function (string $line) {
+            return Line::parse($line);
+        }, explode("\n", $string)));
     }
 }
