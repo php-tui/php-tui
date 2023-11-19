@@ -163,20 +163,13 @@ final class BarChartRenderer implements WidgetRenderer
                         if ($barX + $x >= $area->right()) {
                             break;
                         }
-                        ;
+                        $stylePos = FractionalPosition::at(
+                            (($barX + $x) - $area->left()) / $area->width,
+                            1 - ($j / $area->height),
+                        );
                         $cell = $buffer->get(Position::at($barX + $x, $area->top() + $j));
                         $cell->setChar($symbol);
-                        $cell->setStyle($barStyle->map(function (Style $s) use ($barX, $area, $j, $x) {
-                            if (!$s->fg) {
-                                return;
-                            }
-
-                            $s->fg($s->fg->at(FractionalPosition::at(
-                                (($barX + $x) - $area->left()) / $area->width,
-                                1 - ($j / $area->height),
-                            )));
-
-                        }));
+                        $cell->setStyle($barStyle->atPosition($stylePos));
                     }
 
                     $ticks = max(0, $ticks - self::TICKS_PER_LINE);

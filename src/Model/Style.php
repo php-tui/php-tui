@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Model;
 
 use Closure;
+use PhpTui\Tui\Model\Widget\FractionalPosition;
 use Stringable;
 
 final class Style implements Stringable
@@ -99,21 +100,14 @@ final class Style implements Stringable
         return $this;
     }
 
-    /**
-     * Apply the given closure against this instance.
-     *
-     * @param Closure(Style): void $closure
-     */
-    public function map(Closure $closure): self
+    public function atPosition(FractionalPosition $position): self
     {
-        $new = new self(
-            $this->fg ? clone  $this->fg : null,
-            $this->bg ? clone  $this->bg : null,
-            $this->underline ? clone  $this->underline : null,
+        return new self(
+            $this->fg ? clone $this->fg->at($position) : null,
+            $this->bg ? clone  $this->bg->at($position) : null,
+            $this->underline ? clone  $this->underline->at($position) : null,
             $this->addModifiers,
             $this->subModifiers
         );
-        $closure($new);
-        return $new;
     }
 }
