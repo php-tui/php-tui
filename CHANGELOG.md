@@ -10,6 +10,7 @@ Features:
 - BarChart widget #126
 - Allow content to be inserted before the Inline viewport #134
 - Style shortcuts `Span::fromString('foo')->green()->onWhite()` #136 @KennedyTedesco
+- Linear Gradient Color #138
 
 Bug fixes:
 
