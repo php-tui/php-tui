@@ -7,6 +7,9 @@ namespace PhpTui\Tui\Model\Widget;
 use RuntimeException;
 use Stringable;
 
+/**
+ * Represents a position within the bounds of -1 and 1.
+ */
 final class FractionalPosition implements Stringable
 {
     private function __construct(

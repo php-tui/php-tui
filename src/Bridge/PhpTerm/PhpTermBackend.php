@@ -229,6 +229,8 @@ class PhpTermBackend implements Backend
         if ($color instanceof RgbColor) {
             return new SetRgbForegroundColor($color->r, $color->g, $color->b);
         }
+
+        // if we have a raw gradient, use it's first stop.
         if ($color instanceof LinearGradient) {
             return $this->setForegroundColor($color->at(FractionalPosition::at(0, 0)));
         }

@@ -99,6 +99,10 @@ final class Style implements Stringable
         return $this;
     }
 
+    /**
+     * Apply the fractional position to any gradiated colors and return a new
+     * Style.
+     */
     public function atPosition(FractionalPosition $position): self
     {
         return new self(

@@ -20,11 +20,17 @@ final class LinearGradient implements Color
     {
     }
 
+    /**
+     * Rotate the gradient by the given number of degrees.
+     */
     public function withDegrees(float $degrees): self
     {
         return new self($this->stops, deg2rad($degrees), $this->origin);
     }
 
+    /**
+     * Specify the origin of the rotation as a fractional position.
+     */
     public function withOrigin(FractionalPosition $origin): self
     {
         return new self(
@@ -34,6 +40,9 @@ final class LinearGradient implements Color
         );
     }
 
+    /**
+     * Create a new gradient starting from this color at the first stop.
+     */
     public static function from(RgbColor $color): self
     {
         return new self([[0, $color]], 0, FractionalPosition::at(0, 0));
@@ -51,6 +60,9 @@ final class LinearGradient implements Color
         );
     }
 
+    /**
+     * Add a stop at the given fractional offset (0-1)
+     */
     public function addStop(float $position, RgbColor $color): self
     {
         if ($position > 1 || $position < 0) {
@@ -105,13 +117,13 @@ final class LinearGradient implements Color
         $r = $d / $l;
 
         return RgbColor::fromRgb(
-            $this->calculate($lastStop->r, $nextStop->r, $r),
-            $this->calculate($lastStop->g, $nextStop->g, $r),
-            $this->calculate($lastStop->b, $nextStop->b, $r),
+            $this->interpolate($lastStop->r, $nextStop->r, $r),
+            $this->interpolate($lastStop->g, $nextStop->g, $r),
+            $this->interpolate($lastStop->b, $nextStop->b, $r),
         );
     }
 
-    private function calculate(float $c1, float $c2, float $r): int
+    private function interpolate(float $c1, float $c2, float $r): int
     {
         $d = $c2 - $c1;
 
