@@ -14,6 +14,7 @@ use PhpTui\Tui\Model\Position;
 use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\Widget\BarSet;
+use PhpTui\Tui\Model\Widget\FractionalPosition;
 use PhpTui\Tui\Model\Widget\HorizontalAlignment;
 use PhpTui\Tui\Model\WidgetRenderer;
 
@@ -156,19 +157,26 @@ final class BarChartRenderer implements WidgetRenderer
                 for ($j = $area->height - 1; $j >= 0; $j--) {
                     $symbol = BarSet::fromIndex($ticks);
 
-                    $barStyle = $widget->barStyle->patch($bar->style);
-                    $barStyle->fg = $barStyle->fg ?
-                        $barStyle->fg->at(1 - ($j / $area->height)) :
-                        null;
 
+                    $barStyle = $widget->barStyle->patch($bar->style);
                     for ($x = 0; $x < $widget->barWidth; $x++) {
                         if ($barX + $x >= $area->right()) {
                             break;
                         }
+                        ;
                         $cell = $buffer->get(Position::at($barX + $x, $area->top() + $j));
                         $cell->setChar($symbol);
+                        $cell->setStyle($barStyle->map(function (Style $s) use ($barX, $area, $j, $x) {
+                            if (!$s->fg) {
+                                return;
+                            }
 
-                        $cell->setStyle($barStyle);
+                            $s->fg($s->fg->at(FractionalPosition::at(
+                                (($barX + $x) - $area->left()) / $area->width,
+                                1 - ($j / $area->height),
+                            )));
+
+                        }));
                     }
 
                     $ticks = max(0, $ticks - self::TICKS_PER_LINE);
@@ -316,8 +324,10 @@ final class BarChartRenderer implements WidgetRenderer
                         }
                         $gradStyle = clone $barStyle;
                         $gradStyle->fg = $barStyle->fg ?
-                            $barStyle->fg->at($x / $barsArea->width) :
-                            null;
+                            $barStyle->fg->at(FractionalPosition::at(
+                                $x / $area->width,
+                                $y / $area->height,
+                            )) :null;
                         $buffer->get(
                             Position::at(
                                 $barsArea->left() + $x,

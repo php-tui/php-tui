@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Model\Color;
 
 use PhpTui\Tui\Model\Color;
+use PhpTui\Tui\Model\Widget\FloatPosition;
 use PhpTui\Tui\Model\Widget\FractionalPosition;
 use RuntimeException;
 
@@ -13,7 +14,7 @@ final class LinearGradient implements Color
     /**
      * @param non-empty-list<array{float,RgbColor}> $stops
      */
-    private function __construct(private array $stops)
+    private function __construct(private array $stops, private float $angle, private FractionalPosition $origin)
     {
     }
 
@@ -22,9 +23,23 @@ final class LinearGradient implements Color
         return 'Gradient';
     }
 
+    public function withDegrees(float $degrees): self
+    {
+        return new self($this->stops, deg2rad($degrees), $this->origin);
+    }
+
+    public function withOrigin(FractionalPosition $origin): self
+    {
+        return new self(
+            $this->stops,
+            $this->angle,
+            $origin
+        );
+    }
+
     public static function from(RgbColor $color): self
     {
-        return new self([[0, $color]]);
+        return new self([[0, $color]], 0, FractionalPosition::at(0, 0));
     }
 
     public function debugName(): string
@@ -44,20 +59,33 @@ final class LinearGradient implements Color
         $stops = $this->stops;
         $stops[] = [$position, $color];
 
-        return new self($stops);
+        return new self($stops, $this->angle, $this->origin);
     }
 
     public function at(FractionalPosition $position): RgbColor
     {
-        $target = $position->x;
+        $position = $position->translate($this->origin->invert());
+        $position = $position->rotate($this->angle);
+        $position = $position->translate($this->origin);
+        $fraction = $position->x;
+        return $this->atFraction($fraction);
+    }
+
+    private function atFraction(float $fraction): RgbColor
+    {
         // determine last stop
         $stops = $this->stops;
         usort($stops, fn (array $s1, array $s2) => $s1[0] <=> $s2[0]);
         [$lastPosition, $lastStop] = array_shift($stops);
+
+        if ($fraction < 0) {
+            return $lastStop;
+        }
+
         $nextStop = null;
         $nextPosition = null;
         foreach ($stops as [$stopPos, $stop]) {
-            if ($stopPos > $target) {
+            if ($stopPos > $fraction) {
                 $nextStop = $stop;
                 $nextPosition = $stopPos;
 
@@ -67,11 +95,15 @@ final class LinearGradient implements Color
             $lastPosition = $stopPos;
         }
 
+        if ($fraction > 1) {
+            return $lastStop;
+        }
+
         if ($nextStop === null || $nextPosition === null) {
             return $lastStop;
         }
 
-        $d = $target - $lastPosition;
+        $d = $fraction - $lastPosition;
         $l = $nextPosition - $lastPosition;
         $r = $d / $l;
 

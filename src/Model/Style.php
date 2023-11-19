@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Model;
 
+use Closure;
 use Stringable;
 
 final class Style implements Stringable
@@ -61,6 +62,9 @@ final class Style implements Stringable
         return $this;
     }
 
+    /**
+     * Returns a new Style merging the given style with this one.
+     */
     public function patch(Style $other): self
     {
         $addModifiers = ($this->addModifiers & ~$other->subModifiers) | $other->addModifiers;
@@ -93,5 +97,23 @@ final class Style implements Stringable
         $this->subModifiers |= $modifier;
 
         return $this;
+    }
+
+    /**
+     * Apply the given closure against this instance.
+     *
+     * @param Closure(Style): void $closure
+     */
+    public function map(Closure $closure): self
+    {
+        $new = new self(
+            $this->fg ? clone  $this->fg : null,
+            $this->bg ? clone  $this->bg : null,
+            $this->underline ? clone  $this->underline : null,
+            $this->addModifiers,
+            $this->subModifiers
+        );
+        $closure($new);
+        return $new;
     }
 }

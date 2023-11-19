@@ -15,10 +15,12 @@ use PhpTui\Tui\Model\Constraint;
 use PhpTui\Tui\Model\Direction;
 use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Widget;
+use PhpTui\Tui\Model\Widget\FractionalPosition;
 use PhpTui\Tui\Model\Widget\Line;
 
 class BarChartPage implements Component
 {
+    private int $ticker = 0;
     public function build(): Widget
     {
         return
@@ -48,7 +50,7 @@ class BarChartPage implements Component
                                 )->addStop(
                                     1,
                                     RgbColor::fromRgb(0, 255, 255)
-                                )
+                                )->withDegrees($this->ticker+=10 % 360)->withOrigin(FractionalPosition::at(0.5, 0.5))
                             )
                         )
                         ->data(
@@ -73,7 +75,7 @@ class BarChartPage implements Component
                                 )->addStop(
                                     1,
                                     RgbColor::fromRgb(255, 62, 149)
-                                )
+                                )->withDegrees(-90)
                             )
                         )
                         ->data(
@@ -91,7 +93,7 @@ class BarChartPage implements Component
                 ),
                 BarChartWidget::default()
                     ->direction(Direction::Horizontal)
-                    ->barWidth(1)
+                    ->barWidth(2)
                     ->groupGap(4)
                     ->barStyle(
                         Style::default()->fg(
