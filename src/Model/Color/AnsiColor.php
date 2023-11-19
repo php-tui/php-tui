@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Model\Color;
 
-use PhpTui\Tui\Model\Color;
-use PhpTui\Tui\Model\Widget\FractionalPosition;
-
 use InvalidArgumentException;
+use PhpTui\Tui\Model\Color;
+
+use PhpTui\Tui\Model\Widget\FractionalPosition;
 
 enum AnsiColor: int implements Color
 {
