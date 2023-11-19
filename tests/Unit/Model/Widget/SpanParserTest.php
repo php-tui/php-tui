@@ -6,6 +6,7 @@ namespace PhpTui\Tui\Tests\Unit\Model\Widget;
 
 use InvalidArgumentException;
 use PhpTui\Tui\Model\Color\AnsiColor;
+use PhpTui\Tui\Model\Color\RgbColor;
 use PhpTui\Tui\Model\Modifier;
 use PhpTui\Tui\Model\Widget\SpanParser;
 use PHPUnit\Framework\TestCase;
@@ -249,5 +250,16 @@ class SpanParserTest extends TestCase
         self::assertSame(' World', $secondSpan->content);
         self::assertNull($secondSpan->style->fg);
         self::assertNull($secondSpan->style->bg);
+    }
+
+    public function testParseHexColors(): void
+    {
+        $spans = SpanParser::new()->parse('<fg=#ff0000 bg=#ccc>Hello</>');
+        self::assertCount(1, $spans);
+
+        $firstSpan = $spans[0];
+        self::assertSame('Hello', $firstSpan->content);
+        self::assertSame(RgbColor::fromHex('#ff0000')->debugName(), $firstSpan->style->fg?->debugName());
+        self::assertSame(RgbColor::fromHex('#ccc')->debugName(), $firstSpan->style->bg?->debugName());
     }
 }

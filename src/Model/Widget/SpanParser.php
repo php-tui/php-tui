@@ -6,6 +6,7 @@ namespace PhpTui\Tui\Model\Widget;
 
 use PhpTui\Tui\Model\Color;
 use PhpTui\Tui\Model\Color\AnsiColor;
+use PhpTui\Tui\Model\Color\RgbColor;
 use PhpTui\Tui\Model\Modifier;
 use PhpTui\Tui\Model\Style;
 
@@ -117,8 +118,7 @@ final class SpanParser
     private function parseColor(string $color): Color
     {
         if (str_starts_with($color, '#')) {
-            // From Hex to RGB
-            // TODO
+            return RgbColor::fromHex($color);
         }
 
         return AnsiColor::fromName($color);

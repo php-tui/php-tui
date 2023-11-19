@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Model\Color;
 
+use InvalidArgumentException;
 use OutOfBoundsException;
 use PhpTui\Tui\Model\Color;
 use PhpTui\Tui\Model\Widget\FractionalPosition;
@@ -134,6 +135,29 @@ class RgbColor implements Color, Stringable
             (int) (round($dR)),
             (int) (round($dG)),
             (int) (round($dB))
+        );
+    }
+
+    public static function fromHex(string $hex): self
+    {
+        $hex = ltrim($hex, '#');
+
+        // Expand shorthand notation
+        if (strlen($hex) === 3) {
+            /** @var string $hex */
+            $hex = preg_replace('/(.)(.)(.)/', '$1$1$2$2$3$3', $hex);
+        }
+
+        if (!preg_match('/^[a-fA-F0-9]{6}$/', $hex)) {
+            throw new InvalidArgumentException("Invalid hex color: $hex");
+        }
+
+        $int = hexdec($hex);
+
+        return new self(
+            r: 0xFF & ($int >> 0x10),
+            g: 0xFF & ($int >> 0x8),
+            b: 0xFF & $int,
         );
     }
 
