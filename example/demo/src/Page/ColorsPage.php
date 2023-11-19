@@ -7,10 +7,10 @@ namespace PhpTui\Tui\Example\Demo\Page;
 use PhpTui\Term\Event;
 use PhpTui\Tui\Example\Demo\Component;
 use PhpTui\Tui\Extension\Core\Widget\RawWidget;
-use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Buffer;
+use PhpTui\Tui\Model\Color\AnsiColor;
+use PhpTui\Tui\Model\Color\RgbColor;
 use PhpTui\Tui\Model\Position;
-use PhpTui\Tui\Model\RgbColor;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\Widget\Span;
 

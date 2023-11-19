@@ -10,6 +10,7 @@ Features:
 - BarChart widget #126
 - Allow content to be inserted before the Inline viewport #134
 - Style shortcuts `Span::fromString('foo')->green()->onWhite()` #136 @KennedyTedesco
+- Linear Gradient Color #138
 
 Bug fixes:
 
@@ -23,6 +24,7 @@ Improvements
 
 Refactoring:
 
+- Moved `AnsiColor` and `RgbColor` to the `Color` sub-namespace #138
 - Suffix widgets and shapes with `Widget` and `Shape` #130
 - Always render to _new_ buffers #128
 - Re-organized namespaces

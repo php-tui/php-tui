@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Model;
 
+use PhpTui\Tui\Model\Widget\FractionalPosition;
 use Stringable;
 
 final class Style implements Stringable
@@ -61,6 +62,9 @@ final class Style implements Stringable
         return $this;
     }
 
+    /**
+     * Returns a new Style merging the given style with this one.
+     */
     public function patch(Style $other): self
     {
         $addModifiers = ($this->addModifiers & ~$other->subModifiers) | $other->addModifiers;
@@ -93,5 +97,20 @@ final class Style implements Stringable
         $this->subModifiers |= $modifier;
 
         return $this;
+    }
+
+    /**
+     * Apply the fractional position to any gradiated colors and return a new
+     * Style.
+     */
+    public function atPosition(FractionalPosition $position): self
+    {
+        return new self(
+            $this->fg ? $this->fg->at($position) : null,
+            $this->bg ? $this->bg->at($position) : null,
+            $this->underline ? $this->underline->at($position) : null,
+            $this->addModifiers,
+            $this->subModifiers
+        );
     }
 }

@@ -14,6 +14,7 @@ use PhpTui\Tui\Model\Position;
 use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\Widget\BarSet;
+use PhpTui\Tui\Model\Widget\FractionalPosition;
 use PhpTui\Tui\Model\Widget\HorizontalAlignment;
 use PhpTui\Tui\Model\WidgetRenderer;
 
@@ -157,14 +158,17 @@ final class BarChartRenderer implements WidgetRenderer
                     $symbol = BarSet::fromIndex($ticks);
 
                     $barStyle = $widget->barStyle->patch($bar->style);
-
                     for ($x = 0; $x < $widget->barWidth; $x++) {
                         if ($barX + $x >= $area->right()) {
                             break;
                         }
+                        $stylePos = FractionalPosition::at(
+                            (($barX + $x) - $area->left()) / $area->width,
+                            1 - ($j / $area->height),
+                        );
                         $cell = $buffer->get(Position::at($barX + $x, $area->top() + $j));
                         $cell->setChar($symbol);
-                        $cell->setStyle($barStyle);
+                        $cell->setStyle($barStyle->atPosition($stylePos));
                     }
 
                     $ticks = max(0, $ticks - self::TICKS_PER_LINE);
@@ -305,16 +309,23 @@ final class BarChartRenderer implements WidgetRenderer
                     }
 
                     for ($x = 0; $x < $barsArea->width; $x++) {
+
                         $symbol = $x < $barLength ? BarSet::FULL : BarSet::EMPTY;
                         if ($barsArea->left() + $x >= $buffer->area()->right()) {
                             break;
                         }
+                        $gradStyle = clone $barStyle;
+                        $gradStyle->fg = $barStyle->fg ?
+                            $barStyle->fg->at(FractionalPosition::at(
+                                $x / $area->width,
+                                $y / $area->height,
+                            )) : null;
                         $buffer->get(
                             Position::at(
                                 $barsArea->left() + $x,
                                 $barY,
                             )
-                        )->setChar($symbol)->setStyle($barStyle);
+                        )->setChar($symbol)->setStyle($gradStyle);
                     }
                 }
                 $barValueArea = Area::fromScalars(

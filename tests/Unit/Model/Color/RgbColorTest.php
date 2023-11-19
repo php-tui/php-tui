@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Tests\Unit\Model;
+namespace PhpTui\Tui\Tests\Unit\Model\Color;
 
-use PhpTui\Tui\Model\RgbColor;
+use PhpTui\Tui\Model\Color\RgbColor;
 use PHPUnit\Framework\TestCase;
 
 class RgbColorTest extends TestCase

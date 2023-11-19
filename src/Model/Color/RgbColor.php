@@ -2,17 +2,25 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Model;
+namespace PhpTui\Tui\Model\Color;
 
 use OutOfBoundsException;
+use PhpTui\Tui\Model\Color;
+use PhpTui\Tui\Model\Widget\FractionalPosition;
+use Stringable;
 
-class RgbColor implements Color
+class RgbColor implements Color, Stringable
 {
     private function __construct(public int $r, public int $g, public int $b)
     {
         self::assertRange('red', 0, 255, $r);
         self::assertRange('green', 0, 255, $r);
         self::assertRange('blue', 0, 255, $r);
+    }
+
+    public function __toString(): string
+    {
+        return $this->debugName();
     }
 
     public static function fromRgb(int $r, int $g, int $b): self
@@ -137,6 +145,11 @@ class RgbColor implements Color
     public function toHex(): string
     {
         return sprintf('#%02x%02x%02x', $this->r, $this->g, $this->b);
+    }
+
+    public function at(FractionalPosition $position): RgbColor
+    {
+        return $this;
     }
 
     private static function assertRange(string $context, int $min, int $max, int $value): void

@@ -5,7 +5,7 @@ declare(strict_types=1);
 use PhpTui\Tui\DisplayBuilder;
 use PhpTui\Tui\Extension\Core\Shape\SpriteShape;
 use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
-use PhpTui\Tui\Model\AnsiColor;
+use PhpTui\Tui\Model\Color\AnsiColor;
 use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Model\Widget\FloatPosition;
 

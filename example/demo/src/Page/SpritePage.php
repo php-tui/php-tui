@@ -12,11 +12,12 @@ use PhpTui\Tui\Extension\Core\Shape\SpriteShape;
 use PhpTui\Tui\Extension\Core\Widget\BlockWidget;
 use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
 use PhpTui\Tui\Extension\Core\Widget\GridWidget;
-use PhpTui\Tui\Model\AnsiColor;
 use PhpTui\Tui\Model\Canvas\CanvasContext;
+use PhpTui\Tui\Model\Color\AnsiColor;
+use PhpTui\Tui\Model\Color\LinearGradient;
+use PhpTui\Tui\Model\Color\RgbColor;
 use PhpTui\Tui\Model\Constraint;
 use PhpTui\Tui\Model\Marker;
-use PhpTui\Tui\Model\RgbColor;
 use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\Widget\Borders;
@@ -59,7 +60,7 @@ class SpritePage implements Component
                 '███  ███████████████████████ ',
                 '███  ████ ████  ████  ██████ ',
             ],
-            color: AnsiColor::Blue,
+            color: LinearGradient::from(RgbColor::fromRgb(138, 153, 213))->addStop(1, RgbColor::fromRgb(74, 86, 134)),
             alphaChar: ' ',
             xScale: 1,
             yScale: 1,

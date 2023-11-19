@@ -11,12 +11,15 @@ use PhpTui\Tui\Extension\Core\Widget\BlockWidget;
 use PhpTui\Tui\Extension\Core\Widget\GaugeWidget;
 use PhpTui\Tui\Extension\Core\Widget\GridWidget;
 use PhpTui\Tui\Extension\Core\Widget\ParagraphWidget;
-use PhpTui\Tui\Model\AnsiColor;
+use PhpTui\Tui\Model\Color\AnsiColor;
+use PhpTui\Tui\Model\Color\LinearGradient;
+use PhpTui\Tui\Model\Color\RgbColor;
 use PhpTui\Tui\Model\Constraint;
 use PhpTui\Tui\Model\Direction;
 use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\Widget\Borders;
+use PhpTui\Tui\Model\Widget\FractionalPosition;
 use PhpTui\Tui\Model\Widget\Span;
 use PhpTui\Tui\Model\Widget\Title;
 
@@ -77,7 +80,19 @@ class GaugePage implements Component
                                     ),
                                     GaugeWidget::default()
                                         ->ratio($download->ratio())
-                                        ->style(Style::default()->fg(AnsiColor::Yellow))
+                                        ->style(
+                                            Style::default()->fg(
+                                                LinearGradient::from(
+                                                    RgbColor::fromRgb(255, 100, 100)
+                                                )->addStop(
+                                                    0.5,
+                                                    RgbColor::fromRgb(50, 255, 50)
+                                                )->addStop(
+                                                    1,
+                                                    RgbColor::fromRgb(0, 255, 255)
+                                                )->withDegrees(0)->withOrigin(FractionalPosition::at(0, 0))
+                                            )
+                                        )
                                 );
                         },
                         $this->downloads

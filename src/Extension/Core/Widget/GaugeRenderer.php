@@ -8,6 +8,7 @@ use PhpTui\Tui\Model\Buffer;
 use PhpTui\Tui\Model\Position;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\Widget\BlockSet;
+use PhpTui\Tui\Model\Widget\FractionalPosition;
 use PhpTui\Tui\Model\Widget\Span;
 use PhpTui\Tui\Model\WidgetRenderer;
 
@@ -46,6 +47,10 @@ final class GaugeRenderer implements WidgetRenderer
                 $cell = $buffer->get(Position::at($x, $y));
                 if ($x < $labelCol || $x > $labelCol + $clampedLabelWidth - 1 || $y != $labelRow) {
                     $cell->setChar(BlockSet::FULL);
+                    $cell->setStyle($widget->style->atPosition(FractionalPosition::at(
+                        ($x - $area->left()) / $area->width,
+                        ($y - $area->top()) / $area->height,
+                    )));
                 } else {
                     $cell->setChar(' ');
                 }
