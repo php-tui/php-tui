@@ -9,6 +9,7 @@ use PhpTui\Tui\Example\Demo\Component;
 use PhpTui\Tui\Extension\Core\Widget\BarChart\BarGroup;
 use PhpTui\Tui\Extension\Core\Widget\BarChartWidget;
 use PhpTui\Tui\Extension\Core\Widget\GridWidget;
+use PhpTui\Tui\Model\Color\AnsiColor;
 use PhpTui\Tui\Model\Color\LinearGradient;
 use PhpTui\Tui\Model\Color\RgbColor;
 use PhpTui\Tui\Model\Constraint;
@@ -20,7 +21,6 @@ use PhpTui\Tui\Model\Widget\Line;
 
 class BarChartPage implements Component
 {
-    private int $ticker = 0;
     public function build(): Widget
     {
         return
@@ -43,14 +43,19 @@ class BarChartPage implements Component
                         ->barStyle(
                             Style::default()->fg(
                                 LinearGradient::from(
-                                    RgbColor::fromRgb(100, 0, 0)
+                                    RgbColor::fromRgb(255, 100, 100)
                                 )->addStop(
                                     0.5,
                                     RgbColor::fromRgb(50, 255, 50)
                                 )->addStop(
                                     1,
                                     RgbColor::fromRgb(0, 255, 255)
-                                )->withDegrees($this->ticker+=10 % 360)->withOrigin(FractionalPosition::at(0.5, 0.5))
+                                )->withDegrees(
+                                    45 
+                                )
+                                ->withOrigin(
+                                    FractionalPosition::at(0.5, 0.5)
+                                )
                             )
                         )
                         ->data(
@@ -68,16 +73,7 @@ class BarChartPage implements Component
                     BarChartWidget::default()
                         ->barWidth(10)
                         ->groupGap(5)
-                        ->barStyle(
-                            Style::default()->fg(
-                                LinearGradient::from(
-                                    RgbColor::fromRgb(16, 160, 173)
-                                )->addStop(
-                                    1,
-                                    RgbColor::fromRgb(255, 62, 149)
-                                )->withDegrees(-90)
-                            )
-                        )
+                        ->barStyle(Style::default()->fg(AnsiColor::Red))
                         ->data(
                             BarGroup::fromArray([
                                 '1' => 12,
@@ -93,7 +89,7 @@ class BarChartPage implements Component
                 ),
                 BarChartWidget::default()
                     ->direction(Direction::Horizontal)
-                    ->barWidth(2)
+                    ->barWidth(1)
                     ->groupGap(4)
                     ->barStyle(
                         Style::default()->fg(
