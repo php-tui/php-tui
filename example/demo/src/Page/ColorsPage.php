@@ -11,7 +11,6 @@ use PhpTui\Tui\Model\Buffer;
 use PhpTui\Tui\Model\Color\AnsiColor;
 use PhpTui\Tui\Model\Color\RgbColor;
 use PhpTui\Tui\Model\Position;
-use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\Widget\Span;
 
