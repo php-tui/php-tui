@@ -49,8 +49,8 @@ final class SpanParser
 
             $isOpeningTag = $tag[1] !== '/';
             if ($isOpeningTag) {
-                $styleTag = $matches[1][$index][0];
-                $this->styleStack[] = $this->createStyleFromTag($styleTag);
+                $tagAttributes = $matches[1][$index][0];
+                $this->styleStack[] = $this->createStyleFromTag($tagAttributes);
             } else {
                 array_pop($this->styleStack);
             }
