@@ -15,7 +15,7 @@ class SpanParserTest extends TestCase
 {
     public function testParseOneTag(): void
     {
-        $spans = SpanParser::new()->parse('<fg=green bg=blue options=bold,italic>Hello</> World');
+        $spans = SpanParser::new()->parse('<fg=green;bg=blue;options=bold,italic>Hello</> World');
         self::assertCount(2, $spans);
 
         $firstSpan = $spans[0];
@@ -35,7 +35,7 @@ class SpanParserTest extends TestCase
 
     public function testParseNestedTags(): void
     {
-        $spans = SpanParser::new()->parse('<fg=green bg=blue options=bold,italic>Hello <fg=white bg=red>Wor</>ld</> PHP');
+        $spans = SpanParser::new()->parse('<fg=green;bg=blue;options=bold,italic>Hello <fg=white;bg=red>Wor</>ld</> PHP');
 
         self::assertCount(4, $spans);
 
@@ -254,7 +254,7 @@ class SpanParserTest extends TestCase
 
     public function testParseHexColors(): void
     {
-        $spans = SpanParser::new()->parse('<fg=#ff0000 bg=#ccc>Hello</>');
+        $spans = SpanParser::new()->parse('<fg=#ff0000;bg=#ccc>Hello</>');
         self::assertCount(1, $spans);
 
         $firstSpan = $spans[0];
@@ -274,5 +274,12 @@ class SpanParserTest extends TestCase
         $firstSpan = $spans[0];
         self::assertSame($text, $firstSpan->content);
         self::assertSame(AnsiColor::Green, $firstSpan->style->fg);
+    }
+
+    public function testUsingWrongSeparator(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $spans = SpanParser::new()->parse('<fg=white bg=red>Hello</> World');
+        self::assertCount(2, $spans);
     }
 }

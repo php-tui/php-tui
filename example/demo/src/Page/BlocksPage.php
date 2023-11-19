@@ -162,7 +162,7 @@ class BlocksPage implements Component
     {
         return BlockWidget::default()
             ->borders(Borders::ALL)
-            ->titles(Title::parse('<fg=red bg=white>Titles</>'))
+            ->titles(Title::parse('<fg=red;bg=white>Titles</>'))
             ->widget($paragraph);
     }
 

@@ -10,6 +10,12 @@ use PhpTui\Tui\Model\Color\RgbColor;
 use PhpTui\Tui\Model\Modifier;
 use PhpTui\Tui\Model\Style;
 
+/**
+ * This class is a subset of the Symfony Console component's OutputFormatter class.
+ * It parses strings containing tags into a list of spans.
+ *
+ * @see https://symfony.com/doc/current/console/coloring.html
+ */
 final class SpanParser
 {
     private const OPEN_TAG_REGEX = '[a-z](?:[^\\\\<>]*+ | \\\\.)*';
@@ -73,8 +79,8 @@ final class SpanParser
     private function createStyleFromTag(string $tag, array &$styleStack): Style
     {
         $style = Style::default();
-        $attributes = explode(' ', $tag);
 
+        $attributes = explode(';', $tag);
         foreach ($attributes as $attribute) {
             $attribute = explode('=', $attribute);
             [$key, $value] = [
