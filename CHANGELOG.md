@@ -11,6 +11,7 @@ Features:
 - Allow content to be inserted before the Inline viewport #134
 - Style shortcuts `Span::fromString('foo')->green()->onWhite()` #136 @KennedyTedesco
 - Linear Gradient Color #138
+- Support creation of spans from subset of Symfony console markup #140 @KennedyTedesco
 
 Bug fixes:
 
