@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Tests\Unit\Model\Widget;
+namespace PhpTui\Tui\Tests\Unit\Model\Text;
 
 use PhpTui\Tui\Model\Color\AnsiColor;
 use PhpTui\Tui\Model\Modifier;
 use PhpTui\Tui\Model\Style;
-use PhpTui\Tui\Model\Widget\Text;
+use PhpTui\Tui\Model\Text\Text;
 use PHPUnit\Framework\TestCase;
 
 class TextTest extends TestCase

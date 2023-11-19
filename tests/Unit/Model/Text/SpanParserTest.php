@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Tests\Unit\Model\Widget;
+namespace PhpTui\Tui\Tests\Unit\Model\Text;
 
 use InvalidArgumentException;
 use PhpTui\Tui\Model\Color\AnsiColor;
 use PhpTui\Tui\Model\Color\RgbColor;
 use PhpTui\Tui\Model\Modifier;
-use PhpTui\Tui\Model\Widget\SpanParser;
+use PhpTui\Tui\Model\Text\SpanParser;
 use PHPUnit\Framework\TestCase;
 
 class SpanParserTest extends TestCase

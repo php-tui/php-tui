@@ -13,8 +13,8 @@ use PhpTui\Tui\Model\Canvas\Shape;
 use PhpTui\Tui\Model\Canvas\ShapePainter;
 use PhpTui\Tui\Model\Color\AnsiColor;
 use PhpTui\Tui\Model\Color\RgbColor;
-use PhpTui\Tui\Model\Widget\FloatPosition;
-use PhpTui\Tui\Model\Widget\Line as PhpTuiLine;
+use PhpTui\Tui\Model\Position\FloatPosition;
+use PhpTui\Tui\Model\Text\Line as PhpTuiLine;
 
 final class ImagePainter implements ShapePainter
 {

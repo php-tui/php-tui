@@ -12,8 +12,8 @@ use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Buffer;
 use PhpTui\Tui\Model\Direction;
 use PhpTui\Tui\Model\Style;
+use PhpTui\Tui\Model\Text\Line;
 use PhpTui\Tui\Model\Widget;
-use PhpTui\Tui\Model\Widget\Line;
 
 class BarChartRendererTest extends WidgetTestCase
 {

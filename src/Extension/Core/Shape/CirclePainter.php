@@ -7,7 +7,7 @@ namespace PhpTui\Tui\Extension\Core\Shape;
 use PhpTui\Tui\Model\Canvas\Painter;
 use PhpTui\Tui\Model\Canvas\Shape;
 use PhpTui\Tui\Model\Canvas\ShapePainter;
-use PhpTui\Tui\Model\Widget\FloatPosition;
+use PhpTui\Tui\Model\Position\FloatPosition;
 
 class CirclePainter implements ShapePainter
 {

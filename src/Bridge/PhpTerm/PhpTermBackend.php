@@ -27,7 +27,7 @@ use PhpTui\Tui\Model\Color\LinearGradient;
 use PhpTui\Tui\Model\Color\RgbColor;
 use PhpTui\Tui\Model\Modifier;
 use PhpTui\Tui\Model\Position;
-use PhpTui\Tui\Model\Widget\FractionalPosition;
+use PhpTui\Tui\Model\Position\FractionalPosition;
 use RuntimeException;
 
 class PhpTermBackend implements Backend

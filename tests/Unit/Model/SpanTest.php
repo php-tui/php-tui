@@ -6,7 +6,7 @@ namespace PhpTui\Tui\Tests\Unit\Model;
 
 use PhpTui\Tui\Model\Color\AnsiColor;
 use PhpTui\Tui\Model\Style;
-use PhpTui\Tui\Model\Widget\Span;
+use PhpTui\Tui\Model\Text\Span;
 use PHPUnit\Framework\TestCase;
 
 class SpanTest extends TestCase

@@ -12,7 +12,7 @@ use PhpTui\Tui\Model\Canvas\Resolution;
 use PhpTui\Tui\Model\Color;
 use PhpTui\Tui\Model\Color\AnsiColor;
 use PhpTui\Tui\Model\Position;
-use PhpTui\Tui\Model\Widget\BrailleSet;
+use PhpTui\Tui\Model\Symbol\BrailleSet;
 
 final class BrailleGrid extends CanvasGrid
 {

@@ -6,10 +6,10 @@ namespace PhpTui\Tui\Extension\Core\Widget;
 
 use PhpTui\Tui\Model\Buffer;
 use PhpTui\Tui\Model\Position;
+use PhpTui\Tui\Model\Position\FractionalPosition;
+use PhpTui\Tui\Model\Symbol\BlockSet;
+use PhpTui\Tui\Model\Text\Span;
 use PhpTui\Tui\Model\Widget;
-use PhpTui\Tui\Model\Widget\BlockSet;
-use PhpTui\Tui\Model\Widget\FractionalPosition;
-use PhpTui\Tui\Model\Widget\Span;
 use PhpTui\Tui\Model\WidgetRenderer;
 
 final class GaugeRenderer implements WidgetRenderer

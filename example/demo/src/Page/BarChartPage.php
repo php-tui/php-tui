@@ -14,10 +14,10 @@ use PhpTui\Tui\Model\Color\LinearGradient;
 use PhpTui\Tui\Model\Color\RgbColor;
 use PhpTui\Tui\Model\Constraint;
 use PhpTui\Tui\Model\Direction;
+use PhpTui\Tui\Model\Position\FractionalPosition;
 use PhpTui\Tui\Model\Style;
+use PhpTui\Tui\Model\Text\Line;
 use PhpTui\Tui\Model\Widget;
-use PhpTui\Tui\Model\Widget\FractionalPosition;
-use PhpTui\Tui\Model\Widget\Line;
 
 class BarChartPage implements Component
 {

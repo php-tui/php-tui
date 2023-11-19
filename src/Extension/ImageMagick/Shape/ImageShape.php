@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Extension\ImageMagick\Shape;
 
 use PhpTui\Tui\Model\Canvas\Shape;
-use PhpTui\Tui\Model\Widget\FloatPosition;
+use PhpTui\Tui\Model\Position\FloatPosition;
 use RuntimeException;
 
 /**

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Model\Widget;
 
+use PhpTui\Tui\Model\Symbol\LineSet;
+
 enum BorderType
 {
     case Plain;

@@ -10,11 +10,11 @@ use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Buffer;
 use PhpTui\Tui\Model\Canvas\CanvasContext;
 use PhpTui\Tui\Model\Color\AnsiColor;
+use PhpTui\Tui\Model\HorizontalAlignment;
 use PhpTui\Tui\Model\Position;
+use PhpTui\Tui\Model\Symbol\LineSet;
+use PhpTui\Tui\Model\Text\Span;
 use PhpTui\Tui\Model\Widget;
-use PhpTui\Tui\Model\Widget\HorizontalAlignment;
-use PhpTui\Tui\Model\Widget\LineSet;
-use PhpTui\Tui\Model\Widget\Span;
 use PhpTui\Tui\Model\WidgetRenderer;
 use RuntimeException;
 

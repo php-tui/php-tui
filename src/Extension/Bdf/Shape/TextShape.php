@@ -6,7 +6,7 @@ namespace PhpTui\Tui\Extension\Bdf\Shape;
 
 use PhpTui\Tui\Model\Canvas\Shape;
 use PhpTui\Tui\Model\Color;
-use PhpTui\Tui\Model\Widget\FloatPosition;
+use PhpTui\Tui\Model\Position\FloatPosition;
 
 /**
  * Renders text on the canvas.

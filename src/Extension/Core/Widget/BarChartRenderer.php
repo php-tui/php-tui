@@ -10,12 +10,12 @@ use PhpTui\Tui\Extension\Core\Widget\BarChart\LabelInfo;
 use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Buffer;
 use PhpTui\Tui\Model\Direction;
+use PhpTui\Tui\Model\HorizontalAlignment;
 use PhpTui\Tui\Model\Position;
+use PhpTui\Tui\Model\Position\FractionalPosition;
 use PhpTui\Tui\Model\Style;
+use PhpTui\Tui\Model\Symbol\BarSet;
 use PhpTui\Tui\Model\Widget;
-use PhpTui\Tui\Model\Widget\BarSet;
-use PhpTui\Tui\Model\Widget\FractionalPosition;
-use PhpTui\Tui\Model\Widget\HorizontalAlignment;
 use PhpTui\Tui\Model\WidgetRenderer;
 
 final class BarChartRenderer implements WidgetRenderer

@@ -18,11 +18,11 @@ use PhpTui\Tui\Model\Color\LinearGradient;
 use PhpTui\Tui\Model\Color\RgbColor;
 use PhpTui\Tui\Model\Constraint;
 use PhpTui\Tui\Model\Marker;
+use PhpTui\Tui\Model\Position\FloatPosition;
 use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\Widget\Borders;
 use PhpTui\Tui\Model\Widget\BorderType;
-use PhpTui\Tui\Model\Widget\FloatPosition;
 
 class SpritePage implements Component
 {

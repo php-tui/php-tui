@@ -7,7 +7,7 @@ namespace PhpTui\Tui\Model\Color;
 use InvalidArgumentException;
 use OutOfBoundsException;
 use PhpTui\Tui\Model\Color;
-use PhpTui\Tui\Model\Widget\FractionalPosition;
+use PhpTui\Tui\Model\Position\FractionalPosition;
 use Stringable;
 
 class RgbColor implements Color, Stringable

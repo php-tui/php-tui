@@ -7,7 +7,7 @@ namespace PhpTui\Tui\Extension\Core\Shape;
 use PhpTui\Tui\Model\Canvas\Shape;
 use PhpTui\Tui\Model\Color;
 use PhpTui\Tui\Model\Color\AnsiColor;
-use PhpTui\Tui\Model\Widget\FloatPosition;
+use PhpTui\Tui\Model\Position\FloatPosition;
 
 /**
  * Draw a rectangle at the given position with the given width and height

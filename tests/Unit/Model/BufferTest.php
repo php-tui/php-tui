@@ -14,7 +14,7 @@ use PhpTui\Tui\Model\Color\AnsiColor;
 use PhpTui\Tui\Model\Color\RgbColor;
 use PhpTui\Tui\Model\Position;
 use PhpTui\Tui\Model\Style;
-use PhpTui\Tui\Model\Widget\Line;
+use PhpTui\Tui\Model\Text\Line;
 use PHPUnit\Framework\TestCase;
 
 class BufferTest extends TestCase

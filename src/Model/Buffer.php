@@ -6,8 +6,8 @@ namespace PhpTui\Tui\Model;
 
 use Countable;
 use OutOfBoundsException;
-use PhpTui\Tui\Model\Widget\Line;
-use PhpTui\Tui\Model\Widget\Span;
+use PhpTui\Tui\Model\Text\Line;
+use PhpTui\Tui\Model\Text\Span;
 
 final class Buffer implements Countable
 {

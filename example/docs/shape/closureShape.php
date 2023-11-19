@@ -7,7 +7,7 @@ use PhpTui\Tui\Extension\Core\Shape\ClosureShape;
 use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
 use PhpTui\Tui\Model\Canvas\Painter;
 use PhpTui\Tui\Model\Marker;
-use PhpTui\Tui\Model\Widget\Line;
+use PhpTui\Tui\Model\Text\Line;
 
 require 'vendor/autoload.php';
 

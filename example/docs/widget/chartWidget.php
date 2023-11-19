@@ -9,7 +9,7 @@ use PhpTui\Tui\Extension\Core\Widget\Chart\GraphType;
 use PhpTui\Tui\Extension\Core\Widget\ChartWidget;
 use PhpTui\Tui\Model\AxisBounds;
 use PhpTui\Tui\Model\Marker;
-use PhpTui\Tui\Model\Widget\Span;
+use PhpTui\Tui\Model\Text\Span;
 
 require 'vendor/autoload.php';
 

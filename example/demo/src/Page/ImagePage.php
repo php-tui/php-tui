@@ -11,10 +11,10 @@ use PhpTui\Tui\Extension\Core\Widget\GridWidget;
 use PhpTui\Tui\Extension\ImageMagick\Widget\ImageWidget;
 use PhpTui\Tui\Model\Constraint;
 use PhpTui\Tui\Model\Direction;
+use PhpTui\Tui\Model\Text\Title;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\Widget\Borders;
 use PhpTui\Tui\Model\Widget\BorderType;
-use PhpTui\Tui\Model\Widget\Title;
 
 final class ImagePage implements Component
 {

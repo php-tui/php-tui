@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Tests\Unit\Model\Widget;
+namespace PhpTui\Tui\Tests\Unit\Model\Position;
 
 use PhpTui\Tui\Model\AxisBounds;
-use PhpTui\Tui\Model\Widget\FloatPosition;
+use PhpTui\Tui\Model\Position\FloatPosition;
 use PHPUnit\Framework\TestCase;
 
 class FloatPositionTest extends TestCase

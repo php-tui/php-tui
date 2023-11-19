@@ -2,7 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Model\Widget;
+namespace PhpTui\Tui\Model\Text;
+
+use PhpTui\Tui\Model\HorizontalAlignment;
+use PhpTui\Tui\Model\VerticalAlignment;
 
 final class Title
 {

@@ -16,11 +16,11 @@ use PhpTui\Tui\Extension\Core\Widget\TableWidget;
 use PhpTui\Tui\Model\Color\AnsiColor;
 use PhpTui\Tui\Model\Constraint;
 use PhpTui\Tui\Model\Style;
+use PhpTui\Tui\Model\Text\Line;
+use PhpTui\Tui\Model\Text\Span;
+use PhpTui\Tui\Model\Text\Title;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\Widget\Borders;
-use PhpTui\Tui\Model\Widget\Line;
-use PhpTui\Tui\Model\Widget\Span;
-use PhpTui\Tui\Model\Widget\Title;
 
 final class TablePage implements Component
 {

@@ -11,9 +11,9 @@ use PhpTui\Tui\Extension\Core\Widget\RawWidget;
 use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Buffer;
 use PhpTui\Tui\Model\Position;
+use PhpTui\Tui\Model\Text\Line;
+use PhpTui\Tui\Model\Text\Span;
 use PhpTui\Tui\Model\Widget;
-use PhpTui\Tui\Model\Widget\Line;
-use PhpTui\Tui\Model\Widget\Span;
 
 class RawWidgetTest extends WidgetTestCase
 {

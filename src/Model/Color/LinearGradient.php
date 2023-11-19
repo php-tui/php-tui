@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Model\Color;
 
 use PhpTui\Tui\Model\Color;
-use PhpTui\Tui\Model\Widget\FractionalPosition;
+use PhpTui\Tui\Model\Position\FractionalPosition;
 use RuntimeException;
 
 /**

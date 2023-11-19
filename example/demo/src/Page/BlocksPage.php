@@ -14,15 +14,15 @@ use PhpTui\Tui\Extension\Core\Widget\ParagraphWidget;
 use PhpTui\Tui\Model\Color\AnsiColor;
 use PhpTui\Tui\Model\Constraint;
 use PhpTui\Tui\Model\Direction;
+use PhpTui\Tui\Model\HorizontalAlignment;
 use PhpTui\Tui\Model\Modifier;
 use PhpTui\Tui\Model\Style;
+use PhpTui\Tui\Model\Text\Text;
+use PhpTui\Tui\Model\Text\Title;
+use PhpTui\Tui\Model\VerticalAlignment;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\Widget\Borders;
 use PhpTui\Tui\Model\Widget\BorderType;
-use PhpTui\Tui\Model\Widget\HorizontalAlignment;
-use PhpTui\Tui\Model\Widget\Text;
-use PhpTui\Tui\Model\Widget\Title;
-use PhpTui\Tui\Model\Widget\VerticalAlignment;
 
 class BlocksPage implements Component
 {

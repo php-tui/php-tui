@@ -16,10 +16,10 @@ use PhpTui\Tui\Model\Color\AnsiColor;
 use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Model\Modifier;
 use PhpTui\Tui\Model\Style;
+use PhpTui\Tui\Model\Text\Line as PhpTuiLine;
+use PhpTui\Tui\Model\Text\Title;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\Widget\Borders;
-use PhpTui\Tui\Model\Widget\Line as PhpTuiLine;
-use PhpTui\Tui\Model\Widget\Title;
 
 class CanvasPage implements Component
 {

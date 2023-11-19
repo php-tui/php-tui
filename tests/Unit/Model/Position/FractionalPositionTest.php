@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Tests\Unit\Model\Widget;
+namespace PhpTui\Tui\Tests\Unit\Model\Position;
 
-use PhpTui\Tui\Model\Widget\FractionalPosition;
+use PhpTui\Tui\Model\Position\FractionalPosition;
 use PHPUnit\Framework\TestCase;
 
 class FractionalPositionTest extends TestCase

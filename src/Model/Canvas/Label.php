@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Model\Canvas;
 
-use PhpTui\Tui\Model\Widget\FloatPosition;
-use PhpTui\Tui\Model\Widget\Line;
+use PhpTui\Tui\Model\Position\FloatPosition;
+use PhpTui\Tui\Model\Text\Line;
 
 class Label
 {
