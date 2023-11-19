@@ -15,9 +15,6 @@ final class SpanParser
     private const OPEN_TAG_REGEX = '[a-z](?:[^\\\\<>]*+ | \\\\.)*';
     private const CLOSE_TAG_REGEX = '[a-z][^<>]*+';
 
-    /** @var array<Style> */
-    private array $styleStack = [];
-
     public static function new(): self
     {
         return new self();
@@ -33,6 +30,7 @@ final class SpanParser
 
         $spans = [];
         $offset = 0;
+        $styleStack = [];
         foreach ($matches[0] as $index => $match) {
             $tag = $match[0];
             $pos = $match[1];
@@ -43,7 +41,7 @@ final class SpanParser
 
             $textBeforeTag = mb_substr($input, $offset, $pos - $offset);
             if ($textBeforeTag !== '') {
-                $spans[] = $this->createSpan($textBeforeTag);
+                $spans[] = $this->createSpan($textBeforeTag, $styleStack);
             }
 
             $offset = $pos + mb_strlen($tag);
@@ -51,14 +49,14 @@ final class SpanParser
             $isOpeningTag = $tag[1] !== '/';
             if ($isOpeningTag) {
                 $tagAttributes = $matches[1][$index][0];
-                $this->styleStack[] = $this->createStyleFromTag($tagAttributes);
+                $styleStack[] = $this->createStyleFromTag($tagAttributes, $styleStack);
             } else {
-                array_pop($this->styleStack);
+                array_pop($styleStack);
             }
         }
 
         if ($offset < mb_strlen($input)) {
-            $spans[] = $this->createSpan(mb_substr($input, $offset));
+            $spans[] = $this->createSpan(mb_substr($input, $offset), $styleStack);
         }
 
         return $spans;
@@ -69,7 +67,10 @@ final class SpanParser
         return $pos !== 0 && '\\' === $input[$pos - 1];
     }
 
-    private function createStyleFromTag(string $tag): Style
+    /**
+     * @param array<Style> $styleStack
+     */
+    private function createStyleFromTag(string $tag, array &$styleStack): Style
     {
         $style = Style::default();
         $attributes = explode(' ', $tag);
@@ -87,9 +88,8 @@ final class SpanParser
         }
 
         // Apply the style of the outermost tag with modifications from the current tag.
-        if ($this->styleStack !== []) {
-            $outerStyle = end($this->styleStack);
-            $style = $outerStyle->patch($style);
+        if ($styleStack !== []) {
+            $style = end($styleStack)->patch($style);
         }
 
         return $style;
@@ -124,11 +124,14 @@ final class SpanParser
         return AnsiColor::fromName($color);
     }
 
-    private function createSpan(string $text): Span
+    /**
+     * @param array<Style> $styleStack
+     */
+    private function createSpan(string $text, array &$styleStack): Span
     {
         $text = strtr($text, ["\0" => '\\', '\\<' => '<', '\\>' => '>']);
 
-        $style = $this->styleStack === [] ? Style::default() : end($this->styleStack);
+        $style = $styleStack === [] ? Style::default() : end($styleStack);
 
         return Span::styled($text, $style);
     }
