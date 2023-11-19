@@ -36,8 +36,7 @@ final class SpanParser
             $tag = $match[0];
             $pos = $match[1];
 
-            // Skip processing for escaped tags (preceded by a backslash).
-            if (0 !== $pos && '\\' == $input[$pos - 1]) {
+            if ($this->isEscapedTag($input, $pos)) {
                 continue;
             }
 
@@ -62,6 +61,11 @@ final class SpanParser
         }
 
         return $spans;
+    }
+
+    private function isEscapedTag(string $input, int $pos): bool
+    {
+        return $pos !== 0 && '\\' === $input[$pos - 1];
     }
 
     private function createStyleFromTag(string $tag): Style
