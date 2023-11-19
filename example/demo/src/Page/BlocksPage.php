@@ -20,8 +20,6 @@ use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\Widget\Borders;
 use PhpTui\Tui\Model\Widget\BorderType;
 use PhpTui\Tui\Model\Widget\HorizontalAlignment;
-use PhpTui\Tui\Model\Widget\Line;
-use PhpTui\Tui\Model\Widget\Span;
 use PhpTui\Tui\Model\Widget\Text;
 use PhpTui\Tui\Model\Widget\Title;
 use PhpTui\Tui\Model\Widget\VerticalAlignment;
@@ -80,10 +78,7 @@ class BlocksPage implements Component
         $text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.';
 
         return ParagraphWidget::fromText(
-            Text::styled(
-                $text,
-                Style::default()->fg(AnsiColor::DarkGray)
-            )
+            Text::parse(sprintf('<fg=darkgray>%s</>', $text))
         )->wrap(Wrap::trimmed());
     }
 
@@ -159,10 +154,7 @@ class BlocksPage implements Component
     {
         return BlockWidget::default()
             ->borders(Borders::ALL)
-            ->titles(Title::fromLine(Line::fromSpans([
-                Span::fromString('Styled ')->blue(),
-                Span::fromString('title content')->green(),
-            ])))
+            ->titles(Title::parse('<fg=blue>Styled</> <fg=green>title content</>'))
             ->widget($paragraph);
     }
 
@@ -170,12 +162,7 @@ class BlocksPage implements Component
     {
         return BlockWidget::default()
             ->borders(Borders::ALL)
-            ->titles(Title::fromLine(Line::fromSpans([
-                Span::fromString('Multiple')->blue(),
-            ])))
-            ->titles(Title::fromLine(Line::fromSpans([
-                Span::fromString('Titles')->red()->onWhite(),
-            ])))
+            ->titles(Title::parse('<fg=red;bg=white>Titles</>'))
             ->widget($paragraph);
     }
 

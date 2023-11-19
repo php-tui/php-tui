@@ -18,6 +18,11 @@ final class Title
         return new self(Line::fromString($string), HorizontalAlignment::Left, VerticalAlignment::Top);
     }
 
+    public static function parse(string $string): self
+    {
+        return new self(Line::parse($string), HorizontalAlignment::Left, VerticalAlignment::Top);
+    }
+
     public function horizontalAlignmnet(HorizontalAlignment $alignment): self
     {
         $this->horizontalAlignment = $alignment;

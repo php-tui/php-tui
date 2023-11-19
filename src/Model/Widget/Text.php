@@ -26,6 +26,22 @@ final class Text implements Styleable
         }, explode("\n", $string)));
     }
 
+    public static function parse(string $string): self
+    {
+        $placeholder = '{{1162128a-269a-4c09-88be-effc70a62a3a}}';
+
+        $string = preg_replace_callback('/<[^>]+>.*?<\/>/s', function ($matches) use ($placeholder) {
+            return str_replace("\n", $placeholder, $matches[0]);
+        }, $string);
+
+        // We can only break into new lines at the breaks that are outside of tags.
+        $lines = array_map(function (string $line) use ($placeholder) {
+            return Line::parse(str_replace($placeholder, "\n", $line));
+        }, explode("\n", $string ?? ''));
+
+        return new self($lines);
+    }
+
     public static function fromLine(Line $line): self
     {
         return new self([$line]);

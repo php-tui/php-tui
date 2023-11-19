@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Model\Color;
 
+use InvalidArgumentException;
 use PhpTui\Tui\Model\Color;
+
 use PhpTui\Tui\Model\Widget\FractionalPosition;
 
 enum AnsiColor: int implements Color
@@ -26,6 +28,30 @@ enum AnsiColor: int implements Color
     case LightMagenta = 13;
     case LightCyan = 14;
     case White = 15;
+
+    public static function fromName(string $name): self
+    {
+        return match (strtolower($name)) {
+            'reset' => self::Reset,
+            'black' => self::Black,
+            'red' => self::Red,
+            'green' => self::Green,
+            'yellow' => self::Yellow,
+            'blue' => self::Blue,
+            'magenta' => self::Magenta,
+            'cyan' => self::Cyan,
+            'gray' => self::Gray,
+            'darkgray' => self::DarkGray,
+            'lightred' => self::LightRed,
+            'lightgreen' => self::LightGreen,
+            'lightyellow' => self::LightYellow,
+            'lightblue' => self::LightBlue,
+            'lightmagenta' => self::LightMagenta,
+            'lightcyan' => self::LightCyan,
+            'white' => self::White,
+            default => throw new InvalidArgumentException(sprintf('Unknown color name "%s"', $name)),
+        };
+    }
 
     public function debugName(): string
     {

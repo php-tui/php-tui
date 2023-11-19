@@ -58,6 +58,13 @@ final class Line implements IteratorAggregate, Stringable, Styleable
         ], null);
     }
 
+    public static function parse(string $string): self
+    {
+        return self::fromSpans(
+            SpanParser::new()->parse($string)
+        );
+    }
+
     public function getIterator(): Traversable
     {
         return new ArrayIterator($this->spans);
