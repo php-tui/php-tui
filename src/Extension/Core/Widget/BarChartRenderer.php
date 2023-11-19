@@ -157,7 +157,6 @@ final class BarChartRenderer implements WidgetRenderer
                 for ($j = $area->height - 1; $j >= 0; $j--) {
                     $symbol = BarSet::fromIndex($ticks);
 
-
                     $barStyle = $widget->barStyle->patch($bar->style);
                     for ($x = 0; $x < $widget->barWidth; $x++) {
                         if ($barX + $x >= $area->right()) {
@@ -320,7 +319,7 @@ final class BarChartRenderer implements WidgetRenderer
                             $barStyle->fg->at(FractionalPosition::at(
                                 $x / $area->width,
                                 $y / $area->height,
-                            )) :null;
+                            )) : null;
                         $buffer->get(
                             Position::at(
                                 $barsArea->left() + $x,

@@ -18,8 +18,8 @@ use PhpTui\Tui\Model\Constraint;
 use PhpTui\Tui\Model\Direction;
 use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Widget;
-use PhpTui\Tui\Model\Widget\FractionalPosition;
 use PhpTui\Tui\Model\Widget\Borders;
+use PhpTui\Tui\Model\Widget\FractionalPosition;
 use PhpTui\Tui\Model\Widget\Span;
 use PhpTui\Tui\Model\Widget\Title;
 

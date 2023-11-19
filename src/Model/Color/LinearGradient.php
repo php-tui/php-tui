@@ -41,7 +41,8 @@ final class LinearGradient implements Color
 
     public function debugName(): string
     {
-        return sprintf('LinearGradient(deg: %d, origin: %s, stops: [%s])', 
+        return sprintf(
+            'LinearGradient(deg: %d, origin: %s, stops: [%s])',
             rad2deg($this->angle),
             $this->origin->__toString(),
             implode(', ', array_map(function (array $stop) {

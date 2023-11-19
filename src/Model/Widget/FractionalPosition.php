@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Model\Widget;
 
 use RuntimeException;
@@ -10,14 +12,19 @@ final class FractionalPosition implements Stringable
     private function __construct(
         public readonly float $x,
         public readonly float $y
-    )
-    {
+    ) {
         if ($x < -1 || $x > 1 || $y < -1 || $y > 1) {
             throw new RuntimeException(sprintf(
                 'Fractional axis must be between 0 and 1 got [%f, %f]',
-                $x, $y
+                $x,
+                $y
             ));
         }
+    }
+
+    public function __toString(): string
+    {
+        return sprintf('[%.2f, %.2f]', $this->x, $this->y);
     }
 
     public static function at(float $x, float $y): self
@@ -41,10 +48,5 @@ final class FractionalPosition implements Stringable
     public function invert(): self
     {
         return new self(-$this->x, -$this->y);
-    }
-
-    public function __toString(): string
-    {
-        return sprintf('[%.2f, %.2f]', $this->x, $this->y);
     }
 }

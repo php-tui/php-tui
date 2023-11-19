@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Model;
 
-use Closure;
 use PhpTui\Tui\Model\Widget\FractionalPosition;
 use Stringable;
 

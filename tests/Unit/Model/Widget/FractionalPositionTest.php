@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Tests\Unit\Model\Widget;
 
-use PHPUnit\Framework\TestCase;
 use PhpTui\Tui\Model\Widget\FractionalPosition;
+use PHPUnit\Framework\TestCase;
 
 class FractionalPositionTest extends TestCase
 {

@@ -51,7 +51,7 @@ class BarChartPage implements Component
                                     1,
                                     RgbColor::fromRgb(0, 255, 255)
                                 )->withDegrees(
-                                    45 
+                                    45
                                 )
                                 ->withOrigin(
                                     FractionalPosition::at(0.5, 0.5)
