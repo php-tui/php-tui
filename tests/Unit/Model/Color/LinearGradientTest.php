@@ -59,6 +59,52 @@ class LinearGradientTest extends TestCase
         self::assertEquals('RGB(25, 255, 152)', $color->at(FractionalPosition::at(0.75, 0))->debugName());
     }
 
+    public function testRotateZero(): void
+    {
+        $color = LinearGradient::from(
+            RgbColor::fromRgb(0, 0, 0)
+        )->addStop(
+            1,
+            RgbColor::fromRgb(255, 255, 255)
+        )->withDegrees(0)->withOrigin(FractionalPosition::at(0.5, 0.5));
+
+        self::assertEquals('RGB(0, 0, 0)', $color->at(FractionalPosition::at(0, 0))->debugName());
+        self::assertEquals('RGB(127, 127, 127)', $color->at(FractionalPosition::at(0.5, 0))->debugName());
+        self::assertEquals('RGB(255, 255, 255)', $color->at(FractionalPosition::at(1, 0))->debugName());
+        self::assertEquals('RGB(255, 255, 255)', $color->at(FractionalPosition::at(1, 1))->debugName());
+    }
+
+    public function testFractionCannotBeLessThanZero(): void
+    {
+        $color = LinearGradient::from(
+            RgbColor::fromRgb(0, 0, 0)
+        )->addStop(
+            1,
+            RgbColor::fromRgb(255, 127, 0)
+        )->withDegrees(300)->withOrigin(FractionalPosition::at(0.5, 0.5));
+
+        self::assertEquals('RGB(0, 0, 0)', $color->at(FractionalPosition::at(0, 0))->debugName());
+        self::assertEquals('RGB(17, 8, 0)', $color->at(FractionalPosition::at(0.5, 0))->debugName());
+    }
+
+    public function testBounds(): void
+    {
+        for ($at = 0; $at <= 1; $at+=0.1) {
+            for ($origin = 0; $origin <= 1; $origin+=0.1) {
+                for ($d = 0; $d < 360; $d+=45) {
+                    $color = LinearGradient::from(
+                        RgbColor::fromRgb(0, 0, 0)
+                    )->addStop(
+                        1,
+                        RgbColor::fromRgb(255, 255, 255)
+                    )->withDegrees($d)->withOrigin(FractionalPosition::at($origin, $origin));
+                    $color->at(FractionalPosition::at($at, $at));
+                }
+            }
+        }
+        $this->addToAssertionCount(1);
+    }
+
     public function testAddStopAbove1(): void
     {
         $this->expectException(RuntimeException::class);

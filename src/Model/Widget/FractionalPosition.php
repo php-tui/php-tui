@@ -27,8 +27,8 @@ final class FractionalPosition
     public function rotate(float $radians): self
     {
         return new self(
-            max(0, min(1, (cos($radians) * $this->x - sin($radians) * $this->y))),
-            max(0, min(1, (sin($radians) * $this->x + cos($radians) * $this->y))),
+            min(1, max(-1, (cos($radians) * $this->x - sin($radians) * $this->y))),
+            min(1, max(-1, (sin($radians) * $this->x + cos($radians) * $this->y))),
         );
     }
 

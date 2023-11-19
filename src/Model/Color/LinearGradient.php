@@ -67,7 +67,7 @@ final class LinearGradient implements Color
         $position = $position->translate($this->origin->invert());
         $position = $position->rotate($this->angle);
         $position = $position->translate($this->origin);
-        $fraction = $position->x;
+        $fraction = max(0, $position->x);
         return $this->atFraction($fraction);
     }
 
@@ -77,10 +77,6 @@ final class LinearGradient implements Color
         $stops = $this->stops;
         usort($stops, fn (array $s1, array $s2) => $s1[0] <=> $s2[0]);
         [$lastPosition, $lastStop] = array_shift($stops);
-
-        if ($fraction < 0) {
-            return $lastStop;
-        }
 
         $nextStop = null;
         $nextPosition = null;
@@ -93,10 +89,6 @@ final class LinearGradient implements Color
             }
             $lastStop = $stop;
             $lastPosition = $stopPos;
-        }
-
-        if ($fraction > 1) {
-            return $lastStop;
         }
 
         if ($nextStop === null || $nextPosition === null) {
