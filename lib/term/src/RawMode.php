@@ -9,4 +9,6 @@ interface RawMode
     public function enable(): void;
 
     public function disable(): void;
+
+    public function isEnabled(): bool;
 }
