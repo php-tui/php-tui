@@ -32,16 +32,4 @@ class AggregateWidgetRenderer implements WidgetRenderer
             $aggregateRenderer->render($this, $widget, $buffer);
         }
     }
-
-    public static function fromWidgetSets(WidgetSet ...$widgetSets): self
-    {
-        $renderers = [];
-        foreach ($widgetSets as $widgetSet) {
-            foreach ($widgetSet->renderers() as $renderer) {
-                $renderers[] = $renderer;
-            }
-        }
-
-        return new self($renderers);
-    }
 }

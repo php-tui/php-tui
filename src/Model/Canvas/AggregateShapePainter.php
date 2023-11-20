@@ -25,14 +25,4 @@ class AggregateShapePainter implements ShapePainter
             $aggregateShapePainter->draw($this, $painter, $shape);
         }
     }
-
-    public static function fromShapeSets(ShapeSet ...$shapeSets): self
-    {
-        $painters = [];
-        foreach ($shapeSets as $shapeSet) {
-            $painters = array_merge($painters, $shapeSet->shapes());
-        }
-
-        return new self($painters);
-    }
 }
