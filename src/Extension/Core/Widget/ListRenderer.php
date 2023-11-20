@@ -53,7 +53,7 @@ class ListRenderer implements WidgetRenderer
             })();
 
             $area = Area::fromScalars($x, $y, $listArea->width, $item->height());
-            $itemStyle = $widget->style->patch($item->style);
+            $itemStyle = $widget->style->patchStyle($item->style);
             $buffer->setStyle($area, $itemStyle);
 
             $isSelected = $widget->state->selected === $i + $start;

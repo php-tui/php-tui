@@ -157,7 +157,7 @@ final class BarChartRenderer implements WidgetRenderer
                 for ($j = $area->height - 1; $j >= 0; $j--) {
                     $symbol = BarSet::fromIndex($ticks);
 
-                    $barStyle = $widget->barStyle->patch($bar->style);
+                    $barStyle = $widget->barStyle->patchStyle($bar->style);
                     for ($x = 0; $x < $widget->barWidth; $x++) {
                         if ($barX + $x >= $area->right()) {
                             break;
@@ -226,7 +226,7 @@ final class BarChartRenderer implements WidgetRenderer
         }
 
         foreach ($label->spans as $span) {
-            $span->style = $style->patch($span->style);
+            $span->style = $style->patchStyle($span->style);
         }
 
         $xOffset = match ($label->alignment) {
@@ -250,7 +250,7 @@ final class BarChartRenderer implements WidgetRenderer
         }
 
         foreach ($label->spans as $span) {
-            $span->style = $defaultStyleLabel->patch($span->style);
+            $span->style = $defaultStyleLabel->patchStyle($span->style);
         }
 
         $buffer->putLine(
@@ -275,7 +275,7 @@ final class BarChartRenderer implements WidgetRenderer
                     $y,
                 ),
                 $valueLabel,
-                $defaultValueStyle->patch($bar->valueStyle),
+                $defaultValueStyle->patchStyle($bar->valueStyle),
             );
         }
     }
@@ -300,7 +300,7 @@ final class BarChartRenderer implements WidgetRenderer
             foreach ($tickList as $ii => $ticks) {
                 $bar = $group->bars[$ii];
                 $barLength = (int) ($ticks / 8);
-                $barStyle = $widget->barStyle->patch($bar->style);
+                $barStyle = $widget->barStyle->patchStyle($bar->style);
 
                 for ($y = 0; $y < $widget->barWidth; $y++) {
                     $barY += $y;
@@ -376,12 +376,12 @@ final class BarChartRenderer implements WidgetRenderer
             return;
         }
 
-        $style = $defaultValueStyle->patch($bar->valueStyle);
+        $style = $defaultValueStyle->patchStyle($bar->valueStyle);
         $buffer->putString($area->position, $text, $style, $barLength);
         if (mb_strlen($text) > $barLength) {
             $first = substr($text, 0, $barLength);
             $second = substr($text, $barLength);
-            $style = $barStyle->patch($bar->style);
+            $style = $barStyle->patchStyle($bar->style);
             $buffer->putString(
                 Position::at(
                     $area->position->x + mb_strlen($first),
