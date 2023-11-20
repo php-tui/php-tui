@@ -44,7 +44,7 @@ final class Span implements Stringable, Styleable
      */
     public function toStyledGraphemes(Style $baseStyle): array
     {
-        return array_map(function (string $grapheme) use ($baseStyle) {
+        return array_map(function (string $grapheme) use ($baseStyle): StyledGrapheme {
             return new StyledGrapheme(
                 symbol: $grapheme,
                 style: $baseStyle->patch($this->style),

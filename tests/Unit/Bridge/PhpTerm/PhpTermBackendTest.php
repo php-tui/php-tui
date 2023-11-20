@@ -82,7 +82,7 @@ class PhpTermBackendTest extends TestCase
             'SetForegroundColor(Reset)',
             'SetBackgroundColor(Reset)',
             'Reset()',
-        ], array_map(fn (Action $action) => $action->__toString(), $buffer->actions()));
+        ], array_map(static fn (Action $action): string => $action->__toString(), $buffer->actions()));
     }
 
     public function testDoesNotMoveCursorUnnecessarily(): void
@@ -112,7 +112,7 @@ class PhpTermBackendTest extends TestCase
             'SetForegroundColor(Reset)',
             'SetBackgroundColor(Reset)',
             'Reset()',
-        ], array_map(fn (Action $action) => $action->__toString(), $buffer->actions()));
+        ], array_map(static fn (Action $action): string => $action->__toString(), $buffer->actions()));
     }
 
     public function testDoesNotChangeColorUnnecessarily(): void
@@ -137,7 +137,7 @@ class PhpTermBackendTest extends TestCase
             'SetForegroundColor(Reset)',
             'SetBackgroundColor(Reset)',
             'Reset()',
-        ], array_map(fn (Action $action) => $action->__toString(), $buffer->actions()));
+        ], array_map(static fn (Action $action): string => $action->__toString(), $buffer->actions()));
     }
 
     public function testModifiersReset(): void
@@ -189,7 +189,7 @@ class PhpTermBackendTest extends TestCase
             'SetForegroundColor(Reset)',
             'SetBackgroundColor(Reset)',
             'Reset()',
-        ], array_map(fn (Action $action) => $action->__toString(), $buffer->actions()));
+        ], array_map(static fn (Action $action): string => $action->__toString(), $buffer->actions()));
     }
 
     private function draw(BufferPainter $buffer, BufferUpdates $updates): void

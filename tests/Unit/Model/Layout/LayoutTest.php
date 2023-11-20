@@ -28,7 +28,7 @@ class LayoutTest extends TestCase
             $target->height,
             array_sum(
                 array_map(
-                    fn (Area $area) => $area->height,
+                    static fn (Area $area): int => $area->height,
                     $chunks->toArray()
                 )
             )

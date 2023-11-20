@@ -89,8 +89,8 @@ class StyleableTest extends TestCase
     public static function colorProvider(): array
     {
         return array_map(
-            fn (AnsiColor $color) => [$color, $color->name],
-            array_filter(AnsiColor::cases(), fn (AnsiColor $color) => $color !== AnsiColor::Reset)
+            static fn (AnsiColor $color): array => [$color, $color->name],
+            array_filter(AnsiColor::cases(), static fn (AnsiColor $color): bool => $color !== AnsiColor::Reset)
         );
     }
 }

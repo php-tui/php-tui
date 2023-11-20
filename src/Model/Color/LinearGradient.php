@@ -16,7 +16,7 @@ final class LinearGradient implements Color
     /**
      * @param non-empty-list<array{float,RgbColor}> $stops
      */
-    private function __construct(private array $stops, private float $angle, private FractionalPosition $origin)
+    private function __construct(private array $stops, private readonly float $angle, private readonly FractionalPosition $origin)
     {
     }
 
@@ -54,7 +54,7 @@ final class LinearGradient implements Color
             'LinearGradient(deg: %d, origin: %s, stops: [%s])',
             rad2deg($this->angle),
             $this->origin->__toString(),
-            implode(', ', array_map(function (array $stop) {
+            implode(', ', array_map(function (array $stop): string {
                 return sprintf('%s@%.2f', $stop[1]->debugName(), $stop[0]);
             }, $this->stops))
         );
@@ -92,7 +92,7 @@ final class LinearGradient implements Color
     {
         // determine last stop
         $stops = $this->stops;
-        usort($stops, fn (array $s1, array $s2) => $s1[0] <=> $s2[0]);
+        usort($stops, static fn (array $s1, array $s2): int => $s1[0] <=> $s2[0]);
         [$lastPosition, $lastStop] = array_shift($stops);
 
         $nextStop = null;

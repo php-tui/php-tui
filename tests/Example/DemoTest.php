@@ -49,7 +49,7 @@ class DemoTest extends TestCase
 
     public function testList(): void
     {
-        srand(0);
+        mt_srand(0);
         $backend = $this->execute(
             CharKeyEvent::new('4'),
             null,
@@ -60,7 +60,7 @@ class DemoTest extends TestCase
 
     public function testTable(): void
     {
-        srand(0);
+        mt_srand(0);
         $backend = $this->execute(
             CharKeyEvent::new('5'),
             null,
@@ -84,7 +84,7 @@ class DemoTest extends TestCase
         if (!extension_loaded('imagick')) {
             self::markTestSkipped('imagick not loaded');
         }
-        srand(0);
+        mt_srand(0);
         $backend = $this->execute(
             CharKeyEvent::new('7'),
             null,
@@ -105,7 +105,7 @@ class DemoTest extends TestCase
 
     public function testGauge(): void
     {
-        srand(0);
+        mt_srand(0);
         $backend = $this->execute(
             CharKeyEvent::new('!'),
             null,
@@ -116,7 +116,7 @@ class DemoTest extends TestCase
 
     public function testBarChart(): void
     {
-        srand(0);
+        mt_srand(0);
         $backend = $this->execute(
             CharKeyEvent::new('"'),
             null,

@@ -33,7 +33,7 @@ final class CassowaryConstraintSolver implements ConstraintSolver
 
         $areaSize = $areaEnd - $areaStart;
 
-        $elements = array_map(fn () => Element::empty(), $layout->constraints);
+        $elements = array_map(static fn (): Element => Element::empty(), $layout->constraints);
 
         // ensure that all the elements are inside the area
         foreach ($elements as $element) {

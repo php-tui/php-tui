@@ -10,7 +10,7 @@ use PhpTui\Tui\Model\WidgetSet;
 
 class DefaultWidgetSet implements WidgetSet
 {
-    public function __construct(private ShapePainter $shapePainter)
+    public function __construct(private readonly ShapePainter $shapePainter)
     {
     }
 

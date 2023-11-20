@@ -121,7 +121,7 @@ final class ChartRenderer implements WidgetRenderer
     private function maxWidthOfLabelsLeftOfYAxis(ChartWidget $chart, Area $area, bool $hasYAxis): int
     {
         $maxWidth = $chart->yAxis->labels ? max(
-            ...array_map(function (Span $label) {
+            ...array_map(function (Span $label): int {
                 return $label->width();
             }, $chart->yAxis->labels)
         ) : 0;

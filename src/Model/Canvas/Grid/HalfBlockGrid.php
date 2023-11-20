@@ -16,7 +16,7 @@ use PhpTui\Tui\Model\Symbol\BlockSet;
 class HalfBlockGrid extends CanvasGrid
 {
     public function __construct(
-        private Resolution $resolution,
+        private readonly Resolution $resolution,
         /**
          * @var list<list<Color>>
          */
@@ -34,8 +34,8 @@ class HalfBlockGrid extends CanvasGrid
         return new self(
             new Resolution($width, $height),
             array_map(
-                fn () => array_map(
-                    fn () => AnsiColor::Reset,
+                static fn (): array => array_map(
+                    static fn (): AnsiColor => AnsiColor::Reset,
                     range(1, $width)
                 ),
                 range(1, $height * 2)
@@ -66,7 +66,7 @@ class HalfBlockGrid extends CanvasGrid
         }
 
         $chars = [];
-        $chars = array_map(function (array $pair) {
+        $chars = array_map(function (array $pair): string {
             [$upper, $lower] = $pair;
             if ($upper === AnsiColor::Reset && $lower === AnsiColor::Reset) {
                 return ' ';
@@ -84,7 +84,7 @@ class HalfBlockGrid extends CanvasGrid
 
             return BlockSet::UPPER_HALF;
         }, $paired);
-        $colors = array_map(function (array $pair) {
+        $colors = array_map(function (array $pair): FgBgColor {
             [$upper, $lower] = $pair;
             if ($upper === AnsiColor::Reset && $lower === AnsiColor::Reset) {
                 return new FgBgColor(AnsiColor::Reset, AnsiColor::Reset);

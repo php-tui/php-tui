@@ -9,7 +9,7 @@ use PhpTui\Tui\Model\Display\DisplayExtension;
 
 class BdfExtension implements DisplayExtension
 {
-    public function __construct(private ?FontRegistry $registry = null)
+    public function __construct(private readonly ?FontRegistry $registry = null)
     {
     }
 

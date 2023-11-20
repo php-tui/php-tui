@@ -21,7 +21,7 @@ class AggregateWidgetRenderer implements WidgetRenderer
     /**
      * @param WidgetRenderer[] $renderers
      */
-    public function __construct(private array $renderers)
+    public function __construct(private readonly array $renderers)
     {
     }
 

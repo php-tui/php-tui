@@ -19,12 +19,9 @@ final class DummyBackend implements Backend
 
     private ?string $flushed = null;
 
-    private Position $cursorPosition;
-
-    public function __construct(private int $width, private int $height, ?Position $cursorPosition = null)
+    public function __construct(private int $width, private int $height, private Position $cursorPosition = new Position(0, 0))
     {
         $this->fillGrid($width, $height);
-        $this->cursorPosition = $cursorPosition ?? new Position(0, 0);
     }
 
     public function flushed(): ?string
@@ -46,7 +43,7 @@ final class DummyBackend implements Backend
 
     public function toString(): string
     {
-        return implode("\n", array_map(function (array $cells) {
+        return implode("\n", array_map(function (array $cells): string {
             return implode('', $cells);
         }, $this->grid));
     }
@@ -84,7 +81,7 @@ final class DummyBackend implements Backend
 
     public function appendLines(int $linesAfterCursor): void
     {
-        $this->cursorPosition = $this->cursorPosition->change(fn (int $x, int $y) => [0, $y + $linesAfterCursor]);
+        $this->cursorPosition = $this->cursorPosition->change(static fn (int $x, int $y): array => [0, $y + $linesAfterCursor]);
     }
 
     public function moveCursor(Position $position): void

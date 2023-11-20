@@ -19,7 +19,7 @@ final class CharGrid extends CanvasGrid
      * @param Color[] $colors
      */
     private function __construct(
-        private Resolution $resolution,
+        private readonly Resolution $resolution,
         private array $cells,
         private array $colors,
         private string $cellChar
@@ -47,14 +47,14 @@ final class CharGrid extends CanvasGrid
     {
         return new Layer(
             chars: $this->cells,
-            colors: array_map(fn (Color $color) => new FgBgColor($color, AnsiColor::Reset), $this->colors),
+            colors: array_map(static fn (Color $color): FgBgColor => new FgBgColor($color, AnsiColor::Reset), $this->colors),
         );
     }
 
     public function reset(): void
     {
-        $this->cells = array_map(fn ($_) => ' ', $this->cells);
-        $this->colors = array_map(fn ($_) => AnsiColor::Reset, $this->colors);
+        $this->cells = array_map(static fn (): string => ' ', $this->cells);
+        $this->colors = array_map(static fn (): AnsiColor => AnsiColor::Reset, $this->colors);
     }
 
     public function paint(Position $position, Color $color): void

@@ -14,7 +14,7 @@ use PhpTui\Tui\Model\Position\FloatPosition;
 class TextRenderer implements ShapePainter
 {
     public function __construct(
-        private FontRegistry $registry,
+        private readonly FontRegistry $registry,
     ) {
     }
 

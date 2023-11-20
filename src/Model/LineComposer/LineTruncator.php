@@ -15,8 +15,8 @@ class LineTruncator implements LineComposer
      * @param list<array{list<StyledGrapheme>,HorizontalAlignment}> $lines
      */
     public function __construct(
-        private array $lines,
-        private int $maxLineWidth,
+        private readonly array $lines,
+        private readonly int $maxLineWidth,
         private int $horizontalOffset = 0,
     ) {
     }

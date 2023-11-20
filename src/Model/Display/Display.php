@@ -18,16 +18,16 @@ final class Display
      * @param array<int,Buffer> $buffers
      */
     public function __construct(
-        private Backend $backend,
+        private readonly Backend $backend,
         private array $buffers,
         private int $current,
         /** @phpstan-ignore-next-line */
-        private bool $hiddenCursor,
-        private Viewport $viewport,
+        private readonly bool $hiddenCursor,
+        private readonly Viewport $viewport,
         private Area $viewportArea,
         private Area $lastKnownSize,
         private Position $lastKnownCursorPosition,
-        private WidgetRenderer $widgetRenderer,
+        private readonly WidgetRenderer $widgetRenderer,
     ) {
     }
 

@@ -8,8 +8,9 @@ use PhpTui\Tui\Model\Color;
 use PhpTui\Tui\Model\Color\AnsiColor;
 use PhpTui\Tui\Model\Modifier;
 use PhpTui\Tui\Model\Style;
+use Stringable;
 
-final class Cell
+final class Cell implements Stringable
 {
     public function __construct(
         public string $char,

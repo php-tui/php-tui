@@ -50,7 +50,7 @@ final class DisplayBuilder
      * @param DisplayExtension[] $extensions
      */
     private function __construct(
-        private Backend $backend,
+        private readonly Backend $backend,
         private ?Viewport $viewport,
         private array $extensions
     ) {

@@ -18,7 +18,7 @@ class SpritePainter implements ShapePainter
             return;
         }
 
-        $maxX = max(0, ...array_map(fn (string $row) => mb_strlen($row), $shape->rows));
+        $maxX = max(0, ...array_map(static fn (string $row): int => mb_strlen($row), $shape->rows));
         $xStep = $painter->context->xBounds->length() / $painter->resolution->width;
         $yStep = $painter->context->yBounds->length() / $painter->resolution->height;
         $pixelWidth = $shape->xScale;

@@ -46,7 +46,7 @@ final class EventParser
 
             try {
                 $event = $this->parseEvent($this->buffer, $more);
-            } catch (ParseError $error) {
+            } catch (ParseError) {
                 $this->buffer = [];
 
                 continue;
@@ -99,7 +99,7 @@ final class EventParser
         return match ($buffer[1]) {
             '[' => $this->parseCsi($buffer),
             "\x1B" => CodedKeyEvent::new(KeyCode::Esc),
-            'O' => (function () use ($buffer) {
+            'O' => (function () use ($buffer): null|FunctionKeyEvent|CodedKeyEvent {
                 if (count($buffer) === 2) {
                     return null;
                 }
@@ -187,7 +187,7 @@ final class EventParser
         $str = implode('', array_slice($buffer, 2, (int)array_key_last($buffer)));
 
         $split = array_map(
-            fn (string $substr) => self::filterToInt($substr) ?? 0,
+            static fn (string $substr): int => self::filterToInt($substr) ?? 0,
             explode(';', $str),
         );
         $first = $split[array_key_first($split)];
@@ -253,7 +253,7 @@ final class EventParser
         // split string into bytes
         $parts = explode(';', $str);
 
-        [$modifiers, $kind] = (function () use ($parts) {
+        [$modifiers, $kind] = (function () use ($parts): array {
             $modifierAndKindCode  = $this->modifierAndKindParsed($parts);
             if (null !== $modifierAndKindCode) {
                 return [
@@ -324,7 +324,7 @@ final class EventParser
     {
         $str = array_reduce(
             str_split($substr),
-            function (string $ac, string $char) {
+            function (string $ac, string $char): string {
                 if (false === is_numeric($char)) {
                     return $ac;
                 }

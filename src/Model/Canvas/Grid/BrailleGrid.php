@@ -26,8 +26,8 @@ final class BrailleGrid extends CanvasGrid
      * @param Color[] $colors
      */
     private function __construct(
-        private int $width,
-        private int $height,
+        private readonly int $width,
+        private readonly int $height,
         private array $codePoints,
         private array $colors
     ) {
@@ -56,15 +56,15 @@ final class BrailleGrid extends CanvasGrid
             return $this->brailleCharCache[$point] ??= IntlChar::chr($point);
         }, $this->codePoints);
 
-        $colors = array_map(fn (Color $color) => new FgBgColor($color, AnsiColor::Reset), $this->colors);
+        $colors = array_map(static fn (Color $color): FgBgColor => new FgBgColor($color, AnsiColor::Reset), $this->colors);
 
         return new Layer(chars: $chars, colors: $colors);
     }
 
     public function reset(): void
     {
-        $this->codePoints = array_map(fn () => BrailleSet::BLANK, $this->codePoints);
-        $this->colors = array_map(fn () => AnsiColor::Reset, $this->colors);
+        $this->codePoints = array_map(static fn (): int => BrailleSet::BLANK, $this->codePoints);
+        $this->colors = array_map(static fn (): AnsiColor => AnsiColor::Reset, $this->colors);
     }
 
     public function paint(Position $position, Color $color): void

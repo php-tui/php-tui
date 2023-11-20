@@ -11,16 +11,13 @@ use PhpTui\Tui\Model\WidgetRenderer;
 
 final class CachingWidgetRenderer implements WidgetRenderer
 {
-    private WidgetRenderer $innerRenderer;
-
     /**
      * @var array<string,Buffer>
      */
     private array $cache = [];
 
-    public function __construct(WidgetRenderer $inner)
+    public function __construct(private readonly WidgetRenderer $innerRenderer)
     {
-        $this->innerRenderer = $inner;
     }
 
     public function render(WidgetRenderer $renderer, Widget $widget, Buffer $buffer): void

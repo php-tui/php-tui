@@ -32,7 +32,7 @@ use RuntimeException;
 
 class PhpTermBackend implements Backend
 {
-    public function __construct(private PhpTermTerminal $terminal)
+    public function __construct(private readonly PhpTermTerminal $terminal)
     {
     }
 

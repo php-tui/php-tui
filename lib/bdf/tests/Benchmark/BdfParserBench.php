@@ -13,7 +13,7 @@ use RuntimeException;
 #[Revs(25)]
 final class BdfParserBench
 {
-    private string $contents;
+    private readonly string $contents;
 
     public function __construct()
     {

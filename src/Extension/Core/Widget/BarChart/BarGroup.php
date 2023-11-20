@@ -28,7 +28,7 @@ class BarGroup
      */
     public static function fromArray(array $array): self
     {
-        return new self(null, array_map(function (string|int $key, int $value) {
+        return new self(null, array_map(function (string|int $key, int $value): Bar {
             $key = (string)$key;
 
             return new Bar($value, Line::fromString($key), Style::default(), Style::default(), null);
@@ -49,7 +49,7 @@ class BarGroup
 
     public function max(): int
     {
-        return array_reduce($this->bars, function (int $max, Bar $bar) {
+        return array_reduce($this->bars, function (int $max, Bar $bar): int {
             $value = $bar->value;
             if ($value > $max) {
                 return $value;

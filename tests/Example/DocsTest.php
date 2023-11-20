@@ -13,8 +13,8 @@ use RuntimeException;
 
 class DocsTest extends TestCase
 {
-    public const WIDTH = 20;
-    public const HEIGHT = 50;
+    final public const WIDTH = 20;
+    final public const HEIGHT = 50;
 
     /**
      * @dataProvider provideExamples
