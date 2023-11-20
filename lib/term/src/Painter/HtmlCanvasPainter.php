@@ -76,6 +76,8 @@ class HtmlCanvasPainter implements Painter
         foreach ($actions as $action) {
             if ($action instanceof PrintString) {
                 $this->printString($action);
+                $this->fgColor = null;
+                $this->bgColor = null;
 
                 continue;
             }
@@ -117,11 +119,11 @@ class HtmlCanvasPainter implements Painter
         $y = 0;
         $charChunks = array_chunk($this->chars, $this->width);
         $attrChunks = array_chunk($this->attributes, $this->width);
-        $canvasId = sprintf('term_%s', uniqid());
         $scale = 8;
 
         $width = $this->width * $scale;
         $height = ceil(count($this->chars) / $this->width) * $scale;
+        $canvasId = md5(implode('', $this->chars));
         $html = [
             sprintf(
                 '<canvas id="%s" width=%d height=%d></canvas>',
@@ -131,12 +133,13 @@ class HtmlCanvasPainter implements Painter
             )
         ];
         $html[] = '<script>';
-        $html[] = sprintf('const canvas = document.getElementById("%s");', $canvasId);
-        $html[] = 'const ctx = canvas.getContext("2d");';
-        $html[] = 'ctx.font = "12px monospace";';
-        $html[] = sprintf('ctx.fillStyle = "%s";', $this->toHtmlRgb($this->defaultBgColor));
+        $html[] = sprintf('let canvas%s = document.getElementById("%s");', $canvasId, $canvasId);
+        $html[] = sprintf('let ctx%s = canvas%s.getContext("2d");', $canvasId,$canvasId);
+        $html[] = sprintf('ctx%s.font = "12px monospace";', $canvasId);
+        $html[] = sprintf('ctx%s.fillStyle = "%s";', $canvasId, $this->toHtmlRgb($this->defaultBgColor));
         $html[] = sprintf(
-            'ctx.fillRect(0,0,%d,%d);',
+            'ctx%s.fillRect(0,0,%d,%d);',
+            $canvasId,
             $width,
             $height,
         );
@@ -148,19 +151,21 @@ class HtmlCanvasPainter implements Painter
             $attr = $this->attributes[$offset];
             $x = $offset % $this->width;
             $y = floor($offset / $this->width);
-            $html[] = sprintf('ctx.fillStyle = "%s";', $this->toHtmlRgb($attr['bg'] ?? $this->defaultBgColor));
+            $html[] = sprintf('ctx%s.fillStyle = "%s";',$canvasId, $this->toHtmlRgb($attr['bg'] ?? $this->defaultBgColor));
             $html[] = sprintf(
-                'ctx.fillRect(%d,%d,%d,%d);',
+                'ctx%s.fillRect(%d,%d,%d,%d);',
+                $canvasId,
                 $x * $scale,
                 $y * $scale,
                 $scale,
                 $scale
             );
-            $html[] = sprintf('ctx.fillStyle = "%s";', $this->toHtmlRgb($attr['fg'] ?? $this->defaultFgColor));
+            $html[] = sprintf('ctx%s.fillStyle = "%s";', $canvasId, $this->toHtmlRgb($attr['fg'] ?? $this->defaultFgColor));
 
             $html[] = sprintf(
-                'ctx.fillText("%s",%d,%d);',
-                $char,
+                'ctx%s.fillText("%s",%d,%d);',
+                $canvasId,
+                addslashes($char),
                 $x * $scale,
                 $y * $scale + $scale,
             );
@@ -182,12 +187,8 @@ class HtmlCanvasPainter implements Painter
     {
         $offset = ($y * $this->width + 1) + $x - 1;
         $this->chars[$offset] = $char;
-        if ($this->bgColor) {
-            $this->attributes[$offset]['bg'] = $this->bgColor;
-        }
-        if ($this->fgColor) {
-            $this->attributes[$offset]['fg'] = $this->fgColor;
-        }
+        $this->attributes[$offset]['bg'] = $this->bgColor;
+        $this->attributes[$offset]['fg'] = $this->fgColor;
     }
 
     private function toHtmlRgb(Action $action): string
