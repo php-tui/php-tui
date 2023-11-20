@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PhpTui\Docgen;
 
-class WidgetParam
+class DocParam
 {
     public function __construct(
         public string $type,

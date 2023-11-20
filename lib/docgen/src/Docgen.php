@@ -26,6 +26,7 @@ use Roave\BetterReflection\SourceLocator\Type\AggregateSourceLocator;
 use Roave\BetterReflection\SourceLocator\Type\Composer\Factory\MakeLocatorForComposerJson;
 use Roave\BetterReflection\SourceLocator\Type\PhpInternalSourceLocator;
 use RuntimeException;
+use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * Internal library for generating documentation
@@ -81,19 +82,23 @@ final class Docgen
         DocUnitConfig $config
     ): void
     {
+        $fs = new Filesystem();
+        $fs->remove($this->docsDir . '/' . $config->outPath);
+        $this->writeTo(sprintf('%s/_index.md', $config->outPath),$this->doRender($config->section));
+
         foreach ($this->classes($config->className, 'src/**/*.php') as $widget) {
             $node = $this->parsePhpDoc($widget->getDocComment());
             $this->writeTo(sprintf(
                 '%s/%s.md',
                 $config->outPath,
                 $widget->getShortName()
-            ), $this->renderer->render(new AggregateDocRenderer(), new DocClass(
+            ), $this->doRender(new DocClass(
                 name: lcfirst($widget->getShortName()),
                 humanName: $this->humanName($widget->getShortName(), $config->stripSuffix),
                 className: $widget->getName(),
                 singular: $config->singular,
                 description: $this->description($node),
-                params: array_values(array_filter(array_map(function (ReflectionProperty $prop): false|WidgetParam {
+                params: array_values(array_filter(array_map(function (ReflectionProperty $prop): false|DocParam {
                     if (false === $prop->isPromoted()) {
                         return false;
                     }
@@ -110,13 +115,13 @@ final class Docgen
                         );
                     }
 
-                    return new WidgetParam(
+                    return new DocParam(
                         type: $type ? $type : $phpType,
                         name: $prop->getName(),
                         description: $this->description($phpDoc),
                     );
                 }, $widget->getProperties()))),
-            )) ?? throw new RuntimeException('Aggregate renderer should always return a string'));
+            )));
         }
     }
 
@@ -185,5 +190,11 @@ final class Docgen
         }
 
         return $replaced;
+    }
+
+    private function doRender(object $object): string
+    {
+        return $this->renderer->render(new AggregateDocRenderer(), $object)
+        ?? throw new RuntimeException('Aggregate renderer should always return a string');
     }
 }

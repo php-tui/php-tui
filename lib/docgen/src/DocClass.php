@@ -7,7 +7,7 @@ namespace PhpTui\Docgen;
 final class DocClass
 {
     /**
-     * @param array<int,WidgetParam> $params
+     * @param array<int,DocParam> $params
      */
     public function __construct(
         public string $name,

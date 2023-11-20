@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PhpTui\Docgen\Renderer;
 
 use PhpTui\Docgen\DocRenderer;
+use RuntimeException;
 
 class AggregateDocRenderer implements DocRenderer
 {
@@ -26,6 +27,8 @@ class AggregateDocRenderer implements DocRenderer
             }
         }
 
-        return '';
+        throw new RuntimeException(sprintf(
+            'No renderer for object class: %s', $object::class
+        ));
     }
 }
