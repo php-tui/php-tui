@@ -92,7 +92,10 @@ final class AnsiPainter implements Painter
             $action instanceof SetRgbForegroundColor => sprintf('38;2;%d;%d;%dm', $action->r, $action->g, $action->b),
             $action instanceof CursorShow => sprintf('?25%s', $action->show ? 'h' : 'l'),
             $action instanceof AlternateScreenEnable => sprintf('?1049%s', $action->enable ? 'h' : 'l'),
-            $action instanceof MoveCursor => sprintf('%d;%dH', $action->line, $action->col),
+
+            // cursor offsets start at 1 not 0
+            $action instanceof MoveCursor => sprintf('%d;%dH', $action->line + 1, $action->col + 1),
+
             $action instanceof Reset => '0m',
             $action instanceof Clear => match ($action->clearType) {
                 ClearType::All => '2J',
