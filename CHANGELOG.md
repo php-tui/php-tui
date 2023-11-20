@@ -18,6 +18,9 @@ Bug fixes:
 - Make mouse event properties public
 - Fixed margin in image widget rendering #132
 - Fix incorrect style patching for Spans #131 @KennedyTedesco
+- Fix inline viewport sets terminal to raw but does not set it back #154 
+- Fix inline viewport clear eating first line #150
+- Fix terminal echos raw escape codes when getting cursor position #149 
 
 Improvements
 
