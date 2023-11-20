@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PhpTui\Docgen;
 
+use Closure;
 use Generator;
 use PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocNode;
 use PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTextNode;
@@ -13,6 +14,7 @@ use PHPStan\PhpDocParser\Parser\ConstExprParser;
 use PHPStan\PhpDocParser\Parser\PhpDocParser;
 use PHPStan\PhpDocParser\Parser\TokenIterator;
 use PHPStan\PhpDocParser\Parser\TypeParser;
+use PhpTui\Docgen\Renderer\AggregateDocRenderer;
 use PhpTui\Tui\Model\Canvas\Shape;
 use PhpTui\Tui\Model\Widget;
 use Roave\BetterReflection\BetterReflection;
@@ -32,21 +34,29 @@ final class Docgen
 {
     /**
      * @param iterable<int,ReflectionClass> $classes
+     * @param DocUnitConfig[] $unitConfigs
      */
-    private function __construct(
+    public function __construct(
         private readonly string $docsDir,
         private readonly iterable $classes,
         private readonly Lexer $lexer,
         private readonly PhpDocParser $parser,
+        private readonly array $unitConfigs,
+        private readonly DocRenderer $renderer,
     ) {
     }
+
     public function generate(): void
     {
-        $this->generateWidgets();
-        $this->generateShapes();
+        foreach ($this->unitConfigs as $unitConfig) {
+            $this->render($unitConfig);
+        }
     }
 
-    public static function new(string $cwd, string $docsDir): self
+    /**
+     * @param DocUnitConfig[] $unitConfigs
+     */
+    public static function new(string $cwd, string $docsDir, array $unitConfigs, DocRenderer $renderer): self
     {
         $astLocator = (new BetterReflection())->astLocator();
         $reflector  = new DefaultReflector(new AggregateSourceLocator([
@@ -63,60 +73,25 @@ final class Docgen
 
                 return new PhpDocParser(new TypeParser($constExpr), $constExpr);
             })(),
+            $unitConfigs,
+            $renderer,
         );
     }
-    private function generateShapes(): void
+    private function render(
+        DocUnitConfig $config
+    ): void
     {
-        $widgets = [];
-        foreach ($this->classes(Shape::class, 'src/**/*.php') as $shape) {
-            $node = $this->parsePhpDoc($shape->getDocComment());
-            $this->writeTo(sprintf(
-                'reference/shapes/%s.md',
-                $shape->getShortName()
-            ), $this->renderShape(new WidgetDoc(
-                name: lcfirst($shape->getShortName()),
-                humanName: $this->humanName($shape->getShortName(), 'Shape'),
-                className: $shape->getName(),
-                description: $this->description($node),
-                params: array_values(array_filter(array_map(function (ReflectionProperty $prop): false|WidgetParam {
-                    if (false === $prop->isPromoted()) {
-                        return false;
-                    }
-                    $phpType = $prop->getType() ? $prop->getType()->__toString() : '';
-                    $phpDoc = $this->parsePhpDoc($prop->getDocComment());
-                    $type = null;
-                    if ($phpDoc) {
-                        $type = implode(
-                            '|',
-                            array_map(
-                                static fn (VarTagValueNode $node): string => $node->__toString(),
-                                $phpDoc->getVarTagValues()
-                            )
-                        );
-                    }
-
-                    return new WidgetParam(
-                        type: $type ? $type : $phpType,
-                        name: $prop->getName(),
-                        description: $this->description($phpDoc),
-                    );
-                }, $shape->getProperties()))),
-            )));
-        }
-    }
-
-    private function generateWidgets(): void
-    {
-        $widgets = [];
-        foreach ($this->classes(Widget::class, 'src/**//*.php') as $widget) {
+        foreach ($this->classes($config->className, 'src/**/*.php') as $widget) {
             $node = $this->parsePhpDoc($widget->getDocComment());
             $this->writeTo(sprintf(
-                'reference/widgets/%s.md',
+                '%s/%s.md',
+                $config->outPath,
                 $widget->getShortName()
-            ), $this->renderWidget(new WidgetDoc(
+            ), $this->renderer->render(new AggregateDocRenderer(), new DocClass(
                 name: lcfirst($widget->getShortName()),
-                humanName: $this->humanName($widget->getShortName(), 'Widget'),
+                humanName: $this->humanName($widget->getShortName(), $config->stripSuffix),
                 className: $widget->getName(),
+                singular: $config->singular,
                 description: $this->description($node),
                 params: array_values(array_filter(array_map(function (ReflectionProperty $prop): false|WidgetParam {
                     if (false === $prop->isPromoted()) {
@@ -141,9 +116,10 @@ final class Docgen
                         description: $this->description($phpDoc),
                     );
                 }, $widget->getProperties()))),
-            )));
+            )) ?? throw new RuntimeException('Aggregate renderer should always return a string'));
         }
     }
+
     /**
      * @return Generator<ReflectionClass>
      */
@@ -180,96 +156,13 @@ final class Docgen
         return str_replace("\n", '', implode(' ', $text));
     }
 
-    private function renderShape(WidgetDoc $shapeDoc): string
-    {
-        $title = $shapeDoc->humanName;
-        $doc = [
-            '---',
-            sprintf('title: %s', $title),
-            sprintf('description: %s', $shapeDoc->description),
-            '---',
-            sprintf('## %s', $title),
-            '',
-            sprintf('`%s`', $shapeDoc->className),
-            '',
-            $shapeDoc->description,
-        ];
-        $doc = array_merge($doc, [
-            sprintf('{{%% terminal file="/data/example/docs/shape/%s.html" %%}}', $shapeDoc->name),
-            '{{< details "Show code"  >}}',
-            sprintf('{{%% codeInclude file="/data/example/docs/shape/%s.php" language="php" %%}}', $shapeDoc->name),
-            '',
-            '{{< /details >}}',
-        ]);
-        if ($shapeDoc->params) {
-            $doc = array_merge($doc, [
-            '### Parameters',
-            '',
-            'Configure the shape using the constructor arguments named as follows:',
-            '',
-            '| Name | Type | Description |',
-            '| --- | --- | --- |',
-            ]);
-            foreach ($shapeDoc->params as $param) {
-                $doc[] = sprintf(
-                    '| **%s** | `%s` | %s |',
-                    $param->name,
-                    str_replace('|', '\|', $param->type),
-                    $param->description
-                );
-            }
-        }
-
-        return implode("\n", $doc);
-
-    }
-    private function renderWidget(WidgetDoc $widgetDoc): string
-    {
-        $title = $widgetDoc->humanName;
-        $doc = [
-            '---',
-            sprintf('title: %s', $title),
-            sprintf('description: %s', $widgetDoc->description),
-            '---',
-            sprintf('## %s', $title),
-            '',
-            sprintf('`%s`', $widgetDoc->className),
-            '',
-            $widgetDoc->description,
-        ];
-        $doc = array_merge($doc, [
-            sprintf('{{%% terminal file="/data/example/docs/widget/%s.html" %%}}', $widgetDoc->name),
-            '{{< details "Show code"  >}}',
-            sprintf('{{%% codeInclude file="/data/example/docs/widget/%s.php" language="php" %%}}', $widgetDoc->name),
-            '',
-            '{{< /details >}}',
-        ]);
-        if ($widgetDoc->params) {
-            $doc = array_merge($doc, [
-            '### Parameters',
-            '',
-            'Configure the widget using the builder methods named as follows:',
-            '',
-            '| Name | Type | Description |',
-            '| --- | --- | --- |',
-            ]);
-            foreach ($widgetDoc->params as $param) {
-                $doc[] = sprintf(
-                    '| **%s** | `%s` | %s |',
-                    $param->name,
-                    str_replace('|', '\|', $param->type),
-                    $param->description
-                );
-            }
-        }
-
-        return implode("\n", $doc);
-
-    }
 
     private function writeTo(string $subPath, string $content): void
     {
         $path = $this->docsDir . '/' . $subPath;
+        if (!file_exists(dirname($path))) {
+            mkdir(dirname($path), 511, true);
+        }
         $res = file_put_contents($path, $content);
         if (false === $res) {
             throw new RuntimeException(sprintf(
@@ -279,14 +172,16 @@ final class Docgen
         }
     }
 
-    private function humanName(string $subject, string $suffix): string
+    private function humanName(string $subject, ?string $suffix): string
     {
         $replaced = preg_replace('{([A-Z])}', ' \1', ucfirst($subject));
         if (null === $replaced) {
             throw new RuntimeException('Could not replace');
         }
-        if ($pos = strrpos($replaced, $suffix)) {
-            $replaced = substr($replaced, 0, $pos);
+        if ($suffix !== null) {
+            if ($pos = strrpos($replaced, $suffix)) {
+                $replaced = substr($replaced, 0, $pos);
+            }
         }
 
         return $replaced;
