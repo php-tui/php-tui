@@ -13,8 +13,7 @@ use PhpTui\Tui\Model\Widget\Borders;
 use PhpTui\Tui\Model\Widget\BorderType;
 
 /**
- * The block widget is a container for other widgets and can provide a border,
- * title and padding.
+ * Container for other widgets and can provide a border, title and padding.
  */
 final class BlockWidget implements Widget
 {

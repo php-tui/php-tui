@@ -10,6 +10,9 @@ use PhpTui\Tui\Model\Display\ClearType;
 use PhpTui\Tui\Model\Display\Viewport;
 use PhpTui\Tui\Model\Position\Position;
 
+/**
+ * Viewport that occupies the entire screen.
+ */
 final class Fullscreen implements Viewport
 {
     public function size(Backend $backend): Area

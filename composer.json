@@ -50,9 +50,9 @@
         "phpbench": "php ./vendor/bin/phpbench run --revs=1 --iterations=1",
         "rector": "./vendor/bin/rector process",
         "integrate": [
-            "@rector",
             "@php-cs-fixer",
             "@phpstan",
+            "@rector",
             "@phpunit",
             "@phpbench",
             "@docs"

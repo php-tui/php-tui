@@ -8,6 +8,9 @@ use Closure;
 use PhpTui\Tui\Model\Canvas\Painter;
 use PhpTui\Tui\Model\Canvas\Shape;
 
+/**
+ * Shape that can write directly to the Painter context
+ */
 class ClosureShape implements Shape
 {
     /**

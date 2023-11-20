@@ -10,10 +10,20 @@ use PhpTui\Tui\Model\Display\ClearType;
 use PhpTui\Tui\Model\Display\Viewport;
 use PhpTui\Tui\Model\Position\Position;
 
+/**
+ * Viewport that is displayed _after_ the cursor's current position.
+ *
+ * You can use this viewport in with `Display#insertBefore` in order to add content
+ * before the viewport, which can be usedful for "logging" progress.
+ */
 final class Inline implements Viewport
 {
-    public function __construct(public readonly int $height)
-    {
+    public function __construct(
+        /**
+         * Height of the viewport
+         */
+        public readonly int $height
+    ) {
     }
 
     public function size(Backend $backend): Area

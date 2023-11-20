@@ -1,12 +1,18 @@
 ---
 title:  Grid 
-description: The grid is a widget that provides either a horiztonal or vertical _layout_  based on a series of constraints.  Widgets can be supplied to fill the cells corresponding to the resolved constraints.
+description: The grid is a widget that provides either a horiztonal or vertical _layout_  based on a series of constraints.
 ---
 ##  Grid 
 
 `PhpTui\Tui\Extension\Core\Widget\GridWidget`
 
-The grid is a widget that provides either a horiztonal or vertical _layout_  based on a series of constraints.  Widgets can be supplied to fill the cells corresponding to the resolved constraints.
+The grid is a widget that provides either a horiztonal or vertical _layout_  based on a series of constraints.
+
+
+Widgets can be supplied to fill the cells corresponding to the resolved constraints.
+
+### Example
+
 {{% terminal file="/data/example/docs/widget/gridWidget.html" %}}
 {{< details "Show code"  >}}
 {{% codeInclude file="/data/example/docs/widget/gridWidget.php" language="php" %}}
@@ -20,4 +26,4 @@ Configure the widget using the builder methods named as follows:
 | --- | --- | --- |
 | **direction** | `PhpTui\Tui\Model\Direction` | The direction of the grid |
 | **widgets** | `list<Widget>` | The widgets. There should be at least as many constraints as widgets. |
-| **constraints** | `list<Constraint>` | The constraints define the widget (Direction::Horizontal) or height(Direction::Vertical) of the cells. |
+| **constraints** | `list<Constraint>` | The constraints define the widget (Direction::Horizontal) or height (Direction::Vertical) of the cells. |

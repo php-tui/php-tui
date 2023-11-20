@@ -7,6 +7,8 @@ description: Draw a straight line from one point to another.
 `PhpTui\Tui\Extension\Core\Shape\LineShape`
 
 Draw a straight line from one point to another.
+### Example
+
 {{% terminal file="/data/example/docs/shape/lineShape.html" %}}
 {{< details "Show code"  >}}
 {{% codeInclude file="/data/example/docs/shape/lineShape.php" language="php" %}}
@@ -14,7 +16,7 @@ Draw a straight line from one point to another.
 {{< /details >}}
 ### Parameters
 
-Configure the shape using the constructor arguments named as follows:
+Configure the shape using the builder methods named as follows:
 
 | Name | Type | Description |
 | --- | --- | --- |

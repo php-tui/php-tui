@@ -10,10 +10,17 @@ use PhpTui\Tui\Model\Display\ClearType;
 use PhpTui\Tui\Model\Display\Viewport;
 use PhpTui\Tui\Model\Position\Position;
 
+/**
+ * Creates a fixed location viewport at the given Area
+ */
 final class Fixed implements Viewport
 {
-    public function __construct(public readonly Area $area)
-    {
+    public function __construct(
+        /**
+         * Area to occupy
+         */
+        public readonly Area $area
+    ) {
     }
 
     public function size(Backend $backend): Area

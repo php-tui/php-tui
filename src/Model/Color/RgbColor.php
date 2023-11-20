@@ -10,6 +10,12 @@ use PhpTui\Tui\Model\Color;
 use PhpTui\Tui\Model\Position\FractionalPosition;
 use Stringable;
 
+/**
+ * Represents 24 bit (true) color.
+ *
+ * You can create this object from RGB, HSV or Hexidecimal values using static
+ * constructors.
+ */
 class RgbColor implements Color, Stringable
 {
     private function __construct(public int $r, public int $g, public int $b)

@@ -10,6 +10,7 @@ use PhpTui\Tui\Model\Position\FloatPosition;
 
 /**
  * Renders a "sprite" based on a given "ascii art"
+ *
  * Each sprite can have a single color but they can be layered on the canvas.
  */
 class SpriteShape implements Shape

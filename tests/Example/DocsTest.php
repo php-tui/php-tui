@@ -97,9 +97,6 @@ class DocsTest extends TestCase
 
     private function normalize(string $string): string
     {
-        $normalized = preg_replace('{canvas id=".*?"}', 'canvas id="***"', $string);
-        $normalized = preg_replace('{getElementById\(".*?"\)}', 'getElementById("***")', (string)$normalized);
-
-        return (string)$normalized;
+        return $string;
     }
 }

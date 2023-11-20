@@ -2,11 +2,77 @@
 <?php
 
 use PhpTui\Docgen\Docgen;
+use PhpTui\Docgen\DocSection;
+use PhpTui\Docgen\DocUnitConfig;
+use PhpTui\Docgen\Renderer\AggregateDocRenderer;
+use PhpTui\Docgen\Renderer\DocClassRenderer;
+use PhpTui\Docgen\Renderer\DocSectionRenderer;
+use PhpTui\Tui\Model\Canvas\Shape;
+use PhpTui\Tui\Model\Color;
+use PhpTui\Tui\Model\Display\Viewport;
+use PhpTui\Tui\Model\Widget;
 
 require __DIR__ .'/../vendor/autoload.php';
 
 $docgen = Docgen::new(
     (string)realpath(__DIR__ . '/../'),
-    (string)realpath(__DIR__ . '/../docs/content/docs')
+    (string)realpath(__DIR__ . '/../example/docs'),
+    (string)realpath(__DIR__ . '/../docs/content/docs'),
+    [
+        new DocUnitConfig(
+            new DocSection(
+                'Shapes',
+                <<<'EOT'
+                    Shapes can be drawn upon a Canvas
+                    EOT,
+            ),
+            className: Shape::class,
+            singular: 'shape',
+            outPath: 'reference/shapes',
+            stripSuffix: 'Shape',
+            hasExamples: true,
+        ),
+        new DocUnitConfig(
+            new DocSection(
+                'Widgets',
+                <<<'EOT'
+                    Widgets are PHP-TUI's building blocks.
+                    EOT,
+            ),
+            className: Widget::class,
+            singular: 'widget',
+            outPath: 'reference/widgets',
+            hasExamples: true,
+            stripSuffix: 'Widget',
+        ),
+        new DocUnitConfig(
+            new DocSection(
+                'Colors',
+                <<<'EOT'
+                    Different ways of representing color
+                    EOT,
+            ),
+            className: Color::class,
+            singular: 'color',
+            hasExamples: true,
+            outPath: 'reference/colors',
+        ),
+        new DocUnitConfig(
+            new DocSection(
+                'Viewports',
+                <<<'EOT'
+                    The display's releationship with the terminal space
+                    EOT,
+            ),
+            className: Viewport::class,
+            singular: 'viewport',
+            outPath: 'reference/viewports',
+            hasExamples: false,
+        ),
+    ],
+    new AggregateDocRenderer(
+        new DocClassRenderer(),
+        new DocSectionRenderer(),
+    )
 );
 $docgen->generate();
