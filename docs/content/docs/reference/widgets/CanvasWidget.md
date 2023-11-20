@@ -7,6 +7,8 @@ description: The canvas widget provides a surface, of arbitrary scale, upon whic
 `PhpTui\Tui\Extension\Core\Widget\CanvasWidget`
 
 The canvas widget provides a surface, of arbitrary scale, upon which shapes can be drawn.
+### Example
+
 {{% terminal file="/data/example/docs/widget/canvasWidget.html" %}}
 {{< details "Show code"  >}}
 {{% codeInclude file="/data/example/docs/widget/canvasWidget.php" language="php" %}}

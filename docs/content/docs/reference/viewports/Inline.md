@@ -1,21 +1,19 @@
 ---
 title:  Inline
-description: 
+description: Viewport that is displayed _after_ the cursor's current position.
 ---
 ##  Inline
 
 `PhpTui\Tui\Model\Viewport\Inline`
 
 
-{{% terminal file="/data/example/docs/viewport/inline.html" %}}
-{{< details "Show code"  >}}
-{{% codeInclude file="/data/example/docs/viewport/inline.php" language="php" %}}
+You can use this viewport in with `Display#insertBefore` in order to add content
+before the viewport, which can be usedful for "logging" progress.
 
-{{< /details >}}
 ### Parameters
 
 Configure the viewport using the builder methods named as follows:
 
 | Name | Type | Description |
 | --- | --- | --- |
-| **height** | `int` |  |
+| **height** | `int` | Height of the viewport |

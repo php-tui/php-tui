@@ -39,6 +39,7 @@ final class Docgen
      */
     public function __construct(
         private readonly string $docsDir,
+        private readonly string $examplePath,
         private readonly iterable $classes,
         private readonly Lexer $lexer,
         private readonly PhpDocParser $parser,
@@ -57,7 +58,7 @@ final class Docgen
     /**
      * @param DocUnitConfig[] $unitConfigs
      */
-    public static function new(string $cwd, string $docsDir, array $unitConfigs, DocRenderer $renderer): self
+    public static function new(string $cwd, string $examplesDir, string $docsDir, array $unitConfigs, DocRenderer $renderer): self
     {
         $astLocator = (new BetterReflection())->astLocator();
         $reflector  = new DefaultReflector(new AggregateSourceLocator([
@@ -67,6 +68,7 @@ final class Docgen
 
         return new self(
             $docsDir,
+            $examplesDir,
             $reflector->reflectAllClasses(),
             new Lexer(),
             (function (): PhpDocParser {
@@ -87,17 +89,16 @@ final class Docgen
         $this->writeTo(sprintf('%s/_index.md', $config->outPath),$this->doRender($config->section));
 
         foreach ($this->classes($config->className, 'src/**/*.php') as $widget) {
+
             $node = $this->parsePhpDoc($widget->getDocComment());
-            $this->writeTo(sprintf(
-                '%s/%s.md',
-                $config->outPath,
-                $widget->getShortName()
-            ), $this->doRender(new DocClass(
+            $docClass = new DocClass(
                 name: lcfirst($widget->getShortName()),
                 humanName: $this->humanName($widget->getShortName(), $config->stripSuffix),
                 className: $widget->getName(),
                 singular: $config->singular,
-                description: $this->description($node),
+                summary: $this->summary($node),
+                hasExample: $config->hasExamples,
+                documentation: $this->documentation($node) ?? $this->summary($node),
                 params: array_values(array_filter(array_map(function (ReflectionProperty $prop): false|DocParam {
                     if (false === $prop->isPromoted()) {
                         return false;
@@ -118,10 +119,25 @@ final class Docgen
                     return new DocParam(
                         type: $type ? $type : $phpType,
                         name: $prop->getName(),
-                        description: $this->description($phpDoc),
+                        description: $this->summary($phpDoc),
                     );
                 }, $widget->getProperties()))),
-            )));
+            );
+
+            $phpExample = sprintf('%s/%s/%s.php', $this->examplePath, $docClass->singular, $docClass->name);
+            if ($config->hasExamples && !file_exists($phpExample)) {
+                throw new RuntimeException(sprintf(
+                    '%s should have an example at %s, but it doens\'t',
+                    $docClass->name,
+                    $phpExample
+                ));
+            }
+
+            $this->writeTo(sprintf(
+                '%s/%s.md',
+                $config->outPath,
+                $widget->getShortName()
+            ), $this->doRender($docClass));
         }
     }
 
@@ -146,7 +162,7 @@ final class Docgen
         return $this->parser->parse(new TokenIterator($this->lexer->tokenize($docblock)));
     }
 
-    private function description(?PhpDocNode $node): ?string
+    private function summary(?PhpDocNode $node): ?string
     {
         if (null === $node) {
             return null;
@@ -155,10 +171,39 @@ final class Docgen
         foreach ($node->children as $child) {
             if ($child instanceof PhpDocTextNode) {
                 $text[] = $child->text;
+                break;
             }
         }
+        if ([] === $text) {
+            return null;
+        }
 
-        return str_replace("\n", '', implode(' ', $text));
+        return str_replace("\n", " ", implode('', $text));
+    }
+
+    private function documentation(?PhpDocNode $node): ?string
+    {
+        if (null === $node) {
+            return null;
+        }
+        $text = [];
+        $first = true;
+        foreach ($node->children as $i => $child) {
+            if ($child instanceof PhpDocTextNode) {
+                // ignore the first line which is used as the short description
+                if ($first) {
+                    $first = false;
+                    continue;
+                }
+                $text[] = $child->text;
+                $text[] = "\n";
+            }
+        }
+        if ([] === $text) {
+            return null;
+        }
+
+        return implode('', $text);
     }
 
 

@@ -1,14 +1,9 @@
 ---
 title:  Fullscreen
-description: 
+description: Viewport that occupies the entire screen.
 ---
 ##  Fullscreen
 
 `PhpTui\Tui\Model\Viewport\Fullscreen`
 
-
-{{% terminal file="/data/example/docs/viewport/fullscreen.html" %}}
-{{< details "Show code"  >}}
-{{% codeInclude file="/data/example/docs/viewport/fullscreen.php" language="php" %}}
-
-{{< /details >}}
+Viewport that occupies the entire screen.

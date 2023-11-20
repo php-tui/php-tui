@@ -1,12 +1,14 @@
 ---
 title:  Table 
-description: Shows tabular data arranged in columns. The column spacing is determined bythe "width" constraints.
+description: Shows tabular data arranged in columns. The column spacing is determined by the "width" constraints.
 ---
 ##  Table 
 
 `PhpTui\Tui\Extension\Core\Widget\TableWidget`
 
-Shows tabular data arranged in columns. The column spacing is determined bythe "width" constraints.
+Shows tabular data arranged in columns. The column spacing is determined by the "width" constraints.
+### Example
+
 {{% terminal file="/data/example/docs/widget/tableWidget.html" %}}
 {{< details "Show code"  >}}
 {{% codeInclude file="/data/example/docs/widget/tableWidget.php" language="php" %}}

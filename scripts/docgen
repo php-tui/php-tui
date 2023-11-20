@@ -5,6 +5,7 @@ use PhpTui\Docgen\DocSection;
 use PhpTui\Docgen\Docgen;
 use PhpTui\Docgen\DocUnitConfig;
 use PhpTui\Docgen\Renderer\AggregateDocRenderer;
+use PhpTui\Docgen\Renderer\DocClassRenderer;
 use PhpTui\Docgen\Renderer\DocSectionRenderer;
 use PhpTui\Docgen\Renderer\WidgetDocRenderer;
 use PhpTui\Tui\Model\Canvas\Shape;
@@ -16,6 +17,7 @@ require __DIR__ .'/../vendor/autoload.php';
 
 $docgen = Docgen::new(
     (string)realpath(__DIR__ . '/../'),
+    (string)realpath(__DIR__ . '/../example/docs'),
     (string)realpath(__DIR__ . '/../docs/content/docs'),
     [
         new DocUnitConfig(
@@ -29,6 +31,7 @@ $docgen = Docgen::new(
             singular: 'shape',
             outPath: 'reference/shapes',
             stripSuffix: 'Shape',
+            hasExamples: true,
         ),
         new DocUnitConfig(
             new DocSection(
@@ -40,6 +43,7 @@ $docgen = Docgen::new(
             className: Widget::class,
             singular: 'widget',
             outPath: 'reference/widgets',
+            hasExamples: true,
             stripSuffix: 'Widget',
         ),
         new DocUnitConfig(
@@ -50,6 +54,7 @@ $docgen = Docgen::new(
             ),
             className: Color::class,
             singular: 'color',
+            hasExamples: true,
             outPath: 'reference/colors',
         ),
         new DocUnitConfig(
@@ -61,10 +66,11 @@ $docgen = Docgen::new(
             className: Viewport::class,
             singular: 'viewport',
             outPath: 'reference/viewports',
+            hasExamples: false,
         ),
     ],
     new AggregateDocRenderer(
-        new WidgetDocRenderer(),
+        new DocClassRenderer(),
         new DocSectionRenderer(),
     )
 

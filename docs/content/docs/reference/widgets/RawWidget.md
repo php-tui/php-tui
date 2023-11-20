@@ -7,6 +7,8 @@ description: This widget allows you to write directly to the buffer through a cl
 `PhpTui\Tui\Extension\Core\Widget\RawWidget`
 
 This widget allows you to write directly to the buffer through a closure.
+### Example
+
 {{% terminal file="/data/example/docs/widget/rawWidget.html" %}}
 {{< details "Show code"  >}}
 {{% codeInclude file="/data/example/docs/widget/rawWidget.php" language="php" %}}

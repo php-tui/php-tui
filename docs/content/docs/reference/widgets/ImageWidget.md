@@ -7,6 +7,8 @@ description: Render an image on a canvas matching the dimensions of the image.
 `PhpTui\Tui\Extension\ImageMagick\Widget\ImageWidget`
 
 Render an image on a canvas matching the dimensions of the image.
+### Example
+
 {{% terminal file="/data/example/docs/widget/imageWidget.html" %}}
 {{< details "Show code"  >}}
 {{% codeInclude file="/data/example/docs/widget/imageWidget.php" language="php" %}}

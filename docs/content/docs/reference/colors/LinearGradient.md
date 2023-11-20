@@ -7,6 +7,8 @@ description: Multi-stop linear gradient with optional angle and point of origin.
 `PhpTui\Tui\Model\Color\LinearGradient`
 
 Multi-stop linear gradient with optional angle and point of origin.
+### Example
+
 {{% terminal file="/data/example/docs/color/linearGradient.html" %}}
 {{< details "Show code"  >}}
 {{% codeInclude file="/data/example/docs/color/linearGradient.php" language="php" %}}

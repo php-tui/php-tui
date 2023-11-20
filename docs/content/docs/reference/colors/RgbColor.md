@@ -7,6 +7,8 @@ description:
 `PhpTui\Tui\Model\Color\RgbColor`
 
 
+### Example
+
 {{% terminal file="/data/example/docs/color/rgbColor.html" %}}
 {{< details "Show code"  >}}
 {{% codeInclude file="/data/example/docs/color/rgbColor.php" language="php" %}}

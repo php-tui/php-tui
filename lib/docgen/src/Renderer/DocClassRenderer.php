@@ -4,11 +4,16 @@ declare(strict_types=1);
 
 namespace PhpTui\Docgen\Renderer;
 
-use PhpTui\Docgen\DocRenderer;
 use PhpTui\Docgen\DocClass;
+use PhpTui\Docgen\DocRenderer;
+use RuntimeException;
 
-class WidgetDocRenderer implements DocRenderer
+class DocClassRenderer implements DocRenderer
 {
+    public function __construct()
+    {
+    }
+
     public function render(DocRenderer $renderer, object $object): ?string
     {
         if (!$object instanceof DocClass) {
@@ -19,21 +24,26 @@ class WidgetDocRenderer implements DocRenderer
         $doc = [
             '---',
             sprintf('title: %s', $title),
-            sprintf('description: %s', $object->description),
+            sprintf('description: %s', $object->summary),
             '---',
             sprintf('## %s', $title),
             '',
             sprintf('`%s`', $object->className),
             '',
-            $object->description,
+            $object->documentation,
         ];
-        $doc = array_merge($doc, [
-            sprintf('{{%% terminal file="/data/example/docs/%s/%s.html" %%}}', $object->singular, $object->name),
-            '{{< details "Show code"  >}}',
-            sprintf('{{%% codeInclude file="/data/example/docs/%s/%s.php" language="php" %%}}', $object->singular, $object->name),
-            '',
-            '{{< /details >}}',
-        ]);
+
+        if ($object->hasExample) {
+            $doc[] = '### Example';
+            $doc[] = '';
+            $doc = array_merge($doc, [
+                sprintf('{{%% terminal file="/data/example/docs/%s/%s.html" %%}}', $object->singular, $object->name),
+                '{{< details "Show code"  >}}',
+                sprintf('{{%% codeInclude file="/data/example/docs/%s/%s.php" language="php" %%}}', $object->singular, $object->name),
+                '',
+                '{{< /details >}}',
+            ]);
+        }
         if ($object->params) {
             $doc = array_merge($doc, [
             '### Parameters',

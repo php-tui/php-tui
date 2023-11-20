@@ -14,8 +14,10 @@ final class DocClass
         public string $humanName,
         public string $singular,
         public string $className,
-        public ?string $description,
-        public array $params
+        public ?string $documentation,
+        public ?string $summary,
+        public array $params,
+        public bool $hasExample
     ) {
     }
 }

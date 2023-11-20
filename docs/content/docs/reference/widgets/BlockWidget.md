@@ -1,12 +1,14 @@
 ---
 title:  Block 
-description: The block widget is a container for other widgets and can provide a border,title and padding.
+description: Container for other widgets and can provide a border, title and padding.
 ---
 ##  Block 
 
 `PhpTui\Tui\Extension\Core\Widget\BlockWidget`
 
-The block widget is a container for other widgets and can provide a border,title and padding.
+Container for other widgets and can provide a border, title and padding.
+### Example
+
 {{% terminal file="/data/example/docs/widget/blockWidget.html" %}}
 {{< details "Show code"  >}}
 {{% codeInclude file="/data/example/docs/widget/blockWidget.php" language="php" %}}
@@ -19,7 +21,7 @@ Configure the widget using the builder methods named as follows:
 | Name | Type | Description |
 | --- | --- | --- |
 | **borders** | `int` | Bit mask which determines the border configuration, e.g. Borders::ALL |
-| **titles** | `array` | Titles for the block. You can have multiple titles and each title canbe positioned in a different place. |
+| **titles** | `array` | Titles for the block. You can have multiple titles and each title can be positioned in a different place. |
 | **borderType** | `PhpTui\Tui\Model\Widget\BorderType` | Type of border, e.g. `BorderType::Rounded` |
 | **borderStyle** | `PhpTui\Tui\Model\Style` | Style of the border. |
 | **style** | `PhpTui\Tui\Model\Style` | Style of the block's inner area. |
