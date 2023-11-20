@@ -9,7 +9,7 @@ use PhpTui\Term\Event\CharKeyEvent;
 use PhpTui\Term\EventProvider\LoadedEventProvider;
 use PhpTui\Term\InformationProvider\AggregateInformationProvider;
 use PhpTui\Term\Painter\BufferPainter;
-use PhpTui\Term\RawMode\NullRawMode;
+use PhpTui\Term\RawMode\TestRawMode;
 use PhpTui\Term\Terminal;
 use PhpTui\Tui\Example\Demo\App;
 use PhpTui\Tui\Model\Display\Backend\DummyBackend;
@@ -129,7 +129,7 @@ class DemoTest extends TestCase
     {
         $terminal = Terminal::new(
             infoProvider: new AggregateInformationProvider([]),
-            rawMode: new NullRawMode(),
+            rawMode: new TestRawMode(),
             eventProvider: LoadedEventProvider::fromEvents(
                 ...$events
             ),

@@ -32,7 +32,14 @@ use RuntimeException;
 
 class PhpTermBackend implements Backend
 {
-    public function __construct(private readonly PhpTermTerminal $terminal)
+    public function __construct(
+        private readonly PhpTermTerminal $terminal,
+        /**
+         * Number of seconds to wait for a response from the terminal
+         * when getting the cursor position.
+         */
+        private float $blockingTimeout = 2.0
+    )
     {
     }
 
@@ -116,6 +123,11 @@ class PhpTermBackend implements Backend
         $this->terminal->execute(Actions::clear($clearType));
     }
 
+    /**
+     * Return the current cursor position.
+     *
+     * This is a blocking operation.
+     */
     public function cursorPosition(): Position
     {
         $this->terminal->queue(Actions::requestCursorPosition());
@@ -126,12 +138,13 @@ class PhpTermBackend implements Backend
         while(true) {
             while (null !== $event = $this->terminal->events()->next()) {
                 if ($event instanceof CursorPositionEvent) {
+                    $this->disableRawMode();
                     return new Position($event->x, $event->y);
                 }
             }
 
             // give up after 2 seconds
-            if ((microtime(true) - $start) >= 2) {
+            if ((microtime(true) - $start) >= $this->blockingTimeout) {
                 break;
             }
 

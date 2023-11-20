@@ -6,13 +6,17 @@ namespace PhpTui\Term\RawMode;
 
 use PhpTui\Term\RawMode;
 
-class NullRawMode implements RawMode
+class TestRawMode implements RawMode
 {
+    public bool $enabled = false;
+
     public function enable(): void
     {
+        $this->enabled = true;
     }
 
     public function disable(): void
     {
+        $this->enabled = false;
     }
 }

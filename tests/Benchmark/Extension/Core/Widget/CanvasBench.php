@@ -9,7 +9,7 @@ use PhpBench\Attributes\Revs;
 use PhpTui\Term\InformationProvider\AggregateInformationProvider;
 use PhpTui\Term\InformationProvider\ClosureInformationProvider;
 use PhpTui\Term\Painter\StringPainter;
-use PhpTui\Term\RawMode\NullRawMode;
+use PhpTui\Term\RawMode\TestRawMode;
 use PhpTui\Term\Size;
 use PhpTui\Term\Terminal;
 use PhpTui\Tui\Bridge\PhpTerm\PhpTermBackend;
@@ -40,7 +40,7 @@ final class CanvasBench
                 })
 
             ]),
-            rawMode: new NullRawMode(),
+            rawMode: new TestRawMode(),
             painter: $this->painter,
         );
         $this->display = DisplayBuilder::default(PhpTermBackend::new($terminal))->build();

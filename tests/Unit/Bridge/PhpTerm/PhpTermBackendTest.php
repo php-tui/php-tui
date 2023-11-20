@@ -7,7 +7,10 @@ namespace PhpTui\Tui\Tests\Unit\Bridge\PhpTerm;
 use PhpTui\Term\Action;
 use PhpTui\Term\Actions;
 use PhpTui\Term\ClearType as PhpTuiClearType;
+use PhpTui\Term\Event\CursorPositionEvent;
+use PhpTui\Term\EventProvider\LoadedEventProvider;
 use PhpTui\Term\Painter\BufferPainter;
+use PhpTui\Term\RawMode\TestRawMode;
 use PhpTui\Term\Terminal;
 use PhpTui\Tui\Bridge\PhpTerm\PhpTermBackend;
 use PhpTui\Tui\Model\Color\AnsiColor;
@@ -20,9 +23,48 @@ use PhpTui\Tui\Model\Modifier;
 use PhpTui\Tui\Model\Position\Position;
 use PhpTui\Tui\Model\Style;
 use PHPUnit\Framework\TestCase;
+use RuntimeException;
 
 class PhpTermBackendTest extends TestCase
 {
+    public function testDisableRawModeAfterGettingCursorPosition(): void
+    {
+        $buffer = BufferPainter::new();
+        $rawMode = new TestRawMode();
+        $provider = LoadedEventProvider::fromEvents(
+            new CursorPositionEvent(10, 10)
+        );
+
+        $backend = new PhpTermBackend(Terminal::new(
+            $buffer,
+            rawMode: $rawMode,
+            eventProvider: $provider
+        ));
+        $position = $backend->cursorPosition();
+        self::assertEquals([
+            Actions::requestCursorPosition()
+        ], $buffer->actions());
+        self::assertEquals(Position::at(10, 10), $position);
+        self::assertFalse($rawMode->enabled);
+
+    }
+
+    public function testDisableRawModeIfCursorPositionCannotBeDetermined(): void
+    {
+        $buffer = BufferPainter::new();
+        $rawMode = new TestRawMode();
+        $backend = new PhpTermBackend(Terminal::new(
+            $buffer,
+            rawMode: $rawMode,
+        ), blockingTimeout: 0);
+        try {
+            $position = $backend->cursorPosition();
+            self::fail('Exception not thrown');
+        } catch (RuntimeException) {
+        }
+        self::assertFalse($rawMode->enabled);
+
+    }
     public function testMoveCursor(): void
     {
         $buffer = BufferPainter::new();
