@@ -14,7 +14,7 @@ Renders a map of the world!
 {{< /details >}}
 ### Parameters
 
-Configure the shape using the constructor arguments named as follows:
+Configure the shape using the builder methods named as follows:
 
 | Name | Type | Description |
 | --- | --- | --- |

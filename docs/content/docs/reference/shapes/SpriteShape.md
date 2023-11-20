@@ -14,7 +14,7 @@ Renders a "sprite" based on a given "ascii art"Each sprite can have a single col
 {{< /details >}}
 ### Parameters
 
-Configure the shape using the constructor arguments named as follows:
+Configure the shape using the builder methods named as follows:
 
 | Name | Type | Description |
 | --- | --- | --- |
