@@ -1,12 +1,35 @@
 #!/usr/bin/env php
 <?php
 
+use PhpTui\Docgen\DocUnitConfig;
 use PhpTui\Docgen\Docgen;
+use PhpTui\Docgen\Renderer\AggregateDocRenderer;
+use PhpTui\Docgen\Renderer\WidgetDocRenderer;
+use PhpTui\Tui\Model\Canvas\Shape;
+use PhpTui\Tui\Model\Widget;
+use PhpTui\Tui\Model\WidgetRenderer;
 
 require __DIR__ .'/../vendor/autoload.php';
 
 $docgen = Docgen::new(
     (string)realpath(__DIR__ . '/../'),
-    (string)realpath(__DIR__ . '/../docs/content/docs')
+    (string)realpath(__DIR__ . '/../docs/content/docs'),
+    [
+        new DocUnitConfig(
+            className: Shape::class,
+            singular: 'shape',
+            outPath: 'reference/shapes',
+            stripSuffix: 'Shape',
+        ),
+        new DocUnitConfig(
+            className: Widget::class,
+            singular: 'widget',
+            outPath: 'reference/widgets',
+            stripSuffix: 'Widget',
+        )
+    ],
+    new AggregateDocRenderer(
+        new WidgetDocRenderer(),
+    )
 );
 $docgen->generate();
