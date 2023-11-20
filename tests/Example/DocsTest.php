@@ -38,9 +38,7 @@ class DocsTest extends TestCase
             ],
         );
         if (!is_resource($process)) {
-            throw new RuntimeException(sprintf(
-                'Could not spawn process'
-            ));
+            throw new RuntimeException('Could not spawn process');
         }
         $output = (string)stream_get_contents($pipes[1]);
         $exitCode = proc_close($process);

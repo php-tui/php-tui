@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
+use Rector\CodeQuality\Rector\FuncCall\UnwrapSprintfOneArgumentRector;
 use Rector\CodingStyle\Rector\ArrowFunction\StaticArrowFunctionRector;
+use Rector\CodingStyle\Rector\Encapsed\EncapsedStringsToSprintfRector;
 use Rector\Config\RectorConfig;
 use Rector\Php53\Rector\Ternary\TernaryToElvisRector;
 use Rector\Php73\Rector\FuncCall\JsonThrowOnErrorRector;
@@ -29,6 +31,8 @@ return static function (RectorConfig $rectorConfig): void {
 
     $rectorConfig->rules([
         StaticArrowFunctionRector::class,
+        EncapsedStringsToSprintfRector::class,
+        UnwrapSprintfOneArgumentRector::class,
     ]);
 
     $rectorConfig->sets([

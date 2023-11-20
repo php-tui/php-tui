@@ -44,11 +44,13 @@ class StyleableTest extends TestCase
      */
     public function testFgColors(AnsiColor $color, string $colorName): void
     {
+        $methodName = lcfirst($colorName);
+
         /**
          * @var Span $span
          * @phpstan-ignore-next-line
          */
-        $span = Span::fromString('Hello')->{lcfirst($colorName)}();
+        $span = Span::fromString('Hello')->$methodName();
         self::assertSame($color, $span->style->fg);
     }
 
@@ -57,11 +59,13 @@ class StyleableTest extends TestCase
      */
     public function testBgColors(AnsiColor $color, string $colorName): void
     {
+        $methodName = sprintf('on%s', $colorName);
+
         /**
          * @var Span $span
          * @phpstan-ignore-next-line
          */
-        $span = Span::fromString('Hello')->{"on{$colorName}"}();
+        $span = Span::fromString('Hello')->$methodName();
         self::assertSame($color, $span->style->bg);
     }
 
