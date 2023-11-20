@@ -7,7 +7,6 @@ namespace PhpTui\Tui\Model\WidgetRenderer;
 use PhpTui\Tui\Model\Display\Buffer;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\WidgetRenderer;
-use PhpTui\Tui\Model\WidgetSet;
 
 /**
  * Will iterate over all widget renderers to render the widget Each renderer
