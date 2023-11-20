@@ -27,7 +27,7 @@ use RuntimeException;
 
 final class AnsiPainter implements Painter
 {
-    public function __construct(private Writer $writer)
+    public function __construct(private readonly Writer $writer)
     {
     }
 
@@ -62,7 +62,7 @@ final class AnsiPainter implements Painter
         }
 
         if ($action instanceof EnableMouseCapture) {
-            $this->writer->write(implode('', array_map(fn (string $code) => $this->esc($code), $action->enable ? [
+            $this->writer->write(implode('', array_map(fn (string $code): string => $this->esc($code), $action->enable ? [
                 // Normal tracking: Send mouse X & Y on button press and release
                 '?1000h',
                 // Button-event tracking: Report button motion events (dragging)

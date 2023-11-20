@@ -18,7 +18,7 @@ class AggregateInformationProviderTest extends TestCase
             ClosureInformationProvider::new(function (string $classFqn) {
                 return null;
             }),
-            ClosureInformationProvider::new(function (string $classFqn) use ($info) {
+            ClosureInformationProvider::new(function (string $classFqn) use ($info): ?TestInfo {
                 if ($classFqn !== TestInfo::class) {
                     return null;
                 }

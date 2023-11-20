@@ -20,10 +20,10 @@ class Terminal
     private array $queue = [];
 
     public function __construct(
-        private Painter $painter,
-        private InformationProvider $infoProvider,
-        private RawMode $rawMode,
-        private EventProvider $eventProvider
+        private readonly Painter $painter,
+        private readonly InformationProvider $infoProvider,
+        private readonly RawMode $rawMode,
+        private readonly EventProvider $eventProvider
     ) {
     }
 
@@ -57,9 +57,7 @@ class Terminal
      */
     public function info(string $classFqn): ?object
     {
-        $info = $this->infoProvider->for($classFqn);
-
-        return $info;
+        return $this->infoProvider->for($classFqn);
     }
 
     /**

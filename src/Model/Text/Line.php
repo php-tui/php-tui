@@ -31,14 +31,14 @@ final class Line implements IteratorAggregate, Stringable, Styleable
 
     public function __toString(): string
     {
-        return implode('', array_map(fn (Span $span) => $span->__toString(), $this->spans));
+        return implode('', array_map(static fn (Span $span): string => $span->__toString(), $this->spans));
     }
 
     public function width(): int
     {
         return array_sum(
             array_map(
-                fn (Span $span) => $span->width(),
+                static fn (Span $span): int => $span->width(),
                 $this->spans
             )
         );

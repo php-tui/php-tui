@@ -149,7 +149,7 @@ class RgbColor implements Color, Stringable
         }
 
         if (!preg_match('/^[a-fA-F0-9]{6}$/', $hex)) {
-            throw new InvalidArgumentException("Invalid hex color: $hex");
+            throw new InvalidArgumentException(sprintf('Invalid hex color: %s', $hex));
         }
 
         $int = hexdec($hex);

@@ -65,7 +65,7 @@ final class TerminalTest extends TestCase
                 'SetModifier(Hidden,on)',
                 'SetModifier(Strike,on)',
             ],
-            array_map(fn (Action $cmd) => $cmd->__toString(), $dummy->actions())
+            array_map(static fn (Action $cmd): string => $cmd->__toString(), $dummy->actions())
         );
     }
 }

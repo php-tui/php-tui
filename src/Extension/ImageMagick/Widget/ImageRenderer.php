@@ -14,7 +14,7 @@ use PhpTui\Tui\Model\WidgetRenderer;
 
 class ImageRenderer implements WidgetRenderer
 {
-    public function __construct(private ImageRegistry $registry)
+    public function __construct(private readonly ImageRegistry $registry)
     {
     }
 

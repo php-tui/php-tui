@@ -16,7 +16,7 @@ final class Layout
      * @param Constraint[] $constraints
      */
     private function __construct(
-        private ConstraintSolver $solver,
+        private readonly ConstraintSolver $solver,
         public Direction $direction,
         public Margin $margin,
         public array $constraints,

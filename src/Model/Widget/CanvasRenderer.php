@@ -15,7 +15,7 @@ use PhpTui\Tui\Model\WidgetRenderer;
 
 final class CanvasRenderer implements WidgetRenderer
 {
-    public function __construct(private ShapePainter $painter)
+    public function __construct(private readonly ShapePainter $painter)
     {
     }
 

@@ -16,7 +16,7 @@ class ClosureRunner implements ProcessRunner
     /**
      * @param Closure(string[]): ProcessResult $closure
      */
-    public function __construct(private Closure $closure)
+    public function __construct(private readonly Closure $closure)
     {
     }
 

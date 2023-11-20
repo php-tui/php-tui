@@ -34,10 +34,10 @@ final class Docgen
      * @param iterable<int,ReflectionClass> $classes
      */
     private function __construct(
-        private string $docsDir,
-        private iterable $classes,
-        private Lexer $lexer,
-        private PhpDocParser $parser,
+        private readonly string $docsDir,
+        private readonly iterable $classes,
+        private readonly Lexer $lexer,
+        private readonly PhpDocParser $parser,
     ) {
     }
     public function generate(): void
@@ -58,7 +58,7 @@ final class Docgen
             $docsDir,
             $reflector->reflectAllClasses(),
             new Lexer(),
-            (function () {
+            (function (): PhpDocParser {
                 $constExpr = new ConstExprParser();
 
                 return new PhpDocParser(new TypeParser($constExpr), $constExpr);
@@ -89,7 +89,7 @@ final class Docgen
                         $type = implode(
                             '|',
                             array_map(
-                                fn (VarTagValueNode $node) => $node->__toString(),
+                                static fn (VarTagValueNode $node): string => $node->__toString(),
                                 $phpDoc->getVarTagValues()
                             )
                         );
@@ -129,7 +129,7 @@ final class Docgen
                         $type = implode(
                             '|',
                             array_map(
-                                fn (VarTagValueNode $node) => $node->__toString(),
+                                static fn (VarTagValueNode $node): string => $node->__toString(),
                                 $phpDoc->getVarTagValues()
                             )
                         );
@@ -161,9 +161,8 @@ final class Docgen
         if (null === $docblock) {
             return null;
         }
-        $node = $this->parser->parse(new TokenIterator($this->lexer->tokenize($docblock)));
 
-        return $node;
+        return $this->parser->parse(new TokenIterator($this->lexer->tokenize($docblock)));
     }
 
     private function description(?PhpDocNode $node): ?string

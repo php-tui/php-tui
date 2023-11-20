@@ -21,7 +21,7 @@ final class Text implements Styleable
 
     public static function fromString(string $string): self
     {
-        return new self(array_map(function (string $line) {
+        return new self(array_map(function (string $line): Line {
             return Line::fromString($line);
         }, explode("\n", $string)));
     }
@@ -30,12 +30,12 @@ final class Text implements Styleable
     {
         $placeholder = '{{1162128a-269a-4c09-88be-effc70a62a3a}}';
 
-        $string = preg_replace_callback('/<[^>]+>.*?<\/>/s', function ($matches) use ($placeholder) {
+        $string = preg_replace_callback('/<[^>]+>.*?<\/>/s', function (array $matches) use ($placeholder): string {
             return str_replace("\n", $placeholder, $matches[0]);
         }, $string);
 
         // We can only break into new lines at the breaks that are outside of tags.
-        $lines = array_map(function (string $line) use ($placeholder) {
+        $lines = array_map(function (string $line) use ($placeholder): Line {
             return Line::parse(str_replace($placeholder, "\n", $line));
         }, explode("\n", $string ?? ''));
 

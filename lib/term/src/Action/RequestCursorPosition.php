@@ -14,6 +14,6 @@ final class RequestCursorPosition implements Action
 {
     public function __toString(): string
     {
-        return sprintf('RequestCursorPosition()');
+        return 'RequestCursorPosition()';
     }
 }

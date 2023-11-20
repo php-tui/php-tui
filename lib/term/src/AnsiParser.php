@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PhpTui\Term;
 
+use PhpTui\Term\Action\AlternateScreenEnable;
 use PhpTui\Term\Action\PrintString;
 
 /**
@@ -24,7 +25,7 @@ final class AnsiParser
      */
     private array $actions = [];
 
-    public function __construct(private bool $throw = false)
+    public function __construct(private readonly bool $throw = false)
     {
     }
 
@@ -47,7 +48,7 @@ final class AnsiParser
             }
             if ($strings) {
                 $newActions[] = Actions::printString(
-                    implode('', array_map(fn (PrintString $s) => $s->string, $strings))
+                    implode('', array_map(static fn (PrintString $s): string => $s->string, $strings))
                 );
                 $strings = [];
             }
@@ -55,7 +56,7 @@ final class AnsiParser
         }
         if ($strings) {
             $newActions[] = Actions::printString(
-                implode('', array_map(fn (PrintString $s) => $s->string, $strings))
+                implode('', array_map(static fn (PrintString $s): string => $s->string, $strings))
             );
         }
 
@@ -181,7 +182,7 @@ final class AnsiParser
 
         // true colors
         if (count($parts) === 5) {
-            $rgb = array_map(fn (string $index) => (int) $index, array_slice($parts, -3));
+            $rgb = array_map(static fn (string $index): int => (int) $index, array_slice($parts, -3));
 
             return match ($parts[0]) {
                 '48' => Actions::setRgbBackgroundColor(...$rgb),
@@ -235,7 +236,7 @@ final class AnsiParser
                 default => throw ParseError::couldNotParseBuffer($buffer),
             },
             '0' => match ($buffer[5]) {
-                '4' => (function () use ($buffer) {
+                '4' => (function () use ($buffer): ?AlternateScreenEnable {
                     if (count($buffer) === 6 || count($buffer) === 7) {
                         return null;
                     }

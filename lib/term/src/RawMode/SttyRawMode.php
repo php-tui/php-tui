@@ -11,9 +11,9 @@ use RuntimeException;
 
 class SttyRawMode implements RawMode
 {
-    private ?string $originalSettings;
+    private ?string $originalSettings = null;
 
-    private function __construct(private ProcessRunner $runner)
+    private function __construct(private readonly ProcessRunner $runner)
     {
     }
 

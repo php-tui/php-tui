@@ -34,8 +34,8 @@ class ParagraphRenderer implements WidgetRenderer
 
         $widget->text->patchStyle($widget->style);
         $style = $widget->style;
-        $styled = array_map(function (Line $line) use ($style, $widget) {
-            $graphemes = array_reduce($line->spans, function (array $ac, Span $span) use ($style) {
+        $styled = array_map(function (Line $line) use ($style, $widget): array {
+            $graphemes = array_reduce($line->spans, function (array $ac, Span $span) use ($style): array {
                 foreach ($span->toStyledGraphemes($style) as $grapheme) {
                     $ac[] = $grapheme;
                 }
@@ -59,7 +59,7 @@ class ParagraphRenderer implements WidgetRenderer
 
             if ($y >= $widget->scroll[0]) {
 
-                $x = self::getLineOffset($currentLineWidth, $textArea->width, $currentLineAlignment);
+                $x = $this->getLineOffset($currentLineWidth, $textArea->width, $currentLineAlignment);
 
                 foreach ($currentLine as $grapheme) {
                     if ($grapheme->symbolWidth() === 0) {
@@ -90,7 +90,7 @@ class ParagraphRenderer implements WidgetRenderer
         return new LineTruncator($styled, $textArea->width, $horizontalOffset);
     }
 
-    private static function getLineOffset(int $width, int $maxWidth, HorizontalAlignment $alignment): int
+    private function getLineOffset(int $width, int $maxWidth, HorizontalAlignment $alignment): int
     {
         return match ($alignment) {
             HorizontalAlignment::Center => (int) (($maxWidth / 2) - $width / 2),

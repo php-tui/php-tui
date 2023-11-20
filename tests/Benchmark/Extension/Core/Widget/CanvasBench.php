@@ -24,9 +24,9 @@ use PhpTui\Tui\Model\Display\Display;
 #[Revs(25)]
 final class CanvasBench
 {
-    private Display $display;
+    private readonly Display $display;
 
-    private StringPainter $painter;
+    private readonly StringPainter $painter;
 
     public function __construct()
     {

@@ -41,9 +41,9 @@ use PhpTui\Tui\Model\Widget\Borders;
 
 final class DisplayBench
 {
-    private Display $display;
+    private readonly Display $display;
 
-    private StringPainter $painter;
+    private readonly StringPainter $painter;
 
     public function __construct()
     {

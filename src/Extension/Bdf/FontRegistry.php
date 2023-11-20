@@ -21,7 +21,7 @@ final class FontRegistry
     /**
      * @param array<string,string> $fontMap
      */
-    public function __construct(private BdfParser $parser, private array $fontMap = [])
+    public function __construct(private readonly BdfParser $parser, private array $fontMap = [])
     {
     }
 

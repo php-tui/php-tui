@@ -15,7 +15,7 @@ class AggregateShapePainter implements ShapePainter
     /**
      * @param ShapePainter[] $painters
      */
-    public function __construct(private array $painters)
+    public function __construct(private readonly array $painters)
     {
     }
 

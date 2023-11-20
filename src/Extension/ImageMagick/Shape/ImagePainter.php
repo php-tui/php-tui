@@ -18,7 +18,7 @@ use PhpTui\Tui\Model\Text\Line as PhpTuiLine;
 
 final class ImagePainter implements ShapePainter
 {
-    private ImageRegistry $registry;
+    private readonly ImageRegistry $registry;
 
     public function __construct(ImageRegistry $registry = null)
     {

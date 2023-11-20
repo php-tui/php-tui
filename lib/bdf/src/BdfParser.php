@@ -82,13 +82,7 @@ final class BdfParser
      */
     private function notNull(mixed ...$values): bool
     {
-        foreach ($values as $value) {
-            if ($value === null) {
-                return false;
-            }
-        }
-
-        return true;
+        return !in_array(null, $values, true);
     }
 
     private function parseProperties(BdfTokenStream $tokens): BdfProperties

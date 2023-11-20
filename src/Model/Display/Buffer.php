@@ -11,8 +11,9 @@ use PhpTui\Tui\Model\Position\Position;
 use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Text\Line;
 use PhpTui\Tui\Model\Text\Span;
+use Stringable;
 
-final class Buffer implements Countable
+final class Buffer implements Countable, Stringable
 {
     /**
      * @param Cell[] $content
@@ -71,7 +72,7 @@ final class Buffer implements Countable
         $height = count($lines);
         $width = array_reduce(
             $lines,
-            fn ($acc, $line) => mb_strlen($line) > $acc ? mb_strlen($line) : $acc,
+            static fn ($acc, $line) => mb_strlen($line) > $acc ? mb_strlen($line) : $acc,
             0
         );
 
@@ -96,8 +97,9 @@ final class Buffer implements Countable
         $previous = $this->content();
         $next     = $buffer->content();
         $updates = [];
+        $counter = count($next);
 
-        for ($i = 0; $i < count($next); $i++) {
+        for ($i = 0; $i < $counter; $i++) {
             $previousCell = $previous[$i];
             $currentCell = $next[$i];
             if (false === $previousCell->equals($currentCell)) {
@@ -129,11 +131,11 @@ final class Buffer implements Countable
 
     public function putString(Position $position, string $line, ?Style $style = null, int $width = PHP_INT_MAX): Position
     {
-        $style = $style ?? Style::default();
+        $style ??= Style::default();
 
         try {
             $index = $position->toIndex($this->area);
-        } catch (OutOfBoundsException $e) {
+        } catch (OutOfBoundsException) {
             return $position;
         }
         $chars = mb_str_split($line, 1);
@@ -160,9 +162,8 @@ final class Buffer implements Countable
     public function toLines(): array
     {
         $text = $this->toString();
-        $lines = explode("\n", $text);
 
-        return $lines;
+        return explode("\n", $text);
     }
 
     public function area(): Area

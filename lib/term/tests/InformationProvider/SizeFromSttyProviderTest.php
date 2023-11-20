@@ -14,7 +14,7 @@ class SizeFromSttyProviderTest extends TestCase
 {
     public function testSizeFromStty(): void
     {
-        $runner = ClosureRunner::new(function (array $command) {
+        $runner = ClosureRunner::new(function (array $command): ProcessResult {
             return new ProcessResult(
                 0,
                 <<<'EOT'

@@ -17,7 +17,7 @@ final class ClosureInformationProvider implements InformationProvider
      * @template T of TerminalInformation
      * @param Closure(class-string<T>): (T|null) $closure
      */
-    private function __construct(private Closure $closure)
+    private function __construct(private readonly Closure $closure)
     {
     }
 

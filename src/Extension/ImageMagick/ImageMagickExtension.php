@@ -10,7 +10,7 @@ use PhpTui\Tui\Model\Display\DisplayExtension;
 
 final class ImageMagickExtension implements DisplayExtension
 {
-    public function __construct(private ?ImageRegistry $imageRegistry = null)
+    public function __construct(private readonly ?ImageRegistry $imageRegistry = null)
     {
     }
 

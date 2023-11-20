@@ -32,7 +32,7 @@ use RuntimeException;
 
 class PhpTermBackend implements Backend
 {
-    public function __construct(private PhpTermTerminal $terminal)
+    public function __construct(private readonly PhpTermTerminal $terminal)
     {
     }
 
@@ -126,9 +126,7 @@ class PhpTermBackend implements Backend
         while(true) {
             while (null !== $event = $this->terminal->events()->next()) {
                 if ($event instanceof CursorPositionEvent) {
-                    $pos = new Position($event->x, $event->y);
-
-                    return $pos;
+                    return new Position($event->x, $event->y);
                 }
             }
 

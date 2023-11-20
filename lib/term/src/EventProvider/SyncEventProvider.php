@@ -17,7 +17,7 @@ final class SyncEventProvider implements EventProvider
      */
     private array $buffer = [];
 
-    public function __construct(private Reader $reader, private EventParser $parser)
+    public function __construct(private readonly Reader $reader, private readonly EventParser $parser)
     {
     }
 

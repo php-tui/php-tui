@@ -40,7 +40,7 @@ class StringPainter implements Painter
         $maxX = max(
             0,
             ...array_map(
-                fn (array $cells) => max(
+                static fn (array $cells): mixed => max(
                     array_keys($cells)
                 ),
                 $this->grid

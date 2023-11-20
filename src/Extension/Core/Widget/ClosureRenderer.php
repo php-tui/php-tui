@@ -14,7 +14,7 @@ final class ClosureRenderer implements WidgetRenderer
     /**
      * @param Closure(WidgetRenderer, Widget, Buffer): void $renderer
      */
-    public function __construct(private Closure $renderer)
+    public function __construct(private readonly Closure $renderer)
     {
     }
 

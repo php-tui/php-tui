@@ -18,7 +18,7 @@ use PhpTui\Tui\Model\Text\Line;
 final class CanvasContext
 {
     private function __construct(
-        private ShapePainter $painter,
+        private readonly ShapePainter $painter,
         public AxisBounds $xBounds,
         public AxisBounds $yBounds,
         public CanvasGrid $grid,

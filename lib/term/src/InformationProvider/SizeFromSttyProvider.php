@@ -12,7 +12,7 @@ use PhpTui\Term\TerminalInformation;
 
 final class SizeFromSttyProvider implements InformationProvider
 {
-    private function __construct(private ProcessRunner $runner)
+    private function __construct(private readonly ProcessRunner $runner)
     {
     }
 

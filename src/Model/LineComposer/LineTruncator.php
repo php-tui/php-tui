@@ -15,8 +15,8 @@ class LineTruncator implements LineComposer
      * @param list<array{list<StyledGrapheme>,HorizontalAlignment}> $lines
      */
     public function __construct(
-        private array $lines,
-        private int $maxLineWidth,
+        private readonly array $lines,
+        private readonly int $maxLineWidth,
         private int $horizontalOffset = 0,
     ) {
     }
@@ -81,7 +81,7 @@ class LineTruncator implements LineComposer
         }
 
         if ($styledGrapheme->symbolWidth() > $horizontalOffset) {
-            $symbol = self::trimOffset($styledGrapheme->symbol, $horizontalOffset);
+            $symbol = $this->trimOffset($styledGrapheme->symbol, $horizontalOffset);
             $horizontalOffset = 0;
 
             return $symbol;
@@ -91,7 +91,7 @@ class LineTruncator implements LineComposer
         return '';
     }
 
-    private static function trimOffset(string $string, int $horizontalOffset): string
+    private function trimOffset(string $string, int $horizontalOffset): string
     {
         return mb_substr($string, 0, $horizontalOffset);
     }

@@ -15,7 +15,7 @@ class SttyRawModeTest extends TestCase
     public function testEnableDisable(): void
     {
         $called = [];
-        $runner = ClosureRunner::new(function (array $command) use (&$called) {
+        $runner = ClosureRunner::new(function (array $command) use (&$called): ProcessResult {
             if ($command === ['stty', '-g']) {
                 $called[] = $command;
 

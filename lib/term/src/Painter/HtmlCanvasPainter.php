@@ -32,15 +32,15 @@ class HtmlCanvasPainter implements Painter
     /**
      * @var int<1,max>
      */
-    private int $width;
+    private readonly int $width;
 
     private ?SetRgbBackgroundColor $bgColor = null;
 
     private ?SetRgbForegroundColor $fgColor = null;
 
-    private SetRgbBackgroundColor $defaultBgColor;
+    private readonly SetRgbBackgroundColor $defaultBgColor;
 
-    private SetRgbForegroundColor $defaultFgColor;
+    private readonly SetRgbForegroundColor $defaultFgColor;
 
     private function __construct(
         int $width,

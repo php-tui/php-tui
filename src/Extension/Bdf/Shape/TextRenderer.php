@@ -14,7 +14,7 @@ use PhpTui\Tui\Model\Position\FloatPosition;
 class TextRenderer implements ShapePainter
 {
     public function __construct(
-        private FontRegistry $registry,
+        private readonly FontRegistry $registry,
     ) {
     }
 
@@ -29,15 +29,15 @@ class TextRenderer implements ShapePainter
         foreach (str_split($shape->text) as $char) {
             $glyph = $font->codePoint(ord($char));
 
-            $grid = self::buildGrid($shape, $glyph);
-            $charOffset += self::renderChar($shape, $painter, $charOffset, $grid, $glyph);
+            $grid = $this->buildGrid($shape, $glyph);
+            $charOffset += $this->renderChar($shape, $painter, $charOffset, $grid, $glyph);
         }
     }
 
     /**
      * @return list<array<int,bool>>
      */
-    private static function buildGrid(TextShape $shape, BdfGlyph $glyph): array
+    private function buildGrid(TextShape $shape, BdfGlyph $glyph): array
     {
         $grid = [];
         $y = 0;
@@ -46,7 +46,7 @@ class TextRenderer implements ShapePainter
             for ($i = $glyph->boundingBox->size->width + 1; $i >= 0; $i--) {
                 $x = $i + $shape->position->x;
                 $grid[$y][$x] = ($row & $xbit) > 0;
-                $xbit = $xbit << 1;
+                $xbit <<= 1;
             }
             $y++;
         }
@@ -57,7 +57,7 @@ class TextRenderer implements ShapePainter
     /**
      * @param array<int,array<int,bool>> $grid
      */
-    private static function renderChar(
+    private function renderChar(
         TextShape $shape,
         Painter $painter,
         float $charOffset,

@@ -46,7 +46,7 @@ final class EventParser
 
             try {
                 $event = $this->parseEvent($this->buffer, $more);
-            } catch (ParseError $error) {
+            } catch (ParseError) {
                 $this->buffer = [];
 
                 continue;
@@ -99,7 +99,7 @@ final class EventParser
         return match ($buffer[1]) {
             '[' => $this->parseCsi($buffer),
             "\x1B" => CodedKeyEvent::new(KeyCode::Esc),
-            'O' => (function () use ($buffer) {
+            'O' => (function () use ($buffer): null|FunctionKeyEvent|CodedKeyEvent {
                 if (count($buffer) === 2) {
                     return null;
                 }
@@ -187,7 +187,7 @@ final class EventParser
         $str = implode('', array_slice($buffer, 2, (int)array_key_last($buffer)));
 
         $split = array_map(
-            fn (string $substr) => self::filterToInt($substr) ?? 0,
+            fn (string $substr): int => $this->filterToInt($substr) ?? 0,
             explode(';', $str),
         );
         $first = $split[array_key_first($split)];
@@ -253,7 +253,7 @@ final class EventParser
         // split string into bytes
         $parts = explode(';', $str);
 
-        [$modifiers, $kind] = (function () use ($parts) {
+        [$modifiers, $kind] = (function () use ($parts): array {
             $modifierAndKindCode  = $this->modifierAndKindParsed($parts);
             if (null !== $modifierAndKindCode) {
                 return [
@@ -304,12 +304,12 @@ final class EventParser
             throw new ParseError('Could not parse modifier');
         }
         $parts = explode(':', $parts[1]);
-        $modifierMask = self::filterToInt($parts[0]);
+        $modifierMask = $this->filterToInt($parts[0]);
         if (null === $modifierMask) {
             return null;
         }
         if (isset($parts[1])) {
-            $kindCode = self::filterToInt($parts[1]);
+            $kindCode = $this->filterToInt($parts[1]);
             if (null === $kindCode) {
                 return null;
             }
@@ -320,11 +320,11 @@ final class EventParser
         return [$modifierMask, 1];
     }
 
-    private static function filterToInt(string $substr): ?int
+    private function filterToInt(string $substr): ?int
     {
         $str = array_reduce(
             str_split($substr),
-            function (string $ac, string $char) {
+            function (string $ac, string $char): string {
                 if (false === is_numeric($char)) {
                     return $ac;
                 }

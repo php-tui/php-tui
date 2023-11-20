@@ -13,8 +13,8 @@ use RuntimeException;
 
 class DocsTest extends TestCase
 {
-    public const WIDTH = 20;
-    public const HEIGHT = 50;
+    final public const WIDTH = 20;
+    final public const HEIGHT = 50;
 
     /**
      * @dataProvider provideExamples
@@ -38,9 +38,7 @@ class DocsTest extends TestCase
             ],
         );
         if (!is_resource($process)) {
-            throw new RuntimeException(sprintf(
-                'Could not spawn process'
-            ));
+            throw new RuntimeException('Could not spawn process');
         }
         $output = (string)stream_get_contents($pipes[1]);
         $exitCode = proc_close($process);
@@ -58,7 +56,7 @@ class DocsTest extends TestCase
         $painter->paint($actions);
         $output = $painter->toString();
 
-        $this->assertSnapshot($path, $output, 'html', self::normalize(...));
+        $this->assertSnapshot($path, $output, 'html', $this->normalize(...));
     }
 
     /**
@@ -97,7 +95,7 @@ class DocsTest extends TestCase
 
     }
 
-    private static function normalize(string $string): string
+    private function normalize(string $string): string
     {
         $normalized = preg_replace('{canvas id=".*?"}', 'canvas id="***"', $string);
         $normalized = preg_replace('{getElementById\(".*?"\)}', 'getElementById("***")', (string)$normalized);
