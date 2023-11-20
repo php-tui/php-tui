@@ -7,6 +7,8 @@ description: Draw a straight line from one point to another.
 `PhpTui\Tui\Extension\Core\Shape\LineShape`
 
 Draw a straight line from one point to another.
+
+Draw a straight line from one point to another.
 ### Example
 
 {{% terminal file="/data/example/docs/shape/lineShape.html" %}}

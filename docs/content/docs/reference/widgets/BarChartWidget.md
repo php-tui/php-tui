@@ -7,6 +7,8 @@ description:
 `PhpTui\Tui\Extension\Core\Widget\BarChartWidget`
 
 
+
+
 ### Example
 
 {{% terminal file="/data/example/docs/widget/barChartWidget.html" %}}

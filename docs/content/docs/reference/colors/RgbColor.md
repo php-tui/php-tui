@@ -1,11 +1,16 @@
 ---
 title:  Rgb Color
-description: 
+description: Represents 24 bit (true) color.
 ---
 ##  Rgb Color
 
 `PhpTui\Tui\Model\Color\RgbColor`
 
+Represents 24 bit (true) color.
+
+
+You can create this object from RGB, HSV or Hexidecimal values using static
+constructors.
 
 ### Example
 

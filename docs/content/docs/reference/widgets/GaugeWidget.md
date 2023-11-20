@@ -6,6 +6,8 @@ description: A widget to display a progress bar.
 
 `PhpTui\Tui\Extension\Core\Widget\GaugeWidget`
 
+A widget to display a progress bar.
+
 
 A `GaugeWidget` renders a bar filled according to the value given to the specified ratio. The bar width and height are defined by the area it is in.
 

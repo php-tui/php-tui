@@ -7,6 +7,8 @@ description: This widget has the ability to show and wrap text.
 `PhpTui\Tui\Extension\Core\Widget\ParagraphWidget`
 
 This widget has the ability to show and wrap text.
+
+This widget has the ability to show and wrap text.
 ### Example
 
 {{% terminal file="/data/example/docs/widget/paragraphWidget.html" %}}

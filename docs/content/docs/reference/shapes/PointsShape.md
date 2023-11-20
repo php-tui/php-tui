@@ -7,6 +7,8 @@ description: Render a set of points on the canvas.
 `PhpTui\Tui\Extension\Core\Shape\PointsShape`
 
 Render a set of points on the canvas.
+
+Render a set of points on the canvas.
 ### Example
 
 {{% terminal file="/data/example/docs/shape/pointsShape.html" %}}

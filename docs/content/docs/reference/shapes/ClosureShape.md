@@ -7,6 +7,8 @@ description:
 `PhpTui\Tui\Extension\Core\Shape\ClosureShape`
 
 
+
+
 ### Example
 
 {{% terminal file="/data/example/docs/shape/closureShape.html" %}}

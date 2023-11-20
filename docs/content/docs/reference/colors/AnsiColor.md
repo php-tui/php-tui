@@ -1,14 +1,13 @@
 ---
 title:  Ansi Color
-description: ANSI Color
+description: All colors from the ANSI color table are supported (though some names are not exactly the same).
 ---
 ##  Ansi Color
 
 `PhpTui\Tui\Model\Color\AnsiColor`
 
+All colors from the ANSI color table are supported (though some names are not exactly the same).
 
-All colors from the ANSI color table are supported (though some names are not exactly the
-same).
 
 | Color Name     | Color                     | Foreground | Background |
 |----------------|---------------------------|------------|------------|

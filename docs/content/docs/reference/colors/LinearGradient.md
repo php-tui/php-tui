@@ -7,6 +7,11 @@ description: Multi-stop linear gradient with optional angle and point of origin.
 `PhpTui\Tui\Model\Color\LinearGradient`
 
 Multi-stop linear gradient with optional angle and point of origin.
+
+
+This color is not supported by all widgets. In the case that the widget does
+not support gradient fills the first stop color will be used.
+
 ### Example
 
 {{% terminal file="/data/example/docs/color/linearGradient.html" %}}

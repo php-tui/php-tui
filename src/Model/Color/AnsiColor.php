@@ -10,8 +10,6 @@ use PhpTui\Tui\Model\Color;
 use PhpTui\Tui\Model\Position\FractionalPosition;
 
 /** 
- * ANSI Color
- *
  * All colors from the ANSI color table are supported (though some names are not exactly the
  * same).
  *

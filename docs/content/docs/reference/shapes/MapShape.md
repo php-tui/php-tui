@@ -7,6 +7,8 @@ description: Renders a map of the world!
 `PhpTui\Tui\Extension\Core\Shape\MapShape`
 
 Renders a map of the world!
+
+Renders a map of the world!
 ### Example
 
 {{% terminal file="/data/example/docs/shape/mapShape.html" %}}

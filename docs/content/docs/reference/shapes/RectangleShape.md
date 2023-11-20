@@ -7,6 +7,8 @@ description: Draw a rectangle at the given position with the given width and hei
 `PhpTui\Tui\Extension\Core\Shape\RectangleShape`
 
 Draw a rectangle at the given position with the given width and height
+
+Draw a rectangle at the given position with the given width and height
 ### Example
 
 {{% terminal file="/data/example/docs/shape/rectangleShape.html" %}}

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PhpTui\Docgen;
 
-use Closure;
 use Generator;
 use PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocNode;
 use PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTextNode;
@@ -15,8 +14,6 @@ use PHPStan\PhpDocParser\Parser\PhpDocParser;
 use PHPStan\PhpDocParser\Parser\TokenIterator;
 use PHPStan\PhpDocParser\Parser\TypeParser;
 use PhpTui\Docgen\Renderer\AggregateDocRenderer;
-use PhpTui\Tui\Model\Canvas\Shape;
-use PhpTui\Tui\Model\Widget;
 use Roave\BetterReflection\BetterReflection;
 use Roave\BetterReflection\Reflection\ReflectionClass;
 use Roave\BetterReflection\Reflection\ReflectionProperty;
@@ -82,11 +79,10 @@ final class Docgen
     }
     private function render(
         DocUnitConfig $config
-    ): void
-    {
+    ): void {
         $fs = new Filesystem();
         $fs->remove($this->docsDir . '/' . $config->outPath);
-        $this->writeTo(sprintf('%s/_index.md', $config->outPath),$this->doRender($config->section));
+        $this->writeTo(sprintf('%s/_index.md', $config->outPath), $this->doRender($config->section));
 
         foreach ($this->classes($config->className, 'src/**/*.php') as $widget) {
 
@@ -171,6 +167,7 @@ final class Docgen
         foreach ($node->children as $child) {
             if ($child instanceof PhpDocTextNode) {
                 $text[] = $child->text;
+
                 break;
             }
         }
@@ -178,7 +175,7 @@ final class Docgen
             return null;
         }
 
-        return str_replace("\n", " ", implode('', $text));
+        return str_replace("\n", ' ', implode('', $text));
     }
 
     private function documentation(?PhpDocNode $node): ?string
@@ -193,6 +190,7 @@ final class Docgen
                 // ignore the first line which is used as the short description
                 if ($first) {
                     $first = false;
+
                     continue;
                 }
                 $text[] = $child->text;
@@ -205,7 +203,6 @@ final class Docgen
 
         return implode('', $text);
     }
-
 
     private function writeTo(string $subPath, string $content): void
     {

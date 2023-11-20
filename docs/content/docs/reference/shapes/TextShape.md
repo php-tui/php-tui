@@ -6,6 +6,8 @@ description: Renders text on the canvas.
 
 `PhpTui\Tui\Extension\Bdf\Shape\TextShape`
 
+Renders text on the canvas.
+
 
 This widget requires a bitmap font in the BDF format.
 You can use the `PhpTui\Tui\Adapter\Bdf\FontRegistry` to

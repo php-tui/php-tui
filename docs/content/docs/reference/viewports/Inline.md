@@ -6,6 +6,8 @@ description: Viewport that is displayed _after_ the cursor's current position.
 
 `PhpTui\Tui\Model\Viewport\Inline`
 
+Viewport that is displayed _after_ the cursor's current position.
+
 
 You can use this viewport in with `Display#insertBefore` in order to add content
 before the viewport, which can be usedful for "logging" progress.
