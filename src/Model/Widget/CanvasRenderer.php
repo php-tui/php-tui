@@ -21,10 +21,10 @@ final class CanvasRenderer implements WidgetRenderer
 
     public function render(WidgetRenderer $renderer, Widget $widget, Buffer $buffer): void
     {
-        $area = $buffer->area();
         if (!$widget instanceof CanvasWidget) {
             return;
         }
+        $area = $buffer->area();
         $painter = $widget->painter;
 
         $buffer->setStyle($area, Style::default()->bg($widget->backgroundColor));
