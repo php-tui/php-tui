@@ -63,5 +63,11 @@ class SttyRawMode implements RawMode
                 $result->stderr
             ));
         }
+        $this->originalSettings = null;
+    }
+
+    public function isEnabled(): bool
+    {
+        return $this->originalSettings !== null;
     }
 }

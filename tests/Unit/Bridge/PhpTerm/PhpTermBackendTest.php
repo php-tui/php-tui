@@ -45,8 +45,7 @@ class PhpTermBackendTest extends TestCase
             Actions::requestCursorPosition()
         ], $buffer->actions());
         self::assertEquals(Position::at(10, 10), $position);
-        self::assertFalse($rawMode->enabled);
-
+        self::assertFalse($rawMode->isEnabled());
     }
 
     public function testDisableRawModeIfCursorPositionCannotBeDetermined(): void
@@ -63,7 +62,7 @@ class PhpTermBackendTest extends TestCase
             self::fail('Exception not thrown');
         } catch (RuntimeException) {
         }
-        self::assertFalse($rawMode->enabled);
+        self::assertFalse($rawMode->isEnabled());
 
     }
     public function testMoveCursor(): void

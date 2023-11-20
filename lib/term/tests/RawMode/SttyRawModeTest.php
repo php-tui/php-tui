@@ -17,14 +17,18 @@ class SttyRawModeTest extends TestCase
         $called = [];
         $runner = ClosureRunner::new(function (array $command) use (&$called): ProcessResult {
             $called[] = $command;
-            return new ProcessResult(0,'','');
+
+            return new ProcessResult(0, '', '');
         });
 
         $raw = SttyRawMode::new($runner);
+        self::assertFalse($raw->isEnabled());
         $raw->enable();
         $raw->enable();
+        self::assertTrue($raw->isEnabled());
         self::assertCount(3, $called);
         $raw->disable();
+        self::assertFalse($raw->isEnabled());
     }
 
     public function testEnableDisable(): void
@@ -58,7 +62,9 @@ class SttyRawModeTest extends TestCase
         });
 
         $raw = SttyRawMode::new($runner);
+        self::assertFalse($raw->isEnabled());
         $raw->enable();
+        self::assertTrue($raw->isEnabled());
         self::assertCount(3, $called);
         $raw->disable();
         self::assertEquals([
@@ -67,5 +73,6 @@ class SttyRawModeTest extends TestCase
             ['stty', '-echo'],
             ['stty', 'original mode string'],
         ], $called);
+        self::assertFalse($raw->isEnabled());
     }
 }

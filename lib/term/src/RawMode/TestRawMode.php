@@ -8,7 +8,7 @@ use PhpTui\Term\RawMode;
 
 class TestRawMode implements RawMode
 {
-    public bool $enabled = false;
+    private bool $enabled = false;
 
     public function enable(): void
     {
@@ -18,5 +18,10 @@ class TestRawMode implements RawMode
     public function disable(): void
     {
         $this->enabled = false;
+    }
+
+    public function isEnabled(): bool
+    {
+        return $this->enabled;
     }
 }
