@@ -38,9 +38,8 @@ class PhpTermBackend implements Backend
          * Number of seconds to wait for a response from the terminal
          * when getting the cursor position.
          */
-        private float $blockingTimeout = 2.0
-    )
-    {
+        private readonly float $blockingTimeout = 2.0
+    ) {
     }
 
     public static function new(?PhpTermTerminal $terminal = null): self
@@ -139,6 +138,7 @@ class PhpTermBackend implements Backend
             while (null !== $event = $this->terminal->events()->next()) {
                 if ($event instanceof CursorPositionEvent) {
                     $this->disableRawMode();
+
                     return new Position($event->x, $event->y);
                 }
             }

@@ -57,6 +57,7 @@ class PhpTermBackendTest extends TestCase
             $buffer,
             rawMode: $rawMode,
         ), blockingTimeout: 0);
+
         try {
             $position = $backend->cursorPosition();
             self::fail('Exception not thrown');
