@@ -129,10 +129,10 @@ class PhpTermBackend implements Backend
      */
     public function cursorPosition(): Position
     {
+        $this->enableRawMode();
         $this->terminal->queue(Actions::requestCursorPosition());
         $this->terminal->flush();
         $start = microtime(true);
-        $this->enableRawMode();
         $pos = null;
         while(true) {
             while (null !== $event = $this->terminal->events()->next()) {
