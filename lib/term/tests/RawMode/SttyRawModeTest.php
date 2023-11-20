@@ -12,6 +12,21 @@ use RuntimeException;
 
 class SttyRawModeTest extends TestCase
 {
+    public function testDoesNothingIfAlreadyEnabled(): void
+    {
+        $called = [];
+        $runner = ClosureRunner::new(function (array $command) use (&$called): ProcessResult {
+            $called[] = $command;
+            return new ProcessResult(0,'','');
+        });
+
+        $raw = SttyRawMode::new($runner);
+        $raw->enable();
+        $raw->enable();
+        self::assertCount(3, $called);
+        $raw->disable();
+    }
+
     public function testEnableDisable(): void
     {
         $called = [];

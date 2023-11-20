@@ -24,13 +24,19 @@ class SttyRawMode implements RawMode
 
     public function enable(): void
     {
+        if (null !== $this->originalSettings) {
+            return;
+        }
+
         $result = $this->runner->run(['stty', '-g']);
         if ($result->exitCode !== 0) {
             throw new RuntimeException(
                 'Could not get stty settings'
             );
         }
+
         $this->originalSettings = trim($result->stdout);
+
         $result = $this->runner->run(['stty', 'raw']);
         if ($result->exitCode !== 0) {
             throw new RuntimeException(
