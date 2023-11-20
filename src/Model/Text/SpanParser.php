@@ -11,8 +11,7 @@ use PhpTui\Tui\Model\Modifier;
 use PhpTui\Tui\Model\Style;
 
 /**
- * This class is a subset of the Symfony Console component's OutputFormatter class.
- * It parses strings containing tags into a list of spans.
+ * This is a subset of the Symfony Console markup. It parses strings into a list of spans.
  *
  * @see https://symfony.com/doc/current/console/coloring.html
  */
