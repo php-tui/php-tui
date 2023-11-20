@@ -7,8 +7,6 @@ description: Draws a circle at with the specified radius and color
 `PhpTui\Tui\Extension\Core\Shape\CircleShape`
 
 Draws a circle at with the specified radius and color
-
-Draws a circle at with the specified radius and color
 ### Example
 
 {{% terminal file="/data/example/docs/shape/circleShape.html" %}}

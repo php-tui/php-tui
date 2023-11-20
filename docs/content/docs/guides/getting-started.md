@@ -1,4 +1,6 @@
 ---
+title: Getting Started
+description: Installation and introduction to basic concepts.
 weight: 10
 ---
 

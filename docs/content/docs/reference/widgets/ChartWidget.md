@@ -7,8 +7,6 @@ description: Renders a a composite of scatter or line graphs.
 `PhpTui\Tui\Extension\Core\Widget\ChartWidget`
 
 Renders a a composite of scatter or line graphs.
-
-Renders a a composite of scatter or line graphs.
 ### Example
 
 {{% terminal file="/data/example/docs/widget/chartWidget.html" %}}

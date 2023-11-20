@@ -11,7 +11,7 @@
       <!-- Ranges through content/posts/*.md -->
       {{ range .Pages }}
         <li>
-          <a href="{{ .Permalink }}">{{ .Title }}</a>
+            <a href="{{ .Permalink }}">{{ .Title }}</a>: {{ .Description }}
         </li>
       {{ end }}
     </ul>

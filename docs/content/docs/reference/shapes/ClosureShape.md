@@ -1,14 +1,12 @@
 ---
 title:  Closure 
-description: 
+description: Shape that can write directly to the Painter context
 ---
 ##  Closure 
 
 `PhpTui\Tui\Extension\Core\Shape\ClosureShape`
 
-
-
-
+Shape that can write directly to the Painter context
 ### Example
 
 {{% terminal file="/data/example/docs/shape/closureShape.html" %}}

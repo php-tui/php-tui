@@ -7,8 +7,6 @@ description: Creates a fixed location viewport at the given Area
 `PhpTui\Tui\Model\Viewport\Fixed`
 
 Creates a fixed location viewport at the given Area
-
-Creates a fixed location viewport at the given Area
 ### Parameters
 
 Configure the viewport using the builder methods named as follows:

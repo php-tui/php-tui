@@ -19,6 +19,7 @@ class DocSectionRenderer implements DocRenderer
         $out[] = '---';
         $out[] = 'bookCollapseSection: true';
         $out[] = sprintf('title: %s',$object->title);
+        $out[] = sprintf('description: %s',$object->description);
         $out[] = '---';
         $out[] = $object->description;
 

@@ -31,9 +31,12 @@ class DocClassRenderer implements DocRenderer
             sprintf('`%s`', $object->className),
             '',
             $object->summary,
-            '',
-            $object->documentation,
         ];
+
+        if ($object->documentation !== $object->summary) {
+            $doc[] = '';
+            $doc[] = $object->documentation;
+        }
 
         if ($object->hasExample) {
             $doc[] = '### Example';

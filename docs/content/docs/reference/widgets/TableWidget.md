@@ -7,8 +7,6 @@ description: Shows tabular data arranged in columns. The column spacing is deter
 `PhpTui\Tui\Extension\Core\Widget\TableWidget`
 
 Shows tabular data arranged in columns. The column spacing is determined by the "width" constraints.
-
-Shows tabular data arranged in columns. The column spacing is determined by the "width" constraints.
 ### Example
 
 {{% terminal file="/data/example/docs/widget/tableWidget.html" %}}

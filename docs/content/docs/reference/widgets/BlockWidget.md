@@ -7,8 +7,6 @@ description: Container for other widgets and can provide a border, title and pad
 `PhpTui\Tui\Extension\Core\Widget\BlockWidget`
 
 Container for other widgets and can provide a border, title and padding.
-
-Container for other widgets and can provide a border, title and padding.
 ### Example
 
 {{% terminal file="/data/example/docs/widget/blockWidget.html" %}}

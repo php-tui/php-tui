@@ -1,13 +1,12 @@
 #!/usr/bin/env php
 <?php
 
-use PhpTui\Docgen\DocSection;
 use PhpTui\Docgen\Docgen;
+use PhpTui\Docgen\DocSection;
 use PhpTui\Docgen\DocUnitConfig;
 use PhpTui\Docgen\Renderer\AggregateDocRenderer;
 use PhpTui\Docgen\Renderer\DocClassRenderer;
 use PhpTui\Docgen\Renderer\DocSectionRenderer;
-use PhpTui\Docgen\Renderer\WidgetDocRenderer;
 use PhpTui\Tui\Model\Canvas\Shape;
 use PhpTui\Tui\Model\Color;
 use PhpTui\Tui\Model\Display\Viewport;
@@ -24,8 +23,8 @@ $docgen = Docgen::new(
             new DocSection(
                 'Shapes',
                 <<<'EOT'
-                Shapes can be drawn upon a [Canvas]({{< relref "/docs/reference/widgets/CanvasWidget.md" >}}) widget.
-                EOT,
+                    Shapes can be drawn upon a Canvas
+                    EOT,
             ),
             className: Shape::class,
             singular: 'shape',
@@ -37,8 +36,8 @@ $docgen = Docgen::new(
             new DocSection(
                 'Widgets',
                 <<<'EOT'
-                Widgets are PHP-TUI's building blocks.
-                EOT,
+                    Widgets are PHP-TUI's building blocks.
+                    EOT,
             ),
             className: Widget::class,
             singular: 'widget',
@@ -48,9 +47,10 @@ $docgen = Docgen::new(
         ),
         new DocUnitConfig(
             new DocSection(
-            'Colors',
-            <<<'EOT'
-            EOT,
+                'Colors',
+                <<<'EOT'
+                    Different ways of representing color
+                    EOT,
             ),
             className: Color::class,
             singular: 'color',
@@ -59,9 +59,10 @@ $docgen = Docgen::new(
         ),
         new DocUnitConfig(
             new DocSection(
-            'Viewports',
-            <<<'EOT'
-            EOT,
+                'Viewports',
+                <<<'EOT'
+                    The display's releationship with the terminal space
+                    EOT,
             ),
             className: Viewport::class,
             singular: 'viewport',
@@ -73,6 +74,5 @@ $docgen = Docgen::new(
         new DocClassRenderer(),
         new DocSectionRenderer(),
     )
-
 );
 $docgen->generate();

@@ -2,6 +2,9 @@ baseURL = 'http://example.org/'
 languageCode = 'en-gb'
 title = 'PHP-TUI'
 
+[params]
+BookLogo='phptui.png'
+
 [markup.tableOfContents]
   startLevel = 1
 

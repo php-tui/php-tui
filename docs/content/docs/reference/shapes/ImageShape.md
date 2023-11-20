@@ -7,8 +7,6 @@ description: Renders an image on the canvas.
 `PhpTui\Tui\Extension\ImageMagick\Shape\ImageShape`
 
 Renders an image on the canvas.
-
-Renders an image on the canvas.
 ### Example
 
 {{% terminal file="/data/example/docs/shape/imageShape.html" %}}

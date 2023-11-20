@@ -7,5 +7,3 @@ description: Viewport that occupies the entire screen.
 `PhpTui\Tui\Model\Viewport\Fullscreen`
 
 Viewport that occupies the entire screen.
-
-Viewport that occupies the entire screen.
