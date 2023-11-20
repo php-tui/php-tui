@@ -137,10 +137,10 @@ final class Display
             return;
         }
 
-        $this->clear();
         $height = min($height, $this->lastKnownSize->height);
         $this->backend->appendLines($height);
-        $missingLines = max(0, $height, $this->lastKnownSize->bottom() - $this->viewportArea->top());
+        $missingLines = max(0, $height - $this->lastKnownSize->bottom() - $this->viewportArea->top());
+
         $area = Area::fromScalars(
             $this->viewportArea->left(),
             max(0, $this->viewportArea->top() - $missingLines),
@@ -156,6 +156,7 @@ final class Display
 
         $this->backend->draw($buffer->toUpdates());
         $this->backend->flush();
+
         $remainingLines = $this->lastKnownSize->height - $area->bottom();
         $missingLines = max(0, $this->viewportArea->height - $remainingLines);
         $this->backend->appendLines($this->viewportArea->height);
