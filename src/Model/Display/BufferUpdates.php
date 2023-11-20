@@ -42,7 +42,7 @@ final class BufferUpdates implements Countable, IteratorAggregate
 
     public function last(): BufferUpdate
     {
-        if (count($this->updates) === 0) {
+        if ($this->updates === []) {
             throw new RuntimeException(
                 'Cannot get last update because there are no updates'
             );

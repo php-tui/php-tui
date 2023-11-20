@@ -56,7 +56,7 @@ class DocsTest extends TestCase
         $painter->paint($actions);
         $output = $painter->toString();
 
-        $this->assertSnapshot($path, $output, 'html', self::normalize(...));
+        $this->assertSnapshot($path, $output, 'html', $this->normalize(...));
     }
 
     /**
@@ -95,7 +95,7 @@ class DocsTest extends TestCase
 
     }
 
-    private static function normalize(string $string): string
+    private function normalize(string $string): string
     {
         $normalized = preg_replace('{canvas id=".*?"}', 'canvas id="***"', $string);
         $normalized = preg_replace('{getElementById\(".*?"\)}', 'getElementById("***")', (string)$normalized);

@@ -161,9 +161,8 @@ final class Docgen
         if (null === $docblock) {
             return null;
         }
-        $node = $this->parser->parse(new TokenIterator($this->lexer->tokenize($docblock)));
 
-        return $node;
+        return $this->parser->parse(new TokenIterator($this->lexer->tokenize($docblock)));
     }
 
     private function description(?PhpDocNode $node): ?string

@@ -187,7 +187,7 @@ final class EventParser
         $str = implode('', array_slice($buffer, 2, (int)array_key_last($buffer)));
 
         $split = array_map(
-            static fn (string $substr): int => self::filterToInt($substr) ?? 0,
+            fn (string $substr): int => $this->filterToInt($substr) ?? 0,
             explode(';', $str),
         );
         $first = $split[array_key_first($split)];
@@ -304,12 +304,12 @@ final class EventParser
             throw new ParseError('Could not parse modifier');
         }
         $parts = explode(':', $parts[1]);
-        $modifierMask = self::filterToInt($parts[0]);
+        $modifierMask = $this->filterToInt($parts[0]);
         if (null === $modifierMask) {
             return null;
         }
         if (isset($parts[1])) {
-            $kindCode = self::filterToInt($parts[1]);
+            $kindCode = $this->filterToInt($parts[1]);
             if (null === $kindCode) {
                 return null;
             }
@@ -320,7 +320,7 @@ final class EventParser
         return [$modifierMask, 1];
     }
 
-    private static function filterToInt(string $substr): ?int
+    private function filterToInt(string $substr): ?int
     {
         $str = array_reduce(
             str_split($substr),

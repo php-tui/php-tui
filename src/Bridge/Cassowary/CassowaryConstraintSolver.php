@@ -59,13 +59,13 @@ final class CassowaryConstraintSolver implements ConstraintSolver
         }
 
         // ensure the first element toches the left/top edge of the area
-        if (count($elements)) {
+        if ($elements !== []) {
             $first = $elements[array_key_first($elements)];
             $solver->addConstraint(Constraint::equalTo($first->start, $areaStart, Strength::REQUIRED));
         }
 
         // ensure the last element touches the right/boottom edge of the area
-        if (count($elements)) {
+        if ($elements !== []) {
             $last = $elements[array_key_last($elements)];
             $solver->addConstraint(Constraint::equalTo($last->end, $areaEnd, Strength::REQUIRED));
         }

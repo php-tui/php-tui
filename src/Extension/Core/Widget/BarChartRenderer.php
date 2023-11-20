@@ -303,7 +303,7 @@ final class BarChartRenderer implements WidgetRenderer
                 $barStyle = $widget->barStyle->patch($bar->style);
 
                 for ($y = 0; $y < $widget->barWidth; $y++) {
-                    $barY = $barY + $y;
+                    $barY += $y;
                     if ($barY >= $barsArea->bottom()) {
                         continue;
                     }

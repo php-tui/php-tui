@@ -2,7 +2,10 @@
 
 declare(strict_types=1);
 
+use Rector\CodeQuality\Rector\Foreach_\UnusedForeachValueToArrayKeysRector;
 use Rector\CodeQuality\Rector\FuncCall\UnwrapSprintfOneArgumentRector;
+use Rector\CodeQuality\Rector\Identical\FlipTypeControlToUseExclusiveTypeRector;
+use Rector\CodeQuality\Rector\If_\ExplicitBoolCompareRector;
 use Rector\CodingStyle\Rector\ArrowFunction\StaticArrowFunctionRector;
 use Rector\CodingStyle\Rector\Encapsed\EncapsedStringsToSprintfRector;
 use Rector\Config\RectorConfig;
@@ -26,7 +29,10 @@ return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->skip([
         TernaryToElvisRector::class,
         JsonThrowOnErrorRector::class,
+        ExplicitBoolCompareRector::class,
         ClosureToArrowFunctionRector::class,
+        UnusedForeachValueToArrayKeysRector::class,
+        FlipTypeControlToUseExclusiveTypeRector::class,
     ]);
 
     $rectorConfig->rules([
@@ -36,6 +42,7 @@ return static function (RectorConfig $rectorConfig): void {
     ]);
 
     $rectorConfig->sets([
+        SetList::CODE_QUALITY,
         SetList::TYPE_DECLARATION,
         LevelSetList::UP_TO_PHP_81,
     ]);

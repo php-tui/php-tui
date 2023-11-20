@@ -126,9 +126,7 @@ class PhpTermBackend implements Backend
         while(true) {
             while (null !== $event = $this->terminal->events()->next()) {
                 if ($event instanceof CursorPositionEvent) {
-                    $pos = new Position($event->x, $event->y);
-
-                    return $pos;
+                    return new Position($event->x, $event->y);
                 }
             }
 

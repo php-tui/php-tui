@@ -28,7 +28,7 @@ class ListRenderer implements WidgetRenderer
             return;
         }
 
-        if (count($widget->items) === 0) {
+        if ($widget->items === []) {
             return;
         }
         $listHeight = $listArea->height;
@@ -64,7 +64,7 @@ class ListRenderer implements WidgetRenderer
                 ;
 
                 [$elemPosition, $maxElementWidth] = (function () use ($listArea, $selectionSpacing, $buffer, $x, $j, $y, $symbol, $itemStyle): array {
-                    if ($selectionSpacing === true) {
+                    if ($selectionSpacing) {
                         $pos = $buffer->putString(
                             Position::at($x, $y + $j),
                             $symbol,

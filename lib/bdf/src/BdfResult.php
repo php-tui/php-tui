@@ -41,6 +41,6 @@ final class BdfResult
 
     public function isOk(): bool
     {
-        return $this->ok === true;
+        return $this->ok;
     }
 }

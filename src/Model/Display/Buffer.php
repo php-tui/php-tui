@@ -97,8 +97,9 @@ final class Buffer implements Countable, Stringable
         $previous = $this->content();
         $next     = $buffer->content();
         $updates = [];
+        $counter = count($next);
 
-        for ($i = 0; $i < count($next); $i++) {
+        for ($i = 0; $i < $counter; $i++) {
             $previousCell = $previous[$i];
             $currentCell = $next[$i];
             if (false === $previousCell->equals($currentCell)) {
@@ -161,9 +162,8 @@ final class Buffer implements Countable, Stringable
     public function toLines(): array
     {
         $text = $this->toString();
-        $lines = explode("\n", $text);
 
-        return $lines;
+        return explode("\n", $text);
     }
 
     public function area(): Area

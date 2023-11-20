@@ -166,7 +166,7 @@ final class ChartRenderer implements WidgetRenderer
             $chartArea,
             $layout->graphArea
         );
-        self::renderLabel($buffer, $firstLabel, $labelArea, $labelAlignment);
+        $this->renderLabel($buffer, $firstLabel, $labelArea, $labelAlignment);
 
         $lastLabel = array_pop($labels);
         if (null === $lastLabel) {
@@ -175,11 +175,11 @@ final class ChartRenderer implements WidgetRenderer
         foreach ($labels as $i => $label) {
             $x = $layout->graphArea->left() + ($i + 1) * $widthBetweenTicks + 1;
             $labelArea = Area::fromScalars($x, $layout->labelX, $widthBetweenTicks - 1, 1);
-            self::renderLabel($buffer, $label, $labelArea, HorizontalAlignment::Center);
+            $this->renderLabel($buffer, $label, $labelArea, HorizontalAlignment::Center);
         }
         $x = $layout->graphArea->right() - $widthBetweenTicks;
         $labelArea = Area::fromScalars($x, $layout->labelX, $widthBetweenTicks, 1);
-        self::renderLabel($buffer, $lastLabel, $labelArea, HorizontalAlignment::Center);
+        $this->renderLabel($buffer, $lastLabel, $labelArea, HorizontalAlignment::Center);
 
     }
 
@@ -197,7 +197,7 @@ final class ChartRenderer implements WidgetRenderer
         return Area::fromScalars($minX, $y, $maxX - $minX, 1);
     }
 
-    private static function renderLabel(Buffer $buffer, Span $label, Area $labelArea, HorizontalAlignment $labelAlignment): void
+    private function renderLabel(Buffer $buffer, Span $label, Area $labelArea, HorizontalAlignment $labelAlignment): void
     {
         $boundedLabelWidth = min($labelArea->width, $label->width());
         $x = match ($labelAlignment) {
@@ -228,7 +228,7 @@ final class ChartRenderer implements WidgetRenderer
                     max(0, ($layout->graphArea->left() - $chartArea->left()) - 1),
                     1
                 );
-                self::renderLabel($buffer, $label, $labelArea, $chart->yAxis->labelAlignment);
+                $this->renderLabel($buffer, $label, $labelArea, $chart->yAxis->labelAlignment);
             }
         }
     }

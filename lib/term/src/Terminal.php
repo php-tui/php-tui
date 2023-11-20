@@ -57,9 +57,7 @@ class Terminal
      */
     public function info(string $classFqn): ?object
     {
-        $info = $this->infoProvider->for($classFqn);
-
-        return $info;
+        return $this->infoProvider->for($classFqn);
     }
 
     /**

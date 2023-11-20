@@ -56,21 +56,17 @@ final class TableRenderer implements WidgetRenderer
                 if (null === $cell) {
                     continue;
                 }
-                self::renderCell(
-                    $buffer,
-                    $cell,
-                    Area::fromScalars(
-                        $innerOffset + $width[0],
-                        $tableArea->top(),
-                        $width[1],
-                        $maxHeaderHight
-                    )
-                );
+                $this->renderCell($buffer, $cell, Area::fromScalars(
+                    $innerOffset + $width[0],
+                    $tableArea->top(),
+                    $width[1],
+                    $maxHeaderHight
+                ));
             }
             $currentHeight += $maxHeaderHight;
             $rowsHeight = max(0, $rowsHeight - $maxHeaderHight);
         }
-        if (count($widget->rows) === 0) {
+        if ($widget->rows === []) {
             return;
         }
 
@@ -99,16 +95,12 @@ final class TableRenderer implements WidgetRenderer
                 if (null === $cell) {
                     continue;
                 }
-                self::renderCell(
-                    $buffer,
-                    $cell,
-                    Area::fromScalars(
-                        $innerOffset + $width[0],
-                        $rowY,
-                        $width[1],
-                        $tableRow->height,
-                    )
-                );
+                $this->renderCell($buffer, $cell, Area::fromScalars(
+                    $innerOffset + $width[0],
+                    $rowY,
+                    $width[1],
+                    $tableRow->height,
+                ));
             }
             if ($isSelected) {
                 $buffer->setStyle($tableRowArea, $widget->highlightStyle);
@@ -128,7 +120,7 @@ final class TableRenderer implements WidgetRenderer
             $constraints[] = $constraint;
             $constraints[] = Constraint::length($table->columnSpacing);
         }
-        if (0 !== count($table->widths)) {
+        if ([] !== $table->widths) {
             array_pop($constraints);
         }
         $chunks = Layout::default()
@@ -137,9 +129,11 @@ final class TableRenderer implements WidgetRenderer
             ->split(Area::fromDimensions($maxWidth, 1));
 
         $widths = [];
+        // iterate over the specified width constraints
+        $counter = count($constraints);
 
         // iterate over the specified width constraints
-        for ($i = 1; $i < count($constraints); $i += 2) {
+        for ($i = 1; $i < $counter; $i += 2) {
             $chunk = $chunks->get($i);
             $widths[] = [$chunk->position->x, $chunk->width];
         }
@@ -147,7 +141,7 @@ final class TableRenderer implements WidgetRenderer
         return $widths;
     }
 
-    private static function renderCell(Buffer $buffer, TableCell $cell, Area $area): void
+    private function renderCell(Buffer $buffer, TableCell $cell, Area $area): void
     {
         $buffer->setStyle($area, $cell->style);
         foreach ($cell->content->lines as $i => $line) {

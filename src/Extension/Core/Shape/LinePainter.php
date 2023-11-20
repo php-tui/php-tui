@@ -28,8 +28,8 @@ class LinePainter implements ShapePainter
             return;
         }
 
-        [$diffX, $xRange] = self::resolveDiffAndRange($point1->x, $point2->x);
-        [$diffY, $yRange] = self::resolveDiffAndRange($point1->y, $point2->y);
+        [$diffX, $xRange] = $this->resolveDiffAndRange($point1->x, $point2->x);
+        [$diffY, $yRange] = $this->resolveDiffAndRange($point1->y, $point2->y);
 
         if ($diffX === 0) {
             foreach ($yRange as $y) {
@@ -69,7 +69,7 @@ class LinePainter implements ShapePainter
     /**
      * @return array{int, int[]}
      */
-    private static function resolveDiffAndRange(int $start, int $end): array
+    private function resolveDiffAndRange(int $start, int $end): array
     {
         if ($end >= $start) {
             return [$end - $start, range($start, $end)];
