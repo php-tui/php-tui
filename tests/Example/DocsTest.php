@@ -97,6 +97,6 @@ class DocsTest extends TestCase
 
     private function normalize(string $string): string
     {
-        return (string)$string;
+        return $string;
     }
 }

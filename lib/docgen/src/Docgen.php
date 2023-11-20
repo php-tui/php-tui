@@ -225,10 +225,8 @@ final class Docgen
         if (null === $replaced) {
             throw new RuntimeException('Could not replace');
         }
-        if ($suffix !== null) {
-            if ($pos = strrpos($replaced, $suffix)) {
-                $replaced = substr($replaced, 0, $pos);
-            }
+        if ($suffix !== null && ($pos = strrpos($replaced, $suffix))) {
+            $replaced = substr($replaced, 0, $pos);
         }
 
         return $replaced;

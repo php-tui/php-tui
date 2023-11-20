@@ -23,8 +23,7 @@ final class LinearGradient implements Color
         private array $stops,
         private readonly float $angle,
         private readonly FractionalPosition $origin
-    )
-    {
+    ) {
     }
 
     /**

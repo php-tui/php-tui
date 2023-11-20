@@ -30,12 +30,12 @@ $display->draw(
                 ),
             ParagraphWidget::fromText(
                 Text::parse(<<<'EOT'
-                The <fg=green>world</> is the totality of <options=bold>entities</>,
-                the whole of reality, or everything that is.[1] The nature of the
-                world has been <fg=red>conceptualized</> differently in different fields. Some
-                conceptions see the world as unique while others talk of a
-                "plurality of <bg=green>worlds</>".
-                EOT)
+                    The <fg=green>world</> is the totality of <options=bold>entities</>,
+                    the whole of reality, or everything that is.[1] The nature of the
+                    world has been <fg=red>conceptualized</> differently in different fields. Some
+                    conceptions see the world as unique while others talk of a
+                    "plurality of <bg=green>worlds</>".
+                    EOT)
             )
         )
 );

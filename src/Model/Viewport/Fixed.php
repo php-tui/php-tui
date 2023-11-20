@@ -20,8 +20,7 @@ final class Fixed implements Viewport
          * Area to occupy
          */
         public readonly Area $area
-    )
-    {
+    ) {
     }
 
     public function size(Backend $backend): Area

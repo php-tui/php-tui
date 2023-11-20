@@ -6,7 +6,6 @@ namespace PhpTui\Docgen\Renderer;
 
 use PhpTui\Docgen\DocClass;
 use PhpTui\Docgen\DocRenderer;
-use RuntimeException;
 
 class DocClassRenderer implements DocRenderer
 {

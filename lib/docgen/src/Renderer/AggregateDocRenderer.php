@@ -12,7 +12,7 @@ class AggregateDocRenderer implements DocRenderer
     /**
      * @var DocRenderer[]
      */
-    private array $renderers;
+    private readonly array $renderers;
 
     public function __construct(DocRenderer ...$renderers)
     {
@@ -28,7 +28,8 @@ class AggregateDocRenderer implements DocRenderer
         }
 
         throw new RuntimeException(sprintf(
-            'No renderer for object class: %s', $object::class
+            'No renderer for object class: %s',
+            $object::class
         ));
     }
 }

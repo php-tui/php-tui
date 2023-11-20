@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace PhpTui\Docgen;
 
-use Closure;
-
 class DocUnitConfig
 {
     /**

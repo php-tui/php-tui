@@ -134,7 +134,7 @@ class HtmlCanvasPainter implements Painter
         ];
         $html[] = '<script>';
         $html[] = sprintf('let canvas%s = document.getElementById("%s");', $canvasId, $canvasId);
-        $html[] = sprintf('let ctx%s = canvas%s.getContext("2d");', $canvasId,$canvasId);
+        $html[] = sprintf('let ctx%s = canvas%s.getContext("2d");', $canvasId, $canvasId);
         $html[] = sprintf('ctx%s.font = "12px monospace";', $canvasId);
         $html[] = sprintf('ctx%s.fillStyle = "%s";', $canvasId, $this->toHtmlRgb($this->defaultBgColor));
         $html[] = sprintf(
@@ -151,7 +151,7 @@ class HtmlCanvasPainter implements Painter
             $attr = $this->attributes[$offset];
             $x = $offset % $this->width;
             $y = floor($offset / $this->width);
-            $html[] = sprintf('ctx%s.fillStyle = "%s";',$canvasId, $this->toHtmlRgb($attr['bg'] ?? $this->defaultBgColor));
+            $html[] = sprintf('ctx%s.fillStyle = "%s";', $canvasId, $this->toHtmlRgb($attr['bg'] ?? $this->defaultBgColor));
             $html[] = sprintf(
                 'ctx%s.fillRect(%d,%d,%d,%d);',
                 $canvasId,

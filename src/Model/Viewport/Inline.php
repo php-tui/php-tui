@@ -23,8 +23,7 @@ final class Inline implements Viewport
          * Height of the viewport
          */
         public readonly int $height
-    )
-    {
+    ) {
     }
 
     public function size(Backend $backend): Area
