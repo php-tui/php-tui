@@ -9,7 +9,6 @@ use PhpTui\Tui\Example\Demo\Component;
 use PhpTui\Tui\Extension\Core\Widget\BarChart\BarGroup;
 use PhpTui\Tui\Extension\Core\Widget\BarChartWidget;
 use PhpTui\Tui\Extension\Core\Widget\GridWidget;
-use PhpTui\Tui\Model\Color\AnsiColor;
 use PhpTui\Tui\Model\Color\LinearGradient;
 use PhpTui\Tui\Model\Color\RgbColor;
 use PhpTui\Tui\Model\Direction;
@@ -73,7 +72,7 @@ class BarChartPage implements Component
                     BarChartWidget::default()
                         ->barWidth(10)
                         ->groupGap(5)
-                        ->barStyle(Style::default()->fg(AnsiColor::Red))
+                        ->barStyle(Style::default()->red())
                         ->data(
                             BarGroup::fromArray([
                                 '1' => 12,

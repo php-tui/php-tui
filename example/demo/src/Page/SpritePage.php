@@ -107,7 +107,7 @@ class SpritePage implements Component
                 BlockWidget::default()
                     ->borders(Borders::ALL)
                     ->borderType(BorderType::Rounded)
-                    ->borderStyle(Style::default()->fg(AnsiColor::DarkGray))
+                    ->borderStyle(Style::default()->darkGray())
                     ->widget(
                         CanvasWidget::fromIntBounds(0, self::WIDTH, 0, 8)
                             ->marker(Marker::HalfBlock)

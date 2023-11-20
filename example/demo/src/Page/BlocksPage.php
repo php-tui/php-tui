@@ -11,11 +11,9 @@ use PhpTui\Tui\Extension\Core\Widget\BlockWidget;
 use PhpTui\Tui\Extension\Core\Widget\GridWidget;
 use PhpTui\Tui\Extension\Core\Widget\Paragraph\Wrap;
 use PhpTui\Tui\Extension\Core\Widget\ParagraphWidget;
-use PhpTui\Tui\Model\Color\AnsiColor;
 use PhpTui\Tui\Model\Direction;
 use PhpTui\Tui\Model\HorizontalAlignment;
 use PhpTui\Tui\Model\Layout\Constraint;
-use PhpTui\Tui\Model\Modifier;
 use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Text\Text;
 use PhpTui\Tui\Model\Text\Title;
@@ -106,17 +104,7 @@ class BlocksPage implements Component
     {
         return BlockWidget::default()
             ->borders(Borders::ALL)
-            ->style(
-                Style::default()->fg(
-                    AnsiColor::Blue
-                )->bg(
-                    AnsiColor::White
-                )->addModifier(
-                    Modifier::BOLD
-                )->addModifier(
-                    Modifier::ITALIC
-                )
-            )
+            ->style(Style::default()->blue()->onWhite()->bold()->italic())
             ->titles(Title::fromString('Styled block'))
             ->widget($paragraph);
     }
@@ -125,17 +113,7 @@ class BlocksPage implements Component
     {
         return BlockWidget::default()
             ->borders(Borders::ALL)
-            ->borderStyle(
-                Style::default()->fg(
-                    AnsiColor::Blue
-                )->bg(
-                    AnsiColor::White
-                )->addModifier(
-                    Modifier::BOLD
-                )->addModifier(
-                    Modifier::ITALIC
-                )
-            )
+            ->borderStyle(Style::default()->blue()->onWhite()->bold()->italic())
             ->titles(Title::fromString('Styled borders'))
             ->widget($paragraph);
     }
@@ -145,7 +123,7 @@ class BlocksPage implements Component
         return BlockWidget::default()
             ->borders(Borders::ALL)
             ->titles(Title::fromString('Styled title'))
-            ->titleStyle(Style::default()->fg(AnsiColor::Blue)->bg(AnsiColor::White)->addModifier(Modifier::BOLD)->addModifier(Modifier::ITALIC))
+            ->titleStyle(Style::default()->blue()->onWhite()->bold()->italic())
             ->widget($paragraph);
 
     }

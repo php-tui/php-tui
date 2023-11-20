@@ -27,7 +27,6 @@ use PhpTui\Tui\Extension\Core\Widget\BlockWidget;
 use PhpTui\Tui\Extension\Core\Widget\GridWidget;
 use PhpTui\Tui\Extension\Core\Widget\ParagraphWidget;
 use PhpTui\Tui\Extension\ImageMagick\ImageMagickExtension;
-use PhpTui\Tui\Model\Color\AnsiColor;
 use PhpTui\Tui\Model\Direction;
 use PhpTui\Tui\Model\Display\Backend;
 use PhpTui\Tui\Model\Display\Display;
@@ -219,7 +218,7 @@ final class App
     private function header(): Widget
     {
         return BlockWidget::default()
-                ->borders(Borders::ALL)->style(Style::default()->fg(AnsiColor::White))
+                ->borders(Borders::ALL)->style(Style::default()->white())
                 ->titles(Title::fromString(sprintf('%d FPS', $this->frameRate()))->horizontalAlignmnet(HorizontalAlignment::Right))
                 ->widget(
                     ParagraphWidget::fromText(Text::fromLines(

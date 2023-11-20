@@ -11,7 +11,6 @@ use PhpTui\Tui\Extension\Core\Widget\Chart\Axis;
 use PhpTui\Tui\Extension\Core\Widget\Chart\DataSet;
 use PhpTui\Tui\Extension\Core\Widget\ChartWidget;
 use PhpTui\Tui\Model\AxisBounds;
-use PhpTui\Tui\Model\Color\AnsiColor;
 use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Text\Line;
@@ -35,11 +34,11 @@ class ChartPage implements Component
         $dataSets = [
             DataSet::new('data1')
                 ->marker(Marker::Dot)
-                ->style(Style::default()->fg(AnsiColor::Cyan))
+                ->style(Style::default()->cyan())
                 ->data($this->sinData(0)),
             DataSet::new('data1')
                 ->marker(Marker::Braille)
-                ->style(Style::default()->fg(AnsiColor::Yellow))
+                ->style(Style::default()->yellow())
                 ->data($this->sinData(90)),
         ];
 
@@ -51,14 +50,14 @@ class ChartPage implements Component
                     ->xAxis(
                         Axis::default()
                             //->title('X Axis')
-                            ->style(Style::default()->fg(AnsiColor::Gray))
+                            ->style(Style::default()->gray())
                         ->labels($xLabels)
                         ->bounds(AxisBounds::new(0, 400))
                     )
                     ->yAxis(
                         Axis::default()
                             //->title('X Axis')
-                        ->style(Style::default()->fg(AnsiColor::Gray))
+                        ->style(Style::default()->gray())
                         ->labels([
                             Span::fromString('-20'),
                             Span::fromString('0'),

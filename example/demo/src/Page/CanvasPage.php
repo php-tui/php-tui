@@ -14,7 +14,6 @@ use PhpTui\Tui\Extension\Core\Widget\CanvasWidget as PhpTuiCanvas;
 use PhpTui\Tui\Model\Canvas\CanvasContext;
 use PhpTui\Tui\Model\Color\AnsiColor;
 use PhpTui\Tui\Model\Marker;
-use PhpTui\Tui\Model\Modifier;
 use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Text\Line as PhpTuiLine;
 use PhpTui\Tui\Model\Text\Title;
@@ -37,7 +36,7 @@ class CanvasPage implements Component
                     ->marker(Marker::Braille)
                     ->paint(function (CanvasContext $context): void {
                         $context->draw(MapShape::default()->resolution(MapResolution::High)->color(AnsiColor::Green));
-                        $context->print($this->x, -$this->y, PhpTuiLine::fromString('You are here!')->patchStyle(Style::default()->fg(AnsiColor::Yellow)->addModifier(Modifier::ITALIC)));
+                        $context->print($this->x, -$this->y, PhpTuiLine::fromString('You are here!')->patchStyle(Style::default()->yellow()->italic()));
                     })
             )
         ;
