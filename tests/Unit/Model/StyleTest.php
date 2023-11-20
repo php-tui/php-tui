@@ -58,7 +58,7 @@ class StyleTest extends TestCase
                     ->addModifier(Modifier::BOLD)
                     ->addModifier(Modifier::UNDERLINED);
 
-        $combined = $style1->patch($style2);
+        $combined = $style1->patchStyle($style2);
 
         self::assertEquals(Modifier::NONE, $combined->subModifiers);
 
@@ -68,14 +68,14 @@ class StyleTest extends TestCase
         );
 
         self::assertSame(
-            (string) Style::default()->patch($style1)->patch($style2),
+            (string) Style::default()->patchStyle($style1)->patchStyle($style2),
             (string) $combined
         );
 
         self::assertSame(AnsiColor::Blue, $combined->fg);
         self::assertSame(AnsiColor::Red, $combined->bg);
 
-        $combined2 = Style::default()->patch($combined)->patch(
+        $combined2 = Style::default()->patchStyle($combined)->patchStyle(
             Style::default()
                 ->removeModifier(Modifier::BOLD)
                 ->addModifier(Modifier::ITALIC),

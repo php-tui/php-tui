@@ -69,7 +69,7 @@ final class TablePage implements Component
                     ->state($this->state)
                     ->select($this->selected)
                     ->highlightSymbol('X')
-                    ->highlightStyle(Style::default()->bg(AnsiColor::Cyan)->fg(AnsiColor::Black))
+                    ->highlightStyle(Style::default()->black()->onCyan())
                     ->widths(
                         Constraint::percentage(10),
                         Constraint::min(10),

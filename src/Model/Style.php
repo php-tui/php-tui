@@ -5,10 +5,13 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Model;
 
 use PhpTui\Tui\Model\Position\FractionalPosition;
+use PhpTui\Tui\Model\Style\StyleableTrait;
 use Stringable;
 
-final class Style implements Stringable
+final class Style implements Stringable, Styleable
 {
+    use StyleableTrait;
+
     private function __construct(
         public ?Color $fg,
         public ?Color $bg,
@@ -65,15 +68,15 @@ final class Style implements Stringable
     /**
      * Returns a new Style merging the given style with this one.
      */
-    public function patch(Style $other): self
+    public function patchStyle(Style $style): self
     {
-        $addModifiers = ($this->addModifiers & ~$other->subModifiers) | $other->addModifiers;
-        $subModifiers = ($this->subModifiers & ~$other->addModifiers) | $other->subModifiers;
+        $addModifiers = ($this->addModifiers & ~$style->subModifiers) | $style->addModifiers;
+        $subModifiers = ($this->subModifiers & ~$style->addModifiers) | $style->subModifiers;
 
         return new self(
-            fg: $other->fg ?? $this->fg,
-            bg: $other->bg ?? $this->bg,
-            underline: $other->underline ?? $this->underline,
+            fg: $style->fg ?? $this->fg,
+            bg: $style->bg ?? $this->bg,
+            underline: $style->underline ?? $this->underline,
             addModifiers:$addModifiers,
             subModifiers: $subModifiers,
         );

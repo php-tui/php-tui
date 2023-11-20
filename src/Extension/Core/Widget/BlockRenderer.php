@@ -156,7 +156,7 @@ final class BlockRenderer implements WidgetRenderer
 
             foreach ($title->title->spans as $span) {
                 $titleStyle = clone $block->titleStyle;
-                $span->style = $titleStyle->patch($span->style);
+                $span->style = $titleStyle->patchStyle($span->style);
             }
 
             $buffer->putLine(

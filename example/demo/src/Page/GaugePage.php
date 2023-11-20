@@ -11,7 +11,6 @@ use PhpTui\Tui\Extension\Core\Widget\BlockWidget;
 use PhpTui\Tui\Extension\Core\Widget\GaugeWidget;
 use PhpTui\Tui\Extension\Core\Widget\GridWidget;
 use PhpTui\Tui\Extension\Core\Widget\ParagraphWidget;
-use PhpTui\Tui\Model\Color\AnsiColor;
 use PhpTui\Tui\Model\Color\LinearGradient;
 use PhpTui\Tui\Model\Color\RgbColor;
 use PhpTui\Tui\Model\Direction;
@@ -68,14 +67,14 @@ class GaugePage implements Component
                                 ->widgets(
                                     ParagraphWidget::fromSpans(
                                         Span::fromString('Downloaded')->style(
-                                            Style::default()->fg(AnsiColor::Green)
+                                            Style::default()->green()
                                         ),
                                         Span::fromString(sprintf(
                                             ' %d/%s bytes',
                                             $download->downloaded,
                                             $download->size,
                                         ))->style(
-                                            Style::default()->fg(AnsiColor::White)
+                                            Style::default()->white()
                                         )
                                     ),
                                     GaugeWidget::default()

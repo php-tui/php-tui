@@ -94,7 +94,7 @@ final class SpanParser
 
         // Apply the style of the outermost tag with modifications from the current tag.
         if ($styleStack !== []) {
-            $style = end($styleStack)->patch($style);
+            $style = end($styleStack)->patchStyle($style);
         }
 
         return $style;
