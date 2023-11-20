@@ -78,8 +78,12 @@ final class SpanParser
     private function createStyleFromTag(string $tag, array &$styleStack): Style
     {
         $style = Style::default();
+        $attributes = preg_split('/[; ]/', $tag);
 
-        $attributes = explode(';', $tag);
+        if ($attributes === false) {
+            return $style;
+        }
+
         foreach ($attributes as $attribute) {
             $attribute = explode('=', $attribute);
             [$key, $value] = [

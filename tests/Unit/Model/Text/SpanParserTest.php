@@ -276,10 +276,34 @@ class SpanParserTest extends TestCase
         self::assertSame(AnsiColor::Green, $firstSpan->style->fg);
     }
 
-    public function testUsingWrongSeparator(): void
+    public function testUsingOnlySpaceAsSeparator(): void
     {
-        $this->expectException(InvalidArgumentException::class);
         $spans = SpanParser::new()->parse('<fg=white bg=red>Hello</> World');
+        self::assertCount(2, $spans);
+
+        $firstSpan = $spans[0];
+        self::assertSame('Hello', $firstSpan->content);
+        self::assertSame(AnsiColor::White, $firstSpan->style->fg);
+        self::assertSame(AnsiColor::Red, $firstSpan->style->bg);
+    }
+
+    public function testMixingSpaceAndSemicolonAsSeparator(): void
+    {
+        $spans = SpanParser::new()->parse('<fg=white bg=red;options=bold,italic>Hello</> World');
+        self::assertCount(2, $spans);
+
+        $firstSpan = $spans[0];
+        self::assertSame('Hello', $firstSpan->content);
+        self::assertSame(AnsiColor::White, $firstSpan->style->fg);
+        self::assertSame(AnsiColor::Red, $firstSpan->style->bg);
+        self::assertTrue(($firstSpan->style->addModifiers & Modifier::BOLD) === Modifier::BOLD);
+        self::assertTrue(($firstSpan->style->addModifiers & Modifier::ITALIC) === Modifier::ITALIC);
+
+    }
+
+    public function testParseAttributesFlexibilityWithSeparators(): void
+    {
+        $spans = SpanParser::new()->parse('<fg=white   bg=red ;  options=bold,italic>Hello</> World');
         self::assertCount(2, $spans);
     }
 }
