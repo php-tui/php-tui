@@ -3,14 +3,14 @@ PHP TUI
 
 [![CI](https://github.com/php-tui/php-tui/actions/workflows/ci.yml/badge.svg)](https://github.com/php-tui/php-tui/actions/workflows/ci.yml)
 
-<center>
+<p align="center">
   <img src="https://github.com/php-tui/php-tui/assets/530801/461a654c-e3fc-4073-b350-097a7b5c7325" alt="PHP TUI Logo"/>
 </center>
 
 PHP TUI library heavily inspired by Rust TUI /
 [Ratatui](https://github.com/ratatui-org/ratatui).
 
-![Demo Gif](https://vhs.charm.sh/vhs-1S7kcYHesqfxhLp5PyWbAj.gif)
+![Demo](https://vhs.charm.sh/vhs-5HFprfJ6rSVdmG0teBa6P4.gif)
 
 Features
 --------
