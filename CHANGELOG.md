@@ -22,13 +22,17 @@ Bug fixes:
 - Fix inline viewport clear eating first line #150
 - Fix terminal echos raw escape codes when getting cursor position #149 
 - Inline "clear" is too greedy #158
+- Chart does not crash with 1 label on y axis #153
 
 Improvements
 
 - Add `TableRow::fromStrings('one', 'two')`
+- Chart automatically determines bounds if none are set #161
+- Chart renders a single X label #161
 
 Refactoring:
 
+- Chart labels() accepts a variadic #161
 - Various class namespace organization #141
 - Moved `AnsiColor` and `RgbColor` to the `Color` sub-namespace #138
 - Suffix widgets and shapes with `Widget` and `Shape` #130

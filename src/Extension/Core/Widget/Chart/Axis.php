@@ -29,12 +29,9 @@ final class Axis
         return $this;
     }
 
-    /**
-     * @param Span[] $labels
-     */
-    public function labels(array $labels): self
+    public function labels(Span ...$labels): self
     {
-        $this->labels = $labels;
+        $this->labels = array_values($labels);
 
         return $this;
     }

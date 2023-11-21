@@ -30,20 +30,20 @@ $display->draw(
     )
         ->xAxis(
             Axis::default()
-                ->labels([
+                ->labels(
                     Span::fromString('Good'),
                     Span::fromString('Neutral'),
                     Span::fromString('Bad'),
-                ])
+                )
                 ->bounds(AxisBounds::new(0, 8))
         )
         ->yAxis(
             Axis::default()
-                ->labels([
+                ->labels(
                     Span::fromString('Profit'),
                     Span::fromString('Neutral'),
                     Span::fromString('Loss')
-                ])
+                )
                 ->bounds(AxisBounds::new(-4, 4))
         )
 );

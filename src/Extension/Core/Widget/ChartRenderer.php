@@ -6,17 +6,19 @@ namespace PhpTui\Tui\Extension\Core\Widget;
 
 use PhpTui\Tui\Extension\Core\Shape\PointsShape;
 use PhpTui\Tui\Extension\Core\Widget\Chart\ChartLayout;
+use PhpTui\Tui\Extension\Core\Widget\Chart\DataSet;
 use PhpTui\Tui\Model\Area;
+use PhpTui\Tui\Model\AxisBounds;
 use PhpTui\Tui\Model\Canvas\CanvasContext;
 use PhpTui\Tui\Model\Color\AnsiColor;
 use PhpTui\Tui\Model\Display\Buffer;
 use PhpTui\Tui\Model\HorizontalAlignment;
+use PhpTui\Tui\Model\Math\VectorUtil;
 use PhpTui\Tui\Model\Position\Position;
 use PhpTui\Tui\Model\Symbol\LineSet;
 use PhpTui\Tui\Model\Text\Span;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\WidgetRenderer;
-use RuntimeException;
 
 /**
  * Renders a a composite of scatter or line graphs.
@@ -67,8 +69,8 @@ final class ChartRenderer implements WidgetRenderer
             $subBuffer = Buffer::empty($layout->graphArea);
             $renderer->render($renderer, CanvasWidget::default()
                 ->backgroundColor($widget->style->bg ?? AnsiColor::Reset)
-                ->xBounds($widget->xAxis->bounds)
-                ->yBounds($widget->yAxis->bounds)
+                ->xBounds($this->resolveBounds($dataSet, $widget->xAxis->bounds, 0))
+                ->yBounds($this->resolveBounds($dataSet, $widget->yAxis->bounds, 1))
                 ->marker($dataSet->marker)
                 ->paint(function (CanvasContext $context) use ($dataSet): void {
                     $context->draw(PointsShape::new($dataSet->data, $dataSet->style->fg ?? AnsiColor::Reset));
@@ -120,11 +122,9 @@ final class ChartRenderer implements WidgetRenderer
 
     private function maxWidthOfLabelsLeftOfYAxis(ChartWidget $chart, Area $area, bool $hasYAxis): int
     {
-        $maxWidth = $chart->yAxis->labels ? max(
-            ...array_map(function (Span $label): int {
-                return $label->width();
-            }, $chart->yAxis->labels)
-        ) : 0;
+        $maxWidth = VectorUtil::max(array_map(function (Span $label): int {
+            return $label->width();
+        }, $chart->yAxis->labels ?? [])) ?? 0;
 
         if ($chart->xAxis->labels !== null && count($chart->xAxis->labels)) {
             $first = $chart->xAxis->labels[array_key_first($chart->xAxis->labels)];
@@ -146,7 +146,7 @@ final class ChartRenderer implements WidgetRenderer
             return;
         }
         $labels = $chart->xAxis->labels ?? [];
-        if (count($labels) < 2) {
+        if (count($labels) < 1) {
             return;
         }
         $widthBetweenTicks = (int) ($layout->graphArea->width / count($labels));
@@ -169,9 +169,6 @@ final class ChartRenderer implements WidgetRenderer
         $this->renderLabel($buffer, $firstLabel, $labelArea, $labelAlignment);
 
         $lastLabel = array_pop($labels);
-        if (null === $lastLabel) {
-            throw new RuntimeException('Last label is null, this should not happen');
-        }
         foreach ($labels as $i => $label) {
             $x = $layout->graphArea->left() + ($i + 1) * $widthBetweenTicks + 1;
             $labelArea = Area::fromScalars($x, $layout->labelX, $widthBetweenTicks - 1, 1);
@@ -179,7 +176,9 @@ final class ChartRenderer implements WidgetRenderer
         }
         $x = $layout->graphArea->right() - $widthBetweenTicks;
         $labelArea = Area::fromScalars($x, $layout->labelX, $widthBetweenTicks, 1);
-        $this->renderLabel($buffer, $lastLabel, $labelArea, HorizontalAlignment::Center);
+        if ($lastLabel) {
+            $this->renderLabel($buffer, $lastLabel, $labelArea, HorizontalAlignment::Center);
+        }
 
     }
 
@@ -220,7 +219,7 @@ final class ChartRenderer implements WidgetRenderer
         }
         $labelsLen = count($labels);
         foreach ($labels as $i => $label) {
-            $dy = (int) ($i * ($layout->graphArea->height - 1) / ($labelsLen - 1));
+            $dy = $labelsLen > 1 ? (int) ($i * ($layout->graphArea->height - 1) / ($labelsLen - 1)) : 0;
             if ($dy < $layout->graphArea->bottom()) {
                 $labelArea = Area::fromScalars(
                     $layout->labelY,
@@ -231,5 +230,23 @@ final class ChartRenderer implements WidgetRenderer
                 $this->renderLabel($buffer, $label, $labelArea, $chart->yAxis->labelAlignment);
             }
         }
+    }
+
+    /**
+     * @param int<0,1> $index
+     */
+    private function resolveBounds(DataSet $dataSet, AxisBounds $axisBounds, int $index): AxisBounds
+    {
+        if ($axisBounds->length() !== 0.0) {
+            return $axisBounds;
+        }
+
+        $points = array_column($dataSet->data, $index);
+
+        if ([] === $points) {
+            return $axisBounds;
+        }
+
+        return new AxisBounds(VectorUtil::min($points), VectorUtil::max($points));
     }
 }
