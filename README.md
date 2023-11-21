@@ -2,9 +2,8 @@ PHP TUI
 =======
 
 [![CI](https://github.com/php-tui/php-tui/actions/workflows/ci.yml/badge.svg)](https://github.com/php-tui/php-tui/actions/workflows/ci.yml)
-
 <p align="center">
-  <img src="https://github.com/php-tui/php-tui/assets/530801/461a654c-e3fc-4073-b350-097a7b5c7325" alt="PHP TUI Logo"/>
+  <img src="https://github.com/php-tui/php-tui/assets/530801/a5ea89fa-8f02-4c67-9467-4740c931f88f" alt="PHP TUI Logo"/>
 </center>
 
 PHP TUI library heavily inspired by Rust TUI /
