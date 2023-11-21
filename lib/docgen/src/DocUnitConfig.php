@@ -14,7 +14,7 @@ class DocUnitConfig
         public string $className,
         public string $singular,
         public string $outPath,
-        public bool $hasExamples,
+        public DocExampleType $hasExamples,
         public ?string $stripSuffix = null,
     ) {
     }

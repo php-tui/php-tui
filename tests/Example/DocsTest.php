@@ -42,6 +42,9 @@ class DocsTest extends TestCase
         }
         $output = (string)stream_get_contents($pipes[1]);
         $exitCode = proc_close($process);
+        if ($exitCode !== 0) {
+            self::fail(sprintf('Process failed: (%d) %s', $exitCode, $output));
+        }
         self::assertEquals(0, $exitCode);
 
         $actions = AnsiParser::parseString($output, throw: false);

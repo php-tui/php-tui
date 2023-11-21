@@ -121,7 +121,7 @@ final class Docgen
             );
 
             $phpExample = sprintf('%s/%s/%s.php', $this->examplePath, $docClass->singular, $docClass->name);
-            if ($config->hasExamples && !file_exists($phpExample)) {
+            if ($config->hasExamples !== DocExampleType::None && !file_exists($phpExample)) {
                 throw new RuntimeException(sprintf(
                     '%s should have an example at %s, but it doens\'t',
                     $docClass->name,

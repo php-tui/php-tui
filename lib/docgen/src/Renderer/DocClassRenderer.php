@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PhpTui\Docgen\Renderer;
 
 use PhpTui\Docgen\DocClass;
+use PhpTui\Docgen\DocExampleType;
 use PhpTui\Docgen\DocRenderer;
 
 class DocClassRenderer implements DocRenderer
@@ -37,16 +38,16 @@ class DocClassRenderer implements DocRenderer
             $doc[] = $object->documentation;
         }
 
-        if ($object->hasExample) {
+        if ($object->hasExample !== DocExampleType::None) {
             $doc[] = '### Example';
             $doc[] = '';
-            $doc = array_merge($doc, [
-                sprintf('{{%% terminal file="/data/example/docs/%s/%s.html" %%}}', $object->singular, $object->name),
-                '{{< details "Show code"  >}}',
-                sprintf('{{%% codeInclude file="/data/example/docs/%s/%s.php" language="php" %%}}', $object->singular, $object->name),
-                '',
-                '{{< /details >}}',
-            ]);
+            if ($object->hasExample === DocExampleType::CodeAndOutput) {
+                $doc[] = sprintf('{{%% terminal file="/data/example/docs/%s/%s.html" %%}}', $object->singular, $object->name);
+            }
+            $doc[] = '{{< details "Show code"  >}}';
+            $doc[] = sprintf('{{%% codeInclude file="/data/example/docs/%s/%s.php" language="php" %%}}', $object->singular, $object->name);
+            $doc[] = '';
+            $doc[] = '{{< /details >}}';
         }
         if ($object->params) {
             $doc = array_merge($doc, [

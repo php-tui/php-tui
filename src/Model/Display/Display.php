@@ -138,7 +138,6 @@ final class Display
         }
 
         $height = min($height, $this->lastKnownSize->height);
-        $this->backend->appendLines($height);
         $missingLines = max(0, $height - $this->lastKnownSize->bottom() - $this->viewportArea->top());
 
         $area = Area::fromScalars(

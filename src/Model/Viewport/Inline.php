@@ -56,7 +56,7 @@ final class Inline implements Viewport
 
     public function clear(Backend $backend, Area $area): void
     {
-        $backend->moveCursor(Position::at($area->left(), $area->top()));
+        $backend->moveCursor(Position::at($area->left(), $area->top() + 1));
         $backend->clearRegion(ClearType::AfterCursor);
     }
 }

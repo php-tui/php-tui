@@ -17,7 +17,7 @@ final class DocClass
         public ?string $documentation,
         public ?string $summary,
         public array $params,
-        public bool $hasExample
+        public DocExampleType $hasExample
     ) {
     }
 }
