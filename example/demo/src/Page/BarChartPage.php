@@ -88,7 +88,7 @@ class BarChartPage implements Component
                 ),
                 BarChartWidget::default()
                     ->direction(Direction::Horizontal)
-                    ->barWidth(1)
+                    ->barWidth(4)
                     ->groupGap(4)
                     ->barStyle(
                         Style::default()->fg(
