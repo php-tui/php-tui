@@ -303,9 +303,8 @@ final class BarChartRenderer implements WidgetRenderer
                 $barStyle = $widget->barStyle->patchStyle($bar->style);
 
                 for ($y = 0; $y < $widget->barWidth; $y++) {
-                    $barY += $y;
-                    if ($barY >= $barsArea->bottom()) {
-                        continue;
+                    if ($barY + $y >= $barsArea->bottom()) {
+                        break;
                     }
 
                     for ($x = 0; $x < $barsArea->width; $x++) {
@@ -323,7 +322,7 @@ final class BarChartRenderer implements WidgetRenderer
                         $buffer->get(
                             Position::at(
                                 $barsArea->left() + $x,
-                                $barY,
+                                $barY + $y,
                             )
                         )->setChar($symbol)->setStyle($gradStyle);
                     }

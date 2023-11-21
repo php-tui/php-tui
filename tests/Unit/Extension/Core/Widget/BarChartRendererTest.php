@@ -138,13 +138,18 @@ class BarChartRendererTest extends WidgetTestCase
                 BarGroup::fromBars(
                     Bar::fromValue(1)->textValue('A')->label(Line::fromString('X0'))->style(Style::default()),
                     Bar::fromValue(2)->textValue('B')->label(Line::fromString('X1')),
-                )
+                ),
             )->direction(Direction::Horizontal),
             [
+                '   ███    ',
+                '   ███    ',
                 'X0 A██    ',
+                '   ███    ',
                 '          ',
+                '   ███████',
+                '   ███████',
                 'X1 B██████',
-                '          ',
+                '   ███████',
                 '          ',
             ]
            ,
