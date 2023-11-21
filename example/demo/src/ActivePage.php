@@ -51,7 +51,7 @@ enum ActivePage
     }
     public function previous(): self
     {
-            $cases = self::cases();
+        $cases = self::cases();
         foreach (self::cases() as $i => $case) {
             if ($case === $this) {
                 return $cases[($i - 1) < 0 ? count($cases) - 1 : $i - 1];
