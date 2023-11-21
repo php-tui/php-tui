@@ -93,6 +93,33 @@ class ChartWidgetTest extends WidgetTestCase
         );
     }
 
+    public function testRenderXAxisOneLabels(): void
+    {
+        $chart = ChartWidget::new(
+            DataSet::new('data1')
+                    ->marker(Marker::Dot)
+                    ->style(Style::default()->fg(AnsiColor::Green))
+                    ->data($this->series(0, 1, 2, 1, 0, -1, -2, -1))
+        )->xAxis(
+            Axis::default()->bounds(AxisBounds::new(0, 7))->labels([Span::fromString('1')])
+        )->yAxis(
+            Axis::default()->bounds(AxisBounds::new(-2, 2))
+        );
+
+        self::assertEquals(
+            [
+                ' •••    ',
+                '•   •   ',
+                '     • •',
+                '      • ',
+                '────────',
+                '1       ',
+
+            ],
+            $this->renderToLines($chart, 8, 6)
+        );
+    }
+
     public function testRenderManyXLabels(): void
     {
         $chart = ChartWidget::new()
