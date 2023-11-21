@@ -61,7 +61,7 @@ Set FontSize 12
 Set Width 800
 Set Height 500
 Set Padding 10
-Set Margin 20
+Set Margin 10
 Set MarginFill "#505E8E"
 Set BorderRadius 10
 Set Framerate 10
