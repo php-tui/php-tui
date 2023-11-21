@@ -7,6 +7,12 @@ description: Creates a fixed location viewport at the given Area
 `PhpTui\Tui\Model\Viewport\Fixed`
 
 Creates a fixed location viewport at the given Area
+### Example
+
+{{< details "Show code"  >}}
+{{% codeInclude file="/data/example/docs/viewport/fixed.php" language="php" %}}
+
+{{< /details >}}
 ### Parameters
 
 Configure the viewport using the builder methods named as follows:

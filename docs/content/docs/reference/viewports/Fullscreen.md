@@ -7,3 +7,9 @@ description: Viewport that occupies the entire screen.
 `PhpTui\Tui\Model\Viewport\Fullscreen`
 
 Viewport that occupies the entire screen.
+### Example
+
+{{< details "Show code"  >}}
+{{% codeInclude file="/data/example/docs/viewport/fullscreen.php" language="php" %}}
+
+{{< /details >}}

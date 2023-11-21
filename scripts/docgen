@@ -1,6 +1,7 @@
 #!/usr/bin/env php
 <?php
 
+use PhpTui\Docgen\DocExampleType;
 use PhpTui\Docgen\Docgen;
 use PhpTui\Docgen\DocSection;
 use PhpTui\Docgen\DocUnitConfig;
@@ -30,7 +31,7 @@ $docgen = Docgen::new(
             singular: 'shape',
             outPath: 'reference/shapes',
             stripSuffix: 'Shape',
-            hasExamples: true,
+            hasExamples: DocExampleType::CodeAndOutput,
         ),
         new DocUnitConfig(
             new DocSection(
@@ -42,7 +43,7 @@ $docgen = Docgen::new(
             className: Widget::class,
             singular: 'widget',
             outPath: 'reference/widgets',
-            hasExamples: true,
+            hasExamples: DocExampleType::CodeAndOutput,
             stripSuffix: 'Widget',
         ),
         new DocUnitConfig(
@@ -54,7 +55,7 @@ $docgen = Docgen::new(
             ),
             className: Color::class,
             singular: 'color',
-            hasExamples: true,
+            hasExamples: DocExampleType::CodeAndOutput,
             outPath: 'reference/colors',
         ),
         new DocUnitConfig(
@@ -67,7 +68,7 @@ $docgen = Docgen::new(
             className: Viewport::class,
             singular: 'viewport',
             outPath: 'reference/viewports',
-            hasExamples: false,
+            hasExamples: DocExampleType::CodeOnly,
         ),
     ],
     new AggregateDocRenderer(
