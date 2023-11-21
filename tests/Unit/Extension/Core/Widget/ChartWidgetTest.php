@@ -40,6 +40,27 @@ class ChartWidgetTest extends WidgetTestCase
         );
     }
 
+    public function testRenderCalculateBounds(): void
+    {
+        $chart = ChartWidget::new(
+            DataSet::new('data1')
+                    ->marker(Marker::Dot)
+                    ->style(Style::default()->fg(AnsiColor::Green))
+                    ->data($this->series(0, 1, 2, 1, 0, -1, -2, -1))
+        );
+
+        self::assertEquals(
+            [
+                '  •     ',
+                ' • •    ',
+                '•   •   ',
+                '     • •',
+                '      • ',
+            ],
+            $this->renderToLines($chart)
+        );
+    }
+
     public function testRenderAxisLines(): void
     {
         $chart = ChartWidget::new(
@@ -205,7 +226,7 @@ class ChartWidgetTest extends WidgetTestCase
                     Span::fromString('two'),
                     Span::fromString('three'),
                     Span::fromString('four'),
-               )
+                )
             );
 
         self::assertEquals(

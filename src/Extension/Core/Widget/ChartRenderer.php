@@ -6,7 +6,9 @@ namespace PhpTui\Tui\Extension\Core\Widget;
 
 use PhpTui\Tui\Extension\Core\Shape\PointsShape;
 use PhpTui\Tui\Extension\Core\Widget\Chart\ChartLayout;
+use PhpTui\Tui\Extension\Core\Widget\Chart\DataSet;
 use PhpTui\Tui\Model\Area;
+use PhpTui\Tui\Model\AxisBounds;
 use PhpTui\Tui\Model\Canvas\CanvasContext;
 use PhpTui\Tui\Model\Color\AnsiColor;
 use PhpTui\Tui\Model\Display\Buffer;
@@ -67,8 +69,8 @@ final class ChartRenderer implements WidgetRenderer
             $subBuffer = Buffer::empty($layout->graphArea);
             $renderer->render($renderer, CanvasWidget::default()
                 ->backgroundColor($widget->style->bg ?? AnsiColor::Reset)
-                ->xBounds($widget->xAxis->bounds)
-                ->yBounds($widget->yAxis->bounds)
+                ->xBounds($this->resolveBounds($dataSet, $widget->xAxis->bounds, 0))
+                ->yBounds($this->resolveBounds($dataSet, $widget->yAxis->bounds, 1))
                 ->marker($dataSet->marker)
                 ->paint(function (CanvasContext $context) use ($dataSet): void {
                     $context->draw(PointsShape::new($dataSet->data, $dataSet->style->fg ?? AnsiColor::Reset));
@@ -228,5 +230,23 @@ final class ChartRenderer implements WidgetRenderer
                 $this->renderLabel($buffer, $label, $labelArea, $chart->yAxis->labelAlignment);
             }
         }
+    }
+
+    /**
+     * @param int<0,1> $index
+     */
+    private function resolveBounds(DataSet $dataSet, AxisBounds $axisBounds, int $index): AxisBounds
+    {
+        if ($axisBounds->length() !== 0.0) {
+            return $axisBounds;
+        }
+
+        $points = array_column($dataSet->data, $index);
+
+        if ([] === $points) {
+            return $axisBounds;
+        }
+
+        return new AxisBounds(VectorUtil::min($points), VectorUtil::max($points));
     }
 }
