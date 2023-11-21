@@ -11,4 +11,3 @@ require 'vendor/autoload.php';
 // fullscreen is the default so it can be omitted
 $display = DisplayBuilder::default()->fullscreen()->build();
 $display->draw(BlockWidget::default()->borders(Borders::ALL));
-

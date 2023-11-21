@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use PhpTui\Term\EventProvider\LoadedEventProvider;
 use PhpTui\Term\Event\CursorPositionEvent;
+use PhpTui\Term\EventProvider\LoadedEventProvider;
 use PhpTui\Term\Terminal;
 use PhpTui\Tui\Bridge\PhpTerm\PhpTermBackend;
 use PhpTui\Tui\DisplayBuilder;
@@ -31,12 +31,13 @@ $widget = fn (string $title) => GridWidget::default()
         ->widgets(
             BlockWidget::default()->borders(Borders::ALL)->titles(Title::fromString($title))
         );
+
 for ($i = 0; $i < 5; $i++) {
     for ($ii = 0; $ii < 5; $ii++) {
         $display->draw($widget((string)$ii));
     }
 
     // insert _before_ the viewport, moving the cursor position down
-    $display->insertBefore(20, $widget((string)$ii));
+    $display->insertBefore(20, $widget('done'));
 }
 $display->draw($widget('done'));

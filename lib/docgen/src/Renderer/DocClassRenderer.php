@@ -44,7 +44,7 @@ class DocClassRenderer implements DocRenderer
             if ($object->hasExample === DocExampleType::CodeAndOutput) {
                 $doc[] = sprintf('{{%% terminal file="/data/example/docs/%s/%s.html" %%}}', $object->singular, $object->name);
             }
-            $doc[] ='{{< details "Show code"  >}}';
+            $doc[] = '{{< details "Show code"  >}}';
             $doc[] = sprintf('{{%% codeInclude file="/data/example/docs/%s/%s.php" language="php" %%}}', $object->singular, $object->name);
             $doc[] = '';
             $doc[] = '{{< /details >}}';
