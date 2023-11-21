@@ -197,6 +197,36 @@ class ChartWidgetTest extends WidgetTestCase
         );
     }
 
+    public function testRenderYAxisOneLabel(): void
+    {
+        $chart = ChartWidget::new(
+            DataSet::new('data1')
+                    ->marker(Marker::Dot)
+                    ->style(Style::default()->fg(AnsiColor::Green))
+                    ->data(
+                        array_map(function (int $x, int $y): array {
+                            return [$x, $y];
+                        }, range(0, 7), [0, 1, 2, 1, 0, -1, -2, -1])
+                    )
+        )->xAxis(
+            Axis::default()->bounds(AxisBounds::new(0, 7))
+        )->yAxis(
+            Axis::default()->bounds(AxisBounds::new(-2, 2))->labels([Span::fromString('1')])
+        );
+
+        self::assertEquals(
+            [
+                '2│ •    ',
+                ' │• •   ',
+                ' │• •   ',
+                ' │   • •',
+                ' │      ',
+                '1│    • ',
+            ],
+            $this->renderToLines($chart, 8, 6)
+        );
+    }
+
     /**
      * @return list<array{int,int}>
      */
