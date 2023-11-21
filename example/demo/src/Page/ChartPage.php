@@ -51,18 +51,18 @@ class ChartPage implements Component
                         Axis::default()
                             //->title('X Axis')
                             ->style(Style::default()->gray())
-                        ->labels($xLabels)
+                        ->labels(...$xLabels)
                         ->bounds(AxisBounds::new(0, 400))
                     )
                     ->yAxis(
                         Axis::default()
                             //->title('X Axis')
                         ->style(Style::default()->gray())
-                        ->labels([
+                        ->labels(
                             Span::fromString('-20'),
                             Span::fromString('0'),
                             Span::fromString('20'),
-                        ])
+                        )
                         ->bounds(AxisBounds::new(-400, 400))
                     )
             );

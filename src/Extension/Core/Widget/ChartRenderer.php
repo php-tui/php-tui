@@ -17,7 +17,6 @@ use PhpTui\Tui\Model\Symbol\LineSet;
 use PhpTui\Tui\Model\Text\Span;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\WidgetRenderer;
-use RuntimeException;
 
 /**
  * Renders a a composite of scatter or line graphs.
