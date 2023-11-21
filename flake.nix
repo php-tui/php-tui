@@ -41,6 +41,8 @@
           name = "php-devshell";
 
           buildInputs = [
+            pkgs.bash
+            pkgs.vhs
             pkgs.hugo
             phpForPhpTui
             pkgs.php81.packages.composer

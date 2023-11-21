@@ -7,6 +7,8 @@ namespace PhpTui\Tui\Example\Demo;
 use PhpTui\Term\Actions;
 use PhpTui\Term\ClearType;
 use PhpTui\Term\Event\CharKeyEvent;
+use PhpTui\Term\Event\CodedKeyEvent;
+use PhpTui\Term\KeyCode;
 use PhpTui\Term\Terminal;
 use PhpTui\Tui\Bridge\PhpTerm\PhpTermBackend as PhpTuiPhpTermBackend;
 use PhpTui\Tui\DisplayBuilder;
@@ -177,6 +179,14 @@ final class App
                         $this->activePage = ActivePage::BarChart;
                     }
                 }
+                if ($event instanceof CodedKeyEvent) {
+                    if ($event->code === KeyCode::Tab) {
+                        $this->activePage = $this->activePage->next();
+                    }
+                    if ($event->code === KeyCode::BackTab) {
+                        $this->activePage = $this->activePage->previous();
+                    }
+                }
                 $this->activePage()->handle($event);
             }
 
@@ -225,30 +235,18 @@ final class App
                         Line::fromSpans([
                             Span::fromString('[q]')->red(),
                             Span::fromString('quit '),
-                            Span::fromString('[1]')->green(),
-                            Span::fromString('events '),
-                            Span::fromString('[2]')->green(),
-                            Span::fromString('canvas '),
-                            Span::fromString('[3]')->green(),
-                            Span::fromString('chart '),
-                            Span::fromString('[4]')->green(),
-                            Span::fromString('list '),
-                            Span::fromString('[5]')->green(),
-                            Span::fromString('table '),
-                            Span::fromString('[6]')->green(),
-                            Span::fromString('blocks '),
-                            Span::fromString('[7]')->green(),
-                            Span::fromString('sprites '),
-                            Span::fromString('[8]')->green(),
-                            Span::fromString('colors '),
-                            Span::fromString('[9]')->green(),
-                            Span::fromString('images '),
-                            Span::fromString('[0]')->green(),
-                            Span::fromString('scaling '),
-                            Span::fromString('[!]')->green(),
-                            Span::fromString('gauge '),
-                            Span::fromString('["]')->green(),
-                            Span::fromString('barchart '),
+                            ...array_reduce(ActivePage::cases(), function (array $spans, ActivePage $page) {
+                                if ($page === $this->activePage) {
+                                    $spans[] = Span::fromString(sprintf('[%s]', $page->navItem()->shortcut))->white()->onBlue();
+                                    $spans[] = Span::fromString(sprintf('%s ', $page->navItem()->label))->onMagenta()->white();
+
+                                    return $spans;
+                                }
+                                $spans[] = Span::fromString(sprintf('[%s]', $page->navItem()->shortcut))->green();
+                                $spans[] = Span::fromString(sprintf('%s ', $page->navItem()->label));
+
+                                return $spans;
+                            }, []),
                         ]),
                     ))
                 );

@@ -2,9 +2,11 @@ PHP TUI
 =======
 
 [![CI](https://github.com/php-tui/php-tui/actions/workflows/ci.yml/badge.svg)](https://github.com/php-tui/php-tui/actions/workflows/ci.yml)
+
 <p align="center">
   <img src="https://github.com/php-tui/php-tui/assets/530801/a5ea89fa-8f02-4c67-9467-4740c931f88f" alt="PHP TUI Logo"/>
 </p>
+
 PHP TUI library heavily inspired by Rust TUI /
 [Ratatui](https://github.com/ratatui-org/ratatui).
 
@@ -13,10 +15,11 @@ PHP TUI library heavily inspired by Rust TUI /
 Features
 --------
 
-- Many core features from Ratatui.
+- Many widgets and shapes from Ratatui.
 - Advanced terminal control heavily inspired by Rust's [crossterm](https://github.com/crossterm-rs/crossterm) library.
-- Font rendering
+- Font and image rendering
 - Layout control using the Cassowary algorithm via. [php-tui cassowary](https://github.com/php-tui/cassowary)
+- Lots [more](https://php-tui.github.io/php-tui)
 
 Installation
 ------------
@@ -43,6 +46,8 @@ Checkout the project and run:
 
 Widgets
 -------
+
+Status of widget porting from Ratatui:
 
 - [x] Canvas
 - [x] Chart
