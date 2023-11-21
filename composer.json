@@ -49,13 +49,15 @@
         "docs": "php ./scripts/docgen",
         "phpbench": "php ./vendor/bin/phpbench run --revs=1 --iterations=1",
         "rector": "./vendor/bin/rector process",
+        "vhs": "vhs example/demo/demo.tape",
         "integrate": [
             "@php-cs-fixer",
             "@phpstan",
             "@rector",
             "@phpunit",
             "@phpbench",
-            "@docs"
+            "@docs",
+            "@vhs"
         ]
     },
     "config": {

@@ -1,5 +1,6 @@
 /.phpbench
 /vendor
+/example/demo/demo.gif
 /composer.lock
 /.phpunit.cache
 /.php-cs-fixer.cache
