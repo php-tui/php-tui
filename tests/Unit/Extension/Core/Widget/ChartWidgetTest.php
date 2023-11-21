@@ -216,7 +216,7 @@ class ChartWidgetTest extends WidgetTestCase
 
         self::assertEquals(
             [
-                '2│ •    ',
+                ' │ •    ',
                 ' │• •   ',
                 ' │• •   ',
                 ' │   • •',

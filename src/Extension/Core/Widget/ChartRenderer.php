@@ -11,6 +11,7 @@ use PhpTui\Tui\Model\Canvas\CanvasContext;
 use PhpTui\Tui\Model\Color\AnsiColor;
 use PhpTui\Tui\Model\Display\Buffer;
 use PhpTui\Tui\Model\HorizontalAlignment;
+use PhpTui\Tui\Model\Math\VectorUtil;
 use PhpTui\Tui\Model\Position\Position;
 use PhpTui\Tui\Model\Symbol\LineSet;
 use PhpTui\Tui\Model\Text\Span;
@@ -120,11 +121,9 @@ final class ChartRenderer implements WidgetRenderer
 
     private function maxWidthOfLabelsLeftOfYAxis(ChartWidget $chart, Area $area, bool $hasYAxis): int
     {
-        $maxWidth = $chart->yAxis->labels ? max(
-            ...array_map(function (Span $label): int {
-                return $label->width();
-            }, $chart->yAxis->labels)
-        ) : 0;
+        $maxWidth = VectorUtil::max(array_map(function (Span $label): int {
+            return $label->width();
+        }, $chart->yAxis->labels ?? [])) ?? 0;
 
         if ($chart->xAxis->labels !== null && count($chart->xAxis->labels)) {
             $first = $chart->xAxis->labels[array_key_first($chart->xAxis->labels)];
@@ -220,7 +219,7 @@ final class ChartRenderer implements WidgetRenderer
         }
         $labelsLen = count($labels);
         foreach ($labels as $i => $label) {
-            $dy = (int) ($i * ($layout->graphArea->height - 1) / ($labelsLen - 1));
+            $dy = $labelsLen > 1 ? (int) ($i * ($layout->graphArea->height - 1) / ($labelsLen - 1)) : 0;
             if ($dy < $layout->graphArea->bottom()) {
                 $labelArea = Area::fromScalars(
                     $layout->labelY,
