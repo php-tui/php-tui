@@ -132,6 +132,28 @@ class BarChartRendererTest extends WidgetTestCase
             ]
            ,
         ];
+        yield 'horizontal chart with width > 1' => [
+            Area::fromDimensions(10, 10),
+            BarChartWidget::default()->barWidth(4)->data(
+                BarGroup::fromBars(
+                    Bar::fromValue(1)->textValue('A')->label(Line::fromString('X0'))->style(Style::default()),
+                    Bar::fromValue(2)->textValue('B')->label(Line::fromString('X1')),
+                ),
+            )->direction(Direction::Horizontal),
+            [
+                '   ███    ',
+                '   ███    ',
+                'X0 A██    ',
+                '   ███    ',
+                '          ',
+                '   ███████',
+                '   ███████',
+                'X1 B██████',
+                '   ███████',
+                '          ',
+            ]
+           ,
+        ];
         yield 'wider than dimensions' => [
             Area::fromDimensions(10, 5),
             BarChartWidget::default()->data(

@@ -23,6 +23,7 @@ Bug fixes:
 - Fix terminal echos raw escape codes when getting cursor position #149 
 - Inline "clear" is too greedy #158
 - Chart does not crash with 1 label on y axis #153
+- Fix bar chart horizontal bar width #160
 
 Improvements
 
