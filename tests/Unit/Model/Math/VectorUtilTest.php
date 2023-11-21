@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Tests\Unit\Model\Math;
 
 use Generator;
+use PhpTui\Tui\Model\Math\VectorUtil;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
-use PhpTui\Tui\Model\Math\VectorUtil;
 
 class VectorUtilTest extends TestCase
 {
@@ -18,6 +20,7 @@ class VectorUtilTest extends TestCase
     {
         self::assertEquals($expected, VectorUtil::max($vector));
     }
+
     /**
      * @return Generator<array{list<number>,number|null}>
      */

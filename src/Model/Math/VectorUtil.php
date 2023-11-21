@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Model\Math;
 
 final class VectorUtil
 {
     /**
      * Return the maximum value of the given vector of numbers.
-     * 
+     *
      * - If the vector is empty return null
      * - If the vector has one element, return it
      * - Otherwise return the max
