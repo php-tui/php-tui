@@ -145,7 +145,7 @@ final class ChartRenderer implements WidgetRenderer
             return;
         }
         $labels = $chart->xAxis->labels ?? [];
-        if (count($labels) < 2) {
+        if (count($labels) < 1) {
             return;
         }
         $widthBetweenTicks = (int) ($layout->graphArea->width / count($labels));
@@ -168,9 +168,6 @@ final class ChartRenderer implements WidgetRenderer
         $this->renderLabel($buffer, $firstLabel, $labelArea, $labelAlignment);
 
         $lastLabel = array_pop($labels);
-        if (null === $lastLabel) {
-            throw new RuntimeException('Last label is null, this should not happen');
-        }
         foreach ($labels as $i => $label) {
             $x = $layout->graphArea->left() + ($i + 1) * $widthBetweenTicks + 1;
             $labelArea = Area::fromScalars($x, $layout->labelX, $widthBetweenTicks - 1, 1);
@@ -178,7 +175,9 @@ final class ChartRenderer implements WidgetRenderer
         }
         $x = $layout->graphArea->right() - $widthBetweenTicks;
         $labelArea = Area::fromScalars($x, $layout->labelX, $widthBetweenTicks, 1);
-        $this->renderLabel($buffer, $lastLabel, $labelArea, HorizontalAlignment::Center);
+        if ($lastLabel) {
+            $this->renderLabel($buffer, $lastLabel, $labelArea, HorizontalAlignment::Center);
+        }
 
     }
 
