@@ -184,7 +184,7 @@ final class ChartRenderer implements WidgetRenderer
 
     private function firstXLabelArea(ChartWidget $chart, int $y, int $labelWidth, int $maxWithAfterYAxis, Area $chartArea, Area $graphArea): Area
     {
-        [$minX, $maxX] =  match ($chart->xAxis->labelAlignment) {
+        [$minX, $maxX] = match ($chart->xAxis->labelAlignment) {
             HorizontalAlignment::Left => [$chartArea->left(), $graphArea->left()],
             HorizontalAlignment::Center => [$chartArea->left(), $graphArea->left() + min($maxWithAfterYAxis, $labelWidth)],
             HorizontalAlignment::Right => [

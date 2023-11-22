@@ -6,14 +6,14 @@ namespace PhpTui\Tui\Model\Widget;
 
 final class Borders
 {
-    public const NONE   = 0b0000;
-    public const TOP    = 0b0001;
-    public const RIGHT  = 0b0010;
+    public const NONE = 0b0000;
+    public const TOP = 0b0001;
+    public const RIGHT = 0b0010;
     public const BOTTOM = 0b0100;
-    public const LEFT   = 0b1000;
-    public const VERTICAL   = self::TOP | self::BOTTOM;
+    public const LEFT = 0b1000;
+    public const VERTICAL = self::TOP | self::BOTTOM;
     public const HORIZONTAL = self::LEFT | self::RIGHT;
-    public const ALL    = self::TOP | self::RIGHT | self::BOTTOM | self::LEFT;
+    public const ALL = self::TOP | self::RIGHT | self::BOTTOM | self::LEFT;
 
     public static function toString(int $borders): string
     {

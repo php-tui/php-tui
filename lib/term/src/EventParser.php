@@ -254,7 +254,7 @@ final class EventParser
         $parts = explode(';', $str);
 
         [$modifiers, $kind] = (function () use ($parts): array {
-            $modifierAndKindCode  = $this->modifierAndKindParsed($parts);
+            $modifierAndKindCode = $this->modifierAndKindParsed($parts);
             if (null !== $modifierAndKindCode) {
                 return [
                     $this->parseModifiers($modifierAndKindCode[0]),

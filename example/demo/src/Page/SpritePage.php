@@ -149,7 +149,7 @@ class SpritePage implements Component
                                 10 + 1 * (sin(0.25 * ($this->ticker * 0.25)) * self::HEIGHT)
                             ]
                         );
-                        $elephant3->color = RgbColor::fromHsv($this->ticker  * 32 % 360, 100, 100);
+                        $elephant3->color = RgbColor::fromHsv($this->ticker * 32 % 360, 100, 100);
                         $context->draw($elephant3);
                         $context->saveLayer();
                     })

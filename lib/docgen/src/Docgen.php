@@ -58,7 +58,7 @@ final class Docgen
     public static function new(string $cwd, string $examplesDir, string $docsDir, array $unitConfigs, DocRenderer $renderer): self
     {
         $astLocator = (new BetterReflection())->astLocator();
-        $reflector  = new DefaultReflector(new AggregateSourceLocator([
+        $reflector = new DefaultReflector(new AggregateSourceLocator([
             (new MakeLocatorForComposerJson())($cwd, $astLocator),
             new PhpInternalSourceLocator($astLocator, new ReflectionSourceStubber())
         ]));
