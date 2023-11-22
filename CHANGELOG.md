@@ -3,6 +3,12 @@ CHANGELOG
 
 ## master
 
+Improvements:
+
+- Add fine grained builder methods to `Padding` #165 @KennedyTedesco
+
+## 0.0.2
+
 Features:
 
 - Gauge widget #118
