@@ -29,7 +29,7 @@ final class Layout
         return new self(
             new CassowaryConstraintSolver(),
             Direction::Vertical,
-            new Margin(0, 0),
+            Margin::none(),
             [],
             true
         );

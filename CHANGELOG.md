@@ -5,7 +5,8 @@ CHANGELOG
 
 Improvements:
 
-- Add fine grained builder methods to `Padding` #165 @KennedyTedesco
+- Add fine-grained builder methods to `Padding` #165 @KennedyTedesco
+- Add fine-grained builder methods to `Margin` #167 @KennedyTedesco
 
 ## 0.0.2
 
