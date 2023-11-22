@@ -71,14 +71,14 @@ final class ScrollbarRenderer implements WidgetRenderer
 
         if ($widget->beginSymbol) {
             match ($widget->isVertical()) {
-            true => $buffer->putString(Position::at($trackAxis, max(0, $trackStart - 1)), $widget->beginSymbol, $widget->beginStyle),
-            false => $buffer->putString(Position::at(max(0, $trackStart - 1), $trackAxis), $widget->beginSymbol, $widget->beginStyle),
+                true => $buffer->putString(Position::at($trackAxis, max(0, $trackStart - 1)), $widget->beginSymbol, $widget->beginStyle),
+                false => $buffer->putString(Position::at(max(0, $trackStart - 1), $trackAxis), $widget->beginSymbol, $widget->beginStyle),
             };
         }
         if ($widget->endSymbol) {
             match ($widget->isVertical()) {
-            true => $buffer->putString(Position::at($trackAxis, $trackEnd), $widget->endSymbol, $widget->endStyle),
-            false => $buffer->putString(Position::at($trackEnd, $trackAxis), $widget->endSymbol, $widget->endStyle),
+                true => $buffer->putString(Position::at($trackAxis, $trackEnd), $widget->endSymbol, $widget->endStyle),
+                false => $buffer->putString(Position::at($trackEnd, $trackAxis), $widget->endSymbol, $widget->endStyle),
             };
         }
     }
@@ -146,20 +146,20 @@ final class ScrollbarRenderer implements WidgetRenderer
      */
     private function getThumbStartEnd(ScrollbarState $state, int $trackStart, int $trackEnd): array
     {
-        $viewportContentLength = $state->viewportContentLength === 0 ? 
-            $trackEnd - $trackStart : 
+        $viewportContentLength = $state->viewportContentLength === 0 ?
+            $trackEnd - $trackStart :
             $state->viewportContentLength;
 
         $scrollPositionRatio = min(1.0, $state->position / $state->contentLength);
         $thumbSize = max(
             1,
-            intval(
-                ($viewportContentLength / $state->contentLength) * 
+            (int) (
+                ($viewportContentLength / $state->contentLength) *
                 ($trackEnd - $trackStart)
             )
         );
         $trackSize = max(0, $trackEnd - $trackStart - $thumbSize);
-        $thumbStart = intval($trackStart + ($scrollPositionRatio * $trackSize));
+        $thumbStart = (int) ($trackStart + ($scrollPositionRatio * $trackSize));
         $thumbEnd = $thumbStart + $thumbSize;
 
         return [$thumbStart, $thumbEnd];

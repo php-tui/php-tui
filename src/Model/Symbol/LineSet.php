@@ -18,7 +18,7 @@ final class LineSet
     public const HORIZONTAL_UP = '┴';
     public const CROSS = '┼';
     public const DOUBLE_VERTICAL = '║';
-    public const DOUBLE_HORIZONTAL = "═";
+    public const DOUBLE_HORIZONTAL = '═';
 
     public function __construct(
         public readonly string $vertical,
