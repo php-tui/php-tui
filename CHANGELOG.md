@@ -3,6 +3,10 @@ CHANGELOG
 
 ## master
 
+Features:
+
+- Scrollbar widget #171
+
 Improvements:
 
 - Add fine-grained builder methods to `Padding` #165 @KennedyTedesco

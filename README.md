@@ -58,7 +58,7 @@ Status of widget porting from Ratatui:
 - [ ] Tabs
 - [ ] Calendar
 - [x] Barchart
-- [ ] Scrollbar
+- [x] Scrollbar
 - [ ] Sparkline
 - [x] Gauge
 
