@@ -14,6 +14,7 @@ Improvements:
 - Add fine-grained builder methods to `Padding` #165 @KennedyTedesco
 - Add fine-grained builder methods to `Margin` #167 @KennedyTedesco
 - Add `VERTICAL` and `HORIZONTAL` variants to `Borders` #168 @KennedyTedesco
+- Add fine grained builder methods to `Padding` #165 @KennedyTedesco
 
 ## 0.0.2
 
