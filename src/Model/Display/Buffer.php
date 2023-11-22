@@ -95,7 +95,7 @@ final class Buffer implements Countable, Stringable
     public function diff(Buffer $buffer): BufferUpdates
     {
         $previous = $this->content();
-        $next     = $buffer->content();
+        $next = $buffer->content();
         $updates = [];
         $counter = count($next);
 

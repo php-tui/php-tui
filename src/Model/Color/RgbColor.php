@@ -129,7 +129,7 @@ class RgbColor implements Color, Stringable
                 break;
         }
 
-        $dM  = $dV - $dC;
+        $dM = $dV - $dC;
         $dR += $dM;
         $dG += $dM;
         $dB += $dM;

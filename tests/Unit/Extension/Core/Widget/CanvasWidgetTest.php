@@ -152,7 +152,7 @@ class CanvasWidgetTest extends WidgetTestCase
                 '⣇⣀⣀⣀⣀',
             ]
         ];
-        yield 'half-block'  => [
+        yield 'half-block' => [
             Marker::HalfBlock,
             [
                 '█xxxx',

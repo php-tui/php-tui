@@ -53,7 +53,7 @@ class ColorsPage implements Component
         $y = 3;
         $tick = $this->ticker;
         $saturation = (50 + $tick) % 100;
-        $lightness = (50 + (int) ($tick / 3))  % 100;
+        $lightness = (50 + (int) ($tick / 3)) % 100;
         $buffer->putString(Position::at(0, 2), sprintf('Saturation: %d, Lightness: %d', $saturation, $lightness));
         for ($i = 0; $i < 360; $i++) {
             $color = RgbColor::fromHsv($i, $saturation, $lightness);

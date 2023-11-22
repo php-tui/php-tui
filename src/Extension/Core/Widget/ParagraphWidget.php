@@ -45,7 +45,7 @@ class ParagraphWidget implements Widget
 
     public function style(Style $style): self
     {
-        $this->style =  $style;
+        $this->style = $style;
 
         return $this;
     }
