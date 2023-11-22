@@ -6,6 +6,7 @@ namespace PhpTui\Tui\Tests\Unit\Extension\Core\Widget;
 
 use Generator;
 use PhpTui\Tui\Extension\Core\Widget\ScrollbarWidget;
+use PhpTui\Tui\Extension\Core\Widget\Scrollbar\ScrollbarOrientation;
 use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Display\Buffer;
 use PhpTui\Tui\Model\Text\Span;
@@ -28,7 +29,7 @@ class ScrollbarRendererTest extends WidgetTestCase
      */
     public static function provideScrollbarRender(): Generator
     {
-        yield 'one' => [
+        yield 'vertical' => [
             Area::fromDimensions(3, 7),
             ScrollbarWidget::default(),
             [
@@ -39,6 +40,44 @@ class ScrollbarRendererTest extends WidgetTestCase
                 ' X ',
                 '   ',
                 '   ',
+            ]
+           ,
+        ];
+        yield 'no begining symbol' => [
+            Area::fromDimensions(3, 7),
+            ScrollbarWidget::default()->beginSymbol(null),
+            [
+                '   ',
+                '   ',
+                ' X ',
+                ' X ',
+                ' X ',
+                '   ',
+                '   ',
+            ]
+           ,
+        ];
+        yield 'no end symbol' => [
+            Area::fromDimensions(3, 7),
+            ScrollbarWidget::default()->endSymbol(null),
+            [
+                '   ',
+                '   ',
+                ' X ',
+                ' X ',
+                ' X ',
+                '   ',
+                '   ',
+            ]
+           ,
+        ];
+        yield 'horizontal top' => [
+            Area::fromDimensions(7, 3),
+            ScrollbarWidget::default()->orientation(ScrollbarOrientation::HorizontalTop),
+            [
+                ' xxxx ',
+                '      ',
+                '      ',
             ]
            ,
         ];
