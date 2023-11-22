@@ -7,6 +7,7 @@ namespace PhpTui\Tui\Extension\Core\Widget;
 use PhpTui\Tui\Extension\Core\Widget\Scrollbar\ScrollbarOrientation;
 use PhpTui\Tui\Extension\Core\Widget\Scrollbar\ScrollbarState;
 use PhpTui\Tui\Extension\Core\Widget\Scrollbar\ScrollbarSymbols;
+use PhpTui\Tui\Extension\TextEditor\Symbol\ScrollbarSymbols as PhpTuiScrollbarSymbols;
 use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Widget;
 
@@ -77,6 +78,26 @@ final class ScrollbarWidget implements Widget
     public function orientation(ScrollbarOrientation $orientation): self
     {
         $this->orientation = $orientation;
+        if ($this->isVertical()) {
+            $this->symbols(ScrollbarSymbols::doubleVertical());
+        } else {
+            $this->symbols(ScrollbarSymbols::doubleHorizontal());
+        }
+        return $this;
+    }
+
+    public function symbols(ScrollbarSymbols $symbols): self
+    {
+        $this->thumbSymbol = $symbols->thumb;
+        if ($this->trackSymbol !== null) {
+            $this->trackSymbol = $symbols->track;
+        }
+        if ($this->beginSymbol !== null) {
+            $this->beginSymbol = $symbols->begin;
+        }
+        if ($this->endSymbol !== null) {
+            $this->endSymbol = $symbols->end;
+        }
         return $this;
     }
 

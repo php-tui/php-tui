@@ -68,6 +68,19 @@ final class ScrollbarRenderer implements WidgetRenderer
                 $buffer->putString(Position::at($i, $trackAxis), $symbol, $style);
 
         }
+
+        if ($widget->beginSymbol) {
+            match ($widget->isVertical()) {
+            true => $buffer->putString(Position::at($trackAxis, max(0, $trackStart - 1)), $widget->beginSymbol, $widget->beginStyle),
+            false => $buffer->putString(Position::at(max(0, $trackStart - 1), $trackAxis), $widget->beginSymbol, $widget->beginStyle),
+            };
+        }
+        if ($widget->endSymbol) {
+            match ($widget->isVertical()) {
+            true => $buffer->putString(Position::at($trackAxis, $trackEnd), $widget->endSymbol, $widget->endStyle),
+            false => $buffer->putString(Position::at($trackEnd, $trackAxis), $widget->endSymbol, $widget->endStyle),
+            };
+        }
     }
 
     private function getTrackArea(ScrollbarWidget $widget, Area $area): Area
@@ -77,14 +90,14 @@ final class ScrollbarRenderer implements WidgetRenderer
                 if ($widget->isVertical()) {
                     return Area::fromScalars(
                         $area->position->x,
-                        $area->position->y,
+                        $area->position->y + 1,
                         $area->width,
                         max(0, $area->height - 1)
                     );
                 }
 
                 return Area::fromScalars(
-                    $area->position->x,
+                    $area->position->x + 1,
                     $area->position->y,
                     max(0, $area->width - 1),
                     $area->height
@@ -107,7 +120,12 @@ final class ScrollbarRenderer implements WidgetRenderer
             );
         }
 
-        return $area;
+        return Area::fromScalars(
+            $area->position->x,
+            $area->position->y,
+            max(0, $area->width - 1),
+            $area->height,
+        );
     }
 
     /**
