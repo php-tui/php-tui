@@ -11,6 +11,8 @@ final class Borders
     public const RIGHT  = 0b0010;
     public const BOTTOM = 0b0100;
     public const LEFT   = 0b1000;
+    public const VERTICAL   = self::TOP | self::BOTTOM;
+    public const HORIZONTAL = self::LEFT | self::RIGHT;
     public const ALL    = self::TOP | self::RIGHT | self::BOTTOM | self::LEFT;
 
     public static function toString(int $borders): string
@@ -21,6 +23,14 @@ final class Borders
 
         if ($borders === self::NONE) {
             return 'NONE';
+        }
+
+        if ($borders === self::VERTICAL) {
+            return 'VERTICAL';
+        }
+
+        if ($borders === self::HORIZONTAL) {
+            return 'HORIZONTAL';
         }
 
         $string = [];

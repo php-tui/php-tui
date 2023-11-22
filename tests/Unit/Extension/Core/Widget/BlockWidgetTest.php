@@ -283,6 +283,32 @@ class BlockWidgetTest extends WidgetTestCase
         ], $buffer->toLines());
     }
 
+    public function testRenderWithVerticalBorders(): void
+    {
+        $buffer = Buffer::empty(Area::fromDimensions(5, 5));
+        $this->render($buffer, BlockWidget::default()->borders(Borders::VERTICAL));
+        self::assertEquals([
+            '┌───┐',
+            '     ',
+            '     ',
+            '     ',
+            '└───┘',
+        ], $buffer->toLines());
+    }
+
+    public function testRenderWithHorizontalBorders(): void
+    {
+        $buffer = Buffer::empty(Area::fromDimensions(5, 5));
+        $this->render($buffer, BlockWidget::default()->borders(Borders::HORIZONTAL));
+        self::assertEquals([
+            '┌   ┐',
+            '│   │',
+            '│   │',
+            '│   │',
+            '└   ┘',
+        ], $buffer->toLines());
+    }
+
     public function testRendersWithTitle(): void
     {
         $buffer = Buffer::empty(Area::fromDimensions(8, 5));
