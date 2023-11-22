@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Tests\Unit\Extension\TextEditor;
 
 use OutOfRangeException;
-use PHPUnit\Framework\TestCase;
 use PhpTui\Tui\Extension\TextEditor\TextEditor;
 use PhpTui\Tui\Model\Position\Position;
+use PHPUnit\Framework\TestCase;
 
 class TextEditorTest extends TestCase
 {
@@ -69,7 +71,7 @@ class TextEditorTest extends TestCase
         $editor = TextEditor::fromLines([
             '0123',
             '01234567',
-        ]); 
+        ]);
 
         self::assertEquals(Position::at(0, 0), $editor->cursorPosition());
 

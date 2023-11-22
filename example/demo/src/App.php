@@ -82,6 +82,7 @@ final class App
         foreach (ActivePage::cases() as $case) {
             $pages[$case->name] = match ($case) {
                 ActivePage::Events => new EventsPage(),
+                ActivePage::Canvas => new CanvasPage(),
                 ActivePage::Chart => new ChartPage(),
                 ActivePage::List => new ItemListPage(),
                 ActivePage::Table => new TablePage(),
