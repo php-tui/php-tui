@@ -70,26 +70,26 @@ final class TextEditor
         $line = $this->resolveLine();
         $line = sprintf(
             '%s%s',
-            mb_substr($line, 0, $this->cursor->x - $length),
-            mb_substr($line, $this->cursor->x, strlen($line) - $this->cursor->x),
+            mb_substr($line, 0, max(0, $this->cursor->x - $length)),
+            mb_substr($line, $this->cursor->x, max(0, strlen($line) - $this->cursor->x)),
         );
         $this->setLine($line);
         $this->cursor->x = max(0, $this->cursor->x - 1);
     }
 
-    public function cursorLeft(): void
+    public function cursorLeft(int $amount = 1): void
     {
         $this->cursor = $this->cursor->change(
-            fn (int $x, int $y) => [max(0, $x - 1), $y]
+            static fn (int $x, int $y): array => [max(0, $x - $amount), $y]
         );
     }
 
-    public function cursorRight(): void
+    public function cursorRight(int $amount = 1): void
     {
         $line = $this->resolveLine();
         $this->cursor = $this->cursor->change(
-            fn (int $x, int $y) => [
-                min(mb_strlen($line), $x + 1),
+            static fn (int $x, int $y): array => [
+                min(mb_strlen($line), $x + $amount),
                 $y
             ]
         );
@@ -98,13 +98,13 @@ final class TextEditor
     public function cursorDown(): void
     {
         $this->cursor = $this->cursor->change(
-            fn (int $x, int $y) => [$x, min(count($this->lines) - 1, $y + 1)]
+            fn (int $x, int $y): array => [$x, min(count($this->lines) - 1, $y + 1)]
         );
     }
     public function cursorUp(): void
     {
         $this->cursor = $this->cursor->change(
-            fn (int $x, int $y) => [$x, max(0, $y - 1)]
+            static fn (int $x, int $y): array => [$x, max(0, $y - 1)]
         );
     }
 
@@ -136,5 +136,20 @@ final class TextEditor
     {
         $position = $this->cursor;
         $this->lines[$position->y] = $line;
+    }
+
+    public function newLine(): void
+    {
+        $line = $this->resolveLine();
+        $pre = mb_substr($line, 0, $this->cursor->x);
+        $this->lines = array_values([
+            ...array_slice($this->lines, 0, $this->cursor->y),
+            $pre,
+            ...array_slice($this->lines, $this->cursor->y)
+        ]);
+        $post = mb_substr($line, $this->cursor->x);
+        $this->cursorDown();
+        $this->setLine($post);
+        $this->cursor->x = 0;
     }
 }

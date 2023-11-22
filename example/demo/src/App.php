@@ -25,6 +25,7 @@ use PhpTui\Tui\Example\Demo\Page\ImagePage;
 use PhpTui\Tui\Example\Demo\Page\ItemListPage;
 use PhpTui\Tui\Example\Demo\Page\SpritePage;
 use PhpTui\Tui\Example\Demo\Page\TablePage;
+use PhpTui\Tui\Example\Demo\Page\TextEditorPage;
 use PhpTui\Tui\Extension\Bdf\BdfExtension;
 use PhpTui\Tui\Extension\Core\Widget\BlockWidget;
 use PhpTui\Tui\Extension\Core\Widget\GridWidget;
@@ -77,6 +78,7 @@ final class App
     {
         $terminal = $terminal ?? Terminal::new();
         $pages = [];
+        $bus = new CommandBus([]);
 
         // build up an exhaustive set of pages
         foreach (ActivePage::cases() as $case) {
@@ -91,6 +93,7 @@ final class App
                 ActivePage::Colors => new ColorsPage(),
                 ActivePage::Images => new ImagePage(),
                 ActivePage::CanvasScaling => new CanvasScalingPage($terminal),
+                ActivePage::TextEditor => new TextEditorPage($bus),
                 ActivePage::Gauge => new GaugePage(),
                 ActivePage::BarChart => new BarChartPage(),
             };
@@ -180,6 +183,9 @@ final class App
                         if ($event->char === '"') {
                             $this->activePage = ActivePage::BarChart;
                         }
+                    }
+                    if ($event->char === '$') {
+                        $this->activePage = ActivePage::TextEditor;
                     }
                 }
                 if ($event instanceof CodedKeyEvent) {

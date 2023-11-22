@@ -20,6 +20,7 @@ enum ActivePage
     case CanvasScaling;
     case Gauge;
     case BarChart;
+    case TextEditor;
 
     public function navItem(): NavItem
     {
@@ -36,6 +37,8 @@ enum ActivePage
             ActivePage::Gauge => new NavItem('!', 'guage'),
             ActivePage::BarChart => new NavItem('"', 'barchart'),
             ActivePage::CanvasScaling => new NavItem('0', 'scaling'),
+            ActivePage::TextEditor => new NavItem('$', 'editor'),
+
         };
     }
 

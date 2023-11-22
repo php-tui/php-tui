@@ -29,6 +29,50 @@ class TextEditorTest extends TestCase
         self::assertEquals('Hello🐈CatHai', $editor->toString());
     }
 
+    public function testInsertNewLine(): void
+    {
+        $editor = TextEditor::fromString('Hello World');
+        $editor->newLine();
+        self::assertEquals(<<<'EOT'
+
+        Hello World
+        EOT, $editor->toString());
+    }
+
+    public function testInsertNewLineBetween(): void
+    {
+        $editor = TextEditor::fromString(<<<'EOT'
+        Hello
+        World
+        EOT);
+        $editor->cursorDown();
+        $editor->newLine();
+        self::assertEquals(<<<'EOT'
+        Hello
+
+        World
+        EOT, $editor->toString());
+    }
+
+    public function testInsertNewLineAtOffset(): void
+    {
+        $editor = TextEditor::fromString(<<<'EOT'
+        Hello
+        World
+        EOT);
+        $editor->cursorRight(2);
+
+        self::assertEquals(Position::at(2, 0), $editor->cursorPosition());
+        $editor->newLine();
+
+        self::assertEquals(<<<'EOT'
+        He
+        llo
+        World
+        EOT, $editor->toString());
+        self::assertEquals(Position::at(0, 1), $editor->cursorPosition());
+    }
+
     public function testInsertReplace(): void
     {
         $editor = TextEditor::fromString('Hello World');
@@ -62,6 +106,13 @@ class TextEditorTest extends TestCase
 
         $editor = TextEditor::fromString('');
         $editor->insert('Hello🐈Cat');
+        $editor->delete(4);
+        self::assertEquals('Hello', $editor->toString());
+    }
+
+    public function testDeleteAtZero(): void
+    {
+        $editor = TextEditor::fromString('Hello');
         $editor->delete(4);
         self::assertEquals('Hello', $editor->toString());
     }
