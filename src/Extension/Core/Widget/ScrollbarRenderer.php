@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Extension\Core\Widget;
 
 use PhpTui\Tui\Extension\Core\Widget\Scrollbar\ScrollbarOrientation;
+use PhpTui\Tui\Extension\Core\Widget\Scrollbar\ScrollbarState;
 use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Display\Buffer;
+use PhpTui\Tui\Model\Position\Position;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\WidgetRenderer;
 
@@ -44,6 +46,28 @@ final class ScrollbarRenderer implements WidgetRenderer
         }
 
         $area = $this->getTrackArea($widget, $buffer->area());
+        [$trackStart, $trackEnd, $trackAxis] = $this->getTrackStartEnd($widget, $area);
+        if ($trackEnd - $trackStart === 0 || $widget->state->contentLength === 0) {
+            return;
+        }
+
+        [$thumbStart, $thumbEnd] = $this->getThumbStartEnd($widget->state, $trackStart, $trackEnd);
+
+        for ($i = $trackStart; $i < $trackEnd; $i++) {
+            [$style, $symbol] = match (true) {
+                $i >= $thumbStart && $i < $thumbEnd => [$widget->thumbStyle, $widget->thumbSymbol],
+                $widget->trackSymbol !== null => [$widget->trackStyle, $widget->trackSymbol],
+                default => [null, null],
+            };
+            if (null === $style || null === $symbol) {
+                continue;
+            }
+
+            $widget->isVertical() ?
+                $buffer->putString(Position::at($trackAxis, $i), $symbol, $style) :
+                $buffer->putString(Position::at($i, $trackAxis), $symbol, $style);
+
+        }
     }
 
     private function getTrackArea(ScrollbarWidget $widget, Area $area): Area
@@ -84,5 +108,42 @@ final class ScrollbarRenderer implements WidgetRenderer
         }
 
         return $area;
+    }
+
+    /**
+     * @return array{int,int,int}
+     */
+    private function getTrackStartEnd(ScrollbarWidget $widget, Area $area): array
+    {
+        return match($widget->orientation) {
+            ScrollbarOrientation::VerticalRight => [$area->top(), $area->bottom(), max(0, $area->right() - 1)],
+            ScrollbarOrientation::VerticalLeft => [$area->top(),$area->bottom(), $area->left()],
+            ScrollbarOrientation::HorizontalBottom => [$area->left(), $area->right(), max(0, $area->bottom() - 1)],
+            ScrollbarOrientation::HorizontalTop => [$area->left(), $area->right(), $area->top()],
+        };
+    }
+
+    /**
+     * @return array{int,int}
+     */
+    private function getThumbStartEnd(ScrollbarState $state, int $trackStart, int $trackEnd): array
+    {
+        $viewportContentLength = $state->viewportContentLength === 0 ? 
+            $trackEnd - $trackStart : 
+            $state->viewportContentLength;
+
+        $scrollPositionRatio = min(1.0, $state->position / $state->contentLength);
+        $thumbSize = max(
+            1,
+            intval(
+                ($viewportContentLength / $state->contentLength) * 
+                ($trackEnd - $trackStart)
+            )
+        );
+        $trackSize = max(0, $trackEnd - $trackStart - $thumbSize);
+        $thumbStart = intval($trackStart + ($scrollPositionRatio * $trackSize));
+        $thumbEnd = $thumbStart + $thumbSize;
+
+        return [$thumbStart, $thumbEnd];
     }
 }

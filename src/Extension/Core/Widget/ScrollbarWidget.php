@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Extension\Core\Widget;
 
 use PhpTui\Tui\Extension\Core\Widget\Scrollbar\ScrollbarOrientation;
+use PhpTui\Tui\Extension\Core\Widget\Scrollbar\ScrollbarState;
 use PhpTui\Tui\Extension\Core\Widget\Scrollbar\ScrollbarSymbols;
 use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Widget;
@@ -20,7 +21,9 @@ final class ScrollbarWidget implements Widget
         public ?string $beginSymbol,
         public Style $beginStyle,
         public ?string $endSymbol,
-        public Style $endStyle
+        public Style $endStyle,
+        public ScrollbarState $state,
+
     ) {
     }
 
@@ -37,7 +40,8 @@ final class ScrollbarWidget implements Widget
             beginSymbol: $symbols->begin,
             beginStyle: Style::default(),
             endSymbol: $symbols->end,
-            endStyle: Style::default()
+            endStyle: Style::default(),
+            state: new ScrollbarState(),
         );
     }
 
@@ -61,6 +65,12 @@ final class ScrollbarWidget implements Widget
     public function endSymbol(?string $endSymbol): self
     {
         $this->endSymbol = $endSymbol;
+        return $this;
+    }
+
+    public function state(ScrollbarState $state): self
+    {
+        $this->state = $state;
         return $this;
     }
 
