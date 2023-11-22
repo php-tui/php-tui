@@ -18,10 +18,10 @@ final class CommandBus
      */
     public function drain(): array
     {
-        $events = $this->commands;
+        $commands = $this->commands;
         $this->commands = [];
 
-        return $this->commands;
+        return $commands;
     }
 
     public function dispatch(Command $command): void

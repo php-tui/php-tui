@@ -145,13 +145,6 @@ final class TextEditorPage implements Component
                 $this->editor->delete();
             }
         }
-
-        $this->bus->dispatch(
-            new UpdateCursorPositionCommand(
-                $this->editor->cursorPosition()
-            )
-        );
-
     }
 
 }

@@ -13,6 +13,7 @@ use PhpTui\Term\KeyModifiers;
 use PhpTui\Term\Terminal;
 use PhpTui\Tui\Bridge\PhpTerm\PhpTermBackend as PhpTuiPhpTermBackend;
 use PhpTui\Tui\DisplayBuilder;
+use PhpTui\Tui\Example\Demo\Command\FocusCommand;
 use PhpTui\Tui\Example\Demo\Page\BarChartPage;
 use PhpTui\Tui\Example\Demo\Page\BlocksPage;
 use PhpTui\Tui\Example\Demo\Page\CanvasPage;
@@ -61,6 +62,8 @@ use Throwable;
  */
 final class App
 {
+    private ?Component $focused = null;
+
     /**
      * @param array<string,Component> $pages
      * @param int[] $frameSamples
@@ -71,6 +74,7 @@ final class App
         private ActivePage $activePage,
         private array $pages,
         private array $frameSamples,
+        private CommandBus $bus,
     ) {
     }
 
@@ -110,6 +114,7 @@ final class App
             ActivePage::Events,
             $pages,
             [],
+            $bus,
         );
     }
 
@@ -140,8 +145,17 @@ final class App
 
         // the main loop
         while (true) {
+            foreach ($this->bus->drain() as $command) {
+                if ($command instanceof FocusCommand) {
+                    $this->focused = $command->component;
+                }
+            }
             // handle events sent to the terminal
             while (null !== $event = $this->terminal->events()->next()) {
+                if ($this->focused) {
+                    $this->focused->handle($event);
+                    continue;
+                }
                 if ($event instanceof CharKeyEvent) {
                     if ($event->modifiers === KeyModifiers::NONE) {
                         if ($event->char === 'q') {
