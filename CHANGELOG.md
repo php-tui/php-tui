@@ -6,6 +6,7 @@ CHANGELOG
 Features:
 
 - Scrollbar widget #171
+- Composite widget #173
 
 Improvements:
 
