@@ -114,4 +114,12 @@ final class DummyBackend implements Backend
             $this->grid[$line][$i] = ' ';
         }
     }
+
+    /**
+     * @return string[]
+     */
+    public function toLines(): array
+    {
+        return explode("\n", $this->toString());
+    }
 }

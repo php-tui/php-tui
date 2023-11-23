@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Extension\TextEditor;
+namespace PhpTui\Tui\Extension\TextArea;
 
 use OutOfRangeException;
 use PhpTui\Tui\Model\Position\Position;
 use RuntimeException;
 
-final class TextEditor
+final class TextArea
 {
     /**
      * @param list<string> $lines
@@ -151,5 +151,10 @@ final class TextEditor
         $this->cursorDown();
         $this->setLine($post);
         $this->cursor->x = 0;
+    }
+
+    public function lineCount(): int
+    {
+        return count($this->lines);
     }
 }

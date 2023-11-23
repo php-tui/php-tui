@@ -2,28 +2,28 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Tests\Unit\Extension\TextEditor;
+namespace PhpTui\Tui\Tests\Unit\Extension\TextArea;
 
 use OutOfRangeException;
-use PhpTui\Tui\Extension\TextEditor\TextEditor;
+use PhpTui\Tui\Extension\TextArea\TextArea;
 use PhpTui\Tui\Model\Position\Position;
 use PHPUnit\Framework\TestCase;
 
-class TextEditorTest extends TestCase
+class TextAreaTest extends TestCase
 {
     public function testInsert(): void
     {
-        $editor = TextEditor::fromString('');
+        $editor = TextArea::fromString('');
         $editor->insert('H');
         $editor->insert('ello');
         $editor->insert(' World');
         self::assertEquals('Hello World', $editor->toString());
 
-        $editor = TextEditor::fromString('Hello World');
+        $editor = TextArea::fromString('Hello World');
         $editor->insert('Hello ');
         self::assertEquals('Hello Hello World', $editor->toString());
 
-        $editor = TextEditor::fromString('');
+        $editor = TextArea::fromString('');
         $editor->insert('Hello🐈Cat');
         $editor->insert('Hai');
         self::assertEquals('Hello🐈CatHai', $editor->toString());
@@ -31,7 +31,7 @@ class TextEditorTest extends TestCase
 
     public function testInsertNewLine(): void
     {
-        $editor = TextEditor::fromString('Hello World');
+        $editor = TextArea::fromString('Hello World');
         $editor->newLine();
         self::assertEquals(<<<'EOT'
 
@@ -41,7 +41,7 @@ class TextEditorTest extends TestCase
 
     public function testInsertNewLineBetween(): void
     {
-        $editor = TextEditor::fromString(<<<'EOT'
+        $editor = TextArea::fromString(<<<'EOT'
         Hello
         World
         EOT);
@@ -56,7 +56,7 @@ class TextEditorTest extends TestCase
 
     public function testInsertNewLineAtOffset(): void
     {
-        $editor = TextEditor::fromString(<<<'EOT'
+        $editor = TextArea::fromString(<<<'EOT'
         Hello
         World
         EOT);
@@ -75,7 +75,7 @@ class TextEditorTest extends TestCase
 
     public function testInsertReplace(): void
     {
-        $editor = TextEditor::fromString('Hello World');
+        $editor = TextArea::fromString('Hello World');
         $editor->insert('World', 5);
 
         self::assertEquals('World World', $editor->toString());
@@ -87,14 +87,14 @@ class TextEditorTest extends TestCase
     public function testInsertReplaceNegativeLength(): void
     {
         $this->expectException(OutOfRangeException::class);
-        $editor = TextEditor::fromString('Hello World');
+        $editor = TextArea::fromString('Hello World');
         /** @phpstan-ignore-next-line */
         $editor->insert('World', -5);
     }
 
     public function testDelete(): void
     {
-        $editor = TextEditor::fromString('');
+        $editor = TextArea::fromString('');
         $editor->insert('Hello');
         $editor->delete();
         self::assertEquals('Hell', $editor->toString());
@@ -104,7 +104,7 @@ class TextEditorTest extends TestCase
         $editor->delete(2);
         self::assertEquals('H', $editor->toString());
 
-        $editor = TextEditor::fromString('');
+        $editor = TextArea::fromString('');
         $editor->insert('Hello🐈Cat');
         $editor->delete(4);
         self::assertEquals('Hello', $editor->toString());
@@ -112,14 +112,14 @@ class TextEditorTest extends TestCase
 
     public function testDeleteAtZero(): void
     {
-        $editor = TextEditor::fromString('Hello');
+        $editor = TextArea::fromString('Hello');
         $editor->delete(4);
         self::assertEquals('Hello', $editor->toString());
     }
 
     public function testNavigate(): void
     {
-        $editor = TextEditor::fromLines([
+        $editor = TextArea::fromLines([
             '0123',
             '01234567',
         ]);

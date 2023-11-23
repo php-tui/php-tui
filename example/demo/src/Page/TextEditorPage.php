@@ -16,7 +16,7 @@ use PhpTui\Tui\Extension\Core\Widget\BlockWidget;
 use PhpTui\Tui\Extension\Core\Widget\GridWidget;
 use PhpTui\Tui\Extension\Core\Widget\ParagraphWidget;
 use PhpTui\Tui\Extension\Core\Widget\RawWidget;
-use PhpTui\Tui\Extension\TextEditor\TextEditor;
+use PhpTui\Tui\Extension\TextArea\TextArea;
 use PhpTui\Tui\Model\Display\Buffer;
 use PhpTui\Tui\Model\Layout\Constraint;
 use PhpTui\Tui\Model\Text\Text;
@@ -25,13 +25,13 @@ use PhpTui\Tui\Model\Widget\Borders;
 
 final class TextEditorPage implements Component
 {
-    private TextEditor $editor;
+    private TextArea $editor;
 
     private bool $editing = false;
 
     public function __construct(private CommandBus $bus)
     {
-        $this->editor = TextEditor::fromString(<<<'EOT'
+        $this->editor = TextArea::fromString(<<<'EOT'
         It little profits that an idle king,
         By this still hearth, among these barren crags,
         Match'd with an aged wife, I mete and dole
