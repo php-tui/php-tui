@@ -35,41 +35,41 @@ class TextAreaTest extends TestCase
         $editor->newLine();
         self::assertEquals(<<<'EOT'
 
-            Hello World
-            EOT, $editor->toString());
+        Hello World
+        EOT, $editor->toString());
     }
 
     public function testInsertNewLineBetween(): void
     {
         $editor = TextArea::fromString(<<<'EOT'
-            Hello
-            World
-            EOT);
+        Hello
+        World
+        EOT);
         $editor->cursorDown();
         $editor->newLine();
         self::assertEquals(<<<'EOT'
-            Hello
+        Hello
 
-            World
-            EOT, $editor->toString());
+        World
+        EOT, $editor->toString());
     }
 
     public function testInsertNewLineAtOffset(): void
     {
         $editor = TextArea::fromString(<<<'EOT'
-            Hello
-            World
-            EOT);
+        Hello
+        World
+        EOT);
         $editor->cursorRight(2);
 
         self::assertEquals(Position::at(2, 0), $editor->cursorPosition());
         $editor->newLine();
 
         self::assertEquals(<<<'EOT'
-            He
-            llo
-            World
-            EOT, $editor->toString());
+        He
+        llo
+        World
+        EOT, $editor->toString());
         self::assertEquals(Position::at(0, 1), $editor->cursorPosition());
     }
 
@@ -96,26 +96,96 @@ class TextAreaTest extends TestCase
     {
         $editor = TextArea::fromString('');
         $editor->insert('Hello');
-        $editor->delete();
+        $editor->deleteBackwards();
         self::assertEquals('Hell', $editor->toString());
-        $editor->delete();
+        $editor->deleteBackwards();
         self::assertEquals('Hel', $editor->toString());
 
-        $editor->delete(2);
+        $editor->deleteBackwards(2);
         self::assertEquals('H', $editor->toString());
 
         $editor = TextArea::fromString('');
         $editor->insert('Hello🐈Cat');
-        $editor->delete(4);
+        $editor->deleteBackwards(4);
         self::assertEquals('Hello', $editor->toString());
     }
 
     public function testDeleteAtZero(): void
     {
         $editor = TextArea::fromString('Hello');
-        $editor->delete(4);
+        $editor->deleteBackwards(4);
         self::assertEquals('Hello', $editor->toString());
     }
+
+    public function testNextWord(): void
+    {
+        $editor = TextArea::fromString('Hello World');
+        $editor->wordForward(1);
+        self::assertEquals(Position::at(6, 0), $editor->cursorPosition());
+        $editor->deleteBackwards();
+        self::assertEquals(Position::at(5, 0), $editor->cursorPosition());
+        self::assertEquals('HelloWorld', $editor->toString());
+    }
+
+
+    public function testNextWordCallMultipleTimes(): void
+    {
+        $editor = TextArea::fromString('Hello World This Is Something');
+        $editor->wordForward();
+        $editor->wordForward();
+        $editor->wordForward();
+        self::assertEquals(Position::at(17, 0), $editor->cursorPosition());
+    }
+
+    public function testNextWordMultiline(): void
+    {
+        $editor = TextArea::fromString(<<<'EOT'
+        Hello
+        This
+        EOT
+        );
+        $editor->wordForward(1);
+        self::assertEquals(Position::at(0, 1), $editor->cursorPosition());
+    }
+
+    public function testNextWordWithCount(): void
+    {
+        $editor = TextArea::fromString(<<<'EOT'
+        Hello World
+        This
+        EOT
+        );
+        $editor->wordForward(2);
+        self::assertEquals(Position::at(0, 1), $editor->cursorPosition());
+    }
+
+    public function testPrevWord(): void
+    {
+        $editor = TextArea::fromString('Hello World Goodbye');
+        $editor->moveCursor(Position::at(15, 0));
+        $editor->seekWordPrev();
+        $editor->deleteBackwards();
+        self::assertEquals('Hello WorldGoodbye', $editor->toString());
+    }
+
+    public function testPrevWordMultiline(): void
+    {
+        $editor = TextArea::fromString(<<<'EOT'
+        Hello World
+        This
+        EOT
+        );
+        $editor->moveCursor(Position::at(0, 1));
+        $editor->seekWordPrev();
+        $editor->deleteBackwards();
+        self::assertEquals(<<<'EOT'
+            HelloWorld
+            This
+            EOT,
+            $editor->toString()
+        );
+    }
+
 
     public function testNavigate(): void
     {

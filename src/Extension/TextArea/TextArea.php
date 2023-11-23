@@ -65,7 +65,7 @@ final class TextArea
         $this->setLine($line);
     }
 
-    public function delete(int $length = 1): void
+    public function deleteBackwards(int $length = 1): void
     {
         $line = $this->resolveLine();
         $line = sprintf(
@@ -131,9 +131,55 @@ final class TextArea
         $this->cursor->x = 0;
     }
 
+    public function moveCursor(Position $position): void
+    {
+        $this->cursor = $position->change(function (int $x, int $y) {
+            $line = $this->lines[$y] ?? null;
+            if ($line === null) {
+                $y = count($this->lines) - 1;
+                $line = $this->lines[$y];
+            }
+            if ($x > mb_strlen($line)) {
+                $x = mb_strlen($line) - 1;
+            }
+
+            return [
+                $x,
+                $y
+            ];
+        });
+    }
+
     public function lineCount(): int
     {
         return count($this->lines);
+    }
+
+    public function seekWordPrev():  void
+    {
+        if ($this->cursor->x === 0 && $this->cursor->y === 0) {
+            return;
+        }
+
+        $line = substr($this->resolveLine(), 0, $this->cursor->x);
+        $split = preg_split('{(\s+)}', $line, -1, PREG_SPLIT_OFFSET_CAPTURE);
+
+        if (false === $split) {
+            return;
+        }
+
+        if ($this->cursor->x === 0) {
+            $this->cursorUp();
+            $this->cursorEndOfLine();
+            $this->seekWordPrev();
+            return;
+        }
+
+        if (count($split) > 0) {
+            $last = array_pop($split);
+            $this->cursor->x = $last[1];
+            return;
+        }
     }
 
     /**
@@ -164,5 +210,11 @@ final class TextArea
     {
         $position = $this->cursor;
         $this->lines[$position->y] = $line;
+    }
+
+    private function cursorEndOfLine(): void
+    {
+        $line = $this->resolveLine();
+        $this->cursor->x = mb_strlen($line);
     }
 }
