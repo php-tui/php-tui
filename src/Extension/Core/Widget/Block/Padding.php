@@ -7,10 +7,10 @@ namespace PhpTui\Tui\Extension\Core\Widget\Block;
 final class Padding
 {
     private function __construct(
-        public int $left,
-        public int $right,
-        public int $top,
-        public int $bottom
+        public readonly int $left,
+        public readonly int $right,
+        public readonly int $top,
+        public readonly int $bottom
     ) {
     }
 
@@ -24,7 +24,7 @@ final class Padding
         return new self($amount, $amount, $amount, $amount);
     }
 
-    public static function fromScalars(int $left, int $right, int $top, int $bottom): self
+    public static function fromScalars(int $left = 0, int $right = 0, int $top = 0, int $bottom = 0): self
     {
         return new self($left, $right, $top, $bottom);
     }
@@ -39,31 +39,23 @@ final class Padding
         return new self($amount, $amount, 0, 0);
     }
 
-    public function left(int $left): self
+    public static function left(int $left): self
     {
-        $this->left = $left;
-
-        return $this;
+        return new self($left, 0, 0, 0);
     }
 
-    public function right(int $right): self
+    public static function right(int $right): self
     {
-        $this->right = $right;
-
-        return $this;
+        return new self(0, $right, 0, 0);
     }
 
-    public function top(int $top): self
+    public static function top(int $top): self
     {
-        $this->top = $top;
-
-        return $this;
+        return new self(0, 0, $top, 0);
     }
 
-    public function bottom(int $bottom): self
+    public static function bottom(int $bottom): self
     {
-        $this->bottom = $bottom;
-
-        return $this;
+        return new self(0, 0, 0, $bottom);
     }
 }
