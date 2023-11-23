@@ -161,17 +161,17 @@ final class TextArea
             return;
         }
 
-        $line = substr($this->resolveLine(), 0, $this->cursor->x);
-        $split = preg_split('{(\s+)}', $line, -1, PREG_SPLIT_OFFSET_CAPTURE);
-
-        if (false === $split) {
-            return;
-        }
-
         if ($this->cursor->x === 0) {
             $this->cursorUp();
             $this->cursorEndOfLine();
             $this->seekWordPrev();
+            return;
+        }
+
+        $line = substr($this->resolveLine(), 0, $this->cursor->x);
+        $split = preg_split('{(\s+)}', $line, -1, PREG_SPLIT_OFFSET_CAPTURE);
+
+        if (false === $split) {
             return;
         }
 
@@ -180,6 +180,35 @@ final class TextArea
             $this->cursor->x = $last[1];
             return;
         }
+    }
+
+    public function seekWordNext():  void
+    {
+        $line = mb_substr($this->resolveLine(), $this->cursor->x);
+        $split = preg_split('{(\s+)}', $line, -1, PREG_SPLIT_OFFSET_CAPTURE);
+
+        if (false === $split) {
+            return;
+        }
+
+        if (count($split) > 1) {
+            // remove first element
+            array_shift($split);
+            $last = array_shift($split);
+            if (null === $last) {
+                // should never happen
+                return;
+            }
+            $this->cursor->x = $last[1] + $this->cursor->x;
+            return;
+        }
+
+        if (!isset($this->lines[$this->cursor->y + 1])) {
+            return;
+        }
+        $this->cursor->y++;
+        $this->cursor->x = 0;
+        $this->seekWordNext();
     }
 
     /**

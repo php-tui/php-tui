@@ -120,7 +120,7 @@ class TextAreaTest extends TestCase
     public function testNextWord(): void
     {
         $editor = TextArea::fromString('Hello World');
-        $editor->wordForward(1);
+        $editor->seekWordNext();
         self::assertEquals(Position::at(6, 0), $editor->cursorPosition());
         $editor->deleteBackwards();
         self::assertEquals(Position::at(5, 0), $editor->cursorPosition());
@@ -131,9 +131,9 @@ class TextAreaTest extends TestCase
     public function testNextWordCallMultipleTimes(): void
     {
         $editor = TextArea::fromString('Hello World This Is Something');
-        $editor->wordForward();
-        $editor->wordForward();
-        $editor->wordForward();
+        $editor->seekWordNext();
+        $editor->seekWordNext();
+        $editor->seekWordNext();
         self::assertEquals(Position::at(17, 0), $editor->cursorPosition());
     }
 
@@ -144,18 +144,7 @@ class TextAreaTest extends TestCase
         This
         EOT
         );
-        $editor->wordForward(1);
-        self::assertEquals(Position::at(0, 1), $editor->cursorPosition());
-    }
-
-    public function testNextWordWithCount(): void
-    {
-        $editor = TextArea::fromString(<<<'EOT'
-        Hello World
-        This
-        EOT
-        );
-        $editor->wordForward(2);
+        $editor->seekWordNext();
         self::assertEquals(Position::at(0, 1), $editor->cursorPosition());
     }
 
