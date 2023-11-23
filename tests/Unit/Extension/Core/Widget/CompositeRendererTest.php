@@ -30,5 +30,20 @@ class CompositeRendererTest extends WidgetTestCase
             '▼───┘',
         ], $buffer->toLines());
     }
+
+    public function testNoWidgets(): void
+    {
+        $buffer = Buffer::empty(Area::fromDimensions(5, 5));
+        $this->render($buffer, CompositeWidget::fromWidgets(
+        ));
+
+        self::assertEquals([
+            '     ',
+            '     ',
+            '     ',
+            '     ',
+            '     ',
+        ], $buffer->toLines());
+    }
 }
 
