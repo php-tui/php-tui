@@ -14,6 +14,7 @@ use PhpTui\Tui\Extension\Core\Shape\SpritePainter;
 use PhpTui\Tui\Extension\Core\Widget\BarChartRenderer;
 use PhpTui\Tui\Extension\Core\Widget\BlockRenderer;
 use PhpTui\Tui\Extension\Core\Widget\ChartRenderer;
+use PhpTui\Tui\Extension\Core\Widget\CompositeRenderer;
 use PhpTui\Tui\Extension\Core\Widget\GaugeRenderer;
 use PhpTui\Tui\Extension\Core\Widget\GridRenderer;
 use PhpTui\Tui\Extension\Core\Widget\ListRenderer;
@@ -51,6 +52,7 @@ class CoreExtension implements DisplayExtension
             new GaugeRenderer(),
             new BarChartRenderer(),
             new ScrollbarRenderer(),
+            new CompositeRenderer(),
         ];
     }
 }
