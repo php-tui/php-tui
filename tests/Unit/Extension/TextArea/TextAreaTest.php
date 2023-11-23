@@ -117,6 +117,36 @@ class TextAreaTest extends TestCase
         self::assertEquals('Hello', $editor->toString());
     }
 
+    public function testNextWord(): void
+    {
+        $editor = TextArea::fromString('Hello World');
+        $editor->wordForward(1);
+        self::assertEquals(Position::at(6, 0), $editor->cursorPosition());
+        $editor->delete();
+        self::assertEquals(Position::at(5, 0), $editor->cursorPosition());
+        self::assertEquals('HelloWorld', $editor->toString());
+    }
+    public function testNextWordMultiline(): void
+    {
+        $editor = TextArea::fromString(<<<'EOT'
+        Hello
+        This
+        EOT
+        );
+        $editor->wordForward(1);
+        self::assertEquals(Position::at(0, 1), $editor->cursorPosition());
+    }
+    public function testNextWordWithCount(): void
+    {
+        $editor = TextArea::fromString(<<<'EOT'
+        Hello World
+        This
+        EOT
+        );
+        $editor->wordForward(2);
+        self::assertEquals(Position::at(0, 1), $editor->cursorPosition());
+    }
+
     public function testNavigate(): void
     {
         $editor = TextArea::fromLines([

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Extension\TextArea;
 
+use Generator;
 use OutOfRangeException;
 use PhpTui\Tui\Model\Position\Position;
 use RuntimeException;
@@ -164,5 +165,35 @@ final class TextArea
     public function viewportLines(int $offset, int $height): array
     {
         return array_slice($this->lines, $offset, $height);
+    }
+
+    public function wordForward(int $count = 1): void
+    {
+        $whitespace = false;
+        $y = $this->cursor->y;
+        $firstLine = true;
+        $xx = $this->cursor->x;
+
+        while (isset($this->lines[$y])) {
+            $line = $this->lines[$y];
+            foreach (array_slice(mb_str_split($line), $xx) as $x => $char) {
+                if ($whitespace === true || !$firstLine) {
+                    if ($char === ' ') {
+                        continue;
+                    }
+
+                    $this->cursor = Position::at($x, $y);
+                    return;
+                }
+
+                if ($char === ' ') {
+                    $whitespace = true;
+                    continue;
+                }
+            }
+            $y++;
+            $firstLine = false;
+            $xx = 0;
+        }
     }
 }
