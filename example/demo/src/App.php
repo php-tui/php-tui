@@ -156,6 +156,7 @@ final class App
             while (null !== $event = $this->terminal->events()->next()) {
                 if ($this->focused) {
                     $this->focused->handle($event);
+
                     continue;
                 }
                 if ($event instanceof CharKeyEvent) {

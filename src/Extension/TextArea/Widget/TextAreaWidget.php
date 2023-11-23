@@ -33,6 +33,7 @@ final class TextAreaWidget implements Widget
     public function state(TextAreaState $textAreaState): self
     {
         $this->state = $textAreaState;
+
         return $this;
     }
 

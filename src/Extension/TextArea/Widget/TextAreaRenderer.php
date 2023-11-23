@@ -82,7 +82,7 @@ final class TextAreaRenderer implements WidgetRenderer
     private function cursorPosition(TextAreaWidget $widget): Position
     {
         return $widget->editor->cursorPosition()->change(
-            fn (int $x, int $y) => [
+            static fn (int $x, int $y): array => [
                 $x,
                 max(0, $y - $widget->state->viewportOffset)
             ]

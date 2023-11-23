@@ -132,9 +132,6 @@ final class TextEditorPage implements Component
                 if ($event->char === 'j') {
                     $this->editor->cursorDown();
                 }
-                if ($event->char === 'w') {
-                    $this->editor->wordForward();
-                }
                 if ($event->char === 'k') {
                     $this->editor->cursorUp();
                 }

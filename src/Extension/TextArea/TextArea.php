@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Extension\TextArea;
 
-use Generator;
 use OutOfRangeException;
 use PhpTui\Tui\Model\Position\Position;
 use RuntimeException;
@@ -117,28 +116,6 @@ final class TextArea
         return new self(Position::at(0, 0), $lines);
     }
 
-    private function resolveLine(): string
-    {
-        $position = $this->cursor;
-
-        // if the line at the cursor doesn't exist
-        if (!isset($this->lines[$position->y])) {
-            throw new RuntimeException(sprintf(
-                'There is no line at position: %d',
-                $position->y
-            ));
-        }
-
-        // return the current line
-        return $this->lines[$position->y];
-    }
-
-    private function setLine(string $line): void
-    {
-        $position = $this->cursor;
-        $this->lines[$position->y] = $line;
-    }
-
     public function newLine(): void
     {
         $line = $this->resolveLine();
@@ -167,37 +144,25 @@ final class TextArea
         return array_slice($this->lines, $offset, $height);
     }
 
-    public function wordForward(int $count = 1): void
+    private function resolveLine(): string
     {
-        $whitespace = false;
-        $y = $this->cursor->y;
-        $firstLine = true;
-        $initialX = $this->cursor->x;
-        $found = 0;
+        $position = $this->cursor;
 
-        while (isset($this->lines[$y])) {
-            $line = $this->lines[$y];
-            foreach (array_slice(mb_str_split($line), $initialX) as $x => $char) {
-                if ($whitespace === true || !$firstLine) {
-                    if ($char === ' ') {
-                        continue;
-                    }
-                    if (++$found === $count) {
-                        $this->cursor = Position::at($x + $initialX, $y);
-                        return;
-                    }
-                    $whitespace = false;
-                }
-
-                if ($char !== ' ') {
-                    continue;
-                }
-
-                $whitespace = true;
-            }
-            $y++;
-            $firstLine = false;
-            $initialX = 0;
+        // if the line at the cursor doesn't exist
+        if (!isset($this->lines[$position->y])) {
+            throw new RuntimeException(sprintf(
+                'There is no line at position: %d',
+                $position->y
+            ));
         }
+
+        // return the current line
+        return $this->lines[$position->y];
+    }
+
+    private function setLine(string $line): void
+    {
+        $position = $this->cursor;
+        $this->lines[$position->y] = $line;
     }
 }

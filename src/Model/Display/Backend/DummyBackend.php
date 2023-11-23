@@ -90,6 +90,14 @@ final class DummyBackend implements Backend
     }
 
     /**
+     * @return string[]
+     */
+    public function toLines(): array
+    {
+        return explode("\n", $this->toString());
+    }
+
+    /**
      * @return array<int,array<int,string>>
      */
     private function fillGrid(int $width, int $height): array
@@ -113,13 +121,5 @@ final class DummyBackend implements Backend
         foreach ($this->grid[$line] as $i => $cell) {
             $this->grid[$line][$i] = ' ';
         }
-    }
-
-    /**
-     * @return string[]
-     */
-    public function toLines(): array
-    {
-        return explode("\n", $this->toString());
     }
 }
