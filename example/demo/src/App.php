@@ -305,6 +305,6 @@ final class App
             return $ac;
         }, []);
 
-        return array_sum($bySecond) / count($bySecond);
+        return count($bySecond) > 0 ? array_sum($bySecond) / count($bySecond) : 0;
     }
 }
