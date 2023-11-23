@@ -35,41 +35,41 @@ class TextAreaTest extends TestCase
         $editor->newLine();
         self::assertEquals(<<<'EOT'
 
-        Hello World
-        EOT, $editor->toString());
+            Hello World
+            EOT, $editor->toString());
     }
 
     public function testInsertNewLineBetween(): void
     {
         $editor = TextArea::fromString(<<<'EOT'
-        Hello
-        World
-        EOT);
+            Hello
+            World
+            EOT);
         $editor->cursorDown();
         $editor->newLine();
         self::assertEquals(<<<'EOT'
-        Hello
+            Hello
 
-        World
-        EOT, $editor->toString());
+            World
+            EOT, $editor->toString());
     }
 
     public function testInsertNewLineAtOffset(): void
     {
         $editor = TextArea::fromString(<<<'EOT'
-        Hello
-        World
-        EOT);
+            Hello
+            World
+            EOT);
         $editor->cursorRight(2);
 
         self::assertEquals(Position::at(2, 0), $editor->cursorPosition());
         $editor->newLine();
 
         self::assertEquals(<<<'EOT'
-        He
-        llo
-        World
-        EOT, $editor->toString());
+            He
+            llo
+            World
+            EOT, $editor->toString());
         self::assertEquals(Position::at(0, 1), $editor->cursorPosition());
     }
 
@@ -127,7 +127,6 @@ class TextAreaTest extends TestCase
         self::assertEquals('HelloWorld', $editor->toString());
     }
 
-
     public function testNextWordCallMultipleTimes(): void
     {
         $editor = TextArea::fromString('Hello World This Is Something');
@@ -139,10 +138,11 @@ class TextAreaTest extends TestCase
 
     public function testNextWordMultiline(): void
     {
-        $editor = TextArea::fromString(<<<'EOT'
-        Hello
-        This
-        EOT
+        $editor = TextArea::fromString(
+            <<<'EOT'
+                Hello
+                This
+                EOT
         );
         $editor->seekWordNext();
         self::assertEquals(Position::at(0, 1), $editor->cursorPosition());
@@ -169,22 +169,23 @@ class TextAreaTest extends TestCase
 
     public function testPrevWordMultiline(): void
     {
-        $editor = TextArea::fromString(<<<'EOT'
-        Hello World
-        This
-        EOT
+        $editor = TextArea::fromString(
+            <<<'EOT'
+                Hello World
+                This
+                EOT
         );
         $editor->moveCursor(Position::at(0, 1));
         $editor->seekWordPrev();
         $editor->deleteBackwards();
-        self::assertEquals(<<<'EOT'
-            HelloWorld
-            This
-            EOT,
+        self::assertEquals(
+            <<<'EOT'
+                HelloWorld
+                This
+                EOT,
             $editor->toString()
         );
     }
-
 
     public function testNavigate(): void
     {

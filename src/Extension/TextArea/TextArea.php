@@ -133,7 +133,7 @@ final class TextArea
 
     public function moveCursor(Position $position): void
     {
-        $this->cursor = $position->change(function (int $x, int $y) {
+        $this->cursor = $position->change(function (int $x, int $y): array {
             $line = $this->lines[$y] ?? null;
             if ($line === null) {
                 $y = count($this->lines) - 1;
@@ -155,7 +155,7 @@ final class TextArea
         return count($this->lines);
     }
 
-    public function seekWordPrev():  void
+    public function seekWordPrev(): void
     {
         if ($this->cursor->x === 0 && $this->cursor->y === 0) {
             return;
@@ -165,6 +165,7 @@ final class TextArea
             $this->cursorUp();
             $this->cursorEndOfLine();
             $this->seekWordPrev();
+
             return;
         }
 
@@ -175,7 +176,7 @@ final class TextArea
             return;
         }
 
-        if (count($split) > 0) {
+        if ($split !== []) {
             $last = array_pop($split);
             if ($this->cursor->x === $last[1]) {
                 $last = array_pop($split);
@@ -184,11 +185,12 @@ final class TextArea
                 return;
             }
             $this->cursor->x = $last[1];
+
             return;
         }
     }
 
-    public function seekWordNext():  void
+    public function seekWordNext(): void
     {
         $line = mb_substr($this->resolveLine(), $this->cursor->x);
         $split = preg_split('{(\s+)}', $line, -1, PREG_SPLIT_OFFSET_CAPTURE);
@@ -206,6 +208,7 @@ final class TextArea
                 return;
             }
             $this->cursor->x = $last[1] + $this->cursor->x;
+
             return;
         }
 
@@ -214,7 +217,7 @@ final class TextArea
         }
         $this->cursor->y++;
         $this->cursor->x = 0;
-        if (substr($this->lines[$this->cursor->y], 0, 1) !== ' ') {
+        if (!str_starts_with($this->lines[$this->cursor->y], ' ')) {
             return;
         }
         $this->seekWordNext();
