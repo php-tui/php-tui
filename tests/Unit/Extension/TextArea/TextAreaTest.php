@@ -157,6 +157,16 @@ class TextAreaTest extends TestCase
         self::assertEquals('Hello WorldGoodbye', $editor->toString());
     }
 
+    public function testPrevWordOnWordStart(): void
+    {
+        $editor = TextArea::fromString('Hello World Goodbye');
+        $editor->moveCursor(Position::at(6, 0));
+        $editor->seekWordPrev();
+        $editor->cursorRight();
+        $editor->deleteBackwards();
+        self::assertEquals('ello World Goodbye', $editor->toString());
+    }
+
     public function testPrevWordMultiline(): void
     {
         $editor = TextArea::fromString(<<<'EOT'

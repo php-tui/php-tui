@@ -132,6 +132,12 @@ final class TextEditorPage implements Component
                 if ($event->char === 'j') {
                     $this->editor->cursorDown();
                 }
+                if ($event->char === 'w') {
+                    $this->editor->seekWordNext();
+                }
+                if ($event->char === 'b') {
+                    $this->editor->seekWordPrev();
+                }
                 if ($event->char === 'k') {
                     $this->editor->cursorUp();
                 }
@@ -163,7 +169,7 @@ final class TextEditorPage implements Component
             if (
                 $event->code === KeyCode::Backspace
             ) {
-                $this->editor->delete();
+                $this->editor->deleteBackwards();
             }
         }
     }
