@@ -56,7 +56,7 @@ class PaddingTest extends TestCase
 
     public function testLeft(): void
     {
-        $padding = Padding::none()->left(2);
+        $padding = Padding::left(2);
         self::assertEquals(2, $padding->left);
         self::assertEquals(0, $padding->right);
         self::assertEquals(0, $padding->top);
@@ -65,7 +65,7 @@ class PaddingTest extends TestCase
 
     public function testRight(): void
     {
-        $padding = Padding::none()->right(2);
+        $padding = Padding::right(2);
         self::assertEquals(0, $padding->left);
         self::assertEquals(2, $padding->right);
         self::assertEquals(0, $padding->top);
@@ -74,7 +74,7 @@ class PaddingTest extends TestCase
 
     public function testTop(): void
     {
-        $padding = Padding::none()->top(2);
+        $padding = Padding::top(2);
         self::assertEquals(0, $padding->left);
         self::assertEquals(0, $padding->right);
         self::assertEquals(2, $padding->top);
@@ -83,7 +83,7 @@ class PaddingTest extends TestCase
 
     public function testBottom(): void
     {
-        $padding = Padding::none()->bottom(2);
+        $padding = Padding::bottom(2);
         self::assertEquals(0, $padding->left);
         self::assertEquals(0, $padding->right);
         self::assertEquals(0, $padding->top);
@@ -92,10 +92,10 @@ class PaddingTest extends TestCase
 
     public function testMixed(): void
     {
-        $padding = Padding::all(4)->left(2);
+        $padding = Padding::fromScalars(left: 2, top: 4);
         self::assertEquals(2, $padding->left);
-        self::assertEquals(4, $padding->right);
+        self::assertEquals(0, $padding->right);
         self::assertEquals(4, $padding->top);
-        self::assertEquals(4, $padding->bottom);
+        self::assertEquals(0, $padding->bottom);
     }
 }
