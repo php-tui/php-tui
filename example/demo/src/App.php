@@ -32,6 +32,7 @@ use PhpTui\Tui\Extension\Core\Widget\BlockWidget;
 use PhpTui\Tui\Extension\Core\Widget\GridWidget;
 use PhpTui\Tui\Extension\Core\Widget\ParagraphWidget;
 use PhpTui\Tui\Extension\ImageMagick\ImageMagickExtension;
+use PhpTui\Tui\Extension\TextArea\TextAreaExtension;
 use PhpTui\Tui\Model\Direction;
 use PhpTui\Tui\Model\Display\Backend;
 use PhpTui\Tui\Model\Display\Display;
@@ -106,6 +107,7 @@ final class App
         $display = DisplayBuilder::default($backend ?? PhpTuiPhpTermBackend::new($terminal))
             ->addExtension(new ImageMagickExtension())
             ->addExtension(new BdfExtension())
+            ->addExtension(new TextAreaExtension())
             ->build();
 
         return new self(

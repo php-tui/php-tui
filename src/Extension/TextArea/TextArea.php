@@ -95,16 +95,16 @@ final class TextArea
         );
     }
 
-    public function cursorDown(): void
+    public function cursorDown(int $amount = 1): void
     {
         $this->cursor = $this->cursor->change(
-            fn (int $x, int $y): array => [$x, min(count($this->lines) - 1, $y + 1)]
+            fn (int $x, int $y): array => [$x, min(count($this->lines) - 1, $y + $amount)]
         );
     }
-    public function cursorUp(): void
+    public function cursorUp(int $amount = 1): void
     {
         $this->cursor = $this->cursor->change(
-            static fn (int $x, int $y): array => [$x, max(0, $y - 1)]
+            static fn (int $x, int $y): array => [$x, max(0, $y - $amount)]
         );
     }
 
@@ -156,5 +156,13 @@ final class TextArea
     public function lineCount(): int
     {
         return count($this->lines);
+    }
+
+    /**
+     * @return string[]
+     */
+    public function viewportLines(int $offset, int $height): array
+    {
+        return array_slice($this->lines, $offset, $height);
     }
 }
