@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Extension\Core\Widget;
 
 use PhpTui\Tui\Model\Widget;
@@ -20,7 +22,8 @@ final class CompositeWidget implements Widget
          * @var Widget[] $widgets
          */
         public readonly array $widgets
-    ) {}
+    ) {
+    }
 
     public static function fromWidgets(
         Widget ...$widgets

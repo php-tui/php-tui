@@ -46,4 +46,3 @@ class CompositeRendererTest extends WidgetTestCase
         ], $buffer->toLines());
     }
 }
-
