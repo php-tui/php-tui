@@ -126,6 +126,17 @@ class TextAreaTest extends TestCase
         self::assertEquals(Position::at(5, 0), $editor->cursorPosition());
         self::assertEquals('HelloWorld', $editor->toString());
     }
+
+
+    public function testNextWordCallMultipleTimes(): void
+    {
+        $editor = TextArea::fromString('Hello World This Is Something');
+        $editor->wordForward();
+        $editor->wordForward();
+        $editor->wordForward();
+        self::assertEquals(Position::at(17, 0), $editor->cursorPosition());
+    }
+
     public function testNextWordMultiline(): void
     {
         $editor = TextArea::fromString(<<<'EOT'
@@ -136,6 +147,7 @@ class TextAreaTest extends TestCase
         $editor->wordForward(1);
         self::assertEquals(Position::at(0, 1), $editor->cursorPosition());
     }
+
     public function testNextWordWithCount(): void
     {
         $editor = TextArea::fromString(<<<'EOT'

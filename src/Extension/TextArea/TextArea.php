@@ -172,28 +172,32 @@ final class TextArea
         $whitespace = false;
         $y = $this->cursor->y;
         $firstLine = true;
-        $xx = $this->cursor->x;
+        $initialX = $this->cursor->x;
+        $found = 0;
 
         while (isset($this->lines[$y])) {
             $line = $this->lines[$y];
-            foreach (array_slice(mb_str_split($line), $xx) as $x => $char) {
+            foreach (array_slice(mb_str_split($line), $initialX) as $x => $char) {
                 if ($whitespace === true || !$firstLine) {
                     if ($char === ' ') {
                         continue;
                     }
-
-                    $this->cursor = Position::at($x, $y);
-                    return;
+                    if (++$found === $count) {
+                        $this->cursor = Position::at($x + $initialX, $y);
+                        return;
+                    }
+                    $whitespace = false;
                 }
 
-                if ($char === ' ') {
-                    $whitespace = true;
+                if ($char !== ' ') {
                     continue;
                 }
+
+                $whitespace = true;
             }
             $y++;
             $firstLine = false;
-            $xx = 0;
+            $initialX = 0;
         }
     }
 }
