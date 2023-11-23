@@ -177,6 +177,12 @@ final class TextArea
 
         if (count($split) > 0) {
             $last = array_pop($split);
+            if ($this->cursor->x === $last[1]) {
+                $last = array_pop($split);
+            }
+            if ($last === null) {
+                return;
+            }
             $this->cursor->x = $last[1];
             return;
         }
@@ -208,6 +214,9 @@ final class TextArea
         }
         $this->cursor->y++;
         $this->cursor->x = 0;
+        if (substr($this->lines[$this->cursor->y], 0, 1) !== ' ') {
+            return;
+        }
         $this->seekWordNext();
     }
 
