@@ -48,6 +48,10 @@ class EventParserTest extends TestCase
      */
     public static function provideParse(): Generator
     {
+        yield 'number' => [
+            '1',
+            CharKeyEvent::new('1'),
+        ];
         yield 'csi cursor position' => [
             "\x1B[20;10R",
             new CursorPositionEvent(9, 19),
@@ -283,6 +287,33 @@ class EventParserTest extends TestCase
         yield 'Meta F1' => [
             "\x1B[1;33P",
             FunctionKeyEvent::new(1, KeyModifiers::META),
+        ];
+
+        // control
+        yield 'Control a' => [
+            "\x01",
+            CharKeyEvent::new('a', KeyModifiers::CONTROL),
+        ];
+        yield 'Control z' => [
+            "\x1A",
+            CharKeyEvent::new('z', KeyModifiers::CONTROL),
+        ];
+        yield 'Control 4' => [
+            "\x1C",
+            CharKeyEvent::new('4', KeyModifiers::CONTROL),
+        ];
+        yield 'Control 7' => [
+            "\x1F",
+            CharKeyEvent::new('7', KeyModifiers::CONTROL),
+        ];
+        yield 'Control space' => [
+            "\0",
+            CharKeyEvent::new(' ', KeyModifiers::CONTROL),
+        ];
+
+        yield 'utf8 char £' => [
+            "\xC2\xA3",
+            CharKeyEvent::new('£'),
         ];
     }
 

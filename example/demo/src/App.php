@@ -9,6 +9,7 @@ use PhpTui\Term\ClearType;
 use PhpTui\Term\Event\CharKeyEvent;
 use PhpTui\Term\Event\CodedKeyEvent;
 use PhpTui\Term\KeyCode;
+use PhpTui\Term\KeyModifiers;
 use PhpTui\Term\Terminal;
 use PhpTui\Tui\Bridge\PhpTerm\PhpTermBackend as PhpTuiPhpTermBackend;
 use PhpTui\Tui\DisplayBuilder;
@@ -34,6 +35,7 @@ use PhpTui\Tui\Model\Display\Backend;
 use PhpTui\Tui\Model\Display\Display;
 use PhpTui\Tui\Model\HorizontalAlignment;
 use PhpTui\Tui\Model\Layout\Constraint;
+use PhpTui\Tui\Model\Modifier;
 use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Text\Line;
 use PhpTui\Tui\Model\Text\Span;
@@ -139,44 +141,46 @@ final class App
             // handle events sent to the terminal
             while (null !== $event = $this->terminal->events()->next()) {
                 if ($event instanceof CharKeyEvent) {
-                    if ($event->char === 'q') {
-                        break 2;
-                    }
-                    if ($event->char === '1') {
-                        $this->activePage = ActivePage::Events;
-                    }
-                    if ($event->char === '2') {
-                        $this->activePage = ActivePage::Canvas;
-                    }
-                    if ($event->char === '3') {
-                        $this->activePage = ActivePage::Chart;
-                    }
-                    if ($event->char === '4') {
-                        $this->activePage = ActivePage::List;
-                    }
-                    if ($event->char === '5') {
-                        $this->activePage = ActivePage::Table;
-                    }
-                    if ($event->char === '6') {
-                        $this->activePage = ActivePage::Blocks;
-                    }
-                    if ($event->char === '7') {
-                        $this->activePage = ActivePage::Sprite;
-                    }
-                    if ($event->char === '8') {
-                        $this->activePage = ActivePage::Colors;
-                    }
-                    if ($event->char === '9') {
-                        $this->activePage = ActivePage::Images;
-                    }
-                    if ($event->char === '0') {
-                        $this->activePage = ActivePage::CanvasScaling;
-                    }
-                    if ($event->char === '!') {
-                        $this->activePage = ActivePage::Gauge;
-                    }
-                    if ($event->char === '"') {
-                        $this->activePage = ActivePage::BarChart;
+                    if ($event->modifiers === KeyModifiers::NONE) {
+                        if ($event->char === 'q') {
+                            break 2;
+                        }
+                        if ($event->char === '1') {
+                            $this->activePage = ActivePage::Events;
+                        }
+                        if ($event->char === '2') {
+                            $this->activePage = ActivePage::Canvas;
+                        }
+                        if ($event->char === '3') {
+                            $this->activePage = ActivePage::Chart;
+                        }
+                        if ($event->char === '4') {
+                            $this->activePage = ActivePage::List;
+                        }
+                        if ($event->char === '5') {
+                            $this->activePage = ActivePage::Table;
+                        }
+                        if ($event->char === '6') {
+                            $this->activePage = ActivePage::Blocks;
+                        }
+                        if ($event->char === '7') {
+                            $this->activePage = ActivePage::Sprite;
+                        }
+                        if ($event->char === '8') {
+                            $this->activePage = ActivePage::Colors;
+                        }
+                        if ($event->char === '9') {
+                            $this->activePage = ActivePage::Images;
+                        }
+                        if ($event->char === '0') {
+                            $this->activePage = ActivePage::CanvasScaling;
+                        }
+                        if ($event->char === '!') {
+                            $this->activePage = ActivePage::Gauge;
+                        }
+                        if ($event->char === '"') {
+                            $this->activePage = ActivePage::BarChart;
+                        }
                     }
                 }
                 if ($event instanceof CodedKeyEvent) {

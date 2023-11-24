@@ -11,6 +11,9 @@ use PhpTui\Term\Event\FocusEvent;
 use PhpTui\Term\Event\FunctionKeyEvent;
 use PhpTui\Term\Event\MouseEvent;
 
+/**
+ * Parses input events
+ */
 final class EventParser
 {
     /**
@@ -46,7 +49,7 @@ final class EventParser
 
             try {
                 $event = $this->parseEvent($this->buffer, $more);
-            } catch (ParseError) {
+            } catch (ParseError $e) {
                 $this->buffer = [];
 
                 continue;
@@ -78,7 +81,7 @@ final class EventParser
             "\x7F" => CodedKeyEvent::new(KeyCode::Backspace),
             "\r" => CodedKeyEvent::new(KeyCode::Enter),
             "\t" => CodedKeyEvent::new(KeyCode::Tab),
-            default => $this->parseUtf8Char($buffer),
+            default => $this->parseCtrlOrUtf8Char($buffer),
         };
     }
 
@@ -224,12 +227,32 @@ final class EventParser
     /**
      * @param string[] $buffer
      */
-    private function parseUtf8Char(array $buffer): Event
+    private function parseCtrlOrUtf8Char(array $buffer): ?Event
     {
-        if (count($buffer) !== 1) {
-            throw new ParseError('Multibyte characters not supported');
-        }
         $char = $buffer[0];
+        $code = ord($char);
+
+        // control key for alpha chars
+        if ($code >= 1 && $code <= 26) {
+            return CharKeyEvent::new(chr($code - 1 + ord('a')), KeyModifiers::CONTROL);
+        }
+
+        // control 4-7 !?
+        if ($code >= 28 && $code <= 31) {
+            return CharKeyEvent::new(chr(
+                $code - ord("\x1C") + ord('4')
+            ), KeyModifiers::CONTROL);
+        }
+
+        // control space
+        if ($char === "\x0") {
+            return CharKeyEvent::new(' ', KeyModifiers::CONTROL);
+        }
+
+        $char = implode('', $buffer);
+        if (false === mb_check_encoding($char, 'utf-8')) {
+            return $this->parseUtf8($buffer);
+        }
 
         return $this->charToEvent($char);
     }
@@ -237,7 +260,8 @@ final class EventParser
     private function charToEvent(string $char): Event
     {
         $modifiers = 0;
-        if (strtoupper($char) === $char) {
+        $ord = ord($char);
+        if ($ord >= 65 && $ord <= 90) {
             $modifiers = KeyModifiers::SHIFT;
         }
 
@@ -530,5 +554,38 @@ final class EventParser
             (int) ($split[1]) - 1,
             (int) ($split[0]) - 1,
         );
+    }
+
+    /**
+     * @param non-empty-array<string> $buffer
+     */
+    private function parseUtf8(array $buffer): ?Event
+    {
+        $firstByte = $buffer[0];
+        $ord = ord($firstByte);
+
+        $requiredBytes = match(true) {
+            ($ord <= 0x7F) => 1,
+            ($ord >= 0xC0 && $ord <= 0xDF) => 2,
+            ($ord >= 0xE0 && $ord <= 0xEF) => 3,
+            ($ord >= 0xF0 && $ord <= 0xF7) => 4,
+            default => throw new ParseError('Could not parse'),
+        };
+
+        // More than 1 byte, check them for 10xxxxxx pattern
+        // if ($requiredBytes > 1 && count($buffer) > 1) {
+        //     foreach (array_slice($buffer, 1) as $byte) {
+        //         if ($byte & !0b0011_1111 != 0b1000_000) {
+        //             throw new ParseError('Could not parse event');
+        //         }
+        //     }
+        // }
+        //
+        if (count($buffer) < $requiredBytes) {
+            // all bytes look good so far, but we need more
+            return null;
+        }
+
+        throw new ParseError('Could not parse UTF-8');
     }
 }
