@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Tests\Unit\Model\Display;
 
+use Closure;
 use PhpTui\Tui\DisplayBuilder;
 use PhpTui\Tui\Extension\Core\Shape\PointsShape;
 use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
@@ -76,6 +77,38 @@ class DisplayTest extends TestCase
                  •  
                 •   
                 EOT,
+            $backend->flushed()
+        );
+    }
+
+    public function testRenderUtf8(): void
+    {
+        $backend = DummyBackend::fromDimensions(15, 2);
+        $terminal = DisplayBuilder::default($backend)->build();
+        $terminal->draw(new RawWidget(function (Buffer $buffer) {
+            $buffer->putString(Position::at(0, 0), '😸 here 😼');
+        }));
+        $terminal->draw(new RawWidget(function (Buffer $buffer) {
+            $buffer->putString(Position::at(1, 0), '😸 here 😼');
+        }));
+        $terminal->draw(new RawWidget(function (Buffer $buffer) {
+            $buffer->putString(Position::at(2, 0), '😸 here 😼');
+        }));
+        $terminal->draw(new RawWidget(function (Buffer $buffer) {
+            $buffer->putString(Position::at(3, 0), '😸 here 😼');
+        }));
+        $terminal->draw(new RawWidget(function (Buffer $buffer) {
+            $buffer->putString(Position::at(3, 1), '😸 here 😼');
+        }));
+        $terminal->draw(new RawWidget(function (Buffer $buffer) {
+            $buffer->putString(Position::at(3, 0), '😸 here 😼');
+        }));
+
+        self::assertEquals(
+            <<<'EOT'
+               😸 here 😼    
+                           
+            EOT,
             $backend->flushed()
         );
     }

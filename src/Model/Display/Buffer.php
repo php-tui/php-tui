@@ -219,6 +219,7 @@ final class Buffer implements Countable, Stringable
         $area = $this->area();
 
         foreach ($buffer->content as $bi => $cell) {
+            // TODO: should remove this
             if ($cell->char === ' ') {
                 continue;
             }

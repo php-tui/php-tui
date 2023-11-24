@@ -146,5 +146,18 @@ class BufferTest extends TestCase
                 self::assertCount(4, $updates);
             }
         ];
+        yield 'utf8' => [
+            Buffer::fromLines([
+                '🐈 😼',
+                '00000',
+            ]),
+            Buffer::fromLines([
+                '🐈 🙀',
+                '00000',
+            ]),
+            static function (BufferUpdates $updates): void {
+                self::assertCount(1, $updates);
+            }
+        ];
     }
 }
