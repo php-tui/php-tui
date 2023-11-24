@@ -310,10 +310,18 @@ class EventParserTest extends TestCase
             "\0",
             CharKeyEvent::new(' ', KeyModifiers::CONTROL),
         ];
-
-        yield 'utf8 char £' => [
+        yield 'utf8 2 bytes £' => [
             "\xC2\xA3",
             CharKeyEvent::new('£'),
+        ];
+
+        yield 'utf8 3 bytes £' => [
+            "\xee\xad\x94",
+            CharKeyEvent::new(''),
+        ];
+        yield 'utf8 4 bytes £' => [
+            "\xf0\x9f\x90\x88",
+            CharKeyEvent::new('🐈'),
         ];
     }
 

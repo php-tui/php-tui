@@ -35,7 +35,6 @@ use PhpTui\Tui\Model\Display\Backend;
 use PhpTui\Tui\Model\Display\Display;
 use PhpTui\Tui\Model\HorizontalAlignment;
 use PhpTui\Tui\Model\Layout\Constraint;
-use PhpTui\Tui\Model\Modifier;
 use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Text\Line;
 use PhpTui\Tui\Model\Text\Span;

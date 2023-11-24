@@ -49,7 +49,7 @@ final class EventParser
 
             try {
                 $event = $this->parseEvent($this->buffer, $more);
-            } catch (ParseError $e) {
+            } catch (ParseError) {
                 $this->buffer = [];
 
                 continue;
@@ -225,7 +225,7 @@ final class EventParser
     }
 
     /**
-     * @param string[] $buffer
+     * @param non-empty-array<string> $buffer
      */
     private function parseCtrlOrUtf8Char(array $buffer): ?Event
     {
@@ -251,7 +251,11 @@ final class EventParser
 
         $char = implode('', $buffer);
         if (false === mb_check_encoding($char, 'utf-8')) {
-            return $this->parseUtf8($buffer);
+            // this function either throws an exception or
+            // returns NULL indicating we need to parse more bytes
+            $this->parseUtf8($buffer);
+
+            return null;
         }
 
         return $this->charToEvent($char);
@@ -559,7 +563,7 @@ final class EventParser
     /**
      * @param non-empty-array<string> $buffer
      */
-    private function parseUtf8(array $buffer): ?Event
+    private function parseUtf8(array $buffer): void
     {
         $firstByte = $buffer[0];
         $ord = ord($firstByte);
@@ -572,18 +576,21 @@ final class EventParser
             default => throw new ParseError('Could not parse'),
         };
 
-        // More than 1 byte, check them for 10xxxxxx pattern
-        // if ($requiredBytes > 1 && count($buffer) > 1) {
-        //     foreach (array_slice($buffer, 1) as $byte) {
-        //         if ($byte & !0b0011_1111 != 0b1000_000) {
-        //             throw new ParseError('Could not parse event');
-        //         }
-        //     }
-        // }
+        // NOTE: not sure why this is here...
+        // https://github.com/crossterm-rs/crossterm/blob/08762b3ef4519e7f834453bf91e3fe36f4c63fe7/src/event/sys/unix/parse.rs#L845-L846
         //
+        // More than 1 byte, check them for 10xxxxxx pattern
+        if ($requiredBytes > 1 && count($buffer) > 1) {
+            foreach (array_slice($buffer, 1) as $byte) {
+                if ((ord($byte) & ~0b0011_1111) != 0b1000_0000) {
+                    throw new ParseError('Could not parse event');
+                }
+            }
+        }
+
         if (count($buffer) < $requiredBytes) {
             // all bytes look good so far, but we need more
-            return null;
+            return;
         }
 
         throw new ParseError('Could not parse UTF-8');
