@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Tests\Unit\Extension\TextArea\Widget;
 
 use PhpTui\Tui\DisplayBuilder;
-use PhpTui\Tui\Extension\TextArea\TextArea;
+use PhpTui\Tui\Extension\TextArea\TextEditor;
 use PhpTui\Tui\Extension\TextArea\TextAreaExtension;
 use PhpTui\Tui\Extension\TextArea\Widget\TextAreaWidget;
 use PhpTui\Tui\Model\Display\Backend\DummyBackend;
@@ -51,7 +51,7 @@ class TextAreaRendererTest extends TestCase
             Let us go and make our visit...
             EOT
         ;
-        $editor = TextArea::fromString($text);
+        $editor = TextEditor::fromString($text);
         $editor->cursorDown(100);
 
         self::assertEquals(

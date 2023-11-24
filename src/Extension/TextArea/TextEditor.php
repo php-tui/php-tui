@@ -8,7 +8,10 @@ use OutOfRangeException;
 use PhpTui\Tui\Model\Position\Position;
 use RuntimeException;
 
-final class TextArea
+/**
+ * @experimental
+ */
+final class TextEditor
 {
     /**
      * @param list<string> $lines
@@ -30,12 +33,34 @@ final class TextArea
     }
 
     /**
-     * Return the text editors cursor position within relative to the text
-     * document.
+     * Return the text editors cursor position normalized to the bounds of the
+     * current line.
+     *
+     * If the cursor position is [10,0] and the current line is:
+     *
+     * ```
+     * Hello
+     * ```
+     *
+     * Then the cursor position will be returned as [4,0].
      */
     public function cursorPosition(): Position
     {
-        return $this->cursor;
+        return $this->cursor->change(function (int $x, int $y) {
+            $line = $this->lines[$y] ?? null;
+            if ($line === null) {
+                $y = count($this->lines) - 1;
+                $line = $this->lines[$y];
+            }
+            if ($x > mb_strlen($line)) {
+                $x = mb_strlen($line) - 1;
+            }
+
+            return [
+                $x,
+                $y
+            ];
+        });
     }
 
     /**
@@ -65,6 +90,21 @@ final class TextArea
         $this->setLine($line);
     }
 
+    public function lineStart(): void
+    {
+        $this->cursor->x = 0;
+        $line = $this->resolveLine();
+        if (substr($line, 0, 1) === ' ') {
+            $this->seekWordNext();
+        }
+    }
+
+    public function lineEnd(): void
+    {
+        $line = $this->resolveLine();
+        $this->cursor->x = mb_strlen($line) - 1;
+    }
+
     public function delete(): void
     {
         $line = $this->resolveLine();
@@ -76,7 +116,7 @@ final class TextArea
         $this->setLine($line);
         $lineEnd = mb_strlen($line) - 1;
         if ($lineEnd < $this->cursor->x) {
-            $this->cursor->x = $lineEnd;
+            $this->cursor->x = max(0, $lineEnd);
         }
     }
 
@@ -119,7 +159,10 @@ final class TextArea
     public function cursorUp(int $amount = 1): void
     {
         $this->cursor = $this->cursor->change(
-            static fn (int $x, int $y): array => [$x, max(0, $y - $amount)]
+            static fn (int $x, int $y): array => [
+                $x,
+                max(0, $y - $amount)
+            ]
         );
     }
 

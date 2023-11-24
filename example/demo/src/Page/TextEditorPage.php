@@ -14,7 +14,7 @@ use PhpTui\Tui\Example\Demo\Component;
 use PhpTui\Tui\Extension\Core\Widget\BlockWidget;
 use PhpTui\Tui\Extension\Core\Widget\GridWidget;
 use PhpTui\Tui\Extension\Core\Widget\ParagraphWidget;
-use PhpTui\Tui\Extension\TextArea\TextArea;
+use PhpTui\Tui\Extension\TextArea\TextEditor;
 use PhpTui\Tui\Extension\TextArea\Widget\TextAreaState;
 use PhpTui\Tui\Extension\TextArea\Widget\TextAreaWidget;
 use PhpTui\Tui\Model\Layout\Constraint;
@@ -24,7 +24,7 @@ use PhpTui\Tui\Model\Widget\Borders;
 
 final class TextEditorPage implements Component
 {
-    private TextArea $editor;
+    private TextEditor $editor;
 
     private bool $editing = false;
 
@@ -32,7 +32,7 @@ final class TextEditorPage implements Component
 
     public function __construct(private CommandBus $bus)
     {
-        $this->editor = TextArea::fromString(
+        $this->editor = TextEditor::fromString(
             <<<'EOT'
                 It little profits that an idle king,
                 By this still hearth, among these barren crags,
@@ -104,6 +104,7 @@ final class TextEditorPage implements Component
 
     public function handle(Event $event): void
     {
+        // global keys
         if ($event instanceof CodedKeyEvent) {
             if ($event->code === KeyCode::Down) {
                 $this->editor->cursorDown();
@@ -121,22 +122,25 @@ final class TextEditorPage implements Component
                 $this->editor->cursorRight();
             }
         }
+
+
+        // normal mode
         if (false === $this->editing) {
             if ($event instanceof CharKeyEvent) {
                 if ($event->char === 'i') {
-                    $this->bus->dispatch(new FocusCommand($this));
-                    $this->editing = true;
+                    $this->enableInsertMode();
+
+                    return;
+                }
+                if ($event->char === 'A') {
+                    $this->enableInsertMode();
+                    $this->editor->lineEnd();
+                    $this->editor->cursorRight();
 
                     return;
                 }
                 if ($event->char === 'j') {
                     $this->editor->cursorDown();
-                }
-                if ($event->char === 'w') {
-                    $this->editor->seekWordNext();
-                }
-                if ($event->char === 'b') {
-                    $this->editor->seekWordPrev();
                 }
                 if ($event->char === 'k') {
                     $this->editor->cursorUp();
@@ -146,6 +150,21 @@ final class TextEditorPage implements Component
                 }
                 if ($event->char === 'l' || $event->char === ' ') {
                     $this->editor->cursorRight();
+                }
+                if ($event->char === 'w') {
+                    $this->editor->seekWordNext();
+                }
+                if ($event->char === 'b') {
+                    $this->editor->seekWordPrev();
+                }
+                if ($event->char === 'x') {
+                    $this->editor->delete();
+                }
+                if ($event->char === '^') {
+                    $this->editor->lineStart();
+                }
+                if ($event->char === '$') {
+                    $this->editor->lineEnd();
                 }
             }
             if ($event instanceof CodedKeyEvent) {
@@ -157,6 +176,7 @@ final class TextEditorPage implements Component
             return;
         }
 
+        // insert mode
         if ($event instanceof CharKeyEvent) {
             $this->editor->insert($event->char);
         }
@@ -172,6 +192,12 @@ final class TextEditorPage implements Component
                 $this->editor->deleteBackwards();
             }
         }
+    }
+
+    private function enableInsertMode()
+    {
+        $this->bus->dispatch(new FocusCommand($this));
+        $this->editing = true;
     }
 
 }

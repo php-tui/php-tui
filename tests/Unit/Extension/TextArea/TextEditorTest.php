@@ -5,25 +5,25 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Tests\Unit\Extension\TextArea;
 
 use OutOfRangeException;
-use PhpTui\Tui\Extension\TextArea\TextArea;
+use PhpTui\Tui\Extension\TextArea\TextEditor;
 use PhpTui\Tui\Model\Position\Position;
 use PHPUnit\Framework\TestCase;
 
-class TextAreaTest extends TestCase
+class TextEditorTest extends TestCase
 {
     public function testInsert(): void
     {
-        $editor = TextArea::fromString('');
+        $editor = TextEditor::fromString('');
         $editor->insert('H');
         $editor->insert('ello');
         $editor->insert(' World');
         self::assertEquals('Hello World', $editor->toString());
 
-        $editor = TextArea::fromString('Hello World');
+        $editor = TextEditor::fromString('Hello World');
         $editor->insert('Hello ');
         self::assertEquals('Hello Hello World', $editor->toString());
 
-        $editor = TextArea::fromString('');
+        $editor = TextEditor::fromString('');
         $editor->insert('Hello🐈Cat');
         $editor->insert('Hai');
         self::assertEquals('Hello🐈CatHai', $editor->toString());
@@ -31,7 +31,7 @@ class TextAreaTest extends TestCase
 
     public function testInsertNewLine(): void
     {
-        $editor = TextArea::fromString('Hello World');
+        $editor = TextEditor::fromString('Hello World');
         $editor->newLine();
         self::assertEquals(<<<'EOT'
 
@@ -41,7 +41,7 @@ class TextAreaTest extends TestCase
 
     public function testInsertNewLineBetween(): void
     {
-        $editor = TextArea::fromString(<<<'EOT'
+        $editor = TextEditor::fromString(<<<'EOT'
             Hello
             World
             EOT);
@@ -56,7 +56,7 @@ class TextAreaTest extends TestCase
 
     public function testInsertNewLineAtOffset(): void
     {
-        $editor = TextArea::fromString(<<<'EOT'
+        $editor = TextEditor::fromString(<<<'EOT'
             Hello
             World
             EOT);
@@ -75,7 +75,7 @@ class TextAreaTest extends TestCase
 
     public function testInsertReplace(): void
     {
-        $editor = TextArea::fromString('Hello World');
+        $editor = TextEditor::fromString('Hello World');
         $editor->insert('World', 5);
 
         self::assertEquals('World World', $editor->toString());
@@ -87,14 +87,14 @@ class TextAreaTest extends TestCase
     public function testInsertReplaceNegativeLength(): void
     {
         $this->expectException(OutOfRangeException::class);
-        $editor = TextArea::fromString('Hello World');
+        $editor = TextEditor::fromString('Hello World');
         /** @phpstan-ignore-next-line */
         $editor->insert('World', -5);
     }
 
     public function testDelete(): void
     {
-        $editor = TextArea::fromString('Hello');
+        $editor = TextEditor::fromString('Hello');
         $editor->moveCursor(Position::at(2, 0));
         $editor->delete();
         self::assertEquals('Helo', $editor->toString());
@@ -102,7 +102,7 @@ class TextAreaTest extends TestCase
 
     public function testDeleteMovesCursorBackAtEol(): void
     {
-        $editor = TextArea::fromString('Hello');
+        $editor = TextEditor::fromString('Hello');
         $editor->moveCursor(Position::at(4, 0));
         $editor->delete();
         self::assertEquals('Hell', $editor->toString());
@@ -117,9 +117,26 @@ class TextAreaTest extends TestCase
         self::assertEquals('', $editor->toString());
     }
 
+    public function testLineStartAndEnd(): void
+    {
+        $editor = TextEditor::fromString('Hello World');
+        $editor->moveCursor(Position::at(7, 0));
+        $editor->lineStart();
+        self::assertEquals(Position::at(0, 0), $editor->cursorPosition());
+
+        // start of word is the start of the line
+        $editor = TextEditor::fromString('   Hello');
+        $editor->lineStart();
+        self::assertEquals(Position::at(3, 0), $editor->cursorPosition());
+
+        $editor = TextEditor::fromString('Hello');
+        $editor->lineEnd();
+        self::assertEquals(Position::at(4, 0), $editor->cursorPosition());
+    }
+
     public function testDeleteBackwards(): void
     {
-        $editor = TextArea::fromString('');
+        $editor = TextEditor::fromString('');
         $editor->insert('Hello');
         $editor->deleteBackwards();
         self::assertEquals('Hell', $editor->toString());
@@ -129,7 +146,7 @@ class TextAreaTest extends TestCase
         $editor->deleteBackwards(2);
         self::assertEquals('H', $editor->toString());
 
-        $editor = TextArea::fromString('');
+        $editor = TextEditor::fromString('');
         $editor->insert('Hello🐈Cat');
         $editor->deleteBackwards(4);
         self::assertEquals('Hello', $editor->toString());
@@ -137,14 +154,14 @@ class TextAreaTest extends TestCase
 
     public function testDeleteAtZero(): void
     {
-        $editor = TextArea::fromString('Hello');
+        $editor = TextEditor::fromString('Hello');
         $editor->deleteBackwards(4);
         self::assertEquals('Hello', $editor->toString());
     }
 
     public function testNextWord(): void
     {
-        $editor = TextArea::fromString('Hello World');
+        $editor = TextEditor::fromString('Hello World');
         $editor->seekWordNext();
         self::assertEquals(Position::at(6, 0), $editor->cursorPosition());
         $editor->deleteBackwards();
@@ -154,7 +171,7 @@ class TextAreaTest extends TestCase
 
     public function testNextWordCallMultipleTimes(): void
     {
-        $editor = TextArea::fromString('Hello World This Is Something');
+        $editor = TextEditor::fromString('Hello World This Is Something');
         $editor->seekWordNext();
         $editor->seekWordNext();
         $editor->seekWordNext();
@@ -163,7 +180,7 @@ class TextAreaTest extends TestCase
 
     public function testNextWordMultiline(): void
     {
-        $editor = TextArea::fromString(
+        $editor = TextEditor::fromString(
             <<<'EOT'
                 Hello
                 This
@@ -175,7 +192,7 @@ class TextAreaTest extends TestCase
 
     public function testPrevWord(): void
     {
-        $editor = TextArea::fromString('Hello World Goodbye');
+        $editor = TextEditor::fromString('Hello World Goodbye');
         $editor->moveCursor(Position::at(15, 0));
         $editor->seekWordPrev();
         $editor->deleteBackwards();
@@ -184,7 +201,7 @@ class TextAreaTest extends TestCase
 
     public function testPrevWordOnWordStart(): void
     {
-        $editor = TextArea::fromString('Hello World Goodbye');
+        $editor = TextEditor::fromString('Hello World Goodbye');
         $editor->moveCursor(Position::at(6, 0));
         $editor->seekWordPrev();
         $editor->cursorRight();
@@ -194,7 +211,7 @@ class TextAreaTest extends TestCase
 
     public function testPrevWordMultiline(): void
     {
-        $editor = TextArea::fromString(
+        $editor = TextEditor::fromString(
             <<<'EOT'
                 Hello World
                 This
@@ -214,7 +231,7 @@ class TextAreaTest extends TestCase
 
     public function testNavigate(): void
     {
-        $editor = TextArea::fromLines([
+        $editor = TextEditor::fromLines([
             '0123',
             '01234567',
         ]);
@@ -250,5 +267,17 @@ class TextAreaTest extends TestCase
         $editor->cursorUp();
         $editor->cursorUp();
         self::assertEquals(Position::at(0, 0), $editor->cursorPosition());
+    }
+
+    public function testCursorUpToShorterLine(): void
+    {
+        $area = TextEditor::fromLines([
+            'Goodbye',
+            'Hello World',
+        ]);
+        $area->cursorDown();
+        $area->lineEnd();
+        $area->cursorUp();
+        self::assertEquals(Position::at(6, 0), $area->cursorPosition());
     }
 }

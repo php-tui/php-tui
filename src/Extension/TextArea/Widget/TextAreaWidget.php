@@ -4,20 +4,20 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Extension\TextArea\Widget;
 
-use PhpTui\Tui\Extension\TextArea\TextArea;
+use PhpTui\Tui\Extension\TextArea\TextEditor;
 use PhpTui\Tui\Model\Widget;
 
 final class TextAreaWidget implements Widget
 {
     public function __construct(
-        public TextArea $editor,
+        public TextEditor $editor,
         public TextAreaState $state,
     ) {
     }
 
     public static function fromString(string $contents): self
     {
-        $textArea = TextArea::fromString($contents);
+        $textArea = TextEditor::fromString($contents);
 
         return new self(
             $textArea,
@@ -25,7 +25,7 @@ final class TextAreaWidget implements Widget
         );
     }
 
-    public static function fromEditor(TextArea $textArea): self
+    public static function fromEditor(TextEditor $textArea): self
     {
         return new self($textArea, new TextAreaState(0));
     }
