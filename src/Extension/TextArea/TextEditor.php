@@ -53,7 +53,7 @@ final class TextEditor
                 $line = $this->lines[$y];
             }
             if ($x > mb_strlen($line)) {
-                $x = mb_strlen($line) - 1;
+                $x = max(0, mb_strlen($line) - 1);
             }
 
             return [
@@ -84,7 +84,7 @@ final class TextEditor
             '%s%s%s',
             mb_substr($line, 0, $this->cursor->x),
             $text,
-            mb_substr($line, $this->cursor->x + $length, strlen($line) - $this->cursor->x),
+            mb_substr($line, $this->cursor->x + $length, mb_strlen($line) - $this->cursor->x),
         );
         $this->cursor->x += mb_strlen($text);
         $this->setLine($line);
@@ -94,7 +94,7 @@ final class TextEditor
     {
         $this->cursor->x = 0;
         $line = $this->resolveLine();
-        if (substr($line, 0, 1) === ' ') {
+        if (mb_substr($line, 0, 1) === ' ') {
             $this->seekWordNext();
         }
     }
@@ -126,7 +126,7 @@ final class TextEditor
         $line = sprintf(
             '%s%s',
             mb_substr($line, 0, max(0, $this->cursor->x - $length)),
-            mb_substr($line, $this->cursor->x, max(0, strlen($line) - $this->cursor->x)),
+            mb_substr($line, $this->cursor->x, max(0, mb_strlen($line) - $this->cursor->x)),
         );
         $this->setLine($line);
         $this->cursor->x = max(0, $this->cursor->x - 1);
@@ -227,7 +227,7 @@ final class TextEditor
             return;
         }
 
-        $line = substr($this->resolveLine(), 0, $this->cursor->x);
+        $line = mb_substr($this->resolveLine(), 0, $this->cursor->x);
         $split = preg_split('{(\s+)}', $line, -1, PREG_SPLIT_OFFSET_CAPTURE);
 
         if (false === $split) {

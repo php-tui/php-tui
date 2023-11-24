@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Tests\Unit\Extension\TextArea;
 
+use Closure;
+use Generator;
 use OutOfRangeException;
 use PhpTui\Tui\Extension\TextArea\TextEditor;
 use PhpTui\Tui\Model\Position\Position;
@@ -27,6 +29,34 @@ class TextEditorTest extends TestCase
         $editor->insert('Hello🐈Cat');
         $editor->insert('Hai');
         self::assertEquals('Hello🐈CatHai', $editor->toString());
+    }
+
+    /**
+     * @dataProvider provideMultibyte
+     * @param Closure(TextEditor):void $mutator
+     */
+    public function testInsertMultibyte(string $input, Closure $mutator, string $expected): void
+    {
+        $editor = TextEditor::fromString($input);
+        $mutator($editor);
+        self::assertEquals($expected, $editor->toString());
+    }
+    /**
+     * @return Generator<string,array{string,Closure(TextEditor):void,string}>
+     */
+    public static function provideMultibyte(): Generator
+    {
+        yield 'delete' => [
+            '🐈😸😺',
+            function (TextEditor $editor) {
+                $editor->lineEnd();
+                $editor->cursorRight();
+                $editor->deleteBackwards();
+                $editor->deleteBackwards();
+                $editor->deleteBackwards();
+            },
+            ''
+        ];
     }
 
     public function testInsertNewLine(): void
