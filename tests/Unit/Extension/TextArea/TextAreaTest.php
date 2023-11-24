@@ -94,6 +94,31 @@ class TextAreaTest extends TestCase
 
     public function testDelete(): void
     {
+        $editor = TextArea::fromString('Hello');
+        $editor->moveCursor(Position::at(2, 0));
+        $editor->delete();
+        self::assertEquals('Helo', $editor->toString());
+    }
+
+    public function testDeleteMovesCursorBackAtEol(): void
+    {
+        $editor = TextArea::fromString('Hello');
+        $editor->moveCursor(Position::at(4, 0));
+        $editor->delete();
+        self::assertEquals('Hell', $editor->toString());
+        $editor->delete();
+        self::assertEquals('Hel', $editor->toString());
+        $editor->delete();
+        $editor->delete();
+        $editor->delete();
+        $editor->delete();
+        $editor->delete();
+        $editor->delete();
+        self::assertEquals('', $editor->toString());
+    }
+
+    public function testDeleteBackwards(): void
+    {
         $editor = TextArea::fromString('');
         $editor->insert('Hello');
         $editor->deleteBackwards();

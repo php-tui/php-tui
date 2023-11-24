@@ -65,6 +65,21 @@ final class TextArea
         $this->setLine($line);
     }
 
+    public function delete(): void
+    {
+        $line = $this->resolveLine();
+        $line = sprintf(
+            '%s%s',
+            mb_substr($line, 0, $this->cursor->x),
+            mb_substr($line, $this->cursor->x + 1),
+        );
+        $this->setLine($line);
+        $lineEnd = mb_strlen($line) - 1;
+        if ($lineEnd < $this->cursor->x) {
+            $this->cursor->x = $lineEnd;
+        }
+    }
+
     public function deleteBackwards(int $length = 1): void
     {
         $line = $this->resolveLine();
