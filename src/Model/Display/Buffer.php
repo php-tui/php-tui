@@ -278,6 +278,6 @@ final class Buffer implements Countable, Stringable
      */
     public function toChars(): array
     {
-        return array_map(static fn(Cell $cell): string => $cell->char, $this->content);
+        return array_map(static fn (Cell $cell): string => $cell->char, $this->content);
     }
 }
