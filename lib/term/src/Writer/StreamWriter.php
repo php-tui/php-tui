@@ -22,15 +22,16 @@ class StreamWriter implements Writer
 
     public function write(string $bytes): void
     {
+        $length = strlen($bytes);
+        $written = 0;
         // fwrite does not always write the entire stream to STDOUT keep
         // writing until it's done
-        for ($written = 0; $written < strlen($bytes); $written += $fwritten) {
+        while ($written < $length) {
             $fwritten = fwrite($this->stream, substr($bytes, $written));
-            if ($fwritten !== false) {
-                continue;
+            if ($fwritten === false) {
+                return;
             }
-
-            return;
+            $written += $fwritten;
         }
     }
 }
