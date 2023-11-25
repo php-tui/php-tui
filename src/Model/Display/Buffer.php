@@ -72,7 +72,7 @@ final class Buffer implements Countable, Stringable
         $height = count($lines);
         $width = array_reduce(
             $lines,
-            static fn ($acc, $line) => mb_strlen($line) > $acc ? mb_strlen($line) : $acc,
+            static fn ($acc, $line) => mb_strwidth($line) > $acc ? mb_strwidth($line) : $acc,
             0
         );
 
@@ -98,19 +98,27 @@ final class Buffer implements Countable, Stringable
         $next = $buffer->content();
         $updates = [];
         $counter = count($next);
+        $toSkip = 0;
 
         for ($i = 0; $i < $counter; $i++) {
             $previousCell = $previous[$i];
             $currentCell = $next[$i];
-            if (false === $previousCell->equals($currentCell)) {
+            if (false === $previousCell->equals($currentCell) && $toSkip === 0) {
                 $updates[] = new BufferUpdate(Position::fromIndex($i, $this->area), $currentCell);
             }
+
+            // unicode chars can have 0, 1 or 2 width, so this will only
+            // ever be 0 or 1
+            $toSkip = max(0, mb_strwidth($currentCell->char) - 1);
         }
 
         return new BufferUpdates($updates);
 
     }
 
+    /**
+     * Return the number of cells.
+     */
     public function count(): int
     {
         return count($this->content);
@@ -119,11 +127,16 @@ final class Buffer implements Countable, Stringable
     public function toString(): string
     {
         $string = '';
+        $toSkip = 0;
         foreach ($this->content as $i => $cell) {
-            if ($i > 0 && $i % $this->area->width === 0) {
-                $string .= "\n";
+            if ($toSkip === 0) {
+                if ($i > 0 && $i % $this->area->width === 0) {
+                    $string .= "\n";
+                }
+
+                $string .= $cell->char;
             }
-            $string .= $cell->char;
+            $toSkip = max(0, mb_strwidth($cell->char) - 1);
         }
 
         return $string;
@@ -139,6 +152,7 @@ final class Buffer implements Countable, Stringable
             return $position;
         }
         $chars = mb_str_split($line, 1);
+        $xOffset = $position->x;
         $chars = array_slice(
             $chars,
             0,
@@ -148,12 +162,25 @@ final class Buffer implements Countable, Stringable
             if ($index >= count($this->content)) {
                 break;
             }
+
+            $width = mb_strwidth($char);
+
+            // note the above function doesn't return 0 so this check
+            // is technically never going to pass, but it _should_ return 0
+            if ($width === 0) {
+                continue;
+            }
             $this->content[$index]->setChar($char);
             $this->content[$index]->setStyle($style);
-            $index++;
+
+            for ($i = 1; $i < $width; $i++) {
+                $this->content[$i + $index] = Cell::empty();
+            }
+            $index += $width;
+            $xOffset += $width;
         }
 
-        return $position->withX($position->x + count($chars));
+        return $position->withX($xOffset);
     }
 
     /**
@@ -219,6 +246,7 @@ final class Buffer implements Countable, Stringable
         $area = $this->area();
 
         foreach ($buffer->content as $bi => $cell) {
+            // TODO: should remove this
             if ($cell->char === ' ') {
                 continue;
             }
@@ -243,5 +271,13 @@ final class Buffer implements Countable, Stringable
         }
 
         return new BufferUpdates($updates);
+    }
+
+    /**
+     * @return string[]
+     */
+    public function toChars(): array
+    {
+        return array_map(static fn (Cell $cell): string => $cell->char, $this->content);
     }
 }

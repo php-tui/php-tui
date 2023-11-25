@@ -48,6 +48,16 @@ final class DummyBackend implements Backend
         }, $this->grid));
     }
 
+    /**
+     * @return string[]
+     */
+    public function toLines(): array
+    {
+        return array_map(function (array $cells): string {
+            return implode('', $cells);
+        }, $this->grid);
+    }
+
     public static function fromDimensions(int $width, int $height): self
     {
 

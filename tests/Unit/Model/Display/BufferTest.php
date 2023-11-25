@@ -10,6 +10,7 @@ use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Color\AnsiColor;
 use PhpTui\Tui\Model\Color\RgbColor;
 use PhpTui\Tui\Model\Display\Buffer;
+use PhpTui\Tui\Model\Display\BufferUpdate;
 use PhpTui\Tui\Model\Display\BufferUpdates;
 use PhpTui\Tui\Model\Display\Cell;
 use PhpTui\Tui\Model\Position\Position;
@@ -44,7 +45,12 @@ class BufferTest extends TestCase
             1234    
             12345678
             EOT, $buffer->toString());
+    }
 
+    public function testToStringMutliWidth(): void
+    {
+        $buffer = Buffer::fromLines(['🐈🐈']);
+        self::assertEquals(['🐈🐈'], $buffer->toLines());
     }
 
     public function testSetStyle(): void
@@ -92,6 +98,24 @@ class BufferTest extends TestCase
         $b2 = Buffer::fromLines(['a']);
         $b2->get(Position::at(0, 0))->fg = RgbColor::fromRgb(0, 0, 0);
         self::assertCount(0, $b1->diff($b2));
+    }
+
+    public function testPutString(): void
+    {
+        $b1 = Buffer::empty(Area::fromDimensions(5, 1));
+        $b1->putString(Position::at(0, 0), '🐈234');
+
+        // cat has width of 2 so should "occupy" 2 cells
+        self::assertEquals(['🐈', ' ', '2', '3', '4'], $b1->toChars());
+    }
+
+    public function testPutStringZeroWidth(): void
+    {
+        $b1 = Buffer::empty(Area::fromDimensions(1, 1));
+        $b1->putString(Position::at(0, 0), "\u{200B}a");
+
+        // this is WRONG - but mb_strwidth returns 1 even for 0 width code points 🤷
+        self::assertEquals(["\u{200B}"], $b1->toChars());
     }
 
     /**
@@ -144,6 +168,37 @@ class BufferTest extends TestCase
             ]),
             static function (BufferUpdates $updates): void {
                 self::assertCount(4, $updates);
+            }
+        ];
+        yield 'utf8' => [
+            Buffer::fromLines([
+                '🐈 😼',
+                '00000',
+            ]),
+            Buffer::fromLines([
+                '🐈 🙀',
+                '00000',
+            ]),
+            static function (BufferUpdates $updates): void {
+                self::assertCount(1, $updates);
+            }
+        ];
+        yield 'multi width' => [
+            Buffer::fromLines([
+                '┌Title─┐  ',
+                '└──────┘  ',
+            ]),
+            Buffer::fromLines([
+                '┌称号──┐  ',
+                '└──────┘  ',
+            ]),
+            static function (BufferUpdates $updates): void {
+                self::assertCount(3, $updates);
+                self::assertEquals([
+                    new BufferUpdate(Position::at(1, 0), Cell::fromChar('称')),
+                    new BufferUpdate(Position::at(3, 0), Cell::fromChar('号')),
+                    new BufferUpdate(Position::at(5, 0), Cell::fromChar('─')),
+                ], iterator_to_array($updates));
             }
         ];
     }
