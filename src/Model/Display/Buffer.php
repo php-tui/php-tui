@@ -174,7 +174,7 @@ final class Buffer implements Countable, Stringable
             for ($i = 1; $i < $width; $i++) {
                 $this->content[$i + $index] = Cell::empty();
             }
-            $index+=$width;
+            $index += $width;
             $xOffset += $width;
         }
 
@@ -276,6 +276,6 @@ final class Buffer implements Countable, Stringable
      */
     public function toChars(): array
     {
-        return array_map(fn(Cell $cell) => $cell->char, $this->content);
+        return array_map(static fn(Cell $cell): string => $cell->char, $this->content);
     }
 }

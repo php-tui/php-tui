@@ -179,12 +179,12 @@ class BufferTest extends TestCase
         ];
         yield 'multi width' => [
             Buffer::fromLines([
-                "┌Title─┐  ",
-                "└──────┘  ",
+                '┌Title─┐  ',
+                '└──────┘  ',
             ]),
             Buffer::fromLines([
-                "┌称号──┐  ",
-                "└──────┘  ",
+                '┌称号──┐  ',
+                '└──────┘  ',
             ]),
             static function (BufferUpdates $updates): void {
                 self::assertCount(3, $updates);
