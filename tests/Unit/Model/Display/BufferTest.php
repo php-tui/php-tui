@@ -102,6 +102,15 @@ class BufferTest extends TestCase
         self::assertEquals(['🐈', ' ', '2', '3', '4'], $b1->toChars());
     }
 
+    public function testPutStringZeroWidth(): void
+    {
+        $b1 = Buffer::empty(Area::fromDimensions(1, 1));
+        $b1->putString(Position::at(0, 0), "\u{200B}a");
+
+        // this is WRONG - but mb_strwidth returns 1 even for 0 width code points 🤷
+        self::assertEquals(["\u{200B}"], $b1->toChars());
+    }
+
     /**
      * @dataProvider provideDiff
      * @param Closure(BufferUpdates): void $assertion
