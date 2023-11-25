@@ -72,7 +72,7 @@ final class Buffer implements Countable, Stringable
         $height = count($lines);
         $width = array_reduce(
             $lines,
-            static fn ($acc, $line) => mb_strlen($line) > $acc ? mb_strlen($line) : $acc,
+            static fn ($acc, $line) => mb_strwidth($line) > $acc ? mb_strwidth($line) : $acc,
             0
         );
 
@@ -124,17 +124,19 @@ final class Buffer implements Countable, Stringable
         return count($this->content);
     }
 
-    /**
-     * TODO: this is not multi-width compatible
-     */
     public function toString(): string
     {
         $string = '';
+        $toSkip = 0;
         foreach ($this->content as $i => $cell) {
-            if ($i > 0 && $i % $this->area->width === 0) {
-                $string .= "\n";
+            if ($toSkip === 0) {
+                if ($i > 0 && $i % $this->area->width === 0) {
+                    $string .= "\n";
+                }
+
+                $string .= $cell->char;
             }
-            $string .= $cell->char;
+            $toSkip = max(0, mb_strwidth($cell->char) - 1);
         }
 
         return $string;

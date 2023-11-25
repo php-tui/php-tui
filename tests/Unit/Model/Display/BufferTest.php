@@ -47,6 +47,12 @@ class BufferTest extends TestCase
             EOT, $buffer->toString());
     }
 
+    public function testToStringMutliWidth(): void
+    {
+        $buffer = Buffer::fromLines(['🐈🐈']);
+        self::assertEquals(['🐈🐈'], $buffer->toLines());
+    }
+
     public function testSetStyle(): void
     {
         $buffer = Buffer::fromLines([
