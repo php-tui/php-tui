@@ -98,13 +98,18 @@ final class Buffer implements Countable, Stringable
         $next = $buffer->content();
         $updates = [];
         $counter = count($next);
+        $toSkip = 0;
 
         for ($i = 0; $i < $counter; $i++) {
             $previousCell = $previous[$i];
             $currentCell = $next[$i];
-            if (false === $previousCell->equals($currentCell)) {
+            if (false === $previousCell->equals($currentCell) && $toSkip === 0) {
                 $updates[] = new BufferUpdate(Position::fromIndex($i, $this->area), $currentCell);
             }
+
+            // unicode chars can have 0, 1 or 2 width, so this will only
+            // ever be 0 or 1
+            $toSkip = max(0, mb_strwidth($currentCell->char) - 1);
         }
 
         return new BufferUpdates($updates);
