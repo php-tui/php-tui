@@ -155,6 +155,7 @@ final class Buffer implements Countable, Stringable
             if ($index >= count($this->content)) {
                 break;
             }
+
             $width = mb_strwidth($char);
 
             // note the above function doesn't return 0 so this check
