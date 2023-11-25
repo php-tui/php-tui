@@ -139,6 +139,7 @@ final class Buffer implements Countable, Stringable
             return $position;
         }
         $chars = mb_str_split($line, 1);
+        $xOffset = $position->x;
         $chars = array_slice(
             $chars,
             0,
@@ -148,12 +149,18 @@ final class Buffer implements Countable, Stringable
             if ($index >= count($this->content)) {
                 break;
             }
+            $width = mb_strwidth($char);
             $this->content[$index]->setChar($char);
             $this->content[$index]->setStyle($style);
-            $index++;
+
+            for ($i = 1; $i < $width; $i++) {
+                $this->content[$i + $index] = Cell::empty();
+            }
+            $index+=$width;
+            $xOffset += $width;
         }
 
-        return $position->withX($position->x + count($chars));
+        return $position->withX($xOffset);
     }
 
     /**
