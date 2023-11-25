@@ -111,11 +111,17 @@ final class Buffer implements Countable, Stringable
 
     }
 
+    /**
+     * Return the number of cells.
+     */
     public function count(): int
     {
         return count($this->content);
     }
 
+    /**
+     * TODO: this is not multi-width compatible
+     */
     public function toString(): string
     {
         $string = '';
@@ -150,6 +156,12 @@ final class Buffer implements Countable, Stringable
                 break;
             }
             $width = mb_strwidth($char);
+
+            // note the above function doesn't return 0 so this check
+            // is technically never going to pass, but it _should_ return 0
+            if ($width === 0) {
+                continue;
+            }
             $this->content[$index]->setChar($char);
             $this->content[$index]->setStyle($style);
 
