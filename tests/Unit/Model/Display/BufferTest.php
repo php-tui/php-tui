@@ -44,7 +44,6 @@ class BufferTest extends TestCase
             1234    
             12345678
             EOT, $buffer->toString());
-
     }
 
     public function testSetStyle(): void
@@ -92,6 +91,15 @@ class BufferTest extends TestCase
         $b2 = Buffer::fromLines(['a']);
         $b2->get(Position::at(0, 0))->fg = RgbColor::fromRgb(0, 0, 0);
         self::assertCount(0, $b1->diff($b2));
+    }
+
+    public function testPutString(): void
+    {
+        $b1 = Buffer::empty(Area::fromDimensions(5, 1));
+        $b1->putString(Position::at(0, 0), '🐈234');
+
+        // cat has width of 2 so should "occupy" 2 cells
+        self::assertEquals(['🐈', ' ', '2', '3', '4'], $b1->toChars());
     }
 
     /**

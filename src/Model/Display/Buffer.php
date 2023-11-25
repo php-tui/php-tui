@@ -245,4 +245,12 @@ final class Buffer implements Countable, Stringable
 
         return new BufferUpdates($updates);
     }
+
+    /**
+     * @return string[]
+     */
+    public function toChars(): array
+    {
+        return array_map(fn(Cell $cell) => $cell->char, $this->content);
+    }
 }
