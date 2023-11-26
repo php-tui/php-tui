@@ -138,14 +138,13 @@ class HtmlCanvasPainter implements Painter
 
     public function toString(): string
     {
-        $x = 0;
-        $y = 0;
-        $charChunks = array_chunk($this->chars, $this->width);
-        $attrChunks = array_chunk($this->attributes, $this->width);
-        $scale = 8;
+        $cellHeight = 20;
+        $cellWidth = 15;
+        $cellOffsetMultiplier = 1.5;
 
-        $width = $this->width * $scale;
-        $height = ceil(count($this->chars) / $this->width) * $scale;
+        $width = $this->width * ($cellWidth / $cellOffsetMultiplier);
+        $height = ceil(count($this->chars) / $this->width) * $cellHeight;
+
         $canvasId = md5(implode('', $this->chars));
         $html = [
             sprintf(
@@ -158,8 +157,10 @@ class HtmlCanvasPainter implements Painter
         $html[] = '<script>';
         $html[] = sprintf('let canvas%s = document.getElementById("%s");', $canvasId, $canvasId);
         $html[] = sprintf('let ctx%s = canvas%s.getContext("2d");', $canvasId, $canvasId);
-        $html[] = sprintf('ctx%s.font = "12px monospace";', $canvasId);
+        $html[] = sprintf('ctx%s.font = "%spx monospace";', $canvasId, $cellWidth + 2);
         $html[] = sprintf('ctx%s.fillStyle = "%s";', $canvasId, $this->toHtmlRgb($this->defaultBgColor));
+        $html[] = sprintf('ctx%s.textBaseline = "bottom";', $canvasId);
+        $html[] = sprintf('ctx%s.fontStretch = "ultra-expanded";', $canvasId);
         $html[] = sprintf(
             'ctx%s.fillRect(0,0,%d,%d);',
             $canvasId,
@@ -167,21 +168,21 @@ class HtmlCanvasPainter implements Painter
             $height,
         );
 
-        foreach ($this->chars as $offset => $char) {
-            if ($char === ' ') {
-                continue;
+        $x = 0;
+        foreach ($this->chars as $index => $char) {
+            $attr = $this->attributes[$index];
+            $y = floor($index / $this->width);
+            if ($index % $this->width === 0) {
+                $x = 0;
             }
-            $attr = $this->attributes[$offset];
-            $x = $offset % $this->width;
-            $y = floor($offset / $this->width);
             $html[] = sprintf('ctx%s.fillStyle = "%s";', $canvasId, $this->toHtmlRgb($attr['bg'] ?? $this->defaultBgColor));
             $html[] = sprintf(
                 'ctx%s.fillRect(%d,%d,%d,%d);',
                 $canvasId,
-                $x * $scale,
-                $y * $scale,
-                $scale,
-                $scale
+                $x,
+                $y * $cellHeight,
+                $cellWidth,
+                $cellHeight
             );
             $html[] = sprintf('ctx%s.fillStyle = "%s";', $canvasId, $this->toHtmlRgb($attr['fg'] ?? $this->defaultFgColor));
 
@@ -189,9 +190,10 @@ class HtmlCanvasPainter implements Painter
                 'ctx%s.fillText("%s",%d,%d);',
                 $canvasId,
                 addslashes($char),
-                $x * $scale,
-                $y * $scale + $scale,
+                $x,
+                $y * $cellHeight + $cellHeight,
             );
+            $x += $cellWidth / $cellOffsetMultiplier;
         }
         $html[] = '</script>';
 
