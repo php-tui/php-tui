@@ -5,11 +5,16 @@ declare(strict_types=1);
 namespace PhpTui\Term\Painter;
 
 use PhpTui\Term\Action;
+use PhpTui\Term\Action\Clear;
 use PhpTui\Term\Action\MoveCursor;
 use PhpTui\Term\Action\PrintString;
 use PhpTui\Term\Action\Reset;
+use PhpTui\Term\Action\SetBackgroundColor;
+use PhpTui\Term\Action\SetForegroundColor;
+use PhpTui\Term\Action\SetModifier;
 use PhpTui\Term\Action\SetRgbBackgroundColor;
 use PhpTui\Term\Action\SetRgbForegroundColor;
+use PhpTui\Term\Colors;
 use PhpTui\Term\Painter;
 use RuntimeException;
 
@@ -21,7 +26,7 @@ class HtmlCanvasPainter implements Painter
     private array $chars = [];
 
     /**
-     * @var list<array{bg:?SetRgbBackgroundColor,fg:?SetRgbForegroundColor}>
+     * @var list<array{bg:?Action,fg:?Action}>
      */
     private array $attributes = [];
 
@@ -34,9 +39,9 @@ class HtmlCanvasPainter implements Painter
      */
     private readonly int $width;
 
-    private ?SetRgbBackgroundColor $bgColor = null;
+    private SetBackgroundColor|null|SetRgbBackgroundColor $bgColor = null;
 
-    private ?SetRgbForegroundColor $fgColor = null;
+    private null|SetForegroundColor|SetRgbForegroundColor $fgColor = null;
 
     private readonly SetRgbBackgroundColor $defaultBgColor;
 
@@ -95,6 +100,22 @@ class HtmlCanvasPainter implements Painter
             if ($action instanceof SetRgbForegroundColor) {
                 $this->fgColor = $action;
 
+                continue;
+            }
+            if ($action instanceof SetBackgroundColor) {
+                $this->bgColor = $action;
+
+                continue;
+            }
+            if ($action instanceof SetForegroundColor) {
+                $this->fgColor = $action;
+
+                continue;
+            }
+            if ($action instanceof Clear) {
+                continue;
+            }
+            if ($action instanceof SetModifier) {
                 continue;
             }
             if ($action instanceof Reset) {
@@ -198,6 +219,16 @@ class HtmlCanvasPainter implements Painter
             $action instanceof SetRgbForegroundColor
         ) {
             return sprintf('rgb(%d,%d,%d)', $action->r, $action->g, $action->b);
+        }
+        if ($action instanceof SetForegroundColor) {
+            if ($action->color === Colors::Reset) {
+                return $this->toHtmlRgb($this->defaultFgColor);
+            }
+        }
+        if ($action instanceof SetBackgroundColor) {
+            if ($action->color === Colors::Reset) {
+                return $this->toHtmlRgb($this->defaultBgColor);
+            }
         }
 
         throw new RuntimeException(sprintf(

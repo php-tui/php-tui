@@ -8,9 +8,14 @@ use Generator;
 use PhpTui\Term\Action;
 use PhpTui\Term\Actions;
 use PhpTui\Term\AnsiParser;
-use PHPUnit\Framework\TestCase;
+use PhpTui\Term\ClearType;
 use PhpTui\Term\Colors;
+use PHPUnit\Framework\TestCase;
 
+/**
+ * Note this class is tested for parity with the
+ * painter in AnsiPainterTest
+ */
 class AnsiParserTest extends TestCase
 {
     /**
@@ -122,6 +127,18 @@ class AnsiParserTest extends TestCase
                 Actions::printString('Hello World'),
                 Actions::moveCursor(2, 3),
                 Actions::printString('Good'),
+            ],
+        ];
+        yield 'clear all' => [
+            ["\033[2J"],
+            [
+                Actions::clear(ClearType::All),
+            ],
+        ];
+        yield 'clear purge' => [
+            ["\033[3J"],
+            [
+                Actions::clear(ClearType::Purge),
             ],
         ];
     }

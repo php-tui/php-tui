@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PhpTui\Term;
 
 use PhpTui\Term\Action\AlternateScreenEnable;
+use PhpTui\Term\Action\Clear;
 use PhpTui\Term\Action\PrintString;
 use PhpTui\Tui\Model\Color\AnsiColor;
 
@@ -166,6 +167,8 @@ final class AnsiParser
         return match ($lastByte) {
             'm' => $this->parseGraphicsMode($buffer),
             'H' => $this->parseCursorPosition($buffer),
+            'J', 'K' =>  $this->parseClear($buffer),
+            'n' => Actions::requestCursorPosition(),
             default => throw new ParseError(sprintf(
                 'Do not know how to parse CSI sequence: %s',
                 json_encode(implode('', $buffer))
@@ -198,6 +201,8 @@ final class AnsiParser
             '38' => Actions::setRgbForegroundColor(...Colors256::indexToRgb((int) ($parts[2]))),
             '39' => Actions::setForegroundColor(Colors::Reset),
             '49' => Actions::setBackgroundColor(Colors::Reset),
+            '1' => Actions::bold(true),
+            '22' => Actions::bold(false),
             '0' => Actions::reset(),
             default => throw new ParseError(sprintf('Could not parse graphics mode: %s', json_encode(implode('', $buffer)))),
         };
@@ -268,5 +273,26 @@ final class AnsiParser
         }
 
         return Actions::moveCursor((int) ($parts[0]), (int) ($parts[1]));
+    }
+
+    /**
+     * @param string[] $buffer
+     */
+    private function parseClear(array $buffer): Action
+    {
+        array_shift($buffer);
+        array_shift($buffer);
+        $clear = implode('', $buffer);
+        return new Clear(match ($clear) {
+            '2J' => ClearType::All,
+            '3J' => ClearType::Purge,
+            'J' => ClearType::FromCursorDown,
+            '1J' => ClearType::FromCursorUp,
+            '2K' => ClearType::CurrentLine,
+            'K' => ClearType::UntilNewLine,
+            default => throw new ParseError(sprintf(
+                'Could not parse clear "%s"', $clear
+            )),
+        });
     }
 }
