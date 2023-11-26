@@ -203,7 +203,7 @@ final class AnsiParser
             };
         }
 
-        $code = intval($parts[0]);
+        $code = (int) ($parts[0]);
 
         return match ($parts[0]) {
             '39' => Actions::setForegroundColor(Colors::Reset),
@@ -226,10 +226,10 @@ final class AnsiParser
             '29' => Actions::strike(false),
             '0' => Actions::reset(),
             default => match (true) {
-                substr($parts[0], 0, 1) === '3' => Actions::setForegroundColor($this->inverseColorIndex($code, false)),
-                substr($parts[0], 0, 1) === '4' => Actions::setBackgroundColor($this->inverseColorIndex($code, true)),
-                substr($parts[0], 0, 1) === '9' => Actions::setForegroundColor($this->inverseColorIndex($code, false)),
-                substr($parts[0], 0, 2) === '10' => Actions::setBackgroundColor($this->inverseColorIndex($code, true)),
+                str_starts_with($parts[0], '3') => Actions::setForegroundColor($this->inverseColorIndex($code, false)),
+                str_starts_with($parts[0], '4') => Actions::setBackgroundColor($this->inverseColorIndex($code, true)),
+                str_starts_with($parts[0], '9') => Actions::setForegroundColor($this->inverseColorIndex($code, false)),
+                str_starts_with($parts[0], '10') => Actions::setBackgroundColor($this->inverseColorIndex($code, true)),
                 default => throw new ParseError(sprintf('Could not parse graphics mode: %s', json_encode(implode('', $buffer)))),
             },
         };
@@ -328,6 +328,7 @@ final class AnsiParser
     private function inverseColorIndex(int $color, bool $background): Colors
     {
         $color -= $background ? 10 : 0;
+
         return match ($color) {
             30 => Colors::Black,
             31 => Colors::Red,

@@ -116,6 +116,7 @@ final class AnsiPainter implements Painter
     private function colorIndex(Colors $termColor, bool $background): int
     {
         $offset = $background ? 10 : 0;
+
         return match ($termColor) {
             Colors::Black => 30,
             Colors::Red => 31,

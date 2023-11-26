@@ -36,6 +36,7 @@ class ImageMagickPainter implements Painter
      * @var int<1,max>
      */
     private readonly int $width;
+
     /**
      * @var int<1,max>
      */
@@ -84,6 +85,7 @@ class ImageMagickPainter implements Painter
         foreach ($actions as $action) {
             if ($action instanceof PrintString) {
                 $this->printString($action);
+
                 continue;
             }
             if ($action instanceof MoveCursor) {
@@ -133,7 +135,7 @@ class ImageMagickPainter implements Painter
 
         $image = new Imagick();
 
-        $image->newImage(intval($width), $height, new ImagickPixel('transparent'));
+        $image->newImage($width, $height, new ImagickPixel('transparent'));
         $x = 0;
         $lastY = null;
 
@@ -172,6 +174,7 @@ class ImageMagickPainter implements Painter
         }
 
         $image->setImageFormat('png');
+
         return $image->__toString();
     }
 

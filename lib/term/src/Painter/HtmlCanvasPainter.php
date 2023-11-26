@@ -224,11 +224,15 @@ class HtmlCanvasPainter implements Painter
             if ($action->color === Colors::Reset) {
                 return $this->toHtmlRgb($this->defaultFgColor);
             }
+
+            return $this->toHtmlRgb(new SetRgbForegroundColor(0, 0, 0));
         }
         if ($action instanceof SetBackgroundColor) {
             if ($action->color === Colors::Reset) {
                 return $this->toHtmlRgb($this->defaultBgColor);
             }
+
+            return $this->toHtmlRgb(new SetRgbBackgroundColor(0, 0, 0));
         }
 
         throw new RuntimeException(sprintf(
