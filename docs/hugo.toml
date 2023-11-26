@@ -1,4 +1,4 @@
-baseURL = 'https://php-tui.github.io/php-tui'
+baseURL = 'https://php-tui.github.io'
 languageCode = 'en-gb'
 title = 'PHP-TUI'
 
