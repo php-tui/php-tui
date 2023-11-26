@@ -13,8 +13,8 @@ use RuntimeException;
 
 class DocsTest extends TestCase
 {
-    final public const WIDTH = 20;
-    final public const HEIGHT = 50;
+    final public const WIDTH = 80;
+    final public const HEIGHT = 20;
 
     /**
      * @dataProvider provideExamples
@@ -33,8 +33,8 @@ class DocsTest extends TestCase
             pipes: $pipes,
             cwd: __DIR__ . '/../../',
             env_vars: [
-                'LINES' => self::WIDTH,
-                'COLUMNS' => self::HEIGHT,
+                'LINES' => self::HEIGHT,
+                'COLUMNS' => self::WIDTH,
             ],
         );
         if (!is_resource($process)) {
@@ -55,7 +55,7 @@ class DocsTest extends TestCase
 
         $this->assertSnapshot($path, $output, 'snapshot');
 
-        $painter = HtmlCanvasPainter::default(self::HEIGHT, self::WIDTH);
+        $painter = HtmlCanvasPainter::default(self::WIDTH, self::HEIGHT);
         $painter->paint($actions);
         $output = $painter->toString();
 

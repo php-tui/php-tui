@@ -5,6 +5,7 @@ declare(strict_types=1);
 use PhpTui\Tui\DisplayBuilder;
 use PhpTui\Tui\Extension\Core\Widget\BarChart\BarGroup;
 use PhpTui\Tui\Extension\Core\Widget\BarChartWidget;
+use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Text\Line;
 
 require 'vendor/autoload.php';
@@ -13,7 +14,8 @@ $display = DisplayBuilder::default()->build();
 $display->draw(
     BarChartWidget::default()
         ->barWidth(10)
-    ->groupGap(5)
+        ->barStyle(Style::default()->red())
+        ->groupGap(5)
         ->data(
             BarGroup::fromArray([
                 '1' => 12,

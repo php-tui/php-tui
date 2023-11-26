@@ -86,8 +86,8 @@ final class AnsiPainter implements Painter
         }
 
         $this->writer->write($this->esc(match (true) {
-            $action instanceof SetForegroundColor => sprintf('38;5;%dm', $this->colorIndex($action->color)),
-            $action instanceof SetBackgroundColor => sprintf('48;5;%dm', $this->colorIndex($action->color)),
+            $action instanceof SetForegroundColor => sprintf('%dm', $this->colorIndex($action->color, false)),
+            $action instanceof SetBackgroundColor => sprintf('%dm', $this->colorIndex($action->color, true)),
             $action instanceof SetRgbBackgroundColor => sprintf('48;2;%d;%d;%dm', $action->r, $action->g, $action->b),
             $action instanceof SetRgbForegroundColor => sprintf('38;2;%d;%d;%dm', $action->r, $action->g, $action->b),
             $action instanceof CursorShow => sprintf('?25%s', $action->show ? 'h' : 'l'),
@@ -113,27 +113,29 @@ final class AnsiPainter implements Painter
         }));
     }
 
-    private function colorIndex(Colors $termColor): int
+    private function colorIndex(Colors $termColor, bool $background): int
     {
+        $offset = $background ? 10 : 0;
+
         return match ($termColor) {
-            Colors::Black => 0,
-            Colors::Red => 1,
-            Colors::Green => 2,
-            Colors::Yellow => 3,
-            Colors::Blue => 4,
-            Colors::Magenta => 5,
-            Colors::Cyan => 6,
-            Colors::Gray => 7,
-            Colors::DarkGray => 8,
-            Colors::LightRed => 9,
-            Colors::LightGreen => 10,
-            Colors::LightYellow => 11,
-            Colors::LightBlue => 12,
-            Colors::LightMagenta => 13,
-            Colors::LightCyan => 14,
-            Colors::White => 15,
+            Colors::Black => 30,
+            Colors::Red => 31,
+            Colors::Green => 32,
+            Colors::Yellow => 33,
+            Colors::Blue => 34,
+            Colors::Magenta => 35,
+            Colors::Cyan => 36,
+            Colors::Gray => 37,
+            Colors::DarkGray => 90,
+            Colors::LightRed => 91,
+            Colors::LightGreen => 92,
+            Colors::LightYellow => 93,
+            Colors::LightBlue => 94,
+            Colors::LightMagenta => 95,
+            Colors::LightCyan => 96,
+            Colors::White => 97,
             default => throw new RuntimeException(sprintf('Do not know how to handle color: %s', $termColor->name)),
-        };
+        } + $offset;
     }
 
     private function modifierOnIndex(Attribute $modifier): int

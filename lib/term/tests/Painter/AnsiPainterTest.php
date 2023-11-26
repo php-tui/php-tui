@@ -6,6 +6,7 @@ namespace PhpTui\Term\Tests\Painter;
 
 use PhpTui\Term\Action;
 use PhpTui\Term\Actions;
+use PhpTui\Term\AnsiParser;
 use PhpTui\Term\ClearType;
 use PhpTui\Term\Colors;
 use PhpTui\Term\Painter\AnsiPainter;
@@ -17,8 +18,8 @@ class AnsiPainterTest extends TestCase
     public function testControlSequences(): void
     {
         $this->assertAnsiCode('6n', Actions::requestCursorPosition());
-        $this->assertAnsiCode('48;5;2m', Actions::setBackgroundColor(Colors::Green));
-        $this->assertAnsiCode('38;5;4m', Actions::setForegroundColor(Colors::Blue));
+        $this->assertAnsiCode('42m', Actions::setBackgroundColor(Colors::Green));
+        $this->assertAnsiCode('34m', Actions::setForegroundColor(Colors::Blue));
         $this->assertAnsiCode('48;2;2;3;4m', Actions::setRgbBackgroundColor(2, 3, 4));
         $this->assertAnsiCode('38;2;2;3;4m', Actions::setRgbForegroundColor(2, 3, 4));
         $this->assertAnsiCode('?25l', Actions::cursorHide());
@@ -53,6 +54,8 @@ class AnsiPainterTest extends TestCase
         $term = AnsiPainter::new($writer);
         $term->paint([$command]);
         self::assertEquals(json_encode(sprintf("\033[%s", $string)), json_encode($writer->toString()), $command::class);
+        $parsedCommand = AnsiParser::parseString($writer->toString(), true);
+        self::assertEquals($command, $parsedCommand[0], 'parsing output');
     }
 
     private function assertRawSeq(string $string, Action $command): void

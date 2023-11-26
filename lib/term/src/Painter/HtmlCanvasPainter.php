@@ -5,11 +5,17 @@ declare(strict_types=1);
 namespace PhpTui\Term\Painter;
 
 use PhpTui\Term\Action;
+use PhpTui\Term\Action\Clear;
 use PhpTui\Term\Action\MoveCursor;
 use PhpTui\Term\Action\PrintString;
+use PhpTui\Term\Action\RequestCursorPosition;
 use PhpTui\Term\Action\Reset;
+use PhpTui\Term\Action\SetBackgroundColor;
+use PhpTui\Term\Action\SetForegroundColor;
+use PhpTui\Term\Action\SetModifier;
 use PhpTui\Term\Action\SetRgbBackgroundColor;
 use PhpTui\Term\Action\SetRgbForegroundColor;
+use PhpTui\Term\Colors;
 use PhpTui\Term\Painter;
 use RuntimeException;
 
@@ -21,7 +27,7 @@ class HtmlCanvasPainter implements Painter
     private array $chars = [];
 
     /**
-     * @var list<array{bg:?SetRgbBackgroundColor,fg:?SetRgbForegroundColor}>
+     * @var list<array{bg:?Action,fg:?Action}>
      */
     private array $attributes = [];
 
@@ -34,9 +40,9 @@ class HtmlCanvasPainter implements Painter
      */
     private readonly int $width;
 
-    private ?SetRgbBackgroundColor $bgColor = null;
+    private SetBackgroundColor|null|SetRgbBackgroundColor $bgColor = null;
 
-    private ?SetRgbForegroundColor $fgColor = null;
+    private null|SetForegroundColor|SetRgbForegroundColor $fgColor = null;
 
     private readonly SetRgbBackgroundColor $defaultBgColor;
 
@@ -76,8 +82,6 @@ class HtmlCanvasPainter implements Painter
         foreach ($actions as $action) {
             if ($action instanceof PrintString) {
                 $this->printString($action);
-                $this->fgColor = null;
-                $this->bgColor = null;
 
                 continue;
             }
@@ -95,6 +99,25 @@ class HtmlCanvasPainter implements Painter
             if ($action instanceof SetRgbForegroundColor) {
                 $this->fgColor = $action;
 
+                continue;
+            }
+            if ($action instanceof SetBackgroundColor) {
+                $this->bgColor = $action;
+
+                continue;
+            }
+            if ($action instanceof SetForegroundColor) {
+                $this->fgColor = $action;
+
+                continue;
+            }
+            if ($action instanceof Clear) {
+                continue;
+            }
+            if ($action instanceof SetModifier) {
+                continue;
+            }
+            if ($action instanceof RequestCursorPosition) {
                 continue;
             }
             if ($action instanceof Reset) {
@@ -115,15 +138,34 @@ class HtmlCanvasPainter implements Painter
 
     public function toString(): string
     {
-        $x = 0;
-        $y = 0;
-        $charChunks = array_chunk($this->chars, $this->width);
-        $attrChunks = array_chunk($this->attributes, $this->width);
-        $scale = 8;
+        $cellHeight = 14;
+        $cellWidth = 10;
+        $cellOffsetMultiplier = 1.5;
 
-        $width = $this->width * $scale;
-        $height = ceil(count($this->chars) / $this->width) * $scale;
+        $width = $this->width * ($cellWidth / $cellOffsetMultiplier);
+        $height = ceil(count($this->chars) / $this->width) * $cellHeight;
+
         $canvasId = md5(implode('', $this->chars));
+
+        $x = 0;
+        $data = [];
+        foreach ($this->chars as $index => $char) {
+            $attr = $this->attributes[$index];
+            $y = floor($index / $this->width);
+            if ($index % $this->width === 0) {
+                $x = 0;
+            }
+
+            $data[] = [
+                $x,
+                $y,
+                addslashes($char),
+                $this->toHtmlRgb($attr['bg'] ?? $this->defaultBgColor),
+                $this->toHtmlRgb($attr['fg'] ?? $this->defaultFgColor),
+            ];
+            $x += mb_strwidth($char) * $cellWidth / $cellOffsetMultiplier;
+        }
+
         $html = [
             sprintf(
                 '<canvas id="%s" width=%d height=%d></canvas>',
@@ -132,45 +174,31 @@ class HtmlCanvasPainter implements Painter
                 $height
             )
         ];
-        $html[] = '<script>';
-        $html[] = sprintf('let canvas%s = document.getElementById("%s");', $canvasId, $canvasId);
-        $html[] = sprintf('let ctx%s = canvas%s.getContext("2d");', $canvasId, $canvasId);
-        $html[] = sprintf('ctx%s.font = "12px monospace";', $canvasId);
-        $html[] = sprintf('ctx%s.fillStyle = "%s";', $canvasId, $this->toHtmlRgb($this->defaultBgColor));
-        $html[] = sprintf(
-            'ctx%s.fillRect(0,0,%d,%d);',
-            $canvasId,
-            $width,
-            $height,
-        );
+        $data = json_encode($data);
+        $bgColor = $this->toHtmlRgb($this->defaultBgColor);
+        $fontSize = $cellWidth * 1.25;
 
-        foreach ($this->chars as $offset => $char) {
-            if ($char === ' ') {
-                continue;
+        // indentation deliberately broken here to stop Hugo parsing this as
+        // markdown 😬
+        $html[] = <<<EOT
+            <script>
+            {
+            let canvas = document.getElementById("{$canvasId}");
+            let ctx = canvas.getContext("2d");
+            let data = {$data};
+            ctx.font = "{$fontSize}px Ubuntu mono";
+            ctx.textBaseline = "bottom";
+            for (let i = 0; i < data.length; i++) {
+            let point = data[i];
+            ctx.fillStyle = point[3];
+            ctx.strokeStyle = point[4];
+            ctx.fillRect(point[0], point[1] * {$cellHeight}, {$cellWidth}, {$cellHeight});
+            ctx.fillStyle = point[4];
+            ctx.fillText(point[2],point[0],point[1] * {$cellHeight} + {$cellHeight});
+            };
             }
-            $attr = $this->attributes[$offset];
-            $x = $offset % $this->width;
-            $y = floor($offset / $this->width);
-            $html[] = sprintf('ctx%s.fillStyle = "%s";', $canvasId, $this->toHtmlRgb($attr['bg'] ?? $this->defaultBgColor));
-            $html[] = sprintf(
-                'ctx%s.fillRect(%d,%d,%d,%d);',
-                $canvasId,
-                $x * $scale,
-                $y * $scale,
-                $scale,
-                $scale
-            );
-            $html[] = sprintf('ctx%s.fillStyle = "%s";', $canvasId, $this->toHtmlRgb($attr['fg'] ?? $this->defaultFgColor));
-
-            $html[] = sprintf(
-                'ctx%s.fillText("%s",%d,%d);',
-                $canvasId,
-                addslashes($char),
-                $x * $scale,
-                $y * $scale + $scale,
-            );
-        }
-        $html[] = '</script>';
+            </script>
+            EOT;
 
         return implode("\n", $html);
     }
@@ -199,10 +227,47 @@ class HtmlCanvasPainter implements Painter
         ) {
             return sprintf('rgb(%d,%d,%d)', $action->r, $action->g, $action->b);
         }
+        if ($action instanceof SetForegroundColor) {
+            if ($action->color === Colors::Reset) {
+                return $this->toHtmlRgb($this->defaultFgColor);
+            }
+
+            return $this->toHtmlColor($action->color);
+        }
+        if ($action instanceof SetBackgroundColor) {
+            if ($action->color === Colors::Reset) {
+                return $this->toHtmlRgb($this->defaultBgColor);
+            }
+
+            return $this->toHtmlColor($action->color);
+        }
 
         throw new RuntimeException(sprintf(
             'Do not know how to convert action %s to color',
             $action::class
         ));
+    }
+
+    private function toHtmlColor(Colors $color): string
+    {
+        return match ($color) {
+            Colors::Reset => '',
+            Colors::Black => 'black',
+            Colors::Red => 'red',
+            Colors::Green => 'green',
+            Colors::Yellow => 'yellow',
+            Colors::Blue => 'blue',
+            Colors::Magenta => 'darkmagenta',
+            Colors::Cyan => 'darkcyan',
+            Colors::Gray => 'gray',
+            Colors::DarkGray => 'darkgray',
+            Colors::LightRed => 'pink',
+            Colors::LightGreen => 'lightgreen',
+            Colors::LightYellow => 'lightyellow',
+            Colors::LightBlue => 'lightblue',
+            Colors::LightMagenta => 'magenta',
+            Colors::LightCyan => 'cyan',
+            Colors::White => 'white',
+        };
     }
 }

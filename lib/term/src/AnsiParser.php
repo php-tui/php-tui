@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PhpTui\Term;
 
 use PhpTui\Term\Action\AlternateScreenEnable;
+use PhpTui\Term\Action\Clear;
 use PhpTui\Term\Action\PrintString;
 
 /**
@@ -140,6 +141,8 @@ final class AnsiParser
         return match ($buffer[2]) {
             '0','1','2','3','4','5','6','7','8','9' => $this->parseCsiSeq($buffer),
             '?' => $this->parsePrivateModes($buffer),
+            'J' => Actions::clear(ClearType::FromCursorDown),
+            'K' => Actions::clear(ClearType::UntilNewLine),
             default => throw new ParseError(sprintf('Could not parse CSI sequence: %s', json_encode(implode('', $buffer)))),
         };
 
@@ -165,6 +168,8 @@ final class AnsiParser
         return match ($lastByte) {
             'm' => $this->parseGraphicsMode($buffer),
             'H' => $this->parseCursorPosition($buffer),
+            'J', 'K' => $this->parseClear($buffer),
+            'n' => Actions::requestCursorPosition(),
             default => throw new ParseError(sprintf(
                 'Do not know how to parse CSI sequence: %s',
                 json_encode(implode('', $buffer))
@@ -190,13 +195,43 @@ final class AnsiParser
                 default => throw new ParseError(sprintf('Could not parse graphics mode: %s', json_encode(implode('', $buffer)))),
             };
         }
+        if (count($parts) === 3) {
+            return match ($parts[0]) {
+                '48' => Actions::setRgbBackgroundColor(...Colors256::indexToRgb((int) ($parts[2]))),
+                '38' => Actions::setRgbForegroundColor(...Colors256::indexToRgb((int) ($parts[2]))),
+                default => throw new ParseError(sprintf('Could not parse graphics mode: %s', json_encode(implode('', $buffer)))),
+            };
+        }
 
-        // 256 or ANSI colors
+        $code = (int) ($parts[0]);
+
         return match ($parts[0]) {
-            '48' => Actions::setRgbBackgroundColor(...Colors256::indexToRgb((int) ($parts[2]))),
-            '38' => Actions::setRgbForegroundColor(...Colors256::indexToRgb((int) ($parts[2]))),
+            '39' => Actions::setForegroundColor(Colors::Reset),
+            '49' => Actions::setBackgroundColor(Colors::Reset),
+            '1' => Actions::bold(true),
+            '22' => Actions::bold(false),
+            '2' => Actions::dim(true),
+            '22' => Actions::dim(false),
+            '3' => Actions::italic(true),
+            '23' => Actions::italic(false),
+            '4' => Actions::underline(true),
+            '24' => Actions::underline(false),
+            '5' => Actions::slowBlink(true),
+            '25' => Actions::slowBlink(false),
+            '7' => Actions::reverse(true),
+            '27' => Actions::reverse(false),
+            '8' => Actions::hidden(true),
+            '28' => Actions::hidden(false),
+            '9' => Actions::strike(true),
+            '29' => Actions::strike(false),
             '0' => Actions::reset(),
-            default => throw new ParseError(sprintf('Could not parse graphics mode: %s', json_encode(implode('', $buffer)))),
+            default => match (true) {
+                str_starts_with($parts[0], '3') => Actions::setForegroundColor($this->inverseColorIndex($code, false)),
+                str_starts_with($parts[0], '4') => Actions::setBackgroundColor($this->inverseColorIndex($code, true)),
+                str_starts_with($parts[0], '9') => Actions::setForegroundColor($this->inverseColorIndex($code, false)),
+                str_starts_with($parts[0], '10') => Actions::setBackgroundColor($this->inverseColorIndex($code, true)),
+                default => throw new ParseError(sprintf('Could not parse graphics mode: %s', json_encode(implode('', $buffer)))),
+            },
         };
     }
 
@@ -265,5 +300,53 @@ final class AnsiParser
         }
 
         return Actions::moveCursor((int) ($parts[0]), (int) ($parts[1]));
+    }
+
+    /**
+     * @param string[] $buffer
+     */
+    private function parseClear(array $buffer): Action
+    {
+        array_shift($buffer);
+        array_shift($buffer);
+        $clear = implode('', $buffer);
+
+        return new Clear(match ($clear) {
+            '2J' => ClearType::All,
+            '3J' => ClearType::Purge,
+            'J' => ClearType::FromCursorDown,
+            '1J' => ClearType::FromCursorUp,
+            '2K' => ClearType::CurrentLine,
+            'K' => ClearType::UntilNewLine,
+            default => throw new ParseError(sprintf(
+                'Could not parse clear "%s"',
+                $clear
+            )),
+        });
+    }
+
+    private function inverseColorIndex(int $color, bool $background): Colors
+    {
+        $color -= $background ? 10 : 0;
+
+        return match ($color) {
+            30 => Colors::Black,
+            31 => Colors::Red,
+            32 => Colors::Green,
+            33 => Colors::Yellow,
+            34 => Colors::Blue,
+            35 => Colors::Magenta,
+            36 => Colors::Cyan,
+            37 => Colors::Gray,
+            90 => Colors::DarkGray,
+            91 => Colors::LightRed,
+            92 => Colors::LightGreen,
+            93 => Colors::LightYellow,
+            94 => Colors::LightBlue,
+            95 => Colors::LightMagenta,
+            96 => Colors::LightCyan,
+            97 => Colors::White,
+            default => throw new ParseError(sprintf('Do not know how to handle color: %s', $color)),
+        };
     }
 }

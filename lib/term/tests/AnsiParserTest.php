@@ -8,8 +8,14 @@ use Generator;
 use PhpTui\Term\Action;
 use PhpTui\Term\Actions;
 use PhpTui\Term\AnsiParser;
+use PhpTui\Term\ClearType;
+use PhpTui\Term\Colors;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * Note this class is tested for parity with the
+ * painter in AnsiPainterTest
+ */
 class AnsiParserTest extends TestCase
 {
     /**
@@ -32,14 +38,14 @@ class AnsiParserTest extends TestCase
      */
     public static function provideParse(): Generator
     {
-        yield 'set bg color' => [
+        yield 'set bg color 256' => [
             ["\033[48;5;2m"],
             [
                 Actions::setRgbBackgroundColor(0, 128, 0), // green
             ]
         ];
 
-        yield 'set fg color' => [
+        yield 'set fg color 256' => [
             ["\033[38;5;4m"],
             [
                 Actions::setRgbForegroundColor(0, 0, 128)
@@ -57,6 +63,31 @@ class AnsiParserTest extends TestCase
             ["\033[38;2;2;3;4m"],
             [
                 Actions::setRgbForegroundColor(2, 3, 4),
+            ],
+        ];
+        yield 'ansi fg 16' => [
+            ["\033[33m"],
+            [
+                Actions::setForegroundColor(Colors::Yellow),
+            ],
+        ];
+        yield 'ansi bg 16' => [
+            ["\033[43m"],
+            [
+                Actions::setBackgroundColor(Colors::Yellow),
+            ],
+        ];
+
+        yield 'fg reset' => [
+            ["\033[39m"],
+            [
+                Actions::setForegroundColor(Colors::Reset),
+            ],
+        ];
+        yield 'bf reset' => [
+            ["\033[49m"],
+            [
+                Actions::setBackgroundColor(Colors::Reset),
             ],
         ];
 
@@ -108,6 +139,18 @@ class AnsiParserTest extends TestCase
                 Actions::printString('Hello World'),
                 Actions::moveCursor(2, 3),
                 Actions::printString('Good'),
+            ],
+        ];
+        yield 'clear all' => [
+            ["\033[2J"],
+            [
+                Actions::clear(ClearType::All),
+            ],
+        ];
+        yield 'clear purge' => [
+            ["\033[3J"],
+            [
+                Actions::clear(ClearType::Purge),
             ],
         ];
     }
