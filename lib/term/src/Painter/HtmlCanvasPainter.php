@@ -138,8 +138,8 @@ class HtmlCanvasPainter implements Painter
 
     public function toString(): string
     {
-        $cellHeight = 20;
-        $cellWidth = 15;
+        $cellHeight = 14;
+        $cellWidth = 10;
         $cellOffsetMultiplier = 1.5;
 
         $width = $this->width * ($cellWidth / $cellOffsetMultiplier);
@@ -163,7 +163,7 @@ class HtmlCanvasPainter implements Painter
                 $this->toHtmlRgb($attr['bg'] ?? $this->defaultBgColor),
                 $this->toHtmlRgb($attr['fg'] ?? $this->defaultFgColor),
             ];
-            $x += $cellWidth / $cellOffsetMultiplier;
+            $x += mb_strwidth($char) * $cellWidth / $cellOffsetMultiplier;
         }
 
         $html = [
@@ -176,22 +176,22 @@ class HtmlCanvasPainter implements Painter
         ];
         $data = json_encode($data);
         $bgColor = $this->toHtmlRgb($this->defaultBgColor);
-        $fontSize = $cellWidth * 1.2;
-            $html[] = sprintf('ctx%s.textBaseline = "bottom";', $canvasId);
-            $html[] = sprintf('ctx%s.fontStretch = "ultra-expanded";', $canvasId);
+        $fontSize = $cellWidth * 1.25;
+
+        // indentation deliberately broken here to stop Hugo parsing this as
+        // markdown 😬
         $html[] = <<<EOT
             <script>
             {
             let canvas = document.getElementById("{$canvasId}");
             let ctx = canvas.getContext("2d");
             let data = {$data};
-            ctx.font = "{$fontSize}px monospace";
-            ctx.fillStyle = "{$bgColor}";
+            ctx.font = "{$fontSize}px Ubuntu mono";
             ctx.textBaseline = "bottom";
-            ctx.fillRect(0, 0, {$width}, {$height});
             for (let i = 0; i < data.length; i++) {
             let point = data[i];
             ctx.fillStyle = point[3];
+            ctx.strokeStyle = point[4];
             ctx.fillRect(point[0], point[1] * {$cellHeight}, {$cellWidth}, {$cellHeight});
             ctx.fillStyle = point[4];
             ctx.fillText(point[2],point[0],point[1] * {$cellHeight} + {$cellHeight});
