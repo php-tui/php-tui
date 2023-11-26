@@ -8,6 +8,7 @@ use PhpTui\Term\Action;
 use PhpTui\Term\Action\Clear;
 use PhpTui\Term\Action\MoveCursor;
 use PhpTui\Term\Action\PrintString;
+use PhpTui\Term\Action\RequestCursorPosition;
 use PhpTui\Term\Action\Reset;
 use PhpTui\Term\Action\SetBackgroundColor;
 use PhpTui\Term\Action\SetForegroundColor;
@@ -81,8 +82,6 @@ class HtmlCanvasPainter implements Painter
         foreach ($actions as $action) {
             if ($action instanceof PrintString) {
                 $this->printString($action);
-                $this->fgColor = null;
-                $this->bgColor = null;
 
                 continue;
             }
@@ -116,6 +115,9 @@ class HtmlCanvasPainter implements Painter
                 continue;
             }
             if ($action instanceof SetModifier) {
+                continue;
+            }
+            if ($action instanceof RequestCursorPosition) {
                 continue;
             }
             if ($action instanceof Reset) {
@@ -225,19 +227,42 @@ class HtmlCanvasPainter implements Painter
                 return $this->toHtmlRgb($this->defaultFgColor);
             }
 
-            return $this->toHtmlRgb(new SetRgbForegroundColor(0, 0, 0));
+            return $this->toHtmlColor($action->color);
         }
         if ($action instanceof SetBackgroundColor) {
             if ($action->color === Colors::Reset) {
                 return $this->toHtmlRgb($this->defaultBgColor);
             }
 
-            return $this->toHtmlRgb(new SetRgbBackgroundColor(0, 0, 0));
+            return $this->toHtmlColor($action->color);
         }
 
         throw new RuntimeException(sprintf(
             'Do not know how to convert action %s to color',
             $action::class
         ));
+    }
+
+    private function toHtmlColor(Colors $color): string
+    {
+        return match ($color) {
+            Colors::Reset => '',
+            Colors::Black => 'black',
+            Colors::Red => 'red',
+            Colors::Green => 'green',
+            Colors::Yellow => 'yellow',
+            Colors::Blue => 'blue',
+            Colors::Magenta => 'darkmagenta',
+            Colors::Cyan => 'darkcyan',
+            Colors::Gray => 'gray',
+            Colors::DarkGray => 'darkgray',
+            Colors::LightRed => 'pink',
+            Colors::LightGreen => 'lightgreen',
+            Colors::LightYellow => 'lightyellow',
+            Colors::LightBlue => 'lightblue',
+            Colors::LightMagenta => 'magenta',
+            Colors::LightCyan => 'cyan',
+            Colors::White => 'white',
+        };
     }
 }
