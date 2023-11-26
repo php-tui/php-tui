@@ -38,14 +38,14 @@ class AnsiParserTest extends TestCase
      */
     public static function provideParse(): Generator
     {
-        yield 'set bg color' => [
+        yield 'set bg color 256' => [
             ["\033[48;5;2m"],
             [
                 Actions::setRgbBackgroundColor(0, 128, 0), // green
             ]
         ];
 
-        yield 'set fg color' => [
+        yield 'set fg color 256' => [
             ["\033[38;5;4m"],
             [
                 Actions::setRgbForegroundColor(0, 0, 128)
@@ -63,6 +63,18 @@ class AnsiParserTest extends TestCase
             ["\033[38;2;2;3;4m"],
             [
                 Actions::setRgbForegroundColor(2, 3, 4),
+            ],
+        ];
+        yield 'ansi fg 16' => [
+            ["\033[33m"],
+            [
+                Actions::setForegroundColor(Colors::Yellow),
+            ],
+        ];
+        yield 'ansi bg 16' => [
+            ["\033[43m"],
+            [
+                Actions::setBackgroundColor(Colors::Yellow),
             ],
         ];
 

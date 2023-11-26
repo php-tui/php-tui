@@ -7,7 +7,6 @@ namespace PhpTui\Term;
 use PhpTui\Term\Action\AlternateScreenEnable;
 use PhpTui\Term\Action\Clear;
 use PhpTui\Term\Action\PrintString;
-use PhpTui\Tui\Model\Color\AnsiColor;
 
 /**
  * Parse ANSI escape sequences (back) to painter actions.
@@ -167,7 +166,7 @@ final class AnsiParser
         return match ($lastByte) {
             'm' => $this->parseGraphicsMode($buffer),
             'H' => $this->parseCursorPosition($buffer),
-            'J', 'K' =>  $this->parseClear($buffer),
+            'J', 'K' => $this->parseClear($buffer),
             'n' => Actions::requestCursorPosition(),
             default => throw new ParseError(sprintf(
                 'Do not know how to parse CSI sequence: %s',
@@ -194,11 +193,16 @@ final class AnsiParser
                 default => throw new ParseError(sprintf('Could not parse graphics mode: %s', json_encode(implode('', $buffer)))),
             };
         }
+        if (count($parts) === 3) {
+            return match ($parts[0]) {
+                '48' => Actions::setRgbBackgroundColor(...Colors256::indexToRgb((int) ($parts[2]))),
+                '38' => Actions::setRgbForegroundColor(...Colors256::indexToRgb((int) ($parts[2]))),
+                default => throw new ParseError(sprintf('Could not parse graphics mode: %s', json_encode(implode('', $buffer)))),
+            };
+        }
 
         // 256 or ANSI colors
         return match ($parts[0]) {
-            '48' => Actions::setRgbBackgroundColor(...Colors256::indexToRgb((int) ($parts[2]))),
-            '38' => Actions::setRgbForegroundColor(...Colors256::indexToRgb((int) ($parts[2]))),
             '39' => Actions::setForegroundColor(Colors::Reset),
             '49' => Actions::setBackgroundColor(Colors::Reset),
             '1' => Actions::bold(true),
@@ -283,6 +287,7 @@ final class AnsiParser
         array_shift($buffer);
         array_shift($buffer);
         $clear = implode('', $buffer);
+
         return new Clear(match ($clear) {
             '2J' => ClearType::All,
             '3J' => ClearType::Purge,
@@ -291,7 +296,8 @@ final class AnsiParser
             '2K' => ClearType::CurrentLine,
             'K' => ClearType::UntilNewLine,
             default => throw new ParseError(sprintf(
-                'Could not parse clear "%s"', $clear
+                'Could not parse clear "%s"',
+                $clear
             )),
         });
     }
