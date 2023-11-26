@@ -9,6 +9,7 @@ use PhpTui\Term\Action;
 use PhpTui\Term\Actions;
 use PhpTui\Term\AnsiParser;
 use PHPUnit\Framework\TestCase;
+use PhpTui\Term\Colors;
 
 class AnsiParserTest extends TestCase
 {
@@ -57,6 +58,19 @@ class AnsiParserTest extends TestCase
             ["\033[38;2;2;3;4m"],
             [
                 Actions::setRgbForegroundColor(2, 3, 4),
+            ],
+        ];
+
+        yield 'fg reset' => [
+            ["\033[39m"],
+            [
+                Actions::setForegroundColor(Colors::Reset),
+            ],
+        ];
+        yield 'bf reset' => [
+            ["\033[49m"],
+            [
+                Actions::setBackgroundColor(Colors::Reset),
             ],
         ];
 

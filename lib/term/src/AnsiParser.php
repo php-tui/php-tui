@@ -6,6 +6,7 @@ namespace PhpTui\Term;
 
 use PhpTui\Term\Action\AlternateScreenEnable;
 use PhpTui\Term\Action\PrintString;
+use PhpTui\Tui\Model\Color\AnsiColor;
 
 /**
  * Parse ANSI escape sequences (back) to painter actions.
@@ -195,6 +196,8 @@ final class AnsiParser
         return match ($parts[0]) {
             '48' => Actions::setRgbBackgroundColor(...Colors256::indexToRgb((int) ($parts[2]))),
             '38' => Actions::setRgbForegroundColor(...Colors256::indexToRgb((int) ($parts[2]))),
+            '39' => Actions::setForegroundColor(Colors::Reset),
+            '49' => Actions::setBackgroundColor(Colors::Reset),
             '0' => Actions::reset(),
             default => throw new ParseError(sprintf('Could not parse graphics mode: %s', json_encode(implode('', $buffer)))),
         };
