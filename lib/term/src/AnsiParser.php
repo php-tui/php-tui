@@ -141,6 +141,8 @@ final class AnsiParser
         return match ($buffer[2]) {
             '0','1','2','3','4','5','6','7','8','9' => $this->parseCsiSeq($buffer),
             '?' => $this->parsePrivateModes($buffer),
+            'J' => Actions::clear(ClearType::FromCursorDown),
+            'K' => Actions::clear(ClearType::UntilNewLine),
             default => throw new ParseError(sprintf('Could not parse CSI sequence: %s', json_encode(implode('', $buffer)))),
         };
 
