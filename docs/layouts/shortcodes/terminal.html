@@ -1,4 +1,13 @@
 {{ $file := .Get "file" | readFile }}
-<div>
-{{ $file|safeHTML }}
+<div class="Terminal">
+    <div class="Terminal__Toolbar">
+      <div class="Toolbar__buttons">
+        <button class="Toolbar__button Toolbar__button--exit">&#10005;</button>
+        <button class="Toolbar__button">&#9472;</button>
+        <button class="Toolbar__button">&#9723;</button>
+      </div>
+    </div>
+    <div class="Terminal__body">
+        {{ $file|safeHTML }}
+    </div>
 </div>
