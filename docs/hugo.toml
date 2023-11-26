@@ -1,9 +1,6 @@
-baseURL = 'http://example.org/'
+baseURL = 'https://php-tui.github.io/php-tui'
 languageCode = 'en-gb'
 title = 'PHP-TUI'
-[outputFormats]
-  [outputFormats.JS]
-  isPlainText = true
 
 [params]
 BookLogo='phptui.png'
