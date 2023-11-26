@@ -74,7 +74,7 @@ class AnsiParserTest extends TestCase
         yield 'ansi bg 16' => [
             ["\033[43m"],
             [
-                Actions::setBackgroundColor(Colors::Reset),
+                Actions::setBackgroundColor(Colors::Yellow),
             ],
         ];
 
