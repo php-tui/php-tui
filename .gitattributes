@@ -1,3 +1,4 @@
+*.html linguist-detectable=false
 *.php diff=php
 /example export-ignore
 /tests export-ignore
