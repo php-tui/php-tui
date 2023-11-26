@@ -201,14 +201,21 @@ final class AnsiParser
             };
         }
 
-        // 256 or ANSI colors
+        $code = intval($parts[0]);
+
         return match ($parts[0]) {
             '39' => Actions::setForegroundColor(Colors::Reset),
             '49' => Actions::setBackgroundColor(Colors::Reset),
             '1' => Actions::bold(true),
             '22' => Actions::bold(false),
             '0' => Actions::reset(),
-            default => throw new ParseError(sprintf('Could not parse graphics mode: %s', json_encode(implode('', $buffer)))),
+            default => match (true) {
+                substr($parts[0], 0, 1) === '3' => Actions::setForegroundColor($this->inverseColorIndex($code, false)),
+                substr($parts[0], 0, 1) === '4' => Actions::setBackgroundColor($this->inverseColorIndex($code, true)),
+                substr($parts[0], 0, 1) === '9' => Actions::setForegroundColor($this->inverseColorIndex($code, false)),
+                substr($parts[0], 0, 2) === '10' => Actions::setBackgroundColor($this->inverseColorIndex($code, true)),
+                default => throw new ParseError(sprintf('Could not parse graphics mode: %s', json_encode(implode('', $buffer)))),
+            },
         };
     }
 
@@ -300,5 +307,29 @@ final class AnsiParser
                 $clear
             )),
         });
+    }
+
+    private function inverseColorIndex(int $color, bool $background): Colors
+    {
+        $color -= $background ? 10 : 0;
+        return match ($color) {
+            30 => Colors::Black,
+            31 => Colors::Red,
+            32 => Colors::Green,
+            33 => Colors::Yellow,
+            34 => Colors::Blue,
+            35 => Colors::Magenta,
+            36 => Colors::Cyan,
+            37 => Colors::Gray,
+            90 => Colors::DarkGray,
+            91 => Colors::LightRed,
+            92 => Colors::LightGreen,
+            93 => Colors::LightYellow,
+            94 => Colors::LightBlue,
+            95 => Colors::LightMagenta,
+            96 => Colors::LightCyan,
+            97 => Colors::White,
+            default => throw new ParseError(sprintf('Do not know how to handle color: %s', $color)),
+        };
     }
 }
