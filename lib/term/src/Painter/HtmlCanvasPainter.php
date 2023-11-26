@@ -146,6 +146,26 @@ class HtmlCanvasPainter implements Painter
         $height = ceil(count($this->chars) / $this->width) * $cellHeight;
 
         $canvasId = md5(implode('', $this->chars));
+
+        $x = 0;
+        $data = [];
+        foreach ($this->chars as $index => $char) {
+            $attr = $this->attributes[$index];
+            $y = floor($index / $this->width);
+            if ($index % $this->width === 0) {
+                $x = 0;
+            }
+
+            $data[] = [
+                $x,
+                $y,
+                addslashes($char),
+                $this->toHtmlRgb($attr['bg'] ?? $this->defaultBgColor),
+                $this->toHtmlRgb($attr['fg'] ?? $this->defaultFgColor),
+            ];
+            $x += $cellWidth / $cellOffsetMultiplier;
+        }
+
         $html = [
             sprintf(
                 '<canvas id="%s" width=%d height=%d></canvas>',
@@ -154,48 +174,31 @@ class HtmlCanvasPainter implements Painter
                 $height
             )
         ];
-        $html[] = '<script>';
-        $html[] = sprintf('let canvas%s = document.getElementById("%s");', $canvasId, $canvasId);
-        $html[] = sprintf('let ctx%s = canvas%s.getContext("2d");', $canvasId, $canvasId);
-        $html[] = sprintf('ctx%s.font = "%spx monospace";', $canvasId, $cellWidth + 2);
-        $html[] = sprintf('ctx%s.fillStyle = "%s";', $canvasId, $this->toHtmlRgb($this->defaultBgColor));
-        $html[] = sprintf('ctx%s.textBaseline = "bottom";', $canvasId);
-        $html[] = sprintf('ctx%s.fontStretch = "ultra-expanded";', $canvasId);
-        $html[] = sprintf(
-            'ctx%s.fillRect(0,0,%d,%d);',
-            $canvasId,
-            $width,
-            $height,
-        );
-
-        $x = 0;
-        foreach ($this->chars as $index => $char) {
-            $attr = $this->attributes[$index];
-            $y = floor($index / $this->width);
-            if ($index % $this->width === 0) {
-                $x = 0;
+        $data = json_encode($data);
+        $bgColor = $this->toHtmlRgb($this->defaultBgColor);
+        $fontSize = $cellWidth * 1.2;
+            $html[] = sprintf('ctx%s.textBaseline = "bottom";', $canvasId);
+            $html[] = sprintf('ctx%s.fontStretch = "ultra-expanded";', $canvasId);
+        $html[] = <<<EOT
+            <script>
+            {
+            let canvas = document.getElementById("{$canvasId}");
+            let ctx = canvas.getContext("2d");
+            let data = {$data};
+            ctx.font = "{$fontSize}px monospace";
+            ctx.fillStyle = "{$bgColor}";
+            ctx.textBaseline = "bottom";
+            ctx.fillRect(0, 0, {$width}, {$height});
+            for (let i = 0; i < data.length; i++) {
+            let point = data[i];
+            ctx.fillStyle = point[3];
+            ctx.fillRect(point[0], point[1] * {$cellHeight}, {$cellWidth}, {$cellHeight});
+            ctx.fillStyle = point[4];
+            ctx.fillText(point[2],point[0],point[1] * {$cellHeight} + {$cellHeight});
+            };
             }
-            $html[] = sprintf('ctx%s.fillStyle = "%s";', $canvasId, $this->toHtmlRgb($attr['bg'] ?? $this->defaultBgColor));
-            $html[] = sprintf(
-                'ctx%s.fillRect(%d,%d,%d,%d);',
-                $canvasId,
-                $x,
-                $y * $cellHeight,
-                $cellWidth,
-                $cellHeight
-            );
-            $html[] = sprintf('ctx%s.fillStyle = "%s";', $canvasId, $this->toHtmlRgb($attr['fg'] ?? $this->defaultFgColor));
-
-            $html[] = sprintf(
-                'ctx%s.fillText("%s",%d,%d);',
-                $canvasId,
-                addslashes($char),
-                $x,
-                $y * $cellHeight + $cellHeight,
-            );
-            $x += $cellWidth / $cellOffsetMultiplier;
-        }
-        $html[] = '</script>';
+            </script>
+            EOT;
 
         return implode("\n", $html);
     }
