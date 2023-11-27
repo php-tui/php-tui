@@ -16,6 +16,10 @@ Improvements:
 - Add fine-grained builder methods to `Margin` #167 @KennedyTedesco
 - Add `VERTICAL` and `HORIZONTAL` variants to `Borders` #168 @KennedyTedesco
 
+Refactoring:
+
+- Split `term` into a separate package.
+
 ## 0.0.2
 
 Features:
