@@ -8,6 +8,7 @@ use Generator;
 use PhpTui\Tui\Extension\Core\Widget\GaugeWidget;
 use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Display\Buffer;
+use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Text\Span;
 use PhpTui\Tui\Model\Widget;
 
@@ -75,6 +76,26 @@ class GaugeRendererTest extends WidgetTestCase
                 '██████████',
             ]
            ,
+        ];
+        yield 'solid gauge 75' => [
+            Area::fromDimensions(10, 4),
+            GaugeWidget::default()->ratio(0.75)->style(Style::default()->red()->onLightRed()),
+            [
+                '███████▌██',
+                '███████▌██',
+                '██75.00%██',
+                '███████▌██',
+            ],
+        ];
+        yield 'solid gauge 18' => [
+            Area::fromDimensions(10, 4),
+            GaugeWidget::default()->ratio(0.18)->style(Style::default()->red()->onLightRed()),
+            [
+                '█▊████████',
+                '█▊████████',
+                '█▊18.00%██',
+                '█▊████████',
+            ],
         ];
     }
 }
