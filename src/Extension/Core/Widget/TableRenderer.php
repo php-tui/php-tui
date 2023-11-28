@@ -144,18 +144,22 @@ final class TableRenderer implements WidgetRenderer
     private function renderCell(Buffer $buffer, TableCell $cell, Area $area): void
     {
         $buffer->setStyle($area, $cell->style);
+        /** @var int<0,max> $i */
         foreach ($cell->content->lines as $i => $line) {
             if ($i >= $area->height) {
                 break;
             }
 
             $xOffset = match ($line->alignment) {
-                HorizontalAlignment::Center => ($area->width / 2) - max(0, ($line->width() / 2)),
+                HorizontalAlignment::Center => max(0, (int) (($area->width / 2) - max(0, ($line->width() / 2)))),
                 HorizontalAlignment::Right => max($area->width - 0, $line->width()),
                 default => 0,
             };
             $buffer->putLine(
-                Position::at($area->position->x + $xOffset, $area->position->y + $i),
+                Position::at(
+                    $area->position->x + $xOffset,
+                    $area->position->y + $i
+                ),
                 $line,
                 $area->width
             );
