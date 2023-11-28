@@ -67,7 +67,7 @@ class ParagraphRenderer implements WidgetRenderer
                     }
                     $cell = $buffer->get(Position::at(
                         $textArea->left() + $x,
-                        $textArea->top() + $y - $widget->scroll[0]
+                        $textArea->top() + max(0, $y - $widget->scroll[0])
                     ));
                     $cell->setChar($grapheme->symbol === '' ? ' ' : $grapheme->symbol);
                     $cell->setStyle($grapheme->style);
@@ -90,11 +90,14 @@ class ParagraphRenderer implements WidgetRenderer
         return new LineTruncator($styled, $textArea->width, $horizontalOffset);
     }
 
+    /**
+     * @return int<0,max>
+     */
     private function getLineOffset(int $width, int $maxWidth, HorizontalAlignment $alignment): int
     {
         return match ($alignment) {
-            HorizontalAlignment::Center => (int) (($maxWidth / 2) - $width / 2),
-            HorizontalAlignment::Right => $maxWidth - $width,
+            HorizontalAlignment::Center => max(0, (int) (($maxWidth / 2) - $width / 2)),
+            HorizontalAlignment::Right => max(0, $maxWidth - $width),
             HorizontalAlignment::Left => 0,
         };
     }
