@@ -12,6 +12,7 @@ final class Bar
     public function __construct(
         /**
          * Value to display on the bar
+         * @var int<0,max>
          */
         public int $value,
         /**
@@ -33,6 +34,9 @@ final class Bar
     ) {
     }
 
+    /**
+     * @param int<0,max> $value
+     */
     public static function fromValue(int $value): self
     {
         return new self($value, null, Style::default(), Style::default(), null);

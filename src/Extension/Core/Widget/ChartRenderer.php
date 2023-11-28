@@ -117,7 +117,7 @@ final class ChartRenderer implements WidgetRenderer
             max(0, $y - $area->top() + 1),
         );
 
-        return new ChartLayout($graphArea, max(0, $xAxisY), max(0,$yAxisX), $xLabelY, $yLabelX);
+        return new ChartLayout($graphArea, max(0, $xAxisY), max(0, $yAxisX), $xLabelY, $yLabelX);
     }
 
     private function maxWidthOfLabelsLeftOfYAxis(ChartWidget $chart, Area $area, bool $hasYAxis): int
@@ -137,7 +137,7 @@ final class ChartRenderer implements WidgetRenderer
             $maxWidth = max($maxWidth, $widthOfYAxis);
         }
 
-        return intval(min($maxWidth, $area->width / 3));
+        return (int) (min($maxWidth, $area->width / 3));
     }
 
     private function renderXLabels(ChartWidget $chart, Buffer $buffer, ChartLayout $layout, Area $chartArea): void

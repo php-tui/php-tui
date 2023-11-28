@@ -24,7 +24,7 @@ class BarGroup
     }
 
     /**
-     * @param array<int|string,int> $array
+     * @param array<int|string,int<0,max>> $array
      */
     public static function fromArray(array $array): self
     {

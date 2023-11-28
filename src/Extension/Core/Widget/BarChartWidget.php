@@ -142,7 +142,6 @@ final class BarChartWidget implements Widget
         return $this;
     }
 
-
     /**
      * @param int<0,max> $max
      */
