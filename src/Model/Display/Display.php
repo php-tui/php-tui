@@ -130,6 +130,7 @@ final class Display
      * |                   |
      * +-------------------+
      * ```
+     * @param int<0,max> $height
      */
     public function insertBefore(int $height, Widget $widget): void
     {
