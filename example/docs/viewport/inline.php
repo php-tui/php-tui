@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use PhpTui\Term\Event\CursorPositionEvent;
-use PhpTui\Term\EventProvider\LoadedEventProvider;
+use PhpTui\Term\EventProvider\ArrayEventProvider;
 use PhpTui\Term\RawMode\TestRawMode;
 use PhpTui\Term\Terminal;
 use PhpTui\Tui\Bridge\PhpTerm\PhpTermBackend;
@@ -21,7 +21,7 @@ $title = '';
 // -----
 // ignore this! it is to enable this to work in "headless" mode for the tests.
 $backend = PhpTermBackend::new(Terminal::new(
-    eventProvider: LoadedEventProvider::fromEvents(new CursorPositionEvent(0, 0), new CursorPositionEvent(0, 0)),
+    eventProvider: ArrayEventProvider::fromEvents(new CursorPositionEvent(0, 0), new CursorPositionEvent(0, 0)),
     rawMode: new TestRawMode(),
 ));
 // -----
