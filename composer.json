@@ -50,10 +50,10 @@
         "rector": "./vendor/bin/rector process",
         "vhs": "vhs example/demo/demo.tape",
         "integrate": [
-            "@php-cs-fixer",
-            "@phpstan",
-            "@rector",
             "@phpunit",
+            "@phpstan",
+            "@php-cs-fixer",
+            "@rector",
             "@phpbench",
             "@docs",
             "@vhs"
