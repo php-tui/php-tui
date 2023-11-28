@@ -84,6 +84,10 @@ final class Area implements Stringable
         return $this->position->y + $this->height;
     }
 
+    /**
+     * @param int<0,max> $width
+     * @param int<0,max> $height
+     */
     public static function fromDimensions(int $width, int $height): self
     {
         return self::fromScalars(0, 0, $width, $height);
@@ -103,8 +107,8 @@ final class Area implements Stringable
         return self::fromScalars(
             $this->position->x + $margin->horizontal,
             $this->position->y + $margin->vertical,
-            $this->width - 2 * $margin->horizontal,
-            $this->height - 2 * $margin->vertical,
+            max(0, $this->width - 2) * $margin->horizontal,
+            max(0, $this->height - 2) * $margin->vertical,
         );
     }
 
