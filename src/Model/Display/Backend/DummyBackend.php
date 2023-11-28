@@ -101,8 +101,12 @@ final class DummyBackend implements Backend
         return $this->cursorPosition;
     }
 
+    /**
+     * @param int<0,max> $linesAfterCursor
+     */
     public function appendLines(int $linesAfterCursor): void
     {
+        /** @phpstan-ignore-next-line */
         $this->cursorPosition = $this->cursorPosition->change(static fn (int $x, int $y): array => [0, $y + $linesAfterCursor]);
     }
 

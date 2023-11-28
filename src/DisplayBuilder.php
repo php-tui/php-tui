@@ -93,6 +93,7 @@ final class DisplayBuilder
     /**
      * When set the display will be of the specified height _after_ the row
      * that the cursor is on.
+     * @param int<0,max> $height
      */
     public function inline(int $height): self
     {
