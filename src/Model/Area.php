@@ -107,8 +107,8 @@ final class Area implements Stringable
         return self::fromScalars(
             $this->position->x + $margin->horizontal,
             $this->position->y + $margin->vertical,
-            max(0, $this->width - 2) * $margin->horizontal,
-            max(0, $this->height - 2) * $margin->vertical,
+            max(0, $this->width - 2 * $margin->horizontal),
+            max(0, $this->height - 2 * $margin->vertical),
         );
     }
 
