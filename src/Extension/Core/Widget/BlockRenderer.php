@@ -45,30 +45,32 @@ final class BlockRenderer implements WidgetRenderer
     {
         $buffer->setStyle($area, $block->style);
         $lineSet = $block->borderType->lineSet();
+        $bottom = max(0, $area->bottom() - 1);
+        $right = max(0, $area->right() - 1);
         if ($block->borders & Borders::LEFT) {
-            foreach (range($area->top(), $area->bottom() - 1) as $y) {
+            foreach (range($area->top(), $bottom) as $y) {
                 $buffer->get(Position::at($area->left(), $y))
                     ->setStyle($block->borderStyle)
                     ->setChar($lineSet->vertical);
             }
         }
         if ($block->borders & Borders::TOP) {
-            foreach (range($area->left(), $area->right() - 1) as $x) {
+            foreach (range($area->left(), $right) as $x) {
                 $buffer->get(Position::at($x, $area->top()))
                     ->setStyle($block->borderStyle)
                     ->setChar($lineSet->horizontal);
             }
         }
         if ($block->borders & Borders::RIGHT) {
-            $x = $area->right() - 1;
-            foreach (range($area->top(), $area->bottom() - 1) as $y) {
+            $x = $right;
+            foreach (range($area->top(), $bottom) as $y) {
                 $buffer->get(Position::at($x, $y))
                     ->setStyle($block->borderStyle)
                     ->setChar($lineSet->vertical);
             }
         }
         if ($block->borders & Borders::BOTTOM) {
-            $y = $area->bottom() - 1;
+            $y = $bottom;
             foreach (range($area->left(), $area->right() - 1) as $x) {
                 $buffer->get(Position::at($x, $y))
                     ->setStyle($block->borderStyle)
@@ -76,12 +78,12 @@ final class BlockRenderer implements WidgetRenderer
             }
         }
         if ($block->borders & (Borders::RIGHT | Borders::BOTTOM)) {
-            $buffer->get(Position::at($area->right() - 1, $area->bottom() - 1))
+            $buffer->get(Position::at($right, $bottom))
                 ->setChar($lineSet->bottomRight)
                 ->setStyle($block->borderStyle);
         }
         if ($block->borders & (Borders::RIGHT | Borders::TOP)) {
-            $buffer->get(Position::at($area->right() - 1, $area->top()))
+            $buffer->get(Position::at($right, $area->top()))
                 ->setChar($lineSet->topRight)
                 ->setStyle($block->borderStyle);
         }
@@ -91,7 +93,7 @@ final class BlockRenderer implements WidgetRenderer
                 ->setStyle($block->borderStyle);
         }
         if ($block->borders & (Borders::LEFT | Borders::BOTTOM)) {
-            $buffer->get(Position::at($area->left(), $area->bottom() - 1))
+            $buffer->get(Position::at($area->left(), $bottom))
                 ->setChar($lineSet->bottomLeft)
                 ->setStyle($block->borderStyle);
         }

@@ -59,13 +59,14 @@ class BarChartRendererTest extends WidgetTestCase
         yield 'negative values' => [
             Area::fromDimensions(10, 5),
             BarChartWidget::default()->data(
+                /** @phpstan-ignore-next-line */
                 BarGroup::fromArray(['B0' => -1, 'B1' => 2])
             ),
             [
                 '  █       ',
                 '  █       ',
                 '  █       ',
-                '█ 2       ',
+                '  2       ',
                 'B B       ',
             ]
            ,
