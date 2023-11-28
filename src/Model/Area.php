@@ -130,6 +130,9 @@ final class Area implements Stringable
         return $this->width === 0 || $this->height === 0;
     }
 
+    /**
+     * @param int<0,max> $y
+     */
     public function withY(int $y): self
     {
         return new self(
@@ -139,6 +142,9 @@ final class Area implements Stringable
         );
     }
 
+    /**
+     * @param int<0,max> $x
+     */
     public function withX(int $x): self
     {
         return new self(
