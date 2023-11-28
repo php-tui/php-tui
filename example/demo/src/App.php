@@ -13,6 +13,7 @@ use PhpTui\Term\KeyModifiers;
 use PhpTui\Term\Terminal;
 use PhpTui\Tui\Bridge\PhpTerm\PhpTermBackend as PhpTuiPhpTermBackend;
 use PhpTui\Tui\DisplayBuilder;
+use PhpTui\Tui\Example\Demo\Command\FocusCommand;
 use PhpTui\Tui\Example\Demo\Page\BarChartPage;
 use PhpTui\Tui\Example\Demo\Page\BlocksPage;
 use PhpTui\Tui\Example\Demo\Page\CanvasPage;
@@ -25,11 +26,13 @@ use PhpTui\Tui\Example\Demo\Page\ImagePage;
 use PhpTui\Tui\Example\Demo\Page\ItemListPage;
 use PhpTui\Tui\Example\Demo\Page\SpritePage;
 use PhpTui\Tui\Example\Demo\Page\TablePage;
+use PhpTui\Tui\Example\Demo\Page\TextEditorPage;
 use PhpTui\Tui\Extension\Bdf\BdfExtension;
 use PhpTui\Tui\Extension\Core\Widget\BlockWidget;
 use PhpTui\Tui\Extension\Core\Widget\GridWidget;
 use PhpTui\Tui\Extension\Core\Widget\ParagraphWidget;
 use PhpTui\Tui\Extension\ImageMagick\ImageMagickExtension;
+use PhpTui\Tui\Extension\TextArea\TextAreaExtension;
 use PhpTui\Tui\Model\Direction;
 use PhpTui\Tui\Model\Display\Backend;
 use PhpTui\Tui\Model\Display\Display;
@@ -60,6 +63,8 @@ use Throwable;
  */
 final class App
 {
+    private ?Component $focused = null;
+
     /**
      * @param array<string,Component> $pages
      * @param int[] $frameSamples
@@ -70,6 +75,7 @@ final class App
         private ActivePage $activePage,
         private array $pages,
         private array $frameSamples,
+        private CommandBus $bus,
     ) {
     }
 
@@ -77,6 +83,7 @@ final class App
     {
         $terminal = $terminal ?? Terminal::new();
         $pages = [];
+        $bus = new CommandBus([]);
 
         // build up an exhaustive set of pages
         foreach (ActivePage::cases() as $case) {
@@ -91,6 +98,7 @@ final class App
                 ActivePage::Colors => new ColorsPage(),
                 ActivePage::Images => new ImagePage(),
                 ActivePage::CanvasScaling => new CanvasScalingPage($terminal),
+                ActivePage::TextEditor => new TextEditorPage($bus),
                 ActivePage::Gauge => new GaugePage(),
                 ActivePage::BarChart => new BarChartPage(),
             };
@@ -99,6 +107,7 @@ final class App
         $display = DisplayBuilder::default($backend ?? PhpTuiPhpTermBackend::new($terminal))
             ->addExtension(new ImageMagickExtension())
             ->addExtension(new BdfExtension())
+            ->addExtension(new TextAreaExtension())
             ->build();
 
         return new self(
@@ -107,6 +116,7 @@ final class App
             ActivePage::Events,
             $pages,
             [],
+            $bus,
         );
     }
 
@@ -137,8 +147,18 @@ final class App
 
         // the main loop
         while (true) {
+            foreach ($this->bus->drain() as $command) {
+                if ($command instanceof FocusCommand) {
+                    $this->focused = $command->component;
+                }
+            }
             // handle events sent to the terminal
             while (null !== $event = $this->terminal->events()->next()) {
+                if ($this->focused) {
+                    $this->focused->handle($event);
+
+                    continue;
+                }
                 if ($event instanceof CharKeyEvent) {
                     if ($event->modifiers === KeyModifiers::NONE) {
                         if ($event->char === 'q') {
@@ -180,6 +200,9 @@ final class App
                         if ($event->char === '"') {
                             $this->activePage = ActivePage::BarChart;
                         }
+                    }
+                    if ($event->char === '$') {
+                        $this->activePage = ActivePage::TextEditor;
                     }
                 }
                 if ($event instanceof CodedKeyEvent) {
@@ -282,6 +305,6 @@ final class App
             return $ac;
         }, []);
 
-        return array_sum($bySecond) / count($bySecond);
+        return count($bySecond) > 0 ? array_sum($bySecond) / count($bySecond) : 0;
     }
 }

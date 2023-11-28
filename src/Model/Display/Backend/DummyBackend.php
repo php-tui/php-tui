@@ -116,6 +116,14 @@ final class DummyBackend implements Backend
     }
 
     /**
+     * @return string[]
+     */
+    public function toLines(): array
+    {
+        return explode("\n", $this->toString());
+    }
+
+    /**
      * @return array<int,array<int,string>>
      */
     private function fillGrid(int $width, int $height): array
