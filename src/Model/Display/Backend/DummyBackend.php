@@ -19,7 +19,7 @@ final class DummyBackend implements Backend
 
     private ?string $flushed = null;
 
-    /** 
+    /**
      * @param int<0,max> $height
      * @param int<0,max> $width
      */

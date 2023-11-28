@@ -267,6 +267,7 @@ final class Buffer implements Countable, Stringable
     {
         $updates = [];
         foreach ($this->content as $offset => $cell) {
+            /** @phpstan-ignore-next-line */
             $position = Position::fromIndex($offset, $this->area());
             $updates[] = new BufferUpdate($position, $cell);
         }
