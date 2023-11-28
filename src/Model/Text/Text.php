@@ -63,6 +63,9 @@ final class Text implements Styleable
         return $this;
     }
 
+    /**
+     * @return int<0,max>
+     */
     public function height(): int
     {
         return count($this->lines);

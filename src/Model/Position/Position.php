@@ -16,8 +16,13 @@ use Stringable;
  */
 final class Position implements Stringable
 {
-    public function __construct(public int $x, public int $y)
-    {
+    public function __construct(
+        /** @var int<0,max> */
+        public int $x,
+        /** @var int<0,max> */
+        public int $y
+    ) {
+        /** @phpstan-ignore-next-line */
         if ($x < 0 || $y < 0) {
             throw new RuntimeException(sprintf(
                 'Neither X nor Y values can be less than zero, got [%d, %d]',

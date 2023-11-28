@@ -6,9 +6,9 @@ namespace PhpTui\Tui\Tests\Example;
 
 use PhpTui\Term\Event;
 use PhpTui\Term\Event\CharKeyEvent;
-use PhpTui\Term\EventProvider\LoadedEventProvider;
+use PhpTui\Term\EventProvider\ArrayEventProvider;
 use PhpTui\Term\InformationProvider\AggregateInformationProvider;
-use PhpTui\Term\Painter\BufferPainter;
+use PhpTui\Term\Painter\ArrayPainter;
 use PhpTui\Term\RawMode\TestRawMode;
 use PhpTui\Term\Terminal;
 use PhpTui\Tui\Example\Demo\App;
@@ -130,10 +130,10 @@ class DemoTest extends TestCase
         $terminal = Terminal::new(
             infoProvider: new AggregateInformationProvider([]),
             rawMode: new TestRawMode(),
-            eventProvider: LoadedEventProvider::fromEvents(
+            eventProvider: ArrayEventProvider::fromEvents(
                 ...$events
             ),
-            painter: BufferPainter::new(),
+            painter: ArrayPainter::new(),
         );
 
         $backend = DummyBackend::fromDimensions(80, 20);

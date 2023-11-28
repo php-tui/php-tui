@@ -109,7 +109,7 @@ final class BarChartRenderer implements WidgetRenderer
             $area->position->x,
             $area->position->y,
             $area->width,
-            $area->height - $labelInfo->height
+            max(0, $area->height - $labelInfo->height)
         );
 
         $groupTicks = $this->groupTicks($widget, $area->width, $area->height);
@@ -196,10 +196,10 @@ final class BarChartRenderer implements WidgetRenderer
 
             // print group labels under the bars or the previous labels
             if ($labelInfo->groupLabelVisible) {
-                $labelMaxWidth = count($tickList) * ($widget->barWidth + $widget->barGap) - $widget->barGap;
+                $labelMaxWidth = max(0, count($tickList) * ($widget->barWidth + $widget->barGap) - $widget->barGap);
                 $groupArea = Area::fromScalars(
                     $barX,
-                    $area->bottom() - 1,
+                    max(0, $area->bottom() - 1),
                     $labelMaxWidth,
                     1,
                 );
@@ -288,7 +288,7 @@ final class BarChartRenderer implements WidgetRenderer
         $barsArea = Area::fromScalars(
             $area->position->x + $labelSize + $margin,
             $area->position->y,
-            $area->width - $labelSize - $margin,
+            max(0, $area->width - $labelSize - $margin),
             $area->height
         );
 
@@ -329,7 +329,7 @@ final class BarChartRenderer implements WidgetRenderer
                 }
                 $barValueArea = Area::fromScalars(
                     $barsArea->position->x,
-                    $barY + ($widget->barWidth >> 1),
+                    max(0, $barY + ($widget->barWidth >> 1)),
                     $barsArea->width,
                     $barsArea->height
                 );

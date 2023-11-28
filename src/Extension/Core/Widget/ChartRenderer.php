@@ -111,13 +111,13 @@ final class ChartRenderer implements WidgetRenderer
         }
 
         $graphArea = Area::fromScalars(
-            $x,
-            $area->top(),
-            $area->right() - $x,
-            $y - $area->top() + 1
+            max(0, $x),
+            max(0, $area->top()),
+            max(0, $area->right() - $x),
+            max(0, $y - $area->top() + 1),
         );
 
-        return new ChartLayout($graphArea, $xAxisY, $yAxisX, $xLabelY, $yLabelX);
+        return new ChartLayout($graphArea, max(0, $xAxisY), max(0,$yAxisX), $xLabelY, $yLabelX);
     }
 
     private function maxWidthOfLabelsLeftOfYAxis(ChartWidget $chart, Area $area, bool $hasYAxis): int
@@ -137,7 +137,7 @@ final class ChartRenderer implements WidgetRenderer
             $maxWidth = max($maxWidth, $widthOfYAxis);
         }
 
-        return min($maxWidth, $area->width / 3);
+        return intval(min($maxWidth, $area->width / 3));
     }
 
     private function renderXLabels(ChartWidget $chart, Buffer $buffer, ChartLayout $layout, Area $chartArea): void
@@ -149,7 +149,7 @@ final class ChartRenderer implements WidgetRenderer
         if (count($labels) < 1) {
             return;
         }
-        $widthBetweenTicks = (int) ($layout->graphArea->width / count($labels));
+        $widthBetweenTicks = max(0, (int) ($layout->graphArea->width / count($labels)));
         $labelAlignment = match ($chart->xAxis->labelAlignment) {
             HorizontalAlignment::Left => HorizontalAlignment::Right,
             HorizontalAlignment::Center => HorizontalAlignment::Center,
@@ -170,11 +170,16 @@ final class ChartRenderer implements WidgetRenderer
 
         $lastLabel = array_pop($labels);
         foreach ($labels as $i => $label) {
-            $x = $layout->graphArea->left() + ($i + 1) * $widthBetweenTicks + 1;
-            $labelArea = Area::fromScalars($x, $layout->labelX, $widthBetweenTicks - 1, 1);
+            $x = max(0, $layout->graphArea->left() + ($i + 1) * $widthBetweenTicks + 1);
+            $labelArea = Area::fromScalars(
+                $x,
+                $layout->labelX,
+                max(0, $widthBetweenTicks - 1),
+                1
+            );
             $this->renderLabel($buffer, $label, $labelArea, HorizontalAlignment::Center);
         }
-        $x = $layout->graphArea->right() - $widthBetweenTicks;
+        $x = max(0, $layout->graphArea->right() - $widthBetweenTicks);
         $labelArea = Area::fromScalars($x, $layout->labelX, $widthBetweenTicks, 1);
         if ($lastLabel) {
             $this->renderLabel($buffer, $lastLabel, $labelArea, HorizontalAlignment::Center);
@@ -182,6 +187,9 @@ final class ChartRenderer implements WidgetRenderer
 
     }
 
+    /**
+     * @param int<0,max> $y
+     */
     private function firstXLabelArea(ChartWidget $chart, int $y, int $labelWidth, int $maxWithAfterYAxis, Area $chartArea, Area $graphArea): Area
     {
         [$minX, $maxX] = match ($chart->xAxis->labelAlignment) {
@@ -193,7 +201,7 @@ final class ChartRenderer implements WidgetRenderer
             ],
         };
 
-        return Area::fromScalars($minX, $y, $maxX - $minX, 1);
+        return Area::fromScalars($minX, $y, max(0, $maxX - $minX), 1);
     }
 
     private function renderLabel(Buffer $buffer, Span $label, Area $labelArea, HorizontalAlignment $labelAlignment): void

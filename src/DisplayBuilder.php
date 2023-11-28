@@ -104,6 +104,10 @@ final class DisplayBuilder
     /**
      * When set the display will be at the specified (x,y) position with the
      * specified width and height.
+     * @param positive-int $x
+     * @param positive-int $y
+     * @param positive-int $width
+     * @param positive-int $height
      */
     public function fixed(int $x, int $y, int $width, int $height): self
     {
