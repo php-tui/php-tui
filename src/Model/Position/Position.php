@@ -37,6 +37,9 @@ final class Position implements Stringable
         return sprintf('(%s,%s)', $this->x, $this->y);
     }
 
+    /**
+     * @param int<0,max> $i
+     */
     public static function fromIndex(int $i, Area $area): self
     {
         if (
@@ -53,7 +56,7 @@ final class Position implements Stringable
 
         return new Position(
             $area->position->x + ($i % $area->width),
-            $area->position->y + (int) ($i / $area->width),
+            max(0, $area->position->y + (int) ($i / $area->width)),
         );
     }
 
@@ -77,23 +80,33 @@ final class Position implements Stringable
         return ($this->y - $area->position->y) * $area->width + ($this->x - $area->position->x);
     }
 
+    /**
+     * @param int<0,max> $x
+     * @param int<0,max> $y
+     */
     public static function at(int $x, int $y): self
     {
         return new self($x, $y);
     }
 
+    /**
+     * @param int<0,max> $x
+     */
     public function withX(int $x): self
     {
         return new self($x, $this->y);
     }
 
+    /**
+     * @param int<0,max> $y
+     */
     public function withY(int $y): self
     {
         return new self($this->x, $y);
     }
 
     /**
-     * @param Closure(int,int): array{int,int} $closure
+     * @param Closure(int<0,max>,int<0,max>): array{int<0,max>,int<0,max>} $closure
      */
     public function change(Closure $closure): self
     {

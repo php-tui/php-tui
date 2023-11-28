@@ -47,6 +47,9 @@ class BarGroup
         return $this;
     }
 
+    /**
+     * @return int<0,max>
+     */
     public function max(): int
     {
         return array_reduce($this->bars, function (int $max, Bar $bar): int {

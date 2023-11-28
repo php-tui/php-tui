@@ -42,7 +42,9 @@ final class BarChartRenderer implements WidgetRenderer
     }
 
     /**
-     * @return list<list<int>>
+     * @param int<0,max> $barMaxLength
+     * @param int<0,max> $availableSpace
+     * @return list<list<int<0,max>>>
      */
     private function groupTicks(BarChartWidget $widget, int $availableSpace, int $barMaxLength): array
     {
@@ -79,13 +81,16 @@ final class BarChartRenderer implements WidgetRenderer
                     return 0;
                 }
 
-                return (int) ($bar->value * $barMaxLength * self::TICKS_PER_LINE / $max);
+                return max(0, (int) ($bar->value * $barMaxLength * self::TICKS_PER_LINE / $max));
             }, array_slice($bars, 0, $nBars));
         }
 
         return $ticks;
     }
 
+    /**
+     * @return int<0,max>
+     */
     private function maxDataValue(BarChartWidget $widget): int
     {
         if (null !== $widget->max) {
@@ -114,7 +119,7 @@ final class BarChartRenderer implements WidgetRenderer
 
         $groupTicks = $this->groupTicks($widget, $area->width, $area->height);
         $this->renderVerticalBars($widget, $buffer, $barsArea, $groupTicks);
-        $this->renderLabelsAndVAlues($widget, $area, $buffer, $labelInfo, $groupTicks);
+        $this->renderLabelsAndValues($widget, $area, $buffer, $labelInfo, $groupTicks);
 
     }
 
@@ -180,12 +185,12 @@ final class BarChartRenderer implements WidgetRenderer
     }
 
     /**
-     * @param array<int,array<int,int>> $groupTicks
+     * @param array<int,array<int,int<0,max>>> $groupTicks
      */
-    private function renderLabelsAndVAlues(BarChartWidget $widget, Area $area, Buffer $buffer, LabelInfo $labelInfo, array $groupTicks): void
+    private function renderLabelsAndValues(BarChartWidget $widget, Area $area, Buffer $buffer, LabelInfo $labelInfo, array $groupTicks): void
     {
         $barX = $area->left();
-        $barY = $area->bottom() - $labelInfo->height - 1;
+        $barY = max(0, $area->bottom() - $labelInfo->height - 1);
 
         foreach ($groupTicks as $i => $tickList) {
             $group = $widget->data[$i];
@@ -230,7 +235,7 @@ final class BarChartRenderer implements WidgetRenderer
         }
 
         $xOffset = match ($label->alignment) {
-            HorizontalAlignment::Center => max(0, $area->width - $label->width()) >> 1,
+            HorizontalAlignment::Center => max(0, ($area->width - $label->width()) >> 1),
             HorizontalAlignment::Right => max(0, $area->width - $label->width()),
             default => 0,
         };
@@ -242,6 +247,11 @@ final class BarChartRenderer implements WidgetRenderer
         );
     }
 
+    /**
+     * @param int<0,max> $x
+     * @param int<0,max> $maxWidth
+     * @param int<0,max> $y
+     */
     private function renderBarLabel(Bar $bar, Buffer $buffer, int $maxWidth, int $x, int $y, Style $defaultStyleLabel): void
     {
         $label = $bar->label;
@@ -255,7 +265,7 @@ final class BarChartRenderer implements WidgetRenderer
 
         $buffer->putLine(
             Position::at(
-                $x + (max(0, $maxWidth - $label->width()) >> 1),
+                $x + max(0, (($maxWidth - $label->width()) >> 1)),
                 $y,
             ),
             $label,
@@ -263,6 +273,11 @@ final class BarChartRenderer implements WidgetRenderer
         );
     }
 
+    /**
+     * @param int<0,max> $x
+     * @param int<0,max> $y
+     * @param int<0,max> $ticks
+     */
     private function renderBarValue(Bar $bar, Buffer $buffer, int $maxWidth, int $x, int $y, Style $defaultValueStyle, int $ticks): void
     {
         $valueLabel = $bar->textValue ? $bar->textValue : (string)$bar->value;
@@ -271,7 +286,7 @@ final class BarChartRenderer implements WidgetRenderer
             // why strlen? Ratatui does value_label.len() not sure why.
             $buffer->putString(
                 Position::at(
-                    $x + (max(0, $maxWidth - strlen($valueLabel)) >> 1),
+                    $x + max(0, ($maxWidth - strlen($valueLabel) >> 1)),
                     $y,
                 ),
                 $valueLabel,

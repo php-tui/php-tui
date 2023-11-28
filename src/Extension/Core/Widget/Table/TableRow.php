@@ -13,7 +13,13 @@ final class TableRow
      */
     private function __construct(
         public array $cells,
+        /**
+         * @var int<0,max>
+         */
         public int $height,
+        /**
+         * @var int<0,max>
+         */
         public int $bottomMargin,
         public Style $style,
     ) {
@@ -31,6 +37,9 @@ final class TableRow
         }, array_values($strings)), 1, 0, Style::default());
     }
 
+    /**
+     * @return int<0,max>
+     */
     public function totalHeight(): int
     {
         return $this->height + $this->bottomMargin;
@@ -45,6 +54,9 @@ final class TableRow
         return $this->cells[$index];
     }
 
+    /**
+     * @param int<0,max> $bottomMargin
+     */
     public function bottomMargin(int $bottomMargin): self
     {
         $this->bottomMargin = $bottomMargin;
@@ -52,6 +64,9 @@ final class TableRow
         return $this;
     }
 
+    /**
+     * @param int<0,max> $height
+     */
     public function height(int $height): self
     {
         $this->height = $height;

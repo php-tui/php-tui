@@ -109,7 +109,7 @@ final class TableRenderer implements WidgetRenderer
     }
 
     /**
-     * @return list<array{int,int}>
+     * @return list<array{int<0,max>,int<0,max>}>
      */
     private function getColumnsWidths(TableWidget $table, int $maxWidth, int $selectionWidth): array
     {
