@@ -21,6 +21,7 @@ final class Inline implements Viewport
     public function __construct(
         /**
          * Height of the viewport
+         * @var int<0,max>
          */
         public readonly int $height
     ) {
@@ -51,7 +52,12 @@ final class Inline implements Viewport
         }
         $row = max(0, $row - $offsetInPreviousViewport);
 
-        return Area::fromScalars(0, $row, $size->width, $maxHeight);
+        return Area::fromScalars(
+            0,
+            $row,
+            $size->width,
+            $maxHeight
+        );
     }
 
     public function clear(Backend $backend, Area $area): void
