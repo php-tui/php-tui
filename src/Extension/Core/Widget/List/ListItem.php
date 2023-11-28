@@ -27,6 +27,9 @@ final class ListItem
         return $this;
     }
 
+    /**
+     * @return int<0,max>
+     */
     public function height(): int
     {
         return $this->content->height();

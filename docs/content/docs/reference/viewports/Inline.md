@@ -24,4 +24,4 @@ Configure the viewport using the builder methods named as follows:
 
 | Name | Type | Description |
 | --- | --- | --- |
-| **height** | `int` | Height of the viewport |
+| **height** | `int<0, max>` | Height of the viewport |

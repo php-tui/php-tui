@@ -8,8 +8,8 @@ use PhpTui\Term\Action;
 use PhpTui\Term\Actions;
 use PhpTui\Term\ClearType as PhpTuiClearType;
 use PhpTui\Term\Event\CursorPositionEvent;
-use PhpTui\Term\EventProvider\LoadedEventProvider;
-use PhpTui\Term\Painter\BufferPainter;
+use PhpTui\Term\EventProvider\ArrayEventProvider;
+use PhpTui\Term\Painter\ArrayPainter;
 use PhpTui\Term\RawMode\TestRawMode;
 use PhpTui\Term\Terminal;
 use PhpTui\Tui\Bridge\PhpTerm\PhpTermBackend;
@@ -29,9 +29,9 @@ class PhpTermBackendTest extends TestCase
 {
     public function testDisableRawModeAfterGettingCursorPosition(): void
     {
-        $buffer = BufferPainter::new();
+        $buffer = ArrayPainter::new();
         $rawMode = new TestRawMode();
-        $provider = LoadedEventProvider::fromEvents(
+        $provider = ArrayEventProvider::fromEvents(
             new CursorPositionEvent(10, 10)
         );
 
@@ -50,7 +50,7 @@ class PhpTermBackendTest extends TestCase
 
     public function testDisableRawModeIfCursorPositionCannotBeDetermined(): void
     {
-        $buffer = BufferPainter::new();
+        $buffer = ArrayPainter::new();
         $rawMode = new TestRawMode();
         $backend = new PhpTermBackend(Terminal::new(
             $buffer,
@@ -67,7 +67,7 @@ class PhpTermBackendTest extends TestCase
     }
     public function testMoveCursor(): void
     {
-        $buffer = BufferPainter::new();
+        $buffer = ArrayPainter::new();
         $backend = new PhpTermBackend(Terminal::new($buffer));
         $backend->moveCursor(Position::at(1, 2));
         self::assertEquals([
@@ -77,7 +77,7 @@ class PhpTermBackendTest extends TestCase
 
     public function testClearAll(): void
     {
-        $buffer = BufferPainter::new();
+        $buffer = ArrayPainter::new();
         $backend = new PhpTermBackend(Terminal::new($buffer));
         $backend->clearRegion(ClearType::ALL);
         self::assertEquals([
@@ -87,7 +87,7 @@ class PhpTermBackendTest extends TestCase
 
     public function testClearAfterCursor(): void
     {
-        $buffer = BufferPainter::new();
+        $buffer = ArrayPainter::new();
         $backend = new PhpTermBackend(Terminal::new($buffer));
         $backend->clearRegion(ClearType::AfterCursor);
         self::assertEquals([
@@ -97,7 +97,7 @@ class PhpTermBackendTest extends TestCase
 
     public function testDiagnonalLine(): void
     {
-        $buffer = BufferPainter::new();
+        $buffer = ArrayPainter::new();
         $this->draw($buffer, new BufferUpdates([
             new BufferUpdate(
                 Position::at(0, 0),
@@ -129,7 +129,7 @@ class PhpTermBackendTest extends TestCase
 
     public function testDoesNotMoveCursorUnnecessarily(): void
     {
-        $buffer = BufferPainter::new();
+        $buffer = ArrayPainter::new();
         $this->draw($buffer, new BufferUpdates([
             new BufferUpdate(
                 Position::at(0, 0),
@@ -159,7 +159,7 @@ class PhpTermBackendTest extends TestCase
 
     public function testDoesNotChangeColorUnnecessarily(): void
     {
-        $buffer = BufferPainter::new();
+        $buffer = ArrayPainter::new();
         $this->draw($buffer, new BufferUpdates([
             new BufferUpdate(
                 Position::at(0, 0),
@@ -184,7 +184,7 @@ class PhpTermBackendTest extends TestCase
 
     public function testModifiersReset(): void
     {
-        $buffer = BufferPainter::new();
+        $buffer = ArrayPainter::new();
         $this->draw($buffer, new BufferUpdates([
             new BufferUpdate(
                 Position::at(0, 0),
@@ -234,7 +234,7 @@ class PhpTermBackendTest extends TestCase
         ], array_map(static fn (Action $action): string => $action->__toString(), $buffer->actions()));
     }
 
-    private function draw(BufferPainter $buffer, BufferUpdates $updates): void
+    private function draw(ArrayPainter $buffer, BufferUpdates $updates): void
     {
         $backend = new PhpTermBackend(Terminal::new($buffer));
         $backend->draw($updates);

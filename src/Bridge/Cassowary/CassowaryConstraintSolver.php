@@ -79,9 +79,9 @@ final class CassowaryConstraintSolver implements ConstraintSolver
 
         return new Areas(array_map(function (Element $element) use ($changes, $layout, $inner) {
             $values = $changes->getValues($element->start, $element->end);
-            $start = (int) ($values[0]);
-            $end = (int) ($values[1]);
-            $size = $end - $start;
+            $start = max(0, (int) ($values[0]));
+            $end = max(0, (int) ($values[1]));
+            $size = max(0, $end - $start);
 
             return match ($layout->direction) {
                 Direction::Horizontal => Area::fromScalars(

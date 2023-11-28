@@ -41,7 +41,7 @@ class Painter
         $x = ($floatPosition->x - $this->context->xBounds->min) * ($this->resolution->width - 1.0) / $width;
         $y = ($this->context->yBounds->max - $floatPosition->y) * ($this->resolution->height - 1.0) / $height;
 
-        return Position::at((int) $x, (int) $y);
+        return Position::at(max(0, (int) $x), max(0, (int) $y));
     }
 
     public function paint(Position $position, Color $color): void

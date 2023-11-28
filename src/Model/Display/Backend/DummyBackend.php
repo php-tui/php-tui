@@ -19,6 +19,10 @@ final class DummyBackend implements Backend
 
     private ?string $flushed = null;
 
+    /**
+     * @param int<0,max> $height
+     * @param int<0,max> $width
+     */
     public function __construct(private int $width, private int $height, private Position $cursorPosition = new Position(0, 0))
     {
         $this->fillGrid($width, $height);
@@ -58,12 +62,20 @@ final class DummyBackend implements Backend
         }, $this->grid);
     }
 
+    /**
+     * @param int<0,max> $width
+     * @param int<0,max> $height
+     */
     public static function fromDimensions(int $width, int $height): self
     {
 
         return new self($width, $height);
     }
 
+    /**
+     * @param int<0,max> $width
+     * @param int<0,max> $height
+     */
     public function setDimensions(int $width, int $height): void
     {
         $this->fillGrid($width, $height);
@@ -89,8 +101,12 @@ final class DummyBackend implements Backend
         return $this->cursorPosition;
     }
 
+    /**
+     * @param int<0,max> $linesAfterCursor
+     */
     public function appendLines(int $linesAfterCursor): void
     {
+        /** @phpstan-ignore-next-line */
         $this->cursorPosition = $this->cursorPosition->change(static fn (int $x, int $y): array => [0, $y + $linesAfterCursor]);
     }
 

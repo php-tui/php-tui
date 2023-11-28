@@ -65,7 +65,10 @@ final class CanvasRenderer implements WidgetRenderer
                 $color = $layer->colors[$index];
                 $x = ($index % $width) + $area->left();
                 $y = ($index / $width) + $area->top();
-                $cell = $buffer->get(Position::at($x, (int) $y))->setChar($char);
+                $cell = $buffer->get(Position::at(
+                    max(0, $x),
+                    max(0, (int) $y)
+                ))->setChar($char);
                 $cell->fg = $color->fg;
                 $cell->bg = $color->bg;
             }
@@ -83,7 +86,7 @@ final class CanvasRenderer implements WidgetRenderer
                 ) * ($area->height - 1) / $widget->yBounds->length()) + $area->top()
             );
             $buffer->putLine(
-                Position::at($x, $y),
+                Position::at(max(0, $x), max(0, $y)),
                 $label->line,
                 $area->right() - $x
             );

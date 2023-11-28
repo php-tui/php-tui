@@ -27,6 +27,9 @@ final class Span implements Stringable, Styleable
         return new self($string, Style::default());
     }
 
+    /**
+     * @return int<0,max>
+     */
     public function width(): int
     {
         return mb_strlen($this->content);

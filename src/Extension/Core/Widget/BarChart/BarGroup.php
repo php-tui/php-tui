@@ -24,7 +24,7 @@ class BarGroup
     }
 
     /**
-     * @param array<int|string,int> $array
+     * @param array<int|string,int<0,max>> $array
      */
     public static function fromArray(array $array): self
     {
@@ -47,6 +47,9 @@ class BarGroup
         return $this;
     }
 
+    /**
+     * @return int<0,max>
+     */
     public function max(): int
     {
         return array_reduce($this->bars, function (int $max, Bar $bar): int {

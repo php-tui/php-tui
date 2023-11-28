@@ -14,6 +14,9 @@ class StyledGrapheme
     ) {
     }
 
+    /**
+     * @return int<0,max>
+     */
     public function symbolWidth(): int
     {
         return mb_strlen($this->symbol);

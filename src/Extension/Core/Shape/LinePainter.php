@@ -67,15 +67,19 @@ class LinePainter implements ShapePainter
     }
 
     /**
-     * @return array{int, int[]}
+     * @return array{int<0,max>, int<0,max>[]}
+     * @param int<0,max> $start
+     * @param int<0,max> $end
      */
     private function resolveDiffAndRange(int $start, int $end): array
     {
         if ($end >= $start) {
-            return [$end - $start, range($start, $end)];
+            /** @phpstan-ignore-next-line */
+            return [max(0, $end - $start), range($start, $end)];
         }
 
-        return [$start - $end, range($end, $start)];
+        /** @phpstan-ignore-next-line */
+        return [max(0, $start - $end), range($end, $start)];
     }
 
     private function drawLineLow(Painter $painter, LineShape $line, Position $point1, Position $point2): void
@@ -85,6 +89,7 @@ class LinePainter implements ShapePainter
         $diff = 2 * $diffY - $diffX;
         $y = $point1->y;
         foreach (range($point1->x, $point2->x) as $x) {
+            /** @phpstan-ignore-next-line */
             $painter->paint(Position::at($x, $y), $line->color);
             if ($diff > 0) {
                 if ($point1->y > $point2->y) {
@@ -105,6 +110,7 @@ class LinePainter implements ShapePainter
         $diff = 2 * $diffX - $diffY;
         $x = $point1->x;
         foreach (range($point1->y, $point2->y) as $y) {
+            /** @phpstan-ignore-next-line */
             $painter->paint(Position::at($x, $y), $line->color);
             if ($diff > 0) {
                 if ($point1->x > $point2->x) {

@@ -39,11 +39,12 @@ class ListRenderer implements WidgetRenderer
         $currentHeight = 0;
         $selectionSpacing = $widget->highlightSpacing->shouldAdd($widget->state->selected !== null);
         foreach (array_slice($widget->items, $start, $end - $start) as $i => $item) {
+            /** @var int<0,max> $y */
             [$x, $y, $currentHeight] = (function () use ($item, $listArea, $currentHeight, $widget): array {
                 if ($widget->startCorner === Corner::BottomLeft) {
                     $currentHeight += $item->height();
 
-                    return [$listArea->left(), $listArea->bottom() - $currentHeight, $currentHeight];
+                    return [$listArea->left(), max(0, $listArea->bottom() - $currentHeight), $currentHeight];
                 }
 
                 $y = $listArea->top() + $currentHeight;
@@ -57,6 +58,9 @@ class ListRenderer implements WidgetRenderer
             $buffer->setStyle($area, $itemStyle);
 
             $isSelected = $widget->state->selected === $i + $start;
+            /**
+             * @var int<0,max> $j
+             */
             foreach ($item->content->lines as $j => $line) {
                 $symbol = $isSelected && $j === 0 ?
                     $highlightSymbol :

@@ -6,7 +6,6 @@
     "autoload": {
         "psr-4": {
             "PhpTui\\Tui\\": "src/",
-            "PhpTui\\Term\\": "lib/term/src",
             "PhpTui\\BDF\\": "lib/bdf/src"
         }
     },
@@ -14,8 +13,8 @@
         "psr-4": {
             "PhpTui\\Tui\\Tests\\": "tests/",
             "PhpTui\\Tui\\Example\\Demo\\": "example/demo/src",
-            "PhpTui\\Term\\Tests\\": "lib/term/tests/",
             "PhpTui\\Docgen\\": "lib/docgen/src/",
+            "PhpTui\\Term\\": "lib/term/src",
             "PhpTui\\Bdf\\Tests\\": "lib/bdf/tests/"
         }
     },
@@ -26,7 +25,8 @@
     ],
     "require": {
         "php": "^8.1",
-        "php-tui/cassowary": "^0.1.0"
+        "php-tui/cassowary": "^0.1.0",
+        "php-tui/term": "^0.3.0"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.34",
@@ -51,10 +51,10 @@
         "rector": "./vendor/bin/rector process",
         "vhs": "vhs example/demo/demo.tape",
         "integrate": [
-            "@php-cs-fixer",
-            "@phpstan",
-            "@rector",
             "@phpunit",
+            "@phpstan",
+            "@php-cs-fixer",
+            "@rector",
             "@phpbench",
             "@docs",
             "@vhs"

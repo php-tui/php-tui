@@ -14,14 +14,17 @@ final class BarChartWidget implements Widget
     final public function __construct(
         /**
          * The width of each bar
+         * @var int<0,max>
          */
         public int $barWidth,
         /**
          * The gap between each bar
+         * @var int<0,max>
          */
         public int $barGap,
         /**
          * The gap between each group
+         * @var int<0,max>
          */
         public int $groupGap,
         /**
@@ -48,6 +51,7 @@ final class BarChartWidget implements Widget
         /**
          * Value necessary for a bar to reach the maximum height (if no value is specified,
          * the maximum value in the data is taken as reference)
+         * @var ?int<0,max>
          */
         public ?int $max,
         /**
@@ -73,6 +77,9 @@ final class BarChartWidget implements Widget
         );
     }
 
+    /**
+     * @param int<0,max> $barWidth
+     */
     public function barWidth(int $barWidth): self
     {
         $this->barWidth = $barWidth;
@@ -80,6 +87,9 @@ final class BarChartWidget implements Widget
         return $this;
     }
 
+    /**
+     * @param int<0,max> $barGap
+     */
     public function barGap(int $barGap): self
     {
         $this->barGap = $barGap;
@@ -87,6 +97,9 @@ final class BarChartWidget implements Widget
         return $this;
     }
 
+    /**
+     * @param int<0,max> $groupGap
+     */
     public function groupGap(int $groupGap): self
     {
         $this->groupGap = $groupGap;
@@ -129,6 +142,9 @@ final class BarChartWidget implements Widget
         return $this;
     }
 
+    /**
+     * @param int<0,max> $max
+     */
     public function max(int $max): self
     {
         $this->max = $max;
@@ -167,6 +183,9 @@ final class BarChartWidget implements Widget
         return false;
     }
 
+    /**
+     * @return int<0,max>
+     */
     public function maxLabelSize(): int
     {
         $max = 0;
