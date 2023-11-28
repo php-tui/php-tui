@@ -77,7 +77,8 @@ final class Buffer implements Countable, Stringable
         );
 
         $buffer = self::empty(Area::fromScalars(0, 0, $width, $height));
-        foreach ($lines as $y => $line) {
+        foreach (array_values($lines) as $y => $line) {
+            /** @phpstan-ignore-next-line */
             $buffer->putString(new Position(0, $y), $line, Style::default());
         }
 
