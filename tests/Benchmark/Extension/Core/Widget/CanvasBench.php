@@ -10,8 +10,8 @@ use PhpTui\Term\InformationProvider\AggregateInformationProvider;
 use PhpTui\Term\InformationProvider\ClosureInformationProvider;
 use PhpTui\Term\Painter\StringPainter;
 use PhpTui\Term\RawMode\TestRawMode;
-use PhpTui\Term\Size;
 use PhpTui\Term\Terminal;
+use PhpTui\Term\TerminalInformation\Size;
 use PhpTui\Tui\Bridge\PhpTerm\PhpTermBackend;
 
 use PhpTui\Tui\DisplayBuilder;
