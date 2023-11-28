@@ -368,7 +368,7 @@ final class BarChartRenderer implements WidgetRenderer
             }
             // if group_gap is zero, then there is no place to print the group label
             // check also if the group label is still inside the visible area
-            $labelY = $barY - $widget->barGap;
+            $labelY = max(0, $barY - $widget->barGap);
             if ($widget->groupGap > 0 && $labelY < $barsArea->bottom()) {
                 $labelRect = $barsArea->withY($labelY);
                 $this->renderGroupLabel($group, $buffer, $labelRect, $widget->labelStyle);

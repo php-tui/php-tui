@@ -109,6 +109,8 @@ final class TableRenderer implements WidgetRenderer
     }
 
     /**
+     * @param int<0,max> $maxWidth
+     * @param int<0,max> $selectionWidth
      * @return list<array{int<0,max>,int<0,max>}>
      */
     private function getColumnsWidths(TableWidget $table, int $maxWidth, int $selectionWidth): array
