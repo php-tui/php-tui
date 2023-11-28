@@ -191,7 +191,7 @@ final class BlockRenderer implements WidgetRenderer
             static fn (int $acc, Title $title): int => $acc + $title->title->width(),
             0
         );
-        $offset = (int) (max(0, $area->width - $sumWidth) / 2);
+        $offset = max(0, (int) (($area->width - $sumWidth) / 2));
         foreach ($titles as $title) {
             $titleX = $offset;
             $offset += $title->title->width() + 1;

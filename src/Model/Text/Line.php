@@ -34,6 +34,9 @@ final class Line implements IteratorAggregate, Stringable, Styleable
         return implode('', array_map(static fn (Span $span): string => $span->__toString(), $this->spans));
     }
 
+    /**
+     * @return int<0,max>
+     */
     public function width(): int
     {
         return array_sum(
