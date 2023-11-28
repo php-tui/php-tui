@@ -131,7 +131,7 @@ final class BlockRenderer implements WidgetRenderer
                 Position::at(
                     max(0, $area->width - $titleX) + $area->left(),
                     match ($alignment) {
-                        VerticalAlignment::Bottom => $area->bottom() - 1,
+                        VerticalAlignment::Bottom => max(0, $area->bottom() - 1),
                         VerticalAlignment::Top => $area->top(),
                     }
                 ),
@@ -165,7 +165,7 @@ final class BlockRenderer implements WidgetRenderer
                 Position::at(
                     $titleX + $area->left(),
                     match ($alignment) {
-                        VerticalAlignment::Bottom => $area->bottom() - 1,
+                        VerticalAlignment::Bottom => max(0, $area->bottom() - 1),
                         VerticalAlignment::Top => $area->top(),
                     }
                 ),
@@ -200,7 +200,7 @@ final class BlockRenderer implements WidgetRenderer
                 Position::at(
                     $titleX + $area->left(),
                     match ($alignment) {
-                        VerticalAlignment::Bottom => $area->bottom() - 1,
+                        VerticalAlignment::Bottom => max(0, $area->bottom() - 1),
                         VerticalAlignment::Top => $area->top(),
                     }
                 ),
