@@ -129,7 +129,7 @@ final class ScrollbarRenderer implements WidgetRenderer
     }
 
     /**
-     * @return array{int,int,int}
+     * @return array{int<0,max>,int<0,max>,int<0,max>}
      */
     private function getTrackStartEnd(ScrollbarWidget $widget, Area $area): array
     {
