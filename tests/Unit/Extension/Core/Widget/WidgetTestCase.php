@@ -28,6 +28,8 @@ class WidgetTestCase extends TestCase
 
     /**
      * @return string[]
+     * @param int<0,max> $width
+     * @param int<0,max> $height
      */
     protected function renderToLines(Widget $widget, int $width = 8, int $height = 5): array
     {

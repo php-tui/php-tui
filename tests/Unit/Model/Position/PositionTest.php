@@ -43,12 +43,14 @@ class PositionTest extends TestCase
     public function testThrowsExceptionIfNegativeX(): void
     {
         $this->expectExceptionMessage('Neither X nor Y values can be less than zero, got [-1, 2]');
+        /** @phpstan-ignore-next-line */
         Position::at(-1, 2);
     }
 
     public function testThrowsExceptionIfNegativeY(): void
     {
         $this->expectExceptionMessage('Neither X nor Y values can be less than zero, got [1, -2]');
+        /** @phpstan-ignore-next-line */
         Position::at(1, -2);
     }
 }
