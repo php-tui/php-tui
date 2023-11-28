@@ -18,6 +18,7 @@ Improvements:
 
 Refactoring:
 
+- Added int range type hints
 - Split `term` into a separate package.
 
 ## 0.0.2
