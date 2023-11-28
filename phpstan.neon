@@ -4,7 +4,7 @@ parameters:
         - src/Widget/Canvas/Data
 
     ignoreErrors:
-        // ignore until https://github.com/phpstan/phpstan-src/pull/2792 is merged
+        # ignore until https://github.com/phpstan/phpstan-src/pull/2792 is merged
         - "{expects int<0, max>, int given}"
     paths:
         - example
