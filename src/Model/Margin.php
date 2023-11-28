@@ -33,6 +33,7 @@ final class Margin
 
     /**
      * @param int<0,max> $vertical
+     * @param int<0,max> $horizontal
      */
     public static function fromScalars(int $vertical, int $horizontal): self
     {
