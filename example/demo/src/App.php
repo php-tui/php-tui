@@ -239,10 +239,7 @@ final class App
                 ->titles(Title::fromString(sprintf('%d FPS', $this->frameRate()))->horizontalAlignmnet(HorizontalAlignment::Right))
                 ->widget(
                     TabsWidget::fromTitles(
-                        Line::fromSpans([
-                            Span::fromString('[q]')->red(),
-                            Span::fromString('uit'),
-                        ]),
+                        Line::parse('<fg=red>[q]</>uit'),
                         ...array_reduce(ActivePage::cases(), function (array $lines, ActivePage $page) {
                             $lines[] = Line::fromSpans([
                                 Span::fromString(sprintf('%s', $page->navItem()->label)),
@@ -256,7 +253,6 @@ final class App
 
     private function incFramerate(): void
     {
-        $time = time();
         $this->frameSamples[] = time();
     }
 
