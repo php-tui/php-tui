@@ -33,7 +33,7 @@ class SparklineRenderer implements WidgetRenderer
 
         for ($j = $area->height - 1; $j >= 0; $j--) {
             $i = 0;
-            foreach ($data as $value) {
+            foreach ($data as &$value) {
                 $symbol = match ($value) {
                     0 => BarSet::EMPTY,
                     1 => BarSet::ONE_EIGHTH,
@@ -55,6 +55,8 @@ class SparklineRenderer implements WidgetRenderer
                 ))
                     ->setChar($symbol)
                     ->setStyle($widget->style);
+
+                $value = $value > 8 ? $value - 8 : 0;
 
                 $i++;
             }

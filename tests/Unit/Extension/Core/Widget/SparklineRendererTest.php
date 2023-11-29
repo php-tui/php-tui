@@ -5,10 +5,9 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Tests\Unit\Extension\Core\Widget;
 
 use Generator;
-use PhpTui\Tui\Extension\Core\Widget\SparklineWidget;
 use PhpTui\Tui\Extension\Core\Widget\Sparkline\RenderDirection;
+use PhpTui\Tui\Extension\Core\Widget\SparklineWidget;
 use PhpTui\Tui\Model\Area;
-use PhpTui\Tui\Model\Direction;
 use PhpTui\Tui\Model\Display\Buffer;
 use PhpTui\Tui\Model\Widget;
 
@@ -50,7 +49,23 @@ final class SparklineRendererTest extends WidgetTestCase
             Area::fromDimensions(12, 1),
             SparklineWidget::fromData(...range(0, 8))->direction(RenderDirection::RightToLeft),
             [
-                "   █▇▆▅▄▃▂▁ ",
+                '   █▇▆▅▄▃▂▁ ',
+            ]
+        ];
+
+        yield 'taller' => [
+            Area::fromDimensions(12, 2),
+            SparklineWidget::fromData(...range(0, 8))->direction(RenderDirection::RightToLeft),
+            [
+            '   █▆▄▂     ',
+            '   █████▆▄▂ ',
+            ]
+        ];
+        yield 'with max' => [
+            Area::fromDimensions(12, 1),
+            SparklineWidget::fromData(...range(0, 8))->direction(RenderDirection::RightToLeft)->max(20),
+            [
+                '   ▃▃▂▂▂▁▁  '
             ]
         ];
     }
