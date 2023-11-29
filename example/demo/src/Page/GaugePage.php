@@ -22,7 +22,7 @@ use PhpTui\Tui\Model\Text\Title;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\Widget\Borders;
 
-class GaugePage implements Component
+final class GaugePage implements Component
 {
     /**
      * @var array<int,Download>

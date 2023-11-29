@@ -20,7 +20,7 @@ use PhpTui\Tui\Model\Text\Title;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\Widget\Borders;
 
-class CanvasPage implements Component
+final class CanvasPage implements Component
 {
     private float $x = 0.0;
 

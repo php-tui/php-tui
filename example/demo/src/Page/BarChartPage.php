@@ -18,7 +18,7 @@ use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Text\Line;
 use PhpTui\Tui\Model\Widget;
 
-class BarChartPage implements Component
+final class BarChartPage implements Component
 {
     public function build(): Widget
     {

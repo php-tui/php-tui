@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Example\Demo\Page;
 
-class Download
+final class Download
 {
     public function __construct(
         public int $size,

@@ -14,7 +14,7 @@ use PhpTui\Tui\Model\Position\Position;
 use PhpTui\Tui\Model\Text\Span;
 use PhpTui\Tui\Model\Widget;
 
-class ColorsPage implements Component
+final class ColorsPage implements Component
 {
     private int $ticker = 0;
     public function build(): Widget

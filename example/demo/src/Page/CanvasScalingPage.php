@@ -28,7 +28,7 @@ use PhpTui\Tui\Model\Position\FloatPosition;
 use PhpTui\Tui\Model\Text\Title;
 use PhpTui\Tui\Model\Widget;
 
-class CanvasScalingPage implements Component
+final class CanvasScalingPage implements Component
 {
     public const DELTA = 5;
 
