@@ -89,3 +89,5 @@ Type@10ms "!" Enter
 Sleep 2s
 Type@10ms '"' Enter
 Sleep 2s
+Type@10ms '£' Enter
+Sleep 2s
