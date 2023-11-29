@@ -8,7 +8,7 @@ use InvalidArgumentException;
 use PhpTui\Tui\Model\Color\RgbColor;
 use PHPUnit\Framework\TestCase;
 
-class RgbColorTest extends TestCase
+final class RgbColorTest extends TestCase
 {
     public function testFromRgbOutOfRange(): void
     {

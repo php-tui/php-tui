@@ -10,7 +10,7 @@ namespace PhpTui\Tui\Model\Canvas;
  * Each painter should *return immediately* if the widget is not of the correct
  * type.
  */
-class AggregateShapePainter implements ShapePainter
+final class AggregateShapePainter implements ShapePainter
 {
     /**
      * @param ShapePainter[] $painters

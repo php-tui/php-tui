@@ -6,7 +6,7 @@ namespace PhpTui\Tui\Model\Constraint;
 
 use PhpTui\Tui\Model\Layout\Constraint;
 
-class PercentageConstraint extends Constraint
+final class PercentageConstraint extends Constraint
 {
     public function __construct(public int $percentage)
     {

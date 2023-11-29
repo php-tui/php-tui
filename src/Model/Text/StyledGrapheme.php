@@ -6,7 +6,7 @@ namespace PhpTui\Tui\Model\Text;
 
 use PhpTui\Tui\Model\Style;
 
-class StyledGrapheme
+final class StyledGrapheme
 {
     public function __construct(
         public string $symbol,

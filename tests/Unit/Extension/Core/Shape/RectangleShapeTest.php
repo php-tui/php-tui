@@ -14,7 +14,7 @@ use PhpTui\Tui\Model\Color\AnsiColor;
 use PhpTui\Tui\Model\Display\Buffer;
 use PhpTui\Tui\Model\Marker;
 
-class RectangleShapeTest extends ShapeTestCase
+final class RectangleShapeTest extends ShapeTestCase
 {
     /**
      * @param array<int,string> $expected

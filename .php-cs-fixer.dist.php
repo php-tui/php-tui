@@ -13,6 +13,7 @@ return (new Config())
     ->setRiskyAllowed(true)
     ->setRules([
         '@PSR12' => true,
+        'final_class' => true,
         'no_unused_imports' => true,
         'phpdoc_to_property_type' => true,
         'declare_strict_types' => true,

@@ -8,7 +8,7 @@ use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Margin;
 use PHPUnit\Framework\TestCase;
 
-class AreaTest extends TestCase
+final class AreaTest extends TestCase
 {
     public function testInnerEmpty(): void
     {

@@ -14,7 +14,7 @@ use PhpTui\Tui\Model\Color\AnsiColor;
 use PhpTui\Tui\Model\Display\Buffer;
 use PhpTui\Tui\Model\Marker;
 
-class PointsShapeTest extends ShapeTestCase
+final class PointsShapeTest extends ShapeTestCase
 {
     /**
      * @dataProvider providePoints

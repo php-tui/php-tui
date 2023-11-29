@@ -8,7 +8,7 @@ use PhpTui\Tui\Model\Color\AnsiColor;
 use PHPUnit\Framework\TestCase;
 use ValueError;
 
-class AnsiColorTest extends TestCase
+final class AnsiColorTest extends TestCase
 {
     public function testFromIndex(): void
     {

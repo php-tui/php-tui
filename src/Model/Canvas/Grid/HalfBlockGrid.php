@@ -13,7 +13,7 @@ use PhpTui\Tui\Model\Color\AnsiColor;
 use PhpTui\Tui\Model\Position\Position;
 use PhpTui\Tui\Model\Symbol\BlockSet;
 
-class HalfBlockGrid extends CanvasGrid
+final class HalfBlockGrid extends CanvasGrid
 {
     public function __construct(
         private readonly Resolution $resolution,

@@ -8,7 +8,7 @@ use PhpTui\Term\Actions;
 use PhpTui\Term\Painter\HtmlCanvasPainter;
 use PHPUnit\Framework\TestCase;
 
-class HtmlCanvasPainterTest extends TestCase
+final class HtmlCanvasPainterTest extends TestCase
 {
     public function testPaint(): void
     {

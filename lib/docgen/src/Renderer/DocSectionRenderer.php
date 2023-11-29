@@ -7,7 +7,7 @@ namespace PhpTui\Docgen\Renderer;
 use PhpTui\Docgen\DocRenderer;
 use PhpTui\Docgen\DocSection;
 
-class DocSectionRenderer implements DocRenderer
+final class DocSectionRenderer implements DocRenderer
 {
     public function render(DocRenderer $renderer, object $object): ?string
     {

@@ -8,7 +8,7 @@ use PhpTui\Tui\Model\Color;
 use PhpTui\Tui\Model\Position\FloatPosition;
 use PhpTui\Tui\Model\Position\Position;
 
-class Painter
+final class Painter
 {
     public function __construct(public CanvasContext $context, public Resolution $resolution)
     {

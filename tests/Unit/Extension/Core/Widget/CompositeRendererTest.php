@@ -12,7 +12,7 @@ use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Display\Buffer;
 use PhpTui\Tui\Model\Widget\Borders;
 
-class CompositeRendererTest extends WidgetTestCase
+final class CompositeRendererTest extends WidgetTestCase
 {
     public function testComposite(): void
     {

@@ -11,7 +11,7 @@ use PhpTui\Tui\Model\Display\Backend\DummyBackend;
 use PhpTui\Tui\Model\Marker;
 use PHPUnit\Framework\TestCase;
 
-class ImageRendererTest extends TestCase
+final class ImageRendererTest extends TestCase
 {
     public function testImageWidget(): void
     {

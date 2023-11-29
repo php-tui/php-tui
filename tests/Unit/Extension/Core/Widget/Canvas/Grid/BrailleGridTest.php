@@ -9,7 +9,7 @@ use PhpTui\Tui\Model\Color\AnsiColor;
 use PhpTui\Tui\Model\Position\Position;
 use PHPUnit\Framework\TestCase;
 
-class BrailleGridTest extends TestCase
+final class BrailleGridTest extends TestCase
 {
     public function testZeroSize(): void
     {

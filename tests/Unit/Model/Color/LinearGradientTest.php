@@ -10,7 +10,7 @@ use PhpTui\Tui\Model\Position\FractionalPosition;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 
-class LinearGradientTest extends TestCase
+final class LinearGradientTest extends TestCase
 {
     /**
      * Get the gradient at 0.25 where R at 0 is 0 and at 0.5 it is 10

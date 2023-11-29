@@ -14,7 +14,7 @@ use PhpTui\BDF\BdfSize;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 
-class BdfParserTest extends TestCase
+final class BdfParserTest extends TestCase
 {
     public function testParseFont6x10(): void
     {

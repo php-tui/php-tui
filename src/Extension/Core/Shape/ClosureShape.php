@@ -11,7 +11,7 @@ use PhpTui\Tui\Model\Canvas\Shape;
 /**
  * Shape that can write directly to the Painter context
  */
-class ClosureShape implements Shape
+final class ClosureShape implements Shape
 {
     /**
      * @param Closure(Painter):void $closure

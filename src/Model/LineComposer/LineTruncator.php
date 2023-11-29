@@ -9,7 +9,7 @@ use PhpTui\Tui\Model\HorizontalAlignment;
 use PhpTui\Tui\Model\LineComposer;
 use PhpTui\Tui\Model\Text\StyledGrapheme;
 
-class LineTruncator implements LineComposer
+final class LineTruncator implements LineComposer
 {
     /**
      * @param list<array{list<StyledGrapheme>,HorizontalAlignment}> $lines

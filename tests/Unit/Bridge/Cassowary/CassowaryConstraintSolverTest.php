@@ -10,7 +10,7 @@ use PhpTui\Tui\Model\Layout\Constraint;
 use PhpTui\Tui\Model\Layout\Layout;
 use PHPUnit\Framework\TestCase;
 
-class CassowaryConstraintSolverTest extends TestCase
+final class CassowaryConstraintSolverTest extends TestCase
 {
     public function testPercentage(): void
     {

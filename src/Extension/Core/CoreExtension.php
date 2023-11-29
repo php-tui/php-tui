@@ -24,7 +24,7 @@ use PhpTui\Tui\Extension\Core\Widget\ScrollbarRenderer;
 use PhpTui\Tui\Extension\Core\Widget\TableRenderer;
 use PhpTui\Tui\Model\Display\DisplayExtension;
 
-class CoreExtension implements DisplayExtension
+final class CoreExtension implements DisplayExtension
 {
     public function shapePainters(): array
     {

@@ -18,7 +18,7 @@ use RuntimeException;
  *
  * The label is the percentage of the bar filled by default but can be overridden.
  */
-class GaugeWidget implements Widget
+final class GaugeWidget implements Widget
 {
     private function __construct(
         /**

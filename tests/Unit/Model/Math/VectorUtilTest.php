@@ -9,7 +9,7 @@ use PhpTui\Tui\Model\Math\VectorUtil;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
-class VectorUtilTest extends TestCase
+final class VectorUtilTest extends TestCase
 {
     /**
      * @param list<number> $vector

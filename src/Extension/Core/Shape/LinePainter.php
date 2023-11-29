@@ -9,7 +9,7 @@ use PhpTui\Tui\Model\Canvas\Shape;
 use PhpTui\Tui\Model\Canvas\ShapePainter;
 use PhpTui\Tui\Model\Position\Position;
 
-class LinePainter implements ShapePainter
+final class LinePainter implements ShapePainter
 {
     public function draw(ShapePainter $shapePainter, Painter $painter, Shape $shape): void
     {

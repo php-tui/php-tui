@@ -22,7 +22,7 @@ use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\Widget\Borders;
 use PhpTui\Tui\Model\Widget\BorderType;
 
-class BlocksPage implements Component
+final class BlocksPage implements Component
 {
     public function build(): Widget
     {

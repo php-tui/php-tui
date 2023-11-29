@@ -9,7 +9,7 @@ use PhpTui\Tui\Extension\Core\Widget\BarChart\BarGroup;
 use PhpTui\Tui\Model\Text\Line;
 use PHPUnit\Framework\TestCase;
 
-class BarGroupTest extends TestCase
+final class BarGroupTest extends TestCase
 {
     public function testFrom(): void
     {

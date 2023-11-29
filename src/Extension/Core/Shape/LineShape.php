@@ -12,7 +12,7 @@ use PhpTui\Tui\Model\Position\FloatPosition;
 /**
  * Draw a straight line from one point to another.
  */
-class LineShape implements Shape
+final class LineShape implements Shape
 {
     public function __construct(
         /**

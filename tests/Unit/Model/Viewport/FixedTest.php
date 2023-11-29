@@ -12,7 +12,7 @@ use PhpTui\Tui\Model\Display\ClearType;
 use PhpTui\Tui\Model\Position\Position;
 use PHPUnit\Framework\TestCase;
 
-class FixedTest extends TestCase
+final class FixedTest extends TestCase
 {
     public function testClear(): void
     {

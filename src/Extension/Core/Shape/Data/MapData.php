@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Extension\Core\Shape\Data;
 
-class MapData
+final class MapData
 {
     /**
      * @return list<array{float,float}>

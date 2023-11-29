@@ -13,7 +13,7 @@ use PhpTui\Tui\Model\Canvas\CanvasContext;
 use PhpTui\Tui\Model\Display\Buffer;
 use PhpTui\Tui\Model\Marker;
 
-class CircleShapeTest extends ShapeTestCase
+final class CircleShapeTest extends ShapeTestCase
 {
     /**
      * @dataProvider provideCircle

@@ -10,7 +10,7 @@ use PhpTui\Tui\Model\Layout\Constraint;
 use PhpTui\Tui\Model\Layout\Layout;
 use PHPUnit\Framework\TestCase;
 
-class LayoutTest extends TestCase
+final class LayoutTest extends TestCase
 {
     public function testVerticalSplitByHeight(): void
     {

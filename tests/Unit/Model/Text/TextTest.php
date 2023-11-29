@@ -10,7 +10,7 @@ use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Text\Text;
 use PHPUnit\Framework\TestCase;
 
-class TextTest extends TestCase
+final class TextTest extends TestCase
 {
     public function testRaw(): void
     {

@@ -11,7 +11,7 @@ use PhpTui\Tui\Model\Display\Buffer;
 use PhpTui\Tui\Model\Text\Span;
 use PhpTui\Tui\Model\Widget;
 
-class GaugeRendererTest extends WidgetTestCase
+final class GaugeRendererTest extends WidgetTestCase
 {
     /**
      * @dataProvider provideGaugeRender

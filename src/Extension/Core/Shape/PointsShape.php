@@ -10,7 +10,7 @@ use PhpTui\Tui\Model\Color;
 /**
  * Render a set of points on the canvas.
  */
-class PointsShape implements Shape
+final class PointsShape implements Shape
 {
     /**
      * @param array<int,array{float,float}> $coords

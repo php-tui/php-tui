@@ -7,7 +7,7 @@ namespace PhpTui\Tui\Extension\Core\Widget\BarChart;
 use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Text\Line;
 
-class BarGroup
+final class BarGroup
 {
     public function __construct(
         /**

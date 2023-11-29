@@ -12,7 +12,7 @@ use Traversable;
 /**
  * @implements IteratorAggregate<Label>
  */
-class Labels implements IteratorAggregate
+final class Labels implements IteratorAggregate
 {
     /**
      * @param array<int,Label> $labels

@@ -13,7 +13,7 @@ use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Text\Span;
 
-class ChartWidgetTest extends WidgetTestCase
+final class ChartWidgetTest extends WidgetTestCase
 {
     public function testRender(): void
     {

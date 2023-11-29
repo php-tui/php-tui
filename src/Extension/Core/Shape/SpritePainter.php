@@ -10,7 +10,7 @@ use PhpTui\Tui\Model\Canvas\ShapePainter;
 use PhpTui\Tui\Model\Position\FloatPosition;
 use PhpTui\Tui\Model\Position\FractionalPosition;
 
-class SpritePainter implements ShapePainter
+final class SpritePainter implements ShapePainter
 {
     public function draw(ShapePainter $shapePainter, Painter $painter, Shape $shape): void
     {

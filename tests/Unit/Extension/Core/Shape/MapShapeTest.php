@@ -14,7 +14,7 @@ use PhpTui\Tui\Model\Canvas\CanvasContext;
 use PhpTui\Tui\Model\Display\Buffer;
 use PhpTui\Tui\Model\Marker;
 
-class MapShapeTest extends ShapeTestCase
+final class MapShapeTest extends ShapeTestCase
 {
     /**
      * @param array<int,string> $expected

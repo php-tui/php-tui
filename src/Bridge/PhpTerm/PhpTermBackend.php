@@ -30,7 +30,7 @@ use PhpTui\Tui\Model\Position\FractionalPosition;
 use PhpTui\Tui\Model\Position\Position;
 use RuntimeException;
 
-class PhpTermBackend implements Backend
+final class PhpTermBackend implements Backend
 {
     public function __construct(
         private readonly PhpTermTerminal $terminal,

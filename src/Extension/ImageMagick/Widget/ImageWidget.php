@@ -11,7 +11,7 @@ use RuntimeException;
 /**
  * Render an image on a canvas matching the dimensions of the image.
  */
-class ImageWidget implements Widget
+final class ImageWidget implements Widget
 {
     public function __construct(
         /**

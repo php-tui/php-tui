@@ -11,7 +11,7 @@ use PhpTui\Tui\Model\Position\Position;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\WidgetRenderer;
 
-class ListRenderer implements WidgetRenderer
+final class ListRenderer implements WidgetRenderer
 {
     public function render(WidgetRenderer $renderer, Widget $widget, Buffer $buffer): void
     {

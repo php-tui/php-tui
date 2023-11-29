@@ -8,7 +8,7 @@ use PhpTui\Docgen\DocClass;
 use PhpTui\Docgen\DocExampleType;
 use PhpTui\Docgen\DocRenderer;
 
-class DocClassRenderer implements DocRenderer
+final class DocClassRenderer implements DocRenderer
 {
     public function __construct()
     {

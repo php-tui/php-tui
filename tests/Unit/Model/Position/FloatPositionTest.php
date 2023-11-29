@@ -8,7 +8,7 @@ use PhpTui\Tui\Model\AxisBounds;
 use PhpTui\Tui\Model\Position\FloatPosition;
 use PHPUnit\Framework\TestCase;
 
-class FloatPositionTest extends TestCase
+final class FloatPositionTest extends TestCase
 {
     public function testOutOfBounds(): void
     {

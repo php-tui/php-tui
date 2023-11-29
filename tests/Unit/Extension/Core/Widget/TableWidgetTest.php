@@ -12,7 +12,7 @@ use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Display\Buffer;
 use PhpTui\Tui\Model\Layout\Constraint;
 
-class TableWidgetTest extends WidgetTestCase
+final class TableWidgetTest extends WidgetTestCase
 {
     /**
      * @dataProvider provideTableRender

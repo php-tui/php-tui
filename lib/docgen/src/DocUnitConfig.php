@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PhpTui\Docgen;
 
-class DocUnitConfig
+final class DocUnitConfig
 {
     /**
      * @param class-string $className

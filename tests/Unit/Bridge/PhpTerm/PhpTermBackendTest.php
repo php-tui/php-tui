@@ -25,7 +25,7 @@ use PhpTui\Tui\Model\Style;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 
-class PhpTermBackendTest extends TestCase
+final class PhpTermBackendTest extends TestCase
 {
     public function testDisableRawModeAfterGettingCursorPosition(): void
     {

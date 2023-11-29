@@ -19,7 +19,7 @@ use PhpTui\Tui\Model\Text\Title;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\Widget\Borders;
 
-class ChartPage implements Component
+final class ChartPage implements Component
 {
     private int $tick = 0;
 

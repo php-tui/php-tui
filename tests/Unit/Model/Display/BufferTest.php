@@ -18,7 +18,7 @@ use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Text\Line;
 use PHPUnit\Framework\TestCase;
 
-class BufferTest extends TestCase
+final class BufferTest extends TestCase
 {
     public function testEmpty(): void
     {

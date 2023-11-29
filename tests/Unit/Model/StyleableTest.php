@@ -9,7 +9,7 @@ use PhpTui\Tui\Model\Modifier;
 use PhpTui\Tui\Model\Text\Span;
 use PHPUnit\Framework\TestCase;
 
-class StyleableTest extends TestCase
+final class StyleableTest extends TestCase
 {
     public function testFgBg(): void
     {

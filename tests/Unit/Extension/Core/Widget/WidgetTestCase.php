@@ -15,7 +15,7 @@ use PhpTui\Tui\Model\WidgetRenderer\AggregateWidgetRenderer;
 use PhpTui\Tui\Model\WidgetRenderer\NullWidgetRenderer;
 use PHPUnit\Framework\TestCase;
 
-class WidgetTestCase extends TestCase
+abstract class WidgetTestCase extends TestCase
 {
     protected function render(Buffer $buffer, Widget $widget): void
     {

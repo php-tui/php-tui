@@ -24,7 +24,7 @@ use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\Widget\Borders;
 use PhpTui\Tui\Model\Widget\BorderType;
 
-class SpritePage implements Component
+final class SpritePage implements Component
 {
     public const WIDTH = 100;
     public const HEIGHT = 30;

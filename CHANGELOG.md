@@ -18,6 +18,7 @@ Improvements:
 
 Refactoring:
 
+- Make all classes final #186
 - Added int range type hints
 - Split `term` into a separate package.
 

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Extension\Core\Widget\Table;
 
-class TableState
+final class TableState
 {
     public function __construct(
         public int $offset = 0,
