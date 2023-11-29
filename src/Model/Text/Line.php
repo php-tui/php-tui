@@ -47,10 +47,7 @@ final class Line implements IteratorAggregate, Stringable, Styleable
         );
     }
 
-    /**
-     * @param Span[] $spans
-     */
-    public static function fromSpans(array $spans): self
+    public static function fromSpans(Span ...$spans): self
     {
         return new self($spans);
     }
@@ -65,7 +62,7 @@ final class Line implements IteratorAggregate, Stringable, Styleable
     public static function parse(string $string): self
     {
         return self::fromSpans(
-            SpanParser::new()->parse($string)
+            ...SpanParser::new()->parse($string)
         );
     }
 

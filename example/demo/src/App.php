@@ -38,7 +38,6 @@ use PhpTui\Tui\Model\HorizontalAlignment;
 use PhpTui\Tui\Model\Layout\Constraint;
 use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Text\Line;
-use PhpTui\Tui\Model\Text\Span;
 use PhpTui\Tui\Model\Text\Title;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\Widget\Borders;
@@ -241,9 +240,7 @@ final class App
                     TabsWidget::fromTitles(
                         Line::parse('<fg=red>[q]</>uit'),
                         ...array_reduce(ActivePage::cases(), function (array $lines, ActivePage $page) {
-                            $lines[] = Line::fromSpans([
-                                Span::fromString(sprintf('%s', $page->navItem()->label)),
-                            ]);
+                            $lines[] = Line::fromString(sprintf('%s', $page->navItem()->label));
 
                             return $lines;
                         }, []),
