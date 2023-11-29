@@ -6,8 +6,8 @@ namespace PhpTui\Tui\Example\Demo\Page;
 
 use PhpTui\Term\Event;
 use PhpTui\Tui\Example\Demo\Component;
-use PhpTui\Tui\Extension\Core\Widget\BlockWidget;
 use PhpTui\Tui\Extension\Core\Widget\Block\Padding;
+use PhpTui\Tui\Extension\Core\Widget\BlockWidget;
 use PhpTui\Tui\Extension\Core\Widget\GridWidget;
 use PhpTui\Tui\Extension\Core\Widget\List\ListItem;
 use PhpTui\Tui\Extension\Core\Widget\ListWidget;
@@ -46,9 +46,9 @@ final class EventsPage implements Component
                             Line::parse('<fg=white>Below you can see a log of all the input events, try moving the mouse!</> 🐭'),
                         ),
                     ),
-               BlockWidget::default()->titles(Title::fromString('Event log'))->borders(Borders::ALL)
+                BlockWidget::default()->titles(Title::fromString('Event log'))->borders(Borders::ALL)
                    ->widget(
-                        ListWidget::default()
+                       ListWidget::default()
                             ->items(...array_map(fn (Event $event) => ListItem::new(Text::fromString($event->__toString())), $this->events))
                    )
             )
