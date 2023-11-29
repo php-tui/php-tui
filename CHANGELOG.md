@@ -1,7 +1,7 @@
 CHANGELOG
 =========
 
-## master
+## 0.1.0
 
 Features:
 
