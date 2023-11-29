@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Example\Demo\Page;
 
 use PhpTui\Term\Event;
@@ -12,16 +14,18 @@ use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Text\Title;
 use PhpTui\Tui\Model\Widget;
 
-class SparklinePage implements Component
+final class SparklinePage implements Component
 {
     /**
      * @var list<int<0,max>>
      */
     private array $data1;
+
     /**
      * @var list<int<0,max>>
      */
     private array $data2;
+
     /**
      * @var list<int<0,max>>
      */
