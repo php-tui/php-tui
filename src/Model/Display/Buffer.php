@@ -221,9 +221,9 @@ final class Buffer implements Countable, Stringable
         return $position;
     }
 
-    public function putSpan(Position $position, Span $span, int $width): void
+    public function putSpan(Position $position, Span $span, int $width): Position
     {
-        $this->putString(
+        return $this->putString(
             $position,
             $span->content,
             $span->style,

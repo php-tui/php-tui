@@ -28,18 +28,65 @@ final class TabsRendererTest extends WidgetTestCase
      */
     public static function provideTableRender(): Generator
     {
-        yield 'not enough rows' => [
-            Area::fromDimensions(10, 4),
+        yield 'zero tabs' => [
+            Area::fromDimensions(20, 2),
+            TabsWidget::default(),
+            [
+                '                    ',
+                '                    ',
+            ]
+           ,
+        ];
+        yield 'one tab' => [
+            Area::fromDimensions(20, 2),
+            TabsWidget::default()
+                ->titles(
+                    Line::fromString('Tab 1'),
+                ),
+            [
+                ' Tab 1              ',
+                '                    ',
+            ]
+           ,
+        ];
+        yield 'two tabs' => [
+            Area::fromDimensions(20, 2),
             TabsWidget::default()
                 ->titles(
                     Line::fromString('Tab 1'),
                     Line::fromString('Tab 2'),
                 ),
             [
-                ' Tab 1 Tab',
-                '          ',
-                '          ',
-                '          ',
+                ' Tab 1 │ Tab 2      ',
+                '                    ',
+            ]
+           ,
+        ];
+        yield 'select tabs' => [
+            Area::fromDimensions(20, 2),
+            TabsWidget::default()
+                ->select(1)
+                ->titles(
+                    Line::fromString('Tab 1'),
+                    Line::fromString('Tab 2'),
+                ),
+            [
+                ' Tab 1 │ Tab 2      ',
+                '                    ',
+            ]
+           ,
+        ];
+        yield 'select out of range' => [
+            Area::fromDimensions(20, 2),
+            TabsWidget::default()
+                ->select(100)
+                ->titles(
+                    Line::fromString('Tab 1'),
+                    Line::fromString('Tab 2'),
+                ),
+            [
+                ' Tab 1 │ Tab 2      ',
+                '                    ',
             ]
            ,
         ];
