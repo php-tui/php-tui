@@ -15,7 +15,7 @@ PHP TUI library heavily inspired by Rust TUI /
 Features
 --------
 
-- Many widgets and shapes from Ratatui.
+- Most widgets and shapes from Ratatui.
 - Advanced terminal control heavily inspired by Rust's [crossterm](https://github.com/crossterm-rs/crossterm) library.
 - Font and image rendering
 - Layout control using the Cassowary algorithm via. [php-tui cassowary](https://github.com/php-tui/cassowary)
@@ -43,24 +43,6 @@ Checkout the project and run:
 ```
 ./example/demo/bin/demo
 ```
-
-Widgets
--------
-
-Status of widget porting from Ratatui:
-
-- [x] Canvas
-- [x] Chart
-- [x] Block
-- [x] Paragraph
-- [x] List
-- [x] Table
-- [x] Tabs
-- [ ] Calendar
-- [x] Barchart
-- [x] Scrollbar
-- [ ] Sparkline
-- [x] Gauge
 
 Limitations
 -----------
