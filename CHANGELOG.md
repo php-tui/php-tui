@@ -24,6 +24,10 @@ Refactoring:
 - Added int range type hints
 - Split `term` into a separate package.
 
+Bug fixes:
+
+- Fix multibyte issues with `parse()` #192 @KennedyTedesco
+
 ## 0.0.2
 
 Features:

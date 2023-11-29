@@ -14,7 +14,6 @@ use PhpTui\Tui\Extension\Core\Widget\ListWidget;
 use PhpTui\Tui\Extension\Core\Widget\ParagraphWidget;
 use PhpTui\Tui\Model\Layout\Constraint;
 use PhpTui\Tui\Model\Text\Line;
-use PhpTui\Tui\Model\Text\Span;
 use PhpTui\Tui\Model\Text\Text;
 use PhpTui\Tui\Model\Text\Title;
 use PhpTui\Tui\Model\Widget;
@@ -37,11 +36,7 @@ final class EventsPage implements Component
                     ->padding(Padding::left(1))
                     ->widget(
                         ParagraphWidget::fromLines(
-                            Line::fromSpans([
-                                Span::fromString('Welcome to the '),
-                                Span::fromString('PHP-TUI 🐘')->bold(),
-                                Span::fromString(' demo application.'),
-                            ]),
+                            Line::parse('Welcome to the <fg=white;options=bold>PHP-TUI 🐘</> demo application.'),
                             Line::parse('Use the <fg=#ffa500>tab</> to go to the next page and <fg=#ffa500>shift-tab</> to go to the previous page.'),
                             Line::parse('<fg=white>Below you can see a log of all the input events, try moving the mouse!</> 🐭'),
                         ),

@@ -44,12 +44,12 @@ final class SpanParser
                 continue;
             }
 
-            $textBeforeTag = mb_substr($input, $offset, $pos - $offset);
+            $textBeforeTag = substr($input, $offset, $pos - $offset);
             if ($textBeforeTag !== '') {
                 $spans[] = $this->createSpan($textBeforeTag, $styleStack);
             }
 
-            $offset = $pos + mb_strlen($tag);
+            $offset = $pos + strlen($tag);
 
             $isOpeningTag = $tag[1] !== '/';
             if ($isOpeningTag) {
@@ -60,8 +60,8 @@ final class SpanParser
             }
         }
 
-        if ($offset < mb_strlen($input)) {
-            $spans[] = $this->createSpan(mb_substr($input, $offset), $styleStack);
+        if ($offset < strlen($input)) {
+            $spans[] = $this->createSpan(substr($input, $offset), $styleStack);
         }
 
         return $spans;

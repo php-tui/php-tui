@@ -282,4 +282,34 @@ final class SpanParserTest extends TestCase
         $spans = SpanParser::new()->parse('<fg=white bg=red>Hello</> World');
         self::assertCount(2, $spans);
     }
+
+    public function testMultiWidthCharacters(): void
+    {
+        $spans = SpanParser::new()->parse('<fg=green>Hello 你好 PHP 🐘<fg=white>PHP 🐘 Hello 你好</></>');
+        self::assertCount(2, $spans);
+
+        $firstSpan = $spans[0];
+        self::assertSame('Hello 你好 PHP 🐘', $firstSpan->content);
+        self::assertSame(AnsiColor::Green, $firstSpan->style->fg);
+
+        $secondSpan = $spans[1];
+        self::assertSame('PHP 🐘 Hello 你好', $secondSpan->content);
+        self::assertSame(AnsiColor::White, $secondSpan->style->fg);
+
+        $spans = SpanParser::new()->parse('Welcome to the <fg=white;options=bold>PHP-TUI 🐘</> demo application.');
+        self::assertCount(3, $spans);
+
+        $firstSpan = $spans[0];
+        self::assertSame('Welcome to the ', $firstSpan->content);
+        self::assertNull($firstSpan->style->fg);
+
+        $secondSpan = $spans[1];
+        self::assertSame('PHP-TUI 🐘', $secondSpan->content);
+        self::assertSame(AnsiColor::White, $secondSpan->style->fg);
+        self::assertTrue(($secondSpan->style->addModifiers & Modifier::BOLD) === Modifier::BOLD);
+
+        $thirdSpan = $spans[2];
+        self::assertSame(' demo application.', $thirdSpan->content);
+        self::assertNull($thirdSpan->style->fg);
+    }
 }
