@@ -10,7 +10,7 @@ use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\WidgetRenderer;
 use RuntimeException;
 
-class GridRenderer implements WidgetRenderer
+final class GridRenderer implements WidgetRenderer
 {
     public function render(WidgetRenderer $renderer, Widget $widget, Buffer $buffer): void
     {

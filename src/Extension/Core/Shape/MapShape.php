@@ -11,7 +11,7 @@ use PhpTui\Tui\Model\Color\AnsiColor;
 /**
  * Renders a map of the world!
  */
-class MapShape implements Shape
+final class MapShape implements Shape
 {
     public function __construct(
         /**

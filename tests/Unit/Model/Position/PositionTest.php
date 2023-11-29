@@ -8,7 +8,7 @@ use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Position\Position;
 use PHPUnit\Framework\TestCase;
 
-class PositionTest extends TestCase
+final class PositionTest extends TestCase
 {
     public function testReturnsIndexForPosition(): void
     {

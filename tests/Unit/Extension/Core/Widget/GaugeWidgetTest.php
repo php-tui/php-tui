@@ -8,7 +8,7 @@ use PhpTui\Tui\Extension\Core\Widget\GaugeWidget;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 
-class GaugeWidgetTest extends TestCase
+final class GaugeWidgetTest extends TestCase
 {
     public function testInvalidRange(): void
     {

@@ -14,7 +14,7 @@ use PhpTui\Tui\Model\WidgetRenderer;
  * It should typically be used as the "renderer" when
  * calling the aggregate renderer to satisfy the contract.
  */
-class NullWidgetRenderer implements WidgetRenderer
+final class NullWidgetRenderer implements WidgetRenderer
 {
     public function render(WidgetRenderer $renderer, Widget $widget, Buffer $buffer): void
     {

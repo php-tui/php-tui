@@ -15,7 +15,7 @@ use PhpTui\Tui\Model\WidgetRenderer;
  * This renderer will always pass _itself_ as the renderer to the passed in widgets
  * and so the `$renderer` parameter is unused.
  */
-class AggregateWidgetRenderer implements WidgetRenderer
+final class AggregateWidgetRenderer implements WidgetRenderer
 {
     /**
      * @param WidgetRenderer[] $renderers

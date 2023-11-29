@@ -17,7 +17,7 @@ use PhpTui\Tui\Model\Display\Cell;
 use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Model\Text\Line as DTLLine;
 
-class CanvasWidgetTest extends WidgetTestCase
+final class CanvasWidgetTest extends WidgetTestCase
 {
     public function testFromIntBounds(): void
     {

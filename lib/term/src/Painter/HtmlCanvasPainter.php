@@ -19,7 +19,7 @@ use PhpTui\Term\Colors;
 use PhpTui\Term\Painter;
 use RuntimeException;
 
-class HtmlCanvasPainter implements Painter
+final class HtmlCanvasPainter implements Painter
 {
     /**
      * @var list<string>

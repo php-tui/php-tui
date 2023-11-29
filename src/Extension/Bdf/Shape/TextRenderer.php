@@ -11,7 +11,7 @@ use PhpTui\Tui\Model\Canvas\Shape;
 use PhpTui\Tui\Model\Canvas\ShapePainter;
 use PhpTui\Tui\Model\Position\FloatPosition;
 
-class TextRenderer implements ShapePainter
+final class TextRenderer implements ShapePainter
 {
     public function __construct(
         private readonly FontRegistry $registry,

@@ -7,7 +7,7 @@ namespace PhpTui\Tui\Tests\Unit\Extension\Core\Widget\Block;
 use PhpTui\Tui\Extension\Core\Widget\Block\Padding;
 use PHPUnit\Framework\TestCase;
 
-class PaddingTest extends TestCase
+final class PaddingTest extends TestCase
 {
     public function testAll(): void
     {

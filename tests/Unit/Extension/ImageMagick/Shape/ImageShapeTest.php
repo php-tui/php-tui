@@ -18,7 +18,7 @@ use PhpTui\Tui\Model\Widget\CanvasRenderer;
 use PhpTui\Tui\Model\WidgetRenderer\NullWidgetRenderer;
 use PHPUnit\Framework\TestCase;
 
-class ImageShapeTest extends TestCase
+final class ImageShapeTest extends TestCase
 {
     /**
      * @dataProvider provideImage

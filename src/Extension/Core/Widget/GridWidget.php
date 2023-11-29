@@ -13,7 +13,7 @@ use PhpTui\Tui\Model\Widget;
  *
  * Widgets can be supplied to fill the cells corresponding to the resolved constraints.
  */
-class GridWidget implements Widget
+final class GridWidget implements Widget
 {
     private function __construct(
         /**

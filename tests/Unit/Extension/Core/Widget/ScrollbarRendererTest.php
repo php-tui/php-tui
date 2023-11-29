@@ -13,7 +13,7 @@ use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Display\Buffer;
 use PhpTui\Tui\Model\Widget;
 
-class ScrollbarRendererTest extends WidgetTestCase
+final class ScrollbarRendererTest extends WidgetTestCase
 {
     /**
      * @dataProvider provideScrollbarRender

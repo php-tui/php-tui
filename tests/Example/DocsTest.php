@@ -11,7 +11,7 @@ use PhpTui\Term\Painter\StringPainter;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 
-class DocsTest extends TestCase
+final class DocsTest extends TestCase
 {
     final public const WIDTH = 80;
     final public const HEIGHT = 20;

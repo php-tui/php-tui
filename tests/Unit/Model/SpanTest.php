@@ -9,7 +9,7 @@ use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Text\Span;
 use PHPUnit\Framework\TestCase;
 
-class SpanTest extends TestCase
+final class SpanTest extends TestCase
 {
     public function testToStyledGraphemes(): void
     {

@@ -15,7 +15,7 @@ use PhpTui\Tui\Model\Widget;
 /**
  * This widget has the ability to show and wrap text.
  */
-class ParagraphWidget implements Widget
+final class ParagraphWidget implements Widget
 {
     /** @param array{int,int} $scroll */
     private function __construct(

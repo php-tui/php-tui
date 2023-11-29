@@ -16,7 +16,7 @@ use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Model\Position\Position;
 use PHPUnit\Framework\TestCase;
 
-class DisplayTest extends TestCase
+final class DisplayTest extends TestCase
 {
     public function testAutoresize(): void
     {

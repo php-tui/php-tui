@@ -12,7 +12,7 @@ use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\WidgetRenderer;
 
-class ImageRenderer implements WidgetRenderer
+final class ImageRenderer implements WidgetRenderer
 {
     public function __construct(private readonly ImageRegistry $registry)
     {

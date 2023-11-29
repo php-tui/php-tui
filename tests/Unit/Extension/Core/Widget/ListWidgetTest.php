@@ -12,7 +12,7 @@ use PhpTui\Tui\Model\Corner;
 use PhpTui\Tui\Model\Display\Buffer;
 use PhpTui\Tui\Model\Text\Text;
 
-class ListWidgetTest extends WidgetTestCase
+final class ListWidgetTest extends WidgetTestCase
 {
     /**
      * @dataProvider provideRenderList

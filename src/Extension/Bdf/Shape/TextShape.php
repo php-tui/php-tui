@@ -15,7 +15,7 @@ use PhpTui\Tui\Model\Position\FloatPosition;
  * You can use the `PhpTui\Tui\Adapter\Bdf\FontRegistry` to
  *  load and manage fonts. It has a default font built in.
  */
-class TextShape implements Shape
+final class TextShape implements Shape
 {
     public function __construct(
         /**

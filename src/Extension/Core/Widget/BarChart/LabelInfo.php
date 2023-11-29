@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Extension\Core\Widget\BarChart;
 
-class LabelInfo
+final class LabelInfo
 {
     public function __construct(
         public readonly bool $groupLabelVisible,

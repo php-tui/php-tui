@@ -14,7 +14,7 @@ use PhpTui\Tui\Model\Widget;
 /**
  * The List widget allows you to list and highlight items.
  */
-class ListWidget implements Widget
+final class ListWidget implements Widget
 {
     /**
      * @param list<ListItem> $items

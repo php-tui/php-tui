@@ -6,7 +6,7 @@ namespace PhpTui\Tui\Model\Constraint;
 
 use PhpTui\Tui\Model\Layout\Constraint;
 
-class LengthConstraint extends Constraint
+final class LengthConstraint extends Constraint
 {
     public function __construct(public int $length)
     {

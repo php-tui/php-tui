@@ -7,7 +7,7 @@ namespace PhpTui\Tui\Tests\Unit\Model\Position;
 use PhpTui\Tui\Model\Position\FractionalPosition;
 use PHPUnit\Framework\TestCase;
 
-class FractionalPositionTest extends TestCase
+final class FractionalPositionTest extends TestCase
 {
     public function testRotate(): void
     {

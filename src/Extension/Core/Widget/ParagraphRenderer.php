@@ -17,7 +17,7 @@ use PhpTui\Tui\Model\Text\StyledGrapheme;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\WidgetRenderer;
 
-class ParagraphRenderer implements WidgetRenderer
+final class ParagraphRenderer implements WidgetRenderer
 {
     public function render(WidgetRenderer $renderer, Widget $widget, Buffer $buffer): void
     {

@@ -16,7 +16,7 @@ use PhpTui\Tui\Model\Text\Text;
 use PhpTui\Tui\Model\Widget\Borders;
 use RuntimeException;
 
-class GridWidgetTest extends WidgetTestCase
+final class GridWidgetTest extends WidgetTestCase
 {
     /**
      * @dataProvider provideGridRender

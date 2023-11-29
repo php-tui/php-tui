@@ -7,7 +7,7 @@ namespace PhpTui\Tui\Model\Canvas;
 use PhpTui\Tui\Model\Position\FloatPosition;
 use PhpTui\Tui\Model\Text\Line;
 
-class Label
+final class Label
 {
     public function __construct(public FloatPosition $position, public Line $line)
     {

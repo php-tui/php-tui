@@ -13,7 +13,7 @@ use PhpTui\Tui\Model\Position\FloatPosition;
  *
  * Each sprite can have a single color but they can be layered on the canvas.
  */
-class SpriteShape implements Shape
+final class SpriteShape implements Shape
 {
     /**
      * @param array<int,string> $rows

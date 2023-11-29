@@ -16,7 +16,7 @@ use Stringable;
  * You can create this object from RGB, HSV or Hexidecimal values using static
  * constructors.
  */
-class RgbColor implements Color, Stringable
+final class RgbColor implements Color, Stringable
 {
     private function __construct(public int $r, public int $g, public int $b)
     {

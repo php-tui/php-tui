@@ -11,7 +11,7 @@ use PhpTui\Tui\Model\Modifier;
 use PhpTui\Tui\Model\Text\SpanParser;
 use PHPUnit\Framework\TestCase;
 
-class SpanParserTest extends TestCase
+final class SpanParserTest extends TestCase
 {
     public function testParseOneTag(): void
     {

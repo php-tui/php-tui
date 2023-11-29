@@ -15,7 +15,7 @@ use PhpTui\Tui\Model\Display\Buffer;
 use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Model\Position\FloatPosition;
 
-class SpriteShapeTest extends ShapeTestCase
+final class SpriteShapeTest extends ShapeTestCase
 {
     /**
      * @dataProvider provideSprite

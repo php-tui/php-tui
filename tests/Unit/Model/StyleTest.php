@@ -9,7 +9,7 @@ use PhpTui\Tui\Model\Modifier;
 use PhpTui\Tui\Model\Style;
 use PHPUnit\Framework\TestCase;
 
-class StyleTest extends TestCase
+final class StyleTest extends TestCase
 {
     public function testDefault(): void
     {

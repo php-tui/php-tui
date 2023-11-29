@@ -9,7 +9,7 @@ use PhpTui\Tui\Model\Color\AnsiColor;
 use PhpTui\Tui\Model\Position\Position;
 use PHPUnit\Framework\TestCase;
 
-class CharGridTest extends TestCase
+final class CharGridTest extends TestCase
 {
     public function testZeroSize(): void
     {

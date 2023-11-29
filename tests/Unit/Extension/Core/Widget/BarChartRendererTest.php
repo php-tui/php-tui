@@ -15,7 +15,7 @@ use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Text\Line;
 use PhpTui\Tui\Model\Widget;
 
-class BarChartRendererTest extends WidgetTestCase
+final class BarChartRendererTest extends WidgetTestCase
 {
     /**
      * @dataProvider provideBarChartRender

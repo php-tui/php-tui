@@ -6,7 +6,7 @@ namespace PhpTui\Tui\Extension\Core\Widget\Chart;
 
 use PhpTui\Tui\Model\Area;
 
-class ChartLayout
+final class ChartLayout
 {
     public function __construct(
         public Area $graphArea,

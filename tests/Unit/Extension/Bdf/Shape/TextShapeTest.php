@@ -19,7 +19,7 @@ use PhpTui\Tui\Model\Widget\CanvasRenderer;
 use PhpTui\Tui\Model\WidgetRenderer\NullWidgetRenderer;
 use PHPUnit\Framework\TestCase;
 
-class TextShapeTest extends TestCase
+final class TextShapeTest extends TestCase
 {
     /**
      * @dataProvider provideTextShape

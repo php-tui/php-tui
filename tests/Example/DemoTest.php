@@ -16,7 +16,7 @@ use PhpTui\Tui\Model\Display\Backend\DummyBackend;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 
-class DemoTest extends TestCase
+final class DemoTest extends TestCase
 {
     public function testHome(): void
     {
