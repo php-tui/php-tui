@@ -1,6 +1,12 @@
 CHANGELOG
 =========
 
+## master
+
+Improvements:
+
+- Improve the gauge label style when filled #195 @KennedyTedesco
+
 ## 0.1.0
 
 Features:
