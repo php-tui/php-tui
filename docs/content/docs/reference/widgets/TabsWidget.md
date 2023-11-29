@@ -9,9 +9,9 @@ description: A widget that displays a horizontal set of Tabs with a single tab s
 A widget that displays a horizontal set of Tabs with a single tab selected.
 
 
-Each tab title is stored as a [`Line`] which can be individually styled. The selected tab is set
-using [`Tabs::select`] and styled using [`Tabs::highlight_style`]. The divider can be customized
-with [`Tabs::divider`].
+Each tab title is stored as a `Line` which can be individually styled. The selected tab is set
+using `TabsWidget::select($n)` and styled using `TabsWidget::highlightStyle(...)`. The divider can be customized
+with `TabsWidget::divider('|')`.
 
 ### Example
 
