@@ -1,6 +1,5 @@
 ┌─────────────────────────────────────────────────────────────────────────0 FPS┐
-│[q]quit [1]events [2]canvas [3]chart [4]list [5]table [6]blocks [7]sprite [8]c│
-│olors [9]images [0]scaling [!]guage ["]barchart                               │
+│ [q]uit │ events │ canvas │ chart │ list │ table │ blocks │ sprite │ colors │ │
 └──────────────────────────────────────────────────────────────────────────────┘
 BlackRedGreenYellowBlueMagentaCyanGrayDarkGrayLightRedLightGreenLightYellowLight
 Blue                                                                            
@@ -18,3 +17,4 @@ Saturation: 51, Lightness: 50
  #5f803e  #5e803e  #5d803e  #5c803e  #5b803e  #5a803e  #58803e  #57803e  #56803e
  #55803e  #54803e  #53803e  #52803e  #51803e  #50803e  #4f803e  #4e803e  #4d803e
  #4b803e  #4a803e  #49803e  #48803e  #47803e  #46803e  #45803e  #44803e  #43803e
+ #42803e  #41803e  #40803e  #3e803e  #3e8040  #3e8041  #3e8042  #3e8043  #3e8044

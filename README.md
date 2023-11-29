@@ -55,7 +55,7 @@ Status of widget porting from Ratatui:
 - [x] Paragraph
 - [x] List
 - [x] Table
-- [ ] Tabs
+- [x] Tabs
 - [ ] Calendar
 - [x] Barchart
 - [x] Scrollbar
