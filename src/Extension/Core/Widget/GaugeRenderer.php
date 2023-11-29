@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Extension\Core\Widget;
 
+use PhpTui\Tui\Model\Color\AnsiColor;
 use PhpTui\Tui\Model\Display\Buffer;
 use PhpTui\Tui\Model\Position\FractionalPosition;
 use PhpTui\Tui\Model\Position\Position;
+use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Symbol\BlockSet;
 use PhpTui\Tui\Model\Text\Span;
 use PhpTui\Tui\Model\Widget;
@@ -53,6 +55,11 @@ final class GaugeRenderer implements WidgetRenderer
                     )));
                 } else {
                     $cell->setChar(' ');
+                    $cell->setStyle(
+                        Style::default()
+                            ->bg($widget->style->fg ?? AnsiColor::Reset)
+                            ->fg($widget->style->bg ?? AnsiColor::Reset),
+                    );
                 }
             }
 
