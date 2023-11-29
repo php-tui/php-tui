@@ -29,6 +29,7 @@ use PhpTui\Tui\Extension\Bdf\BdfExtension;
 use PhpTui\Tui\Extension\Core\Widget\BlockWidget;
 use PhpTui\Tui\Extension\Core\Widget\GridWidget;
 use PhpTui\Tui\Extension\Core\Widget\ParagraphWidget;
+use PhpTui\Tui\Extension\Core\Widget\TabsWidget;
 use PhpTui\Tui\Extension\ImageMagick\ImageMagickExtension;
 use PhpTui\Tui\Model\Direction;
 use PhpTui\Tui\Model\Display\Backend;
@@ -214,7 +215,7 @@ final class App
         return GridWidget::default()
             ->direction(Direction::Vertical)
             ->constraints(
-                Constraint::max(4),
+                Constraint::min(3),
                 Constraint::min(1),
             )
             ->widgets(
@@ -234,24 +235,18 @@ final class App
                 ->borders(Borders::ALL)->style(Style::default()->white())
                 ->titles(Title::fromString(sprintf('%d FPS', $this->frameRate()))->horizontalAlignmnet(HorizontalAlignment::Right))
                 ->widget(
-                    ParagraphWidget::fromText(Text::fromLines(
+                    TabsWidget::fromTitles(
                         Line::fromSpans([
                             Span::fromString('[q]')->red(),
-                            Span::fromString('quit '),
-                            ...array_reduce(ActivePage::cases(), function (array $spans, ActivePage $page) {
-                                if ($page === $this->activePage) {
-                                    $spans[] = Span::fromString(sprintf('[%s]', $page->navItem()->shortcut))->white()->onBlue();
-                                    $spans[] = Span::fromString(sprintf('%s ', $page->navItem()->label))->onMagenta()->white();
-
-                                    return $spans;
-                                }
-                                $spans[] = Span::fromString(sprintf('[%s]', $page->navItem()->shortcut))->green();
-                                $spans[] = Span::fromString(sprintf('%s ', $page->navItem()->label));
-
-                                return $spans;
-                            }, []),
+                            Span::fromString('uit'),
                         ]),
-                    ))
+                        ...array_reduce(ActivePage::cases(), function (array $lines, ActivePage $page) {
+                            $lines[] = Line::fromSpans([
+                                Span::fromString(sprintf('%s', $page->navItem()->label)),
+                            ]);
+                            return $lines;
+                        }, []),
+                    )->select($this->activePage->index() + 1)->highlightStyle(Style::default()->white()->onBlue())
                 );
     }
 

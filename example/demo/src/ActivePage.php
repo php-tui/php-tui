@@ -60,4 +60,9 @@ enum ActivePage
 
         throw new RuntimeException('should not happen!');
     }
+
+    public function index(): int
+    {
+        return array_search($this, self::cases());
+    }
 }
