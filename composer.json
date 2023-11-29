@@ -50,6 +50,7 @@
         "phpbench": "php ./vendor/bin/phpbench run --revs=1 --iterations=1",
         "rector": "./vendor/bin/rector process",
         "vhs": "vhs example/demo/demo.tape",
+        "demo": "example/demo/bin/demo",
         "integrate": [
             "@phpunit",
             "@phpstan",

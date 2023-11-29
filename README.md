@@ -10,7 +10,7 @@ PHP TUI
 PHP TUI library heavily inspired by Rust TUI /
 [Ratatui](https://github.com/ratatui-org/ratatui).
 
-![Demo](https://vhs.charm.sh/vhs-5HFprfJ6rSVdmG0teBa6P4.gif)
+![Demo](https://vhs.charm.sh/vhs-5Fmi0Lmn2W9ktdDWuflDlV.gif)
 
 Features
 --------
