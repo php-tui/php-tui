@@ -1,6 +1,5 @@
 ┌─────────────────────────────────────────────────────────────────────────0 FPS┐
-│[q]quit [1]events [2]canvas [3]chart [4]list [5]table [6]blocks [7]sprite [8]c│
-│olors [9]images [0]scaling [!]guage ["]barchart                               │
+│ [q]uit │ events │ canvas │ chart │ list │ table │ blocks │ sprite │ colors │ │
 └──────────────────────────────────────────────────────────────────────────────┘
 ┌Downloading 14 files──────────────────────────────────────────────────────────┐
 │                                                                              │
@@ -15,6 +14,7 @@
 │  Downloaded 0/741 bytes                       0.00%                          │
 │  Downloaded 0/752 bytes                       0.00%                          │
 │  Downloaded 0/547 bytes                       0.00%                          │
+│  Downloaded 0/206 bytes                       0.00%                          │
 │                                                                              │
 │                                                                              │
 └──────────────────────────────────────────────────────────────────────────────┘

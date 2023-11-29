@@ -28,7 +28,6 @@ use PhpTui\Tui\Example\Demo\Page\TablePage;
 use PhpTui\Tui\Extension\Bdf\BdfExtension;
 use PhpTui\Tui\Extension\Core\Widget\BlockWidget;
 use PhpTui\Tui\Extension\Core\Widget\GridWidget;
-use PhpTui\Tui\Extension\Core\Widget\ParagraphWidget;
 use PhpTui\Tui\Extension\Core\Widget\TabsWidget;
 use PhpTui\Tui\Extension\ImageMagick\ImageMagickExtension;
 use PhpTui\Tui\Model\Direction;
@@ -39,7 +38,6 @@ use PhpTui\Tui\Model\Layout\Constraint;
 use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Text\Line;
 use PhpTui\Tui\Model\Text\Span;
-use PhpTui\Tui\Model\Text\Text;
 use PhpTui\Tui\Model\Text\Title;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\Widget\Borders;
@@ -244,6 +242,7 @@ final class App
                             $lines[] = Line::fromSpans([
                                 Span::fromString(sprintf('%s', $page->navItem()->label)),
                             ]);
+
                             return $lines;
                         }, []),
                     )->select($this->activePage->index() + 1)->highlightStyle(Style::default()->white()->onBlue())

@@ -51,33 +51,38 @@ final class TabsWidget implements Widget
     public function titles(Line ...$titles): self
     {
         $this->titles = $titles;
+
         return $this;
     }
 
     public function style(Style $style): self
     {
         $this->style = $style;
+
         return $this;
     }
 
     public function highlightStyle(Style $style): self
     {
         $this->highlightStyle = $style;
+
         return $this;
     }
 
     public function divider(Span $divider): self
     {
         $this->divider = $divider;
+
         return $this;
     }
 
     /**
-     * @var int<0,max> $index
+     * @param int<0,max> $index
      */
     public function select(int $index): self
     {
         $this->selected = $index;
+
         return $this;
     }
 

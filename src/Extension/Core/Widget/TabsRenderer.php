@@ -28,7 +28,7 @@ final class TabsRenderer implements WidgetRenderer
         $i = 0;
         foreach ($widget->titles as $title) {
             $isLastTitle = $titlesCount - 1 === $i;
-            $x+=1;
+            $x += 1;
             $remainingWidth = max(0, $area->right() - $x);
             if ($remainingWidth === 0) {
                 break;

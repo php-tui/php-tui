@@ -63,6 +63,8 @@ enum ActivePage
 
     public function index(): int
     {
-        return array_search($this, self::cases());
+        $search = array_search($this, self::cases(), true);
+
+        return $search ? $search : 0;
     }
 }
