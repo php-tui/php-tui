@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Extension\ImageMagick\Widget;
 
+use Imagick;
 use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
 use PhpTui\Tui\Extension\ImageMagick\ImageRegistry;
 use PhpTui\Tui\Extension\ImageMagick\Shape\ImageShape;
@@ -25,8 +26,14 @@ final class ImageRenderer implements WidgetRenderer
             return;
         }
 
-        $image = $this->registry->load($widget->path);
-        $geo = $image->getImageGeometry();
+        if (class_exists(Imagick::class)) {
+            $image = $this->registry->load($widget->path);
+            $geo = $image->getImageGeometry();
+        } else {
+            // otherwise extension not loaded, image shape will show a
+            // placeholder!
+            $geo = [ 'width' => 100, 'height' => 100 ];
+        }
 
         $renderer->render($renderer, CanvasWidget::fromIntBounds(
             0,

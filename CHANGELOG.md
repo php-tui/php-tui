@@ -11,6 +11,7 @@ Features:
 
 Improvements:
 
+- Fallback to placeholder if Imagemagick not loaded in image _widget_
 - Support multi-width unicode chars #180
 - Support multi-byte input characters and CTRL key modifier #178
 - Add fine-grained builder methods to `Padding` #165 @KennedyTedesco
