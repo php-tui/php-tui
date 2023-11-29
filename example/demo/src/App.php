@@ -23,6 +23,7 @@ use PhpTui\Tui\Example\Demo\Page\EventsPage;
 use PhpTui\Tui\Example\Demo\Page\GaugePage;
 use PhpTui\Tui\Example\Demo\Page\ImagePage;
 use PhpTui\Tui\Example\Demo\Page\ItemListPage;
+use PhpTui\Tui\Example\Demo\Page\SparklinePage;
 use PhpTui\Tui\Example\Demo\Page\SpritePage;
 use PhpTui\Tui\Example\Demo\Page\TablePage;
 use PhpTui\Tui\Extension\Bdf\BdfExtension;
@@ -92,6 +93,7 @@ final class App
                 ActivePage::CanvasScaling => new CanvasScalingPage($terminal),
                 ActivePage::Gauge => new GaugePage(),
                 ActivePage::BarChart => new BarChartPage(),
+                ActivePage::Sparkline => new SparklinePage(),
             };
         }
 
@@ -177,6 +179,9 @@ final class App
                             $this->activePage = ActivePage::Gauge;
                         }
                         if ($event->char === '"') {
+                            $this->activePage = ActivePage::BarChart;
+                        }
+                        if ($event->char === '£') {
                             $this->activePage = ActivePage::BarChart;
                         }
                     }

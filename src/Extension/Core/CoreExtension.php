@@ -21,6 +21,7 @@ use PhpTui\Tui\Extension\Core\Widget\ListRenderer;
 use PhpTui\Tui\Extension\Core\Widget\ParagraphRenderer;
 use PhpTui\Tui\Extension\Core\Widget\RawWidgetRenderer;
 use PhpTui\Tui\Extension\Core\Widget\ScrollbarRenderer;
+use PhpTui\Tui\Extension\Core\Widget\SparklineRenderer;
 use PhpTui\Tui\Extension\Core\Widget\TableRenderer;
 use PhpTui\Tui\Extension\Core\Widget\TabsRenderer;
 use PhpTui\Tui\Model\Display\DisplayExtension;
@@ -55,6 +56,7 @@ final class CoreExtension implements DisplayExtension
             new ScrollbarRenderer(),
             new CompositeRenderer(),
             new TabsRenderer(),
+            new SparklineRenderer(),
         ];
     }
 }
