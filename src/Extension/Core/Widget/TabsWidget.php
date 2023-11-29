@@ -32,12 +32,12 @@ final class TabsWidget implements Widget
     ) {
     }
 
-    public function default(): self
+    public static function default(): self
     {
         return self::fromTitles();
     }
 
-    public function fromTitles(Line ...$titles): self
+    public static function fromTitles(Line ...$titles): self
     {
         return new self(
             $titles,
