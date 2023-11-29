@@ -70,4 +70,3 @@ final class SparklineRendererTest extends WidgetTestCase
         ];
     }
 }
-

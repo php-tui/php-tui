@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTui\Tui\Extension\Core\Widget;
 
 use PhpTui\Tui\Extension\Core\Widget\Sparkline\RenderDirection;
@@ -10,7 +12,7 @@ use PhpTui\Tui\Model\Symbol\BarSet;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\WidgetRenderer;
 
-class SparklineRenderer implements WidgetRenderer
+final class SparklineRenderer implements WidgetRenderer
 {
     public function render(WidgetRenderer $renderer, Widget $widget, Buffer $buffer): void
     {
@@ -24,11 +26,12 @@ class SparklineRenderer implements WidgetRenderer
         }
         $max = $widget->max ?? VectorUtil::max($widget->data) ?? 0;
         $maxIndex = min($area->width, count($widget->data));
-        $data = array_map(function (int $e) use ($max, $area) {
+        $data = array_map(function (int $e) use ($max, $area): int {
             if ($max === 0) {
                 return 0;
             }
-            return intval(round($e * $area->height * 8 / $max));
+
+            return (int) (round($e * $area->height * 8 / $max));
         }, array_slice($widget->data, 0, $maxIndex));
 
         for ($j = $area->height - 1; $j >= 0; $j--) {
