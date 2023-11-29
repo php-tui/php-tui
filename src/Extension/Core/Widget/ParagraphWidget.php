@@ -71,6 +71,6 @@ final class ParagraphWidget implements Widget
 
     public static function fromSpans(Span ...$spans): self
     {
-        return self::fromText(Text::fromLine(Line::fromSpans($spans)));
+        return self::fromText(Text::fromLine(Line::fromSpans(...$spans)));
     }
 }

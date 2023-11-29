@@ -61,7 +61,7 @@ final class ItemListPage implements Component
                 ListWidget::default()
                     ->state($this->state)
                     ->items(...array_map(function (array $event) {
-                        return ListItem::new(Text::fromLine(Line::fromSpans([
+                        return ListItem::new(Text::fromLine(Line::fromSpans(
                             Span::fromString($event[1])->fg(match ($event[1]) {
                                 'INFO' => AnsiColor::Green,
                                 'WARNING' => AnsiColor::Yellow,
@@ -70,7 +70,7 @@ final class ItemListPage implements Component
                             }),
                             Span::fromString(' '),
                             Span::fromString($event[0]),
-                        ])));
+                        )));
                     }, array_merge(self::EVENTS, self::EVENTS)))
             )
         ;
