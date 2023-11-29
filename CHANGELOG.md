@@ -7,6 +7,10 @@ Improvements:
 
 - Improve the gauge label style when filled #195 @KennedyTedesco
 
+Refactoring:
+
+- Make `Line::fromSpans()` variadic #197 @KennedyTedesco
+
 ## 0.1.0
 
 Features:
