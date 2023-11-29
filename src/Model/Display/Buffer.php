@@ -247,10 +247,6 @@ final class Buffer implements Countable, Stringable
         $area = $this->area();
 
         foreach ($buffer->content as $bi => $cell) {
-            // TODO: should remove this
-            if ($cell->char === ' ') {
-                continue;
-            }
             $y = $position->y + (int) (floor($bi / $bArea->width));
             $x = $position->x + ($bi % $bArea->width);
             if ($y > $area->bottom()) {
