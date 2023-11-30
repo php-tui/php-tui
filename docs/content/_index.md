@@ -10,3 +10,6 @@ You can use it to make full screen, animated, terminal applications.
 PHP-TUI is currently a **work-in-progress**.
 
 {{< button href="https://github.com/php-tui/php-tui" >}}Check it out on Github{{< /button >}}
+
+![Demo](https://vhs.charm.sh/vhs-5Fmi0Lmn2W9ktdDWuflDlV.gif)
+_PHP-TUI demo_
