@@ -6,8 +6,8 @@ namespace PhpTui\Tui\Model\Display;
 
 use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Position\Position;
-use PhpTui\Tui\Model\Viewport\Fullscreen;
-use PhpTui\Tui\Model\Viewport\Inline;
+use PhpTui\Tui\Model\Display\Viewport\Fullscreen;
+use PhpTui\Tui\Model\Display\Viewport\Inline;
 use PhpTui\Tui\Model\Widget;
 use PhpTui\Tui\Model\WidgetRenderer;
 use PhpTui\Tui\Model\WidgetRenderer\NullWidgetRenderer;
