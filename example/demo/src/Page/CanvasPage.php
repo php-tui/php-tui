@@ -14,10 +14,9 @@ use PhpTui\Tui\Example\Demo\Component;
 use PhpTui\Tui\Extension\Core\Shape\MapResolution;
 use PhpTui\Tui\Extension\Core\Shape\MapShape;
 use PhpTui\Tui\Extension\Core\Widget\BlockWidget;
-use PhpTui\Tui\Extension\Core\Widget\BufferWidget;
 use PhpTui\Tui\Extension\Core\Widget\Buffer\BufferContext;
+use PhpTui\Tui\Extension\Core\Widget\BufferWidget;
 use PhpTui\Tui\Extension\Core\Widget\CanvasWidget as PhpTuiCanvas;
-use PhpTui\Tui\Style\Style;
 use PhpTui\Tui\Text\Line as PhpTuiLine;
 use PhpTui\Tui\Text\Title;
 use PhpTui\Tui\Widget\Borders;
@@ -35,7 +34,7 @@ final class CanvasPage implements Component
             ->borders(Borders::ALL)
             ->titles(Title::fromString('World'))
             ->widget(
-                BufferWidget::new(function (BufferContext $context) {
+                BufferWidget::new(function (BufferContext $context): void {
                     $buffer = $context->buffer;
                     $context->draw(
                         PhpTuiCanvas::fromIntBounds(-180, 180, -90, 90)
@@ -50,7 +49,9 @@ final class CanvasPage implements Component
 
                                 $context->draw(MapShape::default()->resolution(MapResolution::High)->color(AnsiColor::Green));
                                 $context->print($x, -$y, PhpTuiLine::parse(sprintf(
-                                    '<fg=red;options=bold>←</> <fg=yellow>You are here!</> <fg=white>(%.2f, %.2f)</>', $x, $y
+                                    '<fg=red;options=bold>←</> <fg=yellow>You are here!</> <fg=white>(%.2f, %.2f)</>',
+                                    $x,
+                                    $y
                                 )));
                             })
                     );
