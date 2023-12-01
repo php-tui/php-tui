@@ -17,7 +17,7 @@ use PhpTui\Tui\Model\Text\Line;
 use PhpTui\Tui\Model\Text\Span;
 use PhpTui\Tui\Model\Text\Title;
 use PhpTui\Tui\Model\Widget;
-use PhpTui\Tui\Model\Widget\Borders;
+use PhpTui\Tui\Model\Borders;
 
 final class ChartPage implements Component
 {

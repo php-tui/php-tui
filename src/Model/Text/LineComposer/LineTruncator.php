@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Model\Text;
+namespace PhpTui\Tui\Model\Text\LineComposer;
 
 use Generator;
 use PhpTui\Tui\Model\HorizontalAlignment;

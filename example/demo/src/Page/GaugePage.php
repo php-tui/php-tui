@@ -20,7 +20,7 @@ use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Text\Span;
 use PhpTui\Tui\Model\Text\Title;
 use PhpTui\Tui\Model\Widget;
-use PhpTui\Tui\Model\Widget\Borders;
+use PhpTui\Tui\Model\Borders;
 
 final class GaugePage implements Component
 {

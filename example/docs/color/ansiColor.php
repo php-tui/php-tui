@@ -6,7 +6,7 @@ use PhpTui\Tui\DisplayBuilder;
 use PhpTui\Tui\Extension\Core\Widget\BlockWidget;
 use PhpTui\Tui\Model\Color\AnsiColor;
 use PhpTui\Tui\Model\Style;
-use PhpTui\Tui\Model\Widget\Borders;
+use PhpTui\Tui\Model\Borders;
 
 require 'vendor/autoload.php';
 

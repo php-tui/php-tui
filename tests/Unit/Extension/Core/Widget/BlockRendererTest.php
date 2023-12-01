@@ -14,8 +14,8 @@ use PhpTui\Tui\Model\Display\Buffer;
 use PhpTui\Tui\Model\HorizontalAlignment;
 use PhpTui\Tui\Model\Text\Text;
 use PhpTui\Tui\Model\Text\Title;
-use PhpTui\Tui\Model\Widget\Borders;
-use PhpTui\Tui\Model\Widget\BorderType;
+use PhpTui\Tui\Model\Borders;
+use PhpTui\Tui\Model\BorderType;
 
 final class BlockRendererTest extends WidgetTestCase
 {

@@ -14,8 +14,8 @@ use PhpTui\Tui\Model\Direction;
 use PhpTui\Tui\Model\Layout\Constraint;
 use PhpTui\Tui\Model\Text\Text;
 use PhpTui\Tui\Model\Text\Title;
-use PhpTui\Tui\Model\Widget\Borders;
-use PhpTui\Tui\Model\Widget\BorderType;
+use PhpTui\Tui\Model\Borders;
+use PhpTui\Tui\Model\BorderType;
 
 require 'vendor/autoload.php';
 

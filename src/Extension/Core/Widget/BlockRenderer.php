@@ -11,7 +11,7 @@ use PhpTui\Tui\Model\Position\Position;
 use PhpTui\Tui\Model\Text\Title;
 use PhpTui\Tui\Model\VerticalAlignment;
 use PhpTui\Tui\Model\Widget;
-use PhpTui\Tui\Model\Widget\Borders;
+use PhpTui\Tui\Model\Borders;
 use PhpTui\Tui\Model\WidgetRenderer;
 
 final class BlockRenderer implements WidgetRenderer

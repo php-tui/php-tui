@@ -21,8 +21,8 @@ use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Model\Position\FloatPosition;
 use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Widget;
-use PhpTui\Tui\Model\Widget\Borders;
-use PhpTui\Tui\Model\Widget\BorderType;
+use PhpTui\Tui\Model\Borders;
+use PhpTui\Tui\Model\BorderType;
 
 final class SpritePage implements Component
 {

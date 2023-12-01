@@ -9,8 +9,8 @@ use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Text\Title;
 use PhpTui\Tui\Model\Widget;
-use PhpTui\Tui\Model\Widget\Borders;
-use PhpTui\Tui\Model\Widget\BorderType;
+use PhpTui\Tui\Model\Borders;
+use PhpTui\Tui\Model\BorderType;
 
 /**
  * Container for other widgets and can provide a border, title and padding.
