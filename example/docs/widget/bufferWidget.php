@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 use PhpTui\Tui\DisplayBuilder;
 use PhpTui\Tui\Extension\Core\Widget\BlockWidget;
-use PhpTui\Tui\Extension\Core\Widget\BufferWidget;
 use PhpTui\Tui\Extension\Core\Widget\Buffer\BufferContext;
+use PhpTui\Tui\Extension\Core\Widget\BufferWidget;
 use PhpTui\Tui\Position\Position;
 use PhpTui\Tui\Widget\Borders;
 

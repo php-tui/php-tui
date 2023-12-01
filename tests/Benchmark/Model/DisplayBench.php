@@ -13,11 +13,12 @@ use PhpTui\Term\RawMode\TestRawMode;
 use PhpTui\Term\Terminal;
 use PhpTui\Term\TerminalInformation\Size;
 use PhpTui\Tui\Bridge\PhpTerm\PhpTermBackend;
-use PhpTui\Tui\Display\Buffer;
 use PhpTui\Tui\Display\Display;
 use PhpTui\Tui\DisplayBuilder;
 use PhpTui\Tui\Extension\Core\Shape\MapShape;
 use PhpTui\Tui\Extension\Core\Widget\BlockWidget;
+use PhpTui\Tui\Extension\Core\Widget\Buffer\BufferContext;
+use PhpTui\Tui\Extension\Core\Widget\BufferWidget;
 use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
 use PhpTui\Tui\Extension\Core\Widget\Chart\Axis;
 use PhpTui\Tui\Extension\Core\Widget\Chart\AxisBounds;
@@ -27,7 +28,6 @@ use PhpTui\Tui\Extension\Core\Widget\GridWidget;
 use PhpTui\Tui\Extension\Core\Widget\List\ListItem;
 use PhpTui\Tui\Extension\Core\Widget\ListWidget;
 use PhpTui\Tui\Extension\Core\Widget\ParagraphWidget;
-use PhpTui\Tui\Extension\Core\Widget\BufferWidget;
 use PhpTui\Tui\Extension\Core\Widget\Table\TableCell;
 use PhpTui\Tui\Extension\Core\Widget\Table\TableRow;
 use PhpTui\Tui\Extension\Core\Widget\TableWidget;
@@ -89,8 +89,8 @@ final class DisplayBench
                     ),
                     $this->horizontalGrid(
                         ParagraphWidget::fromString('Hello World'),
-                        BufferWidget::new(function (Buffer $buffer): void {
-                            $buffer->putLine(Position::at(0, 0), Line::fromString('Hello'), 5);
+                        BufferWidget::new(function (BufferContext $context): void {
+                            $context->buffer->putLine(Position::at(0, 0), Line::fromString('Hello'), 5);
                         })
                     ),
                     $this->horizontalGrid(

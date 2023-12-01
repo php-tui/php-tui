@@ -9,7 +9,7 @@ use PhpTui\Tui\Extension\Core\Widget\Buffer\BufferContext;
 use PhpTui\Tui\Widget\Widget;
 
 /**
- * This widget provides access to the Buffer and allows you 
+ * This widget provides access to the Buffer and allows you
  * to mutate it directly in addition to being able to draw widgets.
  *
  * This is useful if you need to know the context upon which widgets are being
