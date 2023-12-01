@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Tests\Unit\Model\Layout;
 
-use PhpTui\Tui\Model\Area;
-use PhpTui\Tui\Model\Direction;
+use PhpTui\Tui\Model\Display\Area;
 use PhpTui\Tui\Model\Layout\Constraint;
 use PhpTui\Tui\Model\Layout\Layout;
+use PhpTui\Tui\Model\Widget\Direction;
 use PHPUnit\Framework\TestCase;
 
 final class LayoutTest extends TestCase

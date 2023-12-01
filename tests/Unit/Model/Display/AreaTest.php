@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Tests\Unit\Model;
+namespace PhpTui\Tui\Tests\Unit\Model\Display;
 
-use PhpTui\Tui\Model\Area;
+use PhpTui\Tui\Model\Display\Area;
 use PhpTui\Tui\Model\Widget\Margin;
 use PHPUnit\Framework\TestCase;
 

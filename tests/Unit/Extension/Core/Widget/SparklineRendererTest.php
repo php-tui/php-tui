@@ -7,7 +7,7 @@ namespace PhpTui\Tui\Tests\Unit\Extension\Core\Widget;
 use Generator;
 use PhpTui\Tui\Extension\Core\Widget\Sparkline\RenderDirection;
 use PhpTui\Tui\Extension\Core\Widget\SparklineWidget;
-use PhpTui\Tui\Model\Area;
+use PhpTui\Tui\Model\Display\Area;
 use PhpTui\Tui\Model\Display\Buffer;
 use PhpTui\Tui\Model\Widget\Widget;
 

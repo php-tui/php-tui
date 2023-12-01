@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Model\Text;
 
-use PhpTui\Tui\Model\HorizontalAlignment;
-use PhpTui\Tui\Model\VerticalAlignment;
+use PhpTui\Tui\Model\Widget\HorizontalAlignment;
+use PhpTui\Tui\Model\Widget\VerticalAlignment;
 
 final class Title
 {

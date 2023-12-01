@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Model\Text\LineComposer;
 
 use Generator;
-use PhpTui\Tui\Model\HorizontalAlignment;
 use PhpTui\Tui\Model\Text\LineComposer;
 use PhpTui\Tui\Model\Text\StyledGrapheme;
+use PhpTui\Tui\Model\Widget\HorizontalAlignment;
 
 final class LineTruncator implements LineComposer
 {

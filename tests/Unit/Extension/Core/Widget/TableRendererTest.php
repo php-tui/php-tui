@@ -8,7 +8,7 @@ use Generator;
 use PhpTui\Tui\Extension\Core\Widget\Table\TableCell;
 use PhpTui\Tui\Extension\Core\Widget\Table\TableRow;
 use PhpTui\Tui\Extension\Core\Widget\TableWidget;
-use PhpTui\Tui\Model\Area;
+use PhpTui\Tui\Model\Display\Area;
 use PhpTui\Tui\Model\Display\Buffer;
 use PhpTui\Tui\Model\Layout\Constraint;
 

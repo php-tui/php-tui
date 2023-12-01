@@ -13,13 +13,13 @@ use PhpTui\Tui\Extension\Core\Widget\Table\TableCell;
 use PhpTui\Tui\Extension\Core\Widget\Table\TableRow;
 use PhpTui\Tui\Extension\Core\Widget\Table\TableState;
 use PhpTui\Tui\Extension\Core\Widget\TableWidget;
-use PhpTui\Tui\Model\Borders;
 use PhpTui\Tui\Model\Color\AnsiColor;
 use PhpTui\Tui\Model\Layout\Constraint;
 use PhpTui\Tui\Model\Style\Style;
 use PhpTui\Tui\Model\Text\Line;
 use PhpTui\Tui\Model\Text\Span;
 use PhpTui\Tui\Model\Text\Title;
+use PhpTui\Tui\Model\Widget\Borders;
 use PhpTui\Tui\Model\Widget\Widget;
 
 final class TablePage implements Component

@@ -6,7 +6,7 @@ namespace PhpTui\Tui\Model\Canvas\Grid;
 
 use IntlChar;
 use PhpTui\Tui\Model\Canvas\CanvasGrid;
-use PhpTui\Tui\Model\Canvas\FgBgColor;
+use PhpTui\Tui\Model\Color\FgBgColor;
 use PhpTui\Tui\Model\Canvas\Layer;
 use PhpTui\Tui\Model\Canvas\Resolution;
 use PhpTui\Tui\Model\Color\AnsiColor;

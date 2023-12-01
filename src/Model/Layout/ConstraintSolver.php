@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Model\Layout;
 
-use PhpTui\Tui\Model\Area;
+use PhpTui\Tui\Model\Display\Area;
 
-use PhpTui\Tui\Model\Areas;
+use PhpTui\Tui\Model\Display\Areas;
 
 interface ConstraintSolver
 {

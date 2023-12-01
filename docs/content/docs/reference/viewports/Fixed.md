@@ -19,4 +19,4 @@ Configure the viewport using the builder methods named as follows:
 
 | Name | Type | Description |
 | --- | --- | --- |
-| **area** | `PhpTui\Tui\Model\Area` | Area to occupy |
+| **area** | `PhpTui\Tui\Model\Display\Area` | Area to occupy |

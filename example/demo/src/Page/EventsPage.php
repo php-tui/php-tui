@@ -12,11 +12,11 @@ use PhpTui\Tui\Extension\Core\Widget\GridWidget;
 use PhpTui\Tui\Extension\Core\Widget\List\ListItem;
 use PhpTui\Tui\Extension\Core\Widget\ListWidget;
 use PhpTui\Tui\Extension\Core\Widget\ParagraphWidget;
-use PhpTui\Tui\Model\Borders;
 use PhpTui\Tui\Model\Layout\Constraint;
 use PhpTui\Tui\Model\Text\Line;
 use PhpTui\Tui\Model\Text\Text;
 use PhpTui\Tui\Model\Text\Title;
+use PhpTui\Tui\Model\Widget\Borders;
 use PhpTui\Tui\Model\Widget\Widget;
 
 final class EventsPage implements Component

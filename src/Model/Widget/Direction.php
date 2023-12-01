@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Model;
+namespace PhpTui\Tui\Model\Widget;
 
 enum Direction
 {

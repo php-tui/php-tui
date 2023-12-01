@@ -5,10 +5,10 @@ declare(strict_types=1);
 use PhpTui\Tui\DisplayBuilder;
 use PhpTui\Tui\Extension\Core\Widget\BlockWidget;
 use PhpTui\Tui\Extension\Core\Widget\ParagraphWidget;
-use PhpTui\Tui\Model\Borders;
-use PhpTui\Tui\Model\BorderType;
 use PhpTui\Tui\Model\Text\Text;
 use PhpTui\Tui\Model\Text\Title;
+use PhpTui\Tui\Model\Widget\Borders;
+use PhpTui\Tui\Model\Widget\BorderType;
 
 require 'vendor/autoload.php';
 

@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Model\Canvas;
 
-use PhpTui\Tui\Model\Canvas\Marker;
-use PhpTui\Tui\Model\Graph\AxisBounds;
+use PhpTui\Tui\Extension\Core\Widget\Chart\AxisBounds;
 use PhpTui\Tui\Model\Canvas\Grid\BrailleGrid;
 use PhpTui\Tui\Model\Canvas\Grid\CharGrid;
 use PhpTui\Tui\Model\Canvas\Grid\HalfBlockGrid;

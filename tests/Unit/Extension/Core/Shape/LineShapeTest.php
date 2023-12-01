@@ -6,11 +6,11 @@ namespace PhpTui\Tui\Tests\Unit\Extension\Core\Shape;
 
 use Generator;
 use PhpTui\Tui\Extension\Core\Shape\LineShape;
-use PhpTui\Tui\Model\Canvas\Marker;
 use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
-use PhpTui\Tui\Model\Area;
-use PhpTui\Tui\Model\Graph\AxisBounds;
+use PhpTui\Tui\Extension\Core\Widget\Chart\AxisBounds;
 use PhpTui\Tui\Model\Canvas\CanvasContext;
+use PhpTui\Tui\Model\Canvas\Marker;
+use PhpTui\Tui\Model\Display\Area;
 use PhpTui\Tui\Model\Display\Buffer;
 
 final class LineShapeTest extends ShapeTestCase

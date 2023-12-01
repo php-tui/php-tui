@@ -5,18 +5,18 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Extension\Core\Widget;
 
 use PhpTui\Tui\Extension\Core\Shape\PointsShape;
+use PhpTui\Tui\Extension\Core\Widget\Chart\AxisBounds;
 use PhpTui\Tui\Extension\Core\Widget\Chart\ChartLayout;
 use PhpTui\Tui\Extension\Core\Widget\Chart\DataSet;
-use PhpTui\Tui\Model\Area;
-use PhpTui\Tui\Model\Graph\AxisBounds;
 use PhpTui\Tui\Model\Canvas\CanvasContext;
 use PhpTui\Tui\Model\Color\AnsiColor;
+use PhpTui\Tui\Model\Display\Area;
 use PhpTui\Tui\Model\Display\Buffer;
-use PhpTui\Tui\Model\HorizontalAlignment;
 use PhpTui\Tui\Model\Math\VectorUtil;
 use PhpTui\Tui\Model\Position\Position;
 use PhpTui\Tui\Model\Symbol\LineSet;
 use PhpTui\Tui\Model\Text\Span;
+use PhpTui\Tui\Model\Widget\HorizontalAlignment;
 use PhpTui\Tui\Model\Widget\Widget;
 use PhpTui\Tui\Model\Widget\WidgetRenderer;
 

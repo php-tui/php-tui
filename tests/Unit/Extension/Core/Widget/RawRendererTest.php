@@ -8,7 +8,7 @@ use Generator;
 use PhpTui\Tui\Extension\Core\Widget\Block\Padding;
 use PhpTui\Tui\Extension\Core\Widget\BlockWidget;
 use PhpTui\Tui\Extension\Core\Widget\RawWidget;
-use PhpTui\Tui\Model\Area;
+use PhpTui\Tui\Model\Display\Area;
 use PhpTui\Tui\Model\Display\Buffer;
 use PhpTui\Tui\Model\Position\Position;
 use PhpTui\Tui\Model\Text\Line;

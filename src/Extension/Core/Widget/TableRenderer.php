@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Extension\Core\Widget;
 
 use PhpTui\Tui\Extension\Core\Widget\Table\TableCell;
-use PhpTui\Tui\Model\Area;
-use PhpTui\Tui\Model\Direction;
+use PhpTui\Tui\Model\Display\Area;
 use PhpTui\Tui\Model\Display\Buffer;
-use PhpTui\Tui\Model\HorizontalAlignment;
 use PhpTui\Tui\Model\Layout\Constraint;
 use PhpTui\Tui\Model\Layout\Layout;
 use PhpTui\Tui\Model\Position\Position;
+use PhpTui\Tui\Model\Widget\Direction;
+use PhpTui\Tui\Model\Widget\HorizontalAlignment;
 use PhpTui\Tui\Model\Widget\Widget;
 use PhpTui\Tui\Model\Widget\WidgetRenderer;
 

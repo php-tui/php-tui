@@ -7,9 +7,8 @@ namespace PhpTui\Tui\Bridge\Cassowary;
 use PhpTui\Cassowary\Constraint;
 use PhpTui\Cassowary\Solver;
 use PhpTui\Cassowary\Strength;
-use PhpTui\Tui\Model\Area;
-use PhpTui\Tui\Model\Areas;
-use PhpTui\Tui\Model\Direction;
+use PhpTui\Tui\Model\Display\Area;
+use PhpTui\Tui\Model\Display\Areas;
 use PhpTui\Tui\Model\Layout\Constraint as DTLConstraint;
 use PhpTui\Tui\Model\Layout\Constraint\LengthConstraint;
 use PhpTui\Tui\Model\Layout\Constraint\MaxConstraint;
@@ -17,6 +16,7 @@ use PhpTui\Tui\Model\Layout\Constraint\MinConstraint;
 use PhpTui\Tui\Model\Layout\Constraint\PercentageConstraint;
 use PhpTui\Tui\Model\Layout\ConstraintSolver;
 use PhpTui\Tui\Model\Layout\Layout;
+use PhpTui\Tui\Model\Widget\Direction;
 use RuntimeException;
 
 final class CassowaryConstraintSolver implements ConstraintSolver

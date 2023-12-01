@@ -5,15 +5,15 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Extension\Core\Widget;
 
 use PhpTui\Tui\Extension\Core\Widget\Paragraph\Wrap;
-use PhpTui\Tui\Model\Area;
+use PhpTui\Tui\Model\Display\Area;
 use PhpTui\Tui\Model\Display\Buffer;
-use PhpTui\Tui\Model\HorizontalAlignment;
 use PhpTui\Tui\Model\Position\Position;
 use PhpTui\Tui\Model\Text\Line;
 use PhpTui\Tui\Model\Text\LineComposer;
 use PhpTui\Tui\Model\Text\LineComposer\LineTruncator;
 use PhpTui\Tui\Model\Text\Span;
 use PhpTui\Tui\Model\Text\StyledGrapheme;
+use PhpTui\Tui\Model\Widget\HorizontalAlignment;
 use PhpTui\Tui\Model\Widget\Widget;
 use PhpTui\Tui\Model\Widget\WidgetRenderer;
 

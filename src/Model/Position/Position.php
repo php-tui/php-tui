@@ -6,12 +6,12 @@ namespace PhpTui\Tui\Model\Position;
 
 use Closure;
 use OutOfBoundsException;
-use PhpTui\Tui\Model\Area;
+use PhpTui\Tui\Model\Display\Area;
 use RuntimeException;
 use Stringable;
 
 /**
- * Zero-based co-ordinates for cells.
+ * Zero-based, integer, co-ordinates for cells.
  * Top-left cell will be 0,0
  */
 final class Position implements Stringable

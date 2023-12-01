@@ -6,10 +6,10 @@ namespace PhpTui\Tui\Model\Text;
 
 use ArrayIterator;
 use IteratorAggregate;
-use PhpTui\Tui\Model\HorizontalAlignment;
 use PhpTui\Tui\Model\Style\Style;
 use PhpTui\Tui\Model\Style\Styleable;
 use PhpTui\Tui\Model\Style\StyleableTrait;
+use PhpTui\Tui\Model\Widget\HorizontalAlignment;
 use Stringable;
 use Traversable;
 

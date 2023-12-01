@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Extension\Core\Widget;
 
 use PhpTui\Tui\Extension\Core\Widget\Paragraph\Wrap;
-use PhpTui\Tui\Model\HorizontalAlignment;
 use PhpTui\Tui\Model\Style\Style;
 use PhpTui\Tui\Model\Text\Line;
 use PhpTui\Tui\Model\Text\Span;
 use PhpTui\Tui\Model\Text\Text;
+use PhpTui\Tui\Model\Widget\HorizontalAlignment;
 use PhpTui\Tui\Model\Widget\Widget;
 
 /**

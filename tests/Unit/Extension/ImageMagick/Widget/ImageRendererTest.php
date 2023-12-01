@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Tests\Unit\Extension\ImageMagick\Widget;
 
 use PhpTui\Tui\DisplayBuilder;
-use PhpTui\Tui\Model\Canvas\Marker;
 use PhpTui\Tui\Extension\ImageMagick\ImageMagickExtension;
 use PhpTui\Tui\Extension\ImageMagick\Widget\ImageWidget;
+use PhpTui\Tui\Model\Canvas\Marker;
 use PhpTui\Tui\Model\Display\Backend\DummyBackend;
 use PHPUnit\Framework\TestCase;
 

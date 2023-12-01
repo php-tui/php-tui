@@ -7,8 +7,8 @@ namespace PhpTui\Tui\Extension\Core\Widget;
 use PhpTui\Tui\Extension\Core\Widget\List\HighlightSpacing;
 use PhpTui\Tui\Extension\Core\Widget\List\ListItem;
 use PhpTui\Tui\Extension\Core\Widget\List\ListState;
-use PhpTui\Tui\Model\Corner;
 use PhpTui\Tui\Model\Style\Style;
+use PhpTui\Tui\Model\Widget\Corner;
 use PhpTui\Tui\Model\Widget\Widget;
 
 /**

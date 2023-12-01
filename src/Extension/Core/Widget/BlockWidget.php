@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Extension\Core\Widget;
 
 use PhpTui\Tui\Extension\Core\Widget\Block\Padding;
-use PhpTui\Tui\Model\Area;
-use PhpTui\Tui\Model\Borders;
-use PhpTui\Tui\Model\BorderType;
+use PhpTui\Tui\Model\Display\Area;
 use PhpTui\Tui\Model\Style\Style;
 use PhpTui\Tui\Model\Text\Title;
+use PhpTui\Tui\Model\Widget\Borders;
+use PhpTui\Tui\Model\Widget\BorderType;
 use PhpTui\Tui\Model\Widget\Widget;
 
 /**

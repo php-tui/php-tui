@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Tests\Unit\Model\Viewport;
 
-use PhpTui\Tui\Model\Area;
+use PhpTui\Tui\Model\Display\Area;
 use PhpTui\Tui\Model\Display\Backend\DummyBackend;
 use PhpTui\Tui\Model\Display\Buffer;
 use PhpTui\Tui\Model\Display\Cell;

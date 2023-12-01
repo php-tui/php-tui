@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Tests\Unit\Model\Position;
 
-use PhpTui\Tui\Model\Graph\AxisBounds;
+use PhpTui\Tui\Extension\Core\Widget\Chart\AxisBounds;
 use PhpTui\Tui\Model\Position\FloatPosition;
 use PHPUnit\Framework\TestCase;
 

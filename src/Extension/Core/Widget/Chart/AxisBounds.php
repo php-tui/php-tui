@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Model\Graph;
+namespace PhpTui\Tui\Extension\Core\Widget\Chart;
 
 final class AxisBounds
 {

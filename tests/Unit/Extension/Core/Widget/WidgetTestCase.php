@@ -6,8 +6,8 @@ namespace PhpTui\Tui\Tests\Unit\Extension\Core\Widget;
 
 use PhpTui\Tui\Extension\Core\CoreExtension;
 use PhpTui\Tui\Extension\Core\Widget\CanvasRenderer;
-use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Canvas\AggregateShapePainter;
+use PhpTui\Tui\Model\Display\Area;
 use PhpTui\Tui\Model\Display\Buffer;
 use PhpTui\Tui\Model\Widget\Widget;
 use PhpTui\Tui\Model\Widget\WidgetRenderer;

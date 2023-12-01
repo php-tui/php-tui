@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Tests\Unit\Extension\ImageMagick\Shape;
 
 use Generator;
-use PhpTui\Tui\Model\Canvas\Marker;
 use PhpTui\Tui\Extension\Core\Widget\CanvasRenderer;
 use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
+use PhpTui\Tui\Extension\Core\Widget\Chart\AxisBounds;
 use PhpTui\Tui\Extension\ImageMagick\Shape\ImagePainter;
 use PhpTui\Tui\Extension\ImageMagick\Shape\ImageShape;
-use PhpTui\Tui\Model\Area;
-use PhpTui\Tui\Model\Graph\AxisBounds;
 use PhpTui\Tui\Model\Canvas\CanvasContext;
+use PhpTui\Tui\Model\Canvas\Marker;
+use PhpTui\Tui\Model\Display\Area;
 use PhpTui\Tui\Model\Display\Buffer;
 use PhpTui\Tui\Model\Position\FloatPosition;
 use PhpTui\Tui\Model\Widget\WidgetRenderer\NullWidgetRenderer;

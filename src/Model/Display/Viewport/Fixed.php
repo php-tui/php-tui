@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Model\Display\Viewport;
 
-use PhpTui\Tui\Model\Area;
+use PhpTui\Tui\Model\Display\Area;
 use PhpTui\Tui\Model\Display\Backend;
 use PhpTui\Tui\Model\Display\ClearType;
 use PhpTui\Tui\Model\Display\Viewport;
