@@ -43,11 +43,11 @@ final class CanvasPage implements Component
                             ->paint(function (CanvasContext $context) use ($buffer, $area): void {
 
                                 $xd = $context->xBounds->length() / ($buffer->area()->width);
-                                $x = $this->x ?? intval($area->width / 2);
+                                $x = $this->x ?? (int) ($area->width / 2);
                                 $x = ($x * $xd) - 180;
 
                                 $yd = $context->yBounds->length() / ($buffer->area()->height);
-                                $y = $this->y ?? intval($area->height / 2);
+                                $y = $this->y ?? (int) ($area->height / 2);
                                 $y = ($y * $yd) - 90 - (($area->position->y - 1) * $yd);
 
                                 $context->draw(MapShape::default()->resolution(MapResolution::High)->color(AnsiColor::Green));
