@@ -237,27 +237,6 @@ final class Buffer implements Countable, Stringable
         return $this->content[$index];
     }
 
-    /**
-     * Insert the contents of the given buffer at the given position.
-     */
-    public function putBuffer(Position $position, Buffer $buffer): void
-    {
-        $bArea = $buffer->area();
-        $area = $this->area();
-
-        foreach ($buffer->content as $bi => $cell) {
-            $y = $position->y + (int) (floor($bi / $bArea->width));
-            $x = $position->x + ($bi % $bArea->width);
-            if ($y > $area->bottom()) {
-                continue;
-            }
-            if ($x > $area->right()) {
-                continue;
-            }
-            $this->content[Position::at($x, $y)->toIndex($this->area())] = $cell;
-        }
-    }
-
     public function toUpdates(): BufferUpdates
     {
         $updates = [];
