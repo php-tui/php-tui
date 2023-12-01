@@ -10,12 +10,12 @@ use PhpTui\Tui\Extension\Core\Widget\Block\Padding;
 use PhpTui\Tui\Extension\Core\Widget\BlockWidget;
 use PhpTui\Tui\Extension\Core\Widget\ParagraphWidget;
 use PhpTui\Tui\Model\Area;
+use PhpTui\Tui\Model\Borders;
+use PhpTui\Tui\Model\BorderType;
 use PhpTui\Tui\Model\Display\Buffer;
 use PhpTui\Tui\Model\HorizontalAlignment;
 use PhpTui\Tui\Model\Text\Text;
 use PhpTui\Tui\Model\Text\Title;
-use PhpTui\Tui\Model\Borders;
-use PhpTui\Tui\Model\BorderType;
 
 final class BlockRendererTest extends WidgetTestCase
 {

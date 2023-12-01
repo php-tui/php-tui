@@ -9,12 +9,12 @@ use PhpTui\Tui\Example\Demo\Component;
 use PhpTui\Tui\Extension\Core\Widget\BlockWidget;
 use PhpTui\Tui\Extension\Core\Widget\GridWidget;
 use PhpTui\Tui\Extension\ImageMagick\Widget\ImageWidget;
+use PhpTui\Tui\Model\Borders;
+use PhpTui\Tui\Model\BorderType;
 use PhpTui\Tui\Model\Direction;
 use PhpTui\Tui\Model\Layout\Constraint;
 use PhpTui\Tui\Model\Text\Title;
 use PhpTui\Tui\Model\Widget;
-use PhpTui\Tui\Model\Borders;
-use PhpTui\Tui\Model\BorderType;
 
 final class ImagePage implements Component
 {

@@ -11,6 +11,8 @@ use PhpTui\Tui\Extension\Core\Widget\BlockWidget;
 use PhpTui\Tui\Extension\Core\Widget\GridWidget;
 use PhpTui\Tui\Extension\Core\Widget\Paragraph\Wrap;
 use PhpTui\Tui\Extension\Core\Widget\ParagraphWidget;
+use PhpTui\Tui\Model\Borders;
+use PhpTui\Tui\Model\BorderType;
 use PhpTui\Tui\Model\Direction;
 use PhpTui\Tui\Model\HorizontalAlignment;
 use PhpTui\Tui\Model\Layout\Constraint;
@@ -19,8 +21,6 @@ use PhpTui\Tui\Model\Text\Text;
 use PhpTui\Tui\Model\Text\Title;
 use PhpTui\Tui\Model\VerticalAlignment;
 use PhpTui\Tui\Model\Widget;
-use PhpTui\Tui\Model\Borders;
-use PhpTui\Tui\Model\BorderType;
 
 final class BlocksPage implements Component
 {

@@ -22,7 +22,7 @@ Configure the widget using the builder methods named as follows:
 | --- | --- | --- |
 | **borders** | `int` | Bit mask which determines the border configuration, e.g. Borders::ALL |
 | **titles** | `array` | Titles for the block. You can have multiple titles and each title can be positioned in a different place. |
-| **borderType** | `PhpTui\Tui\Model\Widget\BorderType` | Type of border, e.g. `BorderType::Rounded` |
+| **borderType** | `PhpTui\Tui\Model\BorderType` | Type of border, e.g. `BorderType::Rounded` |
 | **borderStyle** | `PhpTui\Tui\Model\Style` | Style of the border. |
 | **style** | `PhpTui\Tui\Model\Style` | Style of the block's inner area. |
 | **titleStyle** | `PhpTui\Tui\Model\Style` | Style of the titles. |

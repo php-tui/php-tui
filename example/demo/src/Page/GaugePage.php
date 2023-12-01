@@ -11,6 +11,7 @@ use PhpTui\Tui\Extension\Core\Widget\BlockWidget;
 use PhpTui\Tui\Extension\Core\Widget\GaugeWidget;
 use PhpTui\Tui\Extension\Core\Widget\GridWidget;
 use PhpTui\Tui\Extension\Core\Widget\ParagraphWidget;
+use PhpTui\Tui\Model\Borders;
 use PhpTui\Tui\Model\Color\LinearGradient;
 use PhpTui\Tui\Model\Color\RgbColor;
 use PhpTui\Tui\Model\Direction;
@@ -20,7 +21,6 @@ use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Text\Span;
 use PhpTui\Tui\Model\Text\Title;
 use PhpTui\Tui\Model\Widget;
-use PhpTui\Tui\Model\Borders;
 
 final class GaugePage implements Component
 {

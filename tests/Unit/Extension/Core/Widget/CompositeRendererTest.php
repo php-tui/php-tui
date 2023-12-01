@@ -9,8 +9,8 @@ use PhpTui\Tui\Extension\Core\Widget\CompositeWidget;
 use PhpTui\Tui\Extension\Core\Widget\Scrollbar\ScrollbarState;
 use PhpTui\Tui\Extension\Core\Widget\ScrollbarWidget;
 use PhpTui\Tui\Model\Area;
-use PhpTui\Tui\Model\Display\Buffer;
 use PhpTui\Tui\Model\Borders;
+use PhpTui\Tui\Model\Display\Buffer;
 
 final class CompositeRendererTest extends WidgetTestCase
 {

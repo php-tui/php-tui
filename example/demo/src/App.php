@@ -31,6 +31,7 @@ use PhpTui\Tui\Extension\Core\Widget\BlockWidget;
 use PhpTui\Tui\Extension\Core\Widget\GridWidget;
 use PhpTui\Tui\Extension\Core\Widget\TabsWidget;
 use PhpTui\Tui\Extension\ImageMagick\ImageMagickExtension;
+use PhpTui\Tui\Model\Borders;
 use PhpTui\Tui\Model\Direction;
 use PhpTui\Tui\Model\Display\Backend;
 use PhpTui\Tui\Model\Display\Display;
@@ -40,7 +41,6 @@ use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Text\Line;
 use PhpTui\Tui\Model\Text\Title;
 use PhpTui\Tui\Model\Widget;
-use PhpTui\Tui\Model\Borders;
 use Throwable;
 
 /**

@@ -12,6 +12,8 @@ use PhpTui\Tui\Extension\Core\Shape\SpriteShape;
 use PhpTui\Tui\Extension\Core\Widget\BlockWidget;
 use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
 use PhpTui\Tui\Extension\Core\Widget\GridWidget;
+use PhpTui\Tui\Model\Borders;
+use PhpTui\Tui\Model\BorderType;
 use PhpTui\Tui\Model\Canvas\CanvasContext;
 use PhpTui\Tui\Model\Color\AnsiColor;
 use PhpTui\Tui\Model\Color\LinearGradient;
@@ -21,8 +23,6 @@ use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Model\Position\FloatPosition;
 use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Widget;
-use PhpTui\Tui\Model\Borders;
-use PhpTui\Tui\Model\BorderType;
 
 final class SpritePage implements Component
 {
