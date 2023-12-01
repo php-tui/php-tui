@@ -8,7 +8,7 @@ use Generator;
 use PhpTui\Tui\Extension\Bdf\FontRegistry;
 use PhpTui\Tui\Extension\Bdf\Shape\TextRenderer;
 use PhpTui\Tui\Extension\Bdf\Shape\TextShape;
-use PhpTui\Tui\Extension\Core\Widget\Canvas\Marker;
+use PhpTui\Tui\Model\Canvas\Marker;
 use PhpTui\Tui\Extension\Core\Widget\CanvasRenderer;
 use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
 use PhpTui\Tui\Model\Area;

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Tests\Unit\Extension\Core\Widget;
 
-use PhpTui\Tui\Extension\Core\Widget\Canvas\Marker;
+use PhpTui\Tui\Model\Canvas\Marker;
 use PhpTui\Tui\Extension\Core\Widget\Chart\Axis;
 use PhpTui\Tui\Extension\Core\Widget\Chart\DataSet;
 use PhpTui\Tui\Extension\Core\Widget\ChartWidget;

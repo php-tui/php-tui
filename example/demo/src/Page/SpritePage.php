@@ -10,7 +10,7 @@ use PhpTui\Tui\Extension\Bdf\Shape\TextShape;
 use PhpTui\Tui\Extension\Core\Shape\PointsShape;
 use PhpTui\Tui\Extension\Core\Shape\SpriteShape;
 use PhpTui\Tui\Extension\Core\Widget\BlockWidget;
-use PhpTui\Tui\Extension\Core\Widget\Canvas\Marker;
+use PhpTui\Tui\Model\Canvas\Marker;
 use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
 use PhpTui\Tui\Extension\Core\Widget\GridWidget;
 use PhpTui\Tui\Model\Borders;

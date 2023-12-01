@@ -7,7 +7,7 @@ namespace PhpTui\Tui\Tests\Unit\Extension\Core\Widget;
 use Generator;
 use PhpTui\Tui\Extension\Core\Shape\CircleShape;
 use PhpTui\Tui\Extension\Core\Shape\LineShape;
-use PhpTui\Tui\Extension\Core\Widget\Canvas\Marker;
+use PhpTui\Tui\Model\Canvas\Marker;
 use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
 use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\AxisBounds;

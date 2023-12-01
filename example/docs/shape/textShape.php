@@ -6,7 +6,7 @@ use PhpTui\Tui\DisplayBuilder;
 use PhpTui\Tui\Extension\Bdf\BdfExtension;
 use PhpTui\Tui\Extension\Bdf\FontRegistry;
 use PhpTui\Tui\Extension\Bdf\Shape\TextShape;
-use PhpTui\Tui\Extension\Core\Widget\Canvas\Marker;
+use PhpTui\Tui\Model\Canvas\Marker;
 use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
 use PhpTui\Tui\Model\Color\AnsiColor;
 use PhpTui\Tui\Model\Position\FloatPosition;

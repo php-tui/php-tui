@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Tests\Unit\Extension\ImageMagick\Shape;
 
 use Generator;
-use PhpTui\Tui\Extension\Core\Widget\Canvas\Marker;
+use PhpTui\Tui\Model\Canvas\Marker;
 use PhpTui\Tui\Extension\Core\Widget\CanvasRenderer;
 use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
 use PhpTui\Tui\Extension\ImageMagick\Shape\ImagePainter;

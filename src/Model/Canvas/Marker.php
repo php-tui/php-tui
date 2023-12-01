@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Extension\Core\Widget\Canvas;
+namespace PhpTui\Tui\Model\Canvas;
 
 enum Marker
 {
