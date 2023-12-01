@@ -20,7 +20,7 @@ Configure the shape using the builder methods named as follows:
 
 | Name | Type | Description |
 | --- | --- | --- |
-| **position** | `PhpTui\Tui\Model\Position\FloatPosition` | Position to draw the rectangle (bottom left corner) |
+| **position** | `PhpTui\Tui\Position\FloatPosition` | Position to draw the rectangle (bottom left corner) |
 | **width** | `int` | Width of the rectangle |
 | **height** | `int` | Height of the rectangle |
-| **color** | `PhpTui\Tui\Model\Color` | Color of the rectangle |
+| **color** | `PhpTui\Tui\Color\Color` | Color of the rectangle |

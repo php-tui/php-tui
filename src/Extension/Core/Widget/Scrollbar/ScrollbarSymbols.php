@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Extension\Core\Widget\Scrollbar;
 
-use PhpTui\Tui\Model\Symbol\BlockSet;
-use PhpTui\Tui\Model\Symbol\LineSet;
+use PhpTui\Tui\Symbol\BlockSet;
+use PhpTui\Tui\Symbol\LineSet;
 
 final class ScrollbarSymbols
 {

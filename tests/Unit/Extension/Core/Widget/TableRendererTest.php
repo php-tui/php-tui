@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Tests\Unit\Extension\Core\Widget;
 
 use Generator;
+use PhpTui\Tui\Display\Area;
+use PhpTui\Tui\Display\Buffer;
 use PhpTui\Tui\Extension\Core\Widget\Table\TableCell;
 use PhpTui\Tui\Extension\Core\Widget\Table\TableRow;
 use PhpTui\Tui\Extension\Core\Widget\TableWidget;
-use PhpTui\Tui\Model\Area;
-use PhpTui\Tui\Model\Display\Buffer;
-use PhpTui\Tui\Model\Layout\Constraint;
+use PhpTui\Tui\Layout\Constraint;
 
 final class TableRendererTest extends WidgetTestCase
 {

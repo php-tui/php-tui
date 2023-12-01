@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use PhpTui\Tui\DisplayBuilder;
 use PhpTui\Tui\Extension\Core\Widget\ParagraphWidget;
-use PhpTui\Tui\Model\Text\Text;
+use PhpTui\Tui\Text\Text;
 
 require 'vendor/autoload.php';
 

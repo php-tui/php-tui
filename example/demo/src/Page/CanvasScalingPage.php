@@ -9,6 +9,10 @@ use PhpTui\Term\Event\CodedKeyEvent;
 use PhpTui\Term\KeyCode;
 use PhpTui\Term\Terminal;
 use PhpTui\Term\TerminalInformation\Size;
+use PhpTui\Tui\Canvas\Marker;
+use PhpTui\Tui\Canvas\Painter;
+use PhpTui\Tui\Canvas\Shape;
+use PhpTui\Tui\Color\AnsiColor;
 use PhpTui\Tui\Example\Demo\Component;
 use PhpTui\Tui\Extension\Bdf\Shape\TextShape;
 use PhpTui\Tui\Extension\Core\Shape\CircleShape;
@@ -18,15 +22,11 @@ use PhpTui\Tui\Extension\Core\Widget\BlockWidget;
 use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
 use PhpTui\Tui\Extension\Core\Widget\GridWidget;
 use PhpTui\Tui\Extension\ImageMagick\Shape\ImageShape;
-use PhpTui\Tui\Model\Canvas\Painter;
-use PhpTui\Tui\Model\Canvas\Shape;
-use PhpTui\Tui\Model\Color\AnsiColor;
-use PhpTui\Tui\Model\Direction;
-use PhpTui\Tui\Model\Layout\Constraint;
-use PhpTui\Tui\Model\Marker;
-use PhpTui\Tui\Model\Position\FloatPosition;
-use PhpTui\Tui\Model\Text\Title;
-use PhpTui\Tui\Model\Widget;
+use PhpTui\Tui\Layout\Constraint;
+use PhpTui\Tui\Position\FloatPosition;
+use PhpTui\Tui\Text\Title;
+use PhpTui\Tui\Widget\Direction;
+use PhpTui\Tui\Widget\Widget;
 
 final class CanvasScalingPage implements Component
 {

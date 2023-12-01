@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Extension\Core\Widget\Table;
 
-use PhpTui\Tui\Model\Style;
-use PhpTui\Tui\Model\Text\Line;
-use PhpTui\Tui\Model\Text\Text;
+use PhpTui\Tui\Style\Style;
+use PhpTui\Tui\Text\Line;
+use PhpTui\Tui\Text\Text;
 
 final class TableCell
 {

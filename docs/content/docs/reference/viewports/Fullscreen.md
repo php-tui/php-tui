@@ -4,7 +4,7 @@ description: Viewport that occupies the entire screen.
 ---
 ##  Fullscreen
 
-`PhpTui\Tui\Model\Viewport\Fullscreen`
+`PhpTui\Tui\Display\Viewport\Fullscreen`
 
 Viewport that occupies the entire screen.
 ### Example

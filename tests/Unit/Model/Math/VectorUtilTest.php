@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Tests\Unit\Model\Math;
 
 use Generator;
-use PhpTui\Tui\Model\Math\VectorUtil;
+use PhpTui\Tui\Math\VectorUtil;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 

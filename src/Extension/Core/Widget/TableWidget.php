@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Extension\Core\Widget;
 
+use PhpTui\Tui\Display\Area;
 use PhpTui\Tui\Extension\Core\Widget\List\HighlightSpacing;
 use PhpTui\Tui\Extension\Core\Widget\Table\TableRow;
 use PhpTui\Tui\Extension\Core\Widget\Table\TableState;
-use PhpTui\Tui\Model\Area;
-use PhpTui\Tui\Model\Layout\Constraint;
-use PhpTui\Tui\Model\Style;
-use PhpTui\Tui\Model\Widget;
+use PhpTui\Tui\Layout\Constraint;
+use PhpTui\Tui\Style\Style;
+use PhpTui\Tui\Widget\Widget;
 
 /**
  * Shows tabular data arranged in columns. The column spacing is determined by

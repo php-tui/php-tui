@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Extension\Core\Widget;
 
-use PhpTui\Tui\Model\Display\Buffer;
-use PhpTui\Tui\Model\Layout\Layout;
-use PhpTui\Tui\Model\Widget;
-use PhpTui\Tui\Model\WidgetRenderer;
+use PhpTui\Tui\Display\Buffer;
+use PhpTui\Tui\Layout\Layout;
+use PhpTui\Tui\Widget\Widget;
+use PhpTui\Tui\Widget\WidgetRenderer;
 use RuntimeException;
 
 final class GridRenderer implements WidgetRenderer

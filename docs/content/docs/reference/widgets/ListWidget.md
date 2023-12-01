@@ -21,9 +21,9 @@ Configure the widget using the builder methods named as follows:
 | Name | Type | Description |
 | --- | --- | --- |
 | **items** | `array` |  |
-| **style** | `PhpTui\Tui\Model\Style` |  |
-| **startCorner** | `PhpTui\Tui\Model\Corner` |  |
-| **highlightStyle** | `PhpTui\Tui\Model\Style` |  |
+| **style** | `PhpTui\Tui\Style\Style` |  |
+| **startCorner** | `PhpTui\Tui\Widget\Corner` |  |
+| **highlightStyle** | `PhpTui\Tui\Style\Style` |  |
 | **highlightSymbol** | `string` |  |
 | **state** | `PhpTui\Tui\Extension\Core\Widget\List\ListState` |  |
 | **highlightSpacing** | `PhpTui\Tui\Extension\Core\Widget\List\HighlightSpacing` |  |

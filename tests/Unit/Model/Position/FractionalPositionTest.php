@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Tests\Unit\Model\Position;
 
-use PhpTui\Tui\Model\Position\FractionalPosition;
+use PhpTui\Tui\Position\FractionalPosition;
 use PHPUnit\Framework\TestCase;
 
 final class FractionalPositionTest extends TestCase

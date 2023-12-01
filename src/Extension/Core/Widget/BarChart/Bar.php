@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Extension\Core\Widget\BarChart;
 
-use PhpTui\Tui\Model\Style;
-use PhpTui\Tui\Model\Text\Line;
+use PhpTui\Tui\Style\Style;
+use PhpTui\Tui\Text\Line;
 
 final class Bar
 {

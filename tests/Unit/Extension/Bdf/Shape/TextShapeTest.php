@@ -5,18 +5,18 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Tests\Unit\Extension\Bdf\Shape;
 
 use Generator;
+use PhpTui\Tui\Canvas\CanvasContext;
+use PhpTui\Tui\Canvas\Marker;
+use PhpTui\Tui\Color\AnsiColor;
+use PhpTui\Tui\Display\Area;
+use PhpTui\Tui\Display\Buffer;
 use PhpTui\Tui\Extension\Bdf\FontRegistry;
 use PhpTui\Tui\Extension\Bdf\Shape\TextRenderer;
 use PhpTui\Tui\Extension\Bdf\Shape\TextShape;
+use PhpTui\Tui\Extension\Core\Widget\CanvasRenderer;
 use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
-use PhpTui\Tui\Model\Area;
-use PhpTui\Tui\Model\Canvas\CanvasContext;
-use PhpTui\Tui\Model\Color\AnsiColor;
-use PhpTui\Tui\Model\Display\Buffer;
-use PhpTui\Tui\Model\Marker;
-use PhpTui\Tui\Model\Position\FloatPosition;
-use PhpTui\Tui\Model\Widget\CanvasRenderer;
-use PhpTui\Tui\Model\WidgetRenderer\NullWidgetRenderer;
+use PhpTui\Tui\Position\FloatPosition;
+use PhpTui\Tui\Widget\WidgetRenderer\NullWidgetRenderer;
 use PHPUnit\Framework\TestCase;
 
 final class TextShapeTest extends TestCase

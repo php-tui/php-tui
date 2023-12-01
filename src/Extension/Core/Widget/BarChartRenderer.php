@@ -4,19 +4,19 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Extension\Core\Widget;
 
+use PhpTui\Tui\Display\Area;
+use PhpTui\Tui\Display\Buffer;
 use PhpTui\Tui\Extension\Core\Widget\BarChart\Bar;
 use PhpTui\Tui\Extension\Core\Widget\BarChart\BarGroup;
 use PhpTui\Tui\Extension\Core\Widget\BarChart\LabelInfo;
-use PhpTui\Tui\Model\Area;
-use PhpTui\Tui\Model\Direction;
-use PhpTui\Tui\Model\Display\Buffer;
-use PhpTui\Tui\Model\HorizontalAlignment;
-use PhpTui\Tui\Model\Position\FractionalPosition;
-use PhpTui\Tui\Model\Position\Position;
-use PhpTui\Tui\Model\Style;
-use PhpTui\Tui\Model\Symbol\BarSet;
-use PhpTui\Tui\Model\Widget;
-use PhpTui\Tui\Model\WidgetRenderer;
+use PhpTui\Tui\Position\FractionalPosition;
+use PhpTui\Tui\Position\Position;
+use PhpTui\Tui\Style\Style;
+use PhpTui\Tui\Symbol\BarSet;
+use PhpTui\Tui\Widget\Direction;
+use PhpTui\Tui\Widget\HorizontalAlignment;
+use PhpTui\Tui\Widget\Widget;
+use PhpTui\Tui\Widget\WidgetRenderer;
 
 final class BarChartRenderer implements WidgetRenderer
 {

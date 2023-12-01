@@ -1,6 +1,7 @@
 #!/usr/bin/env php
 <?php
 
+use PhpBench\Color\Color;
 use PhpTui\Docgen\DocExampleType;
 use PhpTui\Docgen\Docgen;
 use PhpTui\Docgen\DocSection;
@@ -8,10 +9,9 @@ use PhpTui\Docgen\DocUnitConfig;
 use PhpTui\Docgen\Renderer\AggregateDocRenderer;
 use PhpTui\Docgen\Renderer\DocClassRenderer;
 use PhpTui\Docgen\Renderer\DocSectionRenderer;
-use PhpTui\Tui\Model\Canvas\Shape;
-use PhpTui\Tui\Model\Color;
-use PhpTui\Tui\Model\Display\Viewport;
-use PhpTui\Tui\Model\Widget;
+use PhpTui\Tui\Canvas\Shape;
+use PhpTui\Tui\Display\Viewport;
+use PhpTui\Tui\Widget\Widget;
 
 require __DIR__ .'/../vendor/autoload.php';
 

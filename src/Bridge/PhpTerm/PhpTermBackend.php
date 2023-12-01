@@ -17,17 +17,17 @@ use PhpTui\Term\Colors;
 use PhpTui\Term\Event\CursorPositionEvent;
 use PhpTui\Term\Terminal as PhpTermTerminal;
 use PhpTui\Term\TerminalInformation\Size;
-use PhpTui\Tui\Model\Area;
-use PhpTui\Tui\Model\Color;
-use PhpTui\Tui\Model\Color\AnsiColor;
-use PhpTui\Tui\Model\Color\LinearGradient;
-use PhpTui\Tui\Model\Color\RgbColor;
-use PhpTui\Tui\Model\Display\Backend;
-use PhpTui\Tui\Model\Display\BufferUpdates;
-use PhpTui\Tui\Model\Display\ClearType;
-use PhpTui\Tui\Model\Modifier;
-use PhpTui\Tui\Model\Position\FractionalPosition;
-use PhpTui\Tui\Model\Position\Position;
+use PhpTui\Tui\Color\AnsiColor;
+use PhpTui\Tui\Color\Color;
+use PhpTui\Tui\Color\LinearGradient;
+use PhpTui\Tui\Color\RgbColor;
+use PhpTui\Tui\Display\Area;
+use PhpTui\Tui\Display\Backend;
+use PhpTui\Tui\Display\BufferUpdates;
+use PhpTui\Tui\Display\ClearType;
+use PhpTui\Tui\Position\FractionalPosition;
+use PhpTui\Tui\Position\Position;
+use PhpTui\Tui\Style\Modifier;
 use RuntimeException;
 
 final class PhpTermBackend implements Backend

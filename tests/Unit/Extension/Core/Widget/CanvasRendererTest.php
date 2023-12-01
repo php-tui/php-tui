@@ -5,17 +5,17 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Tests\Unit\Extension\Core\Widget;
 
 use Generator;
+use PhpTui\Tui\Canvas\CanvasContext;
+use PhpTui\Tui\Canvas\Marker;
+use PhpTui\Tui\Color\AnsiColor;
+use PhpTui\Tui\Display\Area;
+use PhpTui\Tui\Display\Buffer;
+use PhpTui\Tui\Display\Cell;
 use PhpTui\Tui\Extension\Core\Shape\CircleShape;
 use PhpTui\Tui\Extension\Core\Shape\LineShape;
 use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
-use PhpTui\Tui\Model\Area;
-use PhpTui\Tui\Model\AxisBounds;
-use PhpTui\Tui\Model\Canvas\CanvasContext;
-use PhpTui\Tui\Model\Color\AnsiColor;
-use PhpTui\Tui\Model\Display\Buffer;
-use PhpTui\Tui\Model\Display\Cell;
-use PhpTui\Tui\Model\Marker;
-use PhpTui\Tui\Model\Text\Line as DTLLine;
+use PhpTui\Tui\Extension\Core\Widget\Chart\AxisBounds;
+use PhpTui\Tui\Text\Line as DTLLine;
 
 final class CanvasRendererTest extends WidgetTestCase
 {

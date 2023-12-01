@@ -21,4 +21,4 @@ Configure the shape using the builder methods named as follows:
 | Name | Type | Description |
 | --- | --- | --- |
 | **coords** | `array` | Set of coordinates to draw, e.g. `[[0.0, 0.0], [2.0, 2.0], [4.0,4.0]]` |
-| **color** | `PhpTui\Tui\Model\Color` | Color of the points |
+| **color** | `PhpTui\Tui\Color\Color` | Color of the points |

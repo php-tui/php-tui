@@ -7,8 +7,8 @@ namespace PhpTui\Tui\Extension\Core\Widget;
 use PhpTui\Tui\Extension\Core\Widget\Scrollbar\ScrollbarOrientation;
 use PhpTui\Tui\Extension\Core\Widget\Scrollbar\ScrollbarState;
 use PhpTui\Tui\Extension\Core\Widget\Scrollbar\ScrollbarSymbols;
-use PhpTui\Tui\Model\Style;
-use PhpTui\Tui\Model\Widget;
+use PhpTui\Tui\Style\Style;
+use PhpTui\Tui\Widget\Widget;
 
 /**
  * A widget to display a scrollbar

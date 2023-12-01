@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Extension\Core\Widget;
 
 use Closure;
-use PhpTui\Tui\Model\Display\Buffer;
-use PhpTui\Tui\Model\Widget;
+use PhpTui\Tui\Display\Buffer;
+use PhpTui\Tui\Widget\Widget;
 
 /**
  * This widget allows you to write directly to the buffer through a closure.

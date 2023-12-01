@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Tests\Unit\Model\Color;
 
 use InvalidArgumentException;
-use PhpTui\Tui\Model\Color\RgbColor;
+use PhpTui\Tui\Color\RgbColor;
 use PHPUnit\Framework\TestCase;
 
 final class RgbColorTest extends TestCase

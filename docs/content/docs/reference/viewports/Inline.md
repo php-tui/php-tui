@@ -4,7 +4,7 @@ description: Viewport that is displayed _after_ the cursor's current position.
 ---
 ##  Inline
 
-`PhpTui\Tui\Model\Viewport\Inline`
+`PhpTui\Tui\Display\Viewport\Inline`
 
 Viewport that is displayed _after_ the cursor's current position.
 

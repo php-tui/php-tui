@@ -13,10 +13,10 @@ use PhpTui\Term\RawMode\TestRawMode;
 use PhpTui\Term\Terminal;
 use PhpTui\Term\TerminalInformation\Size;
 use PhpTui\Tui\Bridge\PhpTerm\PhpTermBackend;
+use PhpTui\Tui\Display\Display;
 use PhpTui\Tui\DisplayBuilder;
 use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
 use PhpTui\Tui\Extension\ImageMagick\Shape\ImageShape;
-use PhpTui\Tui\Model\Display\Display;
 
 #[Iterations(4)]
 #[Revs(25)]

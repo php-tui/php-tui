@@ -7,20 +7,20 @@ namespace PhpTui\Tui\Example\Demo\Page;
 use PhpTui\Term\Event;
 use PhpTui\Term\Event\CodedKeyEvent;
 use PhpTui\Term\KeyCode;
+use PhpTui\Tui\Color\AnsiColor;
 use PhpTui\Tui\Example\Demo\Component;
 use PhpTui\Tui\Extension\Core\Widget\BlockWidget;
 use PhpTui\Tui\Extension\Core\Widget\Table\TableCell;
 use PhpTui\Tui\Extension\Core\Widget\Table\TableRow;
 use PhpTui\Tui\Extension\Core\Widget\Table\TableState;
 use PhpTui\Tui\Extension\Core\Widget\TableWidget;
-use PhpTui\Tui\Model\Color\AnsiColor;
-use PhpTui\Tui\Model\Layout\Constraint;
-use PhpTui\Tui\Model\Style;
-use PhpTui\Tui\Model\Text\Line;
-use PhpTui\Tui\Model\Text\Span;
-use PhpTui\Tui\Model\Text\Title;
-use PhpTui\Tui\Model\Widget;
-use PhpTui\Tui\Model\Widget\Borders;
+use PhpTui\Tui\Layout\Constraint;
+use PhpTui\Tui\Style\Style;
+use PhpTui\Tui\Text\Line;
+use PhpTui\Tui\Text\Span;
+use PhpTui\Tui\Text\Title;
+use PhpTui\Tui\Widget\Borders;
+use PhpTui\Tui\Widget\Widget;
 
 final class TablePage implements Component
 {

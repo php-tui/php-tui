@@ -5,6 +5,11 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Example\Demo\Page;
 
 use PhpTui\Term\Event;
+use PhpTui\Tui\Canvas\CanvasContext;
+use PhpTui\Tui\Canvas\Marker;
+use PhpTui\Tui\Color\AnsiColor;
+use PhpTui\Tui\Color\LinearGradient;
+use PhpTui\Tui\Color\RgbColor;
 use PhpTui\Tui\Example\Demo\Component;
 use PhpTui\Tui\Extension\Bdf\Shape\TextShape;
 use PhpTui\Tui\Extension\Core\Shape\PointsShape;
@@ -12,17 +17,12 @@ use PhpTui\Tui\Extension\Core\Shape\SpriteShape;
 use PhpTui\Tui\Extension\Core\Widget\BlockWidget;
 use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
 use PhpTui\Tui\Extension\Core\Widget\GridWidget;
-use PhpTui\Tui\Model\Canvas\CanvasContext;
-use PhpTui\Tui\Model\Color\AnsiColor;
-use PhpTui\Tui\Model\Color\LinearGradient;
-use PhpTui\Tui\Model\Color\RgbColor;
-use PhpTui\Tui\Model\Layout\Constraint;
-use PhpTui\Tui\Model\Marker;
-use PhpTui\Tui\Model\Position\FloatPosition;
-use PhpTui\Tui\Model\Style;
-use PhpTui\Tui\Model\Widget;
-use PhpTui\Tui\Model\Widget\Borders;
-use PhpTui\Tui\Model\Widget\BorderType;
+use PhpTui\Tui\Layout\Constraint;
+use PhpTui\Tui\Position\FloatPosition;
+use PhpTui\Tui\Style\Style;
+use PhpTui\Tui\Widget\Borders;
+use PhpTui\Tui\Widget\BorderType;
+use PhpTui\Tui\Widget\Widget;
 
 final class SpritePage implements Component
 {

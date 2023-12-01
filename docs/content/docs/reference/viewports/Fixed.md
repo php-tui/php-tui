@@ -4,7 +4,7 @@ description: Creates a fixed location viewport at the given Area
 ---
 ##  Fixed
 
-`PhpTui\Tui\Model\Viewport\Fixed`
+`PhpTui\Tui\Display\Viewport\Fixed`
 
 Creates a fixed location viewport at the given Area
 ### Example
@@ -19,4 +19,4 @@ Configure the viewport using the builder methods named as follows:
 
 | Name | Type | Description |
 | --- | --- | --- |
-| **area** | `PhpTui\Tui\Model\Area` | Area to occupy |
+| **area** | `PhpTui\Tui\Display\Area` | Area to occupy |

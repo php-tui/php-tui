@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Extension\Core\Widget;
 
-use PhpTui\Tui\Model\Style;
-use PhpTui\Tui\Model\Text\Span;
-use PhpTui\Tui\Model\Widget;
+use PhpTui\Tui\Style\Style;
+use PhpTui\Tui\Text\Span;
+use PhpTui\Tui\Widget\Widget;
 use RuntimeException;
 
 /**

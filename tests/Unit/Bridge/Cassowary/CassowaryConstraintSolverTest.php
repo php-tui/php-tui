@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Tests\Unit\Bridge\Cassowary;
 
-use PhpTui\Tui\Model\Area;
-use PhpTui\Tui\Model\Direction;
-use PhpTui\Tui\Model\Layout\Constraint;
-use PhpTui\Tui\Model\Layout\Layout;
+use PhpTui\Tui\Display\Area;
+use PhpTui\Tui\Layout\Constraint;
+use PhpTui\Tui\Layout\Layout;
+use PhpTui\Tui\Widget\Direction;
 use PHPUnit\Framework\TestCase;
 
 final class CassowaryConstraintSolverTest extends TestCase

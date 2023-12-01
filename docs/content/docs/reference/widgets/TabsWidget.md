@@ -28,6 +28,6 @@ Configure the widget using the builder methods named as follows:
 | --- | --- | --- |
 | **titles** | `Line[]` |  |
 | **selected** | `int<0, max>` |  |
-| **style** | `PhpTui\Tui\Model\Style` |  |
-| **highlightStyle** | `PhpTui\Tui\Model\Style` |  |
-| **divider** | `PhpTui\Tui\Model\Text\Span` |  |
+| **style** | `PhpTui\Tui\Style\Style` |  |
+| **highlightStyle** | `PhpTui\Tui\Style\Style` |  |
+| **divider** | `PhpTui\Tui\Text\Span` |  |

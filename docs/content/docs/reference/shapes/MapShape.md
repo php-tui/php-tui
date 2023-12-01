@@ -21,4 +21,4 @@ Configure the shape using the builder methods named as follows:
 | Name | Type | Description |
 | --- | --- | --- |
 | **mapResolution** | `PhpTui\Tui\Extension\Core\Shape\MapResolution` | Resolution of the map (enum low or high) |
-| **color** | `PhpTui\Tui\Model\Color` | Color of the map |
+| **color** | `PhpTui\Tui\Color\Color` | Color of the map |

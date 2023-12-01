@@ -5,15 +5,15 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Tests\Unit\Extension\Core\Widget;
 
 use Generator;
+use PhpTui\Tui\Display\Area;
+use PhpTui\Tui\Display\Buffer;
 use PhpTui\Tui\Extension\Core\Widget\BlockWidget;
 use PhpTui\Tui\Extension\Core\Widget\GridWidget;
 use PhpTui\Tui\Extension\Core\Widget\ParagraphWidget;
-use PhpTui\Tui\Model\Area;
-use PhpTui\Tui\Model\Direction;
-use PhpTui\Tui\Model\Display\Buffer;
-use PhpTui\Tui\Model\Layout\Constraint;
-use PhpTui\Tui\Model\Text\Text;
-use PhpTui\Tui\Model\Widget\Borders;
+use PhpTui\Tui\Layout\Constraint;
+use PhpTui\Tui\Text\Text;
+use PhpTui\Tui\Widget\Borders;
+use PhpTui\Tui\Widget\Direction;
 use RuntimeException;
 
 final class GridRendererTest extends WidgetTestCase

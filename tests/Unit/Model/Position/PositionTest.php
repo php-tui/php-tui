@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Tests\Unit\Model\Position;
 
-use PhpTui\Tui\Model\Area;
-use PhpTui\Tui\Model\Position\Position;
+use PhpTui\Tui\Display\Area;
+use PhpTui\Tui\Position\Position;
 use PHPUnit\Framework\TestCase;
 
 final class PositionTest extends TestCase

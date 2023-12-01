@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Extension\Core;
 
+use PhpTui\Tui\Display\DisplayExtension;
 use PhpTui\Tui\Extension\Core\Shape\CirclePainter;
 use PhpTui\Tui\Extension\Core\Shape\ClosurePainter;
 use PhpTui\Tui\Extension\Core\Shape\LinePainter;
@@ -24,7 +25,6 @@ use PhpTui\Tui\Extension\Core\Widget\ScrollbarRenderer;
 use PhpTui\Tui\Extension\Core\Widget\SparklineRenderer;
 use PhpTui\Tui\Extension\Core\Widget\TableRenderer;
 use PhpTui\Tui\Extension\Core\Widget\TabsRenderer;
-use PhpTui\Tui\Model\Display\DisplayExtension;
 
 final class CoreExtension implements DisplayExtension
 {

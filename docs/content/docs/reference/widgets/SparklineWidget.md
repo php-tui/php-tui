@@ -20,7 +20,7 @@ Configure the widget using the builder methods named as follows:
 
 | Name | Type | Description |
 | --- | --- | --- |
-| **style** | `PhpTui\Tui\Model\Style` |  |
+| **style** | `PhpTui\Tui\Style\Style` |  |
 | **data** | `list<int<0, max>>` |  |
 | **max** | `int<0, max>` |  |
 | **direction** | `PhpTui\Tui\Extension\Core\Widget\Sparkline\RenderDirection` |  |

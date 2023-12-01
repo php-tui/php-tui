@@ -6,7 +6,7 @@ namespace PhpTui\Tui\Tests\Unit\Extension\Core\Widget\BarChart;
 
 use PhpTui\Tui\Extension\Core\Widget\BarChart\Bar;
 use PhpTui\Tui\Extension\Core\Widget\BarChart\BarGroup;
-use PhpTui\Tui\Model\Text\Line;
+use PhpTui\Tui\Text\Line;
 use PHPUnit\Framework\TestCase;
 
 final class BarGroupTest extends TestCase

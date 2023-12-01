@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Extension\Core\Widget;
 
+use PhpTui\Tui\Display\Buffer;
 use PhpTui\Tui\Extension\Core\Widget\Sparkline\RenderDirection;
-use PhpTui\Tui\Model\Display\Buffer;
-use PhpTui\Tui\Model\Math\VectorUtil;
-use PhpTui\Tui\Model\Position\Position;
-use PhpTui\Tui\Model\Symbol\BarSet;
-use PhpTui\Tui\Model\Widget;
-use PhpTui\Tui\Model\WidgetRenderer;
+use PhpTui\Tui\Math\VectorUtil;
+use PhpTui\Tui\Position\Position;
+use PhpTui\Tui\Symbol\BarSet;
+use PhpTui\Tui\Widget\Widget;
+use PhpTui\Tui\Widget\WidgetRenderer;
 
 final class SparklineRenderer implements WidgetRenderer
 {

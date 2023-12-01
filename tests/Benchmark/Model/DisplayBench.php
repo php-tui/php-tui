@@ -13,11 +13,14 @@ use PhpTui\Term\RawMode\TestRawMode;
 use PhpTui\Term\Terminal;
 use PhpTui\Term\TerminalInformation\Size;
 use PhpTui\Tui\Bridge\PhpTerm\PhpTermBackend;
+use PhpTui\Tui\Display\Buffer;
+use PhpTui\Tui\Display\Display;
 use PhpTui\Tui\DisplayBuilder;
 use PhpTui\Tui\Extension\Core\Shape\MapShape;
 use PhpTui\Tui\Extension\Core\Widget\BlockWidget;
 use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
 use PhpTui\Tui\Extension\Core\Widget\Chart\Axis;
+use PhpTui\Tui\Extension\Core\Widget\Chart\AxisBounds;
 use PhpTui\Tui\Extension\Core\Widget\Chart\DataSet;
 use PhpTui\Tui\Extension\Core\Widget\ChartWidget;
 use PhpTui\Tui\Extension\Core\Widget\GridWidget;
@@ -28,16 +31,13 @@ use PhpTui\Tui\Extension\Core\Widget\RawWidget;
 use PhpTui\Tui\Extension\Core\Widget\Table\TableCell;
 use PhpTui\Tui\Extension\Core\Widget\Table\TableRow;
 use PhpTui\Tui\Extension\Core\Widget\TableWidget;
-use PhpTui\Tui\Model\AxisBounds;
-use PhpTui\Tui\Model\Direction;
-use PhpTui\Tui\Model\Display\Buffer;
-use PhpTui\Tui\Model\Display\Display;
-use PhpTui\Tui\Model\Layout\Constraint;
-use PhpTui\Tui\Model\Position\Position;
-use PhpTui\Tui\Model\Text\Line;
-use PhpTui\Tui\Model\Text\Title;
-use PhpTui\Tui\Model\Widget;
-use PhpTui\Tui\Model\Widget\Borders;
+use PhpTui\Tui\Layout\Constraint;
+use PhpTui\Tui\Position\Position;
+use PhpTui\Tui\Text\Line;
+use PhpTui\Tui\Text\Title;
+use PhpTui\Tui\Widget\Borders;
+use PhpTui\Tui\Widget\Direction;
+use PhpTui\Tui\Widget\Widget;
 
 final class DisplayBench
 {

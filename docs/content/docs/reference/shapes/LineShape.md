@@ -20,6 +20,6 @@ Configure the shape using the builder methods named as follows:
 
 | Name | Type | Description |
 | --- | --- | --- |
-| **point1** | `PhpTui\Tui\Model\Position\FloatPosition` | Draw from this point |
-| **point2** | `PhpTui\Tui\Model\Position\FloatPosition` | Draw to this point |
-| **color** | `PhpTui\Tui\Model\Color` | Color of the line |
+| **point1** | `PhpTui\Tui\Position\FloatPosition` | Draw from this point |
+| **point2** | `PhpTui\Tui\Position\FloatPosition` | Draw to this point |
+| **color** | `PhpTui\Tui\Color\Color` | Color of the line |

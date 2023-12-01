@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Example\Demo\Page;
 
 use PhpTui\Term\Event;
+use PhpTui\Tui\Color\AnsiColor;
+use PhpTui\Tui\Color\RgbColor;
+use PhpTui\Tui\Display\Buffer;
 use PhpTui\Tui\Example\Demo\Component;
 use PhpTui\Tui\Extension\Core\Widget\RawWidget;
-use PhpTui\Tui\Model\Color\AnsiColor;
-use PhpTui\Tui\Model\Color\RgbColor;
-use PhpTui\Tui\Model\Display\Buffer;
-use PhpTui\Tui\Model\Position\Position;
-use PhpTui\Tui\Model\Text\Span;
-use PhpTui\Tui\Model\Widget;
+use PhpTui\Tui\Position\Position;
+use PhpTui\Tui\Text\Span;
+use PhpTui\Tui\Widget\Widget;
 
 final class ColorsPage implements Component
 {

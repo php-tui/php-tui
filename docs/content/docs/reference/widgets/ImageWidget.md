@@ -21,4 +21,4 @@ Configure the widget using the builder methods named as follows:
 | Name | Type | Description |
 | --- | --- | --- |
 | **path** | `string` | Absolute path to the image |
-| **marker** | `PhpTui\Tui\Model\Marker\|null` | Canvas marker to use, defaults to Marker::HalfBlock |
+| **marker** | `PhpTui\Tui\Canvas\Marker\|null` | Canvas marker to use, defaults to Marker::HalfBlock |

@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Extension\Core\Shape;
 
-use PhpTui\Tui\Model\Canvas\Shape;
-use PhpTui\Tui\Model\Color;
-use PhpTui\Tui\Model\Color\AnsiColor;
+use PhpTui\Tui\Canvas\Shape;
+use PhpTui\Tui\Color\AnsiColor;
+use PhpTui\Tui\Color\Color;
 
 /**
  * Renders a map of the world!

@@ -29,5 +29,5 @@ Configure the widget using the builder methods named as follows:
 | Name | Type | Description |
 | --- | --- | --- |
 | **ratio** | `float` | Ratio from 0.0 to 1.0 |
-| **label** | `PhpTui\Tui\Model\Text\Span\|null` | Optional label, will default to percentage (0.00%) |
-| **style** | `PhpTui\Tui\Model\Style` | Style of the gauge |
+| **label** | `PhpTui\Tui\Text\Span\|null` | Optional label, will default to percentage (0.00%) |
+| **style** | `PhpTui\Tui\Style\Style` | Style of the gauge |

@@ -6,8 +6,8 @@ namespace PhpTui\Tui\Extension\Core\Widget;
 
 use PhpTui\Tui\Extension\Core\Widget\Chart\Axis;
 use PhpTui\Tui\Extension\Core\Widget\Chart\DataSet;
-use PhpTui\Tui\Model\Style;
-use PhpTui\Tui\Model\Widget;
+use PhpTui\Tui\Style\Style;
+use PhpTui\Tui\Widget\Widget;
 
 /**
  * Renders a a composite of scatter or line graphs.
