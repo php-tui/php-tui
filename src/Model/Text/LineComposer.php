@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Model;
+namespace PhpTui\Tui\Model\Text;
 
 use Generator;
 use PhpTui\Tui\Model\Text\StyledGrapheme;

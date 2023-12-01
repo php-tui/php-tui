@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Model\LineComposer;
+namespace PhpTui\Tui\Model\Text;
 
 use Generator;
 use PhpTui\Tui\Model\HorizontalAlignment;
-use PhpTui\Tui\Model\LineComposer;
+use PhpTui\Tui\Model\Text\LineComposer;
 use PhpTui\Tui\Model\Text\StyledGrapheme;
 
 final class LineTruncator implements LineComposer
