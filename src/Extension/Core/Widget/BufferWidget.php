@@ -5,25 +5,25 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Extension\Core\Widget;
 
 use Closure;
-use PhpTui\Tui\Display\Buffer;
+use PhpTui\Tui\Extension\Core\Widget\Buffer\BufferContext;
 use PhpTui\Tui\Widget\Widget;
 
 /**
  * This widget allows you to write directly to the buffer through a closure.
  */
-final class RawWidget implements Widget
+final class BufferWidget implements Widget
 {
     public function __construct(
         /**
          * The callback for writing to the buffer.
-         * @var Closure(Buffer $buffer):void
+         * @var Closure(BufferContext $buffer):void
          */
         public Closure $widget
     ) {
     }
 
     /**
-     * @param Closure(Buffer $buffer):void $closure
+     * @param Closure(BufferContext $buffer):void $closure
      */
     public static function new(Closure $closure): self
     {

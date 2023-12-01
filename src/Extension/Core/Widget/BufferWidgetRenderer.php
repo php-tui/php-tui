@@ -6,19 +6,21 @@ namespace PhpTui\Tui\Extension\Core\Widget;
 
 use PhpTui\Tui\Display\Area;
 use PhpTui\Tui\Display\Buffer;
+use PhpTui\Tui\Extension\Core\Widget\Buffer\BufferContext;
 use PhpTui\Tui\Widget\Widget;
 use PhpTui\Tui\Widget\WidgetRenderer;
 
-final class RawWidgetRenderer implements WidgetRenderer
+final class BufferWidgetRenderer implements WidgetRenderer
 {
     public function render(WidgetRenderer $renderer, Widget $widget, Buffer $buffer): void
     {
         $area = $buffer->area();
-        if (!$widget instanceof RawWidget) {
+        if (!$widget instanceof BufferWidget) {
             return;
         }
         $subBuffer = Buffer::empty(Area::fromDimensions($area->width, $area->height));
-        ($widget->widget)($subBuffer);
+        $context = new BufferContext($renderer, $subBuffer);
+        ($widget->widget)($context);
         $buffer->putBuffer($area->position, $subBuffer);
     }
 }

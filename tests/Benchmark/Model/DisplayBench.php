@@ -27,7 +27,7 @@ use PhpTui\Tui\Extension\Core\Widget\GridWidget;
 use PhpTui\Tui\Extension\Core\Widget\List\ListItem;
 use PhpTui\Tui\Extension\Core\Widget\ListWidget;
 use PhpTui\Tui\Extension\Core\Widget\ParagraphWidget;
-use PhpTui\Tui\Extension\Core\Widget\RawWidget;
+use PhpTui\Tui\Extension\Core\Widget\BufferWidget;
 use PhpTui\Tui\Extension\Core\Widget\Table\TableCell;
 use PhpTui\Tui\Extension\Core\Widget\Table\TableRow;
 use PhpTui\Tui\Extension\Core\Widget\TableWidget;
@@ -89,7 +89,7 @@ final class DisplayBench
                     ),
                     $this->horizontalGrid(
                         ParagraphWidget::fromString('Hello World'),
-                        RawWidget::new(function (Buffer $buffer): void {
+                        BufferWidget::new(function (Buffer $buffer): void {
                             $buffer->putLine(Position::at(0, 0), Line::fromString('Hello'), 5);
                         })
                     ),

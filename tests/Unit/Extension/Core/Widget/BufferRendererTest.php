@@ -9,13 +9,14 @@ use PhpTui\Tui\Display\Area;
 use PhpTui\Tui\Display\Buffer;
 use PhpTui\Tui\Extension\Core\Widget\Block\Padding;
 use PhpTui\Tui\Extension\Core\Widget\BlockWidget;
-use PhpTui\Tui\Extension\Core\Widget\RawWidget;
+use PhpTui\Tui\Extension\Core\Widget\BufferWidget;
+use PhpTui\Tui\Extension\Core\Widget\Buffer\BufferContext;
 use PhpTui\Tui\Position\Position;
 use PhpTui\Tui\Text\Line;
 use PhpTui\Tui\Text\Span;
 use PhpTui\Tui\Widget\Widget;
 
-final class RawRendererTest extends WidgetTestCase
+final class BufferRendererTest extends WidgetTestCase
 {
     /**
      * @dataProvider provideRawWidgetRender
@@ -34,8 +35,8 @@ final class RawRendererTest extends WidgetTestCase
     {
         yield 'write to buffer' => [
             Area::fromDimensions(10, 10),
-            RawWidget::new(function (Buffer $buffer): void {
-                $buffer->putLine(Position::at(0, 0), Line::fromString('Hello'), 5);
+            BufferWidget::new(function (BufferContext $context): void {
+                $context->buffer->putLine(Position::at(0, 0), Line::fromString('Hello'), 5);
             }),
             [
                 'Hello     ',
@@ -54,8 +55,8 @@ final class RawRendererTest extends WidgetTestCase
         yield 'write to buffer in block' => [
             Area::fromDimensions(10, 10),
             BlockWidget::default()->widget(
-                RawWidget::new(function (Buffer $buffer): void {
-                    $buffer->putLine(Position::at(0, 0), Line::fromString('Hello'), 5);
+                BufferWidget::new(function (BufferContext $context): void {
+                    $context->buffer->putLine(Position::at(0, 0), Line::fromString('Hello'), 5);
                 })
             )->padding(Padding::fromScalars(1, 1, 1, 1)),
             [
@@ -75,8 +76,8 @@ final class RawRendererTest extends WidgetTestCase
         yield 'overflow' => [
             Area::fromDimensions(10, 10),
             BlockWidget::default()->widget(
-                RawWidget::new(function (Buffer $buffer): void {
-                    $buffer->putSpan(Position::at(0, 0), Span::fromString(str_repeat('Hello', 10)), 10);
+                BufferWidget::new(function (BufferContext $context): void {
+                    $context->buffer->putSpan(Position::at(0, 0), Span::fromString(str_repeat('Hello', 10)), 10);
                 })
             )->padding(Padding::fromScalars(1, 1, 1, 1)),
             [
