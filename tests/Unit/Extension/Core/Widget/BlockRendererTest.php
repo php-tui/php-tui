@@ -346,4 +346,56 @@ final class BlockRendererTest extends WidgetTestCase
             '╰──────╯',
         ], $buffer->toLines());
     }
+
+    public function testBottomBorderOnly(): void
+    {
+        $buffer = Buffer::empty(Area::fromDimensions(3, 2));
+        $block = BlockWidget::default()
+            ->borders(Borders::BOTTOM);
+
+        $this->render($buffer, $block);
+        self::assertEquals([
+            '   ',
+            '───',
+        ], $buffer->toLines());
+    }
+
+    public function testTopBorderOnly(): void
+    {
+        $buffer = Buffer::empty(Area::fromDimensions(3, 2));
+        $block = BlockWidget::default()
+            ->borders(Borders::TOP);
+
+        $this->render($buffer, $block);
+        self::assertEquals([
+            '───',
+            '   ',
+        ], $buffer->toLines());
+    }
+
+    public function testLeftBorderOnly(): void
+    {
+        $buffer = Buffer::empty(Area::fromDimensions(3, 2));
+        $block = BlockWidget::default()
+            ->borders(Borders::LEFT);
+
+        $this->render($buffer, $block);
+        self::assertEquals([
+            '|  ',
+            '|  ',
+        ], $buffer->toLines());
+    }
+
+    public function testRightBorderOnly(): void
+    {
+        $buffer = Buffer::empty(Area::fromDimensions(3, 2));
+        $block = BlockWidget::default()
+            ->borders(Borders::RIGHT);
+
+        $this->render($buffer, $block);
+        self::assertEquals([
+            '  |',
+            '  |',
+        ], $buffer->toLines());
+    }
 }
