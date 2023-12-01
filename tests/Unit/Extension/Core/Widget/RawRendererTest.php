@@ -15,7 +15,7 @@ use PhpTui\Tui\Model\Text\Line;
 use PhpTui\Tui\Model\Text\Span;
 use PhpTui\Tui\Model\Widget;
 
-final class RawWidgetTest extends WidgetTestCase
+final class RawRendererTest extends WidgetTestCase
 {
     /**
      * @dataProvider provideRawWidgetRender

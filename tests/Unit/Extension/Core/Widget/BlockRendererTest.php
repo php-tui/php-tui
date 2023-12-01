@@ -17,7 +17,7 @@ use PhpTui\Tui\Model\Text\Title;
 use PhpTui\Tui\Model\Widget\Borders;
 use PhpTui\Tui\Model\Widget\BorderType;
 
-final class BlockWidgetTest extends WidgetTestCase
+final class BlockRendererTest extends WidgetTestCase
 {
     /**
      * @dataProvider provideBlock

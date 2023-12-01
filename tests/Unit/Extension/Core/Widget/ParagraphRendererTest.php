@@ -12,7 +12,7 @@ use PhpTui\Tui\Model\HorizontalAlignment;
 use PhpTui\Tui\Model\Text\Line;
 use PhpTui\Tui\Model\Text\Text;
 
-final class ParagraphWidgetTest extends WidgetTestCase
+final class ParagraphRendererTest extends WidgetTestCase
 {
     public function testFromString(): void
     {
