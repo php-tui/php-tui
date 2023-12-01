@@ -6,7 +6,7 @@ namespace PhpTui\Tui\Extension\Core\Widget;
 
 use Closure;
 use PhpTui\Tui\Model\Canvas\Marker;
-use PhpTui\Tui\Model\AxisBounds;
+use PhpTui\Tui\Model\Graph\AxisBounds;
 use PhpTui\Tui\Model\Canvas\CanvasContext;
 use PhpTui\Tui\Model\Canvas\Shape;
 use PhpTui\Tui\Model\Color\AnsiColor;

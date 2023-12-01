@@ -8,7 +8,7 @@ use PhpTui\Tui\Extension\Core\Shape\PointsShape;
 use PhpTui\Tui\Extension\Core\Widget\Chart\ChartLayout;
 use PhpTui\Tui\Extension\Core\Widget\Chart\DataSet;
 use PhpTui\Tui\Model\Area;
-use PhpTui\Tui\Model\AxisBounds;
+use PhpTui\Tui\Model\Graph\AxisBounds;
 use PhpTui\Tui\Model\Canvas\CanvasContext;
 use PhpTui\Tui\Model\Color\AnsiColor;
 use PhpTui\Tui\Model\Display\Buffer;

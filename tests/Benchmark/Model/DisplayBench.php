@@ -28,7 +28,7 @@ use PhpTui\Tui\Extension\Core\Widget\RawWidget;
 use PhpTui\Tui\Extension\Core\Widget\Table\TableCell;
 use PhpTui\Tui\Extension\Core\Widget\Table\TableRow;
 use PhpTui\Tui\Extension\Core\Widget\TableWidget;
-use PhpTui\Tui\Model\AxisBounds;
+use PhpTui\Tui\Model\Graph\AxisBounds;
 use PhpTui\Tui\Model\Borders;
 use PhpTui\Tui\Model\Direction;
 use PhpTui\Tui\Model\Display\Buffer;

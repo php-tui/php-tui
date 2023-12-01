@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Model\Position;
 
 use Closure;
-use PhpTui\Tui\Model\AxisBounds;
+use PhpTui\Tui\Model\Graph\AxisBounds;
 use RuntimeException;
 use Stringable;
 

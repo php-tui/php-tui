@@ -8,7 +8,7 @@ use PhpTui\Tui\Extension\Core\Widget\Chart\Axis;
 use PhpTui\Tui\Extension\Core\Widget\Chart\DataSet;
 use PhpTui\Tui\Extension\Core\Widget\Chart\GraphType;
 use PhpTui\Tui\Extension\Core\Widget\ChartWidget;
-use PhpTui\Tui\Model\AxisBounds;
+use PhpTui\Tui\Model\Graph\AxisBounds;
 use PhpTui\Tui\Model\Text\Span;
 
 require 'vendor/autoload.php';
