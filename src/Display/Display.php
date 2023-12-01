@@ -87,7 +87,8 @@ final class Display
         $this->widgetRenderer->render(
             new NullWidgetRenderer(),
             $widget,
-            $buffer
+            $buffer,
+            $buffer->area()
         );
 
         $this->flush();
@@ -150,7 +151,8 @@ final class Display
         $this->widgetRenderer->render(
             new NullWidgetRenderer(),
             $widget,
-            $buffer
+            $buffer,
+            $buffer->area(),
         );
 
         $this->backend->draw($buffer->toUpdates());

@@ -34,7 +34,7 @@ final class TextShapeTest extends TestCase
             });
         $area = Area::fromDimensions(65, 6);
         $buffer = Buffer::empty($area);
-        (new CanvasRenderer(new TextRenderer(FontRegistry::default())))->render(new NullWidgetRenderer(), $canvas, $buffer);
+        (new CanvasRenderer(new TextRenderer(FontRegistry::default())))->render(new NullWidgetRenderer(), $canvas, $buffer, $buffer->area());
         self::assertEquals($expected, $buffer->toLines());
     }
     /**
@@ -111,7 +111,8 @@ final class TextShapeTest extends TestCase
         ))->render(
             new NullWidgetRenderer(),
             $canvas,
-            $buffer
+            $buffer,
+            $buffer->area(),
         );
         self::assertEquals($expected, $buffer->toLines());
     }

@@ -17,14 +17,7 @@ final class BufferWidgetRenderer implements WidgetRenderer
         if (!$widget instanceof BufferWidget) {
             return;
         }
-        $subBuffer = Buffer::empty(Area::fromScalars(
-            $buffer->area()->position->x,
-            $buffer->area()->position->y,
-            $area->width,
-            $area->height
-        ));
-        $context = new BufferContext($renderer, $subBuffer);
+        $context = new BufferContext($renderer, $buffer, $area);
         ($widget->widget)($context);
-        $buffer->putBuffer($area->position, $subBuffer);
     }
 }

@@ -42,6 +42,6 @@ final class ImageRenderer implements WidgetRenderer
             $geo['height'],
         )->marker($widget->marker ?? Marker::HalfBlock)->draw(ImageShape::fromPath(
             $widget->path
-        )), $buffer);
+        )), $buffer, $area);
     }
 }

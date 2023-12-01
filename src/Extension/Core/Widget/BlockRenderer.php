@@ -30,13 +30,12 @@ final class BlockRenderer implements WidgetRenderer
 
         if ($widget->widget) {
             $innerArea = $widget->inner($area);
-            $subBuffer = Buffer::empty($innerArea);
             $renderer->render(
                 $renderer,
                 $widget->widget,
-                $subBuffer
+                $buffer,
+                $innerArea
             );
-            $buffer->putBuffer($innerArea->position, $subBuffer);
         }
     }
 
