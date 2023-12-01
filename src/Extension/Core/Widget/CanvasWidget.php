@@ -6,12 +6,12 @@ namespace PhpTui\Tui\Extension\Core\Widget;
 
 use Closure;
 use PhpTui\Tui\Extension\Core\Widget\Chart\AxisBounds;
-use PhpTui\Tui\Model\Canvas\CanvasContext;
-use PhpTui\Tui\Model\Canvas\Marker;
-use PhpTui\Tui\Model\Canvas\Shape;
-use PhpTui\Tui\Model\Color\AnsiColor;
-use PhpTui\Tui\Model\Color\Color;
-use PhpTui\Tui\Model\Widget\Widget;
+use PhpTui\Tui\Canvas\CanvasContext;
+use PhpTui\Tui\Canvas\Marker;
+use PhpTui\Tui\Canvas\Shape;
+use PhpTui\Tui\Color\AnsiColor;
+use PhpTui\Tui\Color\Color;
+use PhpTui\Tui\Widget\Widget;
 
 /**
  * The canvas widget provides a surface, of arbitrary scale, upon which shapes can be drawn.

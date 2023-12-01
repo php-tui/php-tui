@@ -5,17 +5,17 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Extension\Core\Widget;
 
 use PhpTui\Tui\Extension\Core\Widget\Paragraph\Wrap;
-use PhpTui\Tui\Model\Display\Area;
-use PhpTui\Tui\Model\Display\Buffer;
-use PhpTui\Tui\Model\Position\Position;
-use PhpTui\Tui\Model\Text\Line;
-use PhpTui\Tui\Model\Text\LineComposer;
-use PhpTui\Tui\Model\Text\LineComposer\LineTruncator;
-use PhpTui\Tui\Model\Text\Span;
-use PhpTui\Tui\Model\Text\StyledGrapheme;
-use PhpTui\Tui\Model\Widget\HorizontalAlignment;
-use PhpTui\Tui\Model\Widget\Widget;
-use PhpTui\Tui\Model\Widget\WidgetRenderer;
+use PhpTui\Tui\Display\Area;
+use PhpTui\Tui\Display\Buffer;
+use PhpTui\Tui\Position\Position;
+use PhpTui\Tui\Text\Line;
+use PhpTui\Tui\Text\LineComposer;
+use PhpTui\Tui\Text\LineComposer\LineTruncator;
+use PhpTui\Tui\Text\Span;
+use PhpTui\Tui\Text\StyledGrapheme;
+use PhpTui\Tui\Widget\HorizontalAlignment;
+use PhpTui\Tui\Widget\Widget;
+use PhpTui\Tui\Widget\WidgetRenderer;
 
 final class ParagraphRenderer implements WidgetRenderer
 {

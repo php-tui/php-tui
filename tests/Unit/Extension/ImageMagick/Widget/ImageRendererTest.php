@@ -7,8 +7,8 @@ namespace PhpTui\Tui\Tests\Unit\Extension\ImageMagick\Widget;
 use PhpTui\Tui\DisplayBuilder;
 use PhpTui\Tui\Extension\ImageMagick\ImageMagickExtension;
 use PhpTui\Tui\Extension\ImageMagick\Widget\ImageWidget;
-use PhpTui\Tui\Model\Canvas\Marker;
-use PhpTui\Tui\Model\Display\Backend\DummyBackend;
+use PhpTui\Tui\Canvas\Marker;
+use PhpTui\Tui\Display\Backend\DummyBackend;
 use PHPUnit\Framework\TestCase;
 
 final class ImageRendererTest extends TestCase

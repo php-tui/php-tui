@@ -8,12 +8,12 @@ use Generator;
 use PhpTui\Tui\Extension\Core\Shape\SpriteShape;
 use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
 use PhpTui\Tui\Extension\Core\Widget\Chart\AxisBounds;
-use PhpTui\Tui\Model\Canvas\CanvasContext;
-use PhpTui\Tui\Model\Canvas\Marker;
-use PhpTui\Tui\Model\Color\AnsiColor;
-use PhpTui\Tui\Model\Display\Area;
-use PhpTui\Tui\Model\Display\Buffer;
-use PhpTui\Tui\Model\Position\FloatPosition;
+use PhpTui\Tui\Canvas\CanvasContext;
+use PhpTui\Tui\Canvas\Marker;
+use PhpTui\Tui\Color\AnsiColor;
+use PhpTui\Tui\Display\Area;
+use PhpTui\Tui\Display\Buffer;
+use PhpTui\Tui\Position\FloatPosition;
 
 final class SpriteShapeTest extends ShapeTestCase
 {

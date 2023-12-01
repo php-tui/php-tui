@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Extension\Core\Widget;
 
-use PhpTui\Tui\Model\Display\Buffer;
-use PhpTui\Tui\Model\Widget\Widget;
-use PhpTui\Tui\Model\Widget\WidgetRenderer;
+use PhpTui\Tui\Display\Buffer;
+use PhpTui\Tui\Widget\Widget;
+use PhpTui\Tui\Widget\WidgetRenderer;
 
 final class CompositeRenderer implements WidgetRenderer
 {

@@ -7,16 +7,16 @@ namespace PhpTui\Tui\Extension\Core\Widget;
 use PhpTui\Tui\Extension\Core\Widget\BarChart\Bar;
 use PhpTui\Tui\Extension\Core\Widget\BarChart\BarGroup;
 use PhpTui\Tui\Extension\Core\Widget\BarChart\LabelInfo;
-use PhpTui\Tui\Model\Display\Area;
-use PhpTui\Tui\Model\Display\Buffer;
-use PhpTui\Tui\Model\Position\FractionalPosition;
-use PhpTui\Tui\Model\Position\Position;
-use PhpTui\Tui\Model\Style\Style;
-use PhpTui\Tui\Model\Symbol\BarSet;
-use PhpTui\Tui\Model\Widget\Direction;
-use PhpTui\Tui\Model\Widget\HorizontalAlignment;
-use PhpTui\Tui\Model\Widget\Widget;
-use PhpTui\Tui\Model\Widget\WidgetRenderer;
+use PhpTui\Tui\Display\Area;
+use PhpTui\Tui\Display\Buffer;
+use PhpTui\Tui\Position\FractionalPosition;
+use PhpTui\Tui\Position\Position;
+use PhpTui\Tui\Style\Style;
+use PhpTui\Tui\Symbol\BarSet;
+use PhpTui\Tui\Widget\Direction;
+use PhpTui\Tui\Widget\HorizontalAlignment;
+use PhpTui\Tui\Widget\Widget;
+use PhpTui\Tui\Widget\WidgetRenderer;
 
 final class BarChartRenderer implements WidgetRenderer
 {

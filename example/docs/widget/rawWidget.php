@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 use PhpTui\Tui\DisplayBuilder;
 use PhpTui\Tui\Extension\Core\Widget\RawWidget;
-use PhpTui\Tui\Model\Display\Buffer;
-use PhpTui\Tui\Model\Position\Position;
+use PhpTui\Tui\Display\Buffer;
+use PhpTui\Tui\Position\Position;
 
 require 'vendor/autoload.php';
 

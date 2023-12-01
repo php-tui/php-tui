@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Tests\Unit\Model\Color;
 
-use PhpTui\Tui\Model\Color\LinearGradient;
-use PhpTui\Tui\Model\Color\RgbColor;
-use PhpTui\Tui\Model\Position\FractionalPosition;
+use PhpTui\Tui\Color\LinearGradient;
+use PhpTui\Tui\Color\RgbColor;
+use PhpTui\Tui\Position\FractionalPosition;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 

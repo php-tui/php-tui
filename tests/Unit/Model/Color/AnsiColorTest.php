@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Tests\Unit\Model\Color;
 
-use PhpTui\Tui\Model\Color\AnsiColor;
+use PhpTui\Tui\Color\AnsiColor;
 use PHPUnit\Framework\TestCase;
 use ValueError;
 

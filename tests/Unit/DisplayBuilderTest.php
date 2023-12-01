@@ -9,11 +9,11 @@ use PhpTui\Tui\Extension\Core\Shape\ClosurePainter;
 use PhpTui\Tui\Extension\Core\Shape\ClosureShape;
 use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
 use PhpTui\Tui\Extension\Core\Widget\ClosureRenderer;
-use PhpTui\Tui\Model\Display\Backend\DummyBackend;
-use PhpTui\Tui\Model\Display\Buffer;
-use PhpTui\Tui\Model\Display\DisplayExtension;
-use PhpTui\Tui\Model\Widget\Widget;
-use PhpTui\Tui\Model\Widget\WidgetRenderer;
+use PhpTui\Tui\Display\Backend\DummyBackend;
+use PhpTui\Tui\Display\Buffer;
+use PhpTui\Tui\Display\DisplayExtension;
+use PhpTui\Tui\Widget\Widget;
+use PhpTui\Tui\Widget\WidgetRenderer;
 use PHPUnit\Framework\TestCase;
 
 final class DisplayBuilderTest extends TestCase

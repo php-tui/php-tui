@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Tests\Unit\Model\Text;
 
 use InvalidArgumentException;
-use PhpTui\Tui\Model\Color\AnsiColor;
-use PhpTui\Tui\Model\Color\RgbColor;
-use PhpTui\Tui\Model\Style\Modifier;
-use PhpTui\Tui\Model\Text\SpanParser;
+use PhpTui\Tui\Color\AnsiColor;
+use PhpTui\Tui\Color\RgbColor;
+use PhpTui\Tui\Style\Modifier;
+use PhpTui\Tui\Text\SpanParser;
 use PHPUnit\Framework\TestCase;
 
 final class SpanParserTest extends TestCase

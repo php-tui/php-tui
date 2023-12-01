@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Extension\Core\Shape;
 
-use PhpTui\Tui\Model\Canvas\Shape;
-use PhpTui\Tui\Model\Color\Color;
-use PhpTui\Tui\Model\Position\FloatPosition;
+use PhpTui\Tui\Canvas\Shape;
+use PhpTui\Tui\Color\Color;
+use PhpTui\Tui\Position\FloatPosition;
 
 /**
  * Renders a "sprite" based on a given "ascii art"

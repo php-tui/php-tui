@@ -6,7 +6,7 @@ use PhpTui\Tui\DisplayBuilder;
 use PhpTui\Tui\Extension\Core\Widget\List\ListItem;
 use PhpTui\Tui\Extension\Core\Widget\List\ListState;
 use PhpTui\Tui\Extension\Core\Widget\ListWidget;
-use PhpTui\Tui\Model\Text\Text;
+use PhpTui\Tui\Text\Text;
 
 require 'vendor/autoload.php';
 

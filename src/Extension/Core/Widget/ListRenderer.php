@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Extension\Core\Widget;
 
-use PhpTui\Tui\Model\Display\Area;
-use PhpTui\Tui\Model\Display\Buffer;
-use PhpTui\Tui\Model\Position\Position;
-use PhpTui\Tui\Model\Widget\Corner;
-use PhpTui\Tui\Model\Widget\Widget;
-use PhpTui\Tui\Model\Widget\WidgetRenderer;
+use PhpTui\Tui\Display\Area;
+use PhpTui\Tui\Display\Buffer;
+use PhpTui\Tui\Position\Position;
+use PhpTui\Tui\Widget\Corner;
+use PhpTui\Tui\Widget\Widget;
+use PhpTui\Tui\Widget\WidgetRenderer;
 
 final class ListRenderer implements WidgetRenderer
 {

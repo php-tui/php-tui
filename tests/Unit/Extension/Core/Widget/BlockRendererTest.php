@@ -9,13 +9,13 @@ use Generator;
 use PhpTui\Tui\Extension\Core\Widget\Block\Padding;
 use PhpTui\Tui\Extension\Core\Widget\BlockWidget;
 use PhpTui\Tui\Extension\Core\Widget\ParagraphWidget;
-use PhpTui\Tui\Model\Display\Area;
-use PhpTui\Tui\Model\Display\Buffer;
-use PhpTui\Tui\Model\Text\Text;
-use PhpTui\Tui\Model\Text\Title;
-use PhpTui\Tui\Model\Widget\Borders;
-use PhpTui\Tui\Model\Widget\BorderType;
-use PhpTui\Tui\Model\Widget\HorizontalAlignment;
+use PhpTui\Tui\Display\Area;
+use PhpTui\Tui\Display\Buffer;
+use PhpTui\Tui\Text\Text;
+use PhpTui\Tui\Text\Title;
+use PhpTui\Tui\Widget\Borders;
+use PhpTui\Tui\Widget\BorderType;
+use PhpTui\Tui\Widget\HorizontalAlignment;
 
 final class BlockRendererTest extends WidgetTestCase
 {

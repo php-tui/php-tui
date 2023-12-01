@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Extension\Core\Widget;
 
-use PhpTui\Tui\Model\Layout\Constraint;
-use PhpTui\Tui\Model\Widget\Direction;
-use PhpTui\Tui\Model\Widget\Widget;
+use PhpTui\Tui\Layout\Constraint;
+use PhpTui\Tui\Widget\Direction;
+use PhpTui\Tui\Widget\Widget;
 
 /**
  * The grid is a widget that provides either a horiztonal or vertical _layout_  based on a series of constraints.

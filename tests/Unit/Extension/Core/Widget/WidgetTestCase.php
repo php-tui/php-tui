@@ -6,13 +6,13 @@ namespace PhpTui\Tui\Tests\Unit\Extension\Core\Widget;
 
 use PhpTui\Tui\Extension\Core\CoreExtension;
 use PhpTui\Tui\Extension\Core\Widget\CanvasRenderer;
-use PhpTui\Tui\Model\Canvas\AggregateShapePainter;
-use PhpTui\Tui\Model\Display\Area;
-use PhpTui\Tui\Model\Display\Buffer;
-use PhpTui\Tui\Model\Widget\Widget;
-use PhpTui\Tui\Model\Widget\WidgetRenderer;
-use PhpTui\Tui\Model\Widget\WidgetRenderer\AggregateWidgetRenderer;
-use PhpTui\Tui\Model\Widget\WidgetRenderer\NullWidgetRenderer;
+use PhpTui\Tui\Canvas\AggregateShapePainter;
+use PhpTui\Tui\Display\Area;
+use PhpTui\Tui\Display\Buffer;
+use PhpTui\Tui\Widget\Widget;
+use PhpTui\Tui\Widget\WidgetRenderer;
+use PhpTui\Tui\Widget\WidgetRenderer\AggregateWidgetRenderer;
+use PhpTui\Tui\Widget\WidgetRenderer\NullWidgetRenderer;
 use PHPUnit\Framework\TestCase;
 
 abstract class WidgetTestCase extends TestCase

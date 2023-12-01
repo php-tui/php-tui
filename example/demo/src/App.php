@@ -31,16 +31,16 @@ use PhpTui\Tui\Extension\Core\Widget\BlockWidget;
 use PhpTui\Tui\Extension\Core\Widget\GridWidget;
 use PhpTui\Tui\Extension\Core\Widget\TabsWidget;
 use PhpTui\Tui\Extension\ImageMagick\ImageMagickExtension;
-use PhpTui\Tui\Model\Display\Backend;
-use PhpTui\Tui\Model\Display\Display;
-use PhpTui\Tui\Model\Layout\Constraint;
-use PhpTui\Tui\Model\Style\Style;
-use PhpTui\Tui\Model\Text\Line;
-use PhpTui\Tui\Model\Text\Title;
-use PhpTui\Tui\Model\Widget\Borders;
-use PhpTui\Tui\Model\Widget\Direction;
-use PhpTui\Tui\Model\Widget\HorizontalAlignment;
-use PhpTui\Tui\Model\Widget\Widget;
+use PhpTui\Tui\Display\Backend;
+use PhpTui\Tui\Display\Display;
+use PhpTui\Tui\Layout\Constraint;
+use PhpTui\Tui\Style\Style;
+use PhpTui\Tui\Text\Line;
+use PhpTui\Tui\Text\Title;
+use PhpTui\Tui\Widget\Borders;
+use PhpTui\Tui\Widget\Direction;
+use PhpTui\Tui\Widget\HorizontalAlignment;
+use PhpTui\Tui\Widget\Widget;
 use Throwable;
 
 /**

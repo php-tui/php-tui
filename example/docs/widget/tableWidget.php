@@ -5,7 +5,7 @@ use PhpTui\Tui\DisplayBuilder;
 use PhpTui\Tui\Extension\Core\Widget\Table\TableCell;
 use PhpTui\Tui\Extension\Core\Widget\Table\TableRow;
 use PhpTui\Tui\Extension\Core\Widget\TableWidget;
-use PhpTui\Tui\Model\Layout\Constraint;
+use PhpTui\Tui\Layout\Constraint;
 
 require 'vendor/autoload.php';
 

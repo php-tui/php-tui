@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Tests\Unit\Model\Style;
 
-use PhpTui\Tui\Model\Color\AnsiColor;
-use PhpTui\Tui\Model\Style\Modifier;
-use PhpTui\Tui\Model\Text\Span;
+use PhpTui\Tui\Color\AnsiColor;
+use PhpTui\Tui\Style\Modifier;
+use PhpTui\Tui\Text\Span;
 use PHPUnit\Framework\TestCase;
 
 final class StyleableTest extends TestCase

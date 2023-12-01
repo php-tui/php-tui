@@ -9,11 +9,11 @@ use PhpTui\Tui\Extension\Core\Shape\PointsShape;
 use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
 use PhpTui\Tui\Extension\Core\Widget\ParagraphWidget;
 use PhpTui\Tui\Extension\Core\Widget\RawWidget;
-use PhpTui\Tui\Model\Canvas\Marker;
-use PhpTui\Tui\Model\Color\AnsiColor;
-use PhpTui\Tui\Model\Display\Backend\DummyBackend;
-use PhpTui\Tui\Model\Display\Buffer;
-use PhpTui\Tui\Model\Position\Position;
+use PhpTui\Tui\Canvas\Marker;
+use PhpTui\Tui\Color\AnsiColor;
+use PhpTui\Tui\Display\Backend\DummyBackend;
+use PhpTui\Tui\Display\Buffer;
+use PhpTui\Tui\Position\Position;
 use PHPUnit\Framework\TestCase;
 
 final class DisplayTest extends TestCase

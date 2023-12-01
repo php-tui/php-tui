@@ -16,7 +16,7 @@ use PhpTui\Tui\Bridge\PhpTerm\PhpTermBackend;
 use PhpTui\Tui\DisplayBuilder;
 use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
 use PhpTui\Tui\Extension\ImageMagick\Shape\ImageShape;
-use PhpTui\Tui\Model\Display\Display;
+use PhpTui\Tui\Display\Display;
 
 #[Iterations(4)]
 #[Revs(25)]

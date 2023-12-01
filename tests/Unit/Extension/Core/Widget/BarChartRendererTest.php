@@ -8,12 +8,12 @@ use Generator;
 use PhpTui\Tui\Extension\Core\Widget\BarChart\Bar;
 use PhpTui\Tui\Extension\Core\Widget\BarChart\BarGroup;
 use PhpTui\Tui\Extension\Core\Widget\BarChartWidget;
-use PhpTui\Tui\Model\Display\Area;
-use PhpTui\Tui\Model\Display\Buffer;
-use PhpTui\Tui\Model\Style\Style;
-use PhpTui\Tui\Model\Text\Line;
-use PhpTui\Tui\Model\Widget\Direction;
-use PhpTui\Tui\Model\Widget\Widget;
+use PhpTui\Tui\Display\Area;
+use PhpTui\Tui\Display\Buffer;
+use PhpTui\Tui\Style\Style;
+use PhpTui\Tui\Text\Line;
+use PhpTui\Tui\Widget\Direction;
+use PhpTui\Tui\Widget\Widget;
 
 final class BarChartRendererTest extends WidgetTestCase
 {

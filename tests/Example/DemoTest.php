@@ -12,7 +12,7 @@ use PhpTui\Term\Painter\ArrayPainter;
 use PhpTui\Term\RawMode\TestRawMode;
 use PhpTui\Term\Terminal;
 use PhpTui\Tui\Example\Demo\App;
-use PhpTui\Tui\Model\Display\Backend\DummyBackend;
+use PhpTui\Tui\Display\Backend\DummyBackend;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 

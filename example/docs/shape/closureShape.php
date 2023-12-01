@@ -5,9 +5,9 @@ declare(strict_types=1);
 use PhpTui\Tui\DisplayBuilder;
 use PhpTui\Tui\Extension\Core\Shape\ClosureShape;
 use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
-use PhpTui\Tui\Model\Canvas\Marker;
-use PhpTui\Tui\Model\Canvas\Painter;
-use PhpTui\Tui\Model\Text\Line;
+use PhpTui\Tui\Canvas\Marker;
+use PhpTui\Tui\Canvas\Painter;
+use PhpTui\Tui\Text\Line;
 
 require 'vendor/autoload.php';
 

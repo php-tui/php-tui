@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 use PhpTui\Tui\DisplayBuilder;
 use PhpTui\Tui\Extension\Core\Widget\GaugeWidget;
-use PhpTui\Tui\Model\Color\LinearGradient;
-use PhpTui\Tui\Model\Color\RgbColor;
-use PhpTui\Tui\Model\Style\Style;
+use PhpTui\Tui\Color\LinearGradient;
+use PhpTui\Tui\Color\RgbColor;
+use PhpTui\Tui\Style\Style;
 
 require 'vendor/autoload.php';
 

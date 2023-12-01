@@ -8,10 +8,10 @@ use Generator;
 use PhpTui\Tui\Extension\Core\Shape\LineShape;
 use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
 use PhpTui\Tui\Extension\Core\Widget\Chart\AxisBounds;
-use PhpTui\Tui\Model\Canvas\CanvasContext;
-use PhpTui\Tui\Model\Canvas\Marker;
-use PhpTui\Tui\Model\Display\Area;
-use PhpTui\Tui\Model\Display\Buffer;
+use PhpTui\Tui\Canvas\CanvasContext;
+use PhpTui\Tui\Canvas\Marker;
+use PhpTui\Tui\Display\Area;
+use PhpTui\Tui\Display\Buffer;
 
 final class LineShapeTest extends ShapeTestCase
 {

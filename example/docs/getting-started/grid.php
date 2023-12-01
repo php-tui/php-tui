@@ -8,9 +8,9 @@ use PhpTui\Tui\Extension\Core\Shape\MapShape;
 use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
 use PhpTui\Tui\Extension\Core\Widget\GridWidget;
 use PhpTui\Tui\Extension\Core\Widget\ParagraphWidget;
-use PhpTui\Tui\Model\Layout\Constraint;
-use PhpTui\Tui\Model\Text\Text;
-use PhpTui\Tui\Model\Widget\Direction;
+use PhpTui\Tui\Layout\Constraint;
+use PhpTui\Tui\Text\Text;
+use PhpTui\Tui\Widget\Direction;
 
 require 'vendor/autoload.php';
 

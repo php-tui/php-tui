@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Extension\Core\Shape;
 
-use PhpTui\Tui\Model\Canvas\Painter;
-use PhpTui\Tui\Model\Canvas\Shape;
-use PhpTui\Tui\Model\Canvas\ShapePainter;
-use PhpTui\Tui\Model\Position\Position;
+use PhpTui\Tui\Canvas\Painter;
+use PhpTui\Tui\Canvas\Shape;
+use PhpTui\Tui\Canvas\ShapePainter;
+use PhpTui\Tui\Position\Position;
 
 final class LinePainter implements ShapePainter
 {

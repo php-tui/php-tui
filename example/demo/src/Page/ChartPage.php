@@ -11,13 +11,13 @@ use PhpTui\Tui\Extension\Core\Widget\Chart\Axis;
 use PhpTui\Tui\Extension\Core\Widget\Chart\AxisBounds;
 use PhpTui\Tui\Extension\Core\Widget\Chart\DataSet;
 use PhpTui\Tui\Extension\Core\Widget\ChartWidget;
-use PhpTui\Tui\Model\Canvas\Marker;
-use PhpTui\Tui\Model\Style\Style;
-use PhpTui\Tui\Model\Text\Line;
-use PhpTui\Tui\Model\Text\Span;
-use PhpTui\Tui\Model\Text\Title;
-use PhpTui\Tui\Model\Widget\Borders;
-use PhpTui\Tui\Model\Widget\Widget;
+use PhpTui\Tui\Canvas\Marker;
+use PhpTui\Tui\Style\Style;
+use PhpTui\Tui\Text\Line;
+use PhpTui\Tui\Text\Span;
+use PhpTui\Tui\Text\Title;
+use PhpTui\Tui\Widget\Borders;
+use PhpTui\Tui\Widget\Widget;
 
 final class ChartPage implements Component
 {

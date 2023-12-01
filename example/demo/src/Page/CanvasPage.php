@@ -11,14 +11,14 @@ use PhpTui\Tui\Extension\Core\Shape\MapResolution;
 use PhpTui\Tui\Extension\Core\Shape\MapShape;
 use PhpTui\Tui\Extension\Core\Widget\BlockWidget;
 use PhpTui\Tui\Extension\Core\Widget\CanvasWidget as PhpTuiCanvas;
-use PhpTui\Tui\Model\Canvas\CanvasContext;
-use PhpTui\Tui\Model\Canvas\Marker;
-use PhpTui\Tui\Model\Color\AnsiColor;
-use PhpTui\Tui\Model\Style\Style;
-use PhpTui\Tui\Model\Text\Line as PhpTuiLine;
-use PhpTui\Tui\Model\Text\Title;
-use PhpTui\Tui\Model\Widget\Borders;
-use PhpTui\Tui\Model\Widget\Widget;
+use PhpTui\Tui\Canvas\CanvasContext;
+use PhpTui\Tui\Canvas\Marker;
+use PhpTui\Tui\Color\AnsiColor;
+use PhpTui\Tui\Style\Style;
+use PhpTui\Tui\Text\Line as PhpTuiLine;
+use PhpTui\Tui\Text\Title;
+use PhpTui\Tui\Widget\Borders;
+use PhpTui\Tui\Widget\Widget;
 
 final class CanvasPage implements Component
 {

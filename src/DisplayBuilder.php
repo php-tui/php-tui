@@ -7,18 +7,18 @@ namespace PhpTui\Tui;
 use PhpTui\Tui\Bridge\PhpTerm\PhpTermBackend;
 use PhpTui\Tui\Extension\Core\CoreExtension;
 use PhpTui\Tui\Extension\Core\Widget\CanvasRenderer;
-use PhpTui\Tui\Model\Canvas\AggregateShapePainter;
-use PhpTui\Tui\Model\Canvas\ShapePainter;
-use PhpTui\Tui\Model\Display\Area;
-use PhpTui\Tui\Model\Display\Backend;
-use PhpTui\Tui\Model\Display\Display;
-use PhpTui\Tui\Model\Display\DisplayExtension;
-use PhpTui\Tui\Model\Display\Viewport;
-use PhpTui\Tui\Model\Display\Viewport\Fixed;
-use PhpTui\Tui\Model\Display\Viewport\Fullscreen;
-use PhpTui\Tui\Model\Display\Viewport\Inline;
-use PhpTui\Tui\Model\Widget\WidgetRenderer;
-use PhpTui\Tui\Model\Widget\WidgetRenderer\AggregateWidgetRenderer;
+use PhpTui\Tui\Canvas\AggregateShapePainter;
+use PhpTui\Tui\Canvas\ShapePainter;
+use PhpTui\Tui\Display\Area;
+use PhpTui\Tui\Display\Backend;
+use PhpTui\Tui\Display\Display;
+use PhpTui\Tui\Display\DisplayExtension;
+use PhpTui\Tui\Display\Viewport;
+use PhpTui\Tui\Display\Viewport\Fixed;
+use PhpTui\Tui\Display\Viewport\Fullscreen;
+use PhpTui\Tui\Display\Viewport\Inline;
+use PhpTui\Tui\Widget\WidgetRenderer;
+use PhpTui\Tui\Widget\WidgetRenderer\AggregateWidgetRenderer;
 
 /**
  * An entry point for PHP-TUI.

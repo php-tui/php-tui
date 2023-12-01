@@ -6,7 +6,7 @@ use PhpTui\Tui\DisplayBuilder;
 use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
 use PhpTui\Tui\Extension\ImageMagick\ImageMagickExtension;
 use PhpTui\Tui\Extension\ImageMagick\Shape\ImageShape;
-use PhpTui\Tui\Model\Canvas\Marker;
+use PhpTui\Tui\Canvas\Marker;
 
 require 'vendor/autoload.php';
 

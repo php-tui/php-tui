@@ -8,10 +8,10 @@ use Imagick;
 use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
 use PhpTui\Tui\Extension\ImageMagick\ImageRegistry;
 use PhpTui\Tui\Extension\ImageMagick\Shape\ImageShape;
-use PhpTui\Tui\Model\Canvas\Marker;
-use PhpTui\Tui\Model\Display\Buffer;
-use PhpTui\Tui\Model\Widget\Widget;
-use PhpTui\Tui\Model\Widget\WidgetRenderer;
+use PhpTui\Tui\Canvas\Marker;
+use PhpTui\Tui\Display\Buffer;
+use PhpTui\Tui\Widget\Widget;
+use PhpTui\Tui\Widget\WidgetRenderer;
 
 final class ImageRenderer implements WidgetRenderer
 {

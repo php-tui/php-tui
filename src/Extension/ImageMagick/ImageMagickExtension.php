@@ -6,7 +6,7 @@ namespace PhpTui\Tui\Extension\ImageMagick;
 
 use PhpTui\Tui\Extension\ImageMagick\Shape\ImagePainter;
 use PhpTui\Tui\Extension\ImageMagick\Widget\ImageRenderer;
-use PhpTui\Tui\Model\Display\DisplayExtension;
+use PhpTui\Tui\Display\DisplayExtension;
 
 final class ImageMagickExtension implements DisplayExtension
 {

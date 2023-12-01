@@ -6,16 +6,16 @@ namespace PhpTui\Tui\Tests\Unit\Model\Display;
 
 use Closure;
 use Generator;
-use PhpTui\Tui\Model\Color\AnsiColor;
-use PhpTui\Tui\Model\Color\RgbColor;
-use PhpTui\Tui\Model\Display\Area;
-use PhpTui\Tui\Model\Display\Buffer;
-use PhpTui\Tui\Model\Display\BufferUpdate;
-use PhpTui\Tui\Model\Display\BufferUpdates;
-use PhpTui\Tui\Model\Display\Cell;
-use PhpTui\Tui\Model\Position\Position;
-use PhpTui\Tui\Model\Style\Style;
-use PhpTui\Tui\Model\Text\Line;
+use PhpTui\Tui\Color\AnsiColor;
+use PhpTui\Tui\Color\RgbColor;
+use PhpTui\Tui\Display\Area;
+use PhpTui\Tui\Display\Buffer;
+use PhpTui\Tui\Display\BufferUpdate;
+use PhpTui\Tui\Display\BufferUpdates;
+use PhpTui\Tui\Display\Cell;
+use PhpTui\Tui\Position\Position;
+use PhpTui\Tui\Style\Style;
+use PhpTui\Tui\Text\Line;
 use PHPUnit\Framework\TestCase;
 
 final class BufferTest extends TestCase

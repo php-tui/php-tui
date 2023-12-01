@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Extension\ImageMagick\Widget;
 
-use PhpTui\Tui\Model\Canvas\Marker;
-use PhpTui\Tui\Model\Widget\Widget;
+use PhpTui\Tui\Canvas\Marker;
+use PhpTui\Tui\Widget\Widget;
 use RuntimeException;
 
 /**

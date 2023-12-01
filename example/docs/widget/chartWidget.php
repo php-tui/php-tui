@@ -8,8 +8,8 @@ use PhpTui\Tui\Extension\Core\Widget\Chart\AxisBounds;
 use PhpTui\Tui\Extension\Core\Widget\Chart\DataSet;
 use PhpTui\Tui\Extension\Core\Widget\Chart\GraphType;
 use PhpTui\Tui\Extension\Core\Widget\ChartWidget;
-use PhpTui\Tui\Model\Canvas\Marker;
-use PhpTui\Tui\Model\Text\Span;
+use PhpTui\Tui\Canvas\Marker;
+use PhpTui\Tui\Text\Span;
 
 require 'vendor/autoload.php';
 

@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Tests\Unit\Model;
 
-use PhpTui\Tui\Model\Color\AnsiColor;
-use PhpTui\Tui\Model\Style\Style;
-use PhpTui\Tui\Model\Text\Span;
+use PhpTui\Tui\Color\AnsiColor;
+use PhpTui\Tui\Style\Style;
+use PhpTui\Tui\Text\Span;
 use PHPUnit\Framework\TestCase;
 
 final class SpanTest extends TestCase

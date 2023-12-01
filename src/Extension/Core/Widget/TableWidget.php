@@ -7,10 +7,10 @@ namespace PhpTui\Tui\Extension\Core\Widget;
 use PhpTui\Tui\Extension\Core\Widget\List\HighlightSpacing;
 use PhpTui\Tui\Extension\Core\Widget\Table\TableRow;
 use PhpTui\Tui\Extension\Core\Widget\Table\TableState;
-use PhpTui\Tui\Model\Display\Area;
-use PhpTui\Tui\Model\Layout\Constraint;
-use PhpTui\Tui\Model\Style\Style;
-use PhpTui\Tui\Model\Widget\Widget;
+use PhpTui\Tui\Display\Area;
+use PhpTui\Tui\Layout\Constraint;
+use PhpTui\Tui\Style\Style;
+use PhpTui\Tui\Widget\Widget;
 
 /**
  * Shows tabular data arranged in columns. The column spacing is determined by

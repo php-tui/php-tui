@@ -24,7 +24,7 @@ use PhpTui\Tui\Extension\Core\Widget\ScrollbarRenderer;
 use PhpTui\Tui\Extension\Core\Widget\SparklineRenderer;
 use PhpTui\Tui\Extension\Core\Widget\TableRenderer;
 use PhpTui\Tui\Extension\Core\Widget\TabsRenderer;
-use PhpTui\Tui\Model\Display\DisplayExtension;
+use PhpTui\Tui\Display\DisplayExtension;
 
 final class CoreExtension implements DisplayExtension
 {

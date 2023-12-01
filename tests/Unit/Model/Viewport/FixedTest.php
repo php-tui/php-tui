@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Tests\Unit\Model\Viewport;
 
-use PhpTui\Tui\Model\Display\Area;
-use PhpTui\Tui\Model\Display\Backend\DummyBackend;
-use PhpTui\Tui\Model\Display\Buffer;
-use PhpTui\Tui\Model\Display\Cell;
-use PhpTui\Tui\Model\Display\ClearType;
-use PhpTui\Tui\Model\Position\Position;
+use PhpTui\Tui\Display\Area;
+use PhpTui\Tui\Display\Backend\DummyBackend;
+use PhpTui\Tui\Display\Buffer;
+use PhpTui\Tui\Display\Cell;
+use PhpTui\Tui\Display\ClearType;
+use PhpTui\Tui\Position\Position;
 use PHPUnit\Framework\TestCase;
 
 final class FixedTest extends TestCase

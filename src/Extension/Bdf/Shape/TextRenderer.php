@@ -6,10 +6,10 @@ namespace PhpTui\Tui\Extension\Bdf\Shape;
 
 use PhpTui\BDF\BdfGlyph;
 use PhpTui\Tui\Extension\Bdf\FontRegistry;
-use PhpTui\Tui\Model\Canvas\Painter;
-use PhpTui\Tui\Model\Canvas\Shape;
-use PhpTui\Tui\Model\Canvas\ShapePainter;
-use PhpTui\Tui\Model\Position\FloatPosition;
+use PhpTui\Tui\Canvas\Painter;
+use PhpTui\Tui\Canvas\Shape;
+use PhpTui\Tui\Canvas\ShapePainter;
+use PhpTui\Tui\Position\FloatPosition;
 
 final class TextRenderer implements ShapePainter
 {

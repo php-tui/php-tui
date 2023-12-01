@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Extension\Core\Widget;
 
-use PhpTui\Tui\Model\Style\Style;
-use PhpTui\Tui\Model\Symbol\LineSet;
-use PhpTui\Tui\Model\Text\Line;
-use PhpTui\Tui\Model\Text\Span;
-use PhpTui\Tui\Model\Widget\Widget;
+use PhpTui\Tui\Style\Style;
+use PhpTui\Tui\Symbol\LineSet;
+use PhpTui\Tui\Text\Line;
+use PhpTui\Tui\Text\Span;
+use PhpTui\Tui\Widget\Widget;
 
 /**
  * A widget that displays a horizontal set of Tabs with a single tab selected.

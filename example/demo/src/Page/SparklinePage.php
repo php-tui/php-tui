@@ -9,10 +9,10 @@ use PhpTui\Tui\Example\Demo\Component;
 use PhpTui\Tui\Extension\Core\Widget\BlockWidget;
 use PhpTui\Tui\Extension\Core\Widget\GridWidget;
 use PhpTui\Tui\Extension\Core\Widget\SparklineWidget;
-use PhpTui\Tui\Model\Layout\Constraint;
-use PhpTui\Tui\Model\Style\Style;
-use PhpTui\Tui\Model\Text\Title;
-use PhpTui\Tui\Model\Widget\Widget;
+use PhpTui\Tui\Layout\Constraint;
+use PhpTui\Tui\Style\Style;
+use PhpTui\Tui\Text\Title;
+use PhpTui\Tui\Widget\Widget;
 
 final class SparklinePage implements Component
 {

@@ -18,7 +18,7 @@ use PhpTui\Tui\DisplayBuilder;
 use PhpTui\Tui\Extension\Core\Shape\MapResolution;
 use PhpTui\Tui\Extension\Core\Shape\MapShape;
 use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
-use PhpTui\Tui\Model\Display\Display;
+use PhpTui\Tui\Display\Display;
 
 #[Iterations(10)]
 #[Revs(25)]
