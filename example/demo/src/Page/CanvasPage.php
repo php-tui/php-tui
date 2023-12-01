@@ -42,11 +42,11 @@ final class CanvasPage implements Component
                             ->marker(Marker::Braille)
                             ->paint(function (CanvasContext $context) use ($buffer): void {
 
-                                $x1 = $context->xBounds->length() / ($buffer->area()->width);
-                                $x = ($this->x * $x1) - 180;
+                                $xd = $context->xBounds->length() / ($buffer->area()->width);
+                                $x = ($this->x * $xd) - 180;
 
-                                $y1 = $context->yBounds->length() / ($buffer->area()->height);
-                                $y = ($this->y * $y1) - 90 - ($buffer->area()->position->y * 2);
+                                $yd = $context->yBounds->length() / ($buffer->area()->height);
+                                $y = ($this->y * $yd) - 90 - ($buffer->area()->position->y * 2);
 
                                 $context->draw(MapShape::default()->resolution(MapResolution::High)->color(AnsiColor::Green));
                                 $context->print($x, -$y, PhpTuiLine::parse(sprintf(
