@@ -14,7 +14,7 @@ use PhpTui\Tui\Model\Canvas\CanvasContext;
 use PhpTui\Tui\Model\Display\Buffer;
 use PhpTui\Tui\Model\Marker;
 use PhpTui\Tui\Model\Position\FloatPosition;
-use PhpTui\Tui\Model\Widget\CanvasRenderer;
+use PhpTui\Tui\Extension\Core\Widget\CanvasRenderer;
 use PhpTui\Tui\Model\WidgetRenderer\NullWidgetRenderer;
 use PHPUnit\Framework\TestCase;
 

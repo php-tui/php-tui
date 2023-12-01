@@ -9,7 +9,7 @@ use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Canvas\AggregateShapePainter;
 use PhpTui\Tui\Model\Display\Buffer;
 use PhpTui\Tui\Model\Widget;
-use PhpTui\Tui\Model\Widget\CanvasRenderer;
+use PhpTui\Tui\Extension\Core\Widget\CanvasRenderer;
 use PhpTui\Tui\Model\WidgetRenderer;
 use PhpTui\Tui\Model\WidgetRenderer\AggregateWidgetRenderer;
 use PhpTui\Tui\Model\WidgetRenderer\NullWidgetRenderer;

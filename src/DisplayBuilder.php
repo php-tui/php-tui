@@ -16,7 +16,7 @@ use PhpTui\Tui\Model\Display\Viewport;
 use PhpTui\Tui\Model\Display\Viewport\Fixed;
 use PhpTui\Tui\Model\Display\Viewport\Fullscreen;
 use PhpTui\Tui\Model\Display\Viewport\Inline;
-use PhpTui\Tui\Model\Widget\CanvasRenderer;
+use PhpTui\Tui\Extension\Core\Widget\CanvasRenderer;
 use PhpTui\Tui\Model\WidgetRenderer;
 use PhpTui\Tui\Model\WidgetRenderer\AggregateWidgetRenderer;
 
