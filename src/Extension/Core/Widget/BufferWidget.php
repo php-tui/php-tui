@@ -9,7 +9,11 @@ use PhpTui\Tui\Extension\Core\Widget\Buffer\BufferContext;
 use PhpTui\Tui\Widget\Widget;
 
 /**
- * This widget allows you to write directly to the buffer through a closure.
+ * This widget provides access to the Buffer and allows you 
+ * to mutate it directly in addition to being able to draw widgets.
+ *
+ * This is useful if you need to know the context upon which widgets are being
+ * drawn (for example the absolute position of the containing area etc).
  */
 final class BufferWidget implements Widget
 {
