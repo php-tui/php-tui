@@ -17,8 +17,8 @@ use PhpTui\Tui\Model\Math\VectorUtil;
 use PhpTui\Tui\Model\Position\Position;
 use PhpTui\Tui\Model\Symbol\LineSet;
 use PhpTui\Tui\Model\Text\Span;
-use PhpTui\Tui\Model\Widget;
-use PhpTui\Tui\Model\WidgetRenderer;
+use PhpTui\Tui\Model\Widget\Widget;
+use PhpTui\Tui\Model\Widget\WidgetRenderer;
 
 /**
  * Renders a a composite of scatter or line graphs.

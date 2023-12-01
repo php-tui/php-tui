@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Tests\Unit\Model;
 
 use PhpTui\Tui\Model\Color\AnsiColor;
-use PhpTui\Tui\Model\Style;
+use PhpTui\Tui\Model\Style\Style;
 use PhpTui\Tui\Model\Text\Span;
 use PHPUnit\Framework\TestCase;
 

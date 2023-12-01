@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Tests\Unit\Extension\ImageMagick\Shape;
 
 use Generator;
+use PhpTui\Tui\Extension\Core\Widget\Canvas\Marker;
+use PhpTui\Tui\Extension\Core\Widget\CanvasRenderer;
 use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
 use PhpTui\Tui\Extension\ImageMagick\Shape\ImagePainter;
 use PhpTui\Tui\Extension\ImageMagick\Shape\ImageShape;
@@ -12,10 +14,8 @@ use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\AxisBounds;
 use PhpTui\Tui\Model\Canvas\CanvasContext;
 use PhpTui\Tui\Model\Display\Buffer;
-use PhpTui\Tui\Extension\Core\Widget\Canvas\Marker;
 use PhpTui\Tui\Model\Position\FloatPosition;
-use PhpTui\Tui\Extension\Core\Widget\CanvasRenderer;
-use PhpTui\Tui\Model\WidgetRenderer\NullWidgetRenderer;
+use PhpTui\Tui\Model\Widget\WidgetRenderer\NullWidgetRenderer;
 use PHPUnit\Framework\TestCase;
 
 final class ImageShapeTest extends TestCase

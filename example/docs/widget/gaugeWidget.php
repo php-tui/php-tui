@@ -5,7 +5,7 @@ declare(strict_types=1);
 use PhpTui\Tui\DisplayBuilder;
 use PhpTui\Tui\Extension\Core\Widget\GaugeWidget;
 use PhpTui\Tui\Model\Color\AnsiColor;
-use PhpTui\Tui\Model\Style;
+use PhpTui\Tui\Model\Style\Style;
 
 require 'vendor/autoload.php';
 

@@ -6,13 +6,13 @@ namespace PhpTui\Tui\Tests\Unit\Model\Display;
 
 use PhpTui\Tui\DisplayBuilder;
 use PhpTui\Tui\Extension\Core\Shape\PointsShape;
+use PhpTui\Tui\Extension\Core\Widget\Canvas\Marker;
 use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
 use PhpTui\Tui\Extension\Core\Widget\ParagraphWidget;
 use PhpTui\Tui\Extension\Core\Widget\RawWidget;
 use PhpTui\Tui\Model\Color\AnsiColor;
 use PhpTui\Tui\Model\Display\Backend\DummyBackend;
 use PhpTui\Tui\Model\Display\Buffer;
-use PhpTui\Tui\Extension\Core\Widget\Canvas\Marker;
 use PhpTui\Tui\Model\Position\Position;
 use PHPUnit\Framework\TestCase;
 

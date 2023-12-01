@@ -15,7 +15,7 @@ use PhpTui\Tui\Model\Color\AnsiColor;
 use PhpTui\Tui\Model\Text\Line;
 use PhpTui\Tui\Model\Text\Span;
 use PhpTui\Tui\Model\Text\Text;
-use PhpTui\Tui\Model\Widget;
+use PhpTui\Tui\Model\Widget\Widget;
 
 final class ItemListPage implements Component
 {

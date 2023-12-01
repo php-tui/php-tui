@@ -3,10 +3,10 @@
 declare(strict_types=1);
 
 use PhpTui\Tui\DisplayBuilder;
+use PhpTui\Tui\Extension\Core\Widget\Canvas\Marker;
 use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
 use PhpTui\Tui\Extension\ImageMagick\ImageMagickExtension;
 use PhpTui\Tui\Extension\ImageMagick\Shape\ImageShape;
-use PhpTui\Tui\Extension\Core\Widget\Canvas\Marker;
 
 require 'vendor/autoload.php';
 

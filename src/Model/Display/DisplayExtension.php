@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Model\Display;
 
 use PhpTui\Tui\Model\Canvas\ShapePainter;
-use PhpTui\Tui\Model\WidgetRenderer;
+use PhpTui\Tui\Model\Widget\WidgetRenderer;
 
 interface DisplayExtension
 {

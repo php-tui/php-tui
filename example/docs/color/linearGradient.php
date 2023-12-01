@@ -6,7 +6,7 @@ use PhpTui\Tui\DisplayBuilder;
 use PhpTui\Tui\Extension\Core\Widget\GaugeWidget;
 use PhpTui\Tui\Model\Color\LinearGradient;
 use PhpTui\Tui\Model\Color\RgbColor;
-use PhpTui\Tui\Model\Style;
+use PhpTui\Tui\Model\Style\Style;
 
 require 'vendor/autoload.php';
 

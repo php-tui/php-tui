@@ -14,8 +14,8 @@ use PhpTui\Tui\Model\Text\LineComposer;
 use PhpTui\Tui\Model\Text\LineComposer\LineTruncator;
 use PhpTui\Tui\Model\Text\Span;
 use PhpTui\Tui\Model\Text\StyledGrapheme;
-use PhpTui\Tui\Model\Widget;
-use PhpTui\Tui\Model\WidgetRenderer;
+use PhpTui\Tui\Model\Widget\Widget;
+use PhpTui\Tui\Model\Widget\WidgetRenderer;
 
 final class ParagraphRenderer implements WidgetRenderer
 {

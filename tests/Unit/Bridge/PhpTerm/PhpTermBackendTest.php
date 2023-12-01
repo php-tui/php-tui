@@ -19,9 +19,9 @@ use PhpTui\Tui\Model\Display\BufferUpdate;
 use PhpTui\Tui\Model\Display\BufferUpdates;
 use PhpTui\Tui\Model\Display\Cell;
 use PhpTui\Tui\Model\Display\ClearType;
-use PhpTui\Tui\Model\Style\Modifier;
 use PhpTui\Tui\Model\Position\Position;
-use PhpTui\Tui\Model\Style;
+use PhpTui\Tui\Model\Style\Modifier;
+use PhpTui\Tui\Model\Style\Style;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 

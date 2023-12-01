@@ -6,7 +6,7 @@ namespace PhpTui\Tui\Tests\Unit\Model\Text;
 
 use PhpTui\Tui\Model\Color\AnsiColor;
 use PhpTui\Tui\Model\Style\Modifier;
-use PhpTui\Tui\Model\Style;
+use PhpTui\Tui\Model\Style\Style;
 use PhpTui\Tui\Model\Text\Text;
 use PHPUnit\Framework\TestCase;
 

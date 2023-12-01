@@ -22,4 +22,4 @@ Configure the shape using the builder methods named as follows:
 | --- | --- | --- |
 | **point1** | `PhpTui\Tui\Model\Position\FloatPosition` | Draw from this point |
 | **point2** | `PhpTui\Tui\Model\Position\FloatPosition` | Draw to this point |
-| **color** | `PhpTui\Tui\Model\Color` | Color of the line |
+| **color** | `PhpTui\Tui\Model\Color\Color` | Color of the line |

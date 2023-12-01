@@ -12,8 +12,8 @@ use PhpTui\Tui\Model\HorizontalAlignment;
 use PhpTui\Tui\Model\Layout\Constraint;
 use PhpTui\Tui\Model\Layout\Layout;
 use PhpTui\Tui\Model\Position\Position;
-use PhpTui\Tui\Model\Widget;
-use PhpTui\Tui\Model\WidgetRenderer;
+use PhpTui\Tui\Model\Widget\Widget;
+use PhpTui\Tui\Model\Widget\WidgetRenderer;
 
 final class TableRenderer implements WidgetRenderer
 {

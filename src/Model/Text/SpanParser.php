@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Model\Text;
 
-use PhpTui\Tui\Model\Color;
 use PhpTui\Tui\Model\Color\AnsiColor;
+use PhpTui\Tui\Model\Color\Color;
 use PhpTui\Tui\Model\Color\RgbColor;
 use PhpTui\Tui\Model\Style\Modifier;
-use PhpTui\Tui\Model\Style;
+use PhpTui\Tui\Model\Style\Style;
 
 /**
  * This is a subset of the Symfony Console markup. It parses strings into a list of spans.

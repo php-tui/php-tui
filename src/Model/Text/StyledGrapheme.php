@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Model\Text;
 
-use PhpTui\Tui\Model\Style;
+use PhpTui\Tui\Model\Style\Style;
 
 final class StyledGrapheme
 {

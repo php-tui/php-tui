@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Model\Text;
 
-use PhpTui\Tui\Model\Style;
+use PhpTui\Tui\Model\Style\Style;
+use PhpTui\Tui\Model\Style\Styleable;
 use PhpTui\Tui\Model\Style\StyleableTrait;
-use PhpTui\Tui\Model\Styleable;
 use Stringable;
 
 final class Span implements Stringable, Styleable

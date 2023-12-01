@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Model\Display;
 
 use PhpTui\Tui\Model\Area;
-use PhpTui\Tui\Model\Position\Position;
 use PhpTui\Tui\Model\Display\Viewport\Fullscreen;
 use PhpTui\Tui\Model\Display\Viewport\Inline;
-use PhpTui\Tui\Model\Widget;
-use PhpTui\Tui\Model\WidgetRenderer;
-use PhpTui\Tui\Model\WidgetRenderer\NullWidgetRenderer;
+use PhpTui\Tui\Model\Position\Position;
+use PhpTui\Tui\Model\Widget\Widget;
+use PhpTui\Tui\Model\Widget\WidgetRenderer;
+use PhpTui\Tui\Model\Widget\WidgetRenderer\NullWidgetRenderer;
 
 final class Display
 {

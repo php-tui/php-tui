@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Tests\Unit\Model;
+namespace PhpTui\Tui\Tests\Unit\Model\Style;
 
 use PhpTui\Tui\Model\Color\AnsiColor;
 use PhpTui\Tui\Model\Style\Modifier;
-use PhpTui\Tui\Model\Style;
+use PhpTui\Tui\Model\Style\Style;
 use PHPUnit\Framework\TestCase;
 
 final class StyleTest extends TestCase

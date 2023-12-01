@@ -14,7 +14,7 @@ use PhpTui\Tui\Model\BorderType;
 use PhpTui\Tui\Model\Direction;
 use PhpTui\Tui\Model\Layout\Constraint;
 use PhpTui\Tui\Model\Text\Title;
-use PhpTui\Tui\Model\Widget;
+use PhpTui\Tui\Model\Widget\Widget;
 
 final class ImagePage implements Component
 {

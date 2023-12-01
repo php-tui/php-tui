@@ -37,10 +37,10 @@ use PhpTui\Tui\Model\Display\Backend;
 use PhpTui\Tui\Model\Display\Display;
 use PhpTui\Tui\Model\HorizontalAlignment;
 use PhpTui\Tui\Model\Layout\Constraint;
-use PhpTui\Tui\Model\Style;
+use PhpTui\Tui\Model\Style\Style;
 use PhpTui\Tui\Model\Text\Line;
 use PhpTui\Tui\Model\Text\Title;
-use PhpTui\Tui\Model\Widget;
+use PhpTui\Tui\Model\Widget\Widget;
 use Throwable;
 
 /**

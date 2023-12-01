@@ -10,15 +10,15 @@ use PhpTui\Tui\Example\Demo\Component;
 use PhpTui\Tui\Extension\Core\Shape\MapResolution;
 use PhpTui\Tui\Extension\Core\Shape\MapShape;
 use PhpTui\Tui\Extension\Core\Widget\BlockWidget;
+use PhpTui\Tui\Extension\Core\Widget\Canvas\Marker;
 use PhpTui\Tui\Extension\Core\Widget\CanvasWidget as PhpTuiCanvas;
 use PhpTui\Tui\Model\Borders;
 use PhpTui\Tui\Model\Canvas\CanvasContext;
 use PhpTui\Tui\Model\Color\AnsiColor;
-use PhpTui\Tui\Extension\Core\Widget\Canvas\Marker;
-use PhpTui\Tui\Model\Style;
+use PhpTui\Tui\Model\Style\Style;
 use PhpTui\Tui\Model\Text\Line as PhpTuiLine;
 use PhpTui\Tui\Model\Text\Title;
-use PhpTui\Tui\Model\Widget;
+use PhpTui\Tui\Model\Widget\Widget;
 
 final class CanvasPage implements Component
 {

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Example\Demo;
 
 use PhpTui\Term\Event;
-use PhpTui\Tui\Model\Widget;
+use PhpTui\Tui\Model\Widget\Widget;
 
 interface Component
 {

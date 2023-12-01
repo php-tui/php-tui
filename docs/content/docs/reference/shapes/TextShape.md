@@ -28,7 +28,7 @@ Configure the shape using the builder methods named as follows:
 | --- | --- | --- |
 | **font** | `string` | Font name as it is known in the font registry |
 | **text** | `string` | Text to render |
-| **color** | `PhpTui\Tui\Model\Color` | Color of the text |
+| **color** | `PhpTui\Tui\Model\Color\Color` | Color of the text |
 | **position** | `PhpTui\Tui\Model\Position\FloatPosition` | Position of the text (bottom left corner) |
 | **scaleX** | `float` | Horizontal scale of the font |
 | **scaleY** | `float` | Verttical scale of the font |

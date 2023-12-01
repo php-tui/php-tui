@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Extension\Core\Shape;
 
 use PhpTui\Tui\Model\Canvas\Shape;
-use PhpTui\Tui\Model\Color;
+use PhpTui\Tui\Model\Color\Color;
 use PhpTui\Tui\Model\Position\FloatPosition;
 
 /**

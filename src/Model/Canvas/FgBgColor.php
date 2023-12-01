@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Model\Canvas;
 
-use PhpTui\Tui\Model\Color;
+use PhpTui\Tui\Model\Color\Color;
 
 final class FgBgColor
 {

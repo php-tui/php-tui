@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Extension\ImageMagick\Widget;
 
 use Imagick;
+use PhpTui\Tui\Extension\Core\Widget\Canvas\Marker;
 use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
 use PhpTui\Tui\Extension\ImageMagick\ImageRegistry;
 use PhpTui\Tui\Extension\ImageMagick\Shape\ImageShape;
 use PhpTui\Tui\Model\Display\Buffer;
-use PhpTui\Tui\Extension\Core\Widget\Canvas\Marker;
-use PhpTui\Tui\Model\Widget;
-use PhpTui\Tui\Model\WidgetRenderer;
+use PhpTui\Tui\Model\Widget\Widget;
+use PhpTui\Tui\Model\Widget\WidgetRenderer;
 
 final class ImageRenderer implements WidgetRenderer
 {

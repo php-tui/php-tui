@@ -8,8 +8,8 @@ use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Corner;
 use PhpTui\Tui\Model\Display\Buffer;
 use PhpTui\Tui\Model\Position\Position;
-use PhpTui\Tui\Model\Widget;
-use PhpTui\Tui\Model\WidgetRenderer;
+use PhpTui\Tui\Model\Widget\Widget;
+use PhpTui\Tui\Model\Widget\WidgetRenderer;
 
 final class ListRenderer implements WidgetRenderer
 {

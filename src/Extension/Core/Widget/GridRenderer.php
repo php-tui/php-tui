@@ -6,8 +6,8 @@ namespace PhpTui\Tui\Extension\Core\Widget;
 
 use PhpTui\Tui\Model\Display\Buffer;
 use PhpTui\Tui\Model\Layout\Layout;
-use PhpTui\Tui\Model\Widget;
-use PhpTui\Tui\Model\WidgetRenderer;
+use PhpTui\Tui\Model\Widget\Widget;
+use PhpTui\Tui\Model\Widget\WidgetRenderer;
 use RuntimeException;
 
 final class GridRenderer implements WidgetRenderer

@@ -6,8 +6,8 @@ namespace PhpTui\Tui\Extension\Core\Widget;
 
 use PhpTui\Tui\Extension\Core\Widget\BarChart\BarGroup;
 use PhpTui\Tui\Model\Direction;
-use PhpTui\Tui\Model\Style;
-use PhpTui\Tui\Model\Widget;
+use PhpTui\Tui\Model\Style\Style;
+use PhpTui\Tui\Model\Widget\Widget;
 
 final class BarChartWidget implements Widget
 {

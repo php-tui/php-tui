@@ -9,8 +9,8 @@ use PhpTui\Tui\Extension\Core\Widget\Table\TableRow;
 use PhpTui\Tui\Extension\Core\Widget\Table\TableState;
 use PhpTui\Tui\Model\Area;
 use PhpTui\Tui\Model\Layout\Constraint;
-use PhpTui\Tui\Model\Style;
-use PhpTui\Tui\Model\Widget;
+use PhpTui\Tui\Model\Style\Style;
+use PhpTui\Tui\Model\Widget\Widget;
 
 /**
  * Shows tabular data arranged in columns. The column spacing is determined by

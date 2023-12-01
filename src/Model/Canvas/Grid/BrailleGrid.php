@@ -9,8 +9,8 @@ use PhpTui\Tui\Model\Canvas\CanvasGrid;
 use PhpTui\Tui\Model\Canvas\FgBgColor;
 use PhpTui\Tui\Model\Canvas\Layer;
 use PhpTui\Tui\Model\Canvas\Resolution;
-use PhpTui\Tui\Model\Color;
 use PhpTui\Tui\Model\Color\AnsiColor;
+use PhpTui\Tui\Model\Color\Color;
 use PhpTui\Tui\Model\Position\Position;
 use PhpTui\Tui\Model\Symbol\BrailleSet;
 

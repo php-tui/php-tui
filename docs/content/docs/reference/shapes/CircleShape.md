@@ -22,4 +22,4 @@ Configure the shape using the builder methods named as follows:
 | --- | --- | --- |
 | **position** | `PhpTui\Tui\Model\Position\FloatPosition` | Position of the circle |
 | **radius** | `float` | Radius of the circle |
-| **color** | `PhpTui\Tui\Model\Color` | Color of the circle |
+| **color** | `PhpTui\Tui\Model\Color\Color` | Color of the circle |

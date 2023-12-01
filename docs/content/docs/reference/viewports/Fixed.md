@@ -4,7 +4,7 @@ description: Creates a fixed location viewport at the given Area
 ---
 ##  Fixed
 
-`PhpTui\Tui\Model\Viewport\Fixed`
+`PhpTui\Tui\Model\Display\Viewport\Fixed`
 
 Creates a fixed location viewport at the given Area
 ### Example

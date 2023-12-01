@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Model;
+namespace PhpTui\Tui\Model\Color;
 
 use PhpTui\Tui\Model\Position\FractionalPosition;
 

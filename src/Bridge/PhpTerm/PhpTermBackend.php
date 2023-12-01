@@ -18,16 +18,16 @@ use PhpTui\Term\Event\CursorPositionEvent;
 use PhpTui\Term\Terminal as PhpTermTerminal;
 use PhpTui\Term\TerminalInformation\Size;
 use PhpTui\Tui\Model\Area;
-use PhpTui\Tui\Model\Color;
 use PhpTui\Tui\Model\Color\AnsiColor;
+use PhpTui\Tui\Model\Color\Color;
 use PhpTui\Tui\Model\Color\LinearGradient;
 use PhpTui\Tui\Model\Color\RgbColor;
 use PhpTui\Tui\Model\Display\Backend;
 use PhpTui\Tui\Model\Display\BufferUpdates;
 use PhpTui\Tui\Model\Display\ClearType;
-use PhpTui\Tui\Model\Style\Modifier;
 use PhpTui\Tui\Model\Position\FractionalPosition;
 use PhpTui\Tui\Model\Position\Position;
+use PhpTui\Tui\Model\Style\Modifier;
 use RuntimeException;
 
 final class PhpTermBackend implements Backend

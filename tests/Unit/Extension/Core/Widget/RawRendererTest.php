@@ -13,7 +13,7 @@ use PhpTui\Tui\Model\Display\Buffer;
 use PhpTui\Tui\Model\Position\Position;
 use PhpTui\Tui\Model\Text\Line;
 use PhpTui\Tui\Model\Text\Span;
-use PhpTui\Tui\Model\Widget;
+use PhpTui\Tui\Model\Widget\Widget;
 
 final class RawRendererTest extends WidgetTestCase
 {

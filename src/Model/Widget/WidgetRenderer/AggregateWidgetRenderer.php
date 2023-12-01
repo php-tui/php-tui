@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Model\WidgetRenderer;
+namespace PhpTui\Tui\Model\Widget\WidgetRenderer;
 
 use PhpTui\Tui\Model\Display\Buffer;
-use PhpTui\Tui\Model\Widget;
-use PhpTui\Tui\Model\WidgetRenderer;
+use PhpTui\Tui\Model\Widget\Widget;
+use PhpTui\Tui\Model\Widget\WidgetRenderer;
 
 /**
  * Will iterate over all widget renderers to render the widget Each renderer

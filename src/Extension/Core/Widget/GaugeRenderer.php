@@ -8,11 +8,11 @@ use PhpTui\Tui\Model\Color\AnsiColor;
 use PhpTui\Tui\Model\Display\Buffer;
 use PhpTui\Tui\Model\Position\FractionalPosition;
 use PhpTui\Tui\Model\Position\Position;
-use PhpTui\Tui\Model\Style;
+use PhpTui\Tui\Model\Style\Style;
 use PhpTui\Tui\Model\Symbol\BlockSet;
 use PhpTui\Tui\Model\Text\Span;
-use PhpTui\Tui\Model\Widget;
-use PhpTui\Tui\Model\WidgetRenderer;
+use PhpTui\Tui\Model\Widget\Widget;
+use PhpTui\Tui\Model\Widget\WidgetRenderer;
 
 final class GaugeRenderer implements WidgetRenderer
 {

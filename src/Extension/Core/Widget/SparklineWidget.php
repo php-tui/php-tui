@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Extension\Core\Widget;
 
 use PhpTui\Tui\Extension\Core\Widget\Sparkline\RenderDirection;
-use PhpTui\Tui\Model\Style;
-use PhpTui\Tui\Model\Widget;
+use PhpTui\Tui\Model\Style\Style;
+use PhpTui\Tui\Model\Widget\Widget;
 
 /**
  * Widget to render a sparkline over one or more lines.

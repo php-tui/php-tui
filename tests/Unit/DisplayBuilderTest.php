@@ -12,8 +12,8 @@ use PhpTui\Tui\Extension\Core\Widget\ClosureRenderer;
 use PhpTui\Tui\Model\Display\Backend\DummyBackend;
 use PhpTui\Tui\Model\Display\Buffer;
 use PhpTui\Tui\Model\Display\DisplayExtension;
-use PhpTui\Tui\Model\Widget;
-use PhpTui\Tui\Model\WidgetRenderer;
+use PhpTui\Tui\Model\Widget\Widget;
+use PhpTui\Tui\Model\Widget\WidgetRenderer;
 use PHPUnit\Framework\TestCase;
 
 final class DisplayBuilderTest extends TestCase

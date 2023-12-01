@@ -17,7 +17,7 @@ use PhpTui\Tui\Model\Layout\Constraint;
 use PhpTui\Tui\Model\Text\Line;
 use PhpTui\Tui\Model\Text\Text;
 use PhpTui\Tui\Model\Text\Title;
-use PhpTui\Tui\Model\Widget;
+use PhpTui\Tui\Model\Widget\Widget;
 
 final class EventsPage implements Component
 {
