@@ -288,11 +288,11 @@ final class BlockRendererTest extends WidgetTestCase
         $buffer = Buffer::empty(Area::fromDimensions(5, 5));
         $this->render($buffer, BlockWidget::default()->borders(Borders::VERTICAL));
         self::assertEquals([
-            '┌───┐',
+            '─────',
             '     ',
             '     ',
             '     ',
-            '└───┘',
+            '─────',
         ], $buffer->toLines());
     }
 
@@ -301,11 +301,11 @@ final class BlockRendererTest extends WidgetTestCase
         $buffer = Buffer::empty(Area::fromDimensions(5, 5));
         $this->render($buffer, BlockWidget::default()->borders(Borders::HORIZONTAL));
         self::assertEquals([
-            '┌   ┐',
             '│   │',
             '│   │',
             '│   │',
-            '└   ┘',
+            '│   │',
+            '│   │',
         ], $buffer->toLines());
     }
 
@@ -381,8 +381,8 @@ final class BlockRendererTest extends WidgetTestCase
 
         $this->render($buffer, $block);
         self::assertEquals([
-            '|  ',
-            '|  ',
+            '│  ',
+            '│  ',
         ], $buffer->toLines());
     }
 
@@ -394,8 +394,8 @@ final class BlockRendererTest extends WidgetTestCase
 
         $this->render($buffer, $block);
         self::assertEquals([
-            '  |',
-            '  |',
+            '  │',
+            '  │',
         ], $buffer->toLines());
     }
 }
