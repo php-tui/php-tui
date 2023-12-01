@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Extension\Core\Widget;
 
+use PhpTui\Tui\Display\Area;
 use PhpTui\Tui\Display\Buffer;
 use PhpTui\Tui\Extension\Core\Widget\Sparkline\RenderDirection;
 use PhpTui\Tui\Math\VectorUtil;
@@ -14,13 +15,12 @@ use PhpTui\Tui\Widget\WidgetRenderer;
 
 final class SparklineRenderer implements WidgetRenderer
 {
-    public function render(WidgetRenderer $renderer, Widget $widget, Buffer $buffer): void
+    public function render(WidgetRenderer $renderer, Widget $widget, Buffer $buffer, Area $area): void
     {
         if (!$widget instanceof SparklineWidget) {
             return;
         }
 
-        $area = $buffer->area();
         if ($area->height < 1) {
             return;
         }

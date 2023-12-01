@@ -14,13 +14,13 @@ use PhpTui\Tui\Extension\Core\Shape\RectanglePainter;
 use PhpTui\Tui\Extension\Core\Shape\SpritePainter;
 use PhpTui\Tui\Extension\Core\Widget\BarChartRenderer;
 use PhpTui\Tui\Extension\Core\Widget\BlockRenderer;
+use PhpTui\Tui\Extension\Core\Widget\BufferWidgetRenderer;
 use PhpTui\Tui\Extension\Core\Widget\ChartRenderer;
 use PhpTui\Tui\Extension\Core\Widget\CompositeRenderer;
 use PhpTui\Tui\Extension\Core\Widget\GaugeRenderer;
 use PhpTui\Tui\Extension\Core\Widget\GridRenderer;
 use PhpTui\Tui\Extension\Core\Widget\ListRenderer;
 use PhpTui\Tui\Extension\Core\Widget\ParagraphRenderer;
-use PhpTui\Tui\Extension\Core\Widget\RawWidgetRenderer;
 use PhpTui\Tui\Extension\Core\Widget\ScrollbarRenderer;
 use PhpTui\Tui\Extension\Core\Widget\SparklineRenderer;
 use PhpTui\Tui\Extension\Core\Widget\TableRenderer;
@@ -49,7 +49,7 @@ final class CoreExtension implements DisplayExtension
             new ChartRenderer(),
             new GridRenderer(),
             new ListRenderer(),
-            new RawWidgetRenderer(),
+            new BufferWidgetRenderer(),
             new TableRenderer(),
             new GaugeRenderer(),
             new BarChartRenderer(),

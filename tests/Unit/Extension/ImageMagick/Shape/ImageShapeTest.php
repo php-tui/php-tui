@@ -40,7 +40,7 @@ final class ImageShapeTest extends TestCase
         $buffer = Buffer::empty($area);
         (new CanvasRenderer(
             new ImagePainter(),
-        ))->render(new NullWidgetRenderer(), $canvas, $buffer);
+        ))->render(new NullWidgetRenderer(), $canvas, $buffer, $buffer->area());
         self::assertEquals(implode("\n", $expected), $buffer->toString());
     }
 

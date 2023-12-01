@@ -20,9 +20,9 @@ final class TableRenderer implements WidgetRenderer
     public function render(
         WidgetRenderer $renderer,
         Widget $widget,
-        Buffer $buffer
+        Buffer $buffer,
+        Area $area,
     ): void {
-        $area = $buffer->area();
         if (!$widget instanceof TableWidget) {
             return;
         }

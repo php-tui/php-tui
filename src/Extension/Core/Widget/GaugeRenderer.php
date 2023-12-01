@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Extension\Core\Widget;
 
 use PhpTui\Tui\Color\AnsiColor;
+use PhpTui\Tui\Display\Area;
 use PhpTui\Tui\Display\Buffer;
 use PhpTui\Tui\Position\FractionalPosition;
 use PhpTui\Tui\Position\Position;
@@ -19,9 +20,9 @@ final class GaugeRenderer implements WidgetRenderer
     public function render(
         WidgetRenderer $renderer,
         Widget $widget,
-        Buffer $buffer
+        Buffer $buffer,
+        Area $area,
     ): void {
-        $area = $buffer->area();
         if (!$widget instanceof GaugeWidget) {
             return;
         }

@@ -14,7 +14,7 @@ use PhpTui\Tui\Widget\WidgetRenderer;
 
 final class ScrollbarRenderer implements WidgetRenderer
 {
-    public function render(WidgetRenderer $renderer, Widget $widget, Buffer $buffer): void
+    public function render(WidgetRenderer $renderer, Widget $widget, Buffer $buffer, Area $area): void
     {
         //
         // For ScrollbarOrientation::VerticalRight
@@ -45,7 +45,7 @@ final class ScrollbarRenderer implements WidgetRenderer
             return;
         }
 
-        $area = $this->getTrackArea($widget, $buffer->area());
+        $area = $this->getTrackArea($widget, $area);
         [$trackStart, $trackEnd, $trackAxis] = $this->getTrackStartEnd($widget, $area);
         if ($trackEnd - $trackStart === 0 || $widget->state->contentLength === 0) {
             return;

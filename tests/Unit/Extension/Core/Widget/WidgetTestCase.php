@@ -22,7 +22,8 @@ abstract class WidgetTestCase extends TestCase
         $this->renderer()->render(
             new NullWidgetRenderer(),
             $widget,
-            $buffer
+            $buffer,
+            $buffer->area(),
         );
     }
 
@@ -35,7 +36,7 @@ abstract class WidgetTestCase extends TestCase
     {
         $area = Area::fromDimensions($width, $height);
         $buffer = Buffer::empty($area);
-        $this->renderer()->render(new NullWidgetRenderer(), $widget, $buffer);
+        $this->renderer()->render(new NullWidgetRenderer(), $widget, $buffer, $buffer->area());
 
         return $buffer->toLines();
     }

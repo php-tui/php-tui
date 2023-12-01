@@ -6,6 +6,7 @@ namespace PhpTui\Tui\Extension\ImageMagick\Widget;
 
 use Imagick;
 use PhpTui\Tui\Canvas\Marker;
+use PhpTui\Tui\Display\Area;
 use PhpTui\Tui\Display\Buffer;
 use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
 use PhpTui\Tui\Extension\ImageMagick\ImageRegistry;
@@ -19,9 +20,8 @@ final class ImageRenderer implements WidgetRenderer
     {
     }
 
-    public function render(WidgetRenderer $renderer, Widget $widget, Buffer $buffer): void
+    public function render(WidgetRenderer $renderer, Widget $widget, Buffer $buffer, Area $area): void
     {
-        $area = $buffer->area();
         if (!$widget instanceof ImageWidget) {
             return;
         }
@@ -42,6 +42,6 @@ final class ImageRenderer implements WidgetRenderer
             $geo['height'],
         )->marker($widget->marker ?? Marker::HalfBlock)->draw(ImageShape::fromPath(
             $widget->path
-        )), $buffer);
+        )), $buffer, $area);
     }
 }

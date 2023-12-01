@@ -25,9 +25,8 @@ use PhpTui\Tui\Widget\WidgetRenderer;
  */
 final class ChartRenderer implements WidgetRenderer
 {
-    public function render(WidgetRenderer $renderer, Widget $widget, Buffer $buffer): void
+    public function render(WidgetRenderer $renderer, Widget $widget, Buffer $buffer, Area $area): void
     {
-        $area = $buffer->area();
         if (!$widget instanceof ChartWidget) {
             return;
         }
@@ -76,9 +75,7 @@ final class ChartRenderer implements WidgetRenderer
                 });
         }, $widget->dataSets);
 
-        $subBuffer = Buffer::empty($layout->graphArea);
-        $renderer->render($renderer, CompositeWidget::fromWidgets(...$widgets), $subBuffer);
-        $buffer->putBuffer($layout->graphArea->position, $subBuffer);
+        $renderer->render($renderer, CompositeWidget::fromWidgets(...$widgets), $buffer, $layout->graphArea);
     }
 
     private function resolveLayout(ChartWidget $chart, Area $area): ?ChartLayout

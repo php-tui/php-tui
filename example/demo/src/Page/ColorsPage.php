@@ -9,7 +9,8 @@ use PhpTui\Tui\Color\AnsiColor;
 use PhpTui\Tui\Color\RgbColor;
 use PhpTui\Tui\Display\Buffer;
 use PhpTui\Tui\Example\Demo\Component;
-use PhpTui\Tui\Extension\Core\Widget\RawWidget;
+use PhpTui\Tui\Extension\Core\Widget\Buffer\BufferContext;
+use PhpTui\Tui\Extension\Core\Widget\BufferWidget;
 use PhpTui\Tui\Position\Position;
 use PhpTui\Tui\Text\Span;
 use PhpTui\Tui\Widget\Widget;
@@ -21,9 +22,9 @@ final class ColorsPage implements Component
     {
         $this->ticker++;
 
-        return RawWidget::new(function (Buffer $buffer): void {
-            $this->write16Colors($buffer);
-            $this->writeRgbColors($buffer);
+        return BufferWidget::new(function (BufferContext $context): void {
+            $this->write16Colors($context->buffer);
+            $this->writeRgbColors($context->buffer);
         });
     }
 

@@ -9,6 +9,8 @@ Improvements:
 
 Refactoring:
 
+- (Re)introduces the `area` argument to `WidgetRenderer` #207
+- Renames RawWidget to BufferWidget #207
 - Massive namespace reorganisation (most significantly removed the `Model` namespace) #206
 - Make `Line::fromSpans()` variadic #197 @KennedyTedesco
 
