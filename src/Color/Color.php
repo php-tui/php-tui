@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Color;
 
-use PhpTui\Tui\Color\Color;
 use PhpTui\Tui\Position\FractionalPosition;
 
 interface Color

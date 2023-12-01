@@ -6,7 +6,6 @@ namespace PhpTui\Tui\Canvas;
 
 use ArrayIterator;
 use IteratorAggregate;
-use PhpTui\Tui\Canvas\Layer;
 use Traversable;
 
 /**

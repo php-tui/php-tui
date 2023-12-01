@@ -7,7 +7,6 @@ namespace PhpTui\Tui\Display;
 use ArrayIterator;
 use Countable;
 use IteratorAggregate;
-use PhpTui\Tui\Display\BufferUpdate;
 use RuntimeException;
 use Traversable;
 

@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Tests\Unit\Extension\Core\Widget;
 
 use Generator;
+use PhpTui\Tui\Display\Area;
+use PhpTui\Tui\Display\Buffer;
 use PhpTui\Tui\Extension\Core\Widget\Block\Padding;
 use PhpTui\Tui\Extension\Core\Widget\BlockWidget;
 use PhpTui\Tui\Extension\Core\Widget\RawWidget;
-use PhpTui\Tui\Display\Area;
-use PhpTui\Tui\Display\Buffer;
 use PhpTui\Tui\Position\Position;
 use PhpTui\Tui\Text\Line;
 use PhpTui\Tui\Text\Span;

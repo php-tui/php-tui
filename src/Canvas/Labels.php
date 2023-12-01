@@ -6,7 +6,6 @@ namespace PhpTui\Tui\Canvas;
 
 use ArrayIterator;
 use IteratorAggregate;
-use PhpTui\Tui\Canvas\Label;
 use PhpTui\Tui\Extension\Core\Widget\Chart\AxisBounds;
 use Traversable;
 

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
+use PhpTui\Tui\Canvas\Marker;
 use PhpTui\Tui\DisplayBuilder;
 use PhpTui\Tui\Extension\Core\Widget\Chart\Axis;
 use PhpTui\Tui\Extension\Core\Widget\Chart\AxisBounds;
 use PhpTui\Tui\Extension\Core\Widget\Chart\DataSet;
 use PhpTui\Tui\Extension\Core\Widget\Chart\GraphType;
 use PhpTui\Tui\Extension\Core\Widget\ChartWidget;
-use PhpTui\Tui\Canvas\Marker;
 use PhpTui\Tui\Text\Span;
 
 require 'vendor/autoload.php';

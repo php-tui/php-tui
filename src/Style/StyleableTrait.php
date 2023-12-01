@@ -6,8 +6,6 @@ namespace PhpTui\Tui\Style;
 
 use PhpTui\Tui\Color\AnsiColor;
 use PhpTui\Tui\Color\Color;
-use PhpTui\Tui\Style\Modifier;
-use PhpTui\Tui\Style\Style;
 
 trait StyleableTrait
 {

@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Example\Demo\Page;
 
 use PhpTui\Term\Event;
+use PhpTui\Tui\Color\LinearGradient;
+use PhpTui\Tui\Color\RgbColor;
 use PhpTui\Tui\Example\Demo\Component;
 use PhpTui\Tui\Extension\Core\Widget\BarChart\BarGroup;
 use PhpTui\Tui\Extension\Core\Widget\BarChartWidget;
 use PhpTui\Tui\Extension\Core\Widget\GridWidget;
-use PhpTui\Tui\Color\LinearGradient;
-use PhpTui\Tui\Color\RgbColor;
 use PhpTui\Tui\Layout\Constraint;
 use PhpTui\Tui\Position\FractionalPosition;
 use PhpTui\Tui\Style\Style;

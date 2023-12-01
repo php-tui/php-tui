@@ -6,11 +6,11 @@ namespace PhpTui\Tui\Canvas\Grid;
 
 use IntlChar;
 use PhpTui\Tui\Canvas\CanvasGrid;
-use PhpTui\Tui\Color\FgBgColor;
 use PhpTui\Tui\Canvas\Layer;
 use PhpTui\Tui\Canvas\Resolution;
 use PhpTui\Tui\Color\AnsiColor;
 use PhpTui\Tui\Color\Color;
+use PhpTui\Tui\Color\FgBgColor;
 use PhpTui\Tui\Position\Position;
 use PhpTui\Tui\Symbol\BrailleSet;
 

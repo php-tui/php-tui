@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Example\Demo\Page;
 
 use PhpTui\Term\Event;
-use PhpTui\Tui\Example\Demo\Component;
-use PhpTui\Tui\Extension\Core\Widget\RawWidget;
 use PhpTui\Tui\Color\AnsiColor;
 use PhpTui\Tui\Color\RgbColor;
 use PhpTui\Tui\Display\Buffer;
+use PhpTui\Tui\Example\Demo\Component;
+use PhpTui\Tui\Extension\Core\Widget\RawWidget;
 use PhpTui\Tui\Position\Position;
 use PhpTui\Tui\Text\Span;
 use PhpTui\Tui\Widget\Widget;

@@ -6,8 +6,6 @@ namespace PhpTui\Tui\Style;
 
 use PhpTui\Tui\Color\Color;
 use PhpTui\Tui\Position\FractionalPosition;
-use PhpTui\Tui\Style\Modifier;
-use PhpTui\Tui\Style\Style;
 use Stringable;
 
 final class Style implements Stringable, Styleable

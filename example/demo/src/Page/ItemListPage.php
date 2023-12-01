@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Example\Demo\Page;
 
 use PhpTui\Term\Event;
+use PhpTui\Tui\Color\AnsiColor;
 use PhpTui\Tui\Example\Demo\Component;
 use PhpTui\Tui\Extension\Core\Widget\BlockWidget;
 use PhpTui\Tui\Extension\Core\Widget\List\ListItem;
 use PhpTui\Tui\Extension\Core\Widget\List\ListState;
 use PhpTui\Tui\Extension\Core\Widget\ListWidget;
-use PhpTui\Tui\Color\AnsiColor;
 use PhpTui\Tui\Text\Line;
 use PhpTui\Tui\Text\Span;
 use PhpTui\Tui\Text\Text;

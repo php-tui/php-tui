@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Tests\Unit\Extension\Core\Widget;
 
 use Generator;
+use PhpTui\Tui\Display\Area;
+use PhpTui\Tui\Display\Buffer;
 use PhpTui\Tui\Extension\Core\Widget\BarChart\Bar;
 use PhpTui\Tui\Extension\Core\Widget\BarChart\BarGroup;
 use PhpTui\Tui\Extension\Core\Widget\BarChartWidget;
-use PhpTui\Tui\Display\Area;
-use PhpTui\Tui\Display\Buffer;
 use PhpTui\Tui\Style\Style;
 use PhpTui\Tui\Text\Line;
 use PhpTui\Tui\Widget\Direction;

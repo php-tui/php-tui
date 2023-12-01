@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace PhpTui\Tui;
 
 use PhpTui\Tui\Bridge\PhpTerm\PhpTermBackend;
-use PhpTui\Tui\Extension\Core\CoreExtension;
-use PhpTui\Tui\Extension\Core\Widget\CanvasRenderer;
 use PhpTui\Tui\Canvas\AggregateShapePainter;
 use PhpTui\Tui\Canvas\ShapePainter;
 use PhpTui\Tui\Display\Area;
@@ -17,6 +15,8 @@ use PhpTui\Tui\Display\Viewport;
 use PhpTui\Tui\Display\Viewport\Fixed;
 use PhpTui\Tui\Display\Viewport\Fullscreen;
 use PhpTui\Tui\Display\Viewport\Inline;
+use PhpTui\Tui\Extension\Core\CoreExtension;
+use PhpTui\Tui\Extension\Core\Widget\CanvasRenderer;
 use PhpTui\Tui\Widget\WidgetRenderer;
 use PhpTui\Tui\Widget\WidgetRenderer\AggregateWidgetRenderer;
 

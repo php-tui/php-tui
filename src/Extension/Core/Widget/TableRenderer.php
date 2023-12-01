@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Extension\Core\Widget;
 
-use PhpTui\Tui\Extension\Core\Widget\Table\TableCell;
 use PhpTui\Tui\Display\Area;
 use PhpTui\Tui\Display\Buffer;
+use PhpTui\Tui\Extension\Core\Widget\Table\TableCell;
 use PhpTui\Tui\Layout\Constraint;
 use PhpTui\Tui\Layout\Layout;
 use PhpTui\Tui\Position\Position;

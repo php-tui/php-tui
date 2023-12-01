@@ -6,8 +6,6 @@ namespace PhpTui\Tui\Display;
 
 use Countable;
 use OutOfBoundsException;
-use PhpTui\Tui\Display\Area;
-use PhpTui\Tui\Display\Buffer;
 use PhpTui\Tui\Position\Position;
 use PhpTui\Tui\Style\Style;
 use PhpTui\Tui\Text\Line;

@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Display;
 
-use PhpTui\Tui\Display\Area;
-use PhpTui\Tui\Display\Backend;
-use PhpTui\Tui\Display\Buffer;
 use PhpTui\Tui\Display\Viewport\Fullscreen;
 use PhpTui\Tui\Display\Viewport\Inline;
 use PhpTui\Tui\Position\Position;

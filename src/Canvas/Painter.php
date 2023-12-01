@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Canvas;
 
-use PhpTui\Tui\Canvas\CanvasContext;
 use PhpTui\Tui\Color\Color;
 use PhpTui\Tui\Position\FloatPosition;
 use PhpTui\Tui\Position\Position;

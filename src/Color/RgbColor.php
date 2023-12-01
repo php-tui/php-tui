@@ -6,8 +6,6 @@ namespace PhpTui\Tui\Color;
 
 use InvalidArgumentException;
 use OutOfBoundsException;
-use PhpTui\Tui\Color\Color;
-use PhpTui\Tui\Color\RgbColor;
 use PhpTui\Tui\Position\FractionalPosition;
 use Stringable;
 

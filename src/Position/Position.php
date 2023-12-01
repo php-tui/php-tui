@@ -7,7 +7,6 @@ namespace PhpTui\Tui\Position;
 use Closure;
 use OutOfBoundsException;
 use PhpTui\Tui\Display\Area;
-use PhpTui\Tui\Position\Position;
 use RuntimeException;
 use Stringable;
 

@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Extension\Core\Widget;
 
+use PhpTui\Tui\Display\Area;
+use PhpTui\Tui\Display\Buffer;
 use PhpTui\Tui\Extension\Core\Widget\BarChart\Bar;
 use PhpTui\Tui\Extension\Core\Widget\BarChart\BarGroup;
 use PhpTui\Tui\Extension\Core\Widget\BarChart\LabelInfo;
-use PhpTui\Tui\Display\Area;
-use PhpTui\Tui\Display\Buffer;
 use PhpTui\Tui\Position\FractionalPosition;
 use PhpTui\Tui\Position\Position;
 use PhpTui\Tui\Style\Style;

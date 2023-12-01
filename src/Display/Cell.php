@@ -6,7 +6,6 @@ namespace PhpTui\Tui\Display;
 
 use PhpTui\Tui\Color\AnsiColor;
 use PhpTui\Tui\Color\Color;
-use PhpTui\Tui\Display\Cell;
 use PhpTui\Tui\Style\Modifier;
 use PhpTui\Tui\Style\Style;
 use Stringable;

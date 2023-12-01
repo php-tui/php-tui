@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Extension\Core\Widget;
 
-use PhpTui\Tui\Extension\Core\Widget\Sparkline\RenderDirection;
 use PhpTui\Tui\Display\Buffer;
+use PhpTui\Tui\Extension\Core\Widget\Sparkline\RenderDirection;
 use PhpTui\Tui\Math\VectorUtil;
 use PhpTui\Tui\Position\Position;
 use PhpTui\Tui\Symbol\BarSet;

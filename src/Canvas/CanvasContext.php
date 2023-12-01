@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Canvas;
 
-use PhpTui\Tui\Extension\Core\Widget\Chart\AxisBounds;
 use PhpTui\Tui\Canvas\Grid\BrailleGrid;
 use PhpTui\Tui\Canvas\Grid\CharGrid;
 use PhpTui\Tui\Canvas\Grid\HalfBlockGrid;
+use PhpTui\Tui\Extension\Core\Widget\Chart\AxisBounds;
 use PhpTui\Tui\Position\FloatPosition;
 use PhpTui\Tui\Symbol\BarSet;
 use PhpTui\Tui\Symbol\BlockSet;

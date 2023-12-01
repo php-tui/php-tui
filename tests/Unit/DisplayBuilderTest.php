@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Tests\Unit;
 
+use PhpTui\Tui\Display\Backend\DummyBackend;
+use PhpTui\Tui\Display\Buffer;
+use PhpTui\Tui\Display\DisplayExtension;
 use PhpTui\Tui\DisplayBuilder;
 use PhpTui\Tui\Extension\Core\Shape\ClosurePainter;
 use PhpTui\Tui\Extension\Core\Shape\ClosureShape;
 use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
 use PhpTui\Tui\Extension\Core\Widget\ClosureRenderer;
-use PhpTui\Tui\Display\Backend\DummyBackend;
-use PhpTui\Tui\Display\Buffer;
-use PhpTui\Tui\Display\DisplayExtension;
 use PhpTui\Tui\Widget\Widget;
 use PhpTui\Tui\Widget\WidgetRenderer;
 use PHPUnit\Framework\TestCase;

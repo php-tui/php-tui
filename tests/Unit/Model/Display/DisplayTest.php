@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Tests\Unit\Model\Display;
 
+use PhpTui\Tui\Canvas\Marker;
+use PhpTui\Tui\Color\AnsiColor;
+use PhpTui\Tui\Display\Backend\DummyBackend;
+use PhpTui\Tui\Display\Buffer;
 use PhpTui\Tui\DisplayBuilder;
 use PhpTui\Tui\Extension\Core\Shape\PointsShape;
 use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
 use PhpTui\Tui\Extension\Core\Widget\ParagraphWidget;
 use PhpTui\Tui\Extension\Core\Widget\RawWidget;
-use PhpTui\Tui\Canvas\Marker;
-use PhpTui\Tui\Color\AnsiColor;
-use PhpTui\Tui\Display\Backend\DummyBackend;
-use PhpTui\Tui\Display\Buffer;
 use PhpTui\Tui\Position\Position;
 use PHPUnit\Framework\TestCase;
 

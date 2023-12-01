@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Extension\Core\Widget;
 
-use PhpTui\Tui\Extension\Core\Widget\Paragraph\Wrap;
 use PhpTui\Tui\Display\Area;
 use PhpTui\Tui\Display\Buffer;
+use PhpTui\Tui\Extension\Core\Widget\Paragraph\Wrap;
 use PhpTui\Tui\Position\Position;
 use PhpTui\Tui\Text\Line;
 use PhpTui\Tui\Text\LineComposer;

@@ -7,7 +7,6 @@ namespace PhpTui\Tui\Layout;
 use PhpTui\Tui\Bridge\Cassowary\CassowaryConstraintSolver;
 use PhpTui\Tui\Display\Area;
 use PhpTui\Tui\Display\Areas;
-use PhpTui\Tui\Layout\ConstraintSolver;
 use PhpTui\Tui\Widget\Direction;
 use PhpTui\Tui\Widget\Margin;
 

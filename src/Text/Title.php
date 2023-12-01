@@ -6,7 +6,6 @@ namespace PhpTui\Tui\Text;
 
 use PhpTui\Tui\Widget\HorizontalAlignment;
 use PhpTui\Tui\Widget\VerticalAlignment;
-use PhpTui\Tui\Text\Line;
 
 final class Title
 {

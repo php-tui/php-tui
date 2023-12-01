@@ -6,7 +6,6 @@ namespace PhpTui\Tui\Display;
 
 use ArrayIterator;
 use IteratorAggregate;
-use PhpTui\Tui\Display\Area;
 use RuntimeException;
 use Traversable;
 

@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Tests\Unit\Extension\Core\Widget;
 
-use PhpTui\Tui\Extension\Core\CoreExtension;
-use PhpTui\Tui\Extension\Core\Widget\CanvasRenderer;
 use PhpTui\Tui\Canvas\AggregateShapePainter;
 use PhpTui\Tui\Display\Area;
 use PhpTui\Tui\Display\Buffer;
+use PhpTui\Tui\Extension\Core\CoreExtension;
+use PhpTui\Tui\Extension\Core\Widget\CanvasRenderer;
 use PhpTui\Tui\Widget\Widget;
 use PhpTui\Tui\Widget\WidgetRenderer;
 use PhpTui\Tui\Widget\WidgetRenderer\AggregateWidgetRenderer;

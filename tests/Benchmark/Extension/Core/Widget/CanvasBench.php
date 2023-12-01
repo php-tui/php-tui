@@ -14,11 +14,11 @@ use PhpTui\Term\Terminal;
 use PhpTui\Term\TerminalInformation\Size;
 use PhpTui\Tui\Bridge\PhpTerm\PhpTermBackend;
 
+use PhpTui\Tui\Display\Display;
 use PhpTui\Tui\DisplayBuilder;
 use PhpTui\Tui\Extension\Core\Shape\MapResolution;
 use PhpTui\Tui\Extension\Core\Shape\MapShape;
 use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
-use PhpTui\Tui\Display\Display;
 
 #[Iterations(10)]
 #[Revs(25)]

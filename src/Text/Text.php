@@ -7,7 +7,6 @@ namespace PhpTui\Tui\Text;
 use PhpTui\Tui\Style\Style;
 use PhpTui\Tui\Style\Styleable;
 use PhpTui\Tui\Style\StyleableTrait;
-use PhpTui\Tui\Text\Line;
 
 final class Text implements Styleable
 {

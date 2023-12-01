@@ -6,7 +6,6 @@ namespace PhpTui\Tui\Color;
 
 use InvalidArgumentException;
 
-use PhpTui\Tui\Color\Color;
 use PhpTui\Tui\Position\FractionalPosition;
 
 /**

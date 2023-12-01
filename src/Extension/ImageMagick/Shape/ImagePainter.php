@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Extension\ImageMagick\Shape;
 
 use ImagickPixel;
-use PhpTui\Tui\Extension\Core\Shape\LineShape;
-use PhpTui\Tui\Extension\ImageMagick\ImageRegistry;
 use PhpTui\Tui\Canvas\Label;
 use PhpTui\Tui\Canvas\Painter;
 use PhpTui\Tui\Canvas\Shape;
 use PhpTui\Tui\Canvas\ShapePainter;
 use PhpTui\Tui\Color\AnsiColor;
 use PhpTui\Tui\Color\RgbColor;
+use PhpTui\Tui\Extension\Core\Shape\LineShape;
+use PhpTui\Tui\Extension\ImageMagick\ImageRegistry;
 use PhpTui\Tui\Position\FloatPosition;
 use PhpTui\Tui\Text\Line as PhpTuiLine;
 

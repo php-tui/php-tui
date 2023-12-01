@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Tests\Unit\Extension\Core\Shape;
 
 use Generator;
-use PhpTui\Tui\Extension\Core\Shape\PointsShape;
-use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
-use PhpTui\Tui\Extension\Core\Widget\Chart\AxisBounds;
 use PhpTui\Tui\Canvas\CanvasContext;
 use PhpTui\Tui\Canvas\Marker;
 use PhpTui\Tui\Color\AnsiColor;
 use PhpTui\Tui\Display\Area;
 use PhpTui\Tui\Display\Buffer;
+use PhpTui\Tui\Extension\Core\Shape\PointsShape;
+use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
+use PhpTui\Tui\Extension\Core\Widget\Chart\AxisBounds;
 
 final class PointsShapeTest extends ShapeTestCase
 {

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Display;
 
-use PhpTui\Tui\Display\Area;
 use PhpTui\Tui\Position\Position;
 
 interface Backend
