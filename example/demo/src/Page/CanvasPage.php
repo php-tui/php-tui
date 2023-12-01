@@ -41,14 +41,19 @@ final class CanvasPage implements Component
                         PhpTuiCanvas::fromIntBounds(-180, 180, -90, 90)
                             ->marker(Marker::Braille)
                             ->paint(function (CanvasContext $context) use ($buffer, $area): void {
+                                // center the "you are here" by default
+                                if (null === $this->x) {
+                                    $this->x = (int) ($area->width / 2);
+                                }
+                                if (null === $this->y) {
+                                    $this->y = (int) ($area->height / 2);
+                                }
 
                                 $xd = $context->xBounds->length() / ($buffer->area()->width);
-                                $x = $this->x ?? (int) ($area->width / 2);
-                                $x = ($x * $xd) - 180;
+                                $x = ($this->x * $xd) - 180;
 
                                 $yd = $context->yBounds->length() / ($buffer->area()->height);
-                                $y = $this->y ?? (int) ($area->height / 2);
-                                $y = ($y * $yd) - 90 - (($area->position->y - 1) * $yd);
+                                $y = ($this->y * $yd) - 90 - (($area->position->y - 1) * $yd);
 
                                 $context->draw(MapShape::default()->resolution(MapResolution::High)->color(AnsiColor::Green));
                                 $context->print($x, -$y, PhpTuiLine::parse(sprintf(
@@ -70,6 +75,9 @@ final class CanvasPage implements Component
             $this->x = $event->column;
         }
         if ($event instanceof CharKeyEvent) {
+            if (null === $this->y || null === $this->x) {
+                return;
+            }
             if ($event->char === 'j') {
                 $this->y += 1;
             }
