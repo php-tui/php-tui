@@ -25,7 +25,7 @@ use PhpTui\Tui\Model\Color\RgbColor;
 use PhpTui\Tui\Model\Display\Backend;
 use PhpTui\Tui\Model\Display\BufferUpdates;
 use PhpTui\Tui\Model\Display\ClearType;
-use PhpTui\Tui\Model\Modifier;
+use PhpTui\Tui\Model\Style\Modifier;
 use PhpTui\Tui\Model\Position\FractionalPosition;
 use PhpTui\Tui\Model\Position\Position;
 use RuntimeException;

@@ -23,7 +23,7 @@ use PhpTui\Tui\Model\Canvas\Shape;
 use PhpTui\Tui\Model\Color\AnsiColor;
 use PhpTui\Tui\Model\Direction;
 use PhpTui\Tui\Model\Layout\Constraint;
-use PhpTui\Tui\Model\Marker;
+use PhpTui\Tui\Extension\Core\Widget\Canvas\Marker;
 use PhpTui\Tui\Model\Position\FloatPosition;
 use PhpTui\Tui\Model\Text\Title;
 use PhpTui\Tui\Model\Widget;

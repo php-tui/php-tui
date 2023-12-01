@@ -7,7 +7,7 @@ namespace PhpTui\Tui\Model\Text;
 use PhpTui\Tui\Model\Color;
 use PhpTui\Tui\Model\Color\AnsiColor;
 use PhpTui\Tui\Model\Color\RgbColor;
-use PhpTui\Tui\Model\Modifier;
+use PhpTui\Tui\Model\Style\Modifier;
 use PhpTui\Tui\Model\Style;
 
 /**

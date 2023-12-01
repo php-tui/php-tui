@@ -4,8 +4,12 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Model;
 
+use PhpTui\Tui\Model\Color;
+use PhpTui\Tui\Model\Style\Modifier;
 use PhpTui\Tui\Model\Position\FractionalPosition;
 use PhpTui\Tui\Model\Style\StyleableTrait;
+use PhpTui\Tui\Model\Styleable;
+use PhpTui\Tui\Model\Style;
 use Stringable;
 
 final class Style implements Stringable, Styleable

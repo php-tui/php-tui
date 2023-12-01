@@ -14,7 +14,7 @@ use PhpTui\Tui\Extension\Core\Widget\CanvasWidget as PhpTuiCanvas;
 use PhpTui\Tui\Model\Borders;
 use PhpTui\Tui\Model\Canvas\CanvasContext;
 use PhpTui\Tui\Model\Color\AnsiColor;
-use PhpTui\Tui\Model\Marker;
+use PhpTui\Tui\Extension\Core\Widget\Canvas\Marker;
 use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Text\Line as PhpTuiLine;
 use PhpTui\Tui\Model\Text\Title;

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Model;
 
 use PhpTui\Tui\Model\Position\Position;
+use PhpTui\Tui\Model\Widget\Margin;
 use RuntimeException;
 use Stringable;
 

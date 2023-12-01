@@ -19,7 +19,7 @@ use PhpTui\Tui\Model\Color\AnsiColor;
 use PhpTui\Tui\Model\Color\LinearGradient;
 use PhpTui\Tui\Model\Color\RgbColor;
 use PhpTui\Tui\Model\Layout\Constraint;
-use PhpTui\Tui\Model\Marker;
+use PhpTui\Tui\Extension\Core\Widget\Canvas\Marker;
 use PhpTui\Tui\Model\Position\FloatPosition;
 use PhpTui\Tui\Model\Style;
 use PhpTui\Tui\Model\Widget;

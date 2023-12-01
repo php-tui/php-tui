@@ -6,7 +6,7 @@ use PhpTui\Tui\DisplayBuilder;
 use PhpTui\Tui\Extension\Core\Shape\LineShape;
 use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
 use PhpTui\Tui\Model\Color\AnsiColor;
-use PhpTui\Tui\Model\Marker;
+use PhpTui\Tui\Extension\Core\Widget\Canvas\Marker;
 
 require 'vendor/autoload.php';
 

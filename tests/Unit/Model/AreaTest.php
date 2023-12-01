@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PhpTui\Tui\Tests\Unit\Model;
 
 use PhpTui\Tui\Model\Area;
-use PhpTui\Tui\Model\Margin;
+use PhpTui\Tui\Model\Widget\Margin;
 use PHPUnit\Framework\TestCase;
 
 final class AreaTest extends TestCase

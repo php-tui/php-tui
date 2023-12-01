@@ -6,7 +6,7 @@ namespace PhpTui\Tui\Model\Style;
 
 use PhpTui\Tui\Model\Color;
 use PhpTui\Tui\Model\Color\AnsiColor;
-use PhpTui\Tui\Model\Modifier;
+use PhpTui\Tui\Model\Style\Modifier;
 use PhpTui\Tui\Model\Style;
 
 trait StyleableTrait

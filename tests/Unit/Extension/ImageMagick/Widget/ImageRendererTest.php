@@ -8,7 +8,7 @@ use PhpTui\Tui\DisplayBuilder;
 use PhpTui\Tui\Extension\ImageMagick\ImageMagickExtension;
 use PhpTui\Tui\Extension\ImageMagick\Widget\ImageWidget;
 use PhpTui\Tui\Model\Display\Backend\DummyBackend;
-use PhpTui\Tui\Model\Marker;
+use PhpTui\Tui\Extension\Core\Widget\Canvas\Marker;
 use PHPUnit\Framework\TestCase;
 
 final class ImageRendererTest extends TestCase

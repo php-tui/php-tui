@@ -14,7 +14,7 @@ use PhpTui\Tui\Model\Canvas\CanvasContext;
 use PhpTui\Tui\Model\Color\AnsiColor;
 use PhpTui\Tui\Model\Display\Buffer;
 use PhpTui\Tui\Model\Display\Cell;
-use PhpTui\Tui\Model\Marker;
+use PhpTui\Tui\Extension\Core\Widget\Canvas\Marker;
 use PhpTui\Tui\Model\Text\Line as DTLLine;
 
 final class CanvasRendererTest extends WidgetTestCase
