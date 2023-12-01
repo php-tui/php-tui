@@ -24,9 +24,9 @@ use PhpTui\Tui\Widget\Widget;
 
 final class CanvasPage implements Component
 {
-    private float $x = 0.0;
+    private ?float $x = null;
 
-    private float $y = 0.0;
+    private ?float $y = null;
 
     public function build(): Widget
     {
@@ -36,16 +36,19 @@ final class CanvasPage implements Component
             ->widget(
                 BufferWidget::new(function (BufferContext $context): void {
                     $buffer = $context->buffer;
+                    $area = $context->area;
                     $context->draw(
                         PhpTuiCanvas::fromIntBounds(-180, 180, -90, 90)
                             ->marker(Marker::Braille)
-                            ->paint(function (CanvasContext $context) use ($buffer): void {
+                            ->paint(function (CanvasContext $context) use ($buffer, $area): void {
 
                                 $xd = $context->xBounds->length() / ($buffer->area()->width);
-                                $x = ($this->x * $xd) - 180;
+                                $x = $this->x ?? intval($area->width / 2);
+                                $x = ($x * $xd) - 180;
 
                                 $yd = $context->yBounds->length() / ($buffer->area()->height);
-                                $y = ($this->y * $yd) - 90 - ($buffer->area()->position->y * 2);
+                                $y = $this->y ?? intval($area->height / 2);
+                                $y = ($y * $yd) - 90 - (($area->position->y - 1) * $yd);
 
                                 $context->draw(MapShape::default()->resolution(MapResolution::High)->color(AnsiColor::Green));
                                 $context->print($x, -$y, PhpTuiLine::parse(sprintf(
