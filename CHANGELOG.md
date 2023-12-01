@@ -9,6 +9,7 @@ Improvements:
 
 Refactoring:
 
+- Massive namespace reorganisation (most significantly removed the `Model` namespace) #206
 - Make `Line::fromSpans()` variadic #197 @KennedyTedesco
 
 Bug fixes:
