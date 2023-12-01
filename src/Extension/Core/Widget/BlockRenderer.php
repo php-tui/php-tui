@@ -77,22 +77,23 @@ final class BlockRenderer implements WidgetRenderer
                     ->setChar($lineSet->horizontal);
             }
         }
-        if ($block->borders & (Borders::RIGHT | Borders::BOTTOM)) {
+
+        if ((Borders::RIGHT | Borders::BOTTOM) === ($block->borders & (Borders::RIGHT | Borders::BOTTOM))) {
             $buffer->get(Position::at($right, $bottom))
                 ->setChar($lineSet->bottomRight)
                 ->setStyle($block->borderStyle);
         }
-        if ($block->borders & (Borders::RIGHT | Borders::TOP)) {
+        if ((Borders::RIGHT | Borders::TOP) === ($block->borders & (Borders::RIGHT | Borders::TOP))) {
             $buffer->get(Position::at($right, $area->top()))
                 ->setChar($lineSet->topRight)
                 ->setStyle($block->borderStyle);
         }
-        if ($block->borders & (Borders::LEFT | Borders::TOP)) {
+        if ((Borders::LEFT | Borders::TOP) === ($block->borders & (Borders::LEFT | Borders::TOP))) {
             $buffer->get(Position::at($area->left(), $area->top()))
                 ->setChar($lineSet->topLeft)
                 ->setStyle($block->borderStyle);
         }
-        if ($block->borders & (Borders::LEFT | Borders::BOTTOM)) {
+        if ((Borders::LEFT | Borders::BOTTOM) === ($block->borders & (Borders::LEFT | Borders::BOTTOM))) {
             $buffer->get(Position::at($area->left(), $bottom))
                 ->setChar($lineSet->bottomLeft)
                 ->setStyle($block->borderStyle);

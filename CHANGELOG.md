@@ -11,6 +11,10 @@ Refactoring:
 
 - Make `Line::fromSpans()` variadic #197 @KennedyTedesco
 
+Bug fixes:
+
+- Fix block adjacent border renderering #201
+
 ## 0.1.0
 
 Features:

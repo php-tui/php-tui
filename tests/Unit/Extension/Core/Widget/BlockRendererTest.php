@@ -288,11 +288,11 @@ final class BlockRendererTest extends WidgetTestCase
         $buffer = Buffer::empty(Area::fromDimensions(5, 5));
         $this->render($buffer, BlockWidget::default()->borders(Borders::VERTICAL));
         self::assertEquals([
-            '┌───┐',
+            '─────',
             '     ',
             '     ',
             '     ',
-            '└───┘',
+            '─────',
         ], $buffer->toLines());
     }
 
@@ -301,11 +301,11 @@ final class BlockRendererTest extends WidgetTestCase
         $buffer = Buffer::empty(Area::fromDimensions(5, 5));
         $this->render($buffer, BlockWidget::default()->borders(Borders::HORIZONTAL));
         self::assertEquals([
-            '┌   ┐',
             '│   │',
             '│   │',
             '│   │',
-            '└   ┘',
+            '│   │',
+            '│   │',
         ], $buffer->toLines());
     }
 
@@ -344,6 +344,58 @@ final class BlockRendererTest extends WidgetTestCase
             '│ Foob │',
             '│      │',
             '╰──────╯',
+        ], $buffer->toLines());
+    }
+
+    public function testBottomBorderOnly(): void
+    {
+        $buffer = Buffer::empty(Area::fromDimensions(3, 2));
+        $block = BlockWidget::default()
+            ->borders(Borders::BOTTOM);
+
+        $this->render($buffer, $block);
+        self::assertEquals([
+            '   ',
+            '───',
+        ], $buffer->toLines());
+    }
+
+    public function testTopBorderOnly(): void
+    {
+        $buffer = Buffer::empty(Area::fromDimensions(3, 2));
+        $block = BlockWidget::default()
+            ->borders(Borders::TOP);
+
+        $this->render($buffer, $block);
+        self::assertEquals([
+            '───',
+            '   ',
+        ], $buffer->toLines());
+    }
+
+    public function testLeftBorderOnly(): void
+    {
+        $buffer = Buffer::empty(Area::fromDimensions(3, 2));
+        $block = BlockWidget::default()
+            ->borders(Borders::LEFT);
+
+        $this->render($buffer, $block);
+        self::assertEquals([
+            '│  ',
+            '│  ',
+        ], $buffer->toLines());
+    }
+
+    public function testRightBorderOnly(): void
+    {
+        $buffer = Buffer::empty(Area::fromDimensions(3, 2));
+        $block = BlockWidget::default()
+            ->borders(Borders::RIGHT);
+
+        $this->render($buffer, $block);
+        self::assertEquals([
+            '  │',
+            '  │',
         ], $buffer->toLines());
     }
 }
