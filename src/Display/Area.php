@@ -154,4 +154,12 @@ final class Area implements Stringable
             $this->height,
         );
     }
+
+    public function containsPosition(Position $position): bool
+    {
+        return !($position->x < $this->left() ||
+        $position->x >= $this->right() ||
+        $position->y >= $this->bottom() ||
+        $position->y < $this->top());
+    }
 }
