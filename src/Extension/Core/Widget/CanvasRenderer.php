@@ -6,6 +6,7 @@ namespace PhpTui\Tui\Extension\Core\Widget;
 
 use PhpTui\Tui\Canvas\CanvasContext;
 use PhpTui\Tui\Canvas\ShapePainter;
+use PhpTui\Tui\Display\Area;
 use PhpTui\Tui\Display\Buffer;
 use PhpTui\Tui\Position\Position;
 use PhpTui\Tui\Style\Style;
@@ -18,12 +19,11 @@ final class CanvasRenderer implements WidgetRenderer
     {
     }
 
-    public function render(WidgetRenderer $renderer, Widget $widget, Buffer $buffer): void
+    public function render(WidgetRenderer $renderer, Widget $widget, Buffer $buffer, Area $area): void
     {
         if (!$widget instanceof CanvasWidget) {
             return;
         }
-        $area = $buffer->area();
         $painter = $widget->painter;
 
         $buffer->setStyle($area, Style::default()->bg($widget->backgroundColor));

@@ -12,12 +12,11 @@ use PhpTui\Tui\Widget\WidgetRenderer;
 
 final class TabsRenderer implements WidgetRenderer
 {
-    public function render(WidgetRenderer $renderer, Widget $widget, Buffer $buffer): void
+    public function render(WidgetRenderer $renderer, Widget $widget, Buffer $buffer, Area $area): void
     {
         if (!$widget instanceof TabsWidget) {
             return;
         }
-        $area = $buffer->area();
         $buffer->setStyle($area, $widget->style);
         if ($area->height < 1) {
             return;

@@ -16,9 +16,8 @@ use PhpTui\Tui\Widget\WidgetRenderer;
 
 final class BlockRenderer implements WidgetRenderer
 {
-    public function render(WidgetRenderer $renderer, Widget $widget, Buffer $buffer): void
+    public function render(WidgetRenderer $renderer, Widget $widget, Buffer $buffer, Area $area): void
     {
-        $area = $buffer->area();
         if (!$widget instanceof BlockWidget) {
             return;
         }
