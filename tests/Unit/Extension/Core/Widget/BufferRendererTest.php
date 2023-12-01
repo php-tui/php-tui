@@ -56,7 +56,7 @@ final class BufferRendererTest extends WidgetTestCase
             Area::fromDimensions(10, 10),
             BlockWidget::default()->widget(
                 BufferWidget::new(function (BufferContext $context): void {
-                    $context->buffer->putLine(Position::at(0, 0), Line::fromString('Hello'), 5);
+                    $context->buffer->putLine(Position::at($context->area->left(), $context->area->top()), Line::fromString('Hello'), 5);
                 })
             )->padding(Padding::fromScalars(1, 1, 1, 1)),
             [
@@ -77,7 +77,11 @@ final class BufferRendererTest extends WidgetTestCase
             Area::fromDimensions(10, 10),
             BlockWidget::default()->widget(
                 BufferWidget::new(function (BufferContext $context): void {
-                    $context->buffer->putSpan(Position::at(0, 0), Span::fromString(str_repeat('Hello', 10)), 10);
+                    $context->buffer->putSpan(
+                        Position::at($context->area->left(), $context->area->top()),
+                        Span::fromString(str_repeat('Hello', 10)),
+                        10
+                    );
                 })
             )->padding(Padding::fromScalars(1, 1, 1, 1)),
             [
