@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Model\Constraint;
+namespace PhpTui\Tui\Model\Layout\Constraint;
 
 use PhpTui\Tui\Model\Layout\Constraint;
 

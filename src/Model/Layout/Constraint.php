@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Model\Layout;
 
-use PhpTui\Tui\Model\Constraint\LengthConstraint;
-use PhpTui\Tui\Model\Constraint\MaxConstraint;
-
-use PhpTui\Tui\Model\Constraint\MinConstraint;
-use PhpTui\Tui\Model\Constraint\PercentageConstraint;
+use PhpTui\Tui\Model\Layout\Constraint\LengthConstraint;
+use PhpTui\Tui\Model\Layout\Constraint\MaxConstraint;
+use PhpTui\Tui\Model\Layout\Constraint\MinConstraint;
+use PhpTui\Tui\Model\Layout\Constraint\PercentageConstraint;
 use Stringable;
 
 /**
