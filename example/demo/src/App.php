@@ -61,14 +61,12 @@ final class App
 {
     /**
      * @param array<string,Component> $pages
-     * @param int[] $frameSamples
      */
     private function __construct(
         private Terminal $terminal,
         private Display $display,
         private ActivePage $activePage,
         private array $pages,
-        private array $frameSamples,
     ) {
     }
 
@@ -197,7 +195,6 @@ final class App
             }
 
             $this->display->draw($this->layout());
-            $this->incFramerate();
 
             // sleep for Xms - note that it's encouraged to implement apps
             // using an async library such as Amp or React
@@ -235,7 +232,6 @@ final class App
     {
         return BlockWidget::default()
                 ->borders(Borders::ALL)->style(Style::default()->white())
-                ->titles(Title::fromString(sprintf('%d FPS', $this->frameRate()))->horizontalAlignmnet(HorizontalAlignment::Right))
                 ->widget(
                     TabsWidget::fromTitles(
                         Line::parse('<fg=red>[q]</>uit'),
@@ -246,34 +242,5 @@ final class App
                         }, []),
                     )->select($this->activePage->index() + 1)->highlightStyle(Style::default()->white()->onBlue())
                 );
-    }
-
-    private function incFramerate(): void
-    {
-        $this->frameSamples[] = time();
-    }
-
-    private function frameRate(): float
-    {
-        if (count($this->frameSamples) === 0) {
-            return 0.0;
-        }
-
-        $time = time();
-        foreach ($this->frameSamples as $i => $frameRate) {
-            if ($frameRate < $time - 2) {
-                unset($this->frameSamples[$i]);
-            }
-        }
-        $bySecond = array_reduce($this->frameSamples, function (array $ac, int $timestamp) {
-            if (!isset($ac[$timestamp])) {
-                $ac[$timestamp] = 0;
-            }
-            $ac[$timestamp]++;
-
-            return $ac;
-        }, []);
-
-        return array_sum($bySecond) / count($bySecond);
     }
 }
