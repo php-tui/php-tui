@@ -12,6 +12,8 @@ use PhpTui\Tui\Extension\Core\Widget\Chart\Axis;
 use PhpTui\Tui\Extension\Core\Widget\Chart\AxisBounds;
 use PhpTui\Tui\Extension\Core\Widget\Chart\DataSet;
 use PhpTui\Tui\Extension\Core\Widget\ChartWidget;
+use PhpTui\Tui\Extension\Core\Widget\GridWidget;
+use PhpTui\Tui\Layout\Constraint;
 use PhpTui\Tui\Style\Style;
 use PhpTui\Tui\Text\Line;
 use PhpTui\Tui\Text\Span;
@@ -31,39 +33,79 @@ final class ChartPage implements Component
             Span::styled('two', Style::default()),
             Span::styled('three', Style::default()),
         ];
-        $dataSets = [
+        $dataSets1 = [
             DataSet::new('data1')
                 ->marker(Marker::Dot)
                 ->style(Style::default()->cyan())
                 ->data($this->sinData(0)),
-            DataSet::new('data1')
+            DataSet::new('data2')
                 ->marker(Marker::Braille)
                 ->style(Style::default()->yellow())
                 ->data($this->sinData(90)),
         ];
+        $dataSets2 = [
+            DataSet::new('data1')
+                ->marker(Marker::HalfBlock)
+                ->style(Style::default()->green())
+                ->data($this->sinData(45)),
+            DataSet::new('data2')
+                ->marker(Marker::Block)
+                ->style(Style::default()->blue())
+                ->data($this->sinData(135)),
+        ];
 
-        return BlockWidget::default()
-            ->titles(Title::fromLine(Line::fromString('Chart 1')))
-            ->borders(Borders::ALL)
-            ->widget(
-                ChartWidget::new(...$dataSets)
-                    ->xAxis(
-                        Axis::default()
-                            //->title('X Axis')
-                            ->style(Style::default()->gray())
-                        ->labels(...$xLabels)
-                        ->bounds(AxisBounds::new(0, 400))
-                    )
-                    ->yAxis(
-                        Axis::default()
-                            //->title('X Axis')
-                        ->style(Style::default()->gray())
-                        ->labels(
-                            Span::fromString('-20'),
-                            Span::fromString('0'),
-                            Span::fromString('20'),
-                        )
-                        ->bounds(AxisBounds::new(-400, 400))
+        return GridWidget::default()
+            ->constraints(
+                Constraint::percentage(50),
+                Constraint::percentage(50),
+            )
+            ->widgets(
+                BlockWidget::default()
+                    ->titles(Title::fromLine(Line::fromString('Chart 1')))
+                    ->borders(Borders::ALL)
+                    ->widget(
+                        ChartWidget::new(...$dataSets1)
+                            ->xAxis(
+                                Axis::default()
+                                    //->title('X Axis')
+                                    ->style(Style::default()->gray())
+                                ->labels(...$xLabels)
+                                ->bounds(AxisBounds::new(0, 400))
+                            )
+                            ->yAxis(
+                                Axis::default()
+                                    //->title('X Axis')
+                                ->style(Style::default()->gray())
+                                ->labels(
+                                    Span::fromString('-20'),
+                                    Span::fromString('0'),
+                                    Span::fromString('20'),
+                                )
+                                ->bounds(AxisBounds::new(-400, 400))
+                            )
+                    ),
+                BlockWidget::default()
+                    ->titles(Title::fromLine(Line::fromString('Chart 2')))
+                    ->borders(Borders::ALL)
+                    ->widget(
+                        ChartWidget::new(...$dataSets2)
+                            ->xAxis(
+                                Axis::default()
+                                    ->style(Style::default()->gray())
+                                ->labels(...$xLabels)
+                                ->bounds(AxisBounds::new(0, 400))
+                            )
+                            ->yAxis(
+                                Axis::default()
+                                    //->title('X Axis')
+                                ->style(Style::default()->gray())
+                                ->labels(
+                                    Span::fromString('-20'),
+                                    Span::fromString('0'),
+                                    Span::fromString('20'),
+                                )
+                                ->bounds(AxisBounds::new(-400, 400))
+                            )
                     )
             );
     }
