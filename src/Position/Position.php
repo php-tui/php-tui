@@ -43,9 +43,7 @@ final class Position implements Stringable
     public static function fromIndex(int $i, Area $area): self
     {
         if (
-            false === (
-                $i < $area->area()
-            )
+            $i >= ($area->width * $area->height) // index >= area size
         ) {
             throw new OutOfBoundsException(sprintf(
                 'Index %d outside of area %s',
@@ -63,12 +61,10 @@ final class Position implements Stringable
     public function toIndex(Area $area): int
     {
         if (
-            false === (
-                $this->x >= $area->left()
-                && $this->x < $area->right()
-                && $this->y >= $area->top()
-                && $this->y < $area->bottom()
-            )
+            $this->x < $area->position->x                       // x < area left
+            || $this->y < $area->position->y                    // y < area top
+            || $this->x >= ($area->position->x + $area->width)  // x >= area right
+            || $this->y >= ($area->position->y + $area->height) // y >= area bottom
         ) {
             throw new OutOfBoundsException(sprintf(
                 'Position %s outside of area %s when trying to get index',
