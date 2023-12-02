@@ -36,10 +36,8 @@ use PhpTui\Tui\Extension\ImageMagick\ImageMagickExtension;
 use PhpTui\Tui\Layout\Constraint;
 use PhpTui\Tui\Style\Style;
 use PhpTui\Tui\Text\Line;
-use PhpTui\Tui\Text\Title;
 use PhpTui\Tui\Widget\Borders;
 use PhpTui\Tui\Widget\Direction;
-use PhpTui\Tui\Widget\HorizontalAlignment;
 use PhpTui\Tui\Widget\Widget;
 use Throwable;
 
@@ -104,7 +102,6 @@ final class App
             $display,
             ActivePage::Events,
             $pages,
-            [],
         );
     }
 
@@ -113,12 +110,19 @@ final class App
         try {
             // enable "raw" mode to remove default terminal behavior (e.g.
             // echoing key presses)
+            // hide the cursor
+            $this->terminal->execute(Actions::cursorHide());
+            // switch to the "alternate" screen so that we can return the user where they left off
+            $this->terminal->execute(Actions::alternateScreenEnable());
+            $this->terminal->execute(Actions::enableMouseCapture());
             $this->terminal->enableRawMode();
 
             return $this->doRun();
         } catch (Throwable $err) {
             $this->terminal->disableRawMode();
+            $this->terminal->execute(Actions::disableMouseCapture());
             $this->terminal->execute(Actions::alternateScreenDisable());
+            $this->terminal->execute(Actions::cursorShow());
             $this->terminal->execute(Actions::clear(ClearType::All));
 
             throw $err;
@@ -127,11 +131,6 @@ final class App
 
     private function doRun(): int
     {
-        // hide the cursor
-        $this->terminal->execute(Actions::cursorHide());
-        // switch to the "alternate" screen so that we can return the user where they left off
-        $this->terminal->execute(Actions::alternateScreenEnable());
-        $this->terminal->execute(Actions::enableMouseCapture());
 
         // the main loop
         while (true) {
