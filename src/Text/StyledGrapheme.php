@@ -19,6 +19,6 @@ final class StyledGrapheme
      */
     public function symbolWidth(): int
     {
-        return mb_strlen($this->symbol);
+        return mb_strwidth($this->symbol);
     }
 }
