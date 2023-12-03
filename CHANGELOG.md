@@ -17,6 +17,7 @@ Refactoring:
 Bug fixes:
 
 - Fix block adjacent border renderering #201
+- Fix `StyledGrapheme` symbol width #214
 
 ## 0.1.0
 
