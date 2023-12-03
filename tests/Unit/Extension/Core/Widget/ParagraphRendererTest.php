@@ -35,6 +35,7 @@ final class ParagraphRendererTest extends WidgetTestCase
             'Goodbye   ',
         ], $buffer->toLines());
     }
+
     /**
      * @dataProvider provideParagraph
      */
@@ -46,8 +47,8 @@ final class ParagraphRendererTest extends WidgetTestCase
         $buffer = Buffer::empty($area);
         $this->render($buffer, $paragraph);
         self::assertEquals($expected, $buffer->toString());
-
     }
+
     /**
      * @return Generator<string,array{Area,ParagraphWidget,string}>
      */
@@ -84,6 +85,13 @@ final class ParagraphRendererTest extends WidgetTestCase
             ),
             '1/1       ',
             '     About',
+        ];
+        yield 'unicode' => [
+            Area::fromDimensions(14, 1),
+            ParagraphWidget::fromText(
+                Text::fromString('こんにちは, 世界! 😃')
+            ),
+            'こんにちは, 世',
         ];
     }
 }

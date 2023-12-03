@@ -61,7 +61,7 @@ final class LineTruncator implements LineComposer
                 );
 
                 $currentLine[] = new StyledGrapheme($symbol, $styledGrapheme->style);
-                $currentLineWidth += mb_strlen($symbol);
+                $currentLineWidth += mb_strwidth($symbol);
             }
             yield [
                 $currentLine,
