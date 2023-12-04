@@ -17,6 +17,7 @@ use PhpTui\Tui\Position\Position;
 use PhpTui\Tui\Style\Style;
 use PhpTui\Tui\Text\Line;
 use PHPUnit\Framework\TestCase;
+use PhpTui\Tui\Text\Span;
 
 final class BufferTest extends TestCase
 {
@@ -78,6 +79,22 @@ final class BufferTest extends TestCase
             ' 12 ',
             '    ',
             '    ',
+        ], $buffer->toLines());
+    }
+
+    public function testPutLineManySpans(): void
+    {
+        $buffer = Buffer::empty(Area::fromDimensions(14, 4));
+        $buffer->putLine(Position::at(1, 1), Line::fromSpans(
+            Span::fromString('one'),
+            Span::fromString('😸'),
+            Span::fromString('three'),
+        ), 10);
+        self::assertEquals([
+            '              ',
+            ' one😸three   ',
+            '              ',
+            '              ',
         ], $buffer->toLines());
     }
 

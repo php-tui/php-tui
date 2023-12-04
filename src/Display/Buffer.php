@@ -200,7 +200,6 @@ final class Buffer implements Countable, Stringable
     public function putLine(Position $position, Line $line, int $width): Position
     {
         $remainingWidth = $width;
-        $x = $position->x;
         foreach ($line as $span) {
             if ($remainingWidth === 0) {
                 return $position;
@@ -211,9 +210,9 @@ final class Buffer implements Countable, Stringable
                 $span->style,
                 $remainingWidth,
             );
-            $w = max(0, $position->x - $newPosition->x);
-            $position = $position->withX($newPosition->x);
-            $remainingWidth -= max(0, $remainingWidth - $position->x);
+            $width = max(0, $newPosition->x - $position->x);
+            $position = $newPosition;
+            $remainingWidth = max(0, $remainingWidth, $width);
         }
 
         return $position;

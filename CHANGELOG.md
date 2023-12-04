@@ -16,6 +16,7 @@ Refactoring:
 
 Bug fixes:
 
+- Fix put line truncation #211
 - Fix block adjacent border renderering #201
 - Fix `StyledGrapheme` symbol width #214 @KennedyTedesco
 - Fix issue when truncating unicode text #215 @KennedyTedesco
