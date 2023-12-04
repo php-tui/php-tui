@@ -16,8 +16,8 @@ use PhpTui\Tui\Display\Cell;
 use PhpTui\Tui\Position\Position;
 use PhpTui\Tui\Style\Style;
 use PhpTui\Tui\Text\Line;
-use PHPUnit\Framework\TestCase;
 use PhpTui\Tui\Text\Span;
+use PHPUnit\Framework\TestCase;
 
 final class BufferTest extends TestCase
 {
