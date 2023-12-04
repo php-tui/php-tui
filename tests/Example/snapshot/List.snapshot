@@ -2,19 +2,19 @@
 │ [q]uit │ events │ canvas │ chart │ list │ table │ blocks │ sprite │ colors │ │
 └──────────────────────────────────────────────────────────────────────────────┘
 ┌──────────────────────────────────────────────────────────────────────────────┐
-│INFO Event                                                                    │
-│INFO Event                                                                    │
+│INFO Event1                                                                   │
+│INFO Event2                                                                   │
 │CRITICAL Event3                                                               │
 │ERROR Event4                                                                  │
-│INFO Event                                                                    │
-│INFO Event                                                                    │
+│INFO Event5                                                                   │
+│INFO Event6                                                                   │
 │WARNING Event7                                                                │
-│INFO Event                                                                    │
-│INFO Event                                                                    │
-│INFO Event                                                                    │
+│INFO Event8                                                                   │
+│INFO Event9                                                                   │
+│INFO Event10                                                                  │
 │CRITICAL Event11                                                              │
-│INFO Event                                                                    │
-│INFO Event                                                                    │
-│INFO Event                                                                    │
-│INFO Event                                                                    │
+│INFO Event12                                                                  │
+│INFO Event13                                                                  │
+│INFO Event14                                                                  │
+│INFO Event15                                                                  │
 └──────────────────────────────────────────────────────────────────────────────┘
