@@ -1,6 +1,7 @@
 {
     "name": "php-tui/php-tui",
-    "description": "PHP TUI",
+    "description": "Comprehensive TUI library heavily influenced by Ratatui",
+    "keywords": ["tui","console","terminal","cli"],
     "type": "library",
     "license": "MIT",
     "autoload": {
