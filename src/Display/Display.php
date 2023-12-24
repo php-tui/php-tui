@@ -102,6 +102,25 @@ final class Display
     }
 
     /**
+     * Set the height of an inline viewport. If the current viewport is not inline
+ * this has no effect.
+     * @param int<0,max> $height
+     */
+    public function setInlineHeight(int $height): void
+    {
+        if (!$this->viewport instanceof Inline) {
+            return;
+        }
+
+        if ($height === $this->viewportArea->height) {
+            return;
+        }
+
+        $this->viewport->height = $height;
+        $this->resize($this->lastKnownSize);
+    }
+
+    /**
      * Render a widget before the current inline viewport. This has no effect when the
      * viewport is fullscreen.
      *
