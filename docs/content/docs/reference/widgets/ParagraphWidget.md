@@ -21,7 +21,7 @@ Configure the widget using the builder methods named as follows:
 | Name | Type | Description |
 | --- | --- | --- |
 | **style** | `PhpTui\Tui\Style\Style` |  |
-| **wrap** | `PhpTui\Tui\Extension\Core\Widget\Paragraph\Wrap\|null` |  |
+| **wrap** | `PhpTui\Tui\Extension\Core\Widget\Paragraph\Wrap` |  |
 | **text** | `PhpTui\Tui\Text\Text` |  |
 | **scroll** | `array` |  |
 | **alignment** | `PhpTui\Tui\Widget\HorizontalAlignment` |  |
