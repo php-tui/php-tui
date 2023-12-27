@@ -11,6 +11,7 @@ use PhpTui\Tui\Position\Position;
 use PhpTui\Tui\Text\Line;
 use PhpTui\Tui\Text\LineComposer;
 use PhpTui\Tui\Text\LineComposer\LineTruncator;
+use PhpTui\Tui\Text\LineComposer\WordWrapper;
 use PhpTui\Tui\Text\Span;
 use PhpTui\Tui\Text\StyledGrapheme;
 use PhpTui\Tui\Widget\HorizontalAlignment;
@@ -45,12 +46,7 @@ final class ParagraphRenderer implements WidgetRenderer
             return [ $graphemes, $line->alignment ?? $widget->alignment ];
         }, $widget->text->lines);
 
-        $lineComposer = $this->createLineComposer(
-            $styled,
-            $textArea,
-            $widget->wrap,
-            $widget->scroll[1]
-        );
+        $lineComposer = $this->createLineComposer($styled, $textArea, $widget);
 
         $y = 0;
         foreach ($lineComposer->nextLine() as $line) {
@@ -84,9 +80,15 @@ final class ParagraphRenderer implements WidgetRenderer
     /**
      * @param list<array{list<StyledGrapheme>,HorizontalAlignment}> $styled
      */
-    private function createLineComposer(array $styled, Area $textArea, ?Wrap $wrap, int $horizontalOffset): LineComposer
+    private function createLineComposer(array $styled, Area $textArea, ParagraphWidget $widget): LineComposer
     {
-        return new LineTruncator($styled, $textArea->width, $horizontalOffset);
+        $horizontalOffset = $widget->scroll[1];
+
+        return match ($widget->wrap) {
+            Wrap::Word => new WordWrapper($styled, $textArea->width, trim: false),
+            Wrap::WordTrimmed => new WordWrapper($styled, $textArea->width, trim: true),
+            default => new LineTruncator($styled, $textArea->width, $horizontalOffset),
+        };
     }
 
     /**

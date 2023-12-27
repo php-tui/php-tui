@@ -3,6 +3,10 @@ CHANGELOG
 
 ## master
 
+Features:
+
+- Add paragraph word wrap support #219 @KennedyTedesco
+
 Improvements:
 
 - Improve the gauge label style when filled #195 @KennedyTedesco

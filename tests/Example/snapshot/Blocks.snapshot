@@ -2,19 +2,19 @@
 │ [q]uit │ events │ canvas │ chart │ list │ table │ blocks │ sprite │ colors │ │
 └──────────────────────────────────────────────────────────────────────────────┘
 ┌Borders::ALL──────────────────────────┐Borders::NONE                           
-│Lorem ipsum dolor sit amet, consectetu│Lorem ipsum dolor sit amet, consectetur 
-│r adipiscing elit, sed do eiusmod temp│adipiscing elit, sed do eiusmod tempor i
-└──────────────────────────────────────┘ncididunt ut labore et dolore magna aliq
+│Lorem ipsum dolor sit amet,           │Lorem ipsum dolor sit amet, consectetur 
+│consectetur adipiscing elit, sed do   │adipiscing elit, sed do eiusmod tempor  
+└──────────────────────────────────────┘incididunt ut labore et dolore magna    
 │Borders::LEFT                          Borders::RIGHT                         │
 │Lorem ipsum dolor sit amet, consecteturLorem ipsum dolor sit amet, consectetur│
-│ adipiscing elit, sed do eiusmod tempor adipiscing elit, sed do eiusmod tempor│
-│ incididunt ut labore et dolore magna a incididunt ut labore et dolore magna a│
+│adipiscing elit, sed do eiusmod tempor adipiscing elit, sed do eiusmod tempor │
+│incididunt ut labore et dolore magna   incididunt ut labore et dolore magna   │
 Borders::TOP────────────────────────────Borders::BOTTOM                         
 Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet, consectetur 
-adipiscing elit, sed do eiusmod tempor iadipiscing elit, sed do eiusmod tempor i
-ncididunt ut labore et dolore magna aliq────────────────────────────────────────
+adipiscing elit, sed do eiusmod tempor  adipiscing elit, sed do eiusmod tempor  
+incididunt ut labore et dolore magna    ────────────────────────────────────────
 ┌BordersType::Plain────────────────────┐╭BordersType::Rounded──────────────────╮
-│Lorem ipsum dolor sit amet, consectetu││Lorem ipsum dolor sit amet, consectetu│
-│r adipiscing elit, sed do eiusmod temp││r adipiscing elit, sed do eiusmod temp│
+│Lorem ipsum dolor sit amet,           ││Lorem ipsum dolor sit amet,           │
+│consectetur adipiscing elit, sed do   ││consectetur adipiscing elit, sed do   │
 └──────────────────────────────────────┘╰──────────────────────────────────────╯
 ╚BordersType::Double═══════════════════╗┗BordersType::Thick━━━━━━━━━━━━━━━━━━━━┓

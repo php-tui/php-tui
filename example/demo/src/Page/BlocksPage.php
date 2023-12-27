@@ -77,7 +77,7 @@ final class BlocksPage implements Component
 
         return ParagraphWidget::fromText(
             Text::parse(sprintf('<fg=darkgray>%s</>', $text))
-        )->wrap(Wrap::trimmed());
+        )->wrap(Wrap::Word);
     }
 
     /**

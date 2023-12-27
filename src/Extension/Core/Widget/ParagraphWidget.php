@@ -20,7 +20,7 @@ final class ParagraphWidget implements Widget
     /** @param array{int,int} $scroll */
     private function __construct(
         public Style $style,
-        public ?Wrap $wrap,
+        public Wrap $wrap,
         public Text $text,
         public array $scroll,
         public HorizontalAlignment $alignment
@@ -36,7 +36,7 @@ final class ParagraphWidget implements Widget
     {
         return new self(
             style: Style::default(),
-            wrap: null,
+            wrap: Wrap::None,
             text: $text,
             scroll: [0,0],
             alignment: HorizontalAlignment::Left,
