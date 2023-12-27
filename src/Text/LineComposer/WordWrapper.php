@@ -38,7 +38,7 @@ final class WordWrapper implements LineComposer
             [$lineSymbols, $lineAlignment] = $line;
             [$currentLine, $currentLineWidth] = [[], 0];
             [$currentWord, $currentWordWidth] = [[], 0];
-            [$whitespaceBuffer, $whitespacesWidth] = [[], 0];
+            [$whitespacesBuffer, $whitespacesWidth] = [[], 0];
             $hasSeenNonWhitespace = false;
 
             foreach ($lineSymbols as $symbol) {
@@ -60,7 +60,7 @@ final class WordWrapper implements LineComposer
                 ) {
                     if ($currentLine !== [] || !$this->trim) {
                         // Also append whitespaces if not trimming or current line is not empty
-                        $currentLine = [...$currentLine, ...$whitespaceBuffer];
+                        $currentLine = [...$currentLine, ...$whitespacesBuffer];
                         $currentLineWidth += $whitespacesWidth;
                     }
 
@@ -70,7 +70,7 @@ final class WordWrapper implements LineComposer
                     $currentWord = [];
 
                     // Clear whitespace buffer
-                    $whitespaceBuffer = [];
+                    $whitespacesBuffer = [];
                     $whitespacesWidth = 0;
                     $currentWordWidth = 0;
                 }
@@ -88,7 +88,7 @@ final class WordWrapper implements LineComposer
                     $currentLineWidth = 0;
 
                     // Remove all whitespaces till end of just appended wrapped line + next whitespace
-                    $this->removeWhitespaces($whitespaceBuffer, $whitespacesWidth, $remainingWidth);
+                    $this->removeWhitespaces($whitespacesBuffer, $whitespacesWidth, $remainingWidth);
 
                     // In case all whitespaces have been exhausted, prevent first whitespace to count towards next word
                     if ($isWhitespace) {
@@ -98,7 +98,7 @@ final class WordWrapper implements LineComposer
 
                 // Append symbol to unfinished, partially processed word
                 if ($isWhitespace) {
-                    $whitespaceBuffer[] = $symbol;
+                    $whitespacesBuffer[] = $symbol;
                     $whitespacesWidth += $symbolWidth;
                 } else {
                     $currentWord[] = $symbol;
@@ -109,12 +109,12 @@ final class WordWrapper implements LineComposer
             }
 
             // Append remaining text parts
-            if ($currentWord !== [] || $whitespaceBuffer !== []) {
+            if ($currentWord !== [] || $whitespacesBuffer !== []) {
                 if ($currentLine === [] && $currentWord === []) {
                     $wrappedLines[] = $this->processLine([], $lineAlignment);
                 } elseif(!$this->trim || $currentLine !== []) {
-                    $currentLine = [...$currentLine, ...$whitespaceBuffer];
-                    $whitespaceBuffer = [];
+                    $currentLine = [...$currentLine, ...$whitespacesBuffer];
+                    $whitespacesBuffer = [];
                 }
                 $currentLine = [...$currentLine, ...$currentWord];
             }
@@ -151,15 +151,15 @@ final class WordWrapper implements LineComposer
      */
     private function removeWhitespaces(array &$whitespaceBuffer, int &$whitespacesWidth, int &$remainingWidth): void
     {
-        $firstWhitespace = array_shift($whitespaceBuffer);
-        while ($firstWhitespace instanceof StyledGrapheme) {
-            $symbolWidth = $firstWhitespace->symbolWidth();
+        $whitespace = array_shift($whitespaceBuffer);
+        while ($whitespace instanceof StyledGrapheme) {
+            $symbolWidth = $whitespace->symbolWidth();
             $whitespacesWidth -= $symbolWidth;
             if ($symbolWidth > $remainingWidth) {
                 break;
             }
             $remainingWidth -= $symbolWidth;
-            $firstWhitespace = array_shift($whitespaceBuffer);
+            $whitespace = array_shift($whitespaceBuffer);
         }
     }
 
