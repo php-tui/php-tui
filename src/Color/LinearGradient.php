@@ -59,7 +59,7 @@ final class LinearGradient implements Color
             'LinearGradient(deg: %d, origin: %s, stops: [%s])',
             rad2deg($this->angle),
             $this->origin->__toString(),
-            implode(', ', array_map(function (array $stop): string {
+            implode(', ', array_map(static function (array $stop): string {
                 return sprintf('%s@%.2f', $stop[1]->debugName(), $stop[0]);
             }, $this->stops))
         );

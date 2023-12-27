@@ -68,7 +68,7 @@ final class Docgen
             $examplesDir,
             $reflector->reflectAllClasses(),
             new Lexer(),
-            (function (): PhpDocParser {
+            (static function (): PhpDocParser {
                 $constExpr = new ConstExprParser();
 
                 return new PhpDocParser(new TypeParser($constExpr), $constExpr);

@@ -26,7 +26,7 @@ final class RectangleShapeTest extends ShapeTestCase
             ->marker(Marker::Block)
             ->xBounds(AxisBounds::new(0, 10))
             ->yBounds(AxisBounds::new(0, 10))
-            ->paint(function (CanvasContext $context) use ($circle): void {
+            ->paint(static function (CanvasContext $context) use ($circle): void {
                 $context->draw($circle);
             });
         $area = Area::fromDimensions(10, 10);

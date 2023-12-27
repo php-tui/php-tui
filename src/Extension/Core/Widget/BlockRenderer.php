@@ -119,7 +119,7 @@ final class BlockRenderer implements WidgetRenderer
         $offset = $rightBorderDx;
         foreach (array_filter(
             $block->titles,
-            function (Title $title) use ($alignment): bool {
+            static function (Title $title) use ($alignment): bool {
                 return
                     $title->horizontalAlignment === HorizontalAlignment::Right
                     && $title->verticalAlignment === $alignment;
@@ -148,7 +148,7 @@ final class BlockRenderer implements WidgetRenderer
         $offset = $leftBorderDx;
         foreach (array_filter(
             $block->titles,
-            function (Title $title) use ($alignment): bool {
+            static function (Title $title) use ($alignment): bool {
                 return
                     $title->horizontalAlignment === HorizontalAlignment::Left
                     && $title->verticalAlignment === $alignment;
@@ -181,7 +181,7 @@ final class BlockRenderer implements WidgetRenderer
         [$_, $_, $titleAreaWidth] = $this->calculateTitleAreaOffsets($block, $area);
         $titles = array_filter(
             $block->titles,
-            function (Title $title) use ($alignment): bool {
+            static function (Title $title) use ($alignment): bool {
                 return
                     $title->horizontalAlignment === HorizontalAlignment::Center
                     && $title->verticalAlignment === $alignment;

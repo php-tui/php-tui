@@ -38,7 +38,7 @@ final class Labels implements IteratorAggregate
 
     public function withinBounds(AxisBounds $xBounds, AxisBounds $yBounds): self
     {
-        return new self(array_filter($this->labels, function (Label $label) use ($xBounds, $yBounds): bool {
+        return new self(array_filter($this->labels, static function (Label $label) use ($xBounds, $yBounds): bool {
             return $xBounds->contains($label->position->x) && $yBounds->contains($label->position->y);
         }));
     }

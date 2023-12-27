@@ -97,7 +97,7 @@ final class CanvasRendererTest extends WidgetTestCase
             AnsiColor::Green
         );
         $canvas = CanvasWidget::default()->paint(
-            function (CanvasContext $context) use ($horizontalLine, $verticalLine): void {
+            static function (CanvasContext $context) use ($horizontalLine, $verticalLine): void {
                 $context->draw($verticalLine);
                 $context->draw($horizontalLine);
             }
@@ -167,7 +167,7 @@ final class CanvasRendererTest extends WidgetTestCase
     public function testLabels(): void
     {
         $canvas = CanvasWidget::default()->paint(
-            function (CanvasContext $context): void {
+            static function (CanvasContext $context): void {
                 $context->print(0, 0, DTLLine::fromString('Hello'));
             }
         )->xBounds(AxisBounds::new(0.0, 10.0))->yBounds(AxisBounds::new(0.0, 5));

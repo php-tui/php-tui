@@ -180,7 +180,7 @@ final class ChartRendererTest extends WidgetTestCase
                     ->marker(Marker::Dot)
                     ->style(Style::default()->fg(AnsiColor::Green))
                     ->data(
-                        array_map(function (int $x, int $y): array {
+                        array_map(static function (int $x, int $y): array {
                             return [$x, $y];
                         }, range(0, 7), [0, 1, 2, 1, 0, -1, -2, -1])
                     )
@@ -252,7 +252,7 @@ final class ChartRendererTest extends WidgetTestCase
                     ->marker(Marker::Dot)
                     ->style(Style::default()->fg(AnsiColor::Green))
                     ->data(
-                        array_map(function (int $x, int $y): array {
+                        array_map(static function (int $x, int $y): array {
                             return [$x, $y];
                         }, range(0, 7), [0, 1, 2, 1, 0, -1, -2, -1])
                     )
@@ -280,7 +280,7 @@ final class ChartRendererTest extends WidgetTestCase
      */
     private function series(int ...$points): array
     {
-        return array_map(function (int $x, int $y): array {
+        return array_map(static function (int $x, int $y): array {
             return [$x, $y];
         }, range(0, count($points) - 1), $points);
     }

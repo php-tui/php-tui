@@ -26,7 +26,7 @@ final class MapShapeTest extends ShapeTestCase
             ->marker($marker)
             ->xBounds(AxisBounds::new(-180, 180))
             ->yBounds(AxisBounds::new(-90, 90))
-            ->paint(function (CanvasContext $context) use ($resolution): void {
+            ->paint(static function (CanvasContext $context) use ($resolution): void {
                 $context->draw(MapShape::default()->resolution($resolution));
             });
         $area = Area::fromDimensions(80, 40);

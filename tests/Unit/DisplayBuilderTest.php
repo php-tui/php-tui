@@ -31,7 +31,7 @@ final class DisplayBuilderTest extends TestCase
         $shapePainted = false;
         $extension = $this->getMockBuilder(DisplayExtension::class)->getMock();
         $extension->method('widgetRenderers')->willReturn([new ClosureRenderer(
-            function (WidgetRenderer $renderer, Widget $widget, Buffer $buffer) use (&$widgetRendered): void {
+            static function (WidgetRenderer $renderer, Widget $widget, Buffer $buffer) use (&$widgetRendered): void {
                 $widgetRendered = true;
             }
         )]);
@@ -43,7 +43,7 @@ final class DisplayBuilderTest extends TestCase
             ->fullscreen()
             ->build();
         $display->draw(
-            CanvasWidget::default()->draw(new ClosureShape(function () use (&$shapePainted): void {
+            CanvasWidget::default()->draw(new ClosureShape(static function () use (&$shapePainted): void {
                 $shapePainted = true;
             }))
         );

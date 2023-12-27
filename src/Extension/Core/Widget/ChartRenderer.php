@@ -70,7 +70,7 @@ final class ChartRenderer implements WidgetRenderer
                 ->xBounds($this->resolveBounds($dataSet, $widget->xAxis->bounds, 0))
                 ->yBounds($this->resolveBounds($dataSet, $widget->yAxis->bounds, 1))
                 ->marker($dataSet->marker)
-                ->paint(function (CanvasContext $context) use ($dataSet): void {
+                ->paint(static function (CanvasContext $context) use ($dataSet): void {
                     $context->draw(PointsShape::new($dataSet->data, $dataSet->style->fg ?? AnsiColor::Reset));
                 });
         }, $widget->dataSets);
@@ -123,7 +123,7 @@ final class ChartRenderer implements WidgetRenderer
      */
     private function maxWidthOfLabelsLeftOfYAxis(ChartWidget $chart, Area $area, bool $hasYAxis): int
     {
-        $maxWidth = VectorUtil::max(array_map(function (Span $label): int {
+        $maxWidth = VectorUtil::max(array_map(static function (Span $label): int {
             return $label->width();
         }, $chart->yAxis->labels ?? [])) ?? 0;
 

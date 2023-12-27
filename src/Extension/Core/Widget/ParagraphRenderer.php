@@ -34,8 +34,8 @@ final class ParagraphRenderer implements WidgetRenderer
 
         $widget->text->patchStyle($widget->style);
         $style = $widget->style;
-        $styled = array_map(function (Line $line) use ($style, $widget): array {
-            $graphemes = array_reduce($line->spans, function (array $ac, Span $span) use ($style): array {
+        $styled = array_map(static function (Line $line) use ($style, $widget): array {
+            $graphemes = array_reduce($line->spans, static function (array $ac, Span $span) use ($style): array {
                 foreach ($span->toStyledGraphemes($style) as $grapheme) {
                     $ac[] = $grapheme;
                 }

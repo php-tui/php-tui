@@ -29,7 +29,7 @@ final class TextShapeTest extends TestCase
     {
         $canvas = CanvasWidget::fromIntBounds(0, 65, 0, 6)
             ->marker(Marker::Block)
-            ->paint(function (CanvasContext $context) use ($text): void {
+            ->paint(static function (CanvasContext $context) use ($text): void {
                 $context->draw($text);
             });
         $area = Area::fromDimensions(65, 6);
@@ -102,7 +102,7 @@ final class TextShapeTest extends TestCase
     {
         $canvas = CanvasWidget::fromIntBounds(0, $boundsX, 0, $boundsY)
             ->marker(Marker::Block)
-            ->paint(function (CanvasContext $context) use ($text): void {
+            ->paint(static function (CanvasContext $context) use ($text): void {
                 $context->draw($text);
             });
         $buffer = Buffer::empty($area);

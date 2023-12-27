@@ -34,7 +34,7 @@ final class BlockRendererTest extends WidgetTestCase
     {
         yield 'no borders, width=0, height=0' => [
             BlockWidget::default(),
-            function (BlockWidget $block): void {
+            static function (BlockWidget $block): void {
                 self::assertEquals(
                     Area::fromScalars(0, 0, 0, 0),
                     $block->inner(Area::fromScalars(0, 0, 0, 0))
@@ -43,7 +43,7 @@ final class BlockRendererTest extends WidgetTestCase
         ];
         yield 'no borders, width=1, height=1' => [
             BlockWidget::default(),
-            function (BlockWidget $block): void {
+            static function (BlockWidget $block): void {
                 self::assertEquals(
                     Area::fromScalars(0, 0, 1, 1),
                     $block->inner(Area::fromScalars(0, 0, 1, 1))
@@ -52,7 +52,7 @@ final class BlockRendererTest extends WidgetTestCase
         ];
         yield 'no borders, width=1, height=1, padding out of bounds' => [
             BlockWidget::default(),
-            function (BlockWidget $block): void {
+            static function (BlockWidget $block): void {
                 self::assertEquals(
                     Area::fromScalars(10, 10, 0, 0),
                     $block->padding(Padding::all(10))->inner(Area::fromScalars(0, 0, 1, 1))
@@ -61,7 +61,7 @@ final class BlockRendererTest extends WidgetTestCase
         ];
         yield 'left, width=0' => [
             BlockWidget::default()->borders(Borders::LEFT),
-            function (BlockWidget $block): void {
+            static function (BlockWidget $block): void {
                 self::assertEquals(
                     Area::fromScalars(0, 0, 0, 1),
                     $block->inner(Area::fromScalars(0, 0, 0, 1))
@@ -70,7 +70,7 @@ final class BlockRendererTest extends WidgetTestCase
         ];
         yield 'left, width=1' => [
             BlockWidget::default()->borders(Borders::LEFT),
-            function (BlockWidget $block): void {
+            static function (BlockWidget $block): void {
                 self::assertEquals(
                     Area::fromScalars(1, 0, 0, 1),
                     $block->inner(Area::fromScalars(0, 0, 1, 1))
@@ -79,7 +79,7 @@ final class BlockRendererTest extends WidgetTestCase
         ];
         yield 'left, width=2' => [
             BlockWidget::default()->borders(Borders::LEFT),
-            function (BlockWidget $block): void {
+            static function (BlockWidget $block): void {
                 self::assertEquals(
                     Area::fromScalars(1, 0, 1, 1),
                     $block->inner(Area::fromScalars(0, 0, 2, 1))
@@ -88,7 +88,7 @@ final class BlockRendererTest extends WidgetTestCase
         ];
         yield 'top, height=0' => [
             BlockWidget::default()->borders(Borders::TOP),
-            function (BlockWidget $block): void {
+            static function (BlockWidget $block): void {
                 self::assertEquals(
                     Area::fromScalars(0, 0, 1, 0),
                     $block->inner(Area::fromScalars(0, 0, 1, 0))
@@ -97,7 +97,7 @@ final class BlockRendererTest extends WidgetTestCase
         ];
         yield 'left, height=1' => [
             BlockWidget::default()->borders(Borders::TOP),
-            function (BlockWidget $block): void {
+            static function (BlockWidget $block): void {
                 self::assertEquals(
                     Area::fromScalars(0, 1, 1, 0),
                     $block->inner(Area::fromScalars(0, 1, 1, 0))
@@ -106,7 +106,7 @@ final class BlockRendererTest extends WidgetTestCase
         ];
         yield 'left, height=2' => [
             BlockWidget::default()->borders(Borders::TOP),
-            function (BlockWidget $block): void {
+            static function (BlockWidget $block): void {
                 self::assertEquals(
                     Area::fromScalars(0, 1, 1, 1),
                     $block->inner(Area::fromScalars(0, 0, 1, 2))
@@ -115,7 +115,7 @@ final class BlockRendererTest extends WidgetTestCase
         ];
         yield 'right, width=0' => [
             BlockWidget::default()->borders(Borders::RIGHT),
-            function (BlockWidget $block): void {
+            static function (BlockWidget $block): void {
                 self::assertEquals(
                     Area::fromScalars(0, 0, 0, 1),
                     $block->inner(Area::fromScalars(0, 0, 0, 1))
@@ -124,7 +124,7 @@ final class BlockRendererTest extends WidgetTestCase
         ];
         yield 'right, width=1' => [
             BlockWidget::default()->borders(Borders::RIGHT),
-            function (BlockWidget $block): void {
+            static function (BlockWidget $block): void {
                 self::assertEquals(
                     Area::fromScalars(0, 0, 0, 1),
                     $block->inner(Area::fromScalars(0, 0, 1, 1))
@@ -133,7 +133,7 @@ final class BlockRendererTest extends WidgetTestCase
         ];
         yield 'right, width=2' => [
             BlockWidget::default()->borders(Borders::RIGHT),
-            function (BlockWidget $block): void {
+            static function (BlockWidget $block): void {
                 self::assertEquals(
                     Area::fromScalars(0, 0, 1, 1),
                     $block->inner(Area::fromScalars(0, 0, 2, 1))
@@ -142,7 +142,7 @@ final class BlockRendererTest extends WidgetTestCase
         ];
         yield 'bottom, height=0' => [
             BlockWidget::default()->borders(Borders::BOTTOM),
-            function (BlockWidget $block): void {
+            static function (BlockWidget $block): void {
                 self::assertEquals(
                     Area::fromScalars(0, 0, 1, 0),
                     $block->inner(Area::fromScalars(0, 0, 1, 0))
@@ -151,7 +151,7 @@ final class BlockRendererTest extends WidgetTestCase
         ];
         yield 'bottom, height=1' => [
             BlockWidget::default()->borders(Borders::BOTTOM),
-            function (BlockWidget $block): void {
+            static function (BlockWidget $block): void {
                 self::assertEquals(
                     Area::fromScalars(0, 0, 1, 0),
                     $block->inner(Area::fromScalars(0, 0, 1, 1))
@@ -160,7 +160,7 @@ final class BlockRendererTest extends WidgetTestCase
         ];
         yield 'bottom, height=2' => [
             BlockWidget::default()->borders(Borders::BOTTOM),
-            function (BlockWidget $block): void {
+            static function (BlockWidget $block): void {
                 self::assertEquals(
                     Area::fromScalars(0, 0, 1, 1),
                     $block->inner(Area::fromScalars(0, 0, 1, 2))
@@ -169,7 +169,7 @@ final class BlockRendererTest extends WidgetTestCase
         ];
         yield 'all borders, 0x0' => [
             BlockWidget::default()->borders(Borders::ALL),
-            function (BlockWidget $block): void {
+            static function (BlockWidget $block): void {
                 self::assertEquals(
                     Area::fromScalars(0, 0, 0, 0),
                     $block->inner(Area::fromScalars(0, 0, 0, 0))
@@ -178,7 +178,7 @@ final class BlockRendererTest extends WidgetTestCase
         ];
         yield 'all borders, 1x1' => [
             BlockWidget::default()->borders(Borders::ALL),
-            function (BlockWidget $block): void {
+            static function (BlockWidget $block): void {
                 self::assertEquals(
                     Area::fromScalars(1, 1, 0, 0),
                     $block->inner(Area::fromScalars(0, 0, 1, 1))
@@ -187,7 +187,7 @@ final class BlockRendererTest extends WidgetTestCase
         ];
         yield 'all borders, 2x2' => [
             BlockWidget::default()->borders(Borders::ALL),
-            function (BlockWidget $block): void {
+            static function (BlockWidget $block): void {
                 self::assertEquals(
                     Area::fromScalars(1, 1, 0, 0),
                     $block->inner(Area::fromScalars(0, 0, 2, 2))
@@ -196,7 +196,7 @@ final class BlockRendererTest extends WidgetTestCase
         ];
         yield 'all borders, 3x3' => [
             BlockWidget::default()->borders(Borders::ALL),
-            function (BlockWidget $block): void {
+            static function (BlockWidget $block): void {
                 self::assertEquals(
                     Area::fromScalars(1, 1, 1, 1),
                     $block->inner(Area::fromScalars(0, 0, 3, 3))
@@ -205,7 +205,7 @@ final class BlockRendererTest extends WidgetTestCase
         ];
         yield 'inner takes into account the title' => [
             BlockWidget::default()->titles(Title::fromString('Hello World')),
-            function (BlockWidget $block): void {
+            static function (BlockWidget $block): void {
                 self::assertEquals(
                     Area::fromScalars(0, 1, 0, 0),
                     $block->inner(Area::fromScalars(0, 0, 0, 1))

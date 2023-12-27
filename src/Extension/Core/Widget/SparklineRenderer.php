@@ -26,7 +26,7 @@ final class SparklineRenderer implements WidgetRenderer
         }
         $max = $widget->max ?? VectorUtil::max($widget->data) ?? 0;
         $maxIndex = min($area->width, count($widget->data));
-        $data = array_map(function (int $e) use ($max, $area): int {
+        $data = array_map(static function (int $e) use ($max, $area): int {
             if ($max === 0) {
                 return 0;
             }

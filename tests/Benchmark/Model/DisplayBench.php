@@ -50,7 +50,7 @@ final class DisplayBench
         $this->painter = new StringPainter();
         $terminal = Terminal::new(
             infoProvider: new AggregateInformationProvider([
-                ClosureInformationProvider::new(function (string $info) {
+                ClosureInformationProvider::new(static function (string $info) {
                     if ($info === Size::class) {
                         return new Size(100, 100);
                     }
@@ -89,7 +89,7 @@ final class DisplayBench
                     ),
                     $this->horizontalGrid(
                         ParagraphWidget::fromString('Hello World'),
-                        BufferWidget::new(function (BufferContext $context): void {
+                        BufferWidget::new(static function (BufferContext $context): void {
                             $context->buffer->putLine(Position::at(0, 0), Line::fromString('Hello'), 5);
                         })
                     ),

@@ -39,13 +39,12 @@ final class ListRenderer implements WidgetRenderer
         $selectionSpacing = $widget->highlightSpacing->shouldAdd($widget->state->selected !== null);
         foreach (array_slice($widget->items, $start, $end - $start) as $i => $item) {
             /** @var int<0,max> $y */
-            [$x, $y, $currentHeight] = (function () use ($item, $listArea, $currentHeight, $widget): array {
+            [$x, $y, $currentHeight] = (static function () use ($item, $listArea, $currentHeight, $widget): array {
                 if ($widget->startCorner === Corner::BottomLeft) {
                     $currentHeight += $item->height();
 
                     return [$listArea->left(), max(0, $listArea->bottom() - $currentHeight), $currentHeight];
                 }
-
                 $y = $listArea->top() + $currentHeight;
                 $currentHeight += $item->height();
 
@@ -66,7 +65,7 @@ final class ListRenderer implements WidgetRenderer
                     $blankSymbol
                 ;
 
-                [$elemPosition, $maxElementWidth] = (function () use ($listArea, $selectionSpacing, $buffer, $x, $j, $y, $symbol, $itemStyle): array {
+                [$elemPosition, $maxElementWidth] = (static function () use ($listArea, $selectionSpacing, $buffer, $x, $j, $y, $symbol, $itemStyle): array {
                     if ($selectionSpacing) {
                         $pos = $buffer->putString(
                             Position::at($x, $y + $j),

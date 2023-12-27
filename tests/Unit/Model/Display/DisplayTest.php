@@ -25,7 +25,7 @@ final class DisplayTest extends TestCase
         $backend->setDimensions(2, 2);
 
         // intentionally go out of bounds
-        $terminal->draw(new BufferWidget(function (BufferContext $context): void {
+        $terminal->draw(new BufferWidget(static function (BufferContext $context): void {
             for ($y = 0; $y < 4; $y++) {
                 for ($x = 0; $x < 4; $x++) {
                     $context->buffer->putString(new Position($x, $y), 'h');
@@ -44,7 +44,7 @@ final class DisplayTest extends TestCase
     {
         $backend = DummyBackend::fromDimensions(4, 4);
         $terminal = DisplayBuilder::default($backend)->build();
-        $terminal->draw(new BufferWidget(function (BufferContext $context): void {
+        $terminal->draw(new BufferWidget(static function (BufferContext $context): void {
             $x = 0;
             for ($y = 0; $y <= 4; $y++) {
                 $context->buffer->putString(new Position($x++, $y), 'x');
