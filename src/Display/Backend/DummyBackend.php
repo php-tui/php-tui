@@ -47,7 +47,7 @@ final class DummyBackend implements Backend
 
     public function toString(): string
     {
-        return implode("\n", array_map(function (array $cells): string {
+        return implode("\n", array_map(static function (array $cells): string {
             return implode('', $cells);
         }, $this->grid));
     }
@@ -57,7 +57,7 @@ final class DummyBackend implements Backend
      */
     public function toLines(): array
     {
-        return array_map(function (array $cells): string {
+        return array_map(static function (array $cells): string {
             return implode('', $cells);
         }, $this->grid);
     }

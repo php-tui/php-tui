@@ -27,7 +27,7 @@ final class SpriteShapeTest extends ShapeTestCase
             ->marker($marker)
             ->xBounds(AxisBounds::new(0, 34))
             ->yBounds(AxisBounds::new(0, 10))
-            ->paint(function (CanvasContext $context) use ($sprite): void {
+            ->paint(static function (CanvasContext $context) use ($sprite): void {
                 $context->draw($sprite);
             });
         $area = Area::fromDimensions(34, 10);

@@ -75,7 +75,7 @@ final class BarChartRenderer implements WidgetRenderer
                 return $ticks;
             }
 
-            $ticks[] = array_map(function (Bar $bar) use ($barMaxLength, $max): int {
+            $ticks[] = array_map(static function (Bar $bar) use ($barMaxLength, $max): int {
                 if ($max === 0) {
                     return 0;
                 }
@@ -96,7 +96,7 @@ final class BarChartRenderer implements WidgetRenderer
             return $widget->max;
         }
 
-        return array_reduce($widget->data, function (int $max, BarGroup $barGroup): int {
+        return array_reduce($widget->data, static function (int $max, BarGroup $barGroup): int {
             $barGroupMax = $barGroup->max();
             if ($barGroupMax > $max) {
                 return $barGroupMax;

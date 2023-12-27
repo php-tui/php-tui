@@ -25,7 +25,7 @@ final class LineShapeTest extends ShapeTestCase
             ->marker(Marker::Dot)
             ->xBounds(AxisBounds::new(0, 10))
             ->yBounds(AxisBounds::new(0, 10))
-            ->paint(function (CanvasContext $context) use ($line): void {
+            ->paint(static function (CanvasContext $context) use ($line): void {
                 $context->draw($line);
             });
         $area = Area::fromDimensions(10, 10);

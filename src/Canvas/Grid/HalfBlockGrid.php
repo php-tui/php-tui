@@ -66,7 +66,7 @@ final class HalfBlockGrid extends CanvasGrid
         }
 
         $chars = [];
-        $chars = array_map(function (array $pair): string {
+        $chars = array_map(static function (array $pair): string {
             [$upper, $lower] = $pair;
             if ($upper === AnsiColor::Reset && $lower === AnsiColor::Reset) {
                 return ' ';
@@ -84,7 +84,7 @@ final class HalfBlockGrid extends CanvasGrid
 
             return BlockSet::UPPER_HALF;
         }, $paired);
-        $colors = array_map(function (array $pair): FgBgColor {
+        $colors = array_map(static function (array $pair): FgBgColor {
             [$upper, $lower] = $pair;
             if ($upper === AnsiColor::Reset && $lower === AnsiColor::Reset) {
                 return new FgBgColor(AnsiColor::Reset, AnsiColor::Reset);

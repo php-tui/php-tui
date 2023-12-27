@@ -21,7 +21,7 @@ final class CompositeRenderer implements WidgetRenderer
             return;
         }
 
-        array_map(function (Widget $widget) use ($renderer, $buffer, $area): void {
+        array_map(static function (Widget $widget) use ($renderer, $buffer, $area): void {
             $renderer->render($renderer, $widget, $buffer, $area);
         }, $widget->widgets);
     }

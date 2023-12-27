@@ -33,7 +33,7 @@ final class CanvasBench
         $this->painter = new StringPainter();
         $terminal = Terminal::new(
             infoProvider: new AggregateInformationProvider([
-                ClosureInformationProvider::new(function (string $info) {
+                ClosureInformationProvider::new(static function (string $info) {
                     if ($info === Size::class) {
                         return new Size(100, 100);
                     }

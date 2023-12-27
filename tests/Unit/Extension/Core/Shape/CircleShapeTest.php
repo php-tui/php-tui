@@ -25,7 +25,7 @@ final class CircleShapeTest extends ShapeTestCase
             ->marker(Marker::Braille)
             ->xBounds(AxisBounds::new(-10, 10))
             ->yBounds(AxisBounds::new(-10, 10))
-            ->paint(function (CanvasContext $context) use ($circle): void {
+            ->paint(static function (CanvasContext $context) use ($circle): void {
                 $context->draw($circle);
             });
         $area = Area::fromDimensions(10, 5);

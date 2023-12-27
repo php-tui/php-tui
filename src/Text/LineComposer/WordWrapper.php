@@ -139,7 +139,7 @@ final class WordWrapper implements LineComposer
      */
     private function processLine(array $currentLine, HorizontalAlignment $alignment): array
     {
-        $lineWidth = array_reduce($currentLine, function (int $width, StyledGrapheme $grapheme): int {
+        $lineWidth = array_reduce($currentLine, static function (int $width, StyledGrapheme $grapheme): int {
             return $width + $grapheme->symbolWidth();
         }, 0);
 

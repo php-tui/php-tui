@@ -26,7 +26,7 @@ final class PointsShapeTest extends ShapeTestCase
             ->marker(Marker::Dot)
             ->xBounds(AxisBounds::new(0, 2))
             ->yBounds(AxisBounds::new(0, 2))
-            ->paint(function (CanvasContext $context) use ($points): void {
+            ->paint(static function (CanvasContext $context) use ($points): void {
                 $context->draw($points);
             });
         $area = Area::fromDimensions(3, 3);

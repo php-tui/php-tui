@@ -35,7 +35,7 @@ final class BufferRendererTest extends WidgetTestCase
     {
         yield 'write to buffer' => [
             Area::fromDimensions(10, 10),
-            BufferWidget::new(function (BufferContext $context): void {
+            BufferWidget::new(static function (BufferContext $context): void {
                 $context->buffer->putLine(Position::at(0, 0), Line::fromString('Hello'), 5);
             }),
             [
@@ -55,7 +55,7 @@ final class BufferRendererTest extends WidgetTestCase
         yield 'write to buffer in block' => [
             Area::fromDimensions(10, 10),
             BlockWidget::default()->widget(
-                BufferWidget::new(function (BufferContext $context): void {
+                BufferWidget::new(static function (BufferContext $context): void {
                     $context->buffer->putLine(Position::at($context->area->left(), $context->area->top()), Line::fromString('Hello'), 5);
                 })
             )->padding(Padding::fromScalars(1, 1, 1, 1)),
@@ -76,7 +76,7 @@ final class BufferRendererTest extends WidgetTestCase
         yield 'overflow' => [
             Area::fromDimensions(10, 10),
             BlockWidget::default()->widget(
-                BufferWidget::new(function (BufferContext $context): void {
+                BufferWidget::new(static function (BufferContext $context): void {
                     $context->buffer->putSpan(
                         Position::at($context->area->left(), $context->area->top()),
                         Span::fromString(str_repeat('Hello', 10)),

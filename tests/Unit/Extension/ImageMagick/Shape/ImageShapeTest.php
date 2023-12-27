@@ -33,7 +33,7 @@ final class ImageShapeTest extends TestCase
             ->marker($marker)
             ->xBounds(AxisBounds::new(0, 10))
             ->yBounds(AxisBounds::new(0, 4))
-            ->paint(function (CanvasContext $context) use ($image): void {
+            ->paint(static function (CanvasContext $context) use ($image): void {
                 $context->draw($image);
             });
         $area = Area::fromDimensions(10, 4);
