@@ -19,14 +19,7 @@ final class VectorUtil
      */
     public static function max(array $vector): int|float|null
     {
-        if ([] === $vector) {
-            return null;
-        }
-        if (count($vector) === 1) {
-            return $vector[array_key_first($vector)];
-        }
-
-        return max(...$vector);
+        return $vector === [] ? null : max($vector);
     }
 
     /**
@@ -42,13 +35,6 @@ final class VectorUtil
      */
     public static function min(array $vector): int|float|null
     {
-        if ([] === $vector) {
-            return null;
-        }
-        if (count($vector) === 1) {
-            return $vector[array_key_first($vector)];
-        }
-
-        return min(...$vector);
+        return $vector === [] ? null : min($vector);
     }
 }
