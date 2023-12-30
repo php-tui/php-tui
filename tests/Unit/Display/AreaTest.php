@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Tests\Unit\Model\Display;
+namespace PhpTui\Tui\Tests\Unit\Display;
 
 use PhpTui\Tui\Display\Area;
 use PhpTui\Tui\Widget\Margin;

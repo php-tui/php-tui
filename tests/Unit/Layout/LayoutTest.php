@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Tests\Unit\Model\Layout;
+namespace PhpTui\Tui\Tests\Unit\Layout;
 
 use PhpTui\Tui\Display\Area;
 use PhpTui\Tui\Layout\Constraint;

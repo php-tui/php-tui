@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Tests\Unit\Model\Viewport;
+namespace PhpTui\Tui\Tests\Unit\Display\Viewport;
 
 use PhpTui\Tui\Display\Area;
 use PhpTui\Tui\Display\Backend\DummyBackend;
