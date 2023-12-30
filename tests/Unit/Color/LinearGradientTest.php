@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Tests\Unit\Model\Color;
+namespace PhpTui\Tui\Tests\Unit\Color;
 
 use PhpTui\Tui\Color\LinearGradient;
 use PhpTui\Tui\Color\RgbColor;

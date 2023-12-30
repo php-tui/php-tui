@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Tests\Unit\Model\Math;
+namespace PhpTui\Tui\Tests\Unit\Math;
 
 use Generator;
 use PhpTui\Tui\Math\VectorUtil;

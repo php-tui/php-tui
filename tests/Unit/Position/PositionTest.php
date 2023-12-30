@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Tests\Unit\Model\Position;
+namespace PhpTui\Tui\Tests\Unit\Position;
 
 use PhpTui\Tui\Display\Area;
 use PhpTui\Tui\Position\Position;

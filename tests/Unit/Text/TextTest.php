@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Tests\Unit\Model\Text;
+namespace PhpTui\Tui\Tests\Unit\Text;
 
 use PhpTui\Tui\Color\AnsiColor;
 use PhpTui\Tui\Style\Modifier;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Tests\Unit\Model\Color;
+namespace PhpTui\Tui\Tests\Unit\Color;
 
 use PhpTui\Tui\Color\AnsiColor;
 use PHPUnit\Framework\TestCase;

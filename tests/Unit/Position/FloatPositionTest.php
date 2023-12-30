@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Tests\Unit\Model\Position;
+namespace PhpTui\Tui\Tests\Unit\Position;
 
 use PhpTui\Tui\Extension\Core\Widget\Chart\AxisBounds;
 use PhpTui\Tui\Position\FloatPosition;
