@@ -15,8 +15,8 @@ final class BufferContext
     {
     }
 
-    public function draw(Widget $widget): void
+    public function draw(Widget $widget, ?Area $area = null): void
     {
-        $this->renderer->render($this->renderer, $widget, $this->buffer, $this->area);
+        $this->renderer->render($this->renderer, $widget, $this->buffer, $area ?? $this->area);
     }
 }

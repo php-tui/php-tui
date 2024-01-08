@@ -21,6 +21,7 @@ enum ActivePage
     case Gauge;
     case BarChart;
     case Sparkline;
+    case Window;
 
     public function navItem(): NavItem
     {
@@ -38,6 +39,7 @@ enum ActivePage
             ActivePage::BarChart => new NavItem('"', 'barchart'),
             ActivePage::CanvasScaling => new NavItem('0', 'scaling'),
             ActivePage::Sparkline => new NavItem('£', 'sparkline'),
+            ActivePage::Window => new NavItem('£', 'window'),
         };
     }
 
