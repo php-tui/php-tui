@@ -28,6 +28,7 @@ use PhpTui\Tui\Example\Demo\Page\ItemListPage;
 use PhpTui\Tui\Example\Demo\Page\SparklinePage;
 use PhpTui\Tui\Example\Demo\Page\SpritePage;
 use PhpTui\Tui\Example\Demo\Page\TablePage;
+use PhpTui\Tui\Example\Demo\Page\WindowPage;
 use PhpTui\Tui\Extension\Bdf\BdfExtension;
 use PhpTui\Tui\Extension\Core\Widget\BlockWidget;
 use PhpTui\Tui\Extension\Core\Widget\GridWidget;
@@ -89,6 +90,7 @@ final class App
                 ActivePage::Gauge => new GaugePage(),
                 ActivePage::BarChart => new BarChartPage(),
                 ActivePage::Sparkline => new SparklinePage(),
+                ActivePage::Window => new WindowPage(),
             };
         }
 
