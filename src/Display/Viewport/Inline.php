@@ -23,7 +23,7 @@ final class Inline implements Viewport
          * Height of the viewport
          * @var int<0,max>
          */
-        public readonly int $height
+        public int $height
     ) {
     }
 
