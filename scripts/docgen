@@ -1,7 +1,6 @@
 #!/usr/bin/env php
 <?php
 
-use PhpBench\Color\Color;
 use PhpTui\Docgen\DocExampleType;
 use PhpTui\Docgen\Docgen;
 use PhpTui\Docgen\DocSection;
@@ -10,6 +9,7 @@ use PhpTui\Docgen\Renderer\AggregateDocRenderer;
 use PhpTui\Docgen\Renderer\DocClassRenderer;
 use PhpTui\Docgen\Renderer\DocSectionRenderer;
 use PhpTui\Tui\Canvas\Shape;
+use PhpTui\Tui\Color\Color;
 use PhpTui\Tui\Display\Viewport;
 use PhpTui\Tui\Widget\Widget;
 
