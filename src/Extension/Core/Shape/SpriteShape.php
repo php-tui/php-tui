@@ -30,7 +30,7 @@ final class SpriteShape implements Shape
         /**
          * Position to place the sprite at (bottom left)
          */
-        public  FloatPosition $position,
+        public FloatPosition $position,
         /**
          * Character to use as the "alpha" (transparent) "channel".
          * Defaults to empty space.

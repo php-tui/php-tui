@@ -38,11 +38,11 @@ final class TextShape implements Shape
         /**
          * Horizontal scale of the font
          */
-        public  float $scaleX = 1.0,
+        public float $scaleX = 1.0,
         /**
          * Verttical scale of the font
          */
-        public  float $scaleY = 1.0,
+        public float $scaleY = 1.0,
     ) {
     }
 }

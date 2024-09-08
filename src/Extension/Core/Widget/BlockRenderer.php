@@ -72,9 +72,11 @@ final class BlockRenderer implements WidgetRenderer
         if ($block->borders & Borders::BOTTOM) {
             $y = $bottom;
             foreach (range($area->left(), $area->right() - 1) as $x) {
-                $buffer->get(Position::at($x, $y))
-                    ->setStyle($block->borderStyle)
-                    ->setChar($lineSet->horizontal);
+                if ($x >= 0) {
+                    $buffer->get(Position::at($x, $y))
+                        ->setStyle($block->borderStyle)
+                        ->setChar($lineSet->horizontal);
+                }
             }
         }
 

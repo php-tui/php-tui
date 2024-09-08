@@ -112,7 +112,7 @@ final class WordWrapper implements LineComposer
             if ($currentWord !== [] || $whitespacesBuffer !== []) {
                 if ($currentLine === [] && $currentWord === []) {
                     $wrappedLines[] = $this->processLine([], $lineAlignment);
-                } elseif(!$this->trim || $currentLine !== []) {
+                } elseif (!$this->trim || $currentLine !== []) {
                     $currentLine = [...$currentLine, ...$whitespacesBuffer];
                     $whitespacesBuffer = [];
                 }

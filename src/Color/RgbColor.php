@@ -53,22 +53,22 @@ final class RgbColor implements Color, Stringable
          **             Suitable for CSS function RGB().
          */
 
-        if($hue < 0) {
+        if ($hue < 0) {
             $hue = 0;
         }   // Hue:
-        if($hue > 360) {
+        if ($hue > 360) {
             $hue = 360;
         } //   0-360
-        if($saturation < 0) {
+        if ($saturation < 0) {
             $saturation = 0;
         }   // Saturation:
-        if($saturation > 100) {
+        if ($saturation > 100) {
             $saturation = 100;
         } //   0-100
-        if($lightness < 0) {
+        if ($lightness < 0) {
             $lightness = 0;
         }   // Lightness:
-        if($lightness > 100) {
+        if ($lightness > 100) {
             $lightness = 100;
         } //   0-100
 
@@ -78,12 +78,12 @@ final class RgbColor implements Color, Stringable
         $dH = $hue / 60.0;  // H-Prime:    0.0-6.0
         $dT = $dH;       // Temp variable
 
-        while($dT >= 2.0) {
+        while ($dT >= 2.0) {
             $dT -= 2.0;
         } // php modulus does not work with float
         $dX = $dC * (1 - abs($dT - 1));     // as used in the Wikipedia link
 
-        switch((int) floor($dH)) {
+        switch ((int) floor($dH)) {
             case 0:
                 $dR = $dC;
                 $dG = $dX;

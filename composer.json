@@ -53,9 +53,9 @@
         "vhs": "vhs example/demo/demo.tape",
         "demo": "example/demo/bin/demo",
         "integrate": [
-            "@phpunit",
             "@phpstan",
             "@php-cs-fixer",
+            "@phpunit",
             "@rector",
             "@phpbench",
             "@docs",

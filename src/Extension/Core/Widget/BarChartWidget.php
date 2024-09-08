@@ -161,7 +161,7 @@ final class BarChartWidget implements Widget
 
     public function isBarLabelVisible(): bool
     {
-        foreach  ($this->data as $group) {
+        foreach ($this->data as $group) {
             foreach ($group->bars as $bar) {
                 if ($bar->label !== null) {
                     return true;
@@ -174,7 +174,7 @@ final class BarChartWidget implements Widget
 
     public function isGroupLabelVisible(): bool
     {
-        foreach  ($this->data as $group) {
+        foreach ($this->data as $group) {
             if ($group->label !== null) {
                 return true;
             }

@@ -58,7 +58,9 @@ final class Buffer implements Countable, Stringable
         }
         foreach (range($area->top(), $area->bottom() - 1) as $y) {
             foreach (range($area->left(), $area->right() - 1) as $x) {
-                $this->get(Position::at($x, $y))->setStyle($style);
+                if ($x >= 0 && $y >= 0) {
+                    $this->get(Position::at($x, $y))->setStyle($style);
+                }
             }
         }
     }

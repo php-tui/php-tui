@@ -74,11 +74,9 @@ final class LinePainter implements ShapePainter
     private function resolveDiffAndRange(int $start, int $end): array
     {
         if ($end >= $start) {
-            /** @phpstan-ignore-next-line */
             return [max(0, $end - $start), range($start, $end)];
         }
 
-        /** @phpstan-ignore-next-line */
         return [max(0, $start - $end), range($end, $start)];
     }
 

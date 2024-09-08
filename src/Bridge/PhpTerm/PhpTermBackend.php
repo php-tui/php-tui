@@ -134,7 +134,7 @@ final class PhpTermBackend implements Backend
         $this->terminal->flush();
         $start = microtime(true);
         $pos = null;
-        while(true) {
+        while (true) {
             while (null !== $event = $this->terminal->events()->next()) {
                 if ($event instanceof CursorPositionEvent) {
                     $this->disableRawMode();

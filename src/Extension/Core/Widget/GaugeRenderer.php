@@ -47,6 +47,9 @@ final class GaugeRenderer implements WidgetRenderer
                 if ($x === $area->right()) {
                     break;
                 }
+                if ($y < 0) {
+                    break;
+                }
                 $cell = $buffer->get(Position::at($x, $y));
                 if ($x < $labelCol || $x > $labelCol + $clampedLabelWidth - 1 || $y != $labelRow) {
                     $cell->setChar(BlockSet::FULL);
@@ -64,7 +67,7 @@ final class GaugeRenderer implements WidgetRenderer
                 }
             }
 
-            if ($widget->ratio < 1) {
+            if ($widget->ratio < 1 && $y >= 0) {
                 $buffer->get(
                     Position::at((int)floor($end), $y)
                 )->setChar($this->getUnicodeBlock(fmod($filledWidth, 1.0)));
