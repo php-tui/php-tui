@@ -85,7 +85,7 @@ final class ScrollbarRenderer implements WidgetRenderer
 
     private function getTrackArea(ScrollbarWidget $widget, Area $area): Area
     {
-        $area = (static function (Area $area, ScrollbarWidget $widget) {
+        $area = (static function (Area $area, ScrollbarWidget $widget): Area {
             if ($widget->beginSymbol !== null) {
                 if ($widget->isVertical()) {
                     return Area::fromScalars(
