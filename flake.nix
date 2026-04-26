@@ -25,7 +25,7 @@
         system,
         ...
       }: let 
-        phpForPhpTui = (pkgs.php81.buildEnv {
+        phpForPhpTui = (pkgs.php82.buildEnv {
           extensions = ({ enabled, all }: enabled ++ (with all; [
             imagick
           ]));
@@ -45,7 +45,7 @@
             pkgs.vhs
             pkgs.hugo
             phpForPhpTui
-            pkgs.php81.packages.composer
+            pkgs.php82.packages.composer
           ];
           shellHook = ''
           if [ ! -d ".venv" ]; then

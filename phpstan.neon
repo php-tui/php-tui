@@ -1,7 +1,5 @@
 parameters:
     level: max
-    excludePaths:
-        - src/Widget/Canvas/Data
 
     ignoreErrors:
         # ignore until https://github.com/phpstan/phpstan-src/pull/2792 is merged
@@ -13,3 +11,6 @@ parameters:
         - tests
     strictRules:
         booleansInConditions: false
+
+includes:
+    - phpstan-baseline.neon

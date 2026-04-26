@@ -20,7 +20,7 @@ final class ImagePainter implements ShapePainter
 {
     private readonly ImageRegistry $registry;
 
-    public function __construct(ImageRegistry $registry = null)
+    public function __construct(?ImageRegistry $registry = null)
     {
         $this->registry = $registry ?? new ImageRegistry();
     }

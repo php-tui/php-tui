@@ -1,0 +1,145 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Parameter \#2 \.\.\.\$titles of static method PhpTui\\Tui\\Extension\\Core\\Widget\\TabsWidget\:\:fromTitles\(\) expects PhpTui\\Tui\\Text\\Line, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: example/demo/src/App.php
+
+		-
+			message: '#^Parameter \#1 \$data of method PhpTui\\Tui\\Extension\\Core\\Widget\\Chart\\DataSet\:\:data\(\) expects list\<array\{float, float\}\>, array\<int, array\{float, float\}\> given\.$#'
+			identifier: argument.type
+			count: 4
+			path: example/demo/src/Page/ChartPage.php
+
+		-
+			message: '#^Parameter \#1 \$array \(list\<PhpTui\\BDF\\BdfGlyph\>\) of array_values is already a list, call has no effect\.$#'
+			identifier: arrayValues.list
+			count: 1
+			path: lib/bdf/src/BdfFont.php
+
+		-
+			message: '#^Parameter \$glyphs of class PhpTui\\BDF\\BdfFont constructor expects list\<PhpTui\\BDF\\BdfGlyph\>, array\<int, PhpTui\\BDF\\BdfGlyph\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: lib/bdf/src/BdfParser.php
+
+		-
+			message: '#^Method PhpTui\\Docgen\\Renderer\\AggregateDocRenderer\:\:render\(\) never returns null so it can be removed from the return type\.$#'
+			identifier: return.unusedType
+			count: 1
+			path: lib/docgen/src/Renderer/AggregateDocRenderer.php
+
+		-
+			message: '#^Property PhpTui\\Term\\Painter\\HtmlCanvasPainter\:\:\$chars \(list\<string\>\) does not accept non\-empty\-array\<int, string\>\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: lib/term/src/Painter/HtmlCanvasPainter.php
+
+		-
+			message: '#^Loose comparison via "\!\=" is not allowed\.$#'
+			identifier: notEqual.notAllowed
+			count: 2
+			path: src/Bridge/PhpTerm/PhpTermBackend.php
+
+		-
+			message: '#^Parameter \#1 \$fg of class PhpTui\\Tui\\Color\\FgBgColor constructor expects PhpTui\\Tui\\Color\\Color, PhpTui\\Tui\\Color\\Color\|null given\.$#'
+			identifier: argument.type
+			count: 3
+			path: src/Canvas/Grid/HalfBlockGrid.php
+
+		-
+			message: '#^Parameter \#2 \$bg of class PhpTui\\Tui\\Color\\FgBgColor constructor expects PhpTui\\Tui\\Color\\Color, PhpTui\\Tui\\Color\\Color\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Canvas/Grid/HalfBlockGrid.php
+
+		-
+			message: '#^PHPDoc tag @var with type string is not subtype of type non\-falsy\-string\|null\.$#'
+			identifier: varTag.type
+			count: 1
+			path: src/Color/RgbColor.php
+
+		-
+			message: '#^Parameter \#3 \$width of static method PhpTui\\Tui\\Display\\Area\:\:fromScalars\(\) expects int\<0, max\>, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Display/Buffer.php
+
+		-
+			message: '#^Loose comparison via "\=\=" is not allowed\.$#'
+			identifier: equal.notAllowed
+			count: 3
+			path: src/Display/Cell.php
+
+		-
+			message: '#^Loose comparison via "\=\=" is not allowed\.$#'
+			identifier: equal.notAllowed
+			count: 1
+			path: src/Display/Display.php
+
+		-
+			message: '#^Invalid array key type float\.$#'
+			identifier: offsetAccess.invalidOffset
+			count: 1
+			path: src/Extension/Bdf/Shape/TextRenderer.php
+
+		-
+			message: '#^Method PhpTui\\Tui\\Extension\\Bdf\\Shape\\TextRenderer\:\:buildGrid\(\) should return list\<array\<int, bool\>\> but returns array\<int\<0, max\>, non\-empty\-array\<int, bool\>\>\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Extension/Bdf/Shape/TextRenderer.php
+
+		-
+			message: '#^Method PhpTui\\Tui\\Extension\\Core\\Widget\\BarChartRenderer\:\:groupTicks\(\) should return list\<list\<int\<0, max\>\>\> but returns list\<array\<int\<0, max\>\>\>\.$#'
+			identifier: return.type
+			count: 4
+			path: src/Extension/Core/Widget/BarChartRenderer.php
+
+		-
+			message: '#^Loose comparison via "\!\=" is not allowed\.$#'
+			identifier: notEqual.notAllowed
+			count: 1
+			path: src/Extension/Core/Widget/GaugeRenderer.php
+
+		-
+			message: '#^Parameter \#1 \$styled of method PhpTui\\Tui\\Extension\\Core\\Widget\\ParagraphRenderer\:\:createLineComposer\(\) expects list\<array\{list\<PhpTui\\Tui\\Text\\StyledGrapheme\>, PhpTui\\Tui\\Widget\\HorizontalAlignment\}\>, list\<array\{array, PhpTui\\Tui\\Widget\\HorizontalAlignment\}\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Extension/Core/Widget/ParagraphRenderer.php
+
+		-
+			message: '#^Method PhpTui\\Tui\\Text\\LineComposer\\WordWrapper\:\:processLine\(\) should return array\{list\<PhpTui\\Tui\\Text\\StyledGrapheme\>, int, PhpTui\\Tui\\Widget\\HorizontalAlignment\} but returns array\{array\<PhpTui\\Tui\\Text\\StyledGrapheme\>, int, PhpTui\\Tui\\Widget\\HorizontalAlignment\}\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Text/LineComposer/WordWrapper.php
+
+		-
+			message: '#^Cannot access offset 0 on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/Text/SpanParser.php
+
+		-
+			message: '#^Cannot access offset int\<0, max\> on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/Text/SpanParser.php
+
+		-
+			message: '#^Offset 0 on non\-empty\-list\<string\> on left side of \?\? always exists and is not nullable\.$#'
+			identifier: nullCoalesce.offset
+			count: 1
+			path: src/Text/SpanParser.php
+
+		-
+			message: '#^Offset 1 does not exist on array\{list\<array\{string, int\<\-1, max\>\}\>\}\.$#'
+			identifier: offsetAccess.notFound
+			count: 1
+			path: src/Text/SpanParser.php
+
+		-
+			message: '#^Parameter \#1 \$tag of method PhpTui\\Tui\\Text\\SpanParser\:\:createStyleFromTag\(\) expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Text/SpanParser.php
