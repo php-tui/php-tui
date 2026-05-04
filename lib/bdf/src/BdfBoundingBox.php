@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PhpTui\BDF;
 
-final class BdfBoundingBox
+final readonly class BdfBoundingBox
 {
     public function __construct(
-        public readonly BdfSize $size,
-        public readonly BdfCoord $offset
+        public BdfSize $size,
+        public BdfCoord $offset
     ) {
     }
 

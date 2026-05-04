@@ -36,7 +36,7 @@ trait StyleableTrait
 
     public function yellow(): self
     {
-        return  $this->patchStyle(Style::default()->fg(AnsiColor::Yellow));
+        return $this->patchStyle(Style::default()->fg(AnsiColor::Yellow));
     }
 
     public function blue(): self
@@ -166,7 +166,7 @@ trait StyleableTrait
 
     public function onLightMagenta(): self
     {
-        return  $this->patchStyle(Style::default()->bg(AnsiColor::LightMagenta));
+        return $this->patchStyle(Style::default()->bg(AnsiColor::LightMagenta));
     }
 
     public function onLightCyan(): self

@@ -61,10 +61,10 @@ final class TextShapeTest extends TestCase
         yield 'scale x' => [
             new TextShape(
                 font: 'default',
-                scaleX: 2,
                 text: 'Hello',
                 color: AnsiColor::Green,
                 position: FloatPosition::at(0, 0),
+                scaleX: 2,
             ),
             [
                 '██      ██                ████        ████                       ',
@@ -78,10 +78,10 @@ final class TextShapeTest extends TestCase
         yield 'scale y' => [
             new TextShape(
                 font: 'default',
-                scaleY: 2,
                 text: 'Hello World',
                 color: AnsiColor::Green,
                 position: FloatPosition::at(0, 0),
+                scaleY: 2,
             ),
             [
                 '█████ █████   █     █   █   █       █ █ █ █   █ ██  █   █   █  ██',

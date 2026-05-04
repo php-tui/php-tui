@@ -51,7 +51,7 @@ final class GaugeRenderer implements WidgetRenderer
                     break;
                 }
                 $cell = $buffer->get(Position::at($x, $y));
-                if ($x < $labelCol || $x > $labelCol + $clampedLabelWidth - 1 || $y != $labelRow) {
+                if ($x < $labelCol || $x > $labelCol + $clampedLabelWidth - 1 || $y !== $labelRow) {
                     $cell->setChar(BlockSet::FULL);
                     $cell->setStyle($widget->style->atPosition(FractionalPosition::at(
                         ($x - $area->left()) / $area->width,

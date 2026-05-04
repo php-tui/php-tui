@@ -49,8 +49,7 @@ final class BufferRendererTest extends WidgetTestCase
                 '          ',
                 '          ',
                 '          ',
-            ]
-           ,
+            ],
         ];
         yield 'write to buffer in block' => [
             Area::fromDimensions(10, 10),
@@ -70,8 +69,7 @@ final class BufferRendererTest extends WidgetTestCase
                 '          ',
                 '          ',
                 '          ',
-            ]
-           ,
+            ],
         ];
         yield 'overflow' => [
             Area::fromDimensions(10, 10),
@@ -95,8 +93,7 @@ final class BufferRendererTest extends WidgetTestCase
                 '          ',
                 '          ',
                 '          ',
-            ]
-           ,
+            ],
         ];
     }
 }

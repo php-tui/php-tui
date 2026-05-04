@@ -13,15 +13,15 @@ use RuntimeException;
  * This color is not supported by all widgets. In the case that the widget does
  * not support gradient fills the first stop color will be used.
  */
-final class LinearGradient implements Color
+final readonly class LinearGradient implements Color
 {
     /**
      * @param non-empty-list<array{float,RgbColor}> $stops
      */
     private function __construct(
         private array $stops,
-        private readonly float $angle,
-        private readonly FractionalPosition $origin
+        private float $angle,
+        private FractionalPosition $origin
     ) {
     }
 

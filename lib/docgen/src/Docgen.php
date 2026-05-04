@@ -28,20 +28,20 @@ use Symfony\Component\Filesystem\Filesystem;
 /**
  * Internal library for generating documentation
  */
-final class Docgen
+final readonly class Docgen
 {
     /**
      * @param iterable<int,ReflectionClass> $classes
      * @param DocUnitConfig[] $unitConfigs
      */
     public function __construct(
-        private readonly string $docsDir,
-        private readonly string $examplePath,
-        private readonly iterable $classes,
-        private readonly Lexer $lexer,
-        private readonly PhpDocParser $parser,
-        private readonly array $unitConfigs,
-        private readonly DocRenderer $renderer,
+        private string $docsDir,
+        private string $examplePath,
+        private iterable $classes,
+        private Lexer $lexer,
+        private PhpDocParser $parser,
+        private array $unitConfigs,
+        private DocRenderer $renderer,
     ) {
     }
 
@@ -90,11 +90,10 @@ final class Docgen
             $docClass = new DocClass(
                 name: lcfirst($widget->getShortName()),
                 humanName: $this->humanName($widget->getShortName(), $config->stripSuffix),
-                className: $widget->getName(),
                 singular: $config->singular,
-                summary: $this->summary($node),
-                hasExample: $config->hasExamples,
+                className: $widget->getName(),
                 documentation: $this->documentation($node) ?? $this->summary($node),
+                summary: $this->summary($node),
                 params: array_values(array_filter(array_map(function (ReflectionProperty $prop): false|DocParam {
                     if (false === $prop->isPromoted()) {
                         return false;
@@ -118,6 +117,7 @@ final class Docgen
                         description: $this->summary($phpDoc),
                     );
                 }, $widget->getProperties()))),
+                hasExample: $config->hasExamples,
             );
 
             $phpExample = sprintf('%s/%s/%s.php', $this->examplePath, $docClass->singular, $docClass->name);

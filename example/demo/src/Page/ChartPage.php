@@ -115,7 +115,7 @@ final class ChartPage implements Component
     }
 
     /**
-     * @return array<int,array{float,float}>
+     * @return list<array{float,float}>
      */
     private function sinData(int $offset): array
     {

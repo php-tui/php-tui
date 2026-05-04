@@ -46,6 +46,9 @@ return (new Config())
         'no_whitespace_in_blank_line' => true,
         'blank_line_before_statement' => true,
         'no_extra_blank_lines' => true,
-        'binary_operator_spaces' => true,
+        'no_whitespace_before_comma_in_array' => true,
+        'binary_operator_spaces' => [
+            'default' => 'single_space'
+        ],
     ])
     ->setFinder($finder);

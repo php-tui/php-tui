@@ -4,25 +4,25 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Extension\Core\Widget\Block;
 
-final class Padding
+final readonly class Padding
 {
     private function __construct(
         /**
          * @var int<0,max>
          */
-        public readonly int $left,
+        public int $left,
         /**
          * @var int<0,max>
          */
-        public readonly int $right,
+        public int $right,
         /**
          * @var int<0,max>
          */
-        public readonly int $top,
+        public int $top,
         /**
          * @var int<0,max>
          */
-        public readonly int $bottom
+        public int $bottom
     ) {
     }
 

@@ -7,15 +7,15 @@ namespace PhpTui\BDF;
 /**
  * @template TValue
  */
-final class BdfResult
+final readonly class BdfResult
 {
     /**
      * @param TValue $value
      */
     private function __construct(
-        public readonly bool $ok,
-        public readonly mixed $value,
-        public readonly BdfTokenStream $rest
+        public bool $ok,
+        public mixed $value,
+        public BdfTokenStream $rest
     ) {
     }
 

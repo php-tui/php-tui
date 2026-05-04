@@ -13,13 +13,13 @@ use PhpTui\Tui\Position\Position;
 /**
  * Creates a fixed location viewport at the given Area
  */
-final class Fixed implements Viewport
+final readonly class Fixed implements Viewport
 {
     public function __construct(
         /**
          * Area to occupy
          */
-        public readonly Area $area
+        public Area $area
     ) {
     }
 

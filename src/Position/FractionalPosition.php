@@ -10,11 +10,11 @@ use Stringable;
 /**
  * Represents a position within the bounds of -1 and 1.
  */
-final class FractionalPosition implements Stringable
+final readonly class FractionalPosition implements Stringable
 {
     private function __construct(
-        public readonly float $x,
-        public readonly float $y
+        public float $x,
+        public float $y
     ) {
         if ($x < -1 || $x > 1 || $y < -1 || $y > 1) {
             throw new RuntimeException(sprintf(

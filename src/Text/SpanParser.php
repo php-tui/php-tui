@@ -32,6 +32,7 @@ final class SpanParser
     {
         $regex = sprintf('#<((%s) | /(%s)?)>#ix', self::OPEN_TAG_REGEX, self::CLOSE_TAG_REGEX);
         preg_match_all($regex, $input, $matches, PREG_OFFSET_CAPTURE);
+        /** @var array<int, list<array{string, int<-1, max>}>> $matches */
 
         $spans = [];
         $offset = 0;
@@ -54,6 +55,7 @@ final class SpanParser
             $isOpeningTag = $tag[1] !== '/';
             if ($isOpeningTag) {
                 $tagAttributes = $matches[1][$index][0];
+
                 $styleStack[] = $this->createStyleFromTag($tagAttributes, $styleStack);
             } else {
                 array_pop($styleStack);
@@ -65,6 +67,7 @@ final class SpanParser
         }
 
         return $spans;
+
     }
 
     private function isEscapedTag(string $input, int $pos): bool
@@ -83,7 +86,7 @@ final class SpanParser
         foreach ($attributes as $attribute) {
             $attribute = explode('=', $attribute);
             [$key, $value] = [
-                $attribute[0] ?? '',
+                $attribute[0],
                 $attribute[1] ?? '',
             ];
             if ($key === '' || $value === '') {

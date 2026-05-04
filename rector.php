@@ -13,13 +13,16 @@ use Rector\Config\RectorConfig;
 use Rector\Php53\Rector\Ternary\TernaryToElvisRector;
 use Rector\Php73\Rector\FuncCall\JsonThrowOnErrorRector;
 use Rector\Php74\Rector\Closure\ClosureToArrowFunctionRector;
+use Rector\Php82\Rector\Class_\ReadOnlyClassRector;
 use Rector\Set\ValueObject\LevelSetList;
 use Rector\Set\ValueObject\SetList;
+use Rector\ValueObject\PhpVersion;
 
 return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->parallel();
     $rectorConfig->importNames();
     $rectorConfig->importShortClasses();
+    $rectorConfig->phpVersion(PhpVersion::PHP_82);
 
     $rectorConfig->paths([
         __DIR__ . '/lib',
@@ -41,6 +44,7 @@ return static function (RectorConfig $rectorConfig): void {
         StaticArrowFunctionRector::class,
         EncapsedStringsToSprintfRector::class,
         UnwrapSprintfOneArgumentRector::class,
+        ReadOnlyClassRector::class
     ]);
 
     $rectorConfig->sets([

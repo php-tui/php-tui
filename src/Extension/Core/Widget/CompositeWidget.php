@@ -15,13 +15,13 @@ use PhpTui\Tui\Widget\Widget;
  * which is useful for showing dialogues, overlaying scrollbars, floating
  * windows, etc.
  */
-final class CompositeWidget implements Widget
+final readonly class CompositeWidget implements Widget
 {
     public function __construct(
         /**
          * @var Widget[] $widgets
          */
-        public readonly array $widgets
+        public array $widgets
     ) {
     }
 

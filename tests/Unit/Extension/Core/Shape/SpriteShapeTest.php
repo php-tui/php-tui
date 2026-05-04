@@ -47,10 +47,10 @@ final class SpriteShapeTest extends ShapeTestCase
                     '█████████████████████████████████',
                 ],
                 color: AnsiColor::Green,
+                position: FloatPosition::at(0, 0),
                 alphaChar: ' ',
                 xScale: 1,
-                yScale: 1,
-                position: FloatPosition::at(0, 0)
+                yScale: 1
             ),
             Marker::Block,
             [
@@ -81,10 +81,10 @@ final class SpriteShapeTest extends ShapeTestCase
                     '███  ████ ████  ████  ██████ ',
                 ],
                 color: AnsiColor::Green,
+                position: FloatPosition::at(0, 0),
                 alphaChar: ' ',
                 xScale: 1,
-                yScale: 1,
-                position: FloatPosition::at(0, 0)
+                yScale: 1
             ),
             Marker::Block,
             [
@@ -115,10 +115,10 @@ final class SpriteShapeTest extends ShapeTestCase
                     '███  ████ ████  ████  ██████ ',
                 ],
                 color: AnsiColor::Green,
+                position: FloatPosition::at(4, 2),
                 alphaChar: ' ',
                 xScale: 0.5,
-                yScale: 0.5,
-                position: FloatPosition::at(4, 2)
+                yScale: 0.5
             ),
             Marker::Braille,
             [
@@ -151,10 +151,10 @@ final class SpriteShapeTest extends ShapeTestCase
 
                 ],
                 color: AnsiColor::Green,
+                position: FloatPosition::at(4, 2),
                 alphaChar: ' ',
                 xScale: 2,
-                yScale: 2,
-                position: FloatPosition::at(4, 2)
+                yScale: 2
             ),
             Marker::Braille,
             [
@@ -185,10 +185,10 @@ final class SpriteShapeTest extends ShapeTestCase
                     '███  ████ ████  ████  ██████      ',
                 ],
                 color: AnsiColor::Green,
+                position: FloatPosition::at(0, 0),
                 alphaChar: '█',
                 xScale: 1,
-                yScale: 1,
-                position: FloatPosition::at(0, 0)
+                yScale: 1
             ),
             Marker::Block,
             [

@@ -10,12 +10,12 @@ namespace PhpTui\Tui\Canvas;
  * Each painter should *return immediately* if the widget is not of the correct
  * type.
  */
-final class AggregateShapePainter implements ShapePainter
+final readonly class AggregateShapePainter implements ShapePainter
 {
     /**
      * @param ShapePainter[] $painters
      */
-    public function __construct(private readonly array $painters)
+    public function __construct(private array $painters)
     {
     }
 

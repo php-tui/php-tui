@@ -35,15 +35,12 @@ final class ParagraphRenderer implements WidgetRenderer
         $widget->text->patchStyle($widget->style);
         $style = $widget->style;
         $styled = array_map(static function (Line $line) use ($style, $widget): array {
-            $graphemes = array_reduce($line->spans, static function (array $ac, Span $span) use ($style): array {
-                foreach ($span->toStyledGraphemes($style) as $grapheme) {
-                    $ac[] = $grapheme;
-                }
+            $graphemes = array_merge(...array_map(
+                static fn (Span $span): array => $span->toStyledGraphemes($style),
+                $line->spans
+            ));
 
-                return $ac;
-            }, []);
-
-            return [ $graphemes, $line->alignment ?? $widget->alignment ];
+            return [$graphemes, $line->alignment ?? $widget->alignment];
         }, $widget->text->lines);
 
         $lineComposer = $this->createLineComposer($styled, $textArea, $widget);
@@ -97,7 +94,7 @@ final class ParagraphRenderer implements WidgetRenderer
     private function getLineOffset(int $width, int $maxWidth, HorizontalAlignment $alignment): int
     {
         return match ($alignment) {
-            HorizontalAlignment::Center => max(0, (int) (($maxWidth / 2) - $width / 2)),
+            HorizontalAlignment::Center => max(0, (int)(($maxWidth / 2) - $width / 2)),
             HorizontalAlignment::Right => max(0, $maxWidth - $width),
             HorizontalAlignment::Left => 0,
         };

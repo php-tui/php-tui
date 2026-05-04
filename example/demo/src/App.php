@@ -232,16 +232,15 @@ final class App
     private function header(): Widget
     {
         return BlockWidget::default()
-                ->borders(Borders::ALL)->style(Style::default()->white())
-                ->widget(
-                    TabsWidget::fromTitles(
-                        Line::parse('<fg=red>[q]</>uit'),
-                        ...array_reduce(ActivePage::cases(), function (array $lines, ActivePage $page) {
-                            $lines[] = Line::fromString(sprintf('%s', $page->navItem()->label));
-
-                            return $lines;
-                        }, []),
-                    )->select($this->activePage->index() + 1)->highlightStyle(Style::default()->white()->onBlue())
-                );
+            ->borders(Borders::ALL)->style(Style::default()->white())
+            ->widget(
+                TabsWidget::fromTitles(
+                    Line::parse('<fg=red>[q]</>uit'),
+                    ...array_map(
+                        fn (ActivePage $page) => Line::fromString($page->navItem()->label),
+                        ActivePage::cases()
+                    ),
+                )->select($this->activePage->index() + 1)->highlightStyle(Style::default()->white()->onBlue())
+            );
     }
 }

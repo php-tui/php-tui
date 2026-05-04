@@ -117,7 +117,6 @@ final class Display
      * |                   |
      * +-------------------+
      * ```
-
      * After:
      *
      * ```
@@ -176,7 +175,7 @@ final class Display
         }
 
         $size = $this->backend->size();
-        if ($size == $this->lastKnownSize) {
+        if ((string)$size === (string)$this->lastKnownSize) {
             return;
         }
 

@@ -16,14 +16,14 @@ use PhpTui\Tui\Position\Position;
  * You can use this viewport in with `Display#insertBefore` in order to add content
  * before the viewport, which can be usedful for "logging" progress.
  */
-final class Inline implements Viewport
+final readonly class Inline implements Viewport
 {
     public function __construct(
         /**
          * Height of the viewport
          * @var int<0,max>
          */
-        public readonly int $height
+        public int $height
     ) {
     }
 

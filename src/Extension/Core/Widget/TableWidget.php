@@ -69,9 +69,9 @@ final class TableWidget implements Widget
             columnSpacing: 0,
             highlightStyle: Style::default(),
             highlightSymbol: '>>',
-            highlightSpacing: HighlightSpacing::WhenSelected,
             header: null,
             rows: [],
+            highlightSpacing: HighlightSpacing::WhenSelected,
             state: new TableState(offset: 0, selected: null)
         );
     }

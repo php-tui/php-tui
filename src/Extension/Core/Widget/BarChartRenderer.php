@@ -75,13 +75,13 @@ final class BarChartRenderer implements WidgetRenderer
                 return $ticks;
             }
 
-            $ticks[] = array_map(static function (Bar $bar) use ($barMaxLength, $max): int {
+            $ticks[] = array_values(array_map(static function (Bar $bar) use ($barMaxLength, $max): int {
                 if ($max === 0) {
                     return 0;
                 }
 
                 return max(0, (int) ($bar->value * $barMaxLength * self::TICKS_PER_LINE / $max));
-            }, array_slice($bars, 0, $nBars));
+            }, array_slice($bars, 0, $nBars)));
         }
 
         return $ticks;

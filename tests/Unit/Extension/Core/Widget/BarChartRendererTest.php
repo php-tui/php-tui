@@ -39,8 +39,7 @@ final class BarChartRendererTest extends WidgetTestCase
             ),
             [
                 '',
-            ]
-           ,
+            ],
         ];
         yield 'zero values' => [
             Area::fromDimensions(10, 5),
@@ -53,8 +52,7 @@ final class BarChartRendererTest extends WidgetTestCase
                 '          ',
                 '0 0       ',
                 'B B       ',
-            ]
-           ,
+            ],
         ];
         yield 'negative values' => [
             Area::fromDimensions(10, 5),
@@ -68,8 +66,7 @@ final class BarChartRendererTest extends WidgetTestCase
                 '  █       ',
                 '  2       ',
                 'B B       ',
-            ]
-           ,
+            ],
         ];
         yield 'vertical barchart' => [
             Area::fromDimensions(10, 5),
@@ -82,8 +79,7 @@ final class BarChartRendererTest extends WidgetTestCase
                 '█ █       ',
                 '1 2       ',
                 'B B       ',
-            ]
-           ,
+            ],
         ];
         yield 'horizontal barchart' => [
             Area::fromDimensions(10, 5),
@@ -96,8 +92,7 @@ final class BarChartRendererTest extends WidgetTestCase
                 'B1 2██████',
                 '          ',
                 '          ',
-            ]
-           ,
+            ],
         ];
         yield 'text labels and custom values' => [
             Area::fromDimensions(10, 5),
@@ -113,8 +108,7 @@ final class BarChartRendererTest extends WidgetTestCase
                 'X1 B██████',
                 '          ',
                 '          ',
-            ]
-           ,
+            ],
         ];
         yield 'with style' => [
             Area::fromDimensions(10, 5),
@@ -130,8 +124,7 @@ final class BarChartRendererTest extends WidgetTestCase
                 'X1 B██████',
                 '          ',
                 '          ',
-            ]
-           ,
+            ],
         ];
         yield 'horizontal chart with width > 1' => [
             Area::fromDimensions(10, 10),
@@ -152,8 +145,7 @@ final class BarChartRendererTest extends WidgetTestCase
                 'X1 B██████',
                 '   ███████',
                 '          ',
-            ]
-           ,
+            ],
         ];
         yield 'wider than dimensions' => [
             Area::fromDimensions(10, 5),
@@ -169,8 +161,7 @@ final class BarChartRendererTest extends WidgetTestCase
                 '          ',
                 '          ',
                 '          ',
-            ]
-           ,
+            ],
         ];
         yield 'taller than dimensions' => [
             Area::fromDimensions(10, 5),
@@ -186,8 +177,7 @@ final class BarChartRendererTest extends WidgetTestCase
                 '█         ',
                 'A         ',
                 'X         ',
-            ]
-           ,
+            ],
         ];
     }
 }

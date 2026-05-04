@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Symbol;
 
-final class LineSet
+final readonly class LineSet
 {
     public const HORIZONTAL = '─';
     public const VERTICAL = '│';
@@ -21,17 +21,17 @@ final class LineSet
     public const DOUBLE_HORIZONTAL = '═';
 
     public function __construct(
-        public readonly string $vertical,
-        public readonly string $horizontal,
-        public readonly string $topRight,
-        public readonly string $topLeft,
-        public readonly string $bottomRight,
-        public readonly string $bottomLeft,
-        public readonly string $verticalLeft,
-        public readonly string $verticalRight,
-        public readonly string $horizontalDown,
-        public readonly string $horizontalUp,
-        public readonly string $cross
+        public string $vertical,
+        public string $horizontal,
+        public string $topRight,
+        public string $topLeft,
+        public string $bottomRight,
+        public string $bottomLeft,
+        public string $verticalLeft,
+        public string $verticalRight,
+        public string $horizontalDown,
+        public string $horizontalUp,
+        public string $cross
     ) {
     }
 

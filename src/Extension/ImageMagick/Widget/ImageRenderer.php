@@ -14,9 +14,9 @@ use PhpTui\Tui\Extension\ImageMagick\Shape\ImageShape;
 use PhpTui\Tui\Widget\Widget;
 use PhpTui\Tui\Widget\WidgetRenderer;
 
-final class ImageRenderer implements WidgetRenderer
+final readonly class ImageRenderer implements WidgetRenderer
 {
-    public function __construct(private readonly ImageRegistry $registry)
+    public function __construct(private ImageRegistry $registry)
     {
     }
 

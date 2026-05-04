@@ -128,12 +128,12 @@ final class DemoTest extends TestCase
     private function execute(?Event ...$events): DummyBackend
     {
         $terminal = Terminal::new(
+            painter: ArrayPainter::new(),
             infoProvider: new AggregateInformationProvider([]),
-            rawMode: new TestRawMode(),
             eventProvider: ArrayEventProvider::fromEvents(
                 ...$events
             ),
-            painter: ArrayPainter::new(),
+            rawMode: new TestRawMode(),
         );
 
         $backend = DummyBackend::fromDimensions(80, 20);

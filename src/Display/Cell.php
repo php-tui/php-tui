@@ -71,9 +71,9 @@ final class Cell implements Stringable
     {
         return
             $this->char === $currentCell->char &&
-            $this->fg == $currentCell->fg &&
-            $this->bg == $currentCell->bg &&
+            $this->fg->debugName() === $currentCell->fg->debugName() &&
+            $this->bg->debugName() === $currentCell->bg->debugName() &&
             $this->modifiers === $currentCell->modifiers &&
-            $this->underline == $currentCell->underline;
+            $this->underline->debugName() === $currentCell->underline->debugName();
     }
 }

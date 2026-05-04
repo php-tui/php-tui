@@ -62,7 +62,11 @@ final class HalfBlockGrid extends CanvasGrid
                 break;
             }
 
-            $paired = array_merge($paired, array_map(null, $upper, $lower));
+            $paired = array_merge($paired, array_map(
+                static fn (mixed $u, mixed $l): array => [$u, $l],
+                $upper,
+                $lower
+            ));
         }
 
         $chars = [];

@@ -32,9 +32,7 @@ final class TableRow
 
     public static function fromStrings(string ...$strings): self
     {
-        return new self(array_map(static function (string $string): TableCell {
-            return TableCell::fromString($string);
-        }, array_values($strings)), 1, 0, Style::default());
+        return new self(array_map(TableCell::fromString(...), array_values($strings)), 1, 0, Style::default());
     }
 
     /**

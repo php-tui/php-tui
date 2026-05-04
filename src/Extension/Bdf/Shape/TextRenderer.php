@@ -11,10 +11,10 @@ use PhpTui\Tui\Canvas\ShapePainter;
 use PhpTui\Tui\Extension\Bdf\FontRegistry;
 use PhpTui\Tui\Position\FloatPosition;
 
-final class TextRenderer implements ShapePainter
+final readonly class TextRenderer implements ShapePainter
 {
     public function __construct(
-        private readonly FontRegistry $registry,
+        private FontRegistry $registry,
     ) {
     }
 
@@ -44,14 +44,14 @@ final class TextRenderer implements ShapePainter
         foreach (array_reverse($glyph->bitmap) as $row) {
             $xbit = 1;
             for ($i = $glyph->boundingBox->size->width + 1; $i >= 0; $i--) {
-                $x = $i + $shape->position->x;
+                $x = (int) ($i + $shape->position->x);
                 $grid[$y][$x] = ($row & $xbit) > 0;
                 $xbit <<= 1;
             }
             $y++;
         }
 
-        return $grid;
+        return array_values($grid);
     }
 
     /**

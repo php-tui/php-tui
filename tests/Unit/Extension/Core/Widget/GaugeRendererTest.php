@@ -33,8 +33,7 @@ final class GaugeRendererTest extends WidgetTestCase
             GaugeWidget::default()->ratio(0),
             [
                 '  0.00%   ',
-            ]
-           ,
+            ],
         ];
         yield '50' => [
             Area::fromDimensions(10, 4),
@@ -44,16 +43,14 @@ final class GaugeRendererTest extends WidgetTestCase
                 '█████     ',
                 '██50.00%  ',
                 '█████     ',
-            ]
-           ,
+            ],
         ];
         yield 'fi' => [
             Area::fromDimensions(10, 1),
             GaugeWidget::default()->ratio(0.98),
             [
                 '██98.00%█▊',
-            ]
-           ,
+            ],
         ];
         yield '75' => [
             Area::fromDimensions(10, 4),
@@ -63,8 +60,7 @@ final class GaugeRendererTest extends WidgetTestCase
                 '███████▌  ',
                 '██75.00%  ',
                 '███████▌  ',
-            ]
-           ,
+            ],
         ];
         yield 'custom label' => [
             Area::fromDimensions(10, 3),
@@ -73,8 +69,7 @@ final class GaugeRendererTest extends WidgetTestCase
                 '██████████',
                 '██Hello███',
                 '██████████',
-            ]
-           ,
+            ],
         ];
     }
 }

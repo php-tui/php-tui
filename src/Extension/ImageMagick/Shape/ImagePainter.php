@@ -16,9 +16,9 @@ use PhpTui\Tui\Extension\ImageMagick\ImageRegistry;
 use PhpTui\Tui\Position\FloatPosition;
 use PhpTui\Tui\Text\Line as PhpTuiLine;
 
-final class ImagePainter implements ShapePainter
+final readonly class ImagePainter implements ShapePainter
 {
-    private readonly ImageRegistry $registry;
+    private ImageRegistry $registry;
 
     public function __construct(?ImageRegistry $registry = null)
     {

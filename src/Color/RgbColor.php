@@ -83,7 +83,7 @@ final class RgbColor implements Color, Stringable
         } // php modulus does not work with float
         $dX = $dC * (1 - abs($dT - 1));     // as used in the Wikipedia link
 
-        switch ((int) floor($dH)) {
+        switch ((int)floor($dH)) {
             case 0:
                 $dR = $dC;
                 $dG = $dX;
@@ -137,9 +137,9 @@ final class RgbColor implements Color, Stringable
         $dB *= 255;
 
         return new self(
-            (int) (round($dR)),
-            (int) (round($dG)),
-            (int) (round($dB))
+            (int)(round($dR)),
+            (int)(round($dG)),
+            (int)(round($dB))
         );
     }
 
@@ -149,8 +149,11 @@ final class RgbColor implements Color, Stringable
 
         // Expand shorthand notation
         if (strlen($hex) === 3) {
-            /** @var string $hex */
             $hex = preg_replace('/(.)(.)(.)/', '$1$1$2$2$3$3', $hex);
+
+            if ($hex === null) {
+                throw new InvalidArgumentException(sprintf('Invalid hex color: %s', $hex));
+            }
         }
 
         if (!preg_match('/^[a-fA-F0-9]{6}$/', $hex)) {

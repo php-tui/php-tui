@@ -34,8 +34,7 @@ final class TabsRendererTest extends WidgetTestCase
             [
                 '                    ',
                 '                    ',
-            ]
-           ,
+            ],
         ];
         yield 'one tab' => [
             Area::fromDimensions(20, 2),
@@ -46,8 +45,7 @@ final class TabsRendererTest extends WidgetTestCase
             [
                 ' Tab 1              ',
                 '                    ',
-            ]
-           ,
+            ],
         ];
         yield 'two tabs' => [
             Area::fromDimensions(20, 2),
@@ -59,8 +57,7 @@ final class TabsRendererTest extends WidgetTestCase
             [
                 ' Tab 1 │ Tab 2      ',
                 '                    ',
-            ]
-           ,
+            ],
         ];
         yield 'select tabs' => [
             Area::fromDimensions(20, 2),
@@ -73,8 +70,7 @@ final class TabsRendererTest extends WidgetTestCase
             [
                 ' Tab 1 │ Tab 2      ',
                 '                    ',
-            ]
-           ,
+            ],
         ];
         yield 'select out of range' => [
             Area::fromDimensions(20, 2),
@@ -87,8 +83,7 @@ final class TabsRendererTest extends WidgetTestCase
             [
                 ' Tab 1 │ Tab 2      ',
                 '                    ',
-            ]
-           ,
+            ],
         ];
     }
 }

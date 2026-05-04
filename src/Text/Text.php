@@ -21,9 +21,7 @@ final class Text implements Styleable
 
     public static function fromString(string $string): self
     {
-        return new self(array_map(static function (string $line): Line {
-            return Line::fromString($line);
-        }, explode("\n", $string)));
+        return new self(array_map(Line::fromString(...), explode("\n", $string)));
     }
 
     public static function parse(string $string): self

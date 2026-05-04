@@ -34,16 +34,14 @@ final class SparklineRendererTest extends WidgetTestCase
             [
                 '                    ',
                 '                    ',
-            ]
-           ,
+            ],
         ];
         yield 'sparkline' => [
             Area::fromDimensions(12, 1),
             SparklineWidget::fromData(...range(0, 8)),
             [
                 ' ▁▂▃▄▅▆▇█   ',
-            ]
-           ,
+            ],
         ];
         yield 'right to left' => [
             Area::fromDimensions(12, 1),

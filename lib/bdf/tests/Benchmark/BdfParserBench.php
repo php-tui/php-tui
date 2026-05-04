@@ -11,9 +11,9 @@ use RuntimeException;
 
 #[Iterations(10)]
 #[Revs(25)]
-final class BdfParserBench
+final readonly class BdfParserBench
 {
-    private readonly string $contents;
+    private string $contents;
 
     public function __construct()
     {

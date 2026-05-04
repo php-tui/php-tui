@@ -65,8 +65,7 @@ final class GridRendererTest extends WidgetTestCase
                 '│   ││   │',
                 '│   ││   │',
                 '└───┘└───┘',
-            ]
-           ,
+            ],
         ];
     }
 

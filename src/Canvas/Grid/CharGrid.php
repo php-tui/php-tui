@@ -22,7 +22,7 @@ final class CharGrid extends CanvasGrid
         private readonly Resolution $resolution,
         private array $cells,
         private array $colors,
-        private string $cellChar
+        private readonly string $cellChar
     ) {
     }
 

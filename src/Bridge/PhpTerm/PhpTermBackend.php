@@ -30,15 +30,15 @@ use PhpTui\Tui\Position\Position;
 use PhpTui\Tui\Style\Modifier;
 use RuntimeException;
 
-final class PhpTermBackend implements Backend
+final readonly class PhpTermBackend implements Backend
 {
     public function __construct(
-        private readonly PhpTermTerminal $terminal,
+        private PhpTermTerminal $terminal,
         /**
          * Number of seconds to wait for a response from the terminal
          * when getting the cursor position.
          */
-        private readonly float $blockingTimeout = 2.0
+        private float $blockingTimeout = 2.0
     ) {
     }
 
@@ -81,12 +81,12 @@ final class PhpTermBackend implements Backend
                 $modifier = $update->cell->modifiers;
             }
 
-            if ($update->cell->fg != $fg) {
+            if ($update->cell->fg->debugName() !== $fg->debugName()) {
                 $this->terminal->queue($this->setForegroundColor($update->cell->fg));
                 $fg = $update->cell->fg;
             }
 
-            if ($update->cell->bg != $bg) {
+            if ($update->cell->bg->debugName() !== $bg->debugName()) {
                 $this->terminal->queue($this->setBackgroundColor($update->cell->bg));
                 $bg = $update->cell->bg;
             }
@@ -185,7 +185,7 @@ final class PhpTermBackend implements Backend
 
     private function toPhpTermColor(AnsiColor $color): Colors
     {
-        return match($color) {
+        return match ($color) {
             AnsiColor::Black => Colors::Black,
             AnsiColor::Red => Colors::Red,
             AnsiColor::Green => Colors::Green,

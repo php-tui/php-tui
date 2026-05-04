@@ -41,8 +41,7 @@ final class ScrollbarRendererTest extends WidgetTestCase
                 '   ',
                 '   ',
                 '   ',
-            ]
-           ,
+            ],
         ];
         yield 'vertical left' => [
             Area::fromDimensions(3, 7),
@@ -55,8 +54,7 @@ final class ScrollbarRendererTest extends WidgetTestCase
                 '║  ',
                 '║  ',
                 '▼  ',
-            ]
-           ,
+            ],
         ];
         yield 'vertical right' => [
             Area::fromDimensions(3, 7),
@@ -69,8 +67,7 @@ final class ScrollbarRendererTest extends WidgetTestCase
                 '  ║',
                 '  ║',
                 '  ▼',
-            ]
-           ,
+            ],
         ];
         yield 'no begining symbol' => [
             Area::fromDimensions(3, 7),
@@ -83,8 +80,7 @@ final class ScrollbarRendererTest extends WidgetTestCase
                 '║  ',
                 '║  ',
                 '▼  ',
-            ]
-           ,
+            ],
         ];
         yield 'no end symbol' => [
             Area::fromDimensions(3, 7),
@@ -97,8 +93,7 @@ final class ScrollbarRendererTest extends WidgetTestCase
                 '║  ',
                 '║  ',
                 '║  ',
-            ]
-           ,
+            ],
         ];
         yield 'double horizontal top' => [
             Area::fromDimensions(7, 3),
@@ -107,8 +102,7 @@ final class ScrollbarRendererTest extends WidgetTestCase
                 '◄██═══►',
                 '       ',
                 '       ',
-            ]
-           ,
+            ],
         ];
         yield 'double horizontal bottom' => [
             Area::fromDimensions(7, 3),
@@ -117,8 +111,7 @@ final class ScrollbarRendererTest extends WidgetTestCase
                 '       ',
                 '       ',
                 '◄██═══►',
-            ]
-           ,
+            ],
         ];
         yield 'double horizontal bottom mid' => [
             Area::fromDimensions(7, 3),
@@ -127,8 +120,7 @@ final class ScrollbarRendererTest extends WidgetTestCase
                 '       ',
                 '       ',
                 '◄══█══►',
-            ]
-           ,
+            ],
         ];
         yield 'symbol vertical' => [
             Area::fromDimensions(7, 3),
@@ -137,8 +129,7 @@ final class ScrollbarRendererTest extends WidgetTestCase
             '↑      ',
             '█      ',
             '↓      ',
-            ]
-           ,
+            ],
         ];
         yield 'symbol horizontal' => [
             Area::fromDimensions(7, 3),
@@ -147,8 +138,7 @@ final class ScrollbarRendererTest extends WidgetTestCase
             '←──█──→',
             '       ',
             '       ',
-            ]
-           ,
+            ],
         ];
     }
 }

@@ -7,9 +7,9 @@ namespace PhpTui\Tui\Extension\Bdf;
 use PhpTui\Tui\Display\DisplayExtension;
 use PhpTui\Tui\Extension\Bdf\Shape\TextRenderer;
 
-final class BdfExtension implements DisplayExtension
+final readonly class BdfExtension implements DisplayExtension
 {
-    public function __construct(private readonly ?FontRegistry $registry = null)
+    public function __construct(private ?FontRegistry $registry = null)
     {
     }
 

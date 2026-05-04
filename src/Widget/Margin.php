@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace PhpTui\Tui\Widget;
 
-final class Margin
+final readonly class Margin
 {
     public function __construct(
         /**
          * @var int<0,max>
          */
-        public readonly int $vertical,
+        public int $vertical,
         /**
          * @var int<0,max>
          */
-        public readonly int $horizontal
+        public int $horizontal
     ) {
     }
 

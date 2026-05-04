@@ -22,7 +22,7 @@ use RuntimeException;
 final class HtmlCanvasPainter implements Painter
 {
     /**
-     * @var list<string>
+     * @var array<string>
      */
     private array $chars = [];
 

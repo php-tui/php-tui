@@ -51,8 +51,7 @@ final class TableRendererTest extends WidgetTestCase
                 '1    2    ',
                 '          ',
                 '          ',
-            ]
-           ,
+            ],
         ];
 
         yield 'no widths' => [
@@ -73,8 +72,7 @@ final class TableRendererTest extends WidgetTestCase
                 '          ',
                 '          ',
                 '          ',
-            ]
-           ,
+            ],
         ];
 
         yield 'select' => [
@@ -105,8 +103,7 @@ final class TableRendererTest extends WidgetTestCase
                 '>>1    2  ',
                 '  1-1  2-2',
                 '          ',
-            ]
-           ,
+            ],
         ];
 
         yield [
@@ -135,8 +132,7 @@ final class TableRendererTest extends WidgetTestCase
                 '1    2    ',
                 '1-1  2-2  ',
                 '          ',
-            ]
-           ,
+            ],
         ];
 
         yield 'offset out of range' => [
@@ -160,8 +156,7 @@ final class TableRendererTest extends WidgetTestCase
                 '          ',
                 '          ',
                 '          ',
-            ]
-           ,
+            ],
         ];
     }
 }

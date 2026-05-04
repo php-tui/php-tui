@@ -9,7 +9,7 @@ use PhpTui\Tui\Text\LineComposer;
 use PhpTui\Tui\Text\StyledGrapheme;
 use PhpTui\Tui\Widget\HorizontalAlignment;
 
-final class WordWrapper implements LineComposer
+final readonly class WordWrapper implements LineComposer
 {
     private const NBSP = "\u{00a0}";
 
@@ -17,9 +17,9 @@ final class WordWrapper implements LineComposer
      * @param list<array{list<StyledGrapheme>,HorizontalAlignment}> $lines
      */
     public function __construct(
-        private readonly array $lines,
-        private readonly int $maxLineWidth,
-        private readonly bool $trim = false,
+        private array $lines,
+        private int $maxLineWidth,
+        private bool $trim = false,
     ) {
     }
 
@@ -143,7 +143,7 @@ final class WordWrapper implements LineComposer
             return $width + $grapheme->symbolWidth();
         }, 0);
 
-        return [$currentLine, $lineWidth, $alignment];
+        return [array_values($currentLine), $lineWidth, $alignment];
     }
 
     /**

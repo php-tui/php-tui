@@ -39,16 +39,17 @@ use PhpTui\Tui\Widget\Borders;
 use PhpTui\Tui\Widget\Direction;
 use PhpTui\Tui\Widget\Widget;
 
-final class DisplayBench
+final readonly class DisplayBench
 {
-    private readonly Display $display;
+    private Display $display;
 
-    private readonly StringPainter $painter;
+    private StringPainter $painter;
 
     public function __construct()
     {
         $this->painter = new StringPainter();
         $terminal = Terminal::new(
+            painter: $this->painter,
             infoProvider: new AggregateInformationProvider([
                 ClosureInformationProvider::new(static function (string $info) {
                     if ($info === Size::class) {
@@ -58,7 +59,6 @@ final class DisplayBench
 
             ]),
             rawMode: new TestRawMode(),
-            painter: $this->painter,
         );
         $this->display = DisplayBuilder::default(PhpTermBackend::new($terminal))->build();
     }

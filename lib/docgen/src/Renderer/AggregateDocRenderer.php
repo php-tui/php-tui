@@ -7,19 +7,19 @@ namespace PhpTui\Docgen\Renderer;
 use PhpTui\Docgen\DocRenderer;
 use RuntimeException;
 
-final class AggregateDocRenderer implements DocRenderer
+final readonly class AggregateDocRenderer implements DocRenderer
 {
     /**
      * @var DocRenderer[]
      */
-    private readonly array $renderers;
+    private array $renderers;
 
     public function __construct(DocRenderer ...$renderers)
     {
         $this->renderers = $renderers;
     }
 
-    public function render(DocRenderer $renderer, object $object): ?string
+    public function render(DocRenderer $renderer, object $object): string
     {
         foreach ($this->renderers as $child) {
             if (null !== $out = $child->render($this, $object)) {

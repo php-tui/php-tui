@@ -8,9 +8,9 @@ use PhpTui\Tui\Display\DisplayExtension;
 use PhpTui\Tui\Extension\ImageMagick\Shape\ImagePainter;
 use PhpTui\Tui\Extension\ImageMagick\Widget\ImageRenderer;
 
-final class ImageMagickExtension implements DisplayExtension
+final readonly class ImageMagickExtension implements DisplayExtension
 {
-    public function __construct(private readonly ?ImageRegistry $imageRegistry = null)
+    public function __construct(private ?ImageRegistry $imageRegistry = null)
     {
     }
 

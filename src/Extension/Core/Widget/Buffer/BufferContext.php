@@ -9,9 +9,9 @@ use PhpTui\Tui\Display\Buffer;
 use PhpTui\Tui\Widget\Widget;
 use PhpTui\Tui\Widget\WidgetRenderer;
 
-final class BufferContext
+final readonly class BufferContext
 {
-    public function __construct(private readonly WidgetRenderer $renderer, public readonly Buffer $buffer, public readonly Area $area)
+    public function __construct(private WidgetRenderer $renderer, public Buffer $buffer, public Area $area)
     {
     }
 

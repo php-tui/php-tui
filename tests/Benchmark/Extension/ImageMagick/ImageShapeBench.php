@@ -20,16 +20,17 @@ use PhpTui\Tui\Extension\ImageMagick\Shape\ImageShape;
 
 #[Iterations(4)]
 #[Revs(25)]
-final class ImageShapeBench
+final readonly class ImageShapeBench
 {
-    private readonly Display $display;
+    private Display $display;
 
-    private readonly StringPainter $painter;
+    private StringPainter $painter;
 
     public function __construct()
     {
         $this->painter = new StringPainter();
         $terminal = Terminal::new(
+            painter: $this->painter,
             infoProvider: new AggregateInformationProvider([
                 ClosureInformationProvider::new(static function (string $info) {
                     if ($info === Size::class) {
@@ -39,7 +40,6 @@ final class ImageShapeBench
 
             ]),
             rawMode: new TestRawMode(),
-            painter: $this->painter,
         );
         $this->display = DisplayBuilder::default(PhpTermBackend::new($terminal))->build();
     }

@@ -11,12 +11,12 @@ use PhpTui\Tui\Canvas\Shape;
 /**
  * Shape that can write directly to the Painter context
  */
-final class ClosureShape implements Shape
+final readonly class ClosureShape implements Shape
 {
     /**
      * @param Closure(Painter):void $closure
      */
-    public function __construct(public readonly Closure $closure)
+    public function __construct(public Closure $closure)
     {
     }
 }

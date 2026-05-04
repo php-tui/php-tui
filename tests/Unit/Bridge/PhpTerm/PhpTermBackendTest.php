@@ -37,8 +37,8 @@ final class PhpTermBackendTest extends TestCase
 
         $backend = new PhpTermBackend(Terminal::new(
             $buffer,
-            rawMode: $rawMode,
-            eventProvider: $provider
+            eventProvider: $provider,
+            rawMode: $rawMode
         ));
         $position = $backend->cursorPosition();
         self::assertEquals([

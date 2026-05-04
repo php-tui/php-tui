@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PhpTui\BDF;
 
-final class BdfProperties
+final readonly class BdfProperties
 {
     /**
      * @param array<string,string|int> $properties
      */
-    public function __construct(public readonly array $properties = [])
+    public function __construct(public array $properties = [])
     {
     }
 
