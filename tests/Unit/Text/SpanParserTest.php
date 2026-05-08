@@ -312,4 +312,24 @@ final class SpanParserTest extends TestCase
         self::assertSame(' demo application.', $thirdSpan->content);
         self::assertNull($thirdSpan->style->fg);
     }
+
+    public function testParseTwoTagsWithRemoveModifier(): void
+    {
+        $spans = SpanParser::new()->parse('<fg=green;bg=blue;options=bold,italic>Hello <fg=red;options=~bold>World</></>');
+        self::assertCount(2, $spans);
+
+        $firstSpan = $spans[0];
+        self::assertSame('Hello ', $firstSpan->content);
+        self::assertSame(AnsiColor::Green, $firstSpan->style->fg);
+        self::assertSame(AnsiColor::Blue, $firstSpan->style->bg);
+        self::assertTrue(($firstSpan->style->addModifiers & Modifier::BOLD) === Modifier::BOLD);
+        self::assertTrue(($firstSpan->style->addModifiers & Modifier::ITALIC) === Modifier::ITALIC);
+
+        $secondSpan = $spans[1];
+        self::assertSame('World', $secondSpan->content);
+        self::assertSame(AnsiColor::Red, $secondSpan->style->fg);
+        self::assertSame(AnsiColor::Blue, $secondSpan->style->bg);
+        self::assertTrue(($secondSpan->style->addModifiers & Modifier::ITALIC) === Modifier::ITALIC);
+        self::assertTrue($secondSpan->style->subModifiers === Modifier::BOLD);
+    }
 }

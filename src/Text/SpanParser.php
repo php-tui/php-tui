@@ -116,7 +116,15 @@ final class SpanParser
         if ($attribute === 'options') {
             $options = explode(',', $value);
             foreach ($options as $option) {
-                $style->addModifier(Modifier::fromName($option));
+                $isRemove = str_starts_with($option, '~');
+                $name = $isRemove ? mb_substr($option, 1) : $option;
+                $modifier = Modifier::fromName($name);
+
+                if ($isRemove) {
+                    $style->removeModifier($modifier);
+                } else {
+                    $style->addModifier($modifier);
+                }
             }
         }
 
