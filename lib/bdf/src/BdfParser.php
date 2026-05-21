@@ -121,20 +121,31 @@ final class BdfParser
         $tokens->skipWhitespace();
 
         $value = $tokens->current();
-        if (null === $value) {
+
+        if ($value === null) {
             return null;
+        }
+
+        if (str_starts_with($value, '"')) {
+            if (str_ends_with($value, '"')) {
+                $value = substr($value, 1, -1);
+            } else {
+                do {
+                    $tokens->advance();
+                    $value .= $tokens->current();
+                } while (str_ends_with($value, '"') === false);
+
+                $value = substr($value, 1, -1);
+            }
+
+            $value = trim($value);
+        }
+        if (is_numeric($value)) {
+            $value = intval($value);
         }
 
         $tokens->advance();
         $tokens->skipWhitespace();
-
-        $value = trim($value);
-        if (is_numeric($value)) {
-            return (int)$value;
-        }
-        if (str_starts_with($value, '"') && str_ends_with($value, '"')) {
-            return substr($value, 1, -1);
-        }
 
         return $value;
     }
